@@ -42,14 +42,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\test.yaml = .github\workflows\test.yaml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "design", "design", "{932B4123-594C-494B-9B3E-7017D526E80F}"
-	ProjectSection(SolutionItems) = preProject
-		design\qowaiv logo.psd = design\qowaiv logo.psd
-		design\qowaiv-logo_linkedin_050x050.jpg = design\qowaiv-logo_linkedin_050x050.jpg
-		design\qowaiv-logo_linkedin_100x060.jpg = design\qowaiv-logo_linkedin_100x060.jpg
-		design\qowaiv-logo_nuget_064x064.gif = design\qowaiv-logo_nuget_064x064.gif
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{F74D9EF2-39B5-40EB-8C44-1D6015C38D70}"
 	ProjectSection(SolutionItems) = preProject
 		build\Qowaiv.snk = build\Qowaiv.snk
@@ -96,7 +88,6 @@ Global
 		{C2ABE02B-F1D0-4393-B676-13B1323A7879} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
 		{C036985A-F17D-405A-B3FD-37F30FA154FB} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{8E1F869D-393B-4F6C-A3C0-1D1D336F9FA8} = {C036985A-F17D-405A-B3FD-37F30FA154FB}
-		{932B4123-594C-494B-9B3E-7017D526E80F} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{F74D9EF2-39B5-40EB-8C44-1D6015C38D70} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
