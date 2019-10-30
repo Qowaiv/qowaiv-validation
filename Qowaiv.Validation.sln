@@ -1,0 +1,105 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29020.237
+MinimumVisualStudioVersion = 15.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A4C3C9FF-4EED-41FE-8849-C896429254B5}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		LICENSE.txt = LICENSE.txt
+		Qowaiv.ruleset = Qowaiv.ruleset
+		README.md = README.md
+		ReleaseNotes.md = ReleaseNotes.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{40C1E942-8DB1-4E58-8FB4-71F5EDA66029}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{696E5B2C-1F1D-4ACD-BBD4-40594FC7BF11}"
+	ProjectSection(SolutionItems) = preProject
+		props\analytics.props = props\analytics.props
+		props\common.props = props\common.props
+		props\test.props = props\test.props
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Abstractions", "src\Qowaiv.Validation.Abstractions\Qowaiv.Validation.Abstractions.csproj", "{71FE5C6E-2A11-468E-9E8F-AC4B3A780A33}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Abstractions.UnitTests", "test\Qowaiv.Validation.Abstractions.UnitTests\Qowaiv.Validation.Abstractions.UnitTests.csproj", "{6C74ECDC-D724-4794-905F-609A27A42F99}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Fluent", "src\Qowaiv.Validation.Fluent\Qowaiv.Validation.Fluent.csproj", "{67DC037A-0782-4D36-9A5F-1116062E77E6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.DataAnnotations", "src\Qowaiv.Validation.DataAnnotations\Qowaiv.Validation.DataAnnotations.csproj", "{9F6C3C67-299E-4C60-B8E9-14A7B6B59627}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.DataAnnotations.UnitTests", "test\Qowaiv.Validation.DataAnnotations.UnitTests\Qowaiv.Validation.DataAnnotations.UnitTests.csproj", "{FFAC26F0-5CE0-4BC9-A1D5-8EA3D79C6FA9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Fluent.UnitTests", "test\Qowaiv.Validation.Fluent.UnitTests\Qowaiv.Validation.Fluent.UnitTests.csproj", "{C2ABE02B-F1D0-4393-B676-13B1323A7879}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{C036985A-F17D-405A-B3FD-37F30FA154FB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{8E1F869D-393B-4F6C-A3C0-1D1D336F9FA8}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\test.yaml = .github\workflows\test.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "design", "design", "{932B4123-594C-494B-9B3E-7017D526E80F}"
+	ProjectSection(SolutionItems) = preProject
+		design\qowaiv logo.psd = design\qowaiv logo.psd
+		design\qowaiv-logo_linkedin_050x050.jpg = design\qowaiv-logo_linkedin_050x050.jpg
+		design\qowaiv-logo_linkedin_100x060.jpg = design\qowaiv-logo_linkedin_100x060.jpg
+		design\qowaiv-logo_nuget_064x064.gif = design\qowaiv-logo_nuget_064x064.gif
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{F74D9EF2-39B5-40EB-8C44-1D6015C38D70}"
+	ProjectSection(SolutionItems) = preProject
+		build\Qowaiv.snk = build\Qowaiv.snk
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{71FE5C6E-2A11-468E-9E8F-AC4B3A780A33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71FE5C6E-2A11-468E-9E8F-AC4B3A780A33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71FE5C6E-2A11-468E-9E8F-AC4B3A780A33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71FE5C6E-2A11-468E-9E8F-AC4B3A780A33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C74ECDC-D724-4794-905F-609A27A42F99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C74ECDC-D724-4794-905F-609A27A42F99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C74ECDC-D724-4794-905F-609A27A42F99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C74ECDC-D724-4794-905F-609A27A42F99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67DC037A-0782-4D36-9A5F-1116062E77E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67DC037A-0782-4D36-9A5F-1116062E77E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67DC037A-0782-4D36-9A5F-1116062E77E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67DC037A-0782-4D36-9A5F-1116062E77E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F6C3C67-299E-4C60-B8E9-14A7B6B59627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F6C3C67-299E-4C60-B8E9-14A7B6B59627}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F6C3C67-299E-4C60-B8E9-14A7B6B59627}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F6C3C67-299E-4C60-B8E9-14A7B6B59627}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFAC26F0-5CE0-4BC9-A1D5-8EA3D79C6FA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFAC26F0-5CE0-4BC9-A1D5-8EA3D79C6FA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFAC26F0-5CE0-4BC9-A1D5-8EA3D79C6FA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFAC26F0-5CE0-4BC9-A1D5-8EA3D79C6FA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2ABE02B-F1D0-4393-B676-13B1323A7879}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2ABE02B-F1D0-4393-B676-13B1323A7879}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2ABE02B-F1D0-4393-B676-13B1323A7879}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2ABE02B-F1D0-4393-B676-13B1323A7879}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{696E5B2C-1F1D-4ACD-BBD4-40594FC7BF11} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
+		{6C74ECDC-D724-4794-905F-609A27A42F99} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
+		{FFAC26F0-5CE0-4BC9-A1D5-8EA3D79C6FA9} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
+		{C2ABE02B-F1D0-4393-B676-13B1323A7879} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
+		{C036985A-F17D-405A-B3FD-37F30FA154FB} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
+		{8E1F869D-393B-4F6C-A3C0-1D1D336F9FA8} = {C036985A-F17D-405A-B3FD-37F30FA154FB}
+		{932B4123-594C-494B-9B3E-7017D526E80F} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
+		{F74D9EF2-39B5-40EB-8C44-1D6015C38D70} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9B55A336-E2D3-4656-9840-D519B3E1159B}
+	EndGlobalSection
+EndGlobal
