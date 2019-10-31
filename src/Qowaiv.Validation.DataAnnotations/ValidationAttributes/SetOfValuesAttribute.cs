@@ -1,10 +1,12 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Qowaiv.Validation.DataAnnotations
 {
     /// <summary>Base <see cref="ValidationAttribute"/> for allowing or forbidding a set of values.</summary>
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
     public abstract class SetOfValuesAttribute : ValidationAttribute
     {
         /// <summary>Creates a new instance of a <see cref="SetOfValuesAttribute"/>.</summary>
