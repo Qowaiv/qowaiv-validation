@@ -21,8 +21,10 @@ namespace Qowaiv.Validation.TestTools
         /// <inheritdoc />
         public int GetHashCode(IValidationMessage obj)
         {
-            if (obj is null) { return 0; }
-
+            if (obj is null)
+            {
+                return 0;
+            }
             return (obj.Message ?? "").GetHashCode()
                 ^ (obj.PropertyName ?? "").GetHashCode()
                 ^ (int)obj.Severity;

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 
 namespace Qowaiv.Validation.DataAnnotations
@@ -52,7 +53,7 @@ namespace Qowaiv.Validation.DataAnnotations
             {
                 return new WrappedComparer((IEqualityComparer)Activator.CreateInstance(comparer));
             }
-            throw new ArgumentException(string.Format(QowaivValidationMessages.ArgumentException_TypeIsNotEqualityComparer, comparer), nameof(comparer));
+            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivValidationMessages.ArgumentException_TypeIsNotEqualityComparer, comparer), nameof(comparer));
         }
 
         /// <summary>As there is no none generic hash set.</summary>

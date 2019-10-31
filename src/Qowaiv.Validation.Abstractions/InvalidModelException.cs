@@ -33,6 +33,8 @@ namespace Qowaiv.Validation.Abstractions
         protected InvalidModelException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
+            Guard.NotNull(info, nameof(info));
+
             var errors = info.GetValue(nameof(Errors), typeof(IValidationMessage[])) as IValidationMessage[];
             Errors = new ReadOnlyCollection<IValidationMessage>(errors);
         }
@@ -40,6 +42,7 @@ namespace Qowaiv.Validation.Abstractions
         /// <inheritdoc />
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
+            Guard.NotNull(info, nameof(info));
             base.GetObjectData(info, context);
             info.AddValue(nameof(Errors), Errors.ToArray());
         }
