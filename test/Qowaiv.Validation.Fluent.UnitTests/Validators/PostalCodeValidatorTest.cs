@@ -1,8 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
-using Qowaiv.TestTools.Validiation;
-using Qowaiv.Validation.Abstractions;
 using Qowaiv.Validation.Fluent.UnitTests.Models;
+using Qowaiv.Validation.TestTools;
 
 namespace Qowaiv.Validation.Fluent.UnitTests.Validators
 {

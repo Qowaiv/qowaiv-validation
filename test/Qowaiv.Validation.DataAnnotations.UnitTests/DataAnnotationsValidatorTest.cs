@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
-using Qowaiv.TestTools.Validiation;
 using Qowaiv.Validation.DataAnnotations.UnitTests.Models;
+using Qowaiv.Validation.TestTools;
 using System;
 
 namespace Qowaiv.Validation.DataAnnotations.UnitTests

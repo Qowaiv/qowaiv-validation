@@ -5,13 +5,15 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>0.0.1</Version>
+    <Version>1.0.3</Version>
   </PropertyGroup>
- 
+
   <ItemGroup>
-    <Compile Include="..\..\shared\\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
+    <ProjectReference Include="..\..\src\Qowaiv.Validation.Abstractions\Qowaiv.Validation.Abstractions.csproj" />
+    <ProjectReference Include="..\..\src\Qowaiv.Validation.DataAnnotations\Qowaiv.Validation.DataAnnotations.csproj" />
+    <ProjectReference Include="..\..\src\Qowaiv.Validation.Fluent\Qowaiv.Validation.Fluent.csproj" />
   </ItemGroup>
- 
+
   <ItemGroup>
     <PackageReference Include="SonarAnalyzer.CSharp" Version="8.0.0.9566">
       <PrivateAssets>all</PrivateAssets>
@@ -20,18 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="QowaivValidationMessages.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>QowaivValidationMessages.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="QowaivValidationMessages.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>QowaivValidationMessages.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <Compile Include="..\..\shared\\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
   </ItemGroup>
 
 </Project>
