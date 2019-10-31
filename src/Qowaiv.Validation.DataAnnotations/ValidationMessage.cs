@@ -21,8 +21,11 @@ namespace Qowaiv.Validation.DataAnnotations
 
         /// <summary>Creates a new instance of <see cref="ValidationMessage"/>.</summary>
         protected ValidationMessage(SerializationInfo info, StreamingContext context) :
-            base(GetMessage(info), GetMemberNames(info))
+            this(GetSeverity(info), GetMessage(info), GetMemberNames(info))
         { }
+
+        /// <summary>Helper methods to deserialize the <see cref="ValidationMessage"/>.</summary>
+        private static ValidationSeverity GetSeverity(SerializationInfo info) => (ValidationSeverity)info.GetInt32(nameof(Severity));
 
         /// <summary>Helper methods to deserialize the <see cref="ValidationMessage"/>.</summary>
         private static string GetMessage(SerializationInfo info) => info.GetString(nameof(Message));
@@ -35,6 +38,7 @@ namespace Qowaiv.Validation.DataAnnotations
         {
             Guard.NotNull(info, nameof(info));
 
+            info.AddValue(nameof(Severity), Severity);
             info.AddValue(nameof(Message), Message);
             info.AddValue(nameof(MemberNames), MemberNames.ToArray());
         }
@@ -66,11 +70,11 @@ namespace Qowaiv.Validation.DataAnnotations
         /// </param>
         public static ValidationMessage For(ValidationResult validationResult)
         {
-            if(validationResult is null || validationResult == Success)
+            if (validationResult is null || validationResult == Success)
             {
                 return None;
             }
-            if(validationResult is ValidationMessage message)
+            if (validationResult is ValidationMessage message)
             {
                 return message;
             }
