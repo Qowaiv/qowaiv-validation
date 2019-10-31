@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Qowav.TestTools;
 
 namespace Qowaiv.Validation.Abstractions.UnitTests
 {
@@ -15,13 +16,12 @@ namespace Qowaiv.Validation.Abstractions.UnitTests
                     ValidationMessage.Info("Not my favorite", "_value"),
                 });
 
-            // TODO: include stripped Qowaiv.TestTools.
-            //var actual = SerializationTest.SerializeDeserialize(expected);
+            var actual = SerializationTest.SerializeDeserialize(expected);
 
-            //Assert.AreEqual(expected.Message, actual.Message);
-            //Assert.IsNull(actual.InnerException);
+            Assert.AreEqual(expected.Message, actual.Message);
+            Assert.IsNull(actual.InnerException);
 
-            //CollectionAssert.AreEqual(expected.Errors, actual.Errors);
+            CollectionAssert.AreEqual(expected.Errors, actual.Errors);
         }
     }
 }

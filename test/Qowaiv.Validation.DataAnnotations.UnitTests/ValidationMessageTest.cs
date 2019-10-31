@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Qowav.TestTools;
 
 namespace Qowaiv.Validation.DataAnnotations.UnitTests
 {
@@ -9,10 +10,10 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
         {
             var message = ValidationMessage.Info("Can be serialized", "ErrorMessage", "MemberNames");
 
-            //var actual = SerializationTest.SerializeDeserialize(message);
+            var actual = SerializationTest.SerializeDeserialize(message);
 
-            //Assert.AreEqual(message.ErrorMessage, actual.ErrorMessage);
-            //Assert.AreEqual(message.MemberNames, actual.MemberNames);
+            Assert.AreEqual(message.ErrorMessage, actual.ErrorMessage);
+            Assert.AreEqual(message.MemberNames, actual.MemberNames);
         }
 
         [Test]
@@ -20,10 +21,10 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
         {
             var message = ValidationMessage.Warn("Can be serialized", "ErrorMessage", "MemberNames");
 
-            //var actual = SerializationTest.SerializeDeserialize(message);
+            var actual = SerializationTest.SerializeDeserialize(message);
 
-            //Assert.AreEqual(message.ErrorMessage, actual.ErrorMessage);
-            //Assert.AreEqual(message.MemberNames, actual.MemberNames);
+            Assert.AreEqual(message.ErrorMessage, actual.ErrorMessage);
+            Assert.AreEqual(message.MemberNames, actual.MemberNames);
         }
 
         [Test]
@@ -31,10 +32,10 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
         {
             var message = ValidationMessage.Error("Can be serialized", "ErrorMessage", "MemberNames");
 
-            //var actual = SerializationTest.SerializeDeserialize(message);
+            var actual = SerializationTest.SerializeDeserialize(message);
 
-            //Assert.AreEqual(message.ErrorMessage, actual.ErrorMessage);
-            //Assert.AreEqual(message.MemberNames, actual.MemberNames);
+            Assert.AreEqual(message.ErrorMessage, actual.ErrorMessage);
+            Assert.AreEqual(message.MemberNames, actual.MemberNames);
         }
     }
 }
