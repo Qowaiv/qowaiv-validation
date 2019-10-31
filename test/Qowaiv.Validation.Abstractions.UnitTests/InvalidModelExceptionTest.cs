@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using Qowav.TestTools;
+using Qowaiv.TestTools;
 
 namespace Qowaiv.Validation.Abstractions.UnitTests
 {
