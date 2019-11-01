@@ -34,7 +34,7 @@ namespace Qowaiv.Validation.DataAnnotations
         /// the only way to determine if the provided value is a nullable type,
         /// or not.
         /// </remarks>
-        private Type GetMemberType(ValidationContext context)
+        private static Type GetMemberType(ValidationContext context)
         {
             if (string.IsNullOrEmpty(context.MemberName))
             {

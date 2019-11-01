@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Globalization;
-using Qowaiv.TestTools.Validiation;
 using Qowaiv.Validation.DataAnnotations.UnitTests.Models;
+using Qowaiv.Validation.TestTools;
 using System;
 
 namespace Qowaiv.Validation.DataAnnotations.UnitTests
@@ -82,7 +82,7 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
         [Test]
         public void Validate_NestedModelWithNullChild_With1Error()
         {
-            var model = new NestedModel()
+            var model = new NestedModel
             {
                 Id = Guid.NewGuid()
             };
@@ -93,7 +93,7 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
         [Test]
         public void Validate_NestedModelWithInvalidChild_With1Error()
         {
-            var model = new NestedModel()
+            var model = new NestedModel
             {
                 Id = Guid.NewGuid(),
                 Child = new NestedModel.ChildModel()
@@ -105,7 +105,7 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
         [Test]
         public void Validate_NestedModelWithInvalidChildren_With1Error()
         {
-            var model = new NestedModelWithChildren()
+            var model = new NestedModelWithChildren
             {
                 Id = Guid.NewGuid(),
                 Children = new[]
@@ -121,7 +121,7 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
         [Test]
         public void Validate_NestedModelWithLoop_With1Error()
         {
-            var model = new NestedModelWithLoop()
+            var model = new NestedModelWithLoop
             {
                 Id = Guid.NewGuid(),
                 Child = new NestedModelWithLoop.ChildModel(),

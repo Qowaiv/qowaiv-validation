@@ -4,8 +4,8 @@
   <Import Project="analytics.props" />
 
   <PropertyGroup>
-    <Description>Qowaiv implements common, universal domain objects. These types form the base of your domain model.</Description>
-    <Authors>Ad van der Hoeven;Corniel Nobel;Erik Ammerlaan;Jack Kester;Hanif Hafez Nezami;Patrick Evers;Vincent Lesierse;Wilko Frieke</Authors>
+    <Description>Qowaiv Validation supports a generic interface for (domain) model validation.</Description>
+    <Authors>Corniel Nobel</Authors>
     <Owners>Qowaiv community</Owners>
     <PackageTags>qowaiv domain model</PackageTags>
     <Company>Qowaiv community</Company>
@@ -13,15 +13,14 @@
     <LangVersion>latest</LangVersion>
 
     <PackageIconUrl>https://raw.githubusercontent.com/Qowaiv/Qowaiv/master/design/qowaiv-logo_nuget_064x064.gif</PackageIconUrl>
-    <PackageProjectUrl>http://www.github.com/Qowaiv/Qowaiv</PackageProjectUrl>
-    <PackageLicenseUrl>http://www.github.com/Qowaiv/Qowaiv/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <PackageProjectUrl>http://www.github.com/Qowaiv/qowaiv-validation</PackageProjectUrl>
+    <PackageLicenseUrl>http://www.github.com/Qowaiv/qowaiv-validation/blob/master/LICENSE.txt</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/Qowaiv/Qowaiv</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Qowaiv/qwowaiv-validation</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <VersionSuffix Condition="'$(VersionSuffix)'!='' AND '$(BuildNumber)' != ''">$(VersionSuffix)-$(BuildNumber)</VersionSuffix>
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)..\build\Qowaiv.snk</AssemblyOriginatorKeyFile>

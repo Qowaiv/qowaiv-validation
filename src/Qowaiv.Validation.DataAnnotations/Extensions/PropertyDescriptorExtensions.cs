@@ -41,6 +41,8 @@ namespace System.ComponentModel
         /// <summary>Gets the type converter associated with the property.</summary>
         public static TypeConverter GetTypeConverter(this PropertyDescriptor descriptor)
         {
+            Guard.NotNull(descriptor, nameof(descriptor));
+
             var converterType = descriptor.Attributes
                 .Cast<Attribute>()
                 .OfType<TypeConverterAttribute>()

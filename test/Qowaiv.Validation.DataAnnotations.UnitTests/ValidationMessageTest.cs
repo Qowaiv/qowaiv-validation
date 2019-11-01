@@ -12,6 +12,7 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
 
             var actual = SerializationTest.SerializeDeserialize(message);
 
+            Assert.AreEqual(message.Severity, actual.Severity);
             Assert.AreEqual(message.ErrorMessage, actual.ErrorMessage);
             Assert.AreEqual(message.MemberNames, actual.MemberNames);
         }
@@ -23,6 +24,7 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
 
             var actual = SerializationTest.SerializeDeserialize(message);
 
+            Assert.AreEqual(message.Severity, actual.Severity);
             Assert.AreEqual(message.ErrorMessage, actual.ErrorMessage);
             Assert.AreEqual(message.MemberNames, actual.MemberNames);
         }
@@ -34,6 +36,7 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
 
             var actual = SerializationTest.SerializeDeserialize(message);
 
+            Assert.AreEqual(message.Severity, actual.Severity);
             Assert.AreEqual(message.ErrorMessage, actual.ErrorMessage);
             Assert.AreEqual(message.MemberNames, actual.MemberNames);
         }

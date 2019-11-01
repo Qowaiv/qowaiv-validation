@@ -23,6 +23,8 @@ namespace Qowaiv.Validation.Fluent.Validators
         /// <inheritdoc />
         protected override bool IsValid(PropertyValidatorContext context)
         {
+            Guard.NotNull(context, nameof(context));
+
             var postalCode = (PostalCode)context.PropertyValue;
             var country = _country(context.Instance);
 

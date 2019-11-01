@@ -23,35 +23,35 @@ namespace Qowaiv.Validation.DataAnnotations.Tests.ValidationAttributes
         public void IsValid_FlagsEnumSingle_IsTrue()
         {
             var attribute = new DefinedEnumValuesOnlyAttribute();
-            Assert.IsTrue(attribute.IsValid(Flag.UnionJack));
+            Assert.IsTrue(attribute.IsValid(Banners.UnionJack));
         }
 
         [Test]
         public void IsValid_FlagsEnumMixed_IsTrue()
         {
             var attribute = new DefinedEnumValuesOnlyAttribute();
-            Assert.IsTrue(attribute.IsValid(Flag.American));
+            Assert.IsTrue(attribute.IsValid(Banners.American));
         }
 
         [Test]
         public void IsValid_FlagsEnumMixedAllowUndefinedFlagCombinations_IsTrue()
         {
             var attribute = new DefinedEnumValuesOnlyAttribute { OnlyAllowDefinedFlagsCombinations = false };
-            Assert.IsTrue(attribute.IsValid(Flag.UnionJack | Flag.StarsAndStripes));
+            Assert.IsTrue(attribute.IsValid(Banners.UnionJack | Banners.StarsAndStripes));
         }
 
         [Test]
         public void IsValid_FlagsEnumMixed_IsFalse()
         {
             var attribute = new DefinedEnumValuesOnlyAttribute { OnlyAllowDefinedFlagsCombinations = true };
-            Assert.IsFalse(attribute.IsValid(Flag.UnionJack | Flag.StarsAndStripes));
+            Assert.IsFalse(attribute.IsValid(Banners.UnionJack | Banners.StarsAndStripes));
         }
 
         [Test]
         public void IsValid_FlagsRandomIntValue_IsFalse()
         {
             var attribute = new DefinedEnumValuesOnlyAttribute();
-            Assert.IsFalse(attribute.IsValid((Flag)666));
+            Assert.IsFalse(attribute.IsValid((Banners)666));
         }
 
         [Test]
@@ -69,14 +69,14 @@ namespace Qowaiv.Validation.DataAnnotations.Tests.ValidationAttributes
         }
 
 
-[Flags]
-public enum Flag
-{
-    UnionJack = 1,
-    StarsAndStripes = 2,
-    MapleLeaf = 4,
-    American = StarsAndStripes | MapleLeaf,
-}
+        [Flags]
+        public enum Banners
+        {
+            UnionJack = 1,
+            StarsAndStripes = 2,
+            MapleLeaf = 4,
+            American = StarsAndStripes | MapleLeaf,
+        }
 
         public enum Number
         {
