@@ -62,7 +62,7 @@ namespace Qowaiv.Validation.DataAnnotations
         public static ValidationMessage Warn(string message, params string[] memberNames) => new ValidationMessage(ValidationSeverity.Warning, message, memberNames);
 
         /// <summary>Creates an info message.</summary>
-        public static ValidationMessage Info(string message, params string[] memberNames) => new ValidationMessage(ValidationSeverity.Error, message, memberNames);
+        public static ValidationMessage Info(string message, params string[] memberNames) => new ValidationMessage(ValidationSeverity.Info, message, memberNames);
 
         /// <summary>Creates a validation message for a validation result.</summary>
         /// <param name="validationResult">

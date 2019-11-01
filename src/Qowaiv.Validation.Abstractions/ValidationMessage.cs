@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using System.Text;
 
 namespace Qowaiv.Validation.Abstractions
 {
     /// <summary>Implementation of an <see cref="IValidationMessage"/>.</summary>
     [Serializable]
-    public class ValidationMessage : IValidationMessage, ISerializable
+    public sealed class ValidationMessage : IValidationMessage, ISerializable, IEquatable<ValidationMessage>
     {
         /// <summary>Creates a new instance of a <see cref="ValidationMessage"/>.</summary>
         public ValidationMessage() : this(ValidationSeverity.None, null, null) { }
@@ -18,7 +19,7 @@ namespace Qowaiv.Validation.Abstractions
         }
 
         /// <summary>Creates a new instance of <see cref="ValidationMessage"/>.</summary>
-        protected ValidationMessage(SerializationInfo info, StreamingContext context) :
+        private ValidationMessage(SerializationInfo info, StreamingContext context) :
             this(GetSeverity(info), GetMessage(info), GetProperty(info))
         { }
 
@@ -32,7 +33,7 @@ namespace Qowaiv.Validation.Abstractions
         private static string GetProperty(SerializationInfo info) => info.GetString(nameof(PropertyName));
 
         /// <inheritdoc />
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             Guard.NotNull(info, nameof(info));
 
@@ -50,6 +51,59 @@ namespace Qowaiv.Validation.Abstractions
         /// <inheritdoc />
         public string Message { get; }
 
+        /// <inheritdoc />
+        public override string ToString()
+        {
+            if(Equals(None))
+            {
+                return string.Empty;
+            }
+
+            var sb = new StringBuilder();
+            switch (Severity)
+            {
+                case ValidationSeverity.Info: 
+                    sb.Append("INF: ");
+                    break;
+                case ValidationSeverity.Warning:
+                    sb.Append("WRN: ");
+                    break;
+                case ValidationSeverity.Error:
+                    sb.Append("ERR: ");
+                    break;
+                default:
+                    sb.Append($"Severity: ");
+                    break;
+            }
+            if(!string.IsNullOrEmpty(PropertyName))
+            {
+                sb.Append($"Property: {PropertyName}, ");
+            }
+            sb.Append(Message);
+
+            return sb.ToString();
+        }
+
+        /// <inheritdoc />
+        public override bool Equals(object obj) => obj is ValidationMessage other && Equals(other);
+
+        /// <inheritdoc />
+        public bool Equals(ValidationMessage other)
+        {
+            return other != null
+                && Severity == other.Severity
+                && PropertyName == other.PropertyName
+                && Message == other.Message;
+        }
+
+        /// <inheritdoc />
+        public override int GetHashCode()
+        {
+            return Severity.GetHashCode()
+                ^ (PropertyName ?? "").GetHashCode()
+                ^ (Message ?? "").GetHashCode();
+        }
+
         /// <summary>Creates a None message.</summary>
         public static ValidationMessage None => new ValidationMessage();
 
@@ -60,7 +114,7 @@ namespace Qowaiv.Validation.Abstractions
         public static ValidationMessage Warn(string message, string propertyName = null) => new ValidationMessage(ValidationSeverity.Warning, message, propertyName);
 
         /// <summary>Creates an info message.</summary>
-        public static ValidationMessage Info(string message, string propertyName = null) => new ValidationMessage(ValidationSeverity.Error, message, propertyName);
+        public static ValidationMessage Info(string message, string propertyName = null) => new ValidationMessage(ValidationSeverity.Info, message, propertyName);
 
         /// <summary>Creates a validation message.</summary>
         public static IValidationMessage For(ValidationSeverity serverity, string message, string propertyName = null)
@@ -74,5 +128,7 @@ namespace Qowaiv.Validation.Abstractions
                 default: return Error(message, propertyName);
             }
         }
+
+        
     }
 }
