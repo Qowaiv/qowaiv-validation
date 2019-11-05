@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Qowaiv.Validation.Abstractions
 {
@@ -36,6 +38,64 @@ namespace Qowaiv.Validation.Abstractions
             {
                 throw InvalidModelException.For<TModel>(Errors);
             }
+        }
+
+        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+        /// <param name="action">
+        /// The action to invoke.
+        /// </param>
+        /// <returns>
+        /// A result with the merged messages.
+        /// </returns>
+        public Result<TModel> Act(Func<TModel, Result> action)
+        {
+            Guard.NotNull(action, nameof(action));
+
+            if (!IsValid || ReferenceEquals(Value, null))
+            {
+                return this;
+            }
+            var messages = Messages.ToList();
+            messages.AddRange(action(Value).Messages);
+            return For(Value, messages);
+        }
+
+        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+        /// <param name="action">
+        /// The action to invoke.
+        /// </param>
+        /// <returns>
+        /// A result with the merged messages.
+        /// </returns>
+        public Result<TModel> Act(Func<TModel, Result<TModel>> action) => Act<TModel>(action);
+
+        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+        /// <param name="action">
+        /// The action to invoke.
+        /// </param>
+        /// <typeparam name="TOther">
+        /// The type of the new result value.
+        /// </typeparam>
+        /// <returns>
+        /// A result with the merged messages.
+        /// </returns>
+        public Result<TOther> Act<TOther>(Func<TModel, Result<TOther>> action)
+        {
+            Guard.NotNull(action, nameof(action));
+
+            if (!IsValid || ReferenceEquals(Value, null))
+            {
+                return WithMessages<TOther>(Messages);
+            }
+
+            var messages = Messages.ToList();
+
+            var outcome = action(Value);
+            messages.AddRange(outcome.Messages);
+
+            return outcome.IsValid
+                ? For(outcome.Value, messages)
+                : WithMessages<TOther>(messages);
         }
 
         /// <summary>Explicitly casts the <see cref="Result"/> to the type of the related model.</summary>
