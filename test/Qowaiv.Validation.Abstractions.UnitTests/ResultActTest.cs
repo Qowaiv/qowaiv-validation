@@ -1,12 +1,13 @@
 ﻿using NUnit.Framework;
 using Qowaiv.TestTools.Validiation;
+using System.Threading.Tasks;
 
 namespace Qowaiv.Validation.Abstractions.UnitTests
 {
-    public class NestedResultTest
+    public class ResultActTest
     {
         [Test]
-        public void Nested()
+        public void Act_MultipleTimes_WithErrors()
         {
             var model = new TestModel();
             var result = model.UpdateValue()
@@ -20,8 +21,18 @@ namespace Qowaiv.Validation.Abstractions.UnitTests
 
             ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("InvalidUpdate"));
         }
-    }
 
+        [Test]
+        public async Task ActAsync_MultipleTimes_WithErrors()
+        {
+            var model = new TestModel();
+            var result = await model.UpdateValueAsync()
+                .ActAsync(m => m.UpdateValueAsync())
+                .ActAsync(m => m.InvalidUpdate());
+
+            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("InvalidUpdate"));
+        }
+    }
 
     internal class TestModel
     {
@@ -47,6 +58,13 @@ namespace Qowaiv.Validation.Abstractions.UnitTests
             Value++;
             return Result.WithMessages<TestModel>(ValidationMessage.Error(nameof(InvalidUpdate)));
         }
+
+        public Task<Result<TestModel>> UpdateValueAsync()
+        {
+            Value++;
+            return Task.FromResult(Result.For(this));
+        }
+
         public override string ToString() => Value.ToString();
     }
 

@@ -64,15 +64,6 @@ namespace Qowaiv.Validation.Abstractions
         /// <param name="action">
         /// The action to invoke.
         /// </param>
-        /// <returns>
-        /// A result with the merged messages.
-        /// </returns>
-        public Result<TModel> Act(Func<TModel, Result<TModel>> action) => Act<TModel>(action);
-
-        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
-        /// <param name="action">
-        /// The action to invoke.
-        /// </param>
         /// <typeparam name="TOther">
         /// The type of the new result value.
         /// </typeparam>
