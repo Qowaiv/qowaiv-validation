@@ -82,14 +82,30 @@ Result<DataType> result = Result.For(data);
 Result<DataType> resultWithMessages = Result.For(data, messages);
 ```
 
-#### Concatenated actions
-Actions on `Result<TModel>` can be concatenated:
+#### Composed Actions
+A Composed Action can be created by *method chaining* of multiple smaller
+actions/functions. Subsequent actions are executed while the `Result<TModel>`
+is valid:
+
 ``` C#
-Result<DataType> result = await GetResult()
-    .Act(m => m.Update())
-    .ActAsync(m.UpdateAsync());
+Result<DataType> result = GetModel()
+    .Act(m => m.Action1())
+    .Act(m => m.Action2());
 ```
-Subsequent actions are executed as long as the result is valid.
+This is short for:
+``` C#
+Result<DataType> result = GetModel()
+if (result.Isvalid)
+{
+    result = result.Action1();
+}
+if (result.Isvalid)
+{
+    result = result.Action2();
+}
+```
+
+
 
 ### IValidationMessage
 The common ground of validation messages.
