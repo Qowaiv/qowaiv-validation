@@ -5,10 +5,10 @@
 
 | version                                                                       | package                                                                                              |
 |-------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-0.0.1-darkblue.svg?cacheSeconds=3600)|[Qowaiv.Validation.Abstractions](https://www.nuget.org/packages/Qowaiv.Validation.Abstractions/)      |
-|![v](https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.DataAnnotations](https://www.nuget.org/packages/Qowaiv.Validation.DataAnnotations/)|
-|![v](https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Fluent](https://www.nuget.org/packages/Qowaiv.Validation.Fluent/)                  |
-|![v](https://img.shields.io/badge/version-0.0.0-darkred.svg?cacheSeconds=3600) |[Qowaiv.Validation.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)                       |
+|![v](https://img.shields.io/badge/version-0.0.3-darkblue.svg?cacheSeconds=3600)|[Qowaiv.Validation.Abstractions](https://www.nuget.org/packages/Qowaiv.Validation.Abstractions/)      |
+|![v](https://img.shields.io/badge/version-0.0.2-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.DataAnnotations](https://www.nuget.org/packages/Qowaiv.Validation.DataAnnotations/)|
+|![v](https://img.shields.io/badge/version-0.0.2-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Fluent](https://www.nuget.org/packages/Qowaiv.Validation.Fluent/)                  |
+|![v](https://img.shields.io/badge/version-0.0.1-darkred.svg?cacheSeconds=3600) |[Qowaiv.Validation.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)                       |
 
 # Qowaiv Validation
 There are multiple ways to support validation within .NET. Most notable are
@@ -81,6 +81,15 @@ Typical use cases are:
 Result<DataType> result = Result.For(data);
 Result<DataType> resultWithMessages = Result.For(data, messages);
 ```
+
+#### Concatenated actions
+Actions on `Result<TModel>` can be concatenated:
+``` C#
+Result<DataType> result = await GetResult()
+    .Act(m => m.Update())
+    .ActAsync(m.UpdateAsync());
+```
+Subsequent actions are executed as long as the result is valid.
 
 ### IValidationMessage
 The common ground of validation messages.
@@ -248,10 +257,10 @@ public class NestedModelWithChildren
 {
     public ChildModel[] Children { get; set; }
 
-    [NestedModel]
+    [NestedModel()]
     public class ChildModel
     {
-        [Mandatory]
+        [Mandatory()]
         public string Name { get; set; }
     }
 }

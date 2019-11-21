@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Qowaiv.Validation.Abstractions
 {
@@ -44,6 +45,57 @@ namespace Qowaiv.Validation.Abstractions
         /// <param name="action">
         /// The action to invoke.
         /// </param>
+        /// <typeparam name="TOut">
+        /// The type of the new result value.
+        /// </typeparam>
+        /// <returns>
+        /// A result with the merged messages.
+        /// </returns>
+        public Result<TOut> Act<TOut>(Func<TModel, Result<TOut>> action)
+        {
+            Guard.NotNull(action, nameof(action));
+
+            if (!IsValid || ReferenceEquals(Value, null))
+            {
+                return WithMessages<TOut>(Messages);
+            }
+
+            var messages = Messages.ToList();
+            var outcome = action(Value);
+            messages.AddRange(outcome.Messages);
+            return For(outcome.IsValid ? outcome.Value : default, messages);
+        }
+
+        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+        /// <param name="action">
+        /// The action to invoke.
+        /// </param>
+        /// <typeparam name="TOut">
+        /// The type of the new result value.
+        /// </typeparam>
+        /// <returns>
+        /// A result with the merged messages.
+        /// </returns>
+        public async Task<Result<TOut>> ActAsync<TOut>(Func<TModel, Task<Result<TOut>>> action)
+        {
+            _ = Guard.NotNull(action, nameof(action));
+
+            if (!IsValid || ReferenceEquals(Value, null))
+            {
+                return WithMessages<TOut>(Messages);
+            }
+
+            var messages = Messages.ToList();
+            var outcome = await action(Value).ConfigureAwait(false);
+            messages.AddRange(outcome.Messages);
+            return For(outcome.IsValid ? outcome.Value : default, messages);
+        }
+
+
+        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+        /// <param name="action">
+        /// The action to invoke.
+        /// </param>
         /// <returns>
         /// A result with the merged messages.
         /// </returns>
@@ -53,10 +105,12 @@ namespace Qowaiv.Validation.Abstractions
 
             if (!IsValid || ReferenceEquals(Value, null))
             {
-                return this;
+                return WithMessages<TModel>(Messages);
             }
+
             var messages = Messages.ToList();
-            messages.AddRange(action(Value).Messages);
+            var outcome = action(Value);
+            messages.AddRange(outcome.Messages);
             return For(Value, messages);
         }
 
@@ -64,29 +118,22 @@ namespace Qowaiv.Validation.Abstractions
         /// <param name="action">
         /// The action to invoke.
         /// </param>
-        /// <typeparam name="TOther">
-        /// The type of the new result value.
-        /// </typeparam>
         /// <returns>
         /// A result with the merged messages.
         /// </returns>
-        public Result<TOther> Act<TOther>(Func<TModel, Result<TOther>> action)
+        public async Task<Result<TModel>> ActAsync(Func<TModel, Task<Result>> action)
         {
-            Guard.NotNull(action, nameof(action));
+            _ = Guard.NotNull(action, nameof(action));
 
             if (!IsValid || ReferenceEquals(Value, null))
             {
-                return WithMessages<TOther>(Messages);
+                return WithMessages<TModel>(Messages);
             }
 
             var messages = Messages.ToList();
-
-            var outcome = action(Value);
+            var outcome = await action(Value).ConfigureAwait(false);
             messages.AddRange(outcome.Messages);
-
-            return outcome.IsValid
-                ? For(outcome.Value, messages)
-                : WithMessages<TOther>(messages);
+            return For(Value, messages);
         }
 
         /// <summary>Explicitly casts the <see cref="Result"/> to the type of the related model.</summary>
