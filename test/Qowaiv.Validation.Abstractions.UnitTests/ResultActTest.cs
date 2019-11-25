@@ -83,7 +83,7 @@ namespace Qowaiv.Validation.Abstractions.UnitTests
         [Test]
         public async Task ActAsync_ValidModelValidActionAsync_ActAsync()
         {
-            var result = await ValidModel().ActAsync(m => m.ValidatActionAsync());
+            var result = await ValidModel().ActAsync(m => m.ValidActionAsync());
             Assert.AreEqual(1, result.Value.Actions);
         }
         [Test]
@@ -121,7 +121,7 @@ namespace Qowaiv.Validation.Abstractions.UnitTests
         [Test]
         public async Task Act_ValidModelAsyncValidActionAsync_Act()
         {
-            var result = await ValidModelAsync().ActAsync(m => m.ValidatActionAsync());
+            var result = await ValidModelAsync().ActAsync(m => m.ValidActionAsync());
             Assert.AreEqual(1, result.Value.Actions);
         }
         [Test]
@@ -223,7 +223,7 @@ namespace Qowaiv.Validation.Abstractions.UnitTests
             return Result.WithMessages<TestModel>(ValidationMessage.Error(nameof(InvalidAction)));
         }
 
-        public Task<Result<TestModel>> ValidatActionAsync()
+        public Task<Result<TestModel>> ValidActionAsync()
         {
             Actions++;
             return Task.FromResult(Result.For(this));
