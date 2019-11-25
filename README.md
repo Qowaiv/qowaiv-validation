@@ -5,10 +5,10 @@
 
 | version                                                                       | package                                                                                              |
 |-------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-0.0.1-darkblue.svg?cacheSeconds=3600)|[Qowaiv.Validation.Abstractions](https://www.nuget.org/packages/Qowaiv.Validation.Abstractions/)      |
-|![v](https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.DataAnnotations](https://www.nuget.org/packages/Qowaiv.Validation.DataAnnotations/)|
-|![v](https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Fluent](https://www.nuget.org/packages/Qowaiv.Validation.Fluent/)                  |
-|![v](https://img.shields.io/badge/version-0.0.0-darkred.svg?cacheSeconds=3600) |[Qowaiv.Validation.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)                       |
+|![v](https://img.shields.io/badge/version-0.0.3-darkblue.svg?cacheSeconds=3600)|[Qowaiv.Validation.Abstractions](https://www.nuget.org/packages/Qowaiv.Validation.Abstractions/)      |
+|![v](https://img.shields.io/badge/version-0.0.2-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.DataAnnotations](https://www.nuget.org/packages/Qowaiv.Validation.DataAnnotations/)|
+|![v](https://img.shields.io/badge/version-0.0.2-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Fluent](https://www.nuget.org/packages/Qowaiv.Validation.Fluent/)                  |
+|![v](https://img.shields.io/badge/version-0.0.1-darkred.svg?cacheSeconds=3600) |[Qowaiv.Validation.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)                       |
 
 # Qowaiv Validation
 There are multiple ways to support validation within .NET. Most notable are
@@ -81,6 +81,31 @@ Typical use cases are:
 Result<DataType> result = Result.For(data);
 Result<DataType> resultWithMessages = Result.For(data, messages);
 ```
+
+#### Composed Actions
+A Composed Action can be created by *method chaining* of multiple smaller
+actions/functions. Subsequent actions are executed while the `Result<TModel>`
+is valid:
+
+``` C#
+Result<DataType> result = GetModel()
+    .Act(m => m.Action1())
+    .Act(m => m.Action2());
+```
+This is short for:
+``` C#
+Result<DataType> result = GetModel()
+if (result.Isvalid)
+{
+    result = result.Action1();
+}
+if (result.Isvalid)
+{
+    result = result.Action2();
+}
+```
+
+
 
 ### IValidationMessage
 The common ground of validation messages.
@@ -248,10 +273,10 @@ public class NestedModelWithChildren
 {
     public ChildModel[] Children { get; set; }
 
-    [NestedModel]
+    [NestedModel()]
     public class ChildModel
     {
-        [Mandatory]
+        [Mandatory()]
         public string Name { get; set; }
     }
 }

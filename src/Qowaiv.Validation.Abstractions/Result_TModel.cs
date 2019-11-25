@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Qowaiv.Validation.Abstractions
 {
@@ -36,6 +39,101 @@ namespace Qowaiv.Validation.Abstractions
             {
                 throw InvalidModelException.For<TModel>(Errors);
             }
+        }
+
+        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+        /// <param name="action">
+        /// The action to invoke.
+        /// </param>
+        /// <typeparam name="TOut">
+        /// The type of the new result value.
+        /// </typeparam>
+        /// <returns>
+        /// A result with the merged messages.
+        /// </returns>
+        public Result<TOut> Act<TOut>(Func<TModel, Result<TOut>> action)
+        {
+            Guard.NotNull(action, nameof(action));
+
+            if (!IsValid || ReferenceEquals(Value, null))
+            {
+                return WithMessages<TOut>(Messages);
+            }
+
+            var messages = Messages.ToList();
+            var outcome = action(Value);
+            messages.AddRange(outcome.Messages);
+            return For(outcome.IsValid ? outcome.Value : default, messages);
+        }
+
+        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+        /// <param name="action">
+        /// The action to invoke.
+        /// </param>
+        /// <typeparam name="TOut">
+        /// The type of the new result value.
+        /// </typeparam>
+        /// <returns>
+        /// A result with the merged messages.
+        /// </returns>
+        public async Task<Result<TOut>> ActAsync<TOut>(Func<TModel, Task<Result<TOut>>> action)
+        {
+            _ = Guard.NotNull(action, nameof(action));
+
+            if (!IsValid || ReferenceEquals(Value, null))
+            {
+                return WithMessages<TOut>(Messages);
+            }
+
+            var messages = Messages.ToList();
+            var outcome = await action(Value).ConfigureAwait(false);
+            messages.AddRange(outcome.Messages);
+            return For(outcome.IsValid ? outcome.Value : default, messages);
+        }
+
+
+        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+        /// <param name="action">
+        /// The action to invoke.
+        /// </param>
+        /// <returns>
+        /// A result with the merged messages.
+        /// </returns>
+        public Result<TModel> Act(Func<TModel, Result> action)
+        {
+            Guard.NotNull(action, nameof(action));
+
+            if (!IsValid || ReferenceEquals(Value, null))
+            {
+                return WithMessages<TModel>(Messages);
+            }
+
+            var messages = Messages.ToList();
+            var outcome = action(Value);
+            messages.AddRange(outcome.Messages);
+            return For(Value, messages);
+        }
+
+        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+        /// <param name="action">
+        /// The action to invoke.
+        /// </param>
+        /// <returns>
+        /// A result with the merged messages.
+        /// </returns>
+        public async Task<Result<TModel>> ActAsync(Func<TModel, Task<Result>> action)
+        {
+            _ = Guard.NotNull(action, nameof(action));
+
+            if (!IsValid || ReferenceEquals(Value, null))
+            {
+                return WithMessages<TModel>(Messages);
+            }
+
+            var messages = Messages.ToList();
+            var outcome = await action(Value).ConfigureAwait(false);
+            messages.AddRange(outcome.Messages);
+            return For(Value, messages);
         }
 
         /// <summary>Explicitly casts the <see cref="Result"/> to the type of the related model.</summary>
