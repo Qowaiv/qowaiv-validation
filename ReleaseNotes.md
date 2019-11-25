@@ -1,5 +1,9 @@
 ﻿# Release Notes
 
+### Released 2019-11-25
+#### Qowaiv.Validation.Abstractions 0.0.3
+* Added Support for Composed Actions.
+
 ### Released 2019-11-01
 #### Qowaiv.Validation.Abstractions 0.0.2
 * Added `Qowaiv.Validation.Abstractions.ValidationMessage`.
