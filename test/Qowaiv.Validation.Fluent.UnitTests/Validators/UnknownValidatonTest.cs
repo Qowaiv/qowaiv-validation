@@ -11,8 +11,8 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Validators
         [Test]
         public void Known_IsValid()
         {
-            var model = new NotUnknownModel { Email = EmailAddress.Parse("test@qowaiv.org") };
-            FluentValidatorAssert.IsValid<NotUnknownModelValidator, NotUnknownModel>(model);
+            var model = new UnknownModel { Email = EmailAddress.Parse("test@qowaiv.org") };
+            FluentValidatorAssert.IsValid<UnknownModelValidator, UnknownModel>(model);
         }
 
         [TestCase("'Email' must not be empty.", "en-GB")]
@@ -21,9 +21,9 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Validators
         {
             using (new CultureInfoScope(culture))
             {
-                var model = new NotUnknownModel { Email = EmailAddress.Empty };
+                var model = new UnknownModel { Email = EmailAddress.Empty };
 
-                FluentValidatorAssert.WithErrors<NotUnknownModelValidator, NotUnknownModel>(model,
+                FluentValidatorAssert.WithErrors<UnknownModelValidator, UnknownModel>(model,
                     ValidationMessage.Error(message, "Email")
                 );
             }
@@ -35,9 +35,9 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Validators
         {
             using (new CultureInfoScope(culture))
             {
-                var model = new NotUnknownModel { Email = EmailAddress.Unknown };
+                var model = new UnknownModel { Email = EmailAddress.Unknown };
 
-                FluentValidatorAssert.WithErrors<NotUnknownModelValidator, NotUnknownModel>(model,
+                FluentValidatorAssert.WithErrors<UnknownModelValidator, UnknownModel>(model,
                     ValidationMessage.Error(message, "Email")
                 );
             }

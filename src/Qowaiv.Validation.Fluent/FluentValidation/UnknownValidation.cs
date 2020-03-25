@@ -3,7 +3,7 @@ using Qowaiv.Validation.Fluent;
 
 namespace FluentValidation
 {
-    /// <summary>Fluent validation for Single Value Objects being unknown.</summary>
+    /// <summary>Fluent validation for Single Value Objects being (not) unknown.</summary>
     public static class UnknownValidation
     {
         /// <summary>Defines a 'not unknown' validator on the current rule builder.

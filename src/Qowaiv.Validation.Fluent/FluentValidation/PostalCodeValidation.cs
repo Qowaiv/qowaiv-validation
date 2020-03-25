@@ -9,7 +9,7 @@ namespace FluentValidation
     /// <summary>Fluent validation for <see cref="PostalCode"/>.</summary>
     public static class PostalCodeValidation
     {
-        /// <summary>Defines a postal code validator on the current rule builder.</summary>
+        /// <summary>The postal code should be valid for the specified country.</summary>
         /// <typeparam name="TModel">
         /// Type of the model being validated.
         /// </typeparam>
@@ -25,7 +25,7 @@ namespace FluentValidation
                 .ValidFor((model) => country);
         }
 
-        /// <summary>Defines a postal code validator on the current rule builder.</summary>
+        /// <summary>The postal code should be valid for the specified country.</summary>
         /// <typeparam name="TModel">
         /// Type of object being validated.
         /// </typeparam>
