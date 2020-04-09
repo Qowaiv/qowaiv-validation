@@ -86,5 +86,14 @@ namespace Qowaiv.Validation.Fluent {
                 return ResourceManager.GetString("PostalCodeValidForCountry", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{PropertyName}&apos; is required..
+        /// </summary>
+        internal static string Required {
+            get {
+                return ResourceManager.GetString("Required", resourceCulture);
+            }
+        }
     }
 }
