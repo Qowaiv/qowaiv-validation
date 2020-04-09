@@ -17,7 +17,7 @@ namespace Qowaiv.Validation.Fluent.UnitTests
 
             ValidationMessageAssert.IsValid(result,
                 ValidationMessage.Warn("Test warning.", nameof(model.Message)),
-                ValidationMessage.Info("Nice that your validated this.", nameof(model.Message)));
+                ValidationMessage.Info("Nice that you validated this.", nameof(model.Message)));
         }
     }
 
