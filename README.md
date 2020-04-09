@@ -127,7 +127,7 @@ namespace Qowaiv.Validation.Abstractions
 ### Validators
 
 #### Not unknown
-The `NotUnknownValidator` validates that a value does not equal the Unknown
+The `UnknownValidation` validates that a value does not equal the Unknown
 value (if existing of course). Accessible via the fluent syntax.
 
 ``` C#
@@ -141,8 +141,23 @@ public class CustomValidator : AbstractValidator<Model>
 }
 ```
 
+#### Required
+The `RequiredValidation` validates that a required property has a set value. If
+specified, an unknown value can be seen as a set value, by default it is not.
+
+``` C#
+public class CustomValidator : AbstractValidator<Model>
+{
+    public CustomValidator()
+    {
+        RuleFor(m => m.Email).Required();
+        RuleFor(m => m.Iban).Required(allowUnknown: true);
+    }
+}
+```
+
 #### Email address should be IP-based
-The `NoIPBasedEmailAddressValidator` validates that an `EmailAddress`
+The `EmailAddressValidation` validates that an `EmailAddress`
 does not have an IP-based domain.
 
 ``` C#
@@ -156,7 +171,7 @@ public class CustomValidator : AbstractValidator<Model>
 ```
 
 #### PostalCode valid for specific country
-The `PostalCodeValidator` validates that a `PostalCode` value is valid for
+The `PostalCodeValidation` validates that a `PostalCode` value is valid for
 a specific `Country`, both static and via another property.
 
 ``` C#

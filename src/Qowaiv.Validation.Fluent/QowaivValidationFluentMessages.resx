@@ -67,4 +67,7 @@
   <data name="PostalCodeValidForCountry" xml:space="preserve">
     <value>'{PropertyName}' {Value} is not valid for {Country}.</value>
   </data>
+  <data name="Required" xml:space="preserve">
+    <value>'{PropertyName}' is required.</value>
+  </data>
 </root>
