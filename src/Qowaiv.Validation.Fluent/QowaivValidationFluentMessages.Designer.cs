@@ -61,11 +61,47 @@ namespace Qowaiv.Validation.Fluent {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{PropertyName}&apos; should be in the future..
+        /// </summary>
+        internal static string InFuture {
+            get {
+                return ResourceManager.GetString("InFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{PropertyName}&apos; should be in the past..
+        /// </summary>
+        internal static string InPast {
+            get {
+                return ResourceManager.GetString("InPast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{PropertyName}&apos; has a IP address based domain..
         /// </summary>
         internal static string NoIPBasedEmailAddress {
             get {
                 return ResourceManager.GetString("NoIPBasedEmailAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{PropertyName}&apos; should not be in the future..
+        /// </summary>
+        internal static string NotInFuture {
+            get {
+                return ResourceManager.GetString("NotInFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{PropertyName}&apos; should not be in the past..
+        /// </summary>
+        internal static string NotInPast {
+            get {
+                return ResourceManager.GetString("NotInPast", resourceCulture);
             }
         }
         
