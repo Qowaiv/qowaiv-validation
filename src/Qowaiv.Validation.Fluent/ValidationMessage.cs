@@ -58,7 +58,6 @@ namespace Qowaiv.Validation.Fluent
                     ErrorCode = failure.ErrorCode,
                     FormattedMessageArguments = failure.FormattedMessageArguments,
                     FormattedMessagePlaceholderValues = failure.FormattedMessagePlaceholderValues,
-                    ResourceName = failure.ResourceName,
                     Severity = failure.Severity,
                 };
         }
