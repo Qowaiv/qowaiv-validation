@@ -11,13 +11,13 @@ namespace FluentValidation
         {
             Guard.DefinedEnum(severity, nameof(severity));
 
-            switch (severity)
+            return severity switch
             {
-                case Severity.Error: return ValidationSeverity.Error;
-                case Severity.Warning: return ValidationSeverity.Warning;
-                case Severity.Info: return ValidationSeverity.Info;
-                default: return ValidationSeverity.None;
-            }
+                Severity.Error => ValidationSeverity.Error,
+                Severity.Warning => ValidationSeverity.Warning,
+                Severity.Info => ValidationSeverity.Info,
+                _ => ValidationSeverity.None,
+            };
         }
     }
 }
