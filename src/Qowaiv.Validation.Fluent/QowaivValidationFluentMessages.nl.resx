@@ -58,8 +58,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="InFuture" xml:space="preserve">
+    <value>'{PropertyName}' moet in de toekomst liggen.</value>
+  </data>
+  <data name="InPast" xml:space="preserve">
+    <value>'{PropertyName}' moet in het verleden liggen.</value>
+  </data>
   <data name="NoIPBasedEmailAddress" xml:space="preserve">
     <value>'{PropertyName}' heeft een IP-adres als domein.</value>
+  </data>
+  <data name="NotInFuture" xml:space="preserve">
+    <value>'{PropertyName}' mag niet in de toekomst liggen.</value>
+  </data>
+  <data name="NotInPast" xml:space="preserve">
+    <value>'{PropertyName}' mag niet in het verleden liggen.</value>
   </data>
   <data name="NotUnknown" xml:space="preserve">
     <value>'{PropertyName}' mag niet onbekend zijn.</value>

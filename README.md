@@ -121,8 +121,8 @@ namespace Qowaiv.Validation.Abstractions
 }
 ```
 
-## Qowaiv exensions on FluentValidation.NET
-![FluentValidation.NET](https://raw.githubusercontent.com/JeremySkinner/FluentValidation/master/docs/assets/images/logo/fluent-validation-logo.png)
+## Qowaiv exensions on [*Fluent Validation](https://fluentvalidation.net/)
+
 
 ### Validators
 
@@ -152,6 +152,26 @@ public class CustomValidator : AbstractValidator<Model>
     {
         RuleFor(m => m.Email).Required();
         RuleFor(m => m.Iban).Required(allowUnknown: true);
+    }
+}
+```
+
+### relative to the clock
+
+The `ClockValidation` validates if a date (time) is in the past, or future.
+It supports `Date`, `DateTime`, `Date?`, and `DateTime?`, and the provision
+of custom date (time) provider. By Default, `Clock.Now()` and `Clock.Today()`
+are used.
+
+``` C#
+public class CustomValidator : AbstractValidator<Model>
+{
+    public CustomValidator()
+    {
+        RuleFor(m => m.Date1).InFuture();
+        RuleFor(m => m.Date2).InPast();
+        RuleFor(m => m.Date3).NotInFuture();
+        RuleFor(m => m.Date4).NotInPast(() => CustomeDateProvider());
     }
 }
 ```
