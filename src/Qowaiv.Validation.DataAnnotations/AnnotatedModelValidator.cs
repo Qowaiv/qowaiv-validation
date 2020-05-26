@@ -91,14 +91,14 @@ namespace Qowaiv.Validation.DataAnnotations
             var propertyContext = context.ForProperty(property);
 
             // Only validate the other properties if the required condition was not met.
-            if (propertyContext.AddMessage(property.RequiredAttribute.GetValidationResult(value, propertyContext)))
+            if (propertyContext.AddMessage(property.RequiredAttribute.GetValidationMessage(value, propertyContext)))
             {
                 return;
             }
 
             foreach (var attribute in property.ValidationAttributes)
             {
-                propertyContext.AddMessage(attribute.GetValidationResult(value, propertyContext));
+                propertyContext.AddMessage(attribute.GetValidationMessage(value, propertyContext));
             }
 
             if (value != null)
@@ -127,7 +127,7 @@ namespace Qowaiv.Validation.DataAnnotations
         /// <summary>Gets the results for validating the attributes declared on the type of the model.</summary>
         private static void ValidateType(NestedValidationContext context)
         {
-            context.AddMessages(context.Annotations.TypeAttributes.Select(attr => attr.GetValidationResult(context.Instance, context)));
+            context.AddMessages(context.Annotations.TypeAttributes.Select(attr => attr.GetValidationMessage(context.Instance, context)));
         }
 
         /// <summary>Gets the results for validating <see cref="IValidatableObject.Validate(ValidationContext)"/>.</summary>
