@@ -9,7 +9,7 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
     public class DataAnnotationsValidatorTest
     {
         [Test]
-        public void Validate_ModelWithMandatoryProperties_WithErrors()
+        public void Validate_ModelWithMandatoryProperties_with_errors()
         {
             using (CultureInfoScope.NewInvariant())
             {
@@ -21,8 +21,9 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
                 );
             }
         }
+       
         [Test]
-        public void Validate_ModelWithMandatoryProperties_IsValid()
+        public void Validate_ModelWithMandatoryProperties_is_valid()
         {
             var model = new ModelWithMandatoryProperties
             {
@@ -33,7 +34,7 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
         }
 
         [Test]
-        public void Validate_ModelWithAllowedValues_WithError()
+        public void Validate_ModelWithAllowedValues_with_error()
         {
             var model = new ModelWithAllowedValues
             {
@@ -44,15 +45,16 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
                 ValidationMessage.Error("The value of the Country field is not allowed.", "Country")
             );
         }
+        
         [Test]
-        public void Validate_ModelWithAllowedValues_IsValid()
+        public void Validate_ModelWithAllowedValues_is_valid()
         {
             var model = new ModelWithAllowedValues();
             DataAnnotationsAssert.IsValid(model);
         }
 
         [Test]
-        public void Validate_ModelWithForbiddenValues_WithError()
+        public void Validate_ModelWithForbiddenValues_with_error()
         {
             var model = new ModelWithForbiddenValues
             {
@@ -61,8 +63,9 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
             DataAnnotationsAssert.WithErrors(model,
                 ValidationMessage.Error("The value of the Email field is not allowed.", "Email"));
         }
+        
         [Test]
-        public void Validate_ModelWithForbiddenValues_IsValid()
+        public void Validate_ModelWithForbiddenValues_is_valid()
         {
             var model = new ModelWithForbiddenValues
             {
@@ -72,7 +75,7 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
         }
 
         [Test]
-        public void Validate_ModelWithCustomizedResource_WithError()
+        public void Validate_ModelWithCustomizedResource_with_error()
         {
             var model = new ModelWithCustomizedResource();
             DataAnnotationsAssert.WithErrors(model,
@@ -80,7 +83,7 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
         }
 
         [Test]
-        public void Validate_NestedModelWithNullChild_With1Error()
+        public void Validate_NestedModelWithNullChild_with_error()
         {
             var model = new NestedModel
             {
@@ -91,7 +94,7 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
         }
 
         [Test]
-        public void Validate_NestedModelWithInvalidChild_With1Error()
+        public void Validate_NestedModelWithInvalidChild_with_error()
         {
             var model = new NestedModel
             {
@@ -103,7 +106,7 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
         }
 
         [Test]
-        public void Validate_NestedModelWithInvalidChildren_With1Error()
+        public void Validate_NestedModelWithInvalidChildren_with_error()
         {
             var model = new NestedModelWithChildren
             {
@@ -119,7 +122,7 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
         }
 
         [Test]
-        public void Validate_NestedModelWithLoop_With1Error()
+        public void Validate_NestedModelWithLoop_with_error()
         {
             var model = new NestedModelWithLoop
             {
@@ -130,6 +133,13 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
 
             DataAnnotationsAssert.WithErrors(model,
                 ValidationMessage.Error("The Name field is required.", "Child.Name"));
+        }
+    
+        [Test]
+        public void Validate_ModelThatReturnsNoneMessage_is_valid()
+        {
+            var model = new ModelThatReturnsNoneMessage();
+            DataAnnotationsAssert.IsValid(model);
         }
     }
 }
