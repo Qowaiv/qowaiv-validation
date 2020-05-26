@@ -17,7 +17,7 @@ namespace System.ComponentModel
             return descriptor.Attributes
                 .Cast<Attribute>()
                 .OfType<RequiredAttribute>()
-                .FirstOrDefault(attr => !(attr is NotRequiredAttributeAttribute));
+                .FirstOrDefault(attr => !(attr is OptionalAttribute));
         }
 
         /// <summary>Gets the decorated <see cref="RequiredAttribute"/> for the property.</summary>
