@@ -1,5 +1,10 @@
 ﻿# Release Notes
 
+## Released 2020-05-26
+### Qowaiv.Validation.DataAnnotations 0.0.3
+* Made `OptionalAttribte` public (#9)
+* ValidationMessage.None is treated as ValidationResult.Success (#8) fix
+
 ## Released 2020-04-09
 ### Qowaiv.Validation.Fluent 0.0.3
 * Added `Required()` (#4)
