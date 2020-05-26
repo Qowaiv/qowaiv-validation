@@ -19,7 +19,7 @@ namespace Qowaiv.Validation.DataAnnotations
         {
             descriptor = desc;
             DisplayAttribute = desc.GetDisplayAttribute() ?? new DisplayAttribute { Name = desc.Name };
-            RequiredAttribute = desc.GetRequiredAttribute() ?? NotRequiredAttributeAttribute.Optional;
+            RequiredAttribute = desc.GetRequiredAttribute() ?? OptionalAttribute.Optional;
             ValidationAttributes = desc.GetValidationAttributes().Except(new[] { RequiredAttribute }).ToArray();
             TypeConverter = desc.GetTypeConverter();
             IsEnumerable = PropertyType != typeof(string)
@@ -57,7 +57,7 @@ namespace Qowaiv.Validation.DataAnnotations
 
         /// <summary>Gets the required attribute.</summary>
         /// <remarks>
-        /// <see cref="NotRequiredAttributeAttribute"/> if the property is not decorated.
+        /// <see cref="OptionalAttribute"/> if the property is not decorated.
         /// </remarks>
         public RequiredAttribute RequiredAttribute { get; }
 
