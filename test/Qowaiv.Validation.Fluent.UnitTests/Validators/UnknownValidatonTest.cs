@@ -9,6 +9,7 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Validators
     public class UnknownValidatonTest
     {
         [Test]
+        [SetCulture("en")]
         public void Known_IsValid()
         {
             var model = new UnknownModel { Email = EmailAddress.Parse("test@qowaiv.org") };
@@ -42,5 +43,16 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Validators
                 );
             }
         }
+    
+        [Test]
+        public void Validate_WithServerity_has_warning()
+        {
+            var model = new UnknownWithServerityModel { Email = EmailAddress.Unknown };
+
+            FluentValidatorAssert.IsValid<UnknownWithServerityModelValidator, UnknownWithServerityModel>(model,
+                ValidationMessage.Warn("'Email' must not be unknown.", "Email")
+            );
+        }
+
     }
 }

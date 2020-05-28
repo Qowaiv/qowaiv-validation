@@ -9,14 +9,22 @@ namespace Qowaiv.Validation.TestTools
     public static class FluentValidatorAssert
     {
         /// <summary>Asserts that the model is valid, throws if not.</summary>
-        [DebuggerStepThrough]
-        public static void IsValid<TValidator, TModel>(TModel model) where TValidator : FluentValidation.IValidator<TModel>
-            => IsValid(model, Activator.CreateInstance<TValidator>());
+       [DebuggerStepThrough]
+        public static void IsValid<TValidator, TModel>(TModel model, params IValidationMessage[] expected) where TValidator : FluentValidation.IValidator<TModel>
+            => IsValid(model, Activator.CreateInstance<TValidator>(), expected);
 
         /// <summary>Asserts that the model is valid, throws if not.</summary>
         [DebuggerStepThrough]
-        public static void IsValid<TModel>(TModel model, FluentValidation.IValidator<TModel> validator) 
-            => WithErrors(model, validator, new IValidationMessage[0]);
+        public static void IsValid<TModel>(TModel model, FluentValidation.IValidator<TModel> validator, params IValidationMessage[] expected)
+        {
+            if (validator is null)
+            {
+                throw new ArgumentNullException(nameof(validator));
+            }
+            var wrapper = new FluentValidator<TModel>(validator);
+            var result = wrapper.Validate(model);
+            ValidationMessageAssert.IsValid(result, expected);
+        }
 
         /// <summary>Asserts the model to be invalid with specific messages. Throws if not.</summary>
         [DebuggerStepThrough]
