@@ -88,6 +88,15 @@ namespace Qowaiv.Validation.Fluent {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{PropertyName}&apos; must not be empty or unknown..
+        /// </summary>
+        internal static string NotEmptyOrUnknown {
+            get {
+                return ResourceManager.GetString("NotEmptyOrUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{PropertyName}&apos; should not be in the future..
         /// </summary>
         internal static string NotInFuture {
