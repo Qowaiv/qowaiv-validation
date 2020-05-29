@@ -72,21 +72,21 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Validators
         }
 
         [Test]
-        public void Validate_empty_WithServerity_has_warning()
+        public void Validate_empty_WithSeverity_has_warning()
         {
-            var model = new UnknownWithServerityModel { Email = EmailAddress.Empty };
+            var model = new UnknownWithSeverityModel { Email = EmailAddress.Empty };
 
-            FluentValidatorAssert.IsValid<UnknownWithServerityModelValidator, UnknownWithServerityModel>(model,
+            FluentValidatorAssert.IsValid<UnknownWithSeverityModelValidator, UnknownWithSeverityModel>(model,
                 ValidationMessage.Warn("'Email' must not be empty or unknown.", "Email")
             );
         }
 
         [Test]
-        public void Validate_unknown_WithServerity_has_warning()
+        public void Validate_unknown_WithSeverity_has_warning()
         {
-            var model = new UnknownWithServerityModel { Email = EmailAddress.Unknown };
+            var model = new UnknownWithSeverityModel { Email = EmailAddress.Unknown };
 
-            FluentValidatorAssert.IsValid<UnknownWithServerityModelValidator, UnknownWithServerityModel>(model,
+            FluentValidatorAssert.IsValid<UnknownWithSeverityModelValidator, UnknownWithSeverityModel>(model,
                 ValidationMessage.Warn("'Email' must not be empty or unknown.", "Email")
             );
         }
