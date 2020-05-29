@@ -13,10 +13,10 @@ namespace Qowaiv.Validation.DataAnnotations
         /// <summary>Creates a new instance of a <see cref="ValidationMessage"/>.</summary>
         public ValidationMessage() : this(ValidationSeverity.None, null, null) { }
 
-        internal ValidationMessage(ValidationSeverity serverity, string message, string[] memberNames)
+        internal ValidationMessage(ValidationSeverity severity, string message, string[] memberNames)
             : base(message, memberNames)
         {
-            Severity = serverity;
+            Severity = severity;
         }
 
         /// <summary>Creates a new instance of <see cref="ValidationMessage"/>.</summary>
@@ -82,9 +82,9 @@ namespace Qowaiv.Validation.DataAnnotations
         }
 
         /// <summary>Creates a validation message.</summary>
-        public static IValidationMessage For(ValidationSeverity serverity, string message, string[] memberNames)
+        public static IValidationMessage For(ValidationSeverity severity, string message, string[] memberNames)
         {
-            switch (serverity)
+            switch (severity)
             {
                 case ValidationSeverity.None: return None;
                 case ValidationSeverity.Info: return Info(message, memberNames);
