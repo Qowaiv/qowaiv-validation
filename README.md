@@ -92,16 +92,25 @@ Result<DataType> result = GetModel()
     .Act(m => m.Action1())
     .Act(m => m.Action2());
 ```
+
+Or with the `|` pipe operator:
+``` C#
+Result<DataType> result = GetModel()
+    | (m => m.Action1())
+    | (m => m.Action2());
+```
+
+
 This is short for:
 ``` C#
 Result<DataType> result = GetModel()
 if (result.Isvalid)
 {
-    result = result.Action1();
+    result = result.Value.Action1();
 }
 if (result.Isvalid)
 {
-    result = result.Action2();
+    result = result.Value.Action2();
 }
 ```
 

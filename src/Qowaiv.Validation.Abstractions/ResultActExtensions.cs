@@ -113,7 +113,12 @@ namespace Qowaiv.Validation.Abstractions
             Guard.NotNull(action, nameof(action));
 
             var result = await promise.ConfigureAwait(false);
-            if (!result.IsValid)
+            
+            if (result is null)
+            {
+                return Result.For<TModel>(default);
+            }
+            else if (!result.IsValid || ReferenceEquals(null, result.Value))
             {
                 return result;
             }
@@ -145,7 +150,11 @@ namespace Qowaiv.Validation.Abstractions
 
             var result = await promise.ConfigureAwait(false);
 
-            if (!result.IsValid)
+            if(result is null)
+            {
+                return Result.For<TModel>(default);
+            }
+            else if (!result.IsValid || ReferenceEquals(null, result.Value))
             {
                 return result;
             }

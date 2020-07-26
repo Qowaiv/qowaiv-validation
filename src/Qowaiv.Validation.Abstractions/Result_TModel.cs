@@ -140,5 +140,31 @@ namespace Qowaiv.Validation.Abstractions
 
         /// <summary>Explicitly casts the <see cref="Result"/> to the type of the related model.</summary>
         public static explicit operator TModel(Result<TModel> result) => result == null ? default : result.Value;
+
+        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+        /// <param name="result">
+        /// The result to act on.
+        /// </param>
+        /// <param name="action">
+        /// The action to invoke.
+        /// </param>
+        /// <returns>
+        /// A result with the merged messages.
+        /// </returns>
+        public static Result<TModel> operator |(Result<TModel> result, Func<TModel, Result<TModel>> action)
+            => Guard.NotNull(result, nameof(result)).Act(action);
+
+        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+        /// <param name="result">
+        /// The result to act on.
+        /// </param>
+        /// <param name="action">
+        /// The action to invoke.
+        /// </param>
+        /// <returns>
+        /// A result with the merged messages.
+        /// </returns>
+        public static Result<TModel> operator |(Result<TModel> result, Func<TModel, Result> action)
+            => Guard.NotNull(result, nameof(result)).Act(action);
     }
 }
