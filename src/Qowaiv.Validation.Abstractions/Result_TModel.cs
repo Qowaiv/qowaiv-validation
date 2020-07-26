@@ -95,7 +95,6 @@ namespace Qowaiv.Validation.Abstractions
                 messages.AddRange(outcome.Messages));
         }
 
-
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
         /// <param name="action">
         /// The action to invoke.
