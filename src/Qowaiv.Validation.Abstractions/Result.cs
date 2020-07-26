@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using Qowaiv.Validation.Abstractions.Internals;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Qowaiv.Validation.Abstractions
@@ -11,10 +11,9 @@ namespace Qowaiv.Validation.Abstractions
         /// <param name="messages">
         /// The messages related to the result.
         /// </param>
-        internal Result(IEnumerable<IValidationMessage> messages)
+        internal Result(FixedMessages messages)
         {
-            Guard.NotNull(messages, nameof(messages));
-            Messages = new ReadOnlyCollection<IValidationMessage>(messages.GetWithSeverity().ToList());
+            Messages = Guard.NotNull(messages, nameof(messages));
         }
 
         /// <summary>Gets the messages related to the result.</summary>
@@ -33,24 +32,30 @@ namespace Qowaiv.Validation.Abstractions
         public IEnumerable<IValidationMessage> Infos => Messages.GetInfos();
 
         /// <summary>Creates an OK <see cref="Result"/>.</summary>
-        public static Result OK => new Result(Enumerable.Empty<IValidationMessage>());
+        public static Result OK => new Result(FixedMessages.Empty);
 
         /// <summary>Creates a <see cref="Result{T}"/> for the data.</summary>
-        public static Result<T> For<T>(T data, IEnumerable<IValidationMessage> messages) => new Result<T>(data, messages);
+        public static Result<T> For<T>(T data, IEnumerable<IValidationMessage> messages)
+            => new Result<T>(data, FixedMessages.New(messages));
 
         /// <summary>Creates a <see cref="Result{T}"/> for the data.</summary>
-        public static Result<T> For<T>(T data, params IValidationMessage[] messages) => new Result<T>(data, messages);
+        public static Result<T> For<T>(T data, params IValidationMessage[] messages)
+            => new Result<T>(data, FixedMessages.New(messages));
 
         /// <summary>Creates a result with messages.</summary>
-        public static Result WithMessages(IEnumerable<IValidationMessage> messages) => new Result(messages);
+        public static Result WithMessages(IEnumerable<IValidationMessage> messages)
+            => new Result(FixedMessages.New(messages));
 
         /// <summary>Creates a result with messages.</summary>
-        public static Result WithMessages(params IValidationMessage[] messages) => new Result(messages);
+        public static Result WithMessages(params IValidationMessage[] messages) 
+            => new Result(FixedMessages.New(messages));
 
         /// <summary>Creates a result with messages.</summary>
-        public static Result<T> WithMessages<T>(IEnumerable<IValidationMessage> messages) => new Result<T>(default, messages);
+        public static Result<T> WithMessages<T>(IEnumerable<IValidationMessage> messages) 
+            => new Result<T>(default, FixedMessages.New(messages));
 
         /// <summary>Creates a result with messages.</summary>
-        public static Result<T> WithMessages<T>(params IValidationMessage[] messages) => new Result<T>(default, messages);
+        public static Result<T> WithMessages<T>(params IValidationMessage[] messages)
+            => new Result<T>(default, FixedMessages.New(messages));
     }
 }

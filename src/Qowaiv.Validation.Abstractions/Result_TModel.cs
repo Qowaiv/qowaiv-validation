@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Qowaiv.Validation.Abstractions.Internals;
+using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Qowaiv.Validation.Abstractions
@@ -16,7 +15,7 @@ namespace Qowaiv.Validation.Abstractions
         /// <param name="messages">
         /// The messages related to the result.
         /// </param>
-        internal Result(TModel data, IEnumerable<IValidationMessage> messages) : base(messages)
+        internal Result(TModel data, FixedMessages messages) : base(messages)
         {
             _value = IsValid ? data : default;
         }
@@ -60,10 +59,12 @@ namespace Qowaiv.Validation.Abstractions
                 return WithMessages<TOut>(Messages);
             }
 
-            var messages = Messages.ToList();
+            var messages = (FixedMessages)Messages;
             var outcome = action(Value);
-            messages.AddRange(outcome.Messages);
-            return For(outcome.IsValid ? outcome.Value : default, messages);
+            return For(outcome.IsValid 
+                ? outcome.Value 
+                : default,
+                messages.AddRange(outcome.Messages));
         }
 
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
@@ -85,10 +86,13 @@ namespace Qowaiv.Validation.Abstractions
                 return WithMessages<TOut>(Messages);
             }
 
-            var messages = Messages.ToList();
+            var messages = (FixedMessages)Messages;
             var outcome = await action(Value).ConfigureAwait(false);
-            messages.AddRange(outcome.Messages);
-            return For(outcome.IsValid ? outcome.Value : default, messages);
+            
+            return For(outcome.IsValid 
+                ? outcome.Value 
+                : default,
+                messages.AddRange(outcome.Messages));
         }
 
 
@@ -108,10 +112,9 @@ namespace Qowaiv.Validation.Abstractions
                 return WithMessages<TModel>(Messages);
             }
 
-            var messages = Messages.ToList();
+            var messages = (FixedMessages)Messages;
             var outcome = action(Value);
-            messages.AddRange(outcome.Messages);
-            return For(Value, messages);
+            return For(Value, messages.AddRange(outcome.Messages));
         }
 
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
@@ -130,10 +133,9 @@ namespace Qowaiv.Validation.Abstractions
                 return WithMessages<TModel>(Messages);
             }
 
-            var messages = Messages.ToList();
+            var messages = (FixedMessages)Messages;
             var outcome = await action(Value).ConfigureAwait(false);
-            messages.AddRange(outcome.Messages);
-            return For(Value, messages);
+            return For(Value, messages.AddRange(outcome.Messages));
         }
 
         /// <summary>Explicitly casts the <see cref="Result"/> to the type of the related model.</summary>

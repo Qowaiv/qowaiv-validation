@@ -1,5 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using Qowaiv.Validation.Abstractions.Internals;
+using System;
 using System.Threading.Tasks;
 
 namespace Qowaiv.Validation.Abstractions
@@ -34,14 +34,20 @@ namespace Qowaiv.Validation.Abstractions
             {
                 return Result.WithMessages<TOut>();
             }
-            if (!result.IsValid || ReferenceEquals(result.Value, null))
+            else if (!result.IsValid || ReferenceEquals(result.Value, null))
             {
                 return Result.WithMessages<TOut>(result.Messages);
             }
-            var messages = result.Messages.ToList();
-            var outcome = action(result.Value);
-            messages.AddRange(outcome.Messages);
-            return Result.For(outcome.IsValid ? outcome.Value : default, messages);
+            else
+            {
+                var messages = (FixedMessages)result.Messages;
+                var outcome = action(result.Value);
+
+                return Result.For(outcome.IsValid
+                    ? outcome.Value
+                    : default,
+                    messages.AddRange(outcome.Messages));
+            }
         }
 
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
@@ -71,15 +77,20 @@ namespace Qowaiv.Validation.Abstractions
             {
                 return Result.WithMessages<TOut>();
             }
-            if (!result.IsValid || ReferenceEquals(result.Value, null))
+            else if (!result.IsValid || ReferenceEquals(result.Value, null))
             {
                 return Result.WithMessages<TOut>(result.Messages);
             }
-
-            var messages = result.Messages.ToList();
-            var outcome = await action(result.Value).ConfigureAwait(false);
-            messages.AddRange(outcome.Messages);
-            return Result.For(outcome.IsValid ? outcome.Value : default, messages);
+            else
+            {
+                var messages = (FixedMessages)result.Messages;
+                var outcome = await action(result.Value).ConfigureAwait(false);
+                
+                return Result.For(outcome.IsValid
+                    ? outcome.Value 
+                    : default, 
+                    messages.AddRange(outcome.Messages));
+            }
         }
 
 
@@ -102,7 +113,7 @@ namespace Qowaiv.Validation.Abstractions
             Guard.NotNull(action, nameof(action));
 
             var result = await promise.ConfigureAwait(false);
-
+            
             if (result is null)
             {
                 return Result.For<TModel>(default);
@@ -113,11 +124,9 @@ namespace Qowaiv.Validation.Abstractions
             }
             else
             {
-                var messages = result.Messages.ToList();
-
+                var messages = (FixedMessages)result.Messages;
                 var act = action(result.Value);
-                messages.AddRange(act.Messages);
-                return Result.For(result.Value, messages);
+                return Result.For(result.Value, messages.AddRange(act.Messages));
             }
         }
 
@@ -140,8 +149,8 @@ namespace Qowaiv.Validation.Abstractions
             Guard.NotNull(action, nameof(action));
 
             var result = await promise.ConfigureAwait(false);
-            
-            if (result is null)
+
+            if(result is null)
             {
                 return Result.For<TModel>(default);
             }
@@ -151,10 +160,9 @@ namespace Qowaiv.Validation.Abstractions
             }
             else
             {
-                var messages = result.Messages.ToList();
+                var messages = (FixedMessages)result.Messages;
                 var act = await action(result.Value).ConfigureAwait(false);
-                messages.AddRange(act.Messages);
-                return Result.For(result.Value, messages);
+                return Result.For(result.Value, messages.AddRange(act.Messages));
             }
         }
     }

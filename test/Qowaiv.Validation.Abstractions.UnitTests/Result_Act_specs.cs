@@ -300,12 +300,13 @@ namespace Result_Act_specs
 
     internal class TestModel
     {
+        public TestModel(int actions = 0) => Actions = actions;
+
         public int Actions { get; private set; }
 
         public Result<TestModel> NonfailingFunction()
         {
-            Actions++;
-            return this;
+            return new TestModel(Actions + 1);
         }
         public Result<TestModel> FailingFunction()
         {
@@ -315,8 +316,7 @@ namespace Result_Act_specs
 
         public Task<Result<TestModel>> NonfailingFunctionAsync()
         {
-            Actions++;
-            return Task.FromResult(Result.For(this));
+            return Task.FromResult(Result.For(new TestModel(Actions + 1)));
         }
         public Task<Result<TestModel>> FailingFunctionAsync()
         {
