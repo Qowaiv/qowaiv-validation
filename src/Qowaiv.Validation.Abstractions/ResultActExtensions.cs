@@ -102,17 +102,23 @@ namespace Qowaiv.Validation.Abstractions
             Guard.NotNull(action, nameof(action));
 
             var result = await promise.ConfigureAwait(false);
-            if (!result.IsValid)
+
+            if (result is null || ReferenceEquals(null, result.Value))
+            {
+                return Result.For<TModel>(default);
+            }
+            else if (!result.IsValid)
             {
                 return result;
             }
-            var messages = result.Messages.ToList();
+            else
+            {
+                var messages = result.Messages.ToList();
 
-            var act = action(result.Value);
-
-            messages.AddRange(act.Messages);
-
-            return Result.For(result.Value, messages);
+                var act = action(result.Value);
+                messages.AddRange(act.Messages);
+                return Result.For(result.Value, messages);
+            }
         }
 
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
@@ -134,15 +140,22 @@ namespace Qowaiv.Validation.Abstractions
             Guard.NotNull(action, nameof(action));
 
             var result = await promise.ConfigureAwait(false);
-            if (!result.IsValid)
+            
+            if (result is null || ReferenceEquals(null, result.Value))
+            {
+                return Result.For<TModel>(default);
+            }
+            else if (!result.IsValid)
             {
                 return result;
             }
-
-            var messages = result.Messages.ToList();
-            var act = await action(result.Value).ConfigureAwait(false);
-            messages.AddRange(act.Messages);
-            return Result.For(result.Value, messages);
+            else
+            {
+                var messages = result.Messages.ToList();
+                var act = await action(result.Value).ConfigureAwait(false);
+                messages.AddRange(act.Messages);
+                return Result.For(result.Value, messages);
+            }
         }
     }
 }
