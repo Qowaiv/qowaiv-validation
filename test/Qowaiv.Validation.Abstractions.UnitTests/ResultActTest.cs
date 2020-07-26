@@ -210,12 +210,13 @@ namespace Qowaiv.Validation.Abstractions.UnitTests
 
     internal class TestModel
     {
+        public TestModel(int actions = 0) => Actions = actions;
+
         public int Actions { get; private set; }
 
         public Result<TestModel> ValidAction()
         {
-            Actions++;
-            return this;
+            return new TestModel(Actions +1);
         }
         public Result<TestModel> InvalidAction()
         {
@@ -225,8 +226,7 @@ namespace Qowaiv.Validation.Abstractions.UnitTests
 
         public Task<Result<TestModel>> ValidActionAsync()
         {
-            Actions++;
-            return Task.FromResult(Result.For(this));
+            return Task.FromResult(Result.For(new TestModel(Actions + 1)));
         }
         public Task<Result<TestModel>> InvalidActionAsync()
         {
