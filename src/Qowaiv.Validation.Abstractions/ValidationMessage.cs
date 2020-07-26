@@ -11,9 +11,9 @@ namespace Qowaiv.Validation.Abstractions
         /// <summary>Creates a new instance of a <see cref="ValidationMessage"/>.</summary>
         public ValidationMessage() : this(ValidationSeverity.None, null, null) { }
 
-        internal ValidationMessage(ValidationSeverity serverity, string message, string propertyName)
+        internal ValidationMessage(ValidationSeverity severity, string message, string propertyName)
         {
-            Severity = serverity;
+            Severity = severity;
             Message = message;
             PropertyName = propertyName;
         }
@@ -117,9 +117,9 @@ namespace Qowaiv.Validation.Abstractions
         public static ValidationMessage Info(string message, string propertyName = null) => new ValidationMessage(ValidationSeverity.Info, message, propertyName);
 
         /// <summary>Creates a validation message.</summary>
-        public static IValidationMessage For(ValidationSeverity serverity, string message, string propertyName = null)
+        public static IValidationMessage For(ValidationSeverity severity, string message, string propertyName = null)
         {
-            switch (serverity)
+            switch (severity)
             {
                 case ValidationSeverity.None: return None;
                 case ValidationSeverity.Info: return Info(message, propertyName);

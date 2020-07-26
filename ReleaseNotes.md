@@ -1,5 +1,9 @@
 ﻿# Release Notes
 
+## Released 2020-05-29
+### Qowaiv.Validation.Fluent 0.0.4
+* Support `SetSeverity` and `WithMessage` on `NotEmptyOrUnknown` (#12) fix
+
 ## Released 2020-05-26
 ### Qowaiv.Validation.DataAnnotations 0.0.3
 * Made `OptionalAttribte` public (#9)
@@ -9,10 +13,6 @@
 ### Qowaiv.Validation.Fluent 0.0.3
 * Added `Required()` (#4)
 * Severity taken into account (#5) fix
-
-## Released 2019-11-25
-### Qowaiv.Validation.Abstractions 0.0.3
-* Added Support for Composed Actions.
 
 ## Released 2019-11-25
 ### Qowaiv.Validation.Abstractions 0.0.3
