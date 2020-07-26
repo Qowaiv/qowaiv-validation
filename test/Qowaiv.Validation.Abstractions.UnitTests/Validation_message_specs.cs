@@ -1,19 +1,23 @@
 ﻿using NUnit.Framework;
 using Qowaiv.TestTools;
+using Qowaiv.Validation.Abstractions;
 
-namespace Qowaiv.Validation.Abstractions.UnitTests
+namespace Validation_message_specs
 {
-    public class ValidationMessageTest
+    public class None
     {
         [Test]
-        public void Serializable_None()
+        public void Has_an_empty_string_representation()
         {
             var message = ValidationMessage.None;
             Assert.AreEqual("", message.ToString());
         }
+    }
 
+    public class Serialization
+    {
         [Test]
-        public void Serializable_SomeInfoMessage_Successful()
+        public void On_an_info_message_keeps_all_data()
         {
             var message = ValidationMessage.Info("Can be serialized", "Prop");
 
@@ -26,7 +30,7 @@ namespace Qowaiv.Validation.Abstractions.UnitTests
         }
 
         [Test]
-        public void Serializable_SomeWarningMessage_Successful()
+        public void On_a_warning_message_keeps_all_data()
         {
             var message = ValidationMessage.Warn("Can be serialized", "Prop");
 
@@ -39,7 +43,7 @@ namespace Qowaiv.Validation.Abstractions.UnitTests
         }
 
         [Test]
-        public void Serializable_SomeErrorMessage_Successful()
+        public void On_an_error_message_keeps_all_data()
         {
             var message = ValidationMessage.Error("Can be serialized", "Prop");
 

@@ -72,7 +72,7 @@ namespace Qowaiv.Validation.Abstractions
                     sb.Append("ERR: ");
                     break;
                 default:
-                    sb.Append($"Severity: ");
+                    sb.Append($"{Severity}: ");
                     break;
             }
             if(!string.IsNullOrEmpty(PropertyName))
