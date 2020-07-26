@@ -54,7 +54,7 @@ namespace Qowaiv.Validation.Abstractions
         {
             Guard.NotNull(action, nameof(action));
 
-            if (!IsValid || ReferenceEquals(Value, null))
+            if (IsNullValueOrInvalid(this))
             {
                 return WithMessages<TOut>(Messages);
             }
@@ -81,7 +81,7 @@ namespace Qowaiv.Validation.Abstractions
         {
             _ = Guard.NotNull(action, nameof(action));
 
-            if (!IsValid || ReferenceEquals(Value, null))
+            if (IsNullValueOrInvalid(this))
             {
                 return WithMessages<TOut>(Messages);
             }
@@ -106,7 +106,7 @@ namespace Qowaiv.Validation.Abstractions
         {
             Guard.NotNull(action, nameof(action));
 
-            if (!IsValid || ReferenceEquals(Value, null))
+            if (IsNullValueOrInvalid(this))
             {
                 return WithMessages<TModel>(Messages);
             }
@@ -127,7 +127,7 @@ namespace Qowaiv.Validation.Abstractions
         {
             _ = Guard.NotNull(action, nameof(action));
 
-            if (!IsValid || ReferenceEquals(Value, null))
+            if (IsNullValueOrInvalid(this))
             {
                 return WithMessages<TModel>(Messages);
             }

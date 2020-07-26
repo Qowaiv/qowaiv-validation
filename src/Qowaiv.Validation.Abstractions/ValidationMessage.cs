@@ -119,14 +119,13 @@ namespace Qowaiv.Validation.Abstractions
         /// <summary>Creates a validation message.</summary>
         public static IValidationMessage For(ValidationSeverity severity, string message, string propertyName = null)
         {
-            switch (severity)
+            return severity switch
             {
-                case ValidationSeverity.None: return None;
-                case ValidationSeverity.Info: return Info(message, propertyName);
-                case ValidationSeverity.Warning: return Warn(message, propertyName);
-                case ValidationSeverity.Error:
-                default: return Error(message, propertyName);
-            }
+                ValidationSeverity.None => None,
+                ValidationSeverity.Info => Info(message, propertyName),
+                ValidationSeverity.Warning => Warn(message, propertyName),
+                _ => Error(message, propertyName),
+            };
         }
 
         

@@ -34,7 +34,7 @@ namespace Qowaiv.Validation.Abstractions
             {
                 return Result.WithMessages<TOut>();
             }
-            else if (!result.IsValid || ReferenceEquals(result.Value, null))
+            else if (Result.IsNullValueOrInvalid(result))
             {
                 return Result.WithMessages<TOut>(result.Messages);
             }
@@ -77,7 +77,7 @@ namespace Qowaiv.Validation.Abstractions
             {
                 return Result.WithMessages<TOut>();
             }
-            else if (!result.IsValid || ReferenceEquals(result.Value, null))
+            else if (Result.IsNullValueOrInvalid(result))
             {
                 return Result.WithMessages<TOut>(result.Messages);
             }
@@ -92,7 +92,6 @@ namespace Qowaiv.Validation.Abstractions
                     messages.AddRange(outcome.Messages));
             }
         }
-
 
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
         /// <param name="promise">
@@ -118,7 +117,7 @@ namespace Qowaiv.Validation.Abstractions
             {
                 return Result.For<TModel>(default);
             }
-            else if (!result.IsValid || ReferenceEquals(null, result.Value))
+            else if (Result.IsNullValueOrInvalid(result))
             {
                 return result;
             }
@@ -154,7 +153,7 @@ namespace Qowaiv.Validation.Abstractions
             {
                 return Result.For<TModel>(default);
             }
-            else if (!result.IsValid || ReferenceEquals(null, result.Value))
+            else if (Result.IsNullValueOrInvalid(result))
             {
                 return result;
             }
