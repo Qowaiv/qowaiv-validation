@@ -57,5 +57,8 @@ namespace Qowaiv.Validation.Abstractions
         /// <summary>Creates a result with messages.</summary>
         public static Result<T> WithMessages<T>(params IValidationMessage[] messages)
             => new Result<T>(default, FixedMessages.New(messages));
+
+        internal static bool IsNullValueOrInvalid<T>(Result<T> result) 
+            => !result.IsValid || ReferenceEquals(null, result._value);
     }
 }
