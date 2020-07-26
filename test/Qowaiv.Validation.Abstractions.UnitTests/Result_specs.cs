@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Validation.Abstractions;
 using System;
+using System.Linq;
 using static Qowaiv.Validation.Abstractions.UnitTests.Arrange;
 
 namespace Result_specs
@@ -27,7 +28,7 @@ namespace Result_specs
         [Test]
         public void Contains_at_least_one_ErrorMessage()
         {
-            var result = Result.WithMessages(TestMessages);
+            var result = Result.WithMessages(TestMessages.AsEnumerable());
             Assert.IsFalse(result.IsValid);
         }
 
