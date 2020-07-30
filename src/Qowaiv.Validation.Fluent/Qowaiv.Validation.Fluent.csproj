@@ -5,28 +5,30 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>0.0.4</Version>
+    <Version>0.0.5</Version>
     <PackageReleaseNotes>
-v.0.0.4
+v0.0.5
+- Update to FluentValidation v9.0.1
+
+v0.0.4
 - Support `SetSeverity` and `WithMessage` on `NotEmptyOrUnknown` (#12) fix
 
-v.0.0.3
+v0.0.3
 - Added `Required()` (#4)
 - Severity taken into account (#5) fix
 
-v.0.0.2
+v0.0.2
 - Added Guards for null
 
-v.0.0.1
+v0.0.1
 - Initial version
     </PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="8.5.0" />
+    <PackageReference Include="FluentValidation" Version="9.0.1" />
     <PackageReference Include="Qowaiv" Version="5.1.1" />
-    <PackageReference Include="Qowaiv" Version="5.1.1" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.7.0.17535">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.10.0.19839">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
