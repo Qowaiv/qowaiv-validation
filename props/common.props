@@ -12,10 +12,10 @@
     <Copyright>Copyright © Qowaiv community 2013-2019</Copyright>
     <LangVersion>latest</LangVersion>
 
-    <PackageIconUrl>https://raw.githubusercontent.com/Qowaiv/Qowaiv/master/design/qowaiv-logo_nuget_064x064.gif</PackageIconUrl>
-    <PackageProjectUrl>http://www.github.com/Qowaiv/qowaiv-validation</PackageProjectUrl>
-    <PackageLicenseUrl>http://www.github.com/Qowaiv/qowaiv-validation/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <PackageIcon>package-icon.png</PackageIcon>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>http://www.github.com/Qowaiv/qowaiv-validation</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Qowaiv/qwowaiv-validation</RepositoryUrl>
   </PropertyGroup>
 
@@ -30,5 +30,10 @@
   <PropertyGroup>
     <DebugType>full</DebugType>
   </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Package icon. -->
+    <None Include="$(MSBuildThisFileDirectory)..\design\package-icon.png" Pack="true" PackagePath="" />
+  </ItemGroup>
 
 </Project>
