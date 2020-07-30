@@ -23,10 +23,10 @@ v.0.0.1
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="8.5.0" />
+    <PackageReference Include="FluentValidation" Version="9.0.1" />
     <PackageReference Include="Qowaiv" Version="5.1.1" />
     <PackageReference Include="Qowaiv" Version="5.1.1" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.7.0.17535">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.10.0.19839">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
