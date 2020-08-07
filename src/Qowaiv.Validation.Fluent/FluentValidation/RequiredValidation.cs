@@ -1,5 +1,8 @@
-﻿using Qowaiv;
+﻿using FluentValidation.Validators;
+using Qowaiv;
 using Qowaiv.Validation.Fluent;
+using System;
+using System.Linq;
 
 namespace FluentValidation
 {
@@ -17,9 +20,7 @@ namespace FluentValidation
         /// The rule builder on which the validator should be defined.
         /// </param>
         public static IRuleBuilderOptions<TModel, TProperty> Required<TModel, TProperty>(this IRuleBuilder<TModel, TProperty> ruleBuilder)
-        {
-            return Guard.NotNull(ruleBuilder, nameof(ruleBuilder)).Required(allowUnknown: false);
-        }
+            => ruleBuilder.Required(allowUnknown: false);
 
         /// <summary>The property is required.</summary>
         /// <typeparam name="TModel">
@@ -45,5 +46,43 @@ namespace FluentValidation
                     .NotEmptyOrUnknown().WithMessage(QowaivValidationFluentMessages.Required)
                 ;
         }
+
+        public static IRuleBuilderOptions<TModel, TProperty> RequiredWhen<TModel, TProperty>(
+            this IRuleBuilder<TModel, TProperty> ruleBuilder,
+            Func<TModel, bool> condition)
+            => ruleBuilder.RequiredWhen(condition, false);
+
+        public static IRuleBuilderOptions<TModel, TProperty> RequiredWhen<TModel, TProperty>(
+            this IRuleBuilder<TModel, TProperty> ruleBuilder, 
+            Func<TModel, bool> condition,
+            bool allowUnknown)
+        {
+            Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
+            Guard.NotNull(condition, nameof(condition));
+
+            var predicate = new PredicateValidator((m, val, propertyValidatorContext) => condition((TModel)m));
+            var validator = new ConditnalValidator(predicate,
+                allowUnknown
+                ? new NotEmptyOrUnknownValidator(default(TProperty))
+                : new NotEmptyValidator(default(TProperty)));
+
+            return ruleBuilder.SetValidator(validator).WithMessage(QowaivValidationFluentMessages.Required);
+        }
+    }
+
+    internal class ConditnalValidator : PropertyValidator
+    {
+        public ConditnalValidator(PredicateValidator when, PropertyValidator required)
+            : base((string)null)
+        {
+            When = when;
+            Required = required;
+        }
+
+        protected override bool IsValid(PropertyValidatorContext context)
+            => When.Validate(context).Any() || !Required.Validate(context).Any();
+
+        private PredicateValidator When { get; }
+        private PropertyValidator Required { get; }
     }
 }
