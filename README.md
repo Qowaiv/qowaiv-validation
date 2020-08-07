@@ -154,6 +154,8 @@ public class CustomValidator : AbstractValidator<Model>
 The `RequiredValidation` validates that a required property has a set value. If
 specified, an unknown value can be seen as a set value, by default it is not.
 
+It also support being conditional required via `RequiredWhen`.
+
 ``` C#
 public class CustomValidator : AbstractValidator<Model>
 {
@@ -161,6 +163,7 @@ public class CustomValidator : AbstractValidator<Model>
     {
         RuleFor(m => m.Email).Required();
         RuleFor(m => m.Iban).Required(allowUnknown: true);
+        RuleFor(m => m.EndDate).RequiredWhen(m => m.StartDate.HasValue());
     }
 }
 ```
