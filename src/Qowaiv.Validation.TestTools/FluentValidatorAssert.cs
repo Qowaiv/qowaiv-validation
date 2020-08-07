@@ -21,7 +21,7 @@ namespace Qowaiv.Validation.TestTools
             {
                 throw new ArgumentNullException(nameof(validator));
             }
-            var wrapper = new FluentValidator<TModel>(validator);
+            var wrapper = new WrapperValidator<TModel>(validator);
             var result = wrapper.Validate(model);
             ValidationMessageAssert.IsValid(result, expected);
         }
@@ -39,9 +39,30 @@ namespace Qowaiv.Validation.TestTools
             {
                 throw new ArgumentNullException(nameof(validator));
             }
-            var wrapper = new FluentValidator<TModel>(validator);
+            var wrapper = new WrapperValidator<TModel>(validator);
             var result = wrapper.Validate(model);
             ValidationMessageAssert.WithErrors(result, expected);
+        }
+    }
+
+    /// <summary>Implements <see cref="IValidator{TModel}"/> using <see cref="FluentValidation.IValidator{T}"/>.</summary>
+    /// <typeparam name="TModel"></typeparam>
+    internal class WrapperValidator<TModel> : IValidator<TModel>
+    {
+        private readonly FluentValidation.IValidator<TModel> _validator;
+
+        /// <summary>Creates a new instance of a <see cref="WrapperValidator{TModel}"/>.</summary>
+        public WrapperValidator(FluentValidation.IValidator<TModel> validator)
+        {
+            _validator = validator;
+        }
+
+        /// <inheritdoc />
+        public Result<TModel> Validate(TModel model)
+        {
+            var context = new FluentValidation.ValidationContext<TModel>(model);
+            var result = _validator.Validate(context);
+            return Result.For(model, Fluent.ValidationMessage.For(result.Errors));
         }
     }
 }

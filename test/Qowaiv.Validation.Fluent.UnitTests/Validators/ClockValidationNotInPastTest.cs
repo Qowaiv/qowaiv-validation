@@ -134,22 +134,22 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Validators
         }
 
 
-        public class DateNotInPastValidator : FluentModelValidator<DateModel>
+        public class DateNotInPastValidator : ModelValidator<DateModel>
         {
             public DateNotInPastValidator() => RuleFor(m => m.Prop).NotInPast();
         }
 
-        public class DateTimeNotInPastValidator : FluentModelValidator<DateTimeModel>
+        public class DateTimeNotInPastValidator : ModelValidator<DateTimeModel>
         {
             public DateTimeNotInPastValidator() => RuleFor(m => m.Prop).NotInPast();
         }
 
-        public class NullableDateNotInPastValidator : FluentModelValidator<NullableDateModel>
+        public class NullableDateNotInPastValidator : ModelValidator<NullableDateModel>
         {
             public NullableDateNotInPastValidator() => RuleFor(m => m.Prop).NotInPast();
         }
 
-        public class NullableDateTimeNotInPastValidator : FluentModelValidator<NullableDateTimeModel>
+        public class NullableDateTimeNotInPastValidator : ModelValidator<NullableDateTimeModel>
         {
             public NullableDateTimeNotInPastValidator() => RuleFor(m => m.Prop).NotInPast();
         }
