@@ -7,7 +7,7 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Models
         public string Message { get; set; } = "Some message";
     }
 
-    public class WarningModelValidator : FluentModelValidator<WarningModel>
+    public class WarningModelValidator : ModelValidator<WarningModel>
     {
         public WarningModelValidator()
         {
