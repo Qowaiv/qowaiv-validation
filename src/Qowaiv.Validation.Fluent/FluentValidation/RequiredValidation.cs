@@ -17,9 +17,7 @@ namespace FluentValidation
         /// The rule builder on which the validator should be defined.
         /// </param>
         public static IRuleBuilderOptions<TModel, TProperty> Required<TModel, TProperty>(this IRuleBuilder<TModel, TProperty> ruleBuilder)
-        {
-            return Guard.NotNull(ruleBuilder, nameof(ruleBuilder)).Required(allowUnknown: false);
-        }
+            => ruleBuilder.Required(allowUnknown: false);
 
         /// <summary>The property is required.</summary>
         /// <typeparam name="TModel">
@@ -41,11 +39,8 @@ namespace FluentValidation
             return allowUnknown
                 ? ruleBuilder
                     .NotEmpty().WithMessage(QowaivValidationFluentMessages.Required)
-
                 : ruleBuilder
-                    .NotEmpty().WithMessage(QowaivValidationFluentMessages.Required)
-                    .NotUnknown().WithMessage(QowaivValidationFluentMessages.Required)
-                ;
+                    .NotEmptyOrUnknown().WithMessage(QowaivValidationFluentMessages.Required);
         }
     }
 }
