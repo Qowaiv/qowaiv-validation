@@ -41,10 +41,8 @@ namespace FluentValidation
             return allowUnknown
                 ? ruleBuilder
                     .NotEmpty().WithMessage(QowaivValidationFluentMessages.Required)
-
                 : ruleBuilder
-                    .NotEmpty().WithMessage(QowaivValidationFluentMessages.Required)
-                    .NotUnknown().WithMessage(QowaivValidationFluentMessages.Required)
+                    .NotEmptyOrUnknown().WithMessage(QowaivValidationFluentMessages.Required)
                 ;
         }
     }
