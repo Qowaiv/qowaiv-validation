@@ -3,10 +3,12 @@
 #pragma warning disable S4039 // Interface methods should be callable by derived types
 // Validate should only be visible when used via this interface.
 using Qowaiv.Validation.Abstractions;
+using System;
 
 namespace Qowaiv.Validation.Fluent
 {
     /// <summary>Base class for an <see cref="IValidator{TModel}"/> using FluentValidation.NET.</summary>
+    [Obsolete("Use ModelValidator<TModel> instead.")]
     public abstract class FluentModelValidator<TModel> : FluentValidation.AbstractValidator<TModel>, IValidator<TModel>
     {
         /// <inheritdoc />
