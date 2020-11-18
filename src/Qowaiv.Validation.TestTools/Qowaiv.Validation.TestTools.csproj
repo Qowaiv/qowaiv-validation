@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\shared\\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
+    <Compile Include="..\..\shared\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
   </ItemGroup>
 
 </Project>

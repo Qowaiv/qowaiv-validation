@@ -14,11 +14,20 @@ namespace Qowaiv.Validation.TestTools
 
         /// <summary>Asserts that the result is valid, throws if not.</summary>
         [DebuggerStepThrough]
+        public static T IsValid<T>(Result<T> result, params IValidationMessage[] expectedMessages) where T : class
+        {
+            IsValid((Result)result, expectedMessages);
+            Assert.IsNotNull(result, "The result is null.");
+            return result.Value;
+        }
+
+        /// <summary>Asserts that the result is valid, throws if not.</summary>
+        [DebuggerStepThrough]
         public static void IsValid(Result result, params IValidationMessage[] expectedMessages)
         {
             Assert.IsNotNull(result, "The result is null.");
-            SameMessages(expectedMessages, result?.Messages);
-            Assert.IsTrue(result?.IsValid == true, "The result is not valid");
+            SameMessages(expectedMessages, result.Messages);
+            Assert.IsTrue(result.IsValid, "The result is not valid.");
         }
 
         /// <summary>Asserts that result contains expected messages. Throws if not.</summary>
@@ -26,7 +35,8 @@ namespace Qowaiv.Validation.TestTools
         public static void WithErrors(Result result, params IValidationMessage[] expectedMessages)
         {
             Assert.IsNotNull(result, "The result is null.");
-            SameMessages(expectedMessages, result?.Messages);
+            SameMessages(expectedMessages, result.Messages);
+            Assert.IsTrue(!result.IsValid, "The result is valid.");
         }
 
         /// <summary>Asserts that two collections contain the same error messages, Throws if not.</summary>
