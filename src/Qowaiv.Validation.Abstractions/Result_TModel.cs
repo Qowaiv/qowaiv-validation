@@ -139,6 +139,9 @@ namespace Qowaiv.Validation.Abstractions
 
         /// <summary>Explicitly casts the <see cref="Result"/> to the type of the related model.</summary>
         public static explicit operator TModel(Result<TModel> result) => result == null ? default : result.Value;
+        .
+#pragma warning disable S4069 // Operator overloads should have named alternatives
+        // That method is called Act, not BitwiseOr
 
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
         /// <param name="result">
