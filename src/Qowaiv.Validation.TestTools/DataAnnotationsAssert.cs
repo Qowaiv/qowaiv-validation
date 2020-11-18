@@ -9,15 +9,21 @@ namespace Qowaiv.Validation.TestTools
     {
         /// <summary>Asserts that the model is valid, throws if not.</summary>
         [DebuggerStepThrough]
-        public static void IsValid<T>(T model) => IsValid(model, null);
+        public static void IsValid<T>(T model,  params IValidationMessage[] expected)
+            => IsValid(model, null, expected);
 
         /// <summary>Asserts that the model is valid, throws if not.</summary>
         [DebuggerStepThrough]
-        public static void IsValid<T>(T model, AnnotatedModelValidator<T> validator) => WithErrors(model, validator, new IValidationMessage[0]);
+        public static void IsValid<T>(T model, AnnotatedModelValidator<T> validator, params IValidationMessage[] expected)
+        {
+            var result = (validator ?? new AnnotatedModelValidator<T>()).Validate(model);
+            ValidationMessageAssert.IsValid(result, expected);
+        }
 
         /// <summary>Asserts the model to be invalid with specific messages. Throws if not.</summary>
         [DebuggerStepThrough]
-        public static void WithErrors<T>(T model, params IValidationMessage[] expected) => WithErrors(model, null, expected);
+        public static void WithErrors<T>(T model, params IValidationMessage[] expected)
+            => WithErrors(model, null, expected);
 
         /// <summary>Asserts the model to be invalid with specific messages. Throws if not.</summary>
         [DebuggerStepThrough]
