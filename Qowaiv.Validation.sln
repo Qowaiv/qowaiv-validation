@@ -56,6 +56,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{311653
 		shared\ProductInfo.cs = shared\ProductInfo.cs
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Messages.UnitTests", "test\Qowaiv.Validation.Messages.UnitTests\Qowaiv.Validation.Messages.UnitTests.csproj", "{E66A1060-CABD-41F6-B5D0-FBB1ED57D2C4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Messages", "src\Qowaiv.Validation.Messages\Qowaiv.Validation.Messages.csproj", "{885B894C-FA99-44F3-806C-6244A885E4CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -90,6 +94,14 @@ Global
 		{5E3985BF-DA26-4983-84C2-CFC3C423334F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E3985BF-DA26-4983-84C2-CFC3C423334F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E3985BF-DA26-4983-84C2-CFC3C423334F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E66A1060-CABD-41F6-B5D0-FBB1ED57D2C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E66A1060-CABD-41F6-B5D0-FBB1ED57D2C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E66A1060-CABD-41F6-B5D0-FBB1ED57D2C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E66A1060-CABD-41F6-B5D0-FBB1ED57D2C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{885B894C-FA99-44F3-806C-6244A885E4CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{885B894C-FA99-44F3-806C-6244A885E4CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{885B894C-FA99-44F3-806C-6244A885E4CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{885B894C-FA99-44F3-806C-6244A885E4CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,6 +115,7 @@ Global
 		{8E1F869D-393B-4F6C-A3C0-1D1D336F9FA8} = {C036985A-F17D-405A-B3FD-37F30FA154FB}
 		{F74D9EF2-39B5-40EB-8C44-1D6015C38D70} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{31165360-F096-402C-A6D3-8972543BD430} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
+		{E66A1060-CABD-41F6-B5D0-FBB1ED57D2C4} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B55A336-E2D3-4656-9840-D519B3E1159B}

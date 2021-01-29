@@ -1,0 +1,36 @@
+﻿using Qowaiv.Validation.Abstractions;
+using System;
+using System.Runtime.Serialization;
+using System.Security;
+
+namespace Qowaiv.Validation.Messages
+{
+    /// <summary>Message to communicate that access has been denied.</summary>
+    [Serializable]
+    public class AccessDenied : SecurityException, IValidationMessage
+    {
+        /// <summary>Initializes a new instance of the <see cref="AccessDenied"/> class.</summary>
+        public AccessDenied() : this(ValidationMessages.AccessDenied) => Do.Nothing();
+
+        /// <summary>Initializes a new instance of the <see cref="AccessDenied"/> class.</summary>
+        public AccessDenied(string message) : base(message) => Do.Nothing();
+
+        /// <summary>Initializes a new instance of the <see cref="AccessDenied"/> class.</summary>
+        public AccessDenied(string message, Exception inner) : base(message, inner) => Do.Nothing();
+
+        /// <summary>Initializes a new instance of the <see cref="AccessDenied"/> class.</summary>
+        public AccessDenied(string message, Type type) : base(message, type) => Do.Nothing();
+
+        /// <summary>Initializes a new instance of the <see cref="AccessDenied"/> class.</summary>
+        public AccessDenied(string message, Type type, string state) : base(message, type, state) => Do.Nothing();
+
+        /// <summary>Initializes a new instance of the <see cref="AccessDenied"/> class.</summary>
+        protected AccessDenied(SerializationInfo info, StreamingContext context) : base(info, context) => Do.Nothing();
+
+        /// <inheritdoc />
+        public ValidationSeverity Severity => ValidationSeverity.Error;
+
+        /// <inheritdoc />
+        public string PropertyName => null;
+    }
+}
