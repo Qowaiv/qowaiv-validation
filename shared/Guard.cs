@@ -122,7 +122,7 @@ namespace Qowaiv
         /// It only makes sense to use this function if the original type of the <paramref name="parameter"/>
         /// is <see cref="object"/>, otherwise one should simply use <see cref="NotNull{T}(T, string)"/>.
         /// </summary>
-        /// <typeparam name="T">The type to guard</typeparam>
+        /// <typeparam name="T">The type to guard.</typeparam>
         /// <param name="parameter">The parameter to guard.</param>
         /// <param name="paramName">The name of the parameter.</param>
         [DebuggerStepThrough]
@@ -151,7 +151,6 @@ namespace Qowaiv
         /// <param name="message">
         /// The message to show if the interface is not implemented.
         /// </param>
-        /// <returns></returns>
         [DebuggerStepThrough]
         public static Type ImplementsInterface(Type param, string paramName, Type iface, string message)
         {
@@ -201,7 +200,7 @@ namespace Qowaiv
         public static string NotNullOrEmpty([ValidatedNotNull]string parameter, string paramName)
         {
             NotNull(parameter, paramName);
-            if (string.Empty == parameter)
+            if (parameter == string.Empty)
             {
                 throw new ArgumentException(Messages.ArgumentException_StringEmpty, paramName);
             }
@@ -220,7 +219,7 @@ namespace Qowaiv
         [DebuggerStepThrough]
         public static Guid NotEmpty(Guid parameter, string paramName)
         {
-            if (Guid.Empty == parameter)
+            if (parameter == Guid.Empty)
             {
                 throw new ArgumentException(Messages.ArgumentException_GuidEmpty, paramName);
             }
@@ -418,7 +417,7 @@ namespace Qowaiv
         }
 
         /// <summary>Messages class to group the constants.</summary>
-        static class Messages
+        private static class Messages
         {
             public const string ArgumentException_EmptyCollection = "Argument cannot be an empty collection.";
             public const string ArgumentException_GuidEmpty = "Argument cannot be an empty GUID.";
@@ -442,6 +441,6 @@ namespace Qowaiv
         /// it is named ValidatedNotNullAttribute.
         /// </remarks>
         [AttributeUsage(AttributeTargets.Parameter)]
-        sealed class ValidatedNotNullAttribute : Attribute { }
+        private sealed class ValidatedNotNullAttribute : Attribute { }
     }
 }

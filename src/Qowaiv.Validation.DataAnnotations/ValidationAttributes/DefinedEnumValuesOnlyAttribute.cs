@@ -9,9 +9,9 @@ namespace Qowaiv.Validation.DataAnnotations
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
     public class DefinedEnumValuesOnlyAttribute : ValidationAttribute
     {
-        /// <summary>Creates a new instance of a <see cref="DefinedEnumValuesOnlyAttribute"/>.</summary>
+        /// <summary>Initializes a new instance of the <see cref="DefinedEnumValuesOnlyAttribute"/> class.</summary>
         public DefinedEnumValuesOnlyAttribute()
-        : base(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError) { }
+        : base(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError) => Do.Nothing();
 
         /// <summary>If true, for flag enums, also combinations of defined single values are allowed, that are not defined themselves explicitly.</summary>
         /// <remarks>
@@ -27,14 +27,11 @@ namespace Qowaiv.Validation.DataAnnotations
         public override bool IsValid(object value)
         {
             // Might be a nullable enum, we just don't know.
-            if(value is null)
-            {
-                return true;
-            }
+            if (value is null) { return true; }
 
             var enumType = value.GetType();
 
-            if(!OnlyAllowDefinedFlagsCombinations && enumType.IsEnum && enumType.GetCustomAttributes<FlagsAttribute>().Any())
+            if (!OnlyAllowDefinedFlagsCombinations && enumType.IsEnum && enumType.GetCustomAttributes<FlagsAttribute>().Any())
             {
                 dynamic dyn = value;
                 var max = Enum.GetValues(enumType)
@@ -43,8 +40,6 @@ namespace Qowaiv.Validation.DataAnnotations
 
                 return (max & dyn) == dyn;
             }
-
-
             return Enum.IsDefined(enumType, value);
         }
     }

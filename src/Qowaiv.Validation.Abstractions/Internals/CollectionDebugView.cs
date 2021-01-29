@@ -9,8 +9,11 @@ namespace Qowaiv.Validation.Abstractions.Internals
     [ExcludeFromCodeCoverage]
     internal class CollectionDebugView
     {
-        /// <summary>Constructor.</summary>
-        public CollectionDebugView(IEnumerable enumeration) => Enumeration = enumeration;
+        /// <summary>Initializes a new instance of the <see cref="CollectionDebugView"/> class.</summary>
+        public CollectionDebugView(IEnumerable enumeration) => _enumeration = enumeration;
+
+        /// <summary>A reference to the enumeration to display.</summary>
+        private readonly IEnumerable _enumeration;
 
         /// <summary>The array that is shown by the debugger.</summary>
         /// <remarks>
@@ -18,9 +21,6 @@ namespace Qowaiv.Validation.Abstractions.Internals
         /// By doing this, it is always in sync with the current state of the enumeration.
         /// </remarks>
         [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
-        public object[] Items => Enumeration.Cast<object>().ToArray();
-
-        /// <summary>A reference to the enumeration to display.</summary>
-        private readonly IEnumerable Enumeration;
+        public object[] Items => _enumeration.Cast<object>().ToArray();
     }
 }

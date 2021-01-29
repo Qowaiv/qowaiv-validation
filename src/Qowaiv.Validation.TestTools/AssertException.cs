@@ -9,16 +9,16 @@ namespace Qowaiv.Validation.TestTools
     /// </remarks>
     public class AssertException : Exception
     {
-        /// <inheritdoc />
-        public AssertException() : this("Assertion failed.") { }
+        /// <summary>Initializes a new instance of the <see cref="AssertException"/> class.</summary>
+        public AssertException() : this("Assertion failed.") => Do.Nothing();
 
-        /// <inheritdoc />
-        public AssertException(string message) : base(message) { }
+        /// <summary>Initializes a new instance of the <see cref="AssertException"/> class.</summary>
+        public AssertException(string message) : base(message) => Do.Nothing();
 
-        /// <inheritdoc />
-        public AssertException(string message, Exception innerException) : base(message, innerException) { }
+        /// <summary>Initializes a new instance of the <see cref="AssertException"/> class.</summary>
+        public AssertException(string message, Exception innerException) : base(message, innerException) => Do.Nothing();
 
-        /// <inheritdoc />
-        protected AssertException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        /// <summary>Initializes a new instance of the <see cref="AssertException"/> class.</summary>
+        protected AssertException(SerializationInfo info, StreamingContext context) : base(info, context) => Do.Nothing();
     }
 }

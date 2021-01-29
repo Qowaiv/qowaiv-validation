@@ -5,7 +5,7 @@ namespace Qowaiv.Validation.DataAnnotations
 {
     /// <summary>Compares objects just by reference.</summary>
     /// <remarks>
-    /// We don't want to be cut of in the nested validation due to 
+    /// We don't want to be cut of in the nested validation due to
     /// <see cref="object.GetHashCode()"/> and <see cref="object.Equals(object)"/>
     /// overrides.
     /// </remarks>
@@ -14,8 +14,9 @@ namespace Qowaiv.Validation.DataAnnotations
         /// <summary>Gets the singleton instance.</summary>
         public static readonly IEqualityComparer<object> Instance = new ReferenceComparer();
 
-        /// <summary>No public accessor.</summary>
-        private ReferenceComparer() { }
+        /// <summary>Initializes a new instance of the <see cref="ReferenceComparer"/> class.</summary>
+        /// <remarks>No public accessor.</remarks>
+        private ReferenceComparer() => Do.Nothing();
 
         /// <inheritdoc />
         public new bool Equals(object x, object y) => ReferenceEquals(x, y);

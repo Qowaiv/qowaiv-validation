@@ -11,7 +11,7 @@ namespace Qowaiv.Validation.DataAnnotations
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
     public sealed class DistinctValuesAttribute : ValidationAttribute
     {
-        /// <summary>Creates a new instance of <see cref="DistinctValuesAttribute"/>.</summary>
+        /// <summary>Initializes a new instance of the <see cref="DistinctValuesAttribute"/> class.</summary>
         /// <remarks>
         /// The type of the custom <see cref="IEqualityComparer"/> or <see cref="IEqualityComparer{T}"/> (for <see cref="object"/>).
         /// </remarks>
@@ -45,7 +45,7 @@ namespace Qowaiv.Validation.DataAnnotations
             {
                 return EqualityComparer<object>.Default;
             }
-            if(typeof(IEqualityComparer<object>).IsAssignableFrom(comparer))
+            if (typeof(IEqualityComparer<object>).IsAssignableFrom(comparer))
             {
                 return (IEqualityComparer<object>)Activator.CreateInstance(comparer);
             }

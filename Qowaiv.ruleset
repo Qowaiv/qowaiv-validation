@@ -18,8 +18,7 @@
     <Rule Id="S1151" Action="Warning" />
     <Rule Id="S1192" Action="Warning" />
     <Rule Id="S1200" Action="Warning" />
-    <Rule Id="S121" Action="Warning" />
-    <Rule Id="S122" Action="Warning" />
+    <Rule Id="S121" Action="Info" />
     <Rule Id="S1226" Action="Warning" />
     <Rule Id="S1227" Action="Warning" />
     <Rule Id="S1244" Action="Warning" />
@@ -56,6 +55,7 @@
     <Rule Id="S2342" Action="Warning" />
     <Rule Id="S2357" Action="Warning" />
     <Rule Id="S2360" Action="Hidden" />
+    <Rule Id="S2365" Action="Info" />
     <Rule Id="S2387" Action="Warning" />
     <Rule Id="S2436" Action="Warning" />
     <Rule Id="S2437" Action="Warning" />
@@ -134,5 +134,56 @@
     <Rule Id="S4487" Action="Warning" />
     <Rule Id="S4564" Action="Warning" />
     <Rule Id="S881" Action="Warning" />
+  </Rules>
+  <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+    <Rule Id="SA1101" Action="None" />
+    <Rule Id="SA1116" Action="None" />
+    <Rule Id="SA1117" Action="None" />
+    <Rule Id="SA1127" Action="None" />
+    <Rule Id="SA1128" Action="None" />
+    <Rule Id="SA1200" Action="None" />
+    <Rule Id="SA1201" Action="None" />
+    <Rule Id="SA1202" Action="None" />
+    <Rule Id="SA1204" Action="None" />
+    <Rule Id="SA1208" Action="None" />
+    <Rule Id="SA1309" Action="None" />
+    <Rule Id="SA1310" Action="None" />
+    <Rule Id="SA1501" Action="None" />
+    <Rule Id="SA1502" Action="None" />
+    <Rule Id="SA1503" Action="Info" />
+    <Rule Id="SA1513" Action="None" />
+    <Rule Id="SA1515" Action="Info" />
+    <Rule Id="SA1516" Action="Info" />
+    <Rule Id="SA1600" Action="Info" />
+    <Rule Id="SA1601" Action="Info" />
+    <Rule Id="SA1602" Action="Info" />
+    <Rule Id="SA1604" Action="Info" />
+    <Rule Id="SA1605" Action="Info" />
+    <Rule Id="SA1606" Action="Info" />
+    <Rule Id="SA1607" Action="Info" />
+    <Rule Id="SA1608" Action="Info" />
+    <Rule Id="SA1609" Action="Info" />
+    <Rule Id="SA1610" Action="Info" />
+    <Rule Id="SA1611" Action="Info" />
+    <Rule Id="SA1612" Action="Info" />
+    <Rule Id="SA1613" Action="Info" />
+    <Rule Id="SA1614" Action="Info" />
+    <Rule Id="SA1615" Action="Info" />
+    <Rule Id="SA1616" Action="Info" />
+    <Rule Id="SA1617" Action="Info" />
+    <Rule Id="SA1618" Action="Info" />
+    <Rule Id="SA1619" Action="Info" />
+    <Rule Id="SA1620" Action="Info" />
+    <Rule Id="SA1621" Action="Info" />
+    <Rule Id="SA1623" Action="None" />
+    <Rule Id="SA1633" Action="None" />
+    <Rule Id="SA1634" Action="None" />
+    <Rule Id="SA1635" Action="None" />
+    <Rule Id="SA1636" Action="None" />
+    <Rule Id="SA1637" Action="None" />
+    <Rule Id="SA1638" Action="None" />
+    <Rule Id="SA1640" Action="None" />
+    <Rule Id="SA1649" Action="Info" />
+    <Rule Id="SX1101" Action="Warning" />
   </Rules>
 </RuleSet>

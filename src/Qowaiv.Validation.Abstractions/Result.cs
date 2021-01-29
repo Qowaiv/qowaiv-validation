@@ -7,7 +7,7 @@ namespace Qowaiv.Validation.Abstractions
     /// <summary>Represents a result of a validation, executed command, etcetera.</summary>
     public class Result
     {
-        /// <summary>Creates a new instance of a <see cref="Result"/>.</summary>
+        /// <summary>Initializes a new instance of the <see cref="Result"/> class.</summary>
         /// <param name="messages">
         /// The messages related to the result.
         /// </param>
@@ -47,18 +47,15 @@ namespace Qowaiv.Validation.Abstractions
             => new Result(FixedMessages.New(messages));
 
         /// <summary>Creates a result with messages.</summary>
-        public static Result WithMessages(params IValidationMessage[] messages) 
+        public static Result WithMessages(params IValidationMessage[] messages)
             => new Result(FixedMessages.New(messages));
 
         /// <summary>Creates a result with messages.</summary>
-        public static Result<T> WithMessages<T>(IEnumerable<IValidationMessage> messages) 
+        public static Result<T> WithMessages<T>(IEnumerable<IValidationMessage> messages)
             => new Result<T>(default, FixedMessages.New(messages));
 
         /// <summary>Creates a result with messages.</summary>
         public static Result<T> WithMessages<T>(params IValidationMessage[] messages)
             => new Result<T>(default, FixedMessages.New(messages));
-
-        internal static bool IsNullValueOrInvalid<T>(Result<T> result) 
-            => !result.IsValid || ReferenceEquals(null, result._value);
     }
 }

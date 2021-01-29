@@ -8,7 +8,7 @@ namespace Qowaiv.Validation.Abstractions
     /// <summary>Represents a result of a validation, executed command, etcetera.</summary>
     public sealed class Result<TModel> : Result
     {
-        /// <summary>Creates a new instance of a <see cref="Result{T}"/>.</summary>
+        /// <summary>Initializes a new instance of the <see cref="Result{T}"/> class.</summary>
         /// <param name="data">
         /// The data related to the result.
         /// </param>
@@ -16,9 +16,7 @@ namespace Qowaiv.Validation.Abstractions
         /// The messages related to the result.
         /// </param>
         internal Result(TModel data, FixedMessages messages) : base(messages)
-        {
-            _value = IsValid ? data : default;
-        }
+            => _value = IsValid ? data : default;
 
         /// <summary>Gets the value related to result.</summary>
         public TModel Value => IsValid
@@ -26,7 +24,7 @@ namespace Qowaiv.Validation.Abstractions
             : throw InvalidModelException.For<TModel>(Errors);
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal readonly TModel _value;
+        private readonly TModel _value;
 
         /// <summary>Implicitly casts a model to the <see cref="Result"/>.</summary>
         public static implicit operator Result<TModel>(TModel model) => For(model);
@@ -39,6 +37,9 @@ namespace Qowaiv.Validation.Abstractions
                 throw InvalidModelException.For<TModel>(Errors);
             }
         }
+
+        /// <summary>Has no value (including being invalid).</summary>
+        internal bool HasNoValue() => _value is null || !IsValid;
 
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
         /// <param name="action">
@@ -61,8 +62,8 @@ namespace Qowaiv.Validation.Abstractions
 
             var messages = (FixedMessages)Messages;
             var outcome = action(Value);
-            return For(outcome.IsValid 
-                ? outcome.Value 
+            return For(outcome.IsValid
+                ? outcome.Value
                 : default,
                 messages.AddRange(outcome.Messages));
         }
@@ -88,9 +89,9 @@ namespace Qowaiv.Validation.Abstractions
 
             var messages = (FixedMessages)Messages;
             var outcome = await action(Value).ConfigureAwait(false);
-            
-            return For(outcome.IsValid 
-                ? outcome.Value 
+
+            return For(outcome.IsValid
+                ? outcome.Value
                 : default,
                 messages.AddRange(outcome.Messages));
         }
@@ -140,6 +141,9 @@ namespace Qowaiv.Validation.Abstractions
         /// <summary>Explicitly casts the <see cref="Result"/> to the type of the related model.</summary>
         public static explicit operator TModel(Result<TModel> result) => result == null ? default : result.Value;
 
+#pragma warning disable S4069 // Operator overloads should have named alternatives
+        // That method is called Act, not BitwiseOr
+
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
         /// <param name="result">
         /// The result to act on.
@@ -165,5 +169,8 @@ namespace Qowaiv.Validation.Abstractions
         /// </returns>
         public static Result<TModel> operator |(Result<TModel> result, Func<TModel, Result> action)
             => Guard.NotNull(result, nameof(result)).Act(action);
+
+        internal static bool IsNullValueOrInvalid<T>(Result<T> result)
+           => !result.IsValid || ReferenceEquals(null, result._value);
     }
 }

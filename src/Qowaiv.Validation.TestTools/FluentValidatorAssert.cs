@@ -1,5 +1,4 @@
 ﻿using Qowaiv.Validation.Abstractions;
-using Qowaiv.Validation.Fluent;
 using System;
 using System.Diagnostics;
 
@@ -9,9 +8,9 @@ namespace Qowaiv.Validation.TestTools
     public static class FluentValidatorAssert
     {
         /// <summary>Asserts that the model is valid, throws if not.</summary>
-       [DebuggerStepThrough]
+        [DebuggerStepThrough]
         public static void IsValid<TValidator, TModel>(TModel model, params IValidationMessage[] expected) where TValidator : FluentValidation.IValidator<TModel>
-            => IsValid(model, Activator.CreateInstance<TValidator>(), expected);
+             => IsValid(model, Activator.CreateInstance<TValidator>(), expected);
 
         /// <summary>Asserts that the model is valid, throws if not.</summary>
         [DebuggerStepThrough]
@@ -42,27 +41,6 @@ namespace Qowaiv.Validation.TestTools
             var wrapper = new WrapperValidator<TModel>(validator);
             var result = wrapper.Validate(model);
             ValidationMessageAssert.WithErrors(result, expected);
-        }
-    }
-
-    /// <summary>Implements <see cref="IValidator{TModel}"/> using <see cref="FluentValidation.IValidator{T}"/>.</summary>
-    /// <typeparam name="TModel"></typeparam>
-    internal class WrapperValidator<TModel> : IValidator<TModel>
-    {
-        private readonly FluentValidation.IValidator<TModel> _validator;
-
-        /// <summary>Creates a new instance of a <see cref="WrapperValidator{TModel}"/>.</summary>
-        public WrapperValidator(FluentValidation.IValidator<TModel> validator)
-        {
-            _validator = validator;
-        }
-
-        /// <inheritdoc />
-        public Result<TModel> Validate(TModel model)
-        {
-            var context = new FluentValidation.ValidationContext<TModel>(model);
-            var result = _validator.Validate(context);
-            return Result.For(model, Fluent.ValidationMessage.For(result.Errors));
         }
     }
 }

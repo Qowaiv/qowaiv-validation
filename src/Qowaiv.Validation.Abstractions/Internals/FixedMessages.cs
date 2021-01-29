@@ -6,7 +6,8 @@ using System.Linq;
 
 namespace Qowaiv.Validation.Abstractions.Internals
 {
-    [DebuggerDisplay("{DebuggerDisplay}"), DebuggerTypeProxy(typeof(CollectionDebugView))]
+    [DebuggerDisplay("{DebuggerDisplay}")]
+    [DebuggerTypeProxy(typeof(CollectionDebugView))]
     internal class FixedMessages : IReadOnlyList<IValidationMessage>
     {
         public static FixedMessages New(IEnumerable<IValidationMessage> messages)
@@ -26,7 +27,7 @@ namespace Qowaiv.Validation.Abstractions.Internals
         public FixedMessages AddRange(IEnumerable<IValidationMessage> elements)
         {
             var next = this;
-            foreach(var element in elements)
+            foreach (var element in elements)
             {
                 next = next.Add(element);
             }
@@ -42,5 +43,4 @@ namespace Qowaiv.Validation.Abstractions.Internals
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
-
 }

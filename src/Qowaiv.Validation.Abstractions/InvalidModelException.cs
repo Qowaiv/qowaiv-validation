@@ -11,25 +11,23 @@ namespace Qowaiv.Validation.Abstractions
     [Serializable]
     public class InvalidModelException : InvalidOperationException
     {
-        /// <summary>Creates a new instance of an <see cref="InvalidModelException"/>.</summary>
-        public InvalidModelException() { }
+        /// <summary>Initializes a new instance of the <see cref="InvalidModelException"/> class.</summary>
+        public InvalidModelException() => Do.Nothing();
 
-        /// <summary>Creates a new instance of an <see cref="InvalidModelException"/>.</summary>
+        /// <summary>Initializes a new instance of the <see cref="InvalidModelException"/> class.</summary>
         public InvalidModelException(string message)
-            : base(message) { }
+            : base(message) => Do.Nothing();
 
-        /// <summary>Creates a new instance of an <see cref="InvalidModelException"/>.</summary>
+        /// <summary>Initializes a new instance of the <see cref="InvalidModelException"/> class.</summary>
         public InvalidModelException(string message, Exception innerException)
-            : base(message, innerException) { }
+            : base(message, innerException) => Do.Nothing();
 
-        /// <summary>Creates a new instance of an <see cref="InvalidModelException"/>.</summary>
+        /// <summary>Initializes a new instance of the <see cref="InvalidModelException"/> class.</summary>
         public InvalidModelException(string message, Exception innerException, IEnumerable<IValidationMessage> messages)
-            :this(message, innerException)
-        {
-            Errors = new ReadOnlyCollection<IValidationMessage>(messages.Where(e => e.Severity >= ValidationSeverity.Error).ToArray());
-        }
+            : this(message, innerException)
+            => Errors = new ReadOnlyCollection<IValidationMessage>(messages.Where(e => e.Severity >= ValidationSeverity.Error).ToArray());
 
-        /// <summary>Creates a new instance of an <see cref="InvalidModelException"/>.</summary>
+        /// <summary>Initializes a new instance of the <see cref="InvalidModelException"/> class.</summary>
         protected InvalidModelException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
@@ -51,7 +49,7 @@ namespace Qowaiv.Validation.Abstractions
         public override string ToString()
         {
             var sb = new StringBuilder().AppendLine(base.ToString());
-            foreach(var error in Errors)
+            foreach (var error in Errors)
             {
                 sb.Append(error.Message);
                 if (!string.IsNullOrEmpty(error.PropertyName))

@@ -18,7 +18,7 @@ namespace Qowaiv.Validation.DataAnnotations
         /// <summary>Gets the singleton instance of the <see cref="AnnotatedModelStore"/>.</summary>
         internal static readonly AnnotatedModelStore Store = new AnnotatedModelStore();
 
-        /// <summary>Creates a new instance of an <see cref="AnnotatedModel"/>.</summary>
+        /// <summary>Initializes a new instance of the <see cref="AnnotatedModel"/> class.</summary>
         private AnnotatedModel(
             Type type,
             bool isIValidatableObject,

@@ -30,7 +30,7 @@ namespace FluentValidation
         /// The rule builder on which the validator should be defined.
         /// </param>
         /// <param name="allowUnknown">
-        /// If true, unknown values are seen 
+        /// If true, unknown values are seen.
         /// </param>
         public static IRuleBuilderOptions<TModel, TProperty> Required<TModel, TProperty>(this IRuleBuilder<TModel, TProperty> ruleBuilder, bool allowUnknown)
         {

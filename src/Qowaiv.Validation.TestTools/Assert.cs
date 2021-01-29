@@ -18,10 +18,7 @@ namespace Qowaiv.Validation.TestTools
         [DebuggerStepThrough]
         public static void IsTrue(bool condition, string message)
         {
-            if (!condition)
-            {
-                Fail(message);
-            }
+            if (!condition) Fail(message);
         }
 
         [DebuggerStepThrough]

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\props\common.props" />
+  <Import Project="..\..\props\production.props" />
   
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -28,14 +28,12 @@ v0.0.1
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="9.0.1" />
     <PackageReference Include="Qowaiv" Version="5.1.1" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.10.0.19839">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <Compile Include="..\..\shared\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
+    <Compile Include="..\..\shared\Do.cs" Link="Do.cs" />
+    <Compile Include="..\..\shared\Guard.cs" Link="Guard.cs" />
   </ItemGroup>
 
   <ItemGroup>

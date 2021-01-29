@@ -91,7 +91,6 @@ namespace FluentValidation
                 .WithMessage(m => QowaivValidationFluentMessages.InFuture);
         }
 
-
         /// <summary>Requires a date time not to be in the future.</summary>
         /// <typeparam name="TModel">
         /// Type of the model being validated.
@@ -176,7 +175,6 @@ namespace FluentValidation
                 .WithMessage(m => QowaivValidationFluentMessages.NotInFuture);
         }
 
-
         /// <summary>Requires a date time to be in the past.</summary>
         /// <typeparam name="TModel">
         /// Type of the model being validated.
@@ -260,7 +258,6 @@ namespace FluentValidation
                 .Must(date => !date.HasValue || date.Value < today())
                 .WithMessage(m => QowaivValidationFluentMessages.InPast);
         }
-
 
         /// <summary>Requires a date time not to be in the past.</summary>
         /// <typeparam name="TModel">

@@ -8,6 +8,7 @@
 
         /// <summary>Informative message severity.</summary>
         Info = 0,
+
         /// <summary>Warning message severity.</summary>
         Warning = 1,
 

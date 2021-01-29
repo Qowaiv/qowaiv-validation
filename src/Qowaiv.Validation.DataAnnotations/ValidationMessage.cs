@@ -10,8 +10,8 @@ namespace Qowaiv.Validation.DataAnnotations
     [Serializable]
     public class ValidationMessage : ValidationResult, IValidationMessage, ISerializable
     {
-        /// <summary>Creates a new instance of a <see cref="ValidationMessage"/>.</summary>
-        public ValidationMessage() : this(ValidationSeverity.None, null, null) { }
+        /// <summary>Initializes a new instance of the <see cref="ValidationMessage"/> class.</summary>
+        public ValidationMessage() : this(ValidationSeverity.None, null, null) => Do.Nothing();
 
         internal ValidationMessage(ValidationSeverity severity, string message, string[] memberNames)
             : base(message, memberNames)
@@ -19,10 +19,9 @@ namespace Qowaiv.Validation.DataAnnotations
             Severity = severity;
         }
 
-        /// <summary>Creates a new instance of <see cref="ValidationMessage"/>.</summary>
-        protected ValidationMessage(SerializationInfo info, StreamingContext context) :
-            this(GetSeverity(info), GetMessage(info), GetMemberNames(info))
-        { }
+        /// <summary>Initializes a new instance of the <see cref="ValidationMessage"/> class.</summary>
+        protected ValidationMessage(SerializationInfo info, StreamingContext context)
+            : this(GetSeverity(info), GetMessage(info), GetMemberNames(info)) => Do.Nothing();
 
         /// <summary>Helper methods to deserialize the <see cref="ValidationMessage"/>.</summary>
         private static ValidationSeverity GetSeverity(SerializationInfo info) => (ValidationSeverity)info.GetInt32(nameof(Severity));
