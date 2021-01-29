@@ -11,12 +11,15 @@ namespace Qowaiv.Validation.Fluent
     [Serializable]
     public class ValidationMessage : ValidationFailure, IValidationMessage
     {
-        /// <summary>Creates a new instance of a <see cref="ValidationMessage"/>.</summary>
+        /// <summary>Initializes a new instance of the <see cref="ValidationMessage"/> class.</summary>
         protected ValidationMessage(string propertyName, string errorMessage)
-            : base(propertyName, errorMessage) { }
+            : base(propertyName, errorMessage) => Do.Nothing();
 
         /// <inheritdoc />
+#pragma warning disable S4039 // Interface methods should be callable by derived types
+        // This can be achieved by changing the public accessible Severity property.
         ValidationSeverity IValidationMessage.Severity => Severity.ToValidationSeverity();
+#pragma warning restore S4039
 
         /// <inheritdoc />
         public string Message
@@ -25,15 +28,11 @@ namespace Qowaiv.Validation.Fluent
             set => ErrorMessage = value;
         }
 
-        /// <summary>Gets a collection of <see cref="ValidationMessage"/>s 
+        /// <summary>Gets a collection of <see cref="ValidationMessage"/>s
         /// based on a collection of <see cref="ValidationFailure"/>s.
         /// </summary>
         public static IEnumerable<ValidationMessage> For(IEnumerable<ValidationFailure> messages)
-        {
-            Guard.NotNull(messages, nameof(messages));
-
-            return messages.Select(message => For(message));
-        }
+            => Guard.NotNull(messages, nameof(messages)).Select(message => For(message));
 
         /// <summary>Creates an error message.</summary>
         public static ValidationMessage Error(string message, string propertyName) => new ValidationMessage(propertyName, message) { Severity = Severity.Error };
@@ -46,20 +45,16 @@ namespace Qowaiv.Validation.Fluent
 
         /// <summary>Gets a <see cref="ValidationMessage"/> based on a <see cref="ValidationFailure"/>.</summary>
         public static ValidationMessage For(ValidationFailure failure)
-        {
-            Guard.NotNull(failure, nameof(failure));
-
-            return failure is ValidationMessage message
-                ? message
-                : new ValidationMessage(failure.PropertyName, failure.ErrorMessage)
-                {
-                    AttemptedValue = failure.AttemptedValue,
-                    CustomState = failure.CustomState,
-                    ErrorCode = failure.ErrorCode,
-                    FormattedMessageArguments = failure.FormattedMessageArguments,
-                    FormattedMessagePlaceholderValues = failure.FormattedMessagePlaceholderValues,
-                    Severity = failure.Severity,
-                };
-        }
+            => Guard.NotNull(failure, nameof(failure)) is ValidationMessage message
+            ? message
+            : new ValidationMessage(failure.PropertyName, failure.ErrorMessage)
+            {
+                AttemptedValue = failure.AttemptedValue,
+                CustomState = failure.CustomState,
+                ErrorCode = failure.ErrorCode,
+                FormattedMessageArguments = failure.FormattedMessageArguments,
+                FormattedMessagePlaceholderValues = failure.FormattedMessagePlaceholderValues,
+                Severity = failure.Severity,
+            };
     }
 }

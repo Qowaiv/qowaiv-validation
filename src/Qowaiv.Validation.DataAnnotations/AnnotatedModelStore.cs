@@ -9,7 +9,7 @@ namespace Qowaiv.Validation.DataAnnotations
     /// <summary>Represents a store for <see cref="AnnotatedModel"/>s.</summary>
     public sealed class AnnotatedModelStore
     {
-        /// <summary>Creates a new instance of an <see cref="AnnotatedModelStore"/>.</summary>
+        /// <summary>Initializes a new instance of the <see cref="AnnotatedModelStore"/> class.</summary>
         internal AnnotatedModelStore()
         {
             _models = new ConcurrentDictionary<Type, AnnotatedModel>(new Dictionary<Type, AnnotatedModel>

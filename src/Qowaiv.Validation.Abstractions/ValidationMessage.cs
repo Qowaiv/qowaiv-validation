@@ -8,9 +8,10 @@ namespace Qowaiv.Validation.Abstractions
     [Serializable]
     public sealed class ValidationMessage : IValidationMessage, ISerializable, IEquatable<ValidationMessage>
     {
-        /// <summary>Creates a new instance of a <see cref="ValidationMessage"/>.</summary>
-        public ValidationMessage() : this(ValidationSeverity.None, null, null) { }
+        /// <summary>Initializes a new instance of the <see cref="ValidationMessage"/> class.</summary>
+        public ValidationMessage() : this(ValidationSeverity.None, null, null) => Do.Nothing();
 
+        /// <summary>Initializes a new instance of the <see cref="ValidationMessage"/> class.</summary>
         internal ValidationMessage(ValidationSeverity severity, string message, string propertyName)
         {
             Severity = severity;
@@ -18,17 +19,16 @@ namespace Qowaiv.Validation.Abstractions
             PropertyName = propertyName;
         }
 
-        /// <summary>Creates a new instance of <see cref="ValidationMessage"/>.</summary>
-        private ValidationMessage(SerializationInfo info, StreamingContext context) :
-            this(GetSeverity(info), GetMessage(info), GetProperty(info))
-        { }
+        /// <summary>Initializes a new instance of the <see cref="ValidationMessage"/> class.</summary>
+        private ValidationMessage(SerializationInfo info, StreamingContext context)
+            : this(GetSeverity(info), GetMessage(info), GetProperty(info)) => Do.Nothing();
 
         /// <summary>Helper methods to deserialize the <see cref="ValidationMessage"/>.</summary>
         private static ValidationSeverity GetSeverity(SerializationInfo info) => (ValidationSeverity)info.GetInt32(nameof(Severity));
 
         /// <summary>Helper methods to deserialize the <see cref="ValidationMessage"/>.</summary>
         private static string GetMessage(SerializationInfo info) => info.GetString(nameof(Message));
-    
+
         /// <summary>Helper methods to deserialize the <see cref="ValidationMessage"/>.</summary>
         private static string GetProperty(SerializationInfo info) => info.GetString(nameof(PropertyName));
 
@@ -54,7 +54,7 @@ namespace Qowaiv.Validation.Abstractions
         /// <inheritdoc />
         public override string ToString()
         {
-            if(Equals(None))
+            if (Equals(None))
             {
                 return string.Empty;
             }
@@ -62,7 +62,7 @@ namespace Qowaiv.Validation.Abstractions
             var sb = new StringBuilder();
             switch (Severity)
             {
-                case ValidationSeverity.Info: 
+                case ValidationSeverity.Info:
                     sb.Append("INF: ");
                     break;
                 case ValidationSeverity.Warning:
@@ -75,7 +75,7 @@ namespace Qowaiv.Validation.Abstractions
                     sb.Append($"{Severity}: ");
                     break;
             }
-            if(!string.IsNullOrEmpty(PropertyName))
+            if (!string.IsNullOrEmpty(PropertyName))
             {
                 sb.Append($"Property: {PropertyName}, ");
             }
@@ -100,8 +100,8 @@ namespace Qowaiv.Validation.Abstractions
         public override int GetHashCode()
         {
             return Severity.GetHashCode()
-                ^ (PropertyName ?? "").GetHashCode()
-                ^ (Message ?? "").GetHashCode();
+                ^ (PropertyName ?? string.Empty).GetHashCode()
+                ^ (Message ?? string.Empty).GetHashCode();
         }
 
         /// <summary>Creates a None message.</summary>
@@ -127,7 +127,5 @@ namespace Qowaiv.Validation.Abstractions
                 _ => Error(message, propertyName),
             };
         }
-
-        
     }
 }

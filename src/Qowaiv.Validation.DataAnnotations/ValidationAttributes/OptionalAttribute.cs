@@ -6,7 +6,7 @@ namespace Qowaiv.Validation.DataAnnotations
     /// <summary>Decorates a property or field as optional.</summary>
     /// <remarks>
     /// Null object pattern implementation for a <see cref="RequiredAttribute"/>.
-    /// See: https://en.wikipedia.org/wiki/Null_object_pattern
+    /// See: https://en.wikipedia.org/wiki/Null_object_pattern.
     /// </remarks>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
     public sealed class OptionalAttribute : RequiredAttribute

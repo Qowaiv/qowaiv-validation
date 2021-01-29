@@ -9,7 +9,7 @@ namespace Qowaiv.Validation.DataAnnotations
     /// <summary>Represents a nested wrapper for a (sealed) <see cref="ValidationContext"/>.</summary>
     internal class NestedValidationContext : IServiceProvider
     {
-        /// <summary>Constructor.</summary>
+        /// <summary>Initializes a new instance of the <see cref="NestedValidationContext"/> class.</summary>
         private NestedValidationContext(string path, object instance, IServiceProvider serviceProvider, IDictionary<object, object> items, ISet<object> done)
         {
             Path = path;
@@ -25,7 +25,7 @@ namespace Qowaiv.Validation.DataAnnotations
 
         /// <summary>Gets the (nested) path.</summary>
         public string Path { get; }
-        
+
         /// <summary>Gets the instance/model.</summary>
         public object Instance { get; }
 
@@ -50,7 +50,7 @@ namespace Qowaiv.Validation.DataAnnotations
         /// <summary>Adds a set of messages.</summary>
         public void AddMessages(IEnumerable<ValidationResult> messages)
         {
-            foreach(var message in messages)
+            foreach (var message in messages)
             {
                 AddMessage(message);
             }
@@ -67,11 +67,7 @@ namespace Qowaiv.Validation.DataAnnotations
         {
             var message = ValidationMessage.For(validationResult);
 
-            if (message.Severity <= ValidationSeverity.None)
-            {
-                return false;
-            }
-
+            if (message.Severity <= ValidationSeverity.None) { return false; }
             // Update if the path could/should be updated.
             if (!string.IsNullOrEmpty(Path) && validationResult.MemberNames.Any())
             {
@@ -89,13 +85,11 @@ namespace Qowaiv.Validation.DataAnnotations
 
         /// <summary>Creates context for the property.</summary>
         public NestedValidationContext ForProperty(AnnotatedProperty property)
-        {
-            return new NestedValidationContext(Path, Instance, ServiceProvider, Items, Done)
+            => new NestedValidationContext(Path, Instance, ServiceProvider, Items, Done)
             {
                 MemberName = property.Name,
                 Messages = Messages,
             };
-        }
 
         /// <summary>Creates a nested context for the property context.</summary>
         /// <param name="value">
@@ -110,7 +104,7 @@ namespace Qowaiv.Validation.DataAnnotations
                 ? MemberName
                 : Path + '.' + MemberName;
 
-            if(index.HasValue)
+            if (index.HasValue)
             {
                 path += '[' + index.Value.ToString() + ']';
             }

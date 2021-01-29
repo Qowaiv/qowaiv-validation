@@ -50,6 +50,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{F74D9EF2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.TestTools", "src\Qowaiv.Validation.TestTools\Qowaiv.Validation.TestTools.csproj", "{5E3985BF-DA26-4983-84C2-CFC3C423334F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{31165360-F096-402C-A6D3-8972543BD430}"
+	ProjectSection(SolutionItems) = preProject
+		shared\Do.cs = shared\Do.cs
+		shared\ProductInfo.cs = shared\ProductInfo.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -96,6 +102,7 @@ Global
 		{C036985A-F17D-405A-B3FD-37F30FA154FB} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{8E1F869D-393B-4F6C-A3C0-1D1D336F9FA8} = {C036985A-F17D-405A-B3FD-37F30FA154FB}
 		{F74D9EF2-39B5-40EB-8C44-1D6015C38D70} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
+		{31165360-F096-402C-A6D3-8972543BD430} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B55A336-E2D3-4656-9840-D519B3E1159B}

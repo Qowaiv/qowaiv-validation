@@ -25,8 +25,8 @@ namespace Qowaiv.Validation.TestTools
             {
                 return 0;
             }
-            return (obj.Message ?? "").GetHashCode()
-                ^ (obj.PropertyName ?? "").GetHashCode()
+            return (obj.Message ?? string.Empty).GetHashCode()
+                ^ (obj.PropertyName ?? string.Empty).GetHashCode()
                 ^ (int)obj.Severity;
         }
     }

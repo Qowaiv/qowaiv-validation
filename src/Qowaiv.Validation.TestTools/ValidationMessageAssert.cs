@@ -65,11 +65,11 @@ namespace Qowaiv.Validation.TestTools
 
             if (missing.Any())
             {
-                sb.AppendLine($"Missing message{(missing.Length == 1 ? "" :"s")}:").AppendLine(ToString(missing));
+                sb.AppendLine($"Missing message{(missing.Length == 1 ? string.Empty : "s")}:").AppendLine(ToString(missing));
             }
             if (extra.Any())
             {
-                sb.AppendLine($"Extra message{(extra.Length == 1 ? "" : "s")}:").AppendLine(ToString(extra));
+                sb.AppendLine($"Extra message{(extra.Length == 1 ? string.Empty : "s")}:").AppendLine(ToString(extra));
             }
 
             if (sb.Length != 0)

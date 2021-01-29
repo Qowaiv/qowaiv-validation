@@ -16,8 +16,8 @@ namespace Qowaiv.Validation.Abstractions.Internals
             this.parent = parent;
             this.value = value;
         }
-        
-        public override int Count => parent.Count+1;
+
+        public override int Count => parent.Count + 1;
 
         public override IEnumerator<IValidationMessage> GetEnumerator() => Enumerate().Reverse().GetEnumerator();
 

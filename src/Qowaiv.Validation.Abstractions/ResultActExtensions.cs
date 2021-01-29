@@ -34,7 +34,7 @@ namespace Qowaiv.Validation.Abstractions
             {
                 return Result.WithMessages<TOut>();
             }
-            else if (Result.IsNullValueOrInvalid(result))
+            else if (result.HasNoValue())
             {
                 return Result.WithMessages<TOut>(result.Messages);
             }
@@ -77,7 +77,7 @@ namespace Qowaiv.Validation.Abstractions
             {
                 return Result.WithMessages<TOut>();
             }
-            else if (Result.IsNullValueOrInvalid(result))
+            else if (result.HasNoValue())
             {
                 return Result.WithMessages<TOut>(result.Messages);
             }
@@ -85,10 +85,10 @@ namespace Qowaiv.Validation.Abstractions
             {
                 var messages = (FixedMessages)result.Messages;
                 var outcome = await action(result.Value).ConfigureAwait(false);
-                
+
                 return Result.For(outcome.IsValid
-                    ? outcome.Value 
-                    : default, 
+                    ? outcome.Value
+                    : default,
                     messages.AddRange(outcome.Messages));
             }
         }
@@ -112,15 +112,9 @@ namespace Qowaiv.Validation.Abstractions
             Guard.NotNull(action, nameof(action));
 
             var result = await promise.ConfigureAwait(false);
-            
-            if (result is null)
-            {
-                return Result.For<TModel>(default);
-            }
-            else if (Result.IsNullValueOrInvalid(result))
-            {
-                return result;
-            }
+
+            if (result is null) { return Result.For<TModel>(default); }
+            else if (result.HasNoValue()) { return result; }
             else
             {
                 var messages = (FixedMessages)result.Messages;
@@ -149,14 +143,8 @@ namespace Qowaiv.Validation.Abstractions
 
             var result = await promise.ConfigureAwait(false);
 
-            if(result is null)
-            {
-                return Result.For<TModel>(default);
-            }
-            else if (Result.IsNullValueOrInvalid(result))
-            {
-                return result;
-            }
+            if (result is null) { return Result.For<TModel>(default); }
+            else if (result.HasNoValue()) { return result; }
             else
             {
                 var messages = (FixedMessages)result.Messages;

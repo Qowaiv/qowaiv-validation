@@ -14,7 +14,7 @@ namespace Qowaiv.Validation.DataAnnotations
         /// <summary>The underlying descriptor.</summary>
         private readonly PropertyDescriptor descriptor;
 
-        /// <summary>Creates a new instance of an <see cref="AnnotatedProperty"/>.</summary>
+        /// <summary>Initializes a new instance of the <see cref="AnnotatedProperty"/> class.</summary>
         private AnnotatedProperty(PropertyDescriptor desc)
         {
             descriptor = desc;
@@ -69,12 +69,10 @@ namespace Qowaiv.Validation.DataAnnotations
         /// <summary>Gets the value of the property for the specified model.</summary>
         public object GetValue(object model) => descriptor.GetValue(model);
 
-        #region Debugger experience
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal string DebuggerDisplay
-        {
-            get => $"{descriptor.PropertyType} {descriptor.Name}, Attributes: {string.Join(", ", GetAll().Select(a => Shorten(a)))}";
-        }
+            => $"{descriptor.PropertyType} {descriptor.Name}, Attributes: {string.Join(", ", GetAll().Select(a => Shorten(a)))}";
+
         private IEnumerable<ValidationAttribute> GetAll()
         {
             yield return RequiredAttribute;
@@ -83,9 +81,8 @@ namespace Qowaiv.Validation.DataAnnotations
                 yield return attr;
             }
         }
-        private static string Shorten(Attribute attr) => attr.GetType().Name.Replace("Attribute", "");
 
-        #endregion
+        private static string Shorten(Attribute attr) => attr.GetType().Name.Replace("Attribute", string.Empty);
 
         /// <summary>Creates a <see cref="AnnotatedProperty"/> for all annotated properties.</summary>
         internal static IEnumerable<AnnotatedProperty> CreateAll(Type type)

@@ -6,16 +6,16 @@ namespace Qowaiv.Validation.DataAnnotations
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
     public sealed class ForbiddenValuesAttribute : SetOfValuesAttribute
     {
-        /// <summary>Creates a new instance of a <see cref="ForbiddenValuesAttribute"/>.</summary>
+        /// <summary>Initializes a new instance of the <see cref="ForbiddenValuesAttribute"/> class.</summary>
         public ForbiddenValuesAttribute(string value1, string value2)
-            : base(new[] { value1, value2 }) { }
+            : base(new[] { value1, value2 }) => Do.Nothing();
 
-        /// <summary>Creates a new instance of a <see cref="ForbiddenValuesAttribute"/>.</summary>
+        /// <summary>Initializes a new instance of the <see cref="ForbiddenValuesAttribute"/> class.</summary>
         /// <param name="values">
         /// String representations of the forbidden values.
         /// </param>
         public ForbiddenValuesAttribute(params string[] values)
-            : base(values) { }
+            : base(values) => Do.Nothing();
 
         /// <summary>Gets the forbidden values.</summary>
         public string[] Forbidden { get; }
