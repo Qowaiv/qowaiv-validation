@@ -19,9 +19,24 @@ namespace Qowaiv.Validation.Messages
         public AccessDenied(string message, Exception inner) : base(message, inner) => Do.Nothing();
 
         /// <summary>Initializes a new instance of the <see cref="AccessDenied"/> class.</summary>
+        /// <param name="message">
+        /// The error message that explains the reason for the exception.
+        /// </param>
+        /// <param name="type">
+        /// The type of the permission that caused the exception to be thrown.
+        /// </param>
         public AccessDenied(string message, Type type) : base(message, type) => Do.Nothing();
 
         /// <summary>Initializes a new instance of the <see cref="AccessDenied"/> class.</summary>
+        /// <param name="message">
+        /// The error message that explains the reason for the exception.
+        /// </param>
+        /// <param name="type">
+        /// The type of the permission that caused the exception to be thrown.
+        /// </param>
+        /// <param name="state">
+        /// The state of the permission that caused the exception to be thrown.
+        /// </param>
         public AccessDenied(string message, Type type, string state) : base(message, type, state) => Do.Nothing();
 
         /// <summary>Initializes a new instance of the <see cref="AccessDenied"/> class.</summary>
