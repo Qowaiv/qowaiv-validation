@@ -30,14 +30,8 @@ namespace Qowaiv.Validation.Abstractions
 
             var result = await promise.ConfigureAwait(false);
 
-            if (result is null)
-            {
-                return Result.WithMessages<TOut>();
-            }
-            else if (result.HasNoValue())
-            {
-                return Result.WithMessages<TOut>(result.Messages);
-            }
+            if (result is null) { return Result.WithMessages<TOut>(); }
+            else if (result.HasNoValue()) { return Result.WithMessages<TOut>(result.Messages); }
             else
             {
                 var messages = (FixedMessages)result.Messages;
@@ -73,14 +67,8 @@ namespace Qowaiv.Validation.Abstractions
 
             var result = await promise.ConfigureAwait(false);
 
-            if (result is null)
-            {
-                return Result.WithMessages<TOut>();
-            }
-            else if (result.HasNoValue())
-            {
-                return Result.WithMessages<TOut>(result.Messages);
-            }
+            if (result is null) { return Result.WithMessages<TOut>(); }
+            else if (result.HasNoValue()) { return Result.WithMessages<TOut>(result.Messages); }
             else
             {
                 var messages = (FixedMessages)result.Messages;
