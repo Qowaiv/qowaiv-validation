@@ -7,15 +7,16 @@
 |-------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
 |![v](https://img.shields.io/badge/version-0.0.4-darkblue.svg?cacheSeconds=3600)|[Qowaiv.Validation.Abstractions](https://www.nuget.org/packages/Qowaiv.Validation.Abstractions/)      |
 |![v](https://img.shields.io/badge/version-0.0.3-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.DataAnnotations](https://www.nuget.org/packages/Qowaiv.Validation.DataAnnotations/)|
-|![v](https://img.shields.io/badge/version-0.0.5-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Fluent](https://www.nuget.org/packages/Qowaiv.Validation.Fluent/)                  |
-|![v](https://img.shields.io/badge/version-0.0.1-darkred.svg?cacheSeconds=3600) |[Qowaiv.Validation.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)                       |
+|![v](https://img.shields.io/badge/version-0.0.6-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Fluent](https://www.nuget.org/packages/Qowaiv.Validation.Fluent/)                  |
+|![v](https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Messages](https://www.nuget.org/packages/Qowaiv.Validation.Messages/)              |
+|![v](https://img.shields.io/badge/version-0.0.2-darkred.svg?cacheSeconds=3600) |[Qowaiv.Validation.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)                       |
 
 # Qowaiv Validation
 There are multiple ways to support validation within .NET. Most notable are
 * [System.ComponentModel](https://www.nuget.org/packages/System.ComponentModel)
 * [FluentValidation.NET](https://fluentvalidation.net)
 
-Qowaiv.Valdation aims to provide extensions on top of those that work well when
+Qowaiv.Validation aims to provide extensions on top of those that work well when
 using [Qowaiv SVO's](https://github.com/Qowaiv/Qowaiv), and pretent vendor lock-in.
 
 
@@ -129,6 +130,25 @@ namespace Qowaiv.Validation.Abstractions
     }
 }
 ```
+
+There are implementations available in `Qowaiv.Validation.Abstraction`,
+`Qowaiv.Validation.Fluent` and `Qowaiv.Validation.DataAnnotation`. You can pick
+your implementation of choice based on your scenario. 
+
+#### AccessDenied
+`Qowaiv.Validation.Messages` contains a specific implementation of `IValidationMessage`
+for communicating insufficient rights. A use case for this can be to
+communicate a `403 - Forbidden` response.
+
+#### ConcurrencyIssue
+`Qowaiv.Validation.Messages` contains a specific implementation of `IValidationMessage`
+for communicating that a concurrency issue. A use case for this can be to
+communicate a `409 - Conflict` response.
+
+#### EntityNotFound
+`Qowaiv.Validation.Messages` contains a specific implementation of `IValidationMessage`
+for communicating that an entity could not be found. A use case for this can be to
+communicate a `404 - Not Found` response.
 
 ## Qowaiv exensions on [*Fluent Validation](https://fluentvalidation.net/)
 
