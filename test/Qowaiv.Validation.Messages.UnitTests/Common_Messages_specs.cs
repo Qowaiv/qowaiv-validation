@@ -13,11 +13,11 @@ namespace Common_Messages_specs
             => Assert.IsInstanceOf<IValidationMessage>(new NS.AccessDenied());
 
         [Test]
-        public void Inherrits_from_SecurityException()
+        public void Inherits_from_SecurityException()
             => Assert.IsInstanceOf<SecurityException>(new NS.AccessDenied());
 
         [Test]
-        public void Has_error_validation_serverity()
+        public void Has_error_validation_severity()
             => Assert.AreEqual(ValidationSeverity.Error, new NS.AccessDenied().Severity);
 
         [Test]
@@ -32,11 +32,11 @@ namespace Common_Messages_specs
             => Assert.IsInstanceOf<IValidationMessage>(new NS.ConcurrencyIssue());
 
         [Test]
-        public void Inherrits_from_InvalidOperationException()
+        public void Inherits_from_InvalidOperationException()
             => Assert.IsInstanceOf<InvalidOperationException>(new NS.ConcurrencyIssue());
 
         [Test]
-        public void Has_error_validation_serverity()
+        public void Has_error_validation_severity()
             => Assert.AreEqual(ValidationSeverity.Error, new NS.ConcurrencyIssue().Severity);
 
         [Test]
@@ -59,11 +59,11 @@ namespace Common_Messages_specs
               => Assert.IsInstanceOf<IValidationMessage>(new NS.EntityNotFound());
 
         [Test]
-        public void Inherrits_from_InvalidOperationException()
+        public void Inherits_from_InvalidOperationException()
             => Assert.IsInstanceOf<InvalidOperationException>(new NS.EntityNotFound());
 
         [Test]
-        public void Has_error_validation_serverity()
+        public void Has_error_validation_severity()
             => Assert.AreEqual(ValidationSeverity.Error, new NS.EntityNotFound().Severity);
 
         [Test]
