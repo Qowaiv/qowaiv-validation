@@ -16,7 +16,7 @@ There are multiple ways to support validation within .NET. Most notable are
 * [System.ComponentModel](https://www.nuget.org/packages/System.ComponentModel)
 * [FluentValidation.NET](https://fluentvalidation.net)
 
-Qowaiv.Valdation aims to provide extensions on top of those that work well when
+Qowaiv.Validation aims to provide extensions on top of those that work well when
 using [Qowaiv SVO's](https://github.com/Qowaiv/Qowaiv), and pretent vendor lock-in.
 
 
@@ -131,22 +131,22 @@ namespace Qowaiv.Validation.Abstractions
 }
 ```
 
-There are implementations available in `Qowaiv.Valdation.Abstraction`,
-`Qowaiv.Valdation.Fluent` and `Qowaiv.Valdation.DataAnnotation`. You can pick
+There are implementations available in `Qowaiv.Validation.Abstraction`,
+`Qowaiv.Validation.Fluent` and `Qowaiv.Validation.DataAnnotation`. You can pick
 your implementation of choice based on your scenario. 
 
 #### AccessDenied
-`Qowaiv.Valdation.Messages` contains a specific implementation of `IValidationMessage`
+`Qowaiv.Validation.Messages` contains a specific implementation of `IValidationMessage`
 for communicating insufficient rights. A use case for this can be to
 communicate a `403 - Forbidden` response.
 
 #### ConcurrencyIssue
-`Qowaiv.Valdation.Messages` contains a specific implementation of `IValidationMessage`
+`Qowaiv.Validation.Messages` contains a specific implementation of `IValidationMessage`
 for communicating that a concurrency issue. A use case for this can be to
 communicate a `409 - Conflict` response.
 
 #### EntityNotFound
-`Qowaiv.Valdation.Messages` contains a specific implementation of `IValidationMessage`
+`Qowaiv.Validation.Messages` contains a specific implementation of `IValidationMessage`
 for communicating that an entity could not be found. A use case for this can be to
 communicate a `404 - Not Found` response.
 
