@@ -131,7 +131,7 @@ namespace Qowaiv.Validation.Abstractions
 }
 ```
 
-There is are implementations available in `Qowaiv.Valdation.Abstraction`,
+There are implementations available in `Qowaiv.Valdation.Abstraction`,
 `Qowaiv.Valdation.Fluent` and `Qowaiv.Valdation.DataAnnotation`. You can pick
 your implementation of choice based on your scenario. 
 
