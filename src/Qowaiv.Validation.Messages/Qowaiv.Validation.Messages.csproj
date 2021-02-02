@@ -5,6 +5,12 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Version>0.0.1</Version>
+    <PackageReleaseNotes>
+v0.0.1
+- AccessDenied (#22)
+- ConcurrencyIssue (#22)
+- EntityNotFound (#22)
+    </PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

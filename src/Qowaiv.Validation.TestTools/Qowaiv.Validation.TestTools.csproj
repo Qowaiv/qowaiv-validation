@@ -4,7 +4,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
+    <PackageReleaseNotes>
+v0.0.2
+- ValidationMessageAssert.IsValid() returns the model (#20)
+    </PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
