@@ -1,4 +1,7 @@
-﻿using Qowaiv.Validation.Abstractions;
+﻿#pragma warning disable S4055 // Literals should not be passed as localized parameters
+// Lightweight assertion.
+
+using Qowaiv.Validation.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
