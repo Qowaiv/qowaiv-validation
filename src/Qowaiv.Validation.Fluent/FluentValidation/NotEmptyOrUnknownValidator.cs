@@ -5,20 +5,16 @@ namespace FluentValidation
 {
     /// <remarks>
     /// To ensure that NotEmpty is validated equally for
-    /// <see cref="UnknownValidation.NotEmptyOrUnknown{T, TProperty}(IRuleBuilder{T, TProperty})"/>
+    /// <see cref="UnknownValidation.NotEmptyOrUnknown{TModel, TProperty}(IRuleBuilder{TModel, TProperty})"/>
     /// and
     /// <see cref="UnknownValidation.NotUnknown{TModel, TProperty}(IRuleBuilder{TModel, TProperty})"/>
-    /// the <see cref="NotEmptyValidator"/> is overridden.
+    /// the <see cref="NotEmptyValidator{TModel, TProperty}"/> is overridden.
     /// </remarks>
-    internal sealed class NotEmptyOrUnknownValidator : NotEmptyValidator
+    internal sealed class NotEmptyOrUnknownValidator<TModel, TProperty> : NotEmptyValidator<TModel, TProperty>
     {
-        public NotEmptyOrUnknownValidator(object defaultValueForType)
-            : base(defaultValueForType) => Do.Nothing();
-
-        protected override bool IsValid(PropertyValidatorContext context)
-        {
-            return base.IsValid(context)
-                && !Equals(Unknown.Value(context.PropertyValue.GetType()), context.PropertyValue);
-        }
+        /// <inheritdoc />
+        public override bool IsValid(ValidationContext<TModel> context, TProperty value)
+            => base.IsValid(context, value)
+                && !Equals(Unknown.Value(typeof(TProperty)), value);
     }
 }
