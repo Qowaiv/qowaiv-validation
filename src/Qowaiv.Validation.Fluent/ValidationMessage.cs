@@ -35,13 +35,16 @@ namespace Qowaiv.Validation.Fluent
             => Guard.NotNull(messages, nameof(messages)).Select(message => For(message));
 
         /// <summary>Creates an error message.</summary>
-        public static ValidationMessage Error(string message, string propertyName) => new ValidationMessage(propertyName, message) { Severity = Severity.Error };
+        public static ValidationMessage Error(string message, string propertyName)
+            => new ValidationMessage(propertyName, message) { Severity = Severity.Error };
 
         /// <summary>Creates a warning message.</summary>
-        public static ValidationMessage Warn(string message, string propertyName) => new ValidationMessage(propertyName, message) { Severity = Severity.Warning };
+        public static ValidationMessage Warn(string message, string propertyName)
+            => new ValidationMessage(propertyName, message) { Severity = Severity.Warning };
 
         /// <summary>Creates an info message.</summary>
-        public static ValidationMessage Info(string message, string propertyName) => new ValidationMessage(propertyName, message) { Severity = Severity.Info };
+        public static ValidationMessage Info(string message, string propertyName)
+            => new ValidationMessage(propertyName, message) { Severity = Severity.Info };
 
         /// <summary>Gets a <see cref="ValidationMessage"/> based on a <see cref="ValidationFailure"/>.</summary>
         public static ValidationMessage For(ValidationFailure failure)
@@ -52,7 +55,6 @@ namespace Qowaiv.Validation.Fluent
                 AttemptedValue = failure.AttemptedValue,
                 CustomState = failure.CustomState,
                 ErrorCode = failure.ErrorCode,
-                FormattedMessageArguments = failure.FormattedMessageArguments,
                 FormattedMessagePlaceholderValues = failure.FormattedMessagePlaceholderValues,
                 Severity = failure.Severity,
             };

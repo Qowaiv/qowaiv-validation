@@ -4,8 +4,10 @@
   
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.0.6</Version>
+    <Version>0.0.7</Version>
     <PackageReleaseNotes>
+v0.0.7
+- Update to FluentValidation v10.2.0.
 v0.0.6
 - ModelValidator instead of FluentModelValidator (#18)
 - Drop FluentValidator (#19)
@@ -29,7 +31,7 @@ v0.0.1
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="9.0.1" />
+    <PackageReference Include="FluentValidation" Version="10.2.0" />
     <PackageReference Include="Qowaiv" Version="5.1.1" />
   </ItemGroup>
 

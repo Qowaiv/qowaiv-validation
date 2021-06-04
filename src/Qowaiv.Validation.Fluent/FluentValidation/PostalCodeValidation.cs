@@ -20,10 +20,8 @@ namespace FluentValidation
         /// The county the postal code should be valid for.
         /// </param>
         public static IRuleBuilderOptions<TModel, PostalCode> ValidFor<TModel>(this IRuleBuilder<TModel, PostalCode> ruleBuilder, Country country)
-        {
-            return Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
-                .ValidFor((model) => country);
-        }
+            => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
+            .ValidFor((model) => country);
 
         /// <summary>The postal code should be valid for the specified country.</summary>
         /// <typeparam name="TModel">
@@ -36,13 +34,11 @@ namespace FluentValidation
         /// The county the postal code should be valid for.
         /// </param>
         public static IRuleBuilderOptions<TModel, PostalCode> ValidFor<TModel>(this IRuleBuilder<TModel, PostalCode> ruleBuilder, Func<TModel, Country> country)
-        {
-            return Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
+            => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
                 .Must((model, postalCode, context) => IsValidFor(postalCode, country(model), context))
                 .WithMessage(m => QowaivValidationFluentMessages.PostalCodeValidForCountry);
-        }
 
-        private static bool IsValidFor(PostalCode postalCode, Country country, PropertyValidatorContext context)
+        private static bool IsValidFor<TModel>(PostalCode postalCode, Country country, ValidationContext<TModel> context)
         {
             if (country.IsEmptyOrUnknown()
                 || postalCode.IsEmptyOrUnknown()
