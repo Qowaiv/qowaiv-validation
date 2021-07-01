@@ -12,7 +12,7 @@ namespace Qowaiv.Validation.DataAnnotations
         /// <summary>Initializes a new instance of the <see cref="NestedValidationContext"/> class.</summary>
         private NestedValidationContext(string path, object instance, IServiceProvider serviceProvider, IDictionary<object, object> items, ISet<object> done)
         {
-            Path = path;
+            Root = path;
             Instance = instance;
             ServiceProvider = serviceProvider;
             Items = items;
@@ -24,7 +24,7 @@ namespace Qowaiv.Validation.DataAnnotations
         public ISet<object> Done { get; }
 
         /// <summary>Gets the (nested) path.</summary>
-        public string Path { get; }
+        public string Root { get; }
 
         /// <summary>Gets the instance/model.</summary>
         public object Instance { get; }
@@ -68,24 +68,28 @@ namespace Qowaiv.Validation.DataAnnotations
             var message = ValidationMessage.For(validationResult);
 
             if (message.Severity <= ValidationSeverity.None) { return false; }
-            // Update if the path could/should be updated.
-            if (!string.IsNullOrEmpty(Path) && validationResult.MemberNames.Any())
+            else
             {
-                message = new ValidationMessage(
-                    message.Severity,
-                    message.Message,
-                    message.MemberNames.Select(name => Path + name).ToArray());
+                if (HasNestedPaths(validationResult))
+                {
+                    ((List<IValidationMessage>)Messages).Add(new ValidationMessage(
+                        message.Severity,
+                        message.Message,
+                        message.MemberNames.Select(name => $"{Root}.{name}").ToArray()));
+                }
+                return true;
             }
-            ((List<IValidationMessage>)Messages).Add(message);
-            return true;
         }
+
+        private bool HasNestedPaths(ValidationResult validationResult)
+            => !string.IsNullOrEmpty(Root) && validationResult.MemberNames.Any();
 
         /// <inheritdoc />
         public object GetService(Type serviceType) => ServiceProvider?.GetService(serviceType);
 
         /// <summary>Creates context for the property.</summary>
         public NestedValidationContext ForProperty(AnnotatedProperty property)
-            => new NestedValidationContext(Path, Instance, ServiceProvider, Items, Done)
+            => new(Root, Instance, ServiceProvider, Items, Done)
             {
                 MemberName = property.Name,
                 Messages = Messages,
@@ -99,38 +103,35 @@ namespace Qowaiv.Validation.DataAnnotations
         /// The optional index in case of an enumeration.
         /// </param>
         public NestedValidationContext Nested(object value, int? index = null)
-        {
-            var path = string.IsNullOrEmpty(Path)
-                ? MemberName
-                : Path + '.' + MemberName;
-
-            if (index.HasValue)
-            {
-                path += '[' + index.Value.ToString() + ']';
-            }
-
-            return new NestedValidationContext(path + '.', value, ServiceProvider, Items, Done)
+            => new(Combine(Root, MemberName, index), value, ServiceProvider, Items, Done)
             {
                 Messages = Messages,
             };
+
+        private static string Combine(string root, string path, int? index)
+        {
+            var combine = string.IsNullOrEmpty(root) ? string.Empty : ".";
+            return index.HasValue
+                ? $"{root}{combine}{path}[{index}]"
+                : $"{root}{combine}{path}";
         }
 
         /// <summary>Implicitly casts to the (sealed base) <see cref="ValidationContext"/>.</summary>
         public static implicit operator ValidationContext(NestedValidationContext context)
-        {
-            return context is null
-                ? null
-                : new ValidationContext(context.Instance, context.ServiceProvider, context.Items)
-                {
-                    MemberName = context.MemberName,
-                };
-        }
+            => context is null
+            ? null
+            : new ValidationContext(context.Instance, context.ServiceProvider, context.Items)
+            {
+                MemberName = context.MemberName,
+            };
 
         /// <summary>Creates a root context.</summary>
         public static NestedValidationContext CreateRoot(object instance, IServiceProvider serviceProvider, IDictionary<object, object> items)
-        {
-            Guard.NotNull(instance, nameof(instance));
-            return new NestedValidationContext(string.Empty, instance, serviceProvider, items, new HashSet<object>(ReferenceComparer.Instance));
-        }
+            => new NestedValidationContext(
+                path: string.Empty,
+                Guard.NotNull(instance, nameof(instance)),
+                serviceProvider,
+                items,
+                new HashSet<object>(ReferenceComparer.Instance));
     }
 }

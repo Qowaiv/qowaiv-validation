@@ -113,12 +113,36 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
                 Id = Guid.NewGuid(),
                 Children = new[]
                 {
-                    new NestedModelWithChildren.ChildModel{ Name = "Valid Name" },
-                    new NestedModelWithChildren.ChildModel()
+                    new NestedModelWithChildren.ChildModel{ ChildName = "Valid Name" },
+                    new NestedModelWithChildren.ChildModel(),
                 }
             };
             DataAnnotationsAssert.WithErrors(model,
-                ValidationMessage.Error("The Name field is required.", "Children[1].Name"));
+                ValidationMessage.Error("The ChildName field is required.", "Children[1].ChildName"));
+        }
+
+        [Test]
+        public void Validate_NestedModelWithInvalidGrandchildren_with_error()
+        {
+            var model = new NestedModelWithChildren
+            {
+                Id = Guid.NewGuid(),
+                Children = new[]
+                {
+                    new NestedModelWithChildren.ChildModel{ ChildName = "Valid Name" },
+                    new NestedModelWithChildren.ChildModel
+                    {
+                        Grandchildren = new[]
+                        {
+                            new NestedModelWithChildren.GrandchildModel(),
+                            new NestedModelWithChildren.GrandchildModel{ GrandchildName = "Valid Name" },
+                        },
+                    },
+                }
+            };
+            DataAnnotationsAssert.WithErrors(model,
+                ValidationMessage.Error("The ChildName field is required.", "Children[1].ChildName"),
+                ValidationMessage.Error("The GrandchildName field is required.", "Children[1].Grandchildren[0].GrandchildName"));
         }
 
         [Test]
