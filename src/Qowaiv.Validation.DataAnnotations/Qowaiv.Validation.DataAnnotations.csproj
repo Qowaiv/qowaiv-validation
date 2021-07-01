@@ -4,7 +4,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.0.3</Version>
+    <Version>0.0.4</Version>
+    <PackageReleaseNotes>
+      v0.0.4
+      - Fix double dots in paths for nested properties.
+    </PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
