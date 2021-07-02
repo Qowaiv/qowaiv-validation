@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Qowaiv.Validation.DataAnnotations
@@ -10,14 +11,21 @@ namespace Qowaiv.Validation.DataAnnotations
     internal class NestedValidationContext : IServiceProvider
     {
         /// <summary>Initializes a new instance of the <see cref="NestedValidationContext"/> class.</summary>
-        private NestedValidationContext(string path, object instance, IServiceProvider serviceProvider, IDictionary<object, object> items, ISet<object> done)
+        private NestedValidationContext(
+            string root,
+            object instance,
+            IServiceProvider serviceProvider,
+            IDictionary<object, object> items,
+            ISet<object> done,
+            List<IValidationMessage> messages)
         {
-            Root = path;
+            Root = root;
             Instance = instance;
             ServiceProvider = serviceProvider;
             Items = items;
             Annotations = AnnotatedModel.Get(instance.GetType());
             Done = done;
+            collection = messages;
         }
 
         /// <summary>Keeps track of objects that already have been validated.</summary>
@@ -45,7 +53,9 @@ namespace Qowaiv.Validation.DataAnnotations
         public AnnotatedModel Annotations { get; }
 
         /// <summary>Gets the enumerable of collected messages.</summary>
-        public IReadOnlyCollection<IValidationMessage> Messages { get; private set; } = new List<IValidationMessage>();
+        public IReadOnlyCollection<IValidationMessage> Messages => collection;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private readonly List<IValidationMessage> collection;
 
         /// <summary>Adds a set of messages.</summary>
         public void AddMessages(IEnumerable<ValidationResult> messages)
@@ -66,17 +76,16 @@ namespace Qowaiv.Validation.DataAnnotations
         public bool AddMessage(ValidationResult validationResult)
         {
             var message = ValidationMessage.For(validationResult);
-
             if (message.Severity <= ValidationSeverity.None) { return false; }
             else
             {
-                if (HasNestedPaths(validationResult))
-                {
-                    ((List<IValidationMessage>)Messages).Add(new ValidationMessage(
+                collection.Add(
+                    HasNestedPaths(validationResult)
+                    ? new ValidationMessage(
                         message.Severity,
                         message.Message,
-                        message.MemberNames.Select(name => $"{Root}.{name}").ToArray()));
-                }
+                        message.MemberNames.Select(name => $"{Root}.{name}").ToArray())
+                    : message);
                 return true;
             }
         }
@@ -89,10 +98,9 @@ namespace Qowaiv.Validation.DataAnnotations
 
         /// <summary>Creates context for the property.</summary>
         public NestedValidationContext ForProperty(AnnotatedProperty property)
-            => new(Root, Instance, ServiceProvider, Items, Done)
+            => new(Root, Instance, ServiceProvider, Items, Done, collection)
             {
                 MemberName = property.Name,
-                Messages = Messages,
             };
 
         /// <summary>Creates a nested context for the property context.</summary>
@@ -103,10 +111,13 @@ namespace Qowaiv.Validation.DataAnnotations
         /// The optional index in case of an enumeration.
         /// </param>
         public NestedValidationContext Nested(object value, int? index = null)
-            => new(Combine(Root, MemberName, index), value, ServiceProvider, Items, Done)
-            {
-                Messages = Messages,
-            };
+            => new(
+                root: Combine(Root, MemberName, index),
+                instance: value,
+                ServiceProvider,
+                Items,
+                Done,
+                collection);
 
         private static string Combine(string root, string path, int? index)
         {
@@ -128,10 +139,11 @@ namespace Qowaiv.Validation.DataAnnotations
         /// <summary>Creates a root context.</summary>
         public static NestedValidationContext CreateRoot(object instance, IServiceProvider serviceProvider, IDictionary<object, object> items)
             => new(
-                path: string.Empty,
+                root: string.Empty,
                 Guard.NotNull(instance, nameof(instance)),
                 serviceProvider,
                 items,
-                new HashSet<object>(ReferenceComparer.Instance));
+                new HashSet<object>(ReferenceComparer.Instance),
+                new List<IValidationMessage>());
     }
 }
