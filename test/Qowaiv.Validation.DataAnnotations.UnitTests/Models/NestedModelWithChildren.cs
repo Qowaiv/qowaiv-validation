@@ -14,7 +14,17 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests.Models
         public class ChildModel
         {
             [Mandatory]
-            public string Name { get; set; }
+            public string ChildName { get; set; }
+
+            [Optional]
+            public GrandchildModel[] Grandchildren { get; set; }
+        }
+
+        [NestedModel]
+        public class GrandchildModel
+        {
+            [Mandatory]
+            public string GrandchildName { get; set; }
         }
     }
 }

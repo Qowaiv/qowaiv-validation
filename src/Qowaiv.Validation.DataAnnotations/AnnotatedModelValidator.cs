@@ -8,6 +8,9 @@ using System.Linq;
 namespace Qowaiv.Validation.DataAnnotations
 {
     /// <summary>A validator to validate models based on their data annotations.</summary>
+    /// <typeparam name="TModel">
+    /// The type of the annotated model to validate.
+    /// </typeparam>
     public class AnnotatedModelValidator<TModel> : IValidator<TModel>
     {
         /// <summary>Initializes a new instance of the <see cref="AnnotatedModelValidator{TModel}"/> class.</summary>
