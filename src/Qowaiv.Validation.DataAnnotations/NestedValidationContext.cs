@@ -127,7 +127,7 @@ namespace Qowaiv.Validation.DataAnnotations
 
         /// <summary>Creates a root context.</summary>
         public static NestedValidationContext CreateRoot(object instance, IServiceProvider serviceProvider, IDictionary<object, object> items)
-            => new NestedValidationContext(
+            => new(
                 path: string.Empty,
                 Guard.NotNull(instance, nameof(instance)),
                 serviceProvider,
