@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Validation.Abstractions;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using static Qowaiv.Validation.Abstractions.UnitTests.Arrange;
@@ -13,14 +12,14 @@ namespace Result_specs
         public void Contains_no_ErrorMessages()
         {
             var result = Result.WithMessages<int>(Warning1, Info1, Info2);
-            Assert.True(result.IsValid);
+            Assert.That(result.IsValid, Is.True);
         }
 
         [Test]
         public void Has_access_to_Value()
         {
             var result = Result.For(2);
-            Assert.AreEqual(2, result.Value);
+            Assert.That(result.Value, Is.EqualTo(2));
         }
     }
 
@@ -30,14 +29,14 @@ namespace Result_specs
         public void Contains_at_least_one_ErrorMessage()
         {
             var result = Result.WithMessages(TestMessages.AsEnumerable());
-            Assert.IsFalse(result.IsValid);
+            Assert.That(result.IsValid, Is.False);
         }
 
         [Test]
         public void Has_no_access_to_Value()
         {
             var result = Result.For(new object(), ValidationMessage.Error("Not OK"));
-            Assert.Catch<InvalidModelException>(() => Console.WriteLine(result.Value));
+            Assert.That(() => result.Value, Throws.TypeOf<InvalidModelException>());
         }
     }
 
@@ -47,9 +46,7 @@ namespace Result_specs
         public void Error_messages_is_done_via_the_Errors_property()
         {
             var result = Result.WithMessages(TestMessages);
-            var act = result.Errors;
-            var exp = new[] { Error1, Error2 };
-            Assert.AreEqual(exp, act);
+            Assert.That(result.Errors, Is.EqualTo(new[] { Error1, Error2 }));
         }
 
         [Test]
@@ -77,15 +74,14 @@ namespace Result_specs
         public void Implicit_from_T_to_Result_of_T_is_supported()
         {
             Result<int> result = 17;
-            Assert.AreEqual(17, result.Value);
+            Assert.That(result.Value, Is.EqualTo(17));
         }
 
         [Test]
         public void Expicit_from_Result_of_T_to_T_is_supported()
         {
             var result = Result.For(666);
-            var actual = (int)result;
-            Assert.AreEqual(666, actual);
+            Assert.That((int)result, Is.EqualTo(666));
         }
     }
 
@@ -93,8 +89,6 @@ namespace Result_specs
     {
         [Test]
         public void As_Task_with_Async()
-        {
-            Assert.That(Result.For(17).Async(), Is.InstanceOf<Task<Result<int>>>());
-        }
+            => Assert.That(Result.For(17).Async(), Is.InstanceOf<Task<Result<int>>>());
     }
 }
