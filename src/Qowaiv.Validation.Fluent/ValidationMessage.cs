@@ -16,10 +16,8 @@ namespace Qowaiv.Validation.Fluent
             : base(propertyName, errorMessage) => Do.Nothing();
 
         /// <inheritdoc />
-#pragma warning disable S4039 // Interface methods should be callable by derived types
         // This can be achieved by changing the public accessible Severity property.
         ValidationSeverity IValidationMessage.Severity => Severity.ToValidationSeverity();
-#pragma warning restore S4039
 
         /// <inheritdoc />
         public string Message
@@ -34,23 +32,11 @@ namespace Qowaiv.Validation.Fluent
         public static IEnumerable<ValidationMessage> For(IEnumerable<ValidationFailure> messages)
             => Guard.NotNull(messages, nameof(messages)).Select(message => For(message));
 
-        /// <summary>Creates an error message.</summary>
-        public static ValidationMessage Error(string message, string propertyName)
-            => new ValidationMessage(propertyName, message) { Severity = Severity.Error };
-
-        /// <summary>Creates a warning message.</summary>
-        public static ValidationMessage Warn(string message, string propertyName)
-            => new ValidationMessage(propertyName, message) { Severity = Severity.Warning };
-
-        /// <summary>Creates an info message.</summary>
-        public static ValidationMessage Info(string message, string propertyName)
-            => new ValidationMessage(propertyName, message) { Severity = Severity.Info };
-
         /// <summary>Gets a <see cref="ValidationMessage"/> based on a <see cref="ValidationFailure"/>.</summary>
         public static ValidationMessage For(ValidationFailure failure)
             => Guard.NotNull(failure, nameof(failure)) is ValidationMessage message
             ? message
-            : new ValidationMessage(failure.PropertyName, failure.ErrorMessage)
+            : new(failure.PropertyName, failure.ErrorMessage)
             {
                 AttemptedValue = failure.AttemptedValue,
                 CustomState = failure.CustomState,
@@ -58,5 +44,17 @@ namespace Qowaiv.Validation.Fluent
                 FormattedMessagePlaceholderValues = failure.FormattedMessagePlaceholderValues,
                 Severity = failure.Severity,
             };
+
+        /// <summary>Creates an error message.</summary>
+        public static ValidationMessage Error(string message, string propertyName)
+            => new(propertyName, message) { Severity = Severity.Error };
+
+        /// <summary>Creates a warning message.</summary>
+        public static ValidationMessage Warn(string message, string propertyName)
+            => new(propertyName, message) { Severity = Severity.Warning };
+
+        /// <summary>Creates an info message.</summary>
+        public static ValidationMessage Info(string message, string propertyName)
+            => new(propertyName, message) { Severity = Severity.Info };
     }
 }

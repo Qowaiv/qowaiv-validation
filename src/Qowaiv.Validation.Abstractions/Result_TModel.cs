@@ -72,6 +72,27 @@ namespace Qowaiv.Validation.Abstractions
         /// <param name="action">
         /// The action to invoke.
         /// </param>
+        /// <returns>
+        /// A result with the merged messages.
+        /// </returns>
+        public Result<TModel> Act(Func<TModel, Result> action)
+        {
+            Guard.NotNull(action, nameof(action));
+
+            if (IsNullValueOrInvalid(this))
+            {
+                return WithMessages<TModel>(Messages);
+            }
+
+            var messages = (FixedMessages)Messages;
+            var outcome = action(Value);
+            return For(Value, messages.AddRange(outcome.Messages));
+        }
+
+        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+        /// <param name="action">
+        /// The action to invoke.
+        /// </param>
         /// <typeparam name="TOut">
         /// The type of the new result value.
         /// </typeparam>
@@ -103,27 +124,6 @@ namespace Qowaiv.Validation.Abstractions
         /// <returns>
         /// A result with the merged messages.
         /// </returns>
-        public Result<TModel> Act(Func<TModel, Result> action)
-        {
-            Guard.NotNull(action, nameof(action));
-
-            if (IsNullValueOrInvalid(this))
-            {
-                return WithMessages<TModel>(Messages);
-            }
-
-            var messages = (FixedMessages)Messages;
-            var outcome = action(Value);
-            return For(Value, messages.AddRange(outcome.Messages));
-        }
-
-        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
-        /// <param name="action">
-        /// The action to invoke.
-        /// </param>
-        /// <returns>
-        /// A result with the merged messages.
-        /// </returns>
         public async Task<Result<TModel>> ActAsync(Func<TModel, Task<Result>> action)
         {
             _ = Guard.NotNull(action, nameof(action));
@@ -140,9 +140,6 @@ namespace Qowaiv.Validation.Abstractions
 
         /// <summary>Explicitly casts the <see cref="Result"/> to the type of the related model.</summary>
         public static explicit operator TModel(Result<TModel> result) => result == null ? default : result.Value;
-
-#pragma warning disable S4069 // Operator overloads should have named alternatives
-        // That method is called Act, not BitwiseOr
 
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
         /// <param name="result">
