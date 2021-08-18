@@ -41,7 +41,7 @@ namespace Result_Act_specs
 
     public class AsyncNullModel
     {
-        internal static Task<Result<TestModel>> ModelAsync() => Task.FromResult(Result.For<TestModel>(null));
+        internal static Task<Result<TestModel>> ModelAsync() => Result.For<TestModel>(null).AsTask();
 
         [Test]
         public async Task ActAsync_with_sync_function_is_never_triggered()
@@ -160,7 +160,7 @@ namespace Result_Act_specs
 
     public class AsyncValidModel
     {
-        internal static Task<Result<TestModel>> ModelAsync() => Task.FromResult(Result.For(new TestModel()));
+        internal static Task<Result<TestModel>> ModelAsync() => Result.For(new TestModel()).AsTask();
 
         [Test]
         public async Task ActAsync_on_sync_nonfailing_function_is_executed_and_result_stays_valid()
@@ -246,7 +246,7 @@ namespace Result_Act_specs
 
     public class AsyncInvalidModel
     {
-        internal static Task<Result<TestModel>> ModelAsync() => Task.FromResult(Result.WithMessages<TestModel>(ValidationMessage.Error("FailingModelAsync")));
+        internal static Task<Result<TestModel>> ModelAsync() => Result.WithMessages<TestModel>(ValidationMessage.Error("FailingModelAsync")).AsTask();
 
         [Test]
         public async Task ActAsync_with_sync_function_is_never_triggered()
