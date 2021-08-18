@@ -91,4 +91,21 @@ namespace Result_specs
         public void As_Task_with_AsTask()
             => Assert.That(Result.For(17).AsTask(), Is.InstanceOf<Task<Result<int>>>());
     }
+
+    public class ThrowIfInvalid
+    {
+        [Test]
+        public void Nothing_when_valid()
+        {
+            Assert.That(() => Result.For(17).ThrowIfInvalid(), Throws.Nothing);
+        }
+
+        [Test]
+        public void InvalidModelException_when_invalid()
+        {
+            Assert.That(
+                () => Result.WithMessages<int>(ValidationMessage.Error("Oops")).ThrowIfInvalid()
+                , Throws.InstanceOf<InvalidModelException>());
+        }
+    }
 }

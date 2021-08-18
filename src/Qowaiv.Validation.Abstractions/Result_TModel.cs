@@ -38,9 +38,6 @@ namespace Qowaiv.Validation.Abstractions
             }
         }
 
-        /// <summary>Has no value (including being invalid).</summary>
-        internal bool HasNoValue() => _value is null || !IsValid;
-
         /// <summary>Gets the <see cref="Result{TModel}"/> as a <see cref="Task{TResult}"/>.</summary>
         public Task<Result<TModel>> AsTask() => Task.FromResult(this);
 
@@ -110,7 +107,8 @@ namespace Qowaiv.Validation.Abstractions
         public Result<TModel> Act<TOut>(Func<TModel, Result<TOut>> action, Action<TModel, TOut> update)
             => Act(action, (model, result) =>
             {
-                Guard.NotNull(update, nameof(update)).Invoke(model, result);
+                Guard.NotNull(update, nameof(update));
+                if (model is { }) { update.Invoke(model, result); }
                 return model;
             });
 
@@ -133,8 +131,8 @@ namespace Qowaiv.Validation.Abstractions
 
             var resolved = Act(action);
             return resolved.IsValid
-                ? For(update(Value, resolved.Value), resolved.Messages)
-                : For(Value, resolved.Messages);
+                ? For(update(_value, resolved.Value), resolved.Messages)
+                : For(_value, resolved.Messages);
         }
 
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
@@ -204,7 +202,8 @@ namespace Qowaiv.Validation.Abstractions
             Action<TModel, TOut> update)
             => ActAsync(action, (model, result) =>
             {
-                Guard.NotNull(update, nameof(update)).Invoke(model, result);
+                Guard.NotNull(update, nameof(update));
+                if (model is { }) { update.Invoke(model, result); }
                 return model;
             });
 
@@ -229,8 +228,8 @@ namespace Qowaiv.Validation.Abstractions
 
             var resolved = await ActAsync(action).ContinueOnAnyContext();
             return resolved.IsValid
-                ? For(update(Value, resolved.Value), resolved.Messages)
-                : For(Value, resolved.Messages);
+                ? For(update(_value, resolved.Value), resolved.Messages)
+                : For(_value, resolved.Messages);
         }
 
         /// <summary>Explicitly casts the <see cref="Result"/> to the type of the related model.</summary>
