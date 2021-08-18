@@ -42,7 +42,7 @@ namespace Qowaiv.Validation.Abstractions
         internal bool HasNoValue() => _value is null || !IsValid;
 
         /// <summary>Gets the <see cref="Result{TModel}"/> as a <see cref="Task{TResult}"/>.</summary>
-        public Task<Result<TModel>> Async() => Task.FromResult(this);
+        public Task<Result<TModel>> AsTask() => Task.FromResult(this);
 
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
         /// <param name="action">

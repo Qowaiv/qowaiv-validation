@@ -81,7 +81,7 @@ Typical use cases are:
 ``` C#
 Result<DataType> result = Result.For(data);
 Result<DataType> resultWithMessages = Result.For(data, messages);
-Task<Result<DataType>> asyncResult = Result.For(data).Async();
+Task<Result<DataType>> asyncResult = Result.For(data).AsTask();
 ```
 
 #### Composed Actions

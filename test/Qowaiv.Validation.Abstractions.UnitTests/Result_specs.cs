@@ -88,7 +88,7 @@ namespace Result_specs
     public class Result_Of_TModel
     {
         [Test]
-        public void As_Task_with_Async()
-            => Assert.That(Result.For(17).Async(), Is.InstanceOf<Task<Result<int>>>());
+        public void As_Task_with_AsTask()
+            => Assert.That(Result.For(17).AsTask(), Is.InstanceOf<Task<Result<int>>>());
     }
 }
