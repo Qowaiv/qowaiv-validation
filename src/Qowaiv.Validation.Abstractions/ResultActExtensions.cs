@@ -1,5 +1,5 @@
-﻿using Qowaiv.Validation.Abstractions.Internals;
-using System;
+﻿using System;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Qowaiv.Validation.Abstractions
@@ -28,20 +28,11 @@ namespace Qowaiv.Validation.Abstractions
             _ = Guard.NotNull(promise, nameof(promise));
             Guard.NotNull(action, nameof(action));
 
-            var result = await promise.ConfigureAwait(false);
+            var result = await promise.ContinueOnAnyContext();
 
-            if (result is null) { return Result.WithMessages<TOut>(); }
-            else if (result.HasNoValue()) { return Result.WithMessages<TOut>(result.Messages); }
-            else
-            {
-                var messages = (FixedMessages)result.Messages;
-                var outcome = action(result.Value);
-
-                return Result.For(outcome.IsValid
-                    ? outcome.Value
-                    : default,
-                    messages.AddRange(outcome.Messages));
-            }
+            return result is null
+                ? Result.WithMessages<TOut>()
+                : result.Act(action);
         }
 
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
@@ -65,20 +56,91 @@ namespace Qowaiv.Validation.Abstractions
             _ = Guard.NotNull(promise, nameof(promise));
             Guard.NotNull(action, nameof(action));
 
-            var result = await promise.ConfigureAwait(false);
+            var result = await promise.ContinueOnAnyContext();
+            return result is null
+                ? Result.For<TOut>(default)
+                : await result.ActAsync(action).ContinueOnAnyContext();
+        }
 
-            if (result is null) { return Result.WithMessages<TOut>(); }
-            else if (result.HasNoValue()) { return Result.WithMessages<TOut>(result.Messages); }
-            else
-            {
-                var messages = (FixedMessages)result.Messages;
-                var outcome = await action(result.Value).ConfigureAwait(false);
+        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+        /// <param name="promise">
+        /// The promise of the result.
+        /// </param>
+        /// <param name="action">
+        /// The action to invoke.
+        /// </param>
+        /// <typeparam name="TModel">
+        /// The type of input result.
+        /// </typeparam>
+        /// <returns>
+        /// A result with the merged messages.
+        /// </returns>
+        public static async Task<Result<TModel>> ActAsync<TModel>(this Task<Result<TModel>> promise, Func<TModel, Result> action)
+        {
+            _ = Guard.NotNull(promise, nameof(promise));
+            Guard.NotNull(action, nameof(action));
 
-                return Result.For(outcome.IsValid
-                    ? outcome.Value
-                    : default,
-                    messages.AddRange(outcome.Messages));
-            }
+            var result = await promise.ContinueOnAnyContext();
+            return result is null
+                ? Result.For<TModel>(default)
+                : result.Act(action);
+        }
+
+        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+        /// <param name="promise">
+        /// The promise of the result.
+        /// </param>
+        /// <param name="action">
+        /// The action to invoke.
+        /// </param>
+        /// <typeparam name="TModel">
+        /// The type of input result.
+        /// </typeparam>
+        /// <returns>
+        /// A result with the merged messages.
+        /// </returns>
+        public static async Task<Result<TModel>> ActAsync<TModel>(this Task<Result<TModel>> promise, Func<TModel, Task<Result>> action)
+        {
+            _ = Guard.NotNull(promise, nameof(promise));
+            Guard.NotNull(action, nameof(action));
+
+            var result = await promise.ContinueOnAnyContext();
+            return result is null
+                ? Result.For<TModel>(default)
+                : await result.ActAsync(action).ContinueOnAnyContext();
+        }
+
+        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+        /// <param name="promise">
+        /// The promise of the result.
+        /// </param>
+        /// <param name="update">
+        /// The update to apply on a successfully invoked action.
+        /// </param>
+        /// <param name="action">
+        /// The action to invoke.
+        /// </param>
+        /// <typeparam name="TModel">
+        /// The type of input result.
+        /// </typeparam>
+        /// <typeparam name="TOut">
+        /// The type of the new result value.
+        /// </typeparam>
+        /// <returns>
+        /// The updated model with the merged messages.
+        /// </returns>
+        public static async Task<Result<TModel>> ActAsync<TModel, TOut>(
+            this Task<Result<TModel>> promise,
+            Func<TModel, Result<TOut>> action,
+            Action<TModel, TOut> update)
+        {
+            _ = Guard.NotNull(promise, nameof(promise));
+            Guard.NotNull(action, nameof(action));
+
+            var result = await promise.ContinueOnAnyContext();
+            return result is null
+                ? Result.WithMessages<TModel>()
+                : result.Act(action, update);
         }
 
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
@@ -108,10 +170,43 @@ namespace Qowaiv.Validation.Abstractions
             _ = Guard.NotNull(promise, nameof(promise));
             Guard.NotNull(action, nameof(action));
 
-            var result = await promise.ConfigureAwait(false);
+            var result = await promise.ContinueOnAnyContext();
             return result is null
                 ? Result.WithMessages<TModel>()
-                : await result.ActAsync(action, update).ConfigureAwait(false) ;
+                : await result.ActAsync(action, update).ContinueOnAnyContext();
+        }
+
+        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+        /// <param name="promise">
+        /// The promise of the result.
+        /// </param>
+        /// <param name="update">
+        /// The update to apply on a successfully invoked action.
+        /// </param>
+        /// <param name="action">
+        /// The action to invoke.
+        /// </param>
+        /// <typeparam name="TModel">
+        /// The type of input result.
+        /// </typeparam>
+        /// <typeparam name="TOut">
+        /// The type of the new result value.
+        /// </typeparam>
+        /// <returns>
+        /// The updated model with the merged messages.
+        /// </returns>
+        public static async Task<Result<TModel>> ActAsync<TModel, TOut>(
+            this Task<Result<TModel>> promise,
+            Func<TModel, Result<TOut>> action,
+            Func<TModel, TOut, TModel> update)
+        {
+            _ = Guard.NotNull(promise, nameof(promise));
+            Guard.NotNull(action, nameof(action));
+
+            var result = await promise.ContinueOnAnyContext();
+            return result is null
+                ? Result.WithMessages<TModel>()
+                : result.Act(action, update);
         }
 
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
@@ -141,70 +236,14 @@ namespace Qowaiv.Validation.Abstractions
             _ = Guard.NotNull(promise, nameof(promise));
             Guard.NotNull(action, nameof(action));
 
-            var result = await promise.ConfigureAwait(false);
+            var result = await promise.ContinueOnAnyContext();
             return result is null
                 ? Result.WithMessages<TModel>()
-                : await result.ActAsync(action, update).ConfigureAwait(false);
+                : await result.ActAsync(action, update).ContinueOnAnyContext();
         }
 
-        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
-        /// <param name="promise">
-        /// The promise of the result.
-        /// </param>
-        /// <param name="action">
-        /// The action to invoke.
-        /// </param>
-        /// <typeparam name="TModel">
-        /// The type of input result.
-        /// </typeparam>
-        /// <returns>
-        /// A result with the merged messages.
-        /// </returns>
-        public static async Task<Result<TModel>> ActAsync<TModel>(this Task<Result<TModel>> promise, Func<TModel, Result> action)
-        {
-            _ = Guard.NotNull(promise, nameof(promise));
-            Guard.NotNull(action, nameof(action));
-
-            var result = await promise.ConfigureAwait(false);
-
-            if (result is null) { return Result.For<TModel>(default); }
-            else if (result.HasNoValue()) { return result; }
-            else
-            {
-                var messages = (FixedMessages)result.Messages;
-                var act = action(result.Value);
-                return Result.For(result.Value, messages.AddRange(act.Messages));
-            }
-        }
-
-        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
-        /// <param name="promise">
-        /// The promise of the result.
-        /// </param>
-        /// <param name="action">
-        /// The action to invoke.
-        /// </param>
-        /// <typeparam name="TModel">
-        /// The type of input result.
-        /// </typeparam>
-        /// <returns>
-        /// A result with the merged messages.
-        /// </returns>
-        public static async Task<Result<TModel>> ActAsync<TModel>(this Task<Result<TModel>> promise, Func<TModel, Task<Result>> action)
-        {
-            _ = Guard.NotNull(promise, nameof(promise));
-            Guard.NotNull(action, nameof(action));
-
-            var result = await promise.ConfigureAwait(false);
-
-            if (result is null) { return Result.For<TModel>(default); }
-            else if (result.HasNoValue()) { return result; }
-            else
-            {
-                var messages = (FixedMessages)result.Messages;
-                var act = await action(result.Value).ConfigureAwait(false);
-                return Result.For(result.Value, messages.AddRange(act.Messages));
-            }
-        }
+        /// <summary>Continue the awaitable <see cref="Task"/> on any context, not necessarily the captured one.</summary>
+        internal static ConfiguredTaskAwaitable<T> ContinueOnAnyContext<T>(this Task<T> task)
+            => task.ConfigureAwait(continueOnCapturedContext: false);
     }
 }

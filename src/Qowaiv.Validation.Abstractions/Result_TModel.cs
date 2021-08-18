@@ -157,7 +157,7 @@ namespace Qowaiv.Validation.Abstractions
             }
 
             var messages = (FixedMessages)Messages;
-            var outcome = await action(Value).ConfigureAwait(false);
+            var outcome = await action(Value).ContinueOnAnyContext();
 
             return For(outcome.IsValid
                 ? outcome.Value
@@ -182,7 +182,7 @@ namespace Qowaiv.Validation.Abstractions
             }
 
             var messages = (FixedMessages)Messages;
-            var outcome = await action(Value).ConfigureAwait(false);
+            var outcome = await action(Value).ContinueOnAnyContext();
             return For(Value, messages.AddRange(outcome.Messages));
         }
 
@@ -227,7 +227,7 @@ namespace Qowaiv.Validation.Abstractions
         {
             Guard.NotNull(update, nameof(update));
 
-            var resolved = await ActAsync(action).ConfigureAwait(false);
+            var resolved = await ActAsync(action).ContinueOnAnyContext();
             return resolved.IsValid
                 ? For(update(Value, resolved.Value), resolved.Messages)
                 : For(Value, resolved.Messages);
