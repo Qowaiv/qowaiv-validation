@@ -12,3 +12,6 @@ indent_size = 4
 [*.{csproj,props}]
 indent_style = space
 indent_size = 2
+
+# S3376: Attribute, EventArgs, and Exception type names should end with the type being extended
+dotnet_diagnostic.S3376.severity = none

@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project>
 
-  <Import Project="analytics.props" />
-
   <PropertyGroup>
     <Description>Qowaiv Validation supports a generic interface for (domain) model validation.</Description>
     <Authors>Corniel Nobel</Authors>
@@ -26,6 +24,13 @@
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)..\build\Qowaiv.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.27.0.35380">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  
   <!-- for code coverage an proper debugging -->
   <PropertyGroup>
     <DebugType>full</DebugType>

@@ -30,7 +30,7 @@ namespace Qowaiv.Validation.Messages
 
         /// <summary>Creates an <see cref="ConcurrencyIssue"/> for the version mismatch.</summary>
         public static ConcurrencyIssue VersionMismatch(object expectedVersion, object actualVersion)
-            => new ConcurrencyIssue(string.Format(
+            => new(string.Format(
                 CultureInfo.CurrentCulture,
                 ValidationMessages.VersionMismatch,
                 expectedVersion,
@@ -38,6 +38,6 @@ namespace Qowaiv.Validation.Messages
 
         /// <summary>Creates an <see cref="ConcurrencyIssue"/> for mid-air collision.</summary>
         public static ConcurrencyIssue MidAirCollision()
-            => new ConcurrencyIssue(ValidationMessages.MidAirCollision);
+            => new(ValidationMessages.MidAirCollision);
     }
 }

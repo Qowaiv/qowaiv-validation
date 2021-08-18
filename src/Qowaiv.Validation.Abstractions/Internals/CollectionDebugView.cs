@@ -21,6 +21,9 @@ namespace Qowaiv.Validation.Abstractions.Internals
         /// By doing this, it is always in sync with the current state of the enumeration.
         /// </remarks>
         [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
+#pragma warning disable S2365 // Properties should not make collection or array copies
+        // The only way to get the behavior while debugging.
         public object[] Items => _enumeration.Cast<object>().ToArray();
+#pragma warning restore S2365 // Properties should not make collection or array copies
     }
 }

@@ -32,30 +32,30 @@ namespace Qowaiv.Validation.Abstractions
         public IEnumerable<IValidationMessage> Infos => Messages.GetInfos();
 
         /// <summary>Creates an OK <see cref="Result"/>.</summary>
-        public static Result OK => new Result(FixedMessages.Empty);
+        public static Result OK => new(FixedMessages.Empty);
 
         /// <summary>Creates a <see cref="Result{T}"/> for the data.</summary>
         public static Result<T> For<T>(T data, IEnumerable<IValidationMessage> messages)
-            => new Result<T>(data, FixedMessages.New(messages));
+            => new(data, FixedMessages.New(messages));
 
         /// <summary>Creates a <see cref="Result{T}"/> for the data.</summary>
         public static Result<T> For<T>(T data, params IValidationMessage[] messages)
-            => new Result<T>(data, FixedMessages.New(messages));
+            => new(data, FixedMessages.New(messages));
 
         /// <summary>Creates a result with messages.</summary>
         public static Result WithMessages(IEnumerable<IValidationMessage> messages)
-            => new Result(FixedMessages.New(messages));
+            => new(FixedMessages.New(messages));
 
         /// <summary>Creates a result with messages.</summary>
         public static Result WithMessages(params IValidationMessage[] messages)
-            => new Result(FixedMessages.New(messages));
+            => new(FixedMessages.New(messages));
 
         /// <summary>Creates a result with messages.</summary>
         public static Result<T> WithMessages<T>(IEnumerable<IValidationMessage> messages)
-            => new Result<T>(default, FixedMessages.New(messages));
+            => new(default, FixedMessages.New(messages));
 
         /// <summary>Creates a result with messages.</summary>
         public static Result<T> WithMessages<T>(params IValidationMessage[] messages)
-            => new Result<T>(default, FixedMessages.New(messages));
+            => new(default, FixedMessages.New(messages));
     }
 }
