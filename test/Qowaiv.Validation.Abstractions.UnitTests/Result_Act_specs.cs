@@ -315,13 +315,12 @@ namespace Result_Act_specs
         }
 
         public Task<Result<TestModel>> NonfailingFunctionAsync()
-        {
-            return Task.FromResult(Result.For(new TestModel(Actions + 1)));
-        }
+            => Result.For(new TestModel(Actions + 1)).AsTask();
+
         public Task<Result<TestModel>> FailingFunctionAsync()
         {
             Actions = -Actions;
-            return Task.FromResult(Result.WithMessages<TestModel>(ValidationMessage.Error(nameof(FailingFunctionAsync))));
+            return Result.WithMessages<TestModel>(ValidationMessage.Error(nameof(FailingFunctionAsync))).AsTask();
         }
 
         public Result NonfailingAction()
