@@ -2,6 +2,7 @@
 using Qowaiv.Validation.Abstractions;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using static Qowaiv.Validation.Abstractions.UnitTests.Arrange;
 
 namespace Result_specs
@@ -85,6 +86,15 @@ namespace Result_specs
             var result = Result.For(666);
             var actual = (int)result;
             Assert.AreEqual(666, actual);
+        }
+    }
+
+    public class Result_Of_TModel
+    {
+        [Test]
+        public void As_Task_with_Async()
+        {
+            Assert.That(Result.For(17).Async(), Is.InstanceOf<Task<Result<int>>>());
         }
     }
 }
