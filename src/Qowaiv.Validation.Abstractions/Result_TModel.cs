@@ -261,7 +261,7 @@ namespace Qowaiv.Validation.Abstractions
         public static Result<TModel> operator |(Result<TModel> result, Func<TModel, Result> action)
             => Guard.NotNull(result, nameof(result)).Act(action);
 
-        internal static bool IsNullValueOrInvalid<T>(Result<T> result)
+        private static bool IsNullValueOrInvalid<T>(Result<T> result)
            => !result.IsValid || ReferenceEquals(null, result._value);
     }
 }
