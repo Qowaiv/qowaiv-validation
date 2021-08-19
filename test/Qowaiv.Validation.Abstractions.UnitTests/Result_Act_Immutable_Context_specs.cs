@@ -3,7 +3,7 @@ using Qowaiv.Validation.Abstractions;
 using Qowaiv.Validation.TestTools;
 using System.Threading.Tasks;
 
-namespace Result_Act_Inmutable_Context_specs
+namespace Result_Act_Immutable_Context_specs
 {
     public class Task_Null
     {
