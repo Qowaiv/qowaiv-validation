@@ -106,6 +106,24 @@ namespace Qowaiv.Validation.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The requested service is unavailable..
+        /// </summary>
+        internal static string ServiceUnavailable {
+            get {
+                return ResourceManager.GetString("ServiceUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The service &apos;{0}&apos; is unavailable..
+        /// </summary>
+        internal static string ServiceUnavailable_WithName {
+            get {
+                return ResourceManager.GetString("ServiceUnavailable_WithName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expected version {0}, but got version {1}..
         /// </summary>
         internal static string VersionMismatch {

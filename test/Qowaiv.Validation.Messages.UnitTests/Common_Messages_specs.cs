@@ -74,4 +74,28 @@ namespace Common_Messages_specs
         public void Contains_Id_in_message_when_specified()
             => Assert.AreEqual("Entity with ID 17 could not be found.", NS.EntityNotFound.ForId(17).Message);
     }
+
+    public class ServiceUnavailable
+    {
+        [Test]
+        public void Implements_IValidationMessage()
+             => Assert.IsInstanceOf<IValidationMessage>(new NS.ServiceUnavailable());
+
+        [Test]
+        public void Inherits_from_Exception()
+            => Assert.IsInstanceOf<Exception>(new NS.ServiceUnavailable());
+
+        [Test]
+        public void Has_error_validation_severity()
+            => Assert.AreEqual(ValidationSeverity.Error, new NS.ServiceUnavailable().Severity);
+
+        [Test]
+        public void Has_descriptive_default_message()
+            => Assert.AreEqual("The requested service is unavailable.", new NS.ServiceUnavailable().Message);
+
+        [Test]
+        public void With_name_in_message_when_specified()
+            => Assert.AreEqual("The service 'GitHubBuild' is unavailable.", NS.ServiceUnavailable.WithName("GitHubBuild").Message);
+    }
+
 }

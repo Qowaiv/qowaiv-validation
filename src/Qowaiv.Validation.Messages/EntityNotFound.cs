@@ -28,6 +28,6 @@ namespace Qowaiv.Validation.Messages
 
         /// <summary>Creates an <see cref="EntityNotFound"/> for specific ID.</summary>
         public static EntityNotFound ForId(object id)
-            => new EntityNotFound(string.Format(ValidationMessages.EntityNotFound_ForId, id));
+            => new(string.Format(ValidationMessages.EntityNotFound_ForId, id));
     }
 }

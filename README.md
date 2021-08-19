@@ -151,6 +151,11 @@ communicate a `409 - Conflict` response.
 for communicating that an entity could not be found. A use case for this can be to
 communicate a `404 - Not Found` response.
 
+#### ServiceUnavailable
+`Qowaiv.Validation.Messages` contains a specific implementation of `IValidationMessage`
+for communicating that a service was unavailable. A use case for this can be to
+communicate a `503 - Service Unavailable` response.
+
 ## Qowaiv exensions on [*Fluent Validation](https://fluentvalidation.net/)
 
 
