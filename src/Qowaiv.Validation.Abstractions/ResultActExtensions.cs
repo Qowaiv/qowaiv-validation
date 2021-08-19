@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Qowaiv.Validation.Abstractions
@@ -241,9 +240,5 @@ namespace Qowaiv.Validation.Abstractions
                 ? Result.WithMessages<TModel>()
                 : await result.ActAsync(action, update).ContinueOnAnyContext();
         }
-
-        /// <summary>Continue the awaitable <see cref="Task"/> on any context, not necessarily the captured one.</summary>
-        internal static ConfiguredTaskAwaitable<T> ContinueOnAnyContext<T>(this Task<T> task)
-            => task.ConfigureAwait(continueOnCapturedContext: false);
     }
 }
