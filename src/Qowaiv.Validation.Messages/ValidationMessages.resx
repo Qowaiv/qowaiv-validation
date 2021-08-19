@@ -31,7 +31,7 @@
     <value>The requested service is unavailable.</value>
   </data>
   <data name="ServiceUnavailable_WithName" xml:space="preserve">
-    <value>The service {0} is unavailable.</value>
+    <value>The service '{0}' is unavailable.</value>
   </data>
   <data name="VersionMismatch" xml:space="preserve">
     <value>Expected version {0}, but got version {1}.</value>

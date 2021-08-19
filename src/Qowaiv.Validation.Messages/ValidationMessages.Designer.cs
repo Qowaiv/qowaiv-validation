@@ -115,7 +115,7 @@ namespace Qowaiv.Validation.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The service {0} is unavailable..
+        ///   Looks up a localized string similar to The service &apos;{0}&apos; is unavailable..
         /// </summary>
         internal static string ServiceUnavailable_WithName {
             get {
