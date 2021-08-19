@@ -45,32 +45,29 @@ namespace Qowaiv.Validation.Abstractions
             info.AddValue(nameof(Errors), Errors.ToArray());
         }
 
-        /// <inheritdoc />
-        public override string ToString()
-        {
-            var sb = new StringBuilder().AppendLine(base.ToString());
-            foreach (var error in Errors)
-            {
-                sb.Append(error.Message);
-                if (!string.IsNullOrEmpty(error.PropertyName))
-                {
-                    sb.Append(" (").Append(error.PropertyName).AppendLine(")");
-                }
-                else
-                {
-                    sb.AppendLine();
-                }
-            }
-            return sb.ToString();
-        }
-
         /// <summary>The related validation error(s).</summary>
         public IReadOnlyList<IValidationMessage> Errors { get; } = new ReadOnlyCollection<IValidationMessage>(new IValidationMessage[0]);
 
         /// <summary>Creates an <see cref="InvalidModelException"/> for the model.</summary>
         public static InvalidModelException For<T>(IEnumerable<IValidationMessage> messages)
         {
-            return new InvalidModelException(string.Format(QowaivValidationMessages.InvalidModelException, typeof(T)), null, messages);
+            var sb = new StringBuilder().AppendFormat(QowaivValidationMessages.InvalidModelException, typeof(T));
+            
+            foreach(var message in messages ?? Array.Empty<IValidationMessage>())
+            {
+                if (!string.IsNullOrEmpty(message.Message))
+                {
+                    sb.Append("* ");
+                    var lines = message.Message.Split(NewLine, StringSplitOptions.None);
+                    sb.AppendLine(lines[0]);
+                    foreach(var line in lines.Skip(1))
+                    {
+                        sb.Append("  ").AppendLine(line);
+                    }
+                }
+            }
+            return new InvalidModelException(sb.ToString(), null, messages);
         }
+        private static readonly string[] NewLine = new[] { "\r\n", "\n" };
     }
 }
