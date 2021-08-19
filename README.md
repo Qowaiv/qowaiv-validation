@@ -122,6 +122,12 @@ Result<Context> context = NewContext()
     .Act(c => Service.GetValue(), (c, value) => c.Value = value)
     .Act(c => Service.GetOther(), (c, other) => c.Value = other);
 ```
+Or, with an immutable context:
+``` C#
+Result<Context> context = NewContext()
+    .Act(c => Service.GetValue(), (c, value) => /* return Context */ c.Update(value))
+    .Act(c => Service.GetOther(), (c, other) => /* return Context */ c.Update(other));
+```
 
 ### IValidationMessage
 The common ground of validation messages.
