@@ -38,9 +38,6 @@ namespace Qowaiv.Validation.Abstractions
             }
         }
 
-        /// <summary>Has no value (including being invalid).</summary>
-        internal bool HasNoValue() => _value is null || !IsValid;
-
         /// <summary>Gets the <see cref="Result{TModel}"/> as a <see cref="Task{TResult}"/>.</summary>
         public Task<Result<TModel>> AsTask() => Task.FromResult(this);
 
@@ -58,7 +55,7 @@ namespace Qowaiv.Validation.Abstractions
         {
             Guard.NotNull(action, nameof(action));
 
-            if (IsNullValueOrInvalid(this))
+            if (InvalidOrNull())
             {
                 return WithMessages<TOut>(Messages);
             }
@@ -82,14 +79,60 @@ namespace Qowaiv.Validation.Abstractions
         {
             Guard.NotNull(action, nameof(action));
 
-            if (IsNullValueOrInvalid(this))
+            if (InvalidOrNull())
             {
                 return WithMessages<TModel>(Messages);
             }
+            else
+            {
+                var messages = (FixedMessages)Messages;
+                var outcome = action(Value);
+                return For(Value, messages.AddRange(outcome.Messages));
+            }
+        }
 
-            var messages = (FixedMessages)Messages;
-            var outcome = action(Value);
-            return For(Value, messages.AddRange(outcome.Messages));
+        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+        /// <param name="action">
+        /// The action to invoke.
+        /// </param>
+        /// <param name="update">
+        /// The update to apply on a successfully invoked action.
+        /// </param>
+        /// <typeparam name="TOut">
+        /// The type of the new result value.
+        /// </typeparam>
+        /// <returns>
+        /// The updated model with the merged messages.
+        /// </returns>
+        public Result<TModel> Act<TOut>(Func<TModel, Result<TOut>> action, Action<TModel, TOut> update)
+            => Act(action, (model, result) =>
+            {
+                Guard.NotNull(update, nameof(update));
+                if (model is { }) { update.Invoke(model, result); }
+                return model;
+            });
+
+        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+        /// <param name="action">
+        /// The action to invoke.
+        /// </param>
+        /// <param name="update">
+        /// The update to apply on a successfully invoked action.
+        /// </param>
+        /// <typeparam name="TOut">
+        /// The type of the new result value.
+        /// </typeparam>
+        /// <returns>
+        /// The updated model with the merged messages.
+        /// </returns>
+        public Result<TModel> Act<TOut>(Func<TModel, Result<TOut>> action, Func<TModel, TOut, TModel> update)
+        {
+            Guard.NotNull(update, nameof(update));
+
+            var resolved = Act(action);
+            return resolved.IsValid
+                ? For(update(_value, resolved.Value), resolved.Messages)
+                : For(_value, resolved.Messages);
         }
 
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
@@ -106,13 +149,13 @@ namespace Qowaiv.Validation.Abstractions
         {
             _ = Guard.NotNull(action, nameof(action));
 
-            if (IsNullValueOrInvalid(this))
+            if (InvalidOrNull())
             {
                 return WithMessages<TOut>(Messages);
             }
 
             var messages = (FixedMessages)Messages;
-            var outcome = await action(Value).ConfigureAwait(false);
+            var outcome = await action(Value).ContinueOnAnyContext();
 
             return For(outcome.IsValid
                 ? outcome.Value
@@ -131,14 +174,62 @@ namespace Qowaiv.Validation.Abstractions
         {
             _ = Guard.NotNull(action, nameof(action));
 
-            if (IsNullValueOrInvalid(this))
+            if (InvalidOrNull())
             {
                 return WithMessages<TModel>(Messages);
             }
 
             var messages = (FixedMessages)Messages;
-            var outcome = await action(Value).ConfigureAwait(false);
+            var outcome = await action(Value).ContinueOnAnyContext();
             return For(Value, messages.AddRange(outcome.Messages));
+        }
+
+        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+        /// <param name="action">
+        /// The action to invoke.
+        /// </param>
+        /// <param name="update">
+        /// The update to apply on a successfully invoked action.
+        /// </param>
+        /// <typeparam name="TOut">
+        /// The type of the new result value.
+        /// </typeparam>
+        /// <returns>
+        /// The updated model with the merged messages.
+        /// </returns>
+        public Task<Result<TModel>> ActAsync<TOut>(
+            Func<TModel, Task<Result<TOut>>> action, 
+            Action<TModel, TOut> update)
+            => ActAsync(action, (model, result) =>
+            {
+                Guard.NotNull(update, nameof(update));
+                if (model is { }) { update.Invoke(model, result); }
+                return model;
+            });
+
+        /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+        /// <param name="action">
+        /// The action to invoke.
+        /// </param>
+        /// <param name="update">
+        /// The update to apply on a successfully invoked action.
+        /// </param>
+        /// <typeparam name="TOut">
+        /// The type of the new result value.
+        /// </typeparam>
+        /// <returns>
+        /// The updated model with the merged messages.
+        /// </returns>
+        public async Task<Result<TModel>> ActAsync<TOut>(
+            Func<TModel, Task<Result<TOut>>> action,
+            Func<TModel, TOut, TModel> update)
+        {
+            Guard.NotNull(update, nameof(update));
+
+            var resolved = await ActAsync(action).ContinueOnAnyContext();
+            return resolved.IsValid
+                ? For(update(_value, resolved.Value), resolved.Messages)
+                : For(_value, resolved.Messages);
         }
 
         /// <summary>Explicitly casts the <see cref="Result"/> to the type of the related model.</summary>
@@ -170,7 +261,6 @@ namespace Qowaiv.Validation.Abstractions
         public static Result<TModel> operator |(Result<TModel> result, Func<TModel, Result> action)
             => Guard.NotNull(result, nameof(result)).Act(action);
 
-        internal static bool IsNullValueOrInvalid<T>(Result<T> result)
-           => !result.IsValid || ReferenceEquals(null, result._value);
+        private bool InvalidOrNull() => !IsValid || ReferenceEquals(null, _value);
     }
 }

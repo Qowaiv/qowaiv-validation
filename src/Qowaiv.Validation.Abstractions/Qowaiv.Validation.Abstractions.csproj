@@ -4,10 +4,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.0.4</Version>
+    <Version>0.0.5</Version>
     <PackageReleaseNotes>
-  v0.0.4
-  - Act() methods have pipe notation alternatives.
+      v0.0.5
+      - Act() methods on context #29
+      - AsTask() method for Result&lt;T&gt; #28
+      v0.0.4
+      - Act() methods have pipe notation alternatives.
     </PackageReleaseNotes>
   </PropertyGroup>
  
