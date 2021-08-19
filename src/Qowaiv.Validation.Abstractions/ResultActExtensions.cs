@@ -113,11 +113,11 @@ namespace Qowaiv.Validation.Abstractions
         /// <param name="promise">
         /// The promise of the result.
         /// </param>
-        /// <param name="update">
-        /// The update to apply on a successfully invoked action.
-        /// </param>
         /// <param name="action">
         /// The action to invoke.
+        /// </param>
+        /// <param name="update">
+        /// The update to apply on a successfully invoked action.
         /// </param>
         /// <typeparam name="TModel">
         /// The type of input result.
@@ -146,11 +146,11 @@ namespace Qowaiv.Validation.Abstractions
         /// <param name="promise">
         /// The promise of the result.
         /// </param>
-        /// <param name="update">
-        /// The update to apply on a successfully invoked action.
-        /// </param>
         /// <param name="action">
         /// The action to invoke.
+        /// </param>
+        /// <param name="update">
+        /// The update to apply on a successfully invoked action.
         /// </param>
         /// <typeparam name="TModel">
         /// The type of input result.
@@ -179,11 +179,11 @@ namespace Qowaiv.Validation.Abstractions
         /// <param name="promise">
         /// The promise of the result.
         /// </param>
-        /// <param name="update">
-        /// The update to apply on a successfully invoked action.
-        /// </param>
         /// <param name="action">
         /// The action to invoke.
+        /// </param>
+        /// <param name="update">
+        /// The update to apply on a successfully invoked action.
         /// </param>
         /// <typeparam name="TModel">
         /// The type of input result.
@@ -212,11 +212,11 @@ namespace Qowaiv.Validation.Abstractions
         /// <param name="promise">
         /// The promise of the result.
         /// </param>
-        /// <param name="update">
-        /// The update to apply on a successfully invoked action.
-        /// </param>
         /// <param name="action">
         /// The action to invoke.
+        /// </param>
+        /// <param name="update">
+        /// The update to apply on a successfully invoked action.
         /// </param>
         /// <typeparam name="TModel">
         /// The type of input result.
