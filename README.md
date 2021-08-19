@@ -116,7 +116,12 @@ if (result.Isvalid)
 }
 ```
 
-
+It is also possible to have multiple acts that update a shared context:
+``` C#
+Result<Context> context = NewContext()
+    .Act(c => Service.GetValue(), (c, value) => c.Value = value)
+    .Act(c => Service.GetOther(), (c, other) => c.Value = other);
+```
 
 ### IValidationMessage
 The common ground of validation messages.
