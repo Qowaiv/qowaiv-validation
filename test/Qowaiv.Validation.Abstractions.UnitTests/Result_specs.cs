@@ -1,12 +1,13 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Validation.Abstractions;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using static Qowaiv.Validation.Abstractions.UnitTests.Arrange;
 
 namespace Result_specs
 {
-    public class ValidResult
+    public class Valid_result
     {
         [Test]
         public void Contains_no_ErrorMessages()
@@ -23,7 +24,7 @@ namespace Result_specs
         }
     }
 
-    public class InvalidResult
+    public class Invalid_result
     {
         [Test]
         public void Contains_at_least_one_ErrorMessage()
@@ -40,6 +41,24 @@ namespace Result_specs
         }
     }
 
+    public class Null_result
+    {
+        [Test]
+        public void valid_if_explicit() => Assert.That(Result.Null<object>().IsValid, Is.True);
+
+        [Test]
+        public void valid_if_explicit_with_messages()
+        {
+            var messages = new List<IValidationMessage> { ValidationMessage.Warn("Some warning") };
+            Assert.That(Result.Null<object>(messages).IsValid, Is.True);
+        }
+
+        [Test]
+        public void invalid_if_implicit() => Assert.That(Result.For<object>(null).IsValid, Is.False);
+
+        [Test]
+        public void invalid_if_implicit_with_messages() => Assert.That(Result.WithMessages<object>().IsValid, Is.False);
+    }
     public class Filtering
     {
         [Test]

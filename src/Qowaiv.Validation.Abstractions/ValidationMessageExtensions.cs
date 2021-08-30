@@ -8,30 +8,22 @@ namespace Qowaiv.Validation.Abstractions
     {
         /// <summary>Gets all messages excluding <see cref="ValidationSeverity.None"/>.</summary>
         public static IEnumerable<IValidationMessage> GetWithSeverity(this IEnumerable<IValidationMessage> validationResults)
-        {
-            Guard.NotNull(validationResults, nameof(validationResults));
-            return validationResults.Where(message => message.Severity > ValidationSeverity.None);
-        }
+            => Guard.NotNull(validationResults, nameof(validationResults))
+                .Where(message => message.Severity > ValidationSeverity.None);
 
         /// <summary>Gets all messages with <see cref="ValidationSeverity.Error"/>.</summary>
         public static IEnumerable<IValidationMessage> GetErrors(this IEnumerable<IValidationMessage> validationResults)
-        {
-            Guard.NotNull(validationResults, nameof(validationResults));
-            return validationResults.Where(message => message.Severity == ValidationSeverity.Error);
-        }
+            => Guard.NotNull(validationResults, nameof(validationResults))
+                .Where(message => message.Severity == ValidationSeverity.Error);
 
         /// <summary>Gets all messages with <see cref="ValidationSeverity.Warning"/>.</summary>
         public static IEnumerable<IValidationMessage> GetWarnings(this IEnumerable<IValidationMessage> validationResults)
-        {
-            Guard.NotNull(validationResults, nameof(validationResults));
-            return validationResults.Where(message => message.Severity == ValidationSeverity.Warning);
-        }
+            => Guard.NotNull(validationResults, nameof(validationResults))
+                .Where(message => message.Severity == ValidationSeverity.Warning);
 
         /// <summary>Gets all messages with <see cref="ValidationSeverity.Info"/>.</summary>
         public static IEnumerable<IValidationMessage> GetInfos(this IEnumerable<IValidationMessage> validationResults)
-        {
-            Guard.NotNull(validationResults, nameof(validationResults));
-            return validationResults.Where(message => message.Severity == ValidationSeverity.Info);
-        }
+            => Guard.NotNull(validationResults, nameof(validationResults))
+            .Where(message => message.Severity == ValidationSeverity.Info);
     }
 }

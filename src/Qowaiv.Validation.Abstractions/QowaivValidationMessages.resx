@@ -70,6 +70,9 @@
   <data name="InvalidModelException" xml:space="preserve">
     <value>The {0} model can not be operated on as it is invalid.</value>
   </data>
+  <data name="NoValue" xml:space="preserve">
+    <value>No value.</value>
+  </data>
   <data name="PostalCodeValidator_ErrorMessage" xml:space="preserve">
     <value>The postal code {0} is not valid for {1}.</value>
   </data>

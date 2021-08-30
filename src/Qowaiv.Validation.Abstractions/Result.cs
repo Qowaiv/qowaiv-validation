@@ -32,6 +32,14 @@ namespace Qowaiv.Validation.Abstractions
         /// <summary>Represents an OK <see cref="Result"/>.</summary>
         public static readonly Result OK = new(FixedMessages.Empty);
 
+        /// <summary>Creates a valid null <see cref="Result{T}"/>.</summary>
+        public static Result<T> Null<T>(IEnumerable<IValidationMessage> messages) where T : class
+            => new(FixedMessages.New(messages));
+
+        /// <summary>Creates a valid null <see cref="Result{T}"/>.</summary>
+        public static Result<T> Null<T>(params IValidationMessage[] messages) where T : class
+            => new(FixedMessages.New(messages));
+
         /// <summary>Creates a <see cref="Result{T}"/> for the data.</summary>
         public static Result<T> For<T>(T data, IEnumerable<IValidationMessage> messages)
             => new(data, FixedMessages.New(messages));

@@ -1,6 +1,7 @@
 ﻿using Qowaiv.Validation.Abstractions.Internals;
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Qowaiv.Validation.Abstractions
@@ -9,14 +10,22 @@ namespace Qowaiv.Validation.Abstractions
     public sealed class Result<TModel> : Result
     {
         /// <summary>Initializes a new instance of the <see cref="Result{T}"/> class.</summary>
+        internal Result(FixedMessages messages) : base(messages) => Do.Nothing();
+
+        /// <summary>Initializes a new instance of the <see cref="Result{T}"/> class.</summary>
         /// <param name="value">
         /// The data related to the result.
         /// </param>
         /// <param name="messages">
         /// The messages related to the result.
         /// </param>
-        internal Result(TModel value, FixedMessages messages) : base(messages)
+        internal Result(TModel value, FixedMessages messages) : base(NotNull(value, messages))
             => _value = IsValid ? value : default;
+
+        internal static FixedMessages NotNull(object value, FixedMessages messages)
+            => value is null && !messages.GetErrors().Any()
+            ? messages.Add(new NoValue())
+            : messages;
 
         /// <summary>Gets the value related to result.</summary>
         public TModel Value => IsValid
@@ -167,7 +176,7 @@ namespace Qowaiv.Validation.Abstractions
         {
             _ = Guard.NotNull(action, nameof(action));
 
-            if(IsValid)
+            if (IsValid)
             {
                 var outcome = await action(Value).ContinueOnAnyContext();
                 return For(Value, ((FixedMessages)Messages).AddRange(outcome.Messages));
