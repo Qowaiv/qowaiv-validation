@@ -14,7 +14,7 @@ namespace Qowaiv.Validation.Abstractions
 
         /// <summary>Initializes a new instance of the <see cref="Result{T}"/> class.</summary>
         /// <param name="value">
-        /// The data related to the result.
+        /// The value related to the result.
         /// </param>
         /// <param name="messages">
         /// The messages related to the result.
