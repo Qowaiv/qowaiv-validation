@@ -55,17 +55,15 @@ namespace Qowaiv.Validation.Abstractions
         {
             Guard.NotNull(action, nameof(action));
 
-            if (InvalidOrNull())
+            if (IsValid)
             {
-                return WithMessages<TOut>(Messages);
+                var outcome = action(Value);
+                return For(outcome.IsValid
+                    ? outcome.Value
+                    : default,
+                    ((FixedMessages)Messages).AddRange(outcome.Messages));
             }
-
-            var messages = (FixedMessages)Messages;
-            var outcome = action(Value);
-            return For(outcome.IsValid
-                ? outcome.Value
-                : default,
-                messages.AddRange(outcome.Messages));
+            else return WithMessages<TOut>(Messages);
         }
 
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
@@ -79,16 +77,12 @@ namespace Qowaiv.Validation.Abstractions
         {
             Guard.NotNull(action, nameof(action));
 
-            if (InvalidOrNull())
+            if (IsValid)
             {
-                return WithMessages<TModel>(Messages);
-            }
-            else
-            {
-                var messages = (FixedMessages)Messages;
                 var outcome = action(Value);
-                return For(Value, messages.AddRange(outcome.Messages));
+                return For(Value, ((FixedMessages)Messages).AddRange(outcome.Messages));
             }
+            else return WithMessages<TModel>(Messages);
         }
 
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
@@ -149,18 +143,17 @@ namespace Qowaiv.Validation.Abstractions
         {
             _ = Guard.NotNull(action, nameof(action));
 
-            if (InvalidOrNull())
+            if (IsValid)
             {
-                return WithMessages<TOut>(Messages);
+                var outcome = await action(Value).ContinueOnAnyContext();
+                return For(outcome.IsValid
+                    ? outcome.Value
+                    : default,
+                    ((FixedMessages)Messages).AddRange(outcome.Messages));
             }
+            else return WithMessages<TOut>(Messages);
 
-            var messages = (FixedMessages)Messages;
-            var outcome = await action(Value).ContinueOnAnyContext();
 
-            return For(outcome.IsValid
-                ? outcome.Value
-                : default,
-                messages.AddRange(outcome.Messages));
         }
 
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
@@ -174,14 +167,12 @@ namespace Qowaiv.Validation.Abstractions
         {
             _ = Guard.NotNull(action, nameof(action));
 
-            if (InvalidOrNull())
+            if(IsValid)
             {
-                return WithMessages<TModel>(Messages);
+                var outcome = await action(Value).ContinueOnAnyContext();
+                return For(Value, ((FixedMessages)Messages).AddRange(outcome.Messages));
             }
-
-            var messages = (FixedMessages)Messages;
-            var outcome = await action(Value).ContinueOnAnyContext();
-            return For(Value, messages.AddRange(outcome.Messages));
+            else return WithMessages<TModel>(Messages);
         }
 
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
@@ -198,7 +189,7 @@ namespace Qowaiv.Validation.Abstractions
         /// The updated model with the merged messages.
         /// </returns>
         public Task<Result<TModel>> ActAsync<TOut>(
-            Func<TModel, Task<Result<TOut>>> action, 
+            Func<TModel, Task<Result<TOut>>> action,
             Action<TModel, TOut> update)
             => ActAsync(action, (model, result) =>
             {
@@ -260,7 +251,5 @@ namespace Qowaiv.Validation.Abstractions
         /// </returns>
         public static Result<TModel> operator |(Result<TModel> result, Func<TModel, Result> action)
             => Guard.NotNull(result, nameof(result)).Act(action);
-
-        private bool InvalidOrNull() => !IsValid || ReferenceEquals(null, _value);
     }
 }

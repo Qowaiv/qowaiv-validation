@@ -105,16 +105,16 @@ namespace Qowaiv.Validation.Abstractions
         }
 
         /// <summary>Creates a None message.</summary>
-        public static ValidationMessage None => new ValidationMessage();
+        public static ValidationMessage None => new();
 
         /// <summary>Creates an error message.</summary>
-        public static ValidationMessage Error(string message, string propertyName = null) => new ValidationMessage(ValidationSeverity.Error, message, propertyName);
+        public static ValidationMessage Error(string message, string propertyName = null) => new(ValidationSeverity.Error, message, propertyName);
 
         /// <summary>Creates a warning message.</summary>
-        public static ValidationMessage Warn(string message, string propertyName = null) => new ValidationMessage(ValidationSeverity.Warning, message, propertyName);
+        public static ValidationMessage Warn(string message, string propertyName = null) => new(ValidationSeverity.Warning, message, propertyName);
 
         /// <summary>Creates an info message.</summary>
-        public static ValidationMessage Info(string message, string propertyName = null) => new ValidationMessage(ValidationSeverity.Info, message, propertyName);
+        public static ValidationMessage Info(string message, string propertyName = null) => new(ValidationSeverity.Info, message, propertyName);
 
         /// <summary>Creates a validation message.</summary>
         public static IValidationMessage For(ValidationSeverity severity, string message, string propertyName = null)
