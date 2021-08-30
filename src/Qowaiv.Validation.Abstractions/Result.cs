@@ -31,8 +31,8 @@ namespace Qowaiv.Validation.Abstractions
         /// <summary>Gets all messages with <see cref="ValidationSeverity.Info"/>.</summary>
         public IEnumerable<IValidationMessage> Infos => Messages.GetInfos();
 
-        /// <summary>Creates an OK <see cref="Result"/>.</summary>
-        public static Result OK => new(FixedMessages.Empty);
+        /// <summary>Represents an OK <see cref="Result"/>.</summary>
+        public static readonly Result OK = new(FixedMessages.Empty);
 
         /// <summary>Creates a <see cref="Result{T}"/> for the data.</summary>
         public static Result<T> For<T>(T data, IEnumerable<IValidationMessage> messages)
