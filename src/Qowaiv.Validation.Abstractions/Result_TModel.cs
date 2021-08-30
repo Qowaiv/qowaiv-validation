@@ -9,14 +9,14 @@ namespace Qowaiv.Validation.Abstractions
     public sealed class Result<TModel> : Result
     {
         /// <summary>Initializes a new instance of the <see cref="Result{T}"/> class.</summary>
-        /// <param name="data">
+        /// <param name="value">
         /// The data related to the result.
         /// </param>
         /// <param name="messages">
         /// The messages related to the result.
         /// </param>
-        internal Result(TModel data, FixedMessages messages) : base(messages)
-            => _value = IsValid ? data : default;
+        internal Result(TModel value, FixedMessages messages) : base(messages)
+            => _value = IsValid ? value : default;
 
         /// <summary>Gets the value related to result.</summary>
         public TModel Value => IsValid

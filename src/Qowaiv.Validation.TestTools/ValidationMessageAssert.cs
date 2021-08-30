@@ -1,7 +1,4 @@
-﻿#pragma warning disable S4055 // Literals should not be passed as localized parameters
-// Lightweight assertion.
-
-using Qowaiv.Validation.Abstractions;
+﻿using Qowaiv.Validation.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,7 +10,7 @@ namespace Qowaiv.Validation.TestTools
     /// <summary>Assertion helper class on <see cref="Result"/> and/or <see cref="Result{T}"/>.</summary>
     public static class ValidationMessageAssert
     {
-        private static readonly ValidationMessageComparer Comparer = new ValidationMessageComparer();
+        private static readonly ValidationMessageComparer Comparer = new();
 
         /// <summary>Asserts that the result is valid, throws if not.</summary>
         [DebuggerStepThrough]

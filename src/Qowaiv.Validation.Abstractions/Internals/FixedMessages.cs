@@ -15,7 +15,7 @@ namespace Qowaiv.Validation.Abstractions.Internals
                 ? @internal
                 : Empty.AddRange(messages);
 
-        public static readonly FixedMessages Empty = new FixedMessages();
+        public static readonly FixedMessages Empty = new();
 
         public virtual int Count => 0;
 
