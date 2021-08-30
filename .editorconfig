@@ -13,5 +13,6 @@ indent_size = 4
 indent_style = space
 indent_size = 2
 
-# S3376: Attribute, EventArgs, and Exception type names should end with the type being extended
+# Analyzers
+dotnet_diagnostic.S4487.severity = warning
 dotnet_diagnostic.S3376.severity = none
