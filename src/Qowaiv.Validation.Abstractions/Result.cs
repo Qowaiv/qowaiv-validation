@@ -12,9 +12,7 @@ namespace Qowaiv.Validation.Abstractions
         /// The messages related to the result.
         /// </param>
         internal Result(FixedMessages messages)
-        {
-            Messages = Guard.NotNull(messages, nameof(messages));
-        }
+            => Messages = Guard.NotNull(messages, nameof(messages));
 
         /// <summary>Gets the messages related to the result.</summary>
         public IReadOnlyList<IValidationMessage> Messages { get; }
