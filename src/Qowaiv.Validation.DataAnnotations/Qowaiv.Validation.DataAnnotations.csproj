@@ -4,10 +4,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.0.4</Version>
+    <Version>0.1.0</Version>
     <PackageReleaseNotes>
-      v0.0.4
-      - Fix double dots in paths for nested properties.
+v0.1.0
+- Qowaiv.Validation.Abstractions dependency
+v0.0.4
+- Fix double dots in paths for nested properties.
     </PackageReleaseNotes>
   </PropertyGroup>
 

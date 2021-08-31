@@ -4,8 +4,10 @@
   
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.0.7</Version>
+    <Version>0.1.0</Version>
     <PackageReleaseNotes>
+v0.1.0
+- Qowaiv.Validation.Abstractions dependency
 v0.0.7
 - Update to FluentValidation v10.2.0.
 v0.0.6
@@ -14,17 +16,13 @@ v0.0.6
 - Required with allow unknown is one rule now (#19) fix
 v0.0.5
 - Update to FluentValidation v9.0.1
-
 v0.0.4
 - Support `SetSeverity` and `WithMessage` on `NotEmptyOrUnknown` (#12) fix
-
 v0.0.3
 - Added `Required()` (#4)
 - Severity taken into account (#5) fix
-
 v0.0.2
 - Added Guards for null
-
 v0.0.1
 - Initial version
     </PackageReleaseNotes>
