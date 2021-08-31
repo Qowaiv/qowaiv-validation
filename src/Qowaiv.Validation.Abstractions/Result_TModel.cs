@@ -142,19 +142,25 @@ namespace Qowaiv.Validation.Abstractions
         /// <param name="action">
         /// The action to invoke.
         /// </param>
+        /// <param name="continueOnCapturedContext">
+        /// true to attempt to marshal the continuation back to the original context captured;
+        /// otherwise, false. See <see cref="Task.ConfigureAwait(bool)"/>.
+        /// </param>
         /// <typeparam name="TOut">
         /// The type of the new result value.
         /// </typeparam>
         /// <returns>
         /// A result with the merged messages.
         /// </returns>
-        public async Task<Result<TOut>> ActAsync<TOut>(Func<TModel, Task<Result<TOut>>> action)
+        public async Task<Result<TOut>> ActAsync<TOut>(
+            Func<TModel, Task<Result<TOut>>> action,
+            bool continueOnCapturedContext = false)
         {
             _ = Guard.NotNull(action, nameof(action));
 
             if (IsValid)
             {
-                var outcome = await action(Value).ContinueOnAnyContext();
+                var outcome = await action(Value).ConfigureAwait(continueOnCapturedContext);
                 return For(outcome.IsValid
                     ? outcome.Value
                     : default,
@@ -169,16 +175,22 @@ namespace Qowaiv.Validation.Abstractions
         /// <param name="action">
         /// The action to invoke.
         /// </param>
+        /// <param name="continueOnCapturedContext">
+        /// true to attempt to marshal the continuation back to the original context captured;
+        /// otherwise, false. See <see cref="Task.ConfigureAwait(bool)"/>.
+        /// </param>
         /// <returns>
         /// A result with the merged messages.
         /// </returns>
-        public async Task<Result<TModel>> ActAsync(Func<TModel, Task<Result>> action)
+        public async Task<Result<TModel>> ActAsync(
+            Func<TModel, Task<Result>> action,
+            bool continueOnCapturedContext = false)
         {
             _ = Guard.NotNull(action, nameof(action));
 
             if (IsValid)
             {
-                var outcome = await action(Value).ContinueOnAnyContext();
+                var outcome = await action(Value).ConfigureAwait(continueOnCapturedContext);
                 return For(Value, ((FixedMessages)Messages).AddRange(outcome.Messages));
             }
             else return WithMessages<TModel>(Messages);
@@ -214,6 +226,10 @@ namespace Qowaiv.Validation.Abstractions
         /// <param name="update">
         /// The update to apply on a successfully invoked action.
         /// </param>
+        /// <param name="continueOnCapturedContext">
+        /// true to attempt to marshal the continuation back to the original context captured;
+        /// otherwise, false. See <see cref="Task.ConfigureAwait(bool)"/>.
+        /// </param>
         /// <typeparam name="TOut">
         /// The type of the new result value.
         /// </typeparam>
@@ -222,11 +238,12 @@ namespace Qowaiv.Validation.Abstractions
         /// </returns>
         public async Task<Result<TModel>> ActAsync<TOut>(
             Func<TModel, Task<Result<TOut>>> action,
-            Func<TModel, TOut, TModel> update)
+            Func<TModel, TOut, TModel> update,
+            bool continueOnCapturedContext = false)
         {
             Guard.NotNull(update, nameof(update));
 
-            var resolved = await ActAsync(action).ContinueOnAnyContext();
+            var resolved = await ActAsync(action).ConfigureAwait(continueOnCapturedContext);
             return resolved.IsValid
                 ? For(update(_value, resolved.Value), resolved.Messages)
                 : For(_value, resolved.Messages);
