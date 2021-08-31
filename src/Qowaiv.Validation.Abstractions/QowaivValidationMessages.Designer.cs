@@ -97,6 +97,24 @@ namespace Qowaiv.Validation.Abstractions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value of the Result&lt;T&gt; can not be null..
+        /// </summary>
+        internal static string NoValue {
+            get {
+                return ResourceManager.GetString("NoValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value of the Result&lt;{0}&gt; can not be null..
+        /// </summary>
+        internal static string NoValue_ForT {
+            get {
+                return ResourceManager.GetString("NoValue_ForT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The postal code {0} is not valid for {1}..
         /// </summary>
         internal static string PostalCodeValidator_ErrorMessage {

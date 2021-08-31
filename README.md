@@ -52,8 +52,8 @@ namespace Qowaiv.Validation.Abstractions
         public IEnumerable<IValidationMessage> Infos => Messages.GetInfos();
 
         public static Result OK => new Result(Enumerable.Empty<IValidationMessage>());
-
-        public static Result<T> For<T>(T data, params IValidationMessage[] messages) => new Result<T>(data, messages);
+        public static Result<T> Null<T>(params IValidationMessage[] messages) => new Result<T>(messages);
+        public static Result<T> For<T>(T value, params IValidationMessage[] messages) => new Result<T>(value, messages);
         public static Result WithMessages(params IValidationMessage[] messages) => new Result(messages);
         public static Result<T> WithMessages<T>(params IValidationMessage[] messages) => new Result<T>(default, messages);
     }
@@ -62,7 +62,8 @@ namespace Qowaiv.Validation.Abstractions
 
 The generic result contains also the value/validated model. This `Value` is
 only accessible when the model is valid, otherwise, an `InvalidModelException`
-is thrown. This exception contains the validation messages.
+is thrown. This exception contains the validation messages. The result is considered
+invalid if the value is `null`, unless explicitly created with `Result.Null<T>()`.
 
 ``` C#
 namespace Qowaiv.Validation.Abstractions
@@ -79,9 +80,9 @@ namespace Qowaiv.Validation.Abstractions
 Typical use cases are:
 
 ``` C#
-Result<DataType> result = Result.For(data);
-Result<DataType> resultWithMessages = Result.For(data, messages);
-Task<Result<DataType>> asyncResult = Result.For(data).AsTask();
+Result<DataType> result = Result.For(value);
+Result<DataType> resultWithMessages = Result.For(value, messages);
+Task<Result<DataType>> asyncResult = Result.For(value).AsTask();
 ```
 
 #### Composed Actions

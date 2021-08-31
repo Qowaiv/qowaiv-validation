@@ -5,57 +5,6 @@ using System.Threading.Tasks;
 
 namespace Result_Act_Immutable_Context_specs
 {
-    public class Task_Null
-    {
-        [Test]
-        public async Task ActAsync_with_sync_is_never_triggered()
-        {
-            var result = await Context.NullTask.ActAsync(Actions.Failure, Context.Update);
-            ValidationMessageAssert.IsValid(result);
-        }
-
-        [Test]
-        public async Task ActAsync_with_async_is_never_triggered()
-        {
-            var result = await Context.NullTask.ActAsync(Actions.FailureAsync, Context.Update);
-            ValidationMessageAssert.IsValid(result);
-        }
-    }
-
-    public class Task_Null_Context
-    {
-        [Test]
-        public async Task ActAsync_with_sync_is_never_triggered()
-        {
-            var result = await Context.Null.AsTask().ActAsync(Actions.Failure, Context.Update);
-            ValidationMessageAssert.IsValid(result);
-        }
-
-        [Test]
-        public async Task ActAsync_with_async_is_never_triggered()
-        {
-            var result = await Context.Null.AsTask().ActAsync(Actions.FailureAsync, Context.Update);
-            ValidationMessageAssert.IsValid(result);
-        }
-    }
-
-    public class Null_Model
-    {
-        [Test]
-        public void Act_is_never_triggered()
-        {
-            var result = Context.Null.Act(Actions.Failure, Context.Update);
-            ValidationMessageAssert.IsValid(result);
-        }
-
-        [Test]
-        public async Task ActAsync_is_never_triggered()
-        {
-            var result = await Context.Null.ActAsync(Actions.FailureAsync, Context.Update);
-            ValidationMessageAssert.IsValid(result);
-        }
-    }
-
     public class Valid_Model
     {
         [Test]
@@ -158,8 +107,6 @@ namespace Result_Act_Immutable_Context_specs
 
     internal record Context(string Value)
     {
-        public static Task<Result<Context>> NullTask => Task.FromResult<Result<Context>>(null);
-        public static Result<Context> Null => Result.For<Context>(null);
         public static Result<Context> Valid => Result.For(new Context((string)null));
         public static Result<Context> Invalid => Result.WithMessages<Context>(ValidationMessage.Error("InvalidContext"));
 
