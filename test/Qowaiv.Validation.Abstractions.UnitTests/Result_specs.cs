@@ -54,10 +54,12 @@ namespace Result_specs
         }
 
         [Test]
-        public void invalid_if_implicit() => Assert.That(Result.For<object>(null).IsValid, Is.False);
+        public void invalid_if_implicit() 
+            => Assert.That(() => Result.For<object>(null), Throws.TypeOf<NoValue>().With.Message.EqualTo("The value of the Result<Object> can not be null. (Parameter 'Value')"));
 
         [Test]
-        public void invalid_if_implicit_with_messages() => Assert.That(Result.WithMessages<object>().IsValid, Is.False);
+        public void invalid_if_implicit_with_messages()
+            => Assert.That(() => Result.WithMessages<object>(), Throws.TypeOf<NoValue>());
     }
 
     public class Filtering

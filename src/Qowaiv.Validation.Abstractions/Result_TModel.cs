@@ -24,7 +24,7 @@ namespace Qowaiv.Validation.Abstractions
 
         internal static FixedMessages NotNull(object value, FixedMessages messages)
             => value is null && !messages.GetErrors().Any()
-            ? messages.Add(new NoValue())
+            ? throw NoValue.For<TModel>()
             : messages;
 
         /// <summary>Gets the value related to result.</summary>
