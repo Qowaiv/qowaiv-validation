@@ -16,6 +16,7 @@ namespace FluentAssertions.Qowaiv.Validation
         public TSubject Subject { get; }
 
         /// <summary>Asserts thats <typeparamref name="TSubject"/> is invalid.</summary>
+        [CustomAssertion]
         public ResultInvalidnessAssertions BeInvalid(string because = "", params object[] becauseArgs)
         {
             Execute.Assertion

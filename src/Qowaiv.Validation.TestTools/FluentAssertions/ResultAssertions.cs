@@ -9,6 +9,7 @@ namespace FluentAssertions.Qowaiv.Validation
         internal ResultAssertions(Result subject) : base(subject) { }
 
         /// <summary>Asserts thats <see cref="Result"/> is invalid.</summary>
+        [CustomAssertion]
         public ResultValidnessAssertions BeValid(string because = "", params object[] becauseArgs)
         {
             ExecuteBeValid(because, becauseArgs);
