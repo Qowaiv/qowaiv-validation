@@ -22,12 +22,14 @@ namespace FluentAssertions.Qowaiv.Validation
         internal void ExecuteWithoutMessages()
             => Execute.Assertion
             .ForCondition(!Messages.Any())
+            .WithDefaultIdentifier()
             .FailWith(WithoutMessages(Messages));
 
         internal void ExecuteWithMessage(IValidationMessage message)
             => Execute.Assertion
-                .ForCondition(Messages.Count() == 1 && Comparer().Equals(Messages.Single(), message))
-                .FailWith(WithMessage(message, Messages.ToArray()));
+            .ForCondition(Messages.Count() == 1 && Comparer().Equals(Messages.Single(), message))
+            .WithDefaultIdentifier()
+            .FailWith(WithMessage(message, Messages.ToArray()));
 
         internal void ExecuteWithMessages(IValidationMessage[] messages)
         {
@@ -35,10 +37,11 @@ namespace FluentAssertions.Qowaiv.Validation
             var extra = Messages.Except(messages, Comparer()).ToArray();
 
             Execute.Assertion
-                .ForCondition(!missing.Any() && !extra.Any())
-                .FailWith(Messages.Any() 
-                    ? WithMessages(missing, extra)
-                    : "Expected messages, but found none.");
+            .ForCondition(!missing.Any() && !extra.Any())
+            .WithDefaultIdentifier()
+            .FailWith(Messages.Any() 
+                ? WithMessages(missing, extra)
+                : "Expected messages, but found none.");
         }
 
         internal static string WithoutMessages(IEnumerable<IValidationMessage> messages)

@@ -19,11 +19,12 @@ namespace FluentAssertions.Qowaiv.Validation
         public ResultInvalidnessAssertions BeInvalid(string because = "", params object[] becauseArgs)
         {
             Execute.Assertion
-                .BecauseOf(because, becauseArgs)
-                .ForCondition(!Subject.IsValid)
-                .FailWith(Subject.Messages.Any()
-                ? Text("Expected {context} is valid{reason}:").AppendMessages(Subject.Messages).ToString()
-                : "Expected {context} is valid{reason}.");
+            .BecauseOf(because, becauseArgs)
+            .ForCondition(!Subject.IsValid)
+            .WithDefaultIdentifier()
+            .FailWith(Subject.Messages.Any()
+            ? Text("Actual {context} is not invalid{reason}:").AppendMessages(Subject.Messages).ToString()
+            : "Expected {context} is valid{reason}.");
 
             return new ResultInvalidnessAssertions(Subject);
         }
@@ -31,11 +32,12 @@ namespace FluentAssertions.Qowaiv.Validation
         internal void ExecuteBeValid(string because, object[] becauseArgs)
         {
             Execute.Assertion
-                .BecauseOf(because, becauseArgs)
-                .ForCondition(Subject.IsValid)
-                .FailWith(Subject.Messages.Any()
-                ? Text("Expected {context} is invalid{reason}:").AppendMessages(Subject.Messages).ToString()
-                : "Expected {context} is invalid{reason}.");
+            .BecauseOf(because, becauseArgs)
+            .ForCondition(Subject.IsValid)
+            .WithDefaultIdentifier()
+            .FailWith(Subject.Messages.Any()
+            ? Text("Actual {context} is not valid{reason}:").AppendMessages(Subject.Messages).ToString()
+            : "Expected {context} is invalid{reason}.");
         }
 
         private static StringBuilder Text(string text) => new(text);

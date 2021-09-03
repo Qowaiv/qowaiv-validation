@@ -1,4 +1,4 @@
-﻿using FluentAssertions.Primitives;
+﻿using FluentAssertions.Execution;
 using FluentAssertions.Qowaiv.Validation;
 using Qowaiv.Validation.Abstractions;
 using System.Diagnostics;
@@ -23,5 +23,8 @@ namespace FluentAssertions
         /// </summary>
         [Pure]
         public static ResultAssertions<TModel> Should<TModel>(this Result<TModel> result) => new(result);
+ 
+        internal static AssertionScope WithDefaultIdentifier(this AssertionScope scope)
+            => scope.WithDefaultIdentifier("Result");
     }
 }
