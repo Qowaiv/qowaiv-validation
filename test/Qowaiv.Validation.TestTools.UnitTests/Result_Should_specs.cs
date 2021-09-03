@@ -142,15 +142,27 @@ Extra messages:
         }
     }
 
-    public class And_Value_Should
+    public class Value
     {
         [Test]
-        public void X()
+        public void is_evaluated_for_a_valid_chain()
         {
-            var result = Result.For(13, ValidationMessage.Warn("Test"));
+            Action assert = () =>Result.For(3).Should().BeValid().Value.Should().Be(13);
+            assert.Should().Throw<Exception>().WithMessage("Expected Result.For(3) to be 13, but found 3.");
+        }
 
-            result.Should().BeValid().WithoutMessages()
-                .Value.Should().Be(13);
+        [Test]
+        public void is_evaluated_for_a_valid_chain_with_message_assert()
+        {
+            Action assert = () => Result.For(3).Should().BeValid().WithoutMessages().Value.Should().Be(13);
+            assert.Should().Throw<Exception>().WithMessage("Expected Result.For(3) to be 13, but found 3.");
+        }
+
+        [Test]
+        public void is_not_evaluated_for_a_invalid_chain()
+        {
+            Action assert = () => Result.For(3).Should().BeValid().WithMessage(ValidationMessage.Info("Any")).Value.Should().Be(13);
+            assert.Should().Throw<Exception>().WithMessage("Expected a message, but found none.");
         }
     }
 }
