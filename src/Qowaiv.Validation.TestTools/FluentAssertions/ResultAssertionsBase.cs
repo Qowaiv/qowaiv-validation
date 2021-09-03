@@ -25,7 +25,7 @@ namespace FluentAssertions.Qowaiv.Validation
             .WithDefaultIdentifier()
             .FailWith(Subject.Messages.Any()
             ? Text("Actual {context} is not invalid{reason}:").AppendMessages(Subject.Messages).ToString()
-            : "Expected {context} is valid{reason}.");
+            : "Actual {context} is not invalid{reason}.");
 
             return new ResultInvalidnessAssertions(Subject);
         }
@@ -38,7 +38,7 @@ namespace FluentAssertions.Qowaiv.Validation
             .WithDefaultIdentifier()
             .FailWith(Subject.Messages.Any()
             ? Text("Actual {context} is not valid{reason}:").AppendMessages(Subject.Messages).ToString()
-            : "Expected {context} is invalid{reason}.");
+            : "Actual {context} is not invalid{reason}.");
         }
 
         private static StringBuilder Text(string text) => new(text);
