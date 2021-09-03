@@ -14,7 +14,7 @@ namespace FluentAssertions.Qowaiv.Validation
         protected ResultValidnessAssertionsBase(TSubject subject) => Subject = subject;
 
         /// <summary>Gets the object which value is being asserted.</summary>
-        public TSubject Subject { get; }
+        protected TSubject Subject { get; }
 
         /// <summary>Gets the <see cref="Result.Messages"/>.</summary>
         protected IEnumerable<IValidationMessage> Messages => Subject.Messages;
