@@ -6,33 +6,33 @@ using System.Text;
 
 namespace FluentAssertions.Qowaiv.Validation
 {
+    /// <summary>Contains a number of methods to assert the state of a <see cref="Result"/>.</summary>
     public class ResultValidnessAssertionsBase<TSubject>
         where TSubject : Result
     {
-        private static readonly IEqualityComparer<IValidationMessage> Comparer = ValidationMessageCompare.ByInterface;
-
         /// <summary>Creates a new instance of the <see cref="ResultValidnessAssertionsBase{TSubject}"/> class.</summary>
         protected ResultValidnessAssertionsBase(TSubject subject) => Subject = subject;
 
         /// <summary>Gets the object which value is being asserted.</summary>
         public TSubject Subject { get; }
 
-        protected IEnumerable<IValidationMessage> Messages => Subject.Messages.GetWithSeverity();
+        /// <summary>Gets the <see cref="Result.Messages"/>.</summary>
+        protected IEnumerable<IValidationMessage> Messages => Subject.Messages;
 
-        protected void ExecuteWithoutMessages()
+        internal void ExecuteWithoutMessages()
             => Execute.Assertion
             .ForCondition(!Messages.Any())
             .FailWith(WithoutMessages(Messages));
 
-        protected void ExecuteWithMessage(IValidationMessage message)
+        internal void ExecuteWithMessage(IValidationMessage message)
             => Execute.Assertion
-                .ForCondition(Messages.Count() == 1 && Comparer.Equals(Messages.Single(), message))
+                .ForCondition(Messages.Count() == 1 && Comparer().Equals(Messages.Single(), message))
                 .FailWith(WithMessage(message, Messages.ToArray()));
 
-        protected void ExecuteWithMessages(IValidationMessage[] messages)
+        internal void ExecuteWithMessages(IValidationMessage[] messages)
         {
-            var missing = messages.Except(Messages, Comparer).ToArray();
-            var extra = Messages.Except(messages, Comparer).ToArray();
+            var missing = messages.Except(Messages, Comparer()).ToArray();
+            var extra = Messages.Except(messages, Comparer()).ToArray();
 
             Execute.Assertion
                 .ForCondition(!missing.Any() && !extra.Any())
@@ -41,7 +41,7 @@ namespace FluentAssertions.Qowaiv.Validation
                     : "Expected messages, but found none.");
         }
 
-        protected static string WithoutMessages(IEnumerable<IValidationMessage> messages)
+        internal static string WithoutMessages(IEnumerable<IValidationMessage> messages)
             => new StringBuilder()
                 .Append("Expected no messages, but found:")
                 .AppendMessages(messages)
@@ -62,9 +62,11 @@ namespace FluentAssertions.Qowaiv.Validation
             else
             {
                 var all = new[] { expected };
-                return WithMessages(all.Except(actuals, Comparer).ToArray(), actuals.Except(all, Comparer).ToArray());
+                return WithMessages(all.Except(actuals, Comparer()).ToArray(), actuals.Except(all, Comparer()).ToArray());
             }
         }
+
+        private static IEqualityComparer<IValidationMessage> Comparer() => ValidationMessageCompare.ByInterface;
 
         private static string WithMessages(IValidationMessage[] missing, IValidationMessage[] extra)
         {

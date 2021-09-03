@@ -149,7 +149,7 @@ Extra messages:
         {
             var result = Result.For(13, ValidationMessage.Warn("Test"));
 
-            result.Should().BeValid().WithMessage(ValidationMessage.Warn("Test")).WithValue().Be(12);
+            result.Should().BeValid().WithMessage(ValidationMessage.Warn("Test")).Value.Should().Be(13);
             result.Should().BeValid().WithoutMessages();
         }
     }

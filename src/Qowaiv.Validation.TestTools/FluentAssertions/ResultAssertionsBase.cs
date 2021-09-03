@@ -28,7 +28,7 @@ namespace FluentAssertions.Qowaiv.Validation
             return new ResultInvalidnessAssertions(Subject);
         }
 
-        protected void ExecuteBeValid(string because, object[] becauseArgs)
+        internal void ExecuteBeValid(string because, object[] becauseArgs)
         {
             Execute.Assertion
                 .BecauseOf(because, becauseArgs)
