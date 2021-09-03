@@ -5,6 +5,7 @@ using System.Diagnostics;
 namespace Qowaiv.Validation.TestTools
 {
     /// <summary>Assertion helper class on data annotations.</summary>
+    [Obsolete("Use Should()")]
     public static class FluentValidatorAssert
     {
         /// <summary>Asserts that the model is valid, throws if not.</summary>

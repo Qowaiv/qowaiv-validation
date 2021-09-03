@@ -1,0 +1,85 @@
+﻿using FluentAssertions.Execution;
+using Qowaiv.Validation.Abstractions;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace FluentAssertions.Qowaiv.Validation
+{
+    public class ResultValidnessAssertionsBase<TSubject>
+        where TSubject : Result
+    {
+        private static readonly IEqualityComparer<IValidationMessage> Comparer = ValidationMessageCompare.ByInterface;
+
+        /// <summary>Creates a new instance of the <see cref="ResultValidnessAssertionsBase{TSubject}"/> class.</summary>
+        protected ResultValidnessAssertionsBase(TSubject subject) => Subject = subject;
+
+        /// <summary>Gets the object which value is being asserted.</summary>
+        public TSubject Subject { get; }
+
+        protected IEnumerable<IValidationMessage> Messages => Subject.Messages.GetWithSeverity();
+
+        protected void ExecuteWithoutMessages()
+            => Execute.Assertion
+            .ForCondition(!Messages.Any())
+            .FailWith(WithoutMessages(Messages));
+
+        protected void ExecuteWithMessage(IValidationMessage message)
+            => Execute.Assertion
+                .ForCondition(Messages.Count() == 1 && Comparer.Equals(Messages.Single(), message))
+                .FailWith(WithMessage(message, Messages.ToArray()));
+
+        protected void ExecuteWithMessages(IValidationMessage[] messages)
+        {
+            var missing = messages.Except(Messages, Comparer).ToArray();
+            var extra = Messages.Except(messages, Comparer).ToArray();
+
+            Execute.Assertion
+                .ForCondition(!missing.Any() && !extra.Any())
+                .FailWith(Messages.Any() 
+                    ? WithMessages(missing, extra)
+                    : "Expected messages, but found none.");
+        }
+
+        protected static string WithoutMessages(IEnumerable<IValidationMessage> messages)
+            => new StringBuilder()
+                .Append("Expected no messages, but found:")
+                .AppendMessages(messages)
+                .ToString();
+
+        private static string WithMessage(IValidationMessage expected, IValidationMessage[] actuals)
+        {
+            if (!actuals.Any()) return "Expected a message, but found none.";
+            else if (actuals.Length == 1)
+            {
+                return new StringBuilder()
+                    .AppendLine("Expected:")
+                    .AppendMessage(expected)
+                    .AppendLine("Actual:")
+                    .AppendMessage(actuals[0])
+                    .ToString();
+            }
+            else
+            {
+                var all = new[] { expected };
+                return WithMessages(all.Except(actuals, Comparer).ToArray(), actuals.Except(all, Comparer).ToArray());
+            }
+        }
+
+        private static string WithMessages(IValidationMessage[] missing, IValidationMessage[] extra)
+        {
+            var sb = new StringBuilder();
+            if (missing.Any())
+            {
+                sb.Append($"Missing message{(missing.Length == 1 ? string.Empty : "s")}:")
+                    .AppendMessages(missing);
+            }
+            if (extra.Any())
+            {
+                sb.Append($"Extra message{(extra.Length == 1 ? string.Empty : "s")}:")
+                    .AppendMessages(extra);
+            }
+            return sb.ToString();
+        }
+    }
+}

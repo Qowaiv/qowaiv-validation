@@ -8,6 +8,7 @@ using System.Text;
 namespace Qowaiv.Validation.TestTools
 {
     /// <summary>Assertion helper class on <see cref="Result"/> and/or <see cref="Result{T}"/>.</summary>
+    [Obsolete("Use Should()")]
     public static class ValidationMessageAssert
     {
         private static readonly ValidationMessageComparer Comparer = new();
