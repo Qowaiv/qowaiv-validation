@@ -6,7 +6,7 @@ using System.Diagnostics;
 namespace Qowaiv.Validation.TestTools
 {
     /// <summary>Assertion helper class on data annotations.</summary>
-    [Obsolete("Use Should()")]
+    [Obsolete("Use Should().IsValid() or Should().IsInvalid().")]
     public static class DataAnnotationsAssert
     {
         /// <summary>Asserts that the model is valid, throws if not.</summary>
