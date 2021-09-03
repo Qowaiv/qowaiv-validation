@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Validation.Abstractions;
 using Qowaiv.Validation.Fluent.UnitTests.Models;
-using Qowaiv.Validation.TestTools;
 
 namespace Qowaiv.Validation.Fluent.UnitTests
 {
@@ -13,11 +13,10 @@ namespace Qowaiv.Validation.Fluent.UnitTests
             var model = new WarningModel();
             IValidator<WarningModel> validator = new WarningModelValidator();
 
-            var result = validator.Validate(model);
-
-            ValidationMessageAssert.IsValid(result,
-                ValidationMessage.Warn("Test warning.", nameof(model.Message)),
-                ValidationMessage.Info("Nice that you validated this.", nameof(model.Message)));
+            validator.Validate(model)
+                .Should().BeValid().WithMessages(
+                    ValidationMessage.Warn("Test warning.", nameof(model.Message)),
+                    ValidationMessage.Info("Nice that you validated this.", nameof(model.Message)));
         }
     }
 
