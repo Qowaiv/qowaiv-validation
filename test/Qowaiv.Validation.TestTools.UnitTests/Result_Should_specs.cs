@@ -30,7 +30,7 @@ namespace Result_Should_specs
         public void fails_for_OK_result()
         {
             Action assert = () => Result.OK.Should().BeInvalid("something went wrong");
-            assert.Should().Throw<AssertionException>().WithMessage(@"Expected Result is valid because something went wrong.");
+            assert.Should().Throw<AssertionException>().WithMessage(@"Actual Result.OK is not invalid because something went wrong.");
         }
 
         [Test]
@@ -147,9 +147,11 @@ Extra messages:
         [Test]
         public void X()
         {
-            Result result = Result.For(13, ValidationMessage.Warn("Test"));
+            var result = Result.For(13, ValidationMessage.Warn("Test"));
 
-            result.Should().BeInvalid().WithMessage(ValidationMessage.Warn("Test"));
+            result.Should().BeValid().WithoutMessages()
+                .Value.Should().Be(13);
+                //.WithMessage(ValidationMessage.Warn("Test"));
         }
     }
 }
