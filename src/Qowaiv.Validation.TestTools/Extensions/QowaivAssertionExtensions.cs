@@ -24,7 +24,7 @@ namespace FluentAssertions
         [Pure]
         public static ResultAssertions<TModel> Should<TModel>(this Result<TModel> result) => new(result);
  
-        internal static AssertionScope WithDefaultIdentifier(this AssertionScope scope)
+        internal static IAssertionScope WithDefaultIdentifier(this IAssertionScope scope)
             => scope.WithDefaultIdentifier("Result");
     }
 }
