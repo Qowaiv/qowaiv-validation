@@ -165,4 +165,23 @@ Extra messages:
             assert.Should().Throw<Exception>().WithMessage("Expected a message, but found none.");
         }
     }
+
+    public class Null
+    {
+        [Test]
+        public void Should_BeValid_fails()
+        {
+            Result result = null;
+            Action assert = () => result.Should().BeValid();
+            assert.Should().Throw<ArgumentNullException>();
+        }
+
+        [Test]
+        public void Result_Should_BeInvalid_fails()
+        {
+            Result result = null;
+            Action assert = () => result.Should().BeInvalid();
+            assert.Should().Throw<ArgumentNullException>();
+        }
+    }
 }

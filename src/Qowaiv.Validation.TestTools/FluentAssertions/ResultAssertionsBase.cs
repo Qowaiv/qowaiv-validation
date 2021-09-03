@@ -1,5 +1,7 @@
 ﻿using FluentAssertions.Execution;
+using Qowaiv;
 using Qowaiv.Validation.Abstractions;
+using System;
 using System.Linq;
 using System.Text;
 
@@ -10,7 +12,8 @@ namespace FluentAssertions.Qowaiv.Validation
         where TSubject : Result
     {
         /// <summary>Creates a new instance of the <see cref="ResultActExtensions"/> class.</summary>
-        protected ResultAssertionsBase(TSubject subject) => Subject = subject;
+        protected ResultAssertionsBase(TSubject subject)
+            => Subject = Guard.NotNull(subject, nameof(subject));
 
         /// <summary>Gets the object which validness is being asserted.</summary>
         public TSubject Subject { get; }
