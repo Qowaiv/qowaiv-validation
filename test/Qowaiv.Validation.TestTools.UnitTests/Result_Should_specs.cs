@@ -173,7 +173,7 @@ Extra messages:
         {
             Result result = null;
             Action assert = () => result.Should().BeValid();
-            assert.Should().Throw<ArgumentNullException>();
+            assert.Should().Throw<AssertionException>().WithMessage("Result is <null>.");
         }
 
         [Test]
@@ -181,7 +181,7 @@ Extra messages:
         {
             Result result = null;
             Action assert = () => result.Should().BeInvalid();
-            assert.Should().Throw<ArgumentNullException>();
+            assert.Should().Throw<AssertionException>().WithMessage("Result is <null>.");
         }
     }
 }
