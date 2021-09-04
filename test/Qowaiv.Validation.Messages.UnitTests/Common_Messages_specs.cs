@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 using Qowaiv.Validation.Abstractions;
 using System;
@@ -10,65 +11,66 @@ namespace Common_Messages_specs
     {
         [Test]
         public void Implements_IValidationMessage()
-            => Assert.IsInstanceOf<IValidationMessage>(new NS.AccessDenied());
+            => typeof(NS.AccessDenied).Should().Implement<IValidationMessage>();
 
         [Test]
-        public void Inherits_from_SecurityException()
-            => Assert.IsInstanceOf<SecurityException>(new NS.AccessDenied());
+        public void Derives_from_SecurityException()
+            => typeof(NS.AccessDenied).Should().BeDerivedFrom<SecurityException>();
 
         [Test]
         public void Has_error_validation_severity()
-            => Assert.AreEqual(ValidationSeverity.Error, new NS.AccessDenied().Severity);
+            => new NS.AccessDenied().Severity.Should().Be(ValidationSeverity.Error);
 
         [Test]
         public void Has_descriptive_default_message()
-            => Assert.AreEqual("Access denied.", new NS.AccessDenied().Message);
+            => new NS.AccessDenied().Message.Should().Be("Access denied.");
     }
 
     public class ConcurrencyIssue
     {
         [Test]
         public void Implements_IValidationMessage()
-            => Assert.IsInstanceOf<IValidationMessage>(new NS.ConcurrencyIssue());
+            => typeof(NS.ConcurrencyIssue).Should().Implement<IValidationMessage>();
 
         [Test]
-        public void Inherits_from_InvalidOperationException()
-            => Assert.IsInstanceOf<InvalidOperationException>(new NS.ConcurrencyIssue());
+        public void Derives_from_InvalidOperationException()
+            => typeof(NS.ConcurrencyIssue).Should().BeDerivedFrom<InvalidOperationException>();
 
         [Test]
         public void Has_error_validation_severity()
-            => Assert.AreEqual(ValidationSeverity.Error, new NS.ConcurrencyIssue().Severity);
+            => new NS.ConcurrencyIssue().Severity.Should().Be(ValidationSeverity.Error);
 
         [Test]
         public void Has_descriptive_default_message()
-            => Assert.AreEqual("A concurrency issues occurred.", new NS.ConcurrencyIssue().Message);
+            => new NS.ConcurrencyIssue().Message.Should().Be("A concurrency issues occurred.");
 
         [Test]
         public void Has_MidAirCollision_message()
-            => Assert.AreEqual("A mid-air collision was detected.", NS.ConcurrencyIssue.MidAirCollision().Message);
+            => NS.ConcurrencyIssue.MidAirCollision().Message.Should().Be("A mid-air collision was detected.");
 
         [Test]
         public void Has_VersionMismatch_message()
-            => Assert.AreEqual("Expected version 17, but got version 666.", NS.ConcurrencyIssue.VersionMismatch(expectedVersion: 17, actualVersion: 666).Message);
+            => NS.ConcurrencyIssue.VersionMismatch(expectedVersion: 17, actualVersion: 666)
+            .Message.Should().Be("Expected version 17, but got version 666.");
     }
 
     public class EntityNotFound
     {
         [Test]
         public void Implements_IValidationMessage()
-              => Assert.IsInstanceOf<IValidationMessage>(new NS.EntityNotFound());
+            => typeof(NS.EntityNotFound).Should().Implement<IValidationMessage>();
 
         [Test]
-        public void Inherits_from_InvalidOperationException()
-            => Assert.IsInstanceOf<InvalidOperationException>(new NS.EntityNotFound());
+        public void Derives_from_InvalidOperationException()
+            => typeof(NS.EntityNotFound).Should().BeDerivedFrom<InvalidOperationException>();
 
         [Test]
         public void Has_error_validation_severity()
-            => Assert.AreEqual(ValidationSeverity.Error, new NS.EntityNotFound().Severity);
+            => new NS.EntityNotFound().Severity.Should().Be(ValidationSeverity.Error);
 
         [Test]
         public void Has_descriptive_default_message()
-            => Assert.AreEqual("Entity could not be found.", new NS.EntityNotFound().Message);
+            => new NS.EntityNotFound().Message.Should().Be("Entity could not be found.");
 
         [Test]
         public void Contains_Id_in_message_when_specified()
@@ -79,23 +81,22 @@ namespace Common_Messages_specs
     {
         [Test]
         public void Implements_IValidationMessage()
-             => Assert.IsInstanceOf<IValidationMessage>(new NS.ServiceUnavailable());
+            => typeof(NS.ServiceUnavailable).Should().Implement<IValidationMessage>();
 
         [Test]
-        public void Inherits_from_Exception()
-            => Assert.IsInstanceOf<Exception>(new NS.ServiceUnavailable());
+        public void Derives_from_Exception()
+            => typeof(NS.ServiceUnavailable).Should().BeDerivedFrom<Exception>();
 
         [Test]
         public void Has_error_validation_severity()
-            => Assert.AreEqual(ValidationSeverity.Error, new NS.ServiceUnavailable().Severity);
+            => new NS.ServiceUnavailable().Severity.Should().Be(ValidationSeverity.Error);
 
         [Test]
         public void Has_descriptive_default_message()
-            => Assert.AreEqual("The requested service is unavailable.", new NS.ServiceUnavailable().Message);
+            => new NS.ServiceUnavailable().Message.Should().Be("The requested service is unavailable.");
 
         [Test]
         public void With_name_in_message_when_specified()
-            => Assert.AreEqual("The service 'GitHubBuild' is unavailable.", NS.ServiceUnavailable.WithName("GitHubBuild").Message);
+            => NS.ServiceUnavailable.WithName("GitHubBuild").Message.Should().Be("The service 'GitHubBuild' is unavailable.");
     }
-
 }
