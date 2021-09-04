@@ -8,7 +8,7 @@ namespace FluentAssertions
 {
     /// <summary>Contains extension methods for custom assertions in unit tests.</summary>
     [DebuggerNonUserCode]
-    public static class QowaivAssertionExtensions
+    public static class QowaivValidationAssertions
     {
         /// <summary>
         /// Returns an <see cref="ResultAssertions"/> object that can be used to assert the
