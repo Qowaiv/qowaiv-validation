@@ -19,11 +19,11 @@ namespace Validation.IPBased_specs
         [TestCase("'Email' heeft een IP-adres als domein.", "nl-BE")]
         public void IPBased(string message, CultureInfo culture)
         {
-            using (new CultureInfoScope(culture))
+            using (culture.Scoped())
             {
                new NoIPBasedEmailAddressModel { Email = EmailAddress.Parse("qowaiv@172.16.254.1") }
                .Should().BeInvalidFor(new NoIPBasedEmailAddressModelValidator())
-               .WithMessage(ValidationMessage.Error(message, "Email");
+               .WithMessage(ValidationMessage.Error(message, "Email"));
             }
         }
     }
