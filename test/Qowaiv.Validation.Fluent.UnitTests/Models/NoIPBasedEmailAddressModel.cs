@@ -6,11 +6,8 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Models
     {
         public EmailAddress Email { get; set; }
     }
-    public class NoIPBasedEmailAddressModelValidator : AbstractValidator<NoIPBasedEmailAddressModel>
+    public class NoIPBasedEmailAddressModelValidator : ModelValidator<NoIPBasedEmailAddressModel>
     {
-        public NoIPBasedEmailAddressModelValidator()
-        {
-            RuleFor(m => m.Email).NotIPBased();
-        }
+        public NoIPBasedEmailAddressModelValidator() => RuleFor(m => m.Email).NotIPBased();
     }
 }

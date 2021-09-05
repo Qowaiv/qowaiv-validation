@@ -10,7 +10,7 @@ using System.Globalization;
 
 namespace Validators.NotInPast_specs
 {
-    public class IsValid_for_in_past
+    public class Valid_for_in_past
     {
         [Test]
         public void Date()

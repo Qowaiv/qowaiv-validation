@@ -10,7 +10,7 @@ using System.Globalization;
 
 namespace Validation.NotInFuture_specs
 {
-    public class IsValid_for_not_in_future
+    public class Valid_for_not_in_future
     {
         [Test]
         public void Date()
@@ -70,7 +70,7 @@ namespace Validation.NotInFuture_specs
         }
     }
     
-    public class IsInvalid_for_in_future
+    public class Invalid_for_in_future
     {
         [TestCase("'Prop' mag niet in de toekomst liggen.", "nl-NL")]
         [TestCase("'Prop' should not be in the future.", "en-GB")]
