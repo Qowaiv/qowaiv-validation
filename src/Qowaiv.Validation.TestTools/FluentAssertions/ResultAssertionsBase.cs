@@ -9,7 +9,7 @@ namespace FluentAssertions.Qowaiv.Validation
     public abstract class ResultAssertionsBase<TSubject>
         where TSubject : Result
     {
-        /// <summary>Creates a new instance of the <see cref="ResultActExtensions"/> class.</summary>
+        /// <summary>Creates a new instance of the <see cref="ResultAssertionsBase{TSubject}"/> class.</summary>
         protected ResultAssertionsBase(TSubject subject) => Subject = subject;
 
         /// <summary>Gets the object which validness is being asserted.</summary>

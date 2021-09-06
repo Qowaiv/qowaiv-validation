@@ -22,7 +22,7 @@ namespace FluentAssertions
         public static ResultAssertions Should(this Result result) => new(result);
 
         /// <summary>
-        /// Returns an <see cref="ResultAssertions{T}"/> object that can be used to assert the
+        /// Returns an <see cref="ResultAssertions{TModel}"/> object that can be used to assert the
         /// current <see cref="Result{TModel}"/>.
         /// </summary>
         [Pure]
