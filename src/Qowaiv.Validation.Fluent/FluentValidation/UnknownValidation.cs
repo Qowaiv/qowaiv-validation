@@ -1,5 +1,6 @@
 ﻿using Qowaiv;
 using Qowaiv.Validation.Fluent;
+using System.Diagnostics.Contracts;
 
 namespace FluentValidation
 {
@@ -19,11 +20,9 @@ namespace FluentValidation
         /// The rule builder on which the validator should be defined.
         /// </param>
         public static IRuleBuilderOptions<TModel, TProperty> NotUnknown<TModel, TProperty>(this IRuleBuilder<TModel, TProperty> ruleBuilder)
-        {
-            return Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
-                .Must(prop => prop is null || !Equals(Unknown.Value(typeof(TProperty)), prop))
-                .WithMessage(m => QowaivValidationFluentMessages.NotUnknown);
-        }
+            => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
+            .Must(prop => prop is null || !Equals(Unknown.Value(typeof(TProperty)), prop))
+            .WithMessage(m => QowaivValidationFluentMessages.NotUnknown);
 
         /// <summary>Defines a 'not empty' and a 'not unkmown' validator on the current rule builder.</summary>
         /// <typeparam name="TModel">Type of object being validated.</typeparam>
@@ -31,7 +30,7 @@ namespace FluentValidation
         /// <param name="ruleBuilder">The rule builder on which the validator should be defined.</param>
         public static IRuleBuilderOptions<TModel, TProperty> NotEmptyOrUnknown<TModel, TProperty>(this IRuleBuilder<TModel, TProperty> ruleBuilder)
             => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
-                .SetValidator(new NotEmptyOrUnknownValidator<TModel, TProperty>())
-                .WithMessage(m => QowaivValidationFluentMessages.NotEmptyOrUnknown);
+            .SetValidator(new NotEmptyOrUnknownValidator<TModel, TProperty>())
+            .WithMessage(m => QowaivValidationFluentMessages.NotEmptyOrUnknown);
     }
 }

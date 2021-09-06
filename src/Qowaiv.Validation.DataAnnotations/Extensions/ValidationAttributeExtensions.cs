@@ -1,5 +1,6 @@
 ﻿using Qowaiv;
 using Qowaiv.Validation.DataAnnotations;
+using System.Diagnostics.Contracts;
 using System.Reflection;
 
 namespace System.ComponentModel.DataAnnotations
@@ -11,6 +12,7 @@ namespace System.ComponentModel.DataAnnotations
         /// <remarks>
         /// The original function messes up with <see cref="ValidationMessage.None"/>, as it has no error message.
         /// </remarks>
+        [Pure]
         public static ValidationMessage GetValidationMessage(this ValidationAttribute attribute, object value, ValidationContext validationContext)
         {
             Guard.NotNull(attribute, nameof(attribute));

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace Qowaiv.Validation.DataAnnotations
@@ -90,6 +91,7 @@ namespace Qowaiv.Validation.DataAnnotations
             }
         }
 
+        [Pure]
         private bool HasNestedPaths(ValidationResult validationResult)
             => !string.IsNullOrEmpty(Root) && validationResult.MemberNames.Any();
 
@@ -97,6 +99,7 @@ namespace Qowaiv.Validation.DataAnnotations
         public object GetService(Type serviceType) => ServiceProvider?.GetService(serviceType);
 
         /// <summary>Creates context for the property.</summary>
+        [Pure]
         public NestedValidationContext ForProperty(AnnotatedProperty property)
             => new(Root, Instance, ServiceProvider, Items, Done, collection)
             {
@@ -110,6 +113,7 @@ namespace Qowaiv.Validation.DataAnnotations
         /// <param name="index">
         /// The optional index in case of an enumeration.
         /// </param>
+        [Pure]
         public NestedValidationContext Nested(object value, int? index = null)
             => new(
                 root: Combine(Root, MemberName, index),
@@ -119,6 +123,7 @@ namespace Qowaiv.Validation.DataAnnotations
                 Done,
                 collection);
 
+        [Pure]
         private static string Combine(string root, string path, int? index)
         {
             var combine = string.IsNullOrEmpty(root) ? string.Empty : ".";
@@ -128,6 +133,7 @@ namespace Qowaiv.Validation.DataAnnotations
         }
 
         /// <summary>Implicitly casts to the (sealed base) <see cref="ValidationContext"/>.</summary>
+        [Pure]
         public static implicit operator ValidationContext(NestedValidationContext context)
             => context is null
             ? null
@@ -137,6 +143,7 @@ namespace Qowaiv.Validation.DataAnnotations
             };
 
         /// <summary>Creates a root context.</summary>
+        [Pure]
         public static NestedValidationContext CreateRoot(object instance, IServiceProvider serviceProvider, IDictionary<object, object> items)
             => new(
                 root: string.Empty,

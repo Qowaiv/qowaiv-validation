@@ -3,6 +3,7 @@ using FluentValidation.Results;
 using Qowaiv.Validation.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace Qowaiv.Validation.Fluent
@@ -16,7 +17,7 @@ namespace Qowaiv.Validation.Fluent
             : base(propertyName, errorMessage) => Do.Nothing();
 
         /// <inheritdoc />
-        // This can be achieved by changing the public accessible Severity property.
+        [Pure]
         ValidationSeverity IValidationMessage.Severity => Severity.ToValidationSeverity();
 
         /// <inheritdoc />
@@ -29,10 +30,12 @@ namespace Qowaiv.Validation.Fluent
         /// <summary>Gets a collection of <see cref="ValidationMessage"/>s
         /// based on a collection of <see cref="ValidationFailure"/>s.
         /// </summary>
+        [Pure]
         public static IEnumerable<ValidationMessage> For(IEnumerable<ValidationFailure> messages)
             => Guard.NotNull(messages, nameof(messages)).Select(message => For(message));
 
         /// <summary>Gets a <see cref="ValidationMessage"/> based on a <see cref="ValidationFailure"/>.</summary>
+        [Pure]
         public static ValidationMessage For(ValidationFailure failure)
             => Guard.NotNull(failure, nameof(failure)) is ValidationMessage message
             ? message
@@ -46,14 +49,17 @@ namespace Qowaiv.Validation.Fluent
             };
 
         /// <summary>Creates an error message.</summary>
+        [Pure]
         public static ValidationMessage Error(string message, string propertyName)
             => new(propertyName, message) { Severity = Severity.Error };
 
         /// <summary>Creates a warning message.</summary>
+        [Pure]
         public static ValidationMessage Warn(string message, string propertyName)
             => new(propertyName, message) { Severity = Severity.Warning };
 
         /// <summary>Creates an info message.</summary>
+        [Pure]
         public static ValidationMessage Info(string message, string propertyName)
             => new(propertyName, message) { Severity = Severity.Info };
     }
