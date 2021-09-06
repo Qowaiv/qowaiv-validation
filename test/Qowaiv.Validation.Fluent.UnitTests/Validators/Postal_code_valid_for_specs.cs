@@ -42,7 +42,7 @@ namespace Validation.Postal_code_valid_for_specs
              => new PostalCodeModel
              {
                  PostalCode = PostalCode.Parse("12345"),
-                 Country = Country.NL,
+                 Country = Country.Empty,
              }.Should().BeValidFor(new PostalCodeModelValidator());
     }
     public class Invalid_for
