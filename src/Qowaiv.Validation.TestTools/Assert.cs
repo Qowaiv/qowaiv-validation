@@ -4,6 +4,7 @@ using System.Diagnostics;
 namespace Qowaiv.Validation.TestTools
 {
     /// <summary>Minimized assert helper class, to prevent dependencies on test frameworks.</summary>
+    [Obsolete("Will be dropped.")]
     internal static class Assert
     {
         [DebuggerStepThrough]

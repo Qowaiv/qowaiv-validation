@@ -7,6 +7,7 @@ namespace Qowaiv.Validation.TestTools
     /// <remarks>
     /// Exists to be independent to external test frameworks.
     /// </remarks>
+    [Obsolete("Will be dropped, with other Assert* methods. Use .Should() instead.")]
     [Serializable]
     public class AssertException : Exception
     {

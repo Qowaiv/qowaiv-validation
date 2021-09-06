@@ -363,3 +363,7 @@ public class NestedModelWithChildren
     }
 }
 ```
+
+## Test Tools
+Qowaiv.Valdation comes with a separate [Test Tools package](https://www.nuget.org/packages/Qowaiv.TestTools).
+Details about that package can be found [here](src/Qowaiv.Validation.TestTools/README.md).

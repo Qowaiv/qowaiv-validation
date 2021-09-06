@@ -1,6 +1,4 @@
 ﻿using Qowaiv.Validation.Abstractions;
-using System;
-using System.Diagnostics;
 
 namespace Qowaiv.Validation.TestTools
 {
@@ -10,8 +8,7 @@ namespace Qowaiv.Validation.TestTools
         private readonly FluentValidation.IValidator<TModel> _validator;
 
         /// <summary>Initializes a new instance of the <see cref="WrapperValidator{TModel}"/> class.</summary>
-        public WrapperValidator(FluentValidation.IValidator<TModel> validator)
-            => _validator = validator;
+        public WrapperValidator(FluentValidation.IValidator<TModel> validator) => _validator = validator;
 
         /// <inheritdoc />
         public Result<TModel> Validate(TModel model)

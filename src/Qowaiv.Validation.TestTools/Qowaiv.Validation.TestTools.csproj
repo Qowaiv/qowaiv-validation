@@ -27,4 +27,8 @@ v0.0.2
     <Compile Include="..\..\shared\Guard.cs" Link="Guard.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="6.1.0" />
+  </ItemGroup>
+
 </Project>
