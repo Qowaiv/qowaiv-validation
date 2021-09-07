@@ -1,6 +1,7 @@
 ﻿using Qowaiv.Validation.Abstractions.Internals;
 using System;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,12 +23,14 @@ namespace Qowaiv.Validation.Abstractions
         internal Result(TModel value, FixedMessages messages) : base(NotNull(value, messages))
             => _value = IsValid ? value : default;
 
+        [Pure]
         internal static FixedMessages NotNull(object value, FixedMessages messages)
             => value is null && !messages.GetErrors().Any()
             ? throw NoValue.For<TModel>()
             : messages;
 
         /// <summary>Gets the value related to result.</summary>
+        [Pure]
         public TModel Value => IsValid
             ? _value
             : throw InvalidModelException.For<TModel>(Errors);
@@ -36,6 +39,7 @@ namespace Qowaiv.Validation.Abstractions
         private readonly TModel _value;
 
         /// <summary>Implicitly casts a model to the <see cref="Result"/>.</summary>
+        [Pure]
         public static implicit operator Result<TModel>(TModel model) => For(model);
 
         /// <summary>Throws an <see cref="InvalidModelException"/> if the result is not valid.</summary>
@@ -48,6 +52,7 @@ namespace Qowaiv.Validation.Abstractions
         }
 
         /// <summary>Gets the <see cref="Result{TModel}"/> as a <see cref="Task{TResult}"/>.</summary>
+        [Pure]
         public Task<Result<TModel>> AsTask() => Task.FromResult(this);
 
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>

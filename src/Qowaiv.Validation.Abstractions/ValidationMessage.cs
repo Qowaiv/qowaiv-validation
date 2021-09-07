@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Runtime.Serialization;
 using System.Text;
 
@@ -105,18 +106,23 @@ namespace Qowaiv.Validation.Abstractions
         }
 
         /// <summary>Creates a None message.</summary>
+        [Pure]
         public static ValidationMessage None => new();
 
         /// <summary>Creates an error message.</summary>
+        [Pure]
         public static ValidationMessage Error(string message, string propertyName = null) => new(ValidationSeverity.Error, message, propertyName);
 
         /// <summary>Creates a warning message.</summary>
+        [Pure]
         public static ValidationMessage Warn(string message, string propertyName = null) => new(ValidationSeverity.Warning, message, propertyName);
 
         /// <summary>Creates an info message.</summary>
+        [Pure]
         public static ValidationMessage Info(string message, string propertyName = null) => new(ValidationSeverity.Info, message, propertyName);
 
         /// <summary>Creates a validation message.</summary>
+        [Pure]
         public static IValidationMessage For(ValidationSeverity severity, string message, string propertyName = null)
         {
             return severity switch

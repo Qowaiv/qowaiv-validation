@@ -1,5 +1,6 @@
 ﻿using Qowaiv;
 using Qowaiv.Validation.DataAnnotations;
+using System.Diagnostics.Contracts;
 
 namespace System.ComponentModel.DataAnnotations
 {
@@ -7,6 +8,7 @@ namespace System.ComponentModel.DataAnnotations
     public static class ValidationContextExtensions
     {
         /// <summary>Returns the service that provides custom validation.</summary>
+        [Pure]
         public static T GetSevice<T>(this ValidationContext validationContext)
         {
             Guard.NotNull(validationContext, nameof(validationContext));
@@ -14,11 +16,13 @@ namespace System.ComponentModel.DataAnnotations
         }
 
         /// <summary>Gets a validation context for a property.</summary>
+        [Pure]
         public static ValidationContext ForProperty(this ValidationContext validationContext, AnnotatedProperty property)
         {
             Guard.NotNull(validationContext, nameof(validationContext));
             Guard.NotNull(property, nameof(property));
-            return new ValidationContext(validationContext.ObjectInstance, validationContext, validationContext.Items)
+
+            return new(validationContext.ObjectInstance, validationContext, validationContext.Items)
             {
                 MemberName = property.Name,
                 DisplayName = property.DisplayAttribute.Name,

@@ -2,6 +2,7 @@
 // The whole purpose of this class it so satisfy both interfaces.
 
 using Qowaiv.Validation.Abstractions;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv.Validation.Fluent
 {
@@ -15,6 +16,7 @@ namespace Qowaiv.Validation.Fluent
         protected ModelValidator() => Do.Nothing();
 
         /// <inheritdoc />
+        [Pure]
         Result<TModel> IValidator<TModel>.Validate(TModel model)
         {
             var context = new FluentValidation.ValidationContext<TModel>(model);

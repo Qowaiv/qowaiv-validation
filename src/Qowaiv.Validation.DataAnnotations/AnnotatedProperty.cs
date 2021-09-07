@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace Qowaiv.Validation.DataAnnotations
@@ -67,41 +68,34 @@ namespace Qowaiv.Validation.DataAnnotations
         public IReadOnlyCollection<ValidationAttribute> ValidationAttributes { get; }
 
         /// <summary>Gets the value of the property for the specified model.</summary>
+        [Pure]
         public object GetValue(object model) => descriptor.GetValue(model);
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal string DebuggerDisplay
             => $"{descriptor.PropertyType} {descriptor.Name}, Attributes: {string.Join(", ", GetAll().Select(a => Shorten(a)))}";
 
-        private IEnumerable<ValidationAttribute> GetAll()
-        {
-            yield return RequiredAttribute;
-            foreach (var attr in ValidationAttributes)
-            {
-                yield return attr;
-            }
-        }
+        [Pure]
+        private IEnumerable<ValidationAttribute> GetAll() => Enumerable.Repeat(RequiredAttribute, 1).Concat(ValidationAttributes);
 
+        [Pure]
         private static string Shorten(Attribute attr) => attr.GetType().Name.Replace("Attribute", string.Empty);
 
         /// <summary>Creates a <see cref="AnnotatedProperty"/> for all annotated properties.</summary>
+        [Pure]
         internal static IEnumerable<AnnotatedProperty> CreateAll(Type type)
-        {
-            return TypeDescriptor
-                .GetProperties(type)
-                .Cast<PropertyDescriptor>()
-                .Select(desc => new AnnotatedProperty(desc));
-        }
+            => TypeDescriptor
+            .GetProperties(type)
+            .Cast<PropertyDescriptor>()
+            .Select(desc => new AnnotatedProperty(desc));
 
+        [Pure]
         private static Type GetEnumerableType(Type type)
-        {
-            var enumType = type
-                .GetInterfaces()
-                .FirstOrDefault(iface =>
-                    iface.IsGenericType &&
-                    iface.GetGenericTypeDefinition() == typeof(IEnumerable<>));
-
-            return enumType?.GetGenericArguments()[0];
-        }
+            => type
+            .GetInterfaces()
+            .FirstOrDefault(iface =>
+                iface.IsGenericType &&
+                iface.GetGenericTypeDefinition() == typeof(IEnumerable<>))?
+            .GetGenericArguments()[0];
     }
 }

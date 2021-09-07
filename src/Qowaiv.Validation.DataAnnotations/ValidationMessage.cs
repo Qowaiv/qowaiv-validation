@@ -1,6 +1,7 @@
 ﻿using Qowaiv.Validation.Abstractions;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.Serialization;
 
@@ -52,45 +53,45 @@ namespace Qowaiv.Validation.DataAnnotations
         public string Message => ErrorMessage;
 
         /// <summary>Creates a None message.</summary>
-        public static ValidationMessage None => new ValidationMessage();
+        [Pure]
+        public static ValidationMessage None => new();
 
         /// <summary>Creates an error message.</summary>
-        public static ValidationMessage Error(string message, params string[] memberNames) => new ValidationMessage(ValidationSeverity.Error, message, memberNames);
+        [Pure]
+        public static ValidationMessage Error(string message, params string[] memberNames) => new(ValidationSeverity.Error, message, memberNames);
 
         /// <summary>Creates a warning message.</summary>
-        public static ValidationMessage Warn(string message, params string[] memberNames) => new ValidationMessage(ValidationSeverity.Warning, message, memberNames);
+        [Pure]
+        public static ValidationMessage Warn(string message, params string[] memberNames) => new(ValidationSeverity.Warning, message, memberNames);
 
         /// <summary>Creates an info message.</summary>
-        public static ValidationMessage Info(string message, params string[] memberNames) => new ValidationMessage(ValidationSeverity.Info, message, memberNames);
+        [Pure]
+        public static ValidationMessage Info(string message, params string[] memberNames) => new(ValidationSeverity.Info, message, memberNames);
 
         /// <summary>Creates a validation message for a validation result.</summary>
         /// <param name="validationResult">
         /// The validation result to convert.
         /// </param>
+        [Pure]
         public static ValidationMessage For(ValidationResult validationResult)
-        {
-            if (validationResult is null || validationResult == Success)
+            => validationResult switch
             {
-                return None;
-            }
-            if (validationResult is ValidationMessage message)
-            {
-                return message;
-            }
-            return Error(validationResult.ErrorMessage, validationResult.MemberNames.ToArray());
-        }
+                null => None,
+                ValidationMessage message => message,
+                _ => validationResult == Success
+                    ? None
+                    : Error(validationResult.ErrorMessage, validationResult.MemberNames.ToArray()),
+            };
 
         /// <summary>Creates a validation message.</summary>
+        [Pure]
         public static IValidationMessage For(ValidationSeverity severity, string message, string[] memberNames)
-        {
-            switch (severity)
+            => severity switch
             {
-                case ValidationSeverity.None: return None;
-                case ValidationSeverity.Info: return Info(message, memberNames);
-                case ValidationSeverity.Warning: return Warn(message, memberNames);
-                case ValidationSeverity.Error:
-                default: return Error(message, memberNames);
-            }
-        }
+                ValidationSeverity.None => None,
+                ValidationSeverity.Info => Info(message, memberNames),
+                ValidationSeverity.Warning => Warn(message, memberNames),
+                _ => Error(message, memberNames),
+            };
     }
 }

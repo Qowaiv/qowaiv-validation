@@ -1,4 +1,6 @@
-﻿namespace Qowaiv.Validation.Abstractions
+﻿using System.Diagnostics.Contracts;
+
+namespace Qowaiv.Validation.Abstractions
 {
     /// <summary>Static validator helper class.</summary>
     public static class Validator
@@ -10,6 +12,7 @@
         private sealed class EmptyValidator<TModel> : IValidator<TModel>
         {
             /// <inheritdoc />
+            [Pure]
             public Result<TModel> Validate(TModel model) => Result.For(model);
         }
     }

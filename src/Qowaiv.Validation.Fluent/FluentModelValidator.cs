@@ -4,6 +4,7 @@
 // Validate should only be visible when used via this interface.
 using Qowaiv.Validation.Abstractions;
 using System;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv.Validation.Fluent
 {
@@ -12,6 +13,7 @@ namespace Qowaiv.Validation.Fluent
     public abstract class FluentModelValidator<TModel> : FluentValidation.AbstractValidator<TModel>, IValidator<TModel>
     {
         /// <inheritdoc />
+        [Pure]
         Result<TModel> IValidator<TModel>.Validate(TModel model)
         {
             var context = new FluentValidation.ValidationContext<TModel>(model);
