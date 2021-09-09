@@ -30,7 +30,7 @@ namespace Result_Act_Mutable_Context_specs
         public async Task ActAsync_on_failing_makes_result_invalid()
             => (await Context.Valid.ActAsync(Actions.FailureAsync, Context.Update))
             .Should().BeInvalid()
-            .WithMessage(ValidationMessage.Error("FailureAsynclure"));
+            .WithMessage(ValidationMessage.Error("FailureAsync"));
     }
 
     public class Task_Valid_Model

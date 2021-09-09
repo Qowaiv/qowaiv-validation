@@ -104,13 +104,13 @@ namespace Result_Act_specs
         public async Task ActAsync_on_sync_failing_action_makes_result_invalid()
             => (await ModelAsync().ActAsync(m => m.FailingAction()))
             .Should().BeInvalid()
-            .WithMessage(ValidationMessage.Error("FailingFunction"));
+            .WithMessage(ValidationMessage.Error("FailingAction"));
 
         [Test]
         public async Task ActAsync_on_async_failing_action_makes_result_invalid()
             => (await ModelAsync().ActAsync(m => m.FailingActionAsync()))
             .Should().BeInvalid()
-            .WithMessage(ValidationMessage.Error("FailingFunctionAsync"));
+            .WithMessage(ValidationMessage.Error("FailingActionAsync"));
     }
 
     public class InvalidModel

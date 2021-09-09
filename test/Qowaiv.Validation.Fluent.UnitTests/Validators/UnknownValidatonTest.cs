@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.Validation.Fluent.UnitTests.Models;
-using Qowaiv.Validation.TestTools;
 using System.Globalization;
 
 namespace Qowaiv.Validation.Fluent.UnitTests.Validators
@@ -63,13 +62,13 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Validators
         [Test]
         public void Validate_empty_WithSeverity_has_warning()
             => new UnknownWithSeverityModel { Email = EmailAddress.Empty }
-            .Should().BeInvalidFor(new UnknownWithSeverityModelValidator())
-            .WithMessage(ValidationMessage.Error("'Email' must not be empty or unknown.", "Email"));
+            .Should().BeValidFor(new UnknownWithSeverityModelValidator())
+            .WithMessage(ValidationMessage.Warn("'Email' must not be empty or unknown.", "Email"));
 
         [Test]
         public void Validate_unknown_WithSeverity_has_warning()
             => new UnknownWithSeverityModel { Email = EmailAddress.Unknown }
-            .Should().BeInvalidFor(new UnknownWithSeverityModelValidator())
-            .WithMessage(ValidationMessage.Error("'Email' must not be empty or unknown.", "Email"));
+            .Should().BeValidFor(new UnknownWithSeverityModelValidator())
+            .WithMessage(ValidationMessage.Warn("'Email' must not be empty or unknown.", "Email"));
     }
 }
