@@ -58,6 +58,7 @@ namespace FluentAssertions.Qowaiv.Validation
                 return new StringBuilder()
                     .AppendLine("Expected:")
                     .AppendMessage(expected)
+                    .AppendLine()
                     .AppendLine("Actual:")
                     .AppendMessage(actuals[0])
                     .ToString();
