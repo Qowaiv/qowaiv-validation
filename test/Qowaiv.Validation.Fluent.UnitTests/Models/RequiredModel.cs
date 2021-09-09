@@ -8,7 +8,7 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Models
         public EmailAddress Email { get; set; }
         public Country Country { get; set; }
     }
-    public class RequiredModelValidator : AbstractValidator<RequiredModel>
+    public class RequiredModelValidator : ModelValidator<RequiredModel>
     {
         public RequiredModelValidator()
         {

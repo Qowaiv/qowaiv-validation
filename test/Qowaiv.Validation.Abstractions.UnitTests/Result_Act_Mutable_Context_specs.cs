@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Validation.Abstractions;
 using Qowaiv.Validation.TestTools;
 using System.Threading.Tasks;
@@ -9,100 +10,84 @@ namespace Result_Act_Mutable_Context_specs
     {
         [Test]
         public void Act_on_success_is_executed_and_result_stays_valid()
-        {
-            var result = Context.Valid.Act(Actions.Success, Context.Update);
-            ValidationMessageAssert.IsValid(result);
-            Assert.That(result.Value.Updated, Is.True);
-        }
+            => Context.Valid.Act(Actions.Success, Context.Update)
+            .Should().BeValid()
+            .Value.Updated.Should().BeTrue();
 
         [Test]
         public void Act_on_failing_makes_result_invalid()
-        {
-            var result = Context.Valid.Act(Actions.Failure, Context.Update);
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("Failure"));
-        }
+            => Context.Valid.Act(Actions.Failure, Context.Update)
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("Failure"));
 
         [Test]
         public async Task ActAsync_on_success_is_executed_and_result_stays_valid()
-        {
-            var result = await Context.Valid.ActAsync(Actions.SuccessAsync, Context.Update);
-            ValidationMessageAssert.IsValid(result);
-            Assert.That(result.Value.Updated, Is.True);
-        }
+            => (await Context.Valid.ActAsync(Actions.SuccessAsync, Context.Update))
+           .Should().BeValid()
+           .Value.Updated.Should().BeTrue();
 
         [Test]
         public async Task ActAsync_on_failing_makes_result_invalid()
-        {
-            var result = await Context.Valid.ActAsync(Actions.FailureAsync, Context.Update);
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("FailureAsync"));
-        }
+            => (await Context.Valid.ActAsync(Actions.FailureAsync, Context.Update))
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("FailureAsynclure"));
     }
 
     public class Task_Valid_Model
     {
         [Test]
         public async Task ActAsync_on_sync_success_is_executed_and_result_stays_valid()
-        {
-            var result = await Context.Valid.AsTask().ActAsync(Actions.Success, Context.Update);
-            ValidationMessageAssert.IsValid(result);
-            Assert.That(result.Value.Updated, Is.True);
-        }
+            => (await Context.Valid.AsTask().ActAsync(Actions.Success, Context.Update))
+            .Should().BeValid()
+            .Value.Updated.Should().BeTrue();
 
         [Test]
         public async Task ActAsync_on_async_success_is_executed_and_result_stays_valid()
-        {
-            var result = await Context.Valid.AsTask().ActAsync(Actions.SuccessAsync, Context.Update);
-            ValidationMessageAssert.IsValid(result);
-            Assert.That(result.Value.Updated, Is.True);
-        }
+            => (await Context.Valid.AsTask().ActAsync(Actions.SuccessAsync, Context.Update))
+            .Should().BeValid()
+            .Value.Updated.Should().BeTrue();
 
         [Test]
         public async Task ActAsync_on_sync_failing_makes_result_invalid()
-        {
-            var result = await Context.Valid.AsTask().ActAsync(Actions.Failure, Context.Update);
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("Failure"));
-        }
+            => (await Context.Valid.AsTask().ActAsync(Actions.Failure, Context.Update))
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("Failure"));
 
         [Test]
         public async Task ActAsync_on_async_failing_makes_result_invalid()
-        {
-            var result = await Context.Valid.AsTask().ActAsync(Actions.FailureAsync, Context.Update);
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("FailureAsync"));
-        }
+            => (await Context.Valid.AsTask().ActAsync(Actions.FailureAsync, Context.Update))
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("FailureAsync"));
     }
 
     public class Invalid_Model
     {
         [Test]
         public void Act_is_never_triggered()
-        {
-            var result = Context.Invalid.Act(Actions.Failure, Context.Update);
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("InvalidContext"));
-        }
+            => Context.Invalid.Act(Actions.Failure, Context.Update)
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("InvalidContext"));
 
         [Test]
         public async Task ActAsync_is_never_triggered()
-        {
-            var result = await Context.Invalid.ActAsync(Actions.FailureAsync, Context.Update);
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("InvalidContext"));
-        }
+            => (await Context.Invalid.ActAsync(Actions.FailureAsync, Context.Update))
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("InvalidContext"));
     }
 
     public class Task_Invalid_Model
     {
         [Test]
         public async Task ActAsync_with_sync_is_never_triggered()
-        {
-            var result = await Context.Invalid.AsTask().ActAsync(Actions.Failure, Context.Update);
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("InvalidContext"));
-        }
+            => (await Context.Invalid.AsTask().ActAsync(Actions.Failure, Context.Update))
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("InvalidContext"));
 
         [Test]
         public async Task ActAsync_with_async_is_never_triggered()
-        {
-            var result = await Context.Invalid.AsTask().ActAsync(Actions.FailureAsync, Context.Update);
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("InvalidContext"));
-        }
+            => (await Context.Invalid.AsTask().ActAsync(Actions.FailureAsync, Context.Update))
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("InvalidContext"));
     }
 
     internal class Context
