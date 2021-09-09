@@ -6,13 +6,9 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Models
     {
         public EmailAddress Email { get; set; }
     }
-    public class UnknownWithSeverityModelValidator : AbstractValidator<UnknownWithSeverityModel>
+    public class UnknownWithSeverityModelValidator : ModelValidator<UnknownWithSeverityModel>
     {
         public UnknownWithSeverityModelValidator()
-        {
-            RuleFor(m => m.Email)
-                .NotEmptyOrUnknown()
-                .WithSeverity(Severity.Warning);
-        }
+            => RuleFor(m => m.Email).NotEmptyOrUnknown().WithSeverity(Severity.Warning);
     }
 }
