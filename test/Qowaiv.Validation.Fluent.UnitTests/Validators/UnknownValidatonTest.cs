@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Globalization;
 using Qowaiv.Validation.Fluent.UnitTests.Models;
-using Qowaiv.Validation.TestTools;
 using System.Globalization;
 
 namespace Qowaiv.Validation.Fluent.UnitTests.Validators
@@ -10,10 +10,8 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Validators
     {
         [Test]
         public void NotEmptyOrUnknown_is_valid_when_value()
-        {
-            var model = new UnknownModel { Country = Country.NL };
-            FluentValidatorAssert.IsValid<UnknownModelValidator, UnknownModel>(model);
-        }
+            => new UnknownModel { Country = Country.NL }
+            .Should().BeValidFor(new UnknownModelValidator());
 
         [TestCase("'Country' must not be empty or unknown.", "en-GB")]
         [TestCase("'Country' mag niet leeg of onbekend zijn.", "nl-BE")]
@@ -21,11 +19,9 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Validators
         {
             using (new CultureInfoScope(culture))
             {
-                var model = new UnknownModel { Country = Country.Empty };
-
-                FluentValidatorAssert.WithErrors<UnknownModelValidator, UnknownModel>(model,
-                    ValidationMessage.Error(message, "Country")
-                );
+                new UnknownModel { Country = Country.Empty }
+                    .Should().BeInvalidFor(new UnknownModelValidator())
+                    .WithMessage(ValidationMessage.Error(message, "Country"));
             }
         }
 
@@ -35,27 +31,21 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Validators
         {
             using (new CultureInfoScope(culture))
             {
-                var model = new UnknownModel { Country = Country.Unknown };
-
-                FluentValidatorAssert.WithErrors<UnknownModelValidator, UnknownModel>(model,
-                    ValidationMessage.Error(message, "Country")
-                );
+                new UnknownModel { Country = Country.Unknown }
+                    .Should().BeInvalidFor(new UnknownModelValidator())
+                    .WithMessage(ValidationMessage.Error(message, "Country"));
             }
         }
 
         [Test]
         public void NoUnknown_is_valid_when_empty()
-        {
-            var model = new UnknownModel { Email = EmailAddress.Empty };
-            FluentValidatorAssert.IsValid<UnknownModelValidator, UnknownModel>(model);
-        }
+            => new UnknownModel { Email = EmailAddress.Empty }
+            .Should().BeValidFor(new UnknownModelValidator());
 
         [Test]
         public void NoUnknown_is_valid_when_set()
-        {
-            var model = new UnknownModel { Email = EmailAddress.Parse("test@qowaiv.org") };
-            FluentValidatorAssert.IsValid<UnknownModelValidator, UnknownModel>(model);
-        }
+            => new UnknownModel { Email = EmailAddress.Parse("test@qowaiv.org") }
+            .Should().BeValidFor(new UnknownModelValidator());
 
         [TestCase("'Email' must not be unknown.", "en-GB")]
         [TestCase("'Email' mag niet onbekend zijn.", "nl-BE")]
@@ -63,33 +53,22 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Validators
         {
             using (new CultureInfoScope(culture))
             {
-                var model = new UnknownModel { Email = EmailAddress.Unknown };
-
-                FluentValidatorAssert.WithErrors<UnknownModelValidator, UnknownModel>(model,
-                    ValidationMessage.Error(message, "Email")
-                );
+                new UnknownModel { Email = EmailAddress.Unknown }
+                    .Should().BeInvalidFor(new UnknownModelValidator())
+                    .WithMessage(ValidationMessage.Error(message, "Email"));
             }
         }
 
         [Test]
         public void Validate_empty_WithSeverity_has_warning()
-        {
-            var model = new UnknownWithSeverityModel { Email = EmailAddress.Empty };
-
-            FluentValidatorAssert.IsValid<UnknownWithSeverityModelValidator, UnknownWithSeverityModel>(model,
-                ValidationMessage.Warn("'Email' must not be empty or unknown.", "Email")
-            );
-        }
+            => new UnknownWithSeverityModel { Email = EmailAddress.Empty }
+            .Should().BeValidFor(new UnknownWithSeverityModelValidator())
+            .WithMessage(ValidationMessage.Warn("'Email' must not be empty or unknown.", "Email"));
 
         [Test]
         public void Validate_unknown_WithSeverity_has_warning()
-        {
-            var model = new UnknownWithSeverityModel { Email = EmailAddress.Unknown };
-
-            FluentValidatorAssert.IsValid<UnknownWithSeverityModelValidator, UnknownWithSeverityModel>(model,
-                ValidationMessage.Warn("'Email' must not be empty or unknown.", "Email")
-            );
-        }
-
+            => new UnknownWithSeverityModel { Email = EmailAddress.Unknown }
+            .Should().BeValidFor(new UnknownWithSeverityModelValidator())
+            .WithMessage(ValidationMessage.Warn("'Email' must not be empty or unknown.", "Email"));
     }
 }

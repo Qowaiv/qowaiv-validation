@@ -13,10 +13,10 @@ namespace Qowaiv.Validation.DataAnnotations
     /// </remarks>
     public class AnnotatedModel
     {
-        internal static readonly AnnotatedModel None = new AnnotatedModel(typeof(object), false, new ValidationAttribute[0], new AnnotatedProperty[0]);
+        internal static readonly AnnotatedModel None = new(typeof(object), false, new ValidationAttribute[0], new AnnotatedProperty[0]);
 
         /// <summary>Gets the singleton instance of the <see cref="AnnotatedModelStore"/>.</summary>
-        internal static readonly AnnotatedModelStore Store = new AnnotatedModelStore();
+        internal static readonly AnnotatedModelStore Store = new();
 
         /// <summary>Initializes a new instance of the <see cref="AnnotatedModel"/> class.</summary>
         private AnnotatedModel(

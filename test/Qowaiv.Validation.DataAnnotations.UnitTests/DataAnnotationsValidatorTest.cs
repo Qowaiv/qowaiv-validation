@@ -1,10 +1,13 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
+using Qowaiv;
 using Qowaiv.Globalization;
+using Qowaiv.Validation.DataAnnotations;
 using Qowaiv.Validation.DataAnnotations.UnitTests.Models;
 using Qowaiv.Validation.TestTools;
 using System;
 
-namespace Qowaiv.Validation.DataAnnotations.UnitTests
+namespace DataAnnotationsValidator_specs
 {
     public class DataAnnotationsValidatorTest
     {
@@ -13,102 +16,83 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
         {
             using (CultureInfoScope.NewInvariant())
             {
-                var model = new ModelWithMandatoryProperties();
-
-                DataAnnotationsAssert.WithErrors(model,
-                    ValidationMessage.Error("The E-mail address field is required.", "Email"),
-                    ValidationMessage.Error("The SomeString field is required.", "SomeString")
-                );
+                new ModelWithMandatoryProperties()
+                    .Should().BeInvalidFor(new AnnotatedModelValidator<ModelWithMandatoryProperties>())
+                    .WithMessages(
+                        ValidationMessage.Error("The E-mail address field is required.", "Email"),
+                        ValidationMessage.Error("The SomeString field is required.", "SomeString"));
             }
         }
        
         [Test]
         public void Validate_ModelWithMandatoryProperties_is_valid()
-        {
-            var model = new ModelWithMandatoryProperties
+            => new ModelWithMandatoryProperties
             {
                 Email = EmailAddress.Parse("info@qowaiv.org"),
                 SomeString = "Some value",
-            };
-            DataAnnotationsAssert.IsValid(model);
-        }
+            }
+            .Should().BeValidFor(new AnnotatedModelValidator<ModelWithMandatoryProperties>());
 
         [Test]
         public void Validate_ModelWithAllowedValues_with_error()
-        {
-            var model = new ModelWithAllowedValues
+            => new ModelWithAllowedValues
             {
                 Country = Country.TR
-            };
-
-            DataAnnotationsAssert.WithErrors(model,
-                ValidationMessage.Error("The value of the Country field is not allowed.", "Country")
-            );
-        }
+            }
+            .Should().BeInvalidFor(new AnnotatedModelValidator<ModelWithAllowedValues>())
+            .WithMessage(ValidationMessage.Error("The value of the Country field is not allowed.", "Country"));
         
         [Test]
         public void Validate_ModelWithAllowedValues_is_valid()
-        {
-            var model = new ModelWithAllowedValues();
-            DataAnnotationsAssert.IsValid(model);
-        }
+            => new ModelWithAllowedValues()
+            .Should().BeValidFor(new AnnotatedModelValidator<ModelWithAllowedValues>());
 
         [Test]
         public void Validate_ModelWithForbiddenValues_with_error()
-        {
-            var model = new ModelWithForbiddenValues
+            => new ModelWithForbiddenValues
             {
                 Email = EmailAddress.Parse("spam@qowaiv.org"),
-            };
-            DataAnnotationsAssert.WithErrors(model,
-                ValidationMessage.Error("The value of the Email field is not allowed.", "Email"));
-        }
+            }
+            .Should().BeInvalidFor(new AnnotatedModelValidator<ModelWithForbiddenValues>())
+            .WithMessage(ValidationMessage.Error("The value of the Email field is not allowed.", "Email"));
         
         [Test]
         public void Validate_ModelWithForbiddenValues_is_valid()
-        {
-            var model = new ModelWithForbiddenValues
+            => new ModelWithForbiddenValues
             {
                 Email = EmailAddress.Parse("info@qowaiv.org"),
-            };
-            DataAnnotationsAssert.IsValid(model);
-        }
+            }
+            .Should().BeValidFor(new AnnotatedModelValidator<ModelWithForbiddenValues>());
+
 
         [Test]
         public void Validate_ModelWithCustomizedResource_with_error()
-        {
-            var model = new ModelWithCustomizedResource();
-            DataAnnotationsAssert.WithErrors(model,
-                ValidationMessage.Error("This IBAN is wrong.", "Iban"));
-        }
+            => new ModelWithCustomizedResource()
+            .Should().BeInvalidFor(new AnnotatedModelValidator<ModelWithCustomizedResource>())
+            .WithMessage(ValidationMessage.Error("This IBAN is wrong.", "Iban"));
 
         [Test]
         public void Validate_NestedModelWithNullChild_with_error()
-        {
-            var model = new NestedModel
+            => new NestedModel
             {
                 Id = Guid.NewGuid()
-            };
-            DataAnnotationsAssert.WithErrors(model,
-                ValidationMessage.Error("The Child field is required.", "Child"));
-        }
+            }
+            .Should().BeInvalidFor(new AnnotatedModelValidator<NestedModel>())
+            .WithMessage(ValidationMessage.Error("The Child field is required.", "Child"));
 
         [Test]
         public void Validate_NestedModelWithInvalidChild_with_error()
-        {
-            var model = new NestedModel
+            => new NestedModel
             {
                 Id = Guid.NewGuid(),
                 Child = new NestedModel.ChildModel()
-            };
-            DataAnnotationsAssert.WithErrors(model,
-                ValidationMessage.Error("The Name field is required.", "Child.Name"));
-        }
+            }
+            .Should().BeInvalidFor(new AnnotatedModelValidator<NestedModel>())
+            .WithMessage(ValidationMessage.Error("The Name field is required.", "Child.Name"));
 
         [Test]
         public void Validate_NestedModelWithInvalidChildren_with_error()
-        {
-            var model = new NestedModelWithChildren
+            => new NestedModelWithChildren
             {
                 Id = Guid.NewGuid(),
                 Children = new[]
@@ -116,15 +100,13 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
                     new NestedModelWithChildren.ChildModel{ ChildName = "Valid Name" },
                     new NestedModelWithChildren.ChildModel(),
                 }
-            };
-            DataAnnotationsAssert.WithErrors(model,
-                ValidationMessage.Error("The ChildName field is required.", "Children[1].ChildName"));
-        }
+            }
+            .Should().BeInvalidFor(new AnnotatedModelValidator<NestedModelWithChildren>())
+            .WithMessage(ValidationMessage.Error("The ChildName field is required.", "Children[1].ChildName"));
 
         [Test]
         public void Validate_NestedModelWithInvalidGrandchildren_with_error()
-        {
-            var model = new NestedModelWithChildren
+            => new NestedModelWithChildren
             {
                 Id = Guid.NewGuid(),
                 Children = new[]
@@ -139,11 +121,11 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
                         },
                     },
                 }
-            };
-            DataAnnotationsAssert.WithErrors(model,
+            }
+            .Should().BeInvalidFor(new AnnotatedModelValidator<NestedModelWithChildren>())
+            .WithMessages(
                 ValidationMessage.Error("The ChildName field is required.", "Children[1].ChildName"),
                 ValidationMessage.Error("The GrandchildName field is required.", "Children[1].Grandchildren[0].GrandchildName"));
-        }
 
         [Test]
         public void Validate_NestedModelWithLoop_with_error()
@@ -155,15 +137,14 @@ namespace Qowaiv.Validation.DataAnnotations.UnitTests
             };
             model.Child.Parent = model;
 
-            DataAnnotationsAssert.WithErrors(model,
-                ValidationMessage.Error("The Name field is required.", "Child.Name"));
+            model.Should().BeInvalidFor(new AnnotatedModelValidator<NestedModelWithLoop>())
+                .WithMessage(ValidationMessage.Error("The Name field is required.", "Child.Name"));
         }
-    
+
         [Test]
         public void Validate_ModelThatReturnsNoneMessage_is_valid()
-        {
-            var model = new ModelThatReturnsNoneMessage();
-            DataAnnotationsAssert.IsValid(model);
-        }
+            => new ModelThatReturnsNoneMessage()
+            .Should().BeValidFor(new AnnotatedModelValidator<ModelThatReturnsNoneMessage>())
+            .WithoutMessages();
     }
 }

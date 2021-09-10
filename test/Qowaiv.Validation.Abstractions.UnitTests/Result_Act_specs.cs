@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Qowaiv.Validation.Abstractions;
 using Qowaiv.Validation.TestTools;
 using System.Globalization;
@@ -12,65 +13,51 @@ namespace Result_Act_specs
 
         [Test]
         public void Act_on_nonfailing_function_is_executed_and_result_stays_valid()
-        {
-            var result = Model().Act(m => m.NonfailingFunction());
-
-            Assert.AreEqual(1, result.Value.Actions);
-            ValidationMessageAssert.IsValid(result);
-        }
-
+            => Model().Act(m => m.NonfailingFunction())
+            .Should().BeValid()
+            .Value.Actions.Should().Be(1);
+    
         [Test]
         public void Act_on_failing_function_makes_result_invalid()
-        {
-            var result = Model().Act(m => m.FailingFunction());
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("FailingFunction"));
-        }
+            => Model().Act(m => m.FailingFunction())
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("FailingFunction"));
 
         [Test]
         public async Task ActAsync_on_nonfailing_function_is_executed_and_result_stays_valid()
-        {
-            var result = await Model().ActAsync(m => m.NonfailingFunctionAsync());
-
-            ValidationMessageAssert.IsValid(result);
-            Assert.AreEqual(1, result.Value.Actions);
-        }
+            => (await Model().ActAsync(m => m.NonfailingFunctionAsync()))
+            .Should().BeValid()
+            .Value.Actions.Should().Be(1);
 
         [Test]
         public async Task ActAsync_on_failing_function_makes_result_invalid()
-        {
-            var result = await Model().ActAsync(m => m.FailingFunctionAsync());
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("FailingFunctionAsync"));
-        }
+            => (await Model().ActAsync(m => m.FailingFunctionAsync()))
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("FailingFunctionAsync"));
 
         [Test]
         public void Act_on_nonfailing_action_is_executed_and_result_stays_valid()
-        {
-            var result = Model().Act(m => m.NonfailingAction());
-            Assert.AreEqual(1, result.Value.Actions);
-            ValidationMessageAssert.IsValid(result);
-        }
+            => Model().Act(m => m.NonfailingAction())
+            .Should().BeValid()
+            .Value.Actions.Should().Be(1);
 
         [Test]
         public void Act_on_failing_action_makes_result_invalid()
-        {
-            var result = Model().Act(m => m.FailingAction());
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("FailingAction"));
-        }
+            => Model().Act(m => m.FailingAction())
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("FailingAction"));
 
         [Test]
         public async Task ActAsync_on_nonfailing_action_is_executed_and_result_stays_valid()
-        {
-            var result = await Model().ActAsync(m => m.NonfailingActionAsync());
-            Assert.AreEqual(1, result.Value.Actions);
-            ValidationMessageAssert.IsValid(result);
-        }
+            => (await Model().ActAsync(m => m.NonfailingActionAsync()))
+            .Should().BeValid()
+            .Value.Actions.Should().Be(1);
 
         [Test]
         public async Task ActAsync_on_failing_action_makes_result_invalid()
-        {
-            var result = await Model().ActAsync(m => m.FailingActionAsync());
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("FailingActionAsync"));
-        }
+            => (await Model().ActAsync(m => m.FailingActionAsync()))
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("FailingActionAsync"));
     }
 
     public class AsyncValidModel
@@ -79,65 +66,51 @@ namespace Result_Act_specs
 
         [Test]
         public async Task ActAsync_on_sync_nonfailing_function_is_executed_and_result_stays_valid()
-        {
-            var result = await ModelAsync().ActAsync(m => m.NonfailingFunction());
-
-            Assert.AreEqual(1, result.Value.Actions);
-            ValidationMessageAssert.IsValid(result);
-        }
+            => (await ModelAsync().ActAsync(m => m.NonfailingFunction()))
+            .Should().BeValid()
+            .Value.Actions.Should().Be(1);
 
         [Test]
         public async Task ActAsync_on_async_nonfailing_function_is_executed_and_result_stays_valid()
-        {
-            var result = await ModelAsync().ActAsync(m => m.NonfailingFunctionAsync());
-
-            Assert.AreEqual(1, result.Value.Actions);
-            ValidationMessageAssert.IsValid(result);
-        }
+            => (await ModelAsync().ActAsync(m => m.NonfailingFunctionAsync()))
+            .Should().BeValid()
+            .Value.Actions.Should().Be(1);
 
         [Test]
         public async Task ActAsync_on_sync_failing_function_makes_result_invalid()
-        {
-            var result = await ModelAsync().ActAsync(m => m.FailingFunction());
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("FailingFunction"));
-        }
+            => (await ModelAsync().ActAsync(m => m.FailingFunction()))
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("FailingFunction"));
 
         [Test]
         public async Task ActAsync_on_async_failing_function_makes_result_invalid()
-        {
-            var result = await ModelAsync().ActAsync(m => m.FailingFunctionAsync());
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("FailingFunctionAsync"));
-        }
+            => (await ModelAsync().ActAsync(m => m.FailingFunctionAsync()))
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("FailingFunctionAsync"));
 
         [Test]
         public async Task ActAsync_on_sync_nonfailing_action_is_executed_and_result_stays_valid()
-        {
-            var result = await ModelAsync().ActAsync(m => m.NonfailingAction());
-            Assert.AreEqual(1, result.Value.Actions);
-            ValidationMessageAssert.IsValid(result);
-        }
+            => (await ModelAsync().ActAsync(m => m.NonfailingAction()))
+            .Should().BeValid()
+            .Value.Actions.Should().Be(1);
 
         [Test]
         public async Task ActAsync_on_async_nonfailing_action_is_executed_and_result_stays_valid()
-        {
-            var result = await ModelAsync().ActAsync(m => m.NonfailingActionAsync());
-            Assert.AreEqual(1, result.Value.Actions);
-            ValidationMessageAssert.IsValid(result);
-        }
+            => (await ModelAsync().ActAsync(m => m.NonfailingActionAsync()))
+            .Should().BeValid()
+            .Value.Actions.Should().Be(1);
 
         [Test]
         public async Task ActAsync_on_sync_failing_action_makes_result_invalid()
-        {
-            var result = await ModelAsync().ActAsync(m => m.FailingAction());
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("FailingAction"));
-        }
+            => (await ModelAsync().ActAsync(m => m.FailingAction()))
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("FailingAction"));
 
         [Test]
         public async Task ActAsync_on_async_failing_action_makes_result_invalid()
-        {
-            var result = await ModelAsync().ActAsync(m => m.FailingActionAsync());
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("FailingActionAsync"));
-        }
+            => (await ModelAsync().ActAsync(m => m.FailingActionAsync()))
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("FailingActionAsync"));
     }
 
     public class InvalidModel
@@ -146,17 +119,15 @@ namespace Result_Act_specs
 
         [Test]
         public void Act_is_never_triggered()
-        {
-            var result = Model().Act(m => m.FailingFunction());
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("FailingModel"));
-        }
+            => Model().Act(m => m.FailingFunction())
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("FailingModel"));
 
         [Test]
         public async Task ActAsync_is_never_triggered()
-        {
-            var result = await Model().ActAsync(m => m.FailingFunctionAsync());
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("FailingModel"));
-        }
+            => (await Model().ActAsync(m => m.FailingFunctionAsync()))
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("FailingModel"));
     }
 
     public class AsyncInvalidModel
@@ -165,31 +136,27 @@ namespace Result_Act_specs
 
         [Test]
         public async Task ActAsync_with_sync_function_is_never_triggered()
-        {
-            var result = await ModelAsync().ActAsync(m => m.FailingFunction());
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("FailingModelAsync"));
-        }
+            => (await ModelAsync().ActAsync(m => m.FailingFunction()))
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("FailingModelAsync"));
 
         [Test]
         public async Task ActAsync_with_async_function_is_never_triggered()
-        {
-            var result = await ModelAsync().ActAsync(m => m.FailingFunctionAsync());
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("FailingModelAsync"));
-        }
+            => (await ModelAsync().ActAsync(m => m.FailingFunctionAsync()))
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("FailingModelAsync"));
 
         [Test]
         public async Task ActAsync_with_sync_action_is_never_triggered()
-        {
-            var result = await ModelAsync().ActAsync(m => m.FailingAction());
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("FailingModelAsync"));
-        }
+            => (await ModelAsync().ActAsync(m => m.FailingAction()))
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("FailingModelAsync"));
 
         [Test]
         public async Task ActAsync_with_async_action_is_never_triggered()
-        {
-            var result = await ModelAsync().ActAsync(m => m.FailingActionAsync());
-            ValidationMessageAssert.WithErrors(result, ValidationMessage.Error("FailingModelAsync"));
-        }
+            => (await ModelAsync().ActAsync(m => m.FailingActionAsync()))
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error("FailingModelAsync"));
     }
 
     public class Pipe_Symbol
@@ -200,7 +167,7 @@ namespace Result_Act_specs
             Result<TestModel> result = new TestModel();
             result |= (m => m.NonfailingFunction());
 
-            Assert.AreEqual(1, result.Value.Actions);
+            result.Should().BeValid().Value.Actions.Should().Be(1);
         }
 
         [Test]
@@ -209,7 +176,7 @@ namespace Result_Act_specs
             Result<TestModel> result = new TestModel();
             result |= (m => m.NonfailingAction());
 
-            Assert.AreEqual(1, result.Value.Actions);
+            result.Should().BeValid().Value.Actions.Should().Be(1);
         }
     }
 

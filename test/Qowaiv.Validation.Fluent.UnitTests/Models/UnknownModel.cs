@@ -8,7 +8,7 @@ namespace Qowaiv.Validation.Fluent.UnitTests.Models
         public EmailAddress Email { get; set; }
         public Country Country { get; set; } = Country.NL;
     }
-    public class UnknownModelValidator : AbstractValidator<UnknownModel>
+    public class UnknownModelValidator : ModelValidator<UnknownModel>
     {
         public UnknownModelValidator()
         {
