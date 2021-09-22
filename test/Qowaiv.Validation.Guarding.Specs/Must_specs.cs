@@ -68,7 +68,7 @@ namespace Must_specs
     {
         [Test]
         public void Displays_type_based_on_TSubject()
-            => new TestModel().Must().ToString().Should().Be("Must<System.Object>");
+            => new TestModel().Must().ToString().Should().Be("Must<Must_specs.TestModel>");
     }
 
     internal class TestModel { }
