@@ -25,7 +25,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.28.0.36354">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.29.0.36737 ">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -35,10 +35,5 @@
   <PropertyGroup>
     <DebugType>full</DebugType>
   </PropertyGroup>
-
-  <ItemGroup>
-    <!-- Package icon. -->
-    <None Include="$(MSBuildThisFileDirectory)..\design\package-icon.png" Pack="true" PackagePath="" />
-  </ItemGroup>
 
 </Project>
