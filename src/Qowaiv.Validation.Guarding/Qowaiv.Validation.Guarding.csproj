@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\props\production.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>0.1.2</Version>
+    <PackageReleaseNotes>
+v0.1.2
+- Initial version
+- Introduction of the Must() guarding mechanism.
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\shared\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
+    <Compile Include="..\..\shared\Guard.cs" Link="Guard.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Qowaiv.Validation.Abstractions\Qowaiv.Validation.Abstractions.csproj" />
+    <ProjectReference Include="..\Qowaiv.Validation.Messages\Qowaiv.Validation.Messages.csproj" />
+  </ItemGroup>
+  
+</Project>
