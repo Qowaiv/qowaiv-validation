@@ -3,13 +3,14 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Code of Conduct](https://img.shields.io/badge/%E2%9D%A4-code%20of%20conduct-blue.svg?style=flat)](https://github.com/Qowaiv/qowaiv-validation/blob/master/CODE_OF_CONDUCT.md)
 
-| version                                                                       | package                                                                                              |
-|-------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-0.1.1-darkblue.svg?cacheSeconds=3600)|[Qowaiv.Validation.Abstractions](https://www.nuget.org/packages/Qowaiv.Validation.Abstractions/)      |
-|![v](https://img.shields.io/badge/version-0.1.1-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.DataAnnotations](https://www.nuget.org/packages/Qowaiv.Validation.DataAnnotations/)|
-|![v](https://img.shields.io/badge/version-0.1.1-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Fluent](https://www.nuget.org/packages/Qowaiv.Validation.Fluent/)                  |
-|![v](https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Messages](https://www.nuget.org/packages/Qowaiv.Validation.Messages/)              |
-|![v](https://img.shields.io/badge/version-0.1.1-darkred.svg?cacheSeconds=3600) |[Qowaiv.Validation.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)                       |
+| version                                                                       | package                                                                                             |
+|-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+|![v](https://img.shields.io/badge/version-0.1.1-darkblue.svg?cacheSeconds=3600)|[Qowaiv.Validation.Abstractions](https://www.nuget.org/packages/Qowaiv.Validation.Abstractions)      |
+|![v](https://img.shields.io/badge/version-0.1.1-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.DataAnnotations](https://www.nuget.org/packages/Qowaiv.Validation.DataAnnotations)|
+|![v](https://img.shields.io/badge/version-0.1.1-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Fluent](https://www.nuget.org/packages/Qowaiv.Validation.Fluent)                  |
+|![v](https://img.shields.io/badge/version-0.1.2-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Guarding](https://www.nuget.org/packages/Qowaiv.Validation.Guarding)              |
+|![v](https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Messages](https://www.nuget.org/packages/Qowaiv.Validation.Messages)              |
+|![v](https://img.shields.io/badge/version-0.1.1-darkred.svg?cacheSeconds=3600) |[Qowaiv.Validation.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools)                       |
 
 # Qowaiv Validation
 There are multiple ways to support validation within .NET. Most notable are
@@ -363,6 +364,22 @@ public class NestedModelWithChildren
     }
 }
 ```
+
+## Guarding
+To guard pre-conditions, the fluent syntax `.Must()` guards conditions using a
+`Result<T>` to communicate the outcome. So:
+
+``` C#
+game.Must().Be(game.Phase == GamePhase.Started, "Game has started");
+```
+
+will return a valid `Result<Game>` if the game is the required state,
+otherwise an invalid `Result<Game>` with the specified error message
+is returned.
+
+Out-of-the-box, `Be`, `NotBe`, and `Exist` are provided, but it can easily be
+extended by writing custom extenion methods on `Must<TSubject>` based on
+what guarding your (domain) logic requires.
 
 ## Test Tools
 Qowaiv.Valdation comes with a separate [Test Tools package](https://www.nuget.org/packages/Qowaiv.TestTools).
