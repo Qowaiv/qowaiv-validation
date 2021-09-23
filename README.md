@@ -378,7 +378,7 @@ otherwise an invalid `Result<Game>` with the specified error message
 is returned.
 
 Out-of-the-box, `Be`, `NotBe`, and `Exist` are provided, but it can easily be
-extended by writing custom extenion methods on `Must<TSubject>` based on
+extended by writing custom extension methods on `Must<TSubject>` based on
 what guarding your (domain) logic requires.
 
 ## Test Tools
