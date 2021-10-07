@@ -52,12 +52,12 @@ namespace Qowaiv.Validation.Abstractions
         /// <summary>Creates a <see cref="Result{T}"/> for the value.</summary>
         [Pure]
         public static Result<T> For<T>(T value, IEnumerable<IValidationMessage> messages)
-            => new(value, FixedMessages.New(messages));
+            => new Result<T>(value, FixedMessages.New(messages)).NotNull();
 
         /// <summary>Creates a <see cref="Result{T}"/> for the value.</summary>
         [Pure]
         public static Result<T> For<T>(T value, params IValidationMessage[] messages)
-            => new(value, FixedMessages.New(messages));
+            => new Result<T>(value, FixedMessages.New(messages)).NotNull();
 
         /// <summary>Creates a result with messages.</summary>
         [Pure]
@@ -72,11 +72,11 @@ namespace Qowaiv.Validation.Abstractions
         /// <summary>Creates a result with messages.</summary>
         [Pure]
         public static Result<T> WithMessages<T>(IEnumerable<IValidationMessage> messages)
-            => new(default, FixedMessages.New(messages));
+           => new Result<T>(default, FixedMessages.New(messages)).NotNull();
 
         /// <summary>Creates a result with messages.</summary>
         [Pure]
         public static Result<T> WithMessages<T>(params IValidationMessage[] messages)
-            => new(default, FixedMessages.New(messages));
+            => new Result<T>(default, FixedMessages.New(messages)).NotNull();
     }
 }

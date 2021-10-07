@@ -4,10 +4,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.1.1</Version>
+    <Version>0.1.2</Version>
     <PackageReleaseNotes>
+v0.1.2
+- Dealing with Result.Null() values internally should not throw. #42
 v0.1.1
-- Decorate pure methods with attribute (#38)
+- Decorate pure methods with attribute. #38
 v0.1.0
 - ContinueOnCapturedContext is configurable. #35
 - Introduction of Result.Null&lt;T&gt;(). #34
@@ -16,8 +18,8 @@ v0.1.0
 - Result.OK is static readonly field (was static property). #32
 - Improvements on InvalidModelException. #31
 v0.0.5
-- Act() methods on context #29
-- AsTask() method for Result&lt;T&gt; #28
+- Act() methods on context. #29
+- AsTask() method for Result&lt;T&gt;. #28
 v0.0.4
 - Act() methods have pipe notation alternatives.
     </PackageReleaseNotes>

@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Qowaiv.Validation.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -60,6 +61,10 @@ namespace Result_specs
         [Test]
         public void invalid_if_implicit_with_messages()
             => Assert.That(() => Result.WithMessages<object>(), Throws.TypeOf<NoValue>());
+
+        [Test]
+        public void invalid_if_implicit_with_empty_messages()
+            => Assert.That(() => Result.WithMessages<object>(Array.Empty<IValidationMessage>()), Throws.TypeOf<NoValue>());
     }
 
     public class Filtering

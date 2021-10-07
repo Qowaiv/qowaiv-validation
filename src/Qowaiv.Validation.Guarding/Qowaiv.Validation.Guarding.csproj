@@ -13,7 +13,6 @@ v0.1.2
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\shared\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
     <Compile Include="..\..\shared\Guard.cs" Link="Guard.cs" />
   </ItemGroup>
 
