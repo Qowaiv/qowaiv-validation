@@ -66,7 +66,7 @@ namespace Qowaiv.Validation.Abstractions
             if (IsValid)
             {
                 var outcome = action(Value);
-                return new Result<TOut>(outcome.IsValid
+                return new(outcome.IsValid
                     ? outcome.Value
                     : default,
                     ((FixedMessages)Messages).AddRange(outcome.Messages));
