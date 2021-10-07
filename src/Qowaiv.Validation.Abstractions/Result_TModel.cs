@@ -20,14 +20,8 @@ namespace Qowaiv.Validation.Abstractions
         /// <param name="messages">
         /// The messages related to the result.
         /// </param>
-        internal Result(TModel value, FixedMessages messages) : base(NotNull(value, messages))
+        internal Result(TModel value, FixedMessages messages) : base(messages)
             => _value = IsValid ? value : default;
-
-        [Pure]
-        internal static FixedMessages NotNull(object value, FixedMessages messages)
-            => value is null && !messages.GetErrors().Any()
-            ? throw NoValue.For<TModel>()
-            : messages;
 
         /// <summary>Gets the value related to result.</summary>
         [Pure]
@@ -72,7 +66,7 @@ namespace Qowaiv.Validation.Abstractions
             if (IsValid)
             {
                 var outcome = action(Value);
-                return For(outcome.IsValid
+                return new Result<TOut>(outcome.IsValid
                     ? outcome.Value
                     : default,
                     ((FixedMessages)Messages).AddRange(outcome.Messages));
@@ -139,8 +133,8 @@ namespace Qowaiv.Validation.Abstractions
 
             var resolved = Act(action);
             return resolved.IsValid
-                ? For(update(_value, resolved.Value), resolved.Messages)
-                : For(_value, resolved.Messages);
+                ? new(update(_value, resolved.Value), (FixedMessages)resolved.Messages)
+                : new(_value, (FixedMessages)resolved.Messages);
         }
 
         /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
@@ -166,7 +160,7 @@ namespace Qowaiv.Validation.Abstractions
             if (IsValid)
             {
                 var outcome = await action(Value).ConfigureAwait(continueOnCapturedContext);
-                return For(outcome.IsValid
+                return new(outcome.IsValid
                     ? outcome.Value
                     : default,
                     ((FixedMessages)Messages).AddRange(outcome.Messages));
@@ -250,8 +244,8 @@ namespace Qowaiv.Validation.Abstractions
 
             var resolved = await ActAsync(action).ConfigureAwait(continueOnCapturedContext);
             return resolved.IsValid
-                ? For(update(_value, resolved.Value), resolved.Messages)
-                : For(_value, resolved.Messages);
+                ? new(update(_value, resolved.Value), (FixedMessages)resolved.Messages)
+                : new(_value, (FixedMessages)resolved.Messages);
         }
 
         /// <summary>Explicitly casts the <see cref="Result"/> to the type of the related model.</summary>
@@ -282,5 +276,9 @@ namespace Qowaiv.Validation.Abstractions
         /// </returns>
         public static Result<TModel> operator |(Result<TModel> result, Func<TModel, Result> action)
             => Guard.NotNull(result, nameof(result)).Act(action);
+
+        /// <summary>Throws <see cref="NoValue"/> exception when valid with null value.</summary>
+        internal Result<TModel> NotNull()
+           => IsValid && Value is null ? throw NoValue.For<TModel>() : this;
     }
 }
