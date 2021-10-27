@@ -5,6 +5,7 @@
 
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DefineConstants>CONTRACTS_FULL</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
