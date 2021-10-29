@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv.Validation.DataAnnotations
 {
@@ -11,13 +12,10 @@ namespace Qowaiv.Validation.DataAnnotations
         /// <summary>Returns true if the value is not null and the collection
         /// has any item, otherwise false.
         /// </summary>
+        [Pure]
         public override bool IsValid(object value)
-        {
-            if (value is IEnumerable enumerable)
-            {
-                return enumerable.GetEnumerator().MoveNext();
-            }
-            return base.IsValid(value);
-        }
+            => value is IEnumerable enumerable
+            ? enumerable.GetEnumerator().MoveNext()
+            : base.IsValid(value);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Qowaiv;
+using Qowaiv.Validation.Abstractions.Diagnostics.Contracts;
 using Qowaiv.Validation.Fluent;
 
 namespace FluentValidation
@@ -16,6 +17,7 @@ namespace FluentValidation
         /// <param name="ruleBuilder">
         /// The rule builder on which the validator should be defined.
         /// </param>
+        [FluentSyntax]
         public static IRuleBuilderOptions<TModel, TProperty> Required<TModel, TProperty>(this IRuleBuilder<TModel, TProperty> ruleBuilder)
             => ruleBuilder.Required(allowUnknown: false);
 
@@ -32,6 +34,7 @@ namespace FluentValidation
         /// <param name="allowUnknown">
         /// If true, unknown values are seen.
         /// </param>
+        [FluentSyntax]
         public static IRuleBuilderOptions<TModel, TProperty> Required<TModel, TProperty>(this IRuleBuilder<TModel, TProperty> ruleBuilder, bool allowUnknown)
         {
             Guard.NotNull(ruleBuilder, nameof(ruleBuilder));

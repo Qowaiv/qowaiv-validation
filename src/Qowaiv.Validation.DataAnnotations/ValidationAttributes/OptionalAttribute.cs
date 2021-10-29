@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv.Validation.DataAnnotations
 {
@@ -12,9 +13,10 @@ namespace Qowaiv.Validation.DataAnnotations
     public sealed class OptionalAttribute : RequiredAttribute
     {
         /// <summary>Gets a (singleton) <see cref="OptionalAttribute"/>.</summary>
-        internal static readonly OptionalAttribute Optional = new OptionalAttribute();
+        internal static readonly OptionalAttribute Optional = new();
 
         /// <summary>Returns true as an <see cref="OptionalAttribute"/> is always valid.</summary>
+        [Pure]
         public override bool IsValid(object value) => true;
     }
 }

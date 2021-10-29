@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace Qowaiv.Validation.DataAnnotations
@@ -32,14 +33,15 @@ namespace Qowaiv.Validation.DataAnnotations
         public string[] Values { get; }
 
         /// <summary>Returns true if the value occurs to be forbidden, otherwise false.</summary>
+        [Pure]
         public sealed override bool IsValid(object value)
         {
-            if (value == null)
+            if (value == null) return true;
+            else
             {
-                return true;
+                var converter = TypeDescriptor.GetConverter(value.GetType());
+                return OnEqual == Values.Any(val => value.Equals(converter.ConvertFromString(val)));
             }
-            var converter = TypeDescriptor.GetConverter(value.GetType());
-            return OnEqual == Values.Any(val => value.Equals(converter.ConvertFromString(val)));
         }
     }
 }

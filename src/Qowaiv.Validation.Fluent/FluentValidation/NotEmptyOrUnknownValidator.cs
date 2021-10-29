@@ -1,5 +1,6 @@
 ﻿using FluentValidation.Validators;
 using Qowaiv;
+using System.Diagnostics.Contracts;
 
 namespace FluentValidation
 {
@@ -13,8 +14,9 @@ namespace FluentValidation
     internal sealed class NotEmptyOrUnknownValidator<TModel, TProperty> : NotEmptyValidator<TModel, TProperty>
     {
         /// <inheritdoc />
+        [Pure]
         public override bool IsValid(ValidationContext<TModel> context, TProperty value)
             => base.IsValid(context, value)
-                && !Equals(Unknown.Value(typeof(TProperty)), value);
+            && !Equals(Unknown.Value(typeof(TProperty)), value);
     }
 }

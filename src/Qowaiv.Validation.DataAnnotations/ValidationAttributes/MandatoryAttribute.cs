@@ -1,6 +1,7 @@
 ﻿using Qowaiv.Reflection;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv.Validation.DataAnnotations
 {
@@ -15,6 +16,7 @@ namespace Qowaiv.Validation.DataAnnotations
         public override bool RequiresValidationContext => true;
 
         /// <inheritdoc />
+        [Pure]
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             Guard.NotNull(validationContext, nameof(validationContext));
@@ -23,9 +25,11 @@ namespace Qowaiv.Validation.DataAnnotations
             {
                 return ValidationResult.Success;
             }
-
-            var memberNames = validationContext.MemberName != null ? new[] { validationContext.MemberName } : null;
-            return ValidationMessage.Error(FormatErrorMessage(validationContext.DisplayName), memberNames);
+            else
+            {
+                var memberNames = validationContext.MemberName != null ? new[] { validationContext.MemberName } : null;
+                return ValidationMessage.Error(FormatErrorMessage(validationContext.DisplayName), memberNames);
+            }
         }
 
         /// <summary>Gets the type of the field/property.</summary>
@@ -34,14 +38,15 @@ namespace Qowaiv.Validation.DataAnnotations
         /// the only way to determine if the provided value is a nullable type,
         /// or not.
         /// </remarks>
+        [Pure]
         private static Type GetMemberType(ValidationContext context)
         {
-            if (string.IsNullOrEmpty(context.MemberName))
+            if (string.IsNullOrEmpty(context.MemberName)) return null;
+            else
             {
-                return null;
+                return context.ObjectType.GetProperty(context.MemberName)?.PropertyType
+                    ?? context.ObjectType.GetField(context.MemberName)?.FieldType;
             }
-            return context.ObjectType.GetProperty(context.MemberName)?.PropertyType
-                ?? context.ObjectType.GetField(context.MemberName)?.FieldType;
         }
 
         /// <summary>Returns true if the value is not null and value types are
@@ -50,8 +55,10 @@ namespace Qowaiv.Validation.DataAnnotations
         /// <remarks>
         /// The unknown value is expected to be static field or property of the type with the name "Unknown".
         /// </remarks>
+        [Pure]
         public override bool IsValid(object value) => IsValid(value, null);
 
+        [Pure]
         private bool IsValid(object value, Type memberType)
         {
             if (value != null)
@@ -63,7 +70,7 @@ namespace Qowaiv.Validation.DataAnnotations
                 {
                     return false;
                 }
-                if (type.IsValueType)
+                else if (type.IsValueType)
                 {
                     return !value.Equals(Activator.CreateInstance(type));
                 }
