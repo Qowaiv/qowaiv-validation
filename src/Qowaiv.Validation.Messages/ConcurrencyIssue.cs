@@ -1,5 +1,6 @@
 ﻿using Qowaiv.Validation.Abstractions;
 using System;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.Serialization;
 
@@ -29,6 +30,7 @@ namespace Qowaiv.Validation.Messages
         public string PropertyName => null;
 
         /// <summary>Creates an <see cref="ConcurrencyIssue"/> for the version mismatch.</summary>
+        [Pure]
         public static ConcurrencyIssue VersionMismatch(object expectedVersion, object actualVersion)
             => new(string.Format(
                 CultureInfo.CurrentCulture,
@@ -37,6 +39,7 @@ namespace Qowaiv.Validation.Messages
                 actualVersion));
 
         /// <summary>Creates an <see cref="ConcurrencyIssue"/> for mid-air collision.</summary>
+        [Pure]
         public static ConcurrencyIssue MidAirCollision()
             => new(ValidationMessages.MidAirCollision);
     }

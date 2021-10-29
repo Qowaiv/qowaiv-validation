@@ -94,6 +94,7 @@ namespace Qowaiv.Validation.Guarding
             => Exist(id, selector, null);
 
         /// <inheritdoc />
+        [Pure]
         public override string ToString() => $"Must<{typeof(TSubject)}>";
     }
 }
