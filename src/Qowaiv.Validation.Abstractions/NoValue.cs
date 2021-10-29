@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Runtime.Serialization;
 
 namespace Qowaiv.Validation.Abstractions
@@ -26,6 +27,7 @@ namespace Qowaiv.Validation.Abstractions
         /// <typeparam name="T">
         /// The type of the result.
         /// </typeparam>
+        [Pure]
         public static NoValue For<T>() => new(nameof(Result<T>.Value), string.Format(QowaivValidationMessages.NoValue_ForT, typeof(T).Name));
     }
 }

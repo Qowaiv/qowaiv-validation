@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace Qowaiv.Validation.DataAnnotations
@@ -53,6 +54,7 @@ namespace Qowaiv.Validation.DataAnnotations
         /// <returns>
         /// A result including the model and the <see cref="ValidationResult"/>s.
         /// </returns>
+        [Pure]
         public Result<TModel> Validate(TModel model)
         {
             var context = NestedValidationContext.CreateRoot(model, ServiceProvider, Items);

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace Qowaiv.Validation.DataAnnotations
@@ -28,6 +29,7 @@ namespace Qowaiv.Validation.DataAnnotations
         private readonly ConcurrentDictionary<Type, AnnotatedModel> _models;
 
         /// <summary>Gets an <see cref="AnnotatedModel"/> based on the <see cref="Type"/>.</summary>
+        [Pure]
         public AnnotatedModel GetAnnotededModel(Type type)
         {
             Guard.NotNull(type, nameof(type));

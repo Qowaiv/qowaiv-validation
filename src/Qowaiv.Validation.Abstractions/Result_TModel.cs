@@ -1,4 +1,5 @@
-﻿using Qowaiv.Validation.Abstractions.Internals;
+﻿using Qowaiv.Validation.Abstractions.Diagnostics.Contracts;
+using Qowaiv.Validation.Abstractions.Internals;
 using System;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
@@ -59,6 +60,7 @@ namespace Qowaiv.Validation.Abstractions
         /// <returns>
         /// A result with the merged messages.
         /// </returns>
+        [Impure]
         public Result<TOut> Act<TOut>(Func<TModel, Result<TOut>> action)
         {
             Guard.NotNull(action, nameof(action));
@@ -81,6 +83,7 @@ namespace Qowaiv.Validation.Abstractions
         /// <returns>
         /// A result with the merged messages.
         /// </returns>
+        [Impure]
         public Result<TModel> Act(Func<TModel, Result> action)
         {
             Guard.NotNull(action, nameof(action));
@@ -106,6 +109,7 @@ namespace Qowaiv.Validation.Abstractions
         /// <returns>
         /// The updated model with the merged messages.
         /// </returns>
+        [Impure]
         public Result<TModel> Act<TOut>(Func<TModel, Result<TOut>> action, Action<TModel, TOut> update)
             => Act(action, (model, result) =>
             {
@@ -127,6 +131,7 @@ namespace Qowaiv.Validation.Abstractions
         /// <returns>
         /// The updated model with the merged messages.
         /// </returns>
+        [Impure]
         public Result<TModel> Act<TOut>(Func<TModel, Result<TOut>> action, Func<TModel, TOut, TModel> update)
         {
             Guard.NotNull(update, nameof(update));
@@ -151,6 +156,7 @@ namespace Qowaiv.Validation.Abstractions
         /// <returns>
         /// A result with the merged messages.
         /// </returns>
+        [Impure]
         public async Task<Result<TOut>> ActAsync<TOut>(
             Func<TModel, Task<Result<TOut>>> action,
             bool continueOnCapturedContext = false)
@@ -181,6 +187,7 @@ namespace Qowaiv.Validation.Abstractions
         /// <returns>
         /// A result with the merged messages.
         /// </returns>
+        [Impure]
         public async Task<Result<TModel>> ActAsync(
             Func<TModel, Task<Result>> action,
             bool continueOnCapturedContext = false)
@@ -208,6 +215,7 @@ namespace Qowaiv.Validation.Abstractions
         /// <returns>
         /// The updated model with the merged messages.
         /// </returns>
+        [Impure]
         public Task<Result<TModel>> ActAsync<TOut>(
             Func<TModel, Task<Result<TOut>>> action,
             Action<TModel, TOut> update)
@@ -235,6 +243,7 @@ namespace Qowaiv.Validation.Abstractions
         /// <returns>
         /// The updated model with the merged messages.
         /// </returns>
+        [Impure]
         public async Task<Result<TModel>> ActAsync<TOut>(
             Func<TModel, Task<Result<TOut>>> action,
             Func<TModel, TOut, TModel> update,
@@ -278,6 +287,7 @@ namespace Qowaiv.Validation.Abstractions
             => Guard.NotNull(result, nameof(result)).Act(action);
 
         /// <summary>Throws <see cref="NoValue"/> exception when valid with null value.</summary>
+        [Pure]
         internal Result<TModel> NotNull()
            => IsValid && Value is null ? throw NoValue.For<TModel>() : this;
     }

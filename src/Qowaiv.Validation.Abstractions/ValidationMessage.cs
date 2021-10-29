@@ -25,12 +25,15 @@ namespace Qowaiv.Validation.Abstractions
             : this(GetSeverity(info), GetMessage(info), GetProperty(info)) => Do.Nothing();
 
         /// <summary>Helper methods to deserialize the <see cref="ValidationMessage"/>.</summary>
+        [Pure]
         private static ValidationSeverity GetSeverity(SerializationInfo info) => (ValidationSeverity)info.GetInt32(nameof(Severity));
 
         /// <summary>Helper methods to deserialize the <see cref="ValidationMessage"/>.</summary>
+        [Pure]
         private static string GetMessage(SerializationInfo info) => info.GetString(nameof(Message));
 
         /// <summary>Helper methods to deserialize the <see cref="ValidationMessage"/>.</summary>
+        [Pure]
         private static string GetProperty(SerializationInfo info) => info.GetString(nameof(PropertyName));
 
         /// <inheritdoc />
@@ -53,6 +56,7 @@ namespace Qowaiv.Validation.Abstractions
         public string Message { get; }
 
         /// <inheritdoc />
+        [Pure]
         public override string ToString()
         {
             if (Equals(None))
@@ -86,18 +90,19 @@ namespace Qowaiv.Validation.Abstractions
         }
 
         /// <inheritdoc />
+        [Pure]
         public override bool Equals(object obj) => obj is ValidationMessage other && Equals(other);
 
         /// <inheritdoc />
+        [Pure]
         public bool Equals(ValidationMessage other)
-        {
-            return other != null
-                && Severity == other.Severity
-                && PropertyName == other.PropertyName
-                && Message == other.Message;
-        }
+            => other is not null
+            && Severity == other.Severity
+            && PropertyName == other.PropertyName
+            && Message == other.Message;
 
         /// <inheritdoc />
+        [Pure]
         public override int GetHashCode()
         {
             return Severity.GetHashCode()

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Qowaiv.Validation.Abstractions.Diagnostics.Contracts;
+using System;
 using System.Threading.Tasks;
 
 namespace Qowaiv.Validation.Abstractions
@@ -26,6 +27,7 @@ namespace Qowaiv.Validation.Abstractions
         /// <returns>
         /// A result with the merged messages.
         /// </returns>
+        [Impure]
         public static async Task<Result<TOut>> ActAsync<TModel, TOut>(
             this Task<Result<TModel>> promise,
             Func<TModel, Result<TOut>> action,
@@ -61,6 +63,7 @@ namespace Qowaiv.Validation.Abstractions
         /// <returns>
         /// A result with the merged messages.
         /// </returns>
+        [Impure]
         public static async Task<Result<TOut>> ActAsync<TModel, TOut>(
             this Task<Result<TModel>> promise,
             Func<TModel, Task<Result<TOut>>> action,
@@ -92,6 +95,7 @@ namespace Qowaiv.Validation.Abstractions
         /// <returns>
         /// A result with the merged messages.
         /// </returns>
+        [Impure]
         public static async Task<Result<TModel>> ActAsync<TModel>(
             this Task<Result<TModel>> promise,
             Func<TModel, Result> action,
@@ -123,6 +127,7 @@ namespace Qowaiv.Validation.Abstractions
         /// <returns>
         /// A result with the merged messages.
         /// </returns>
+        [Impure]
         public static async Task<Result<TModel>> ActAsync<TModel>(
             this Task<Result<TModel>> promise,
             Func<TModel, Task<Result>> action,
@@ -160,6 +165,7 @@ namespace Qowaiv.Validation.Abstractions
         /// <returns>
         /// The updated model with the merged messages.
         /// </returns>
+        [Impure]
         public static async Task<Result<TModel>> ActAsync<TModel, TOut>(
             this Task<Result<TModel>> promise,
             Func<TModel, Result<TOut>> action,
@@ -198,6 +204,7 @@ namespace Qowaiv.Validation.Abstractions
         /// <returns>
         /// The updated model with the merged messages.
         /// </returns>
+        [Impure]
         public static async Task<Result<TModel>> ActAsync<TModel, TOut>(
             this Task<Result<TModel>> promise,
             Func<TModel, Task<Result<TOut>>> action,
@@ -236,6 +243,7 @@ namespace Qowaiv.Validation.Abstractions
         /// <returns>
         /// The updated model with the merged messages.
         /// </returns>
+        [Impure]
         public static async Task<Result<TModel>> ActAsync<TModel, TOut>(
             this Task<Result<TModel>> promise,
             Func<TModel, Result<TOut>> action,
@@ -274,6 +282,7 @@ namespace Qowaiv.Validation.Abstractions
         /// <returns>
         /// The updated model with the merged messages.
         /// </returns>
+        [Impure]
         public static async Task<Result<TModel>> ActAsync<TModel, TOut>(
             this Task<Result<TModel>> promise,
             Func<TModel, Task<Result<TOut>>> action,

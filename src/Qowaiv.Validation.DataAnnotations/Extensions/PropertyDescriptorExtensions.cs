@@ -28,11 +28,13 @@ namespace System.ComponentModel
             .OfType<ValidationAttribute>();
 
         /// <summary>Gets the decorated <see cref="DisplayAttribute"/> for the property.</summary>
+        [Pure]
         public static DisplayAttribute GetDisplayAttribute(this PropertyDescriptor descriptor)
             => (DisplayAttribute)Guard.NotNull(descriptor, nameof(descriptor))
             .Attributes[typeof(DisplayAttribute)];
 
         /// <summary>Gets the type converter associated with the property.</summary>
+        [Pure]
         public static TypeConverter GetTypeConverter(this PropertyDescriptor descriptor)
             => Guard.NotNull(descriptor, nameof(descriptor)).Attributes
                 .Cast<Attribute>()

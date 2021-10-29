@@ -1,4 +1,6 @@
-﻿namespace Qowaiv.Validation.Guarding
+﻿using System.Diagnostics.Contracts;
+
+namespace Qowaiv.Validation.Guarding
 {
     /// <summary>Extension method
     /// 
@@ -11,6 +13,7 @@
         /// </typeparam>
         /// <param name="this"></param>
         /// <returns></returns>
+        [Pure]
         public static Must<TSubject> Must<TSubject>(this TSubject @this) where TSubject : class
             => new(@this);
     }

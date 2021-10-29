@@ -1,4 +1,5 @@
 ﻿using Qowaiv.Validation.Abstractions;
+using Qowaiv.Validation.TestTools.Diagnostics.Contracts;
 
 namespace FluentAssertions.Qowaiv.Validation
 {
@@ -8,6 +9,7 @@ namespace FluentAssertions.Qowaiv.Validation
         internal ResultValidnessMessageAssertions(Result<TModel> subject) : base(subject) { }
 
         /// <summary>Asserts that the <see cref="Result"/> contains no messages.</summary>
+        [Assertion]
         public ResultValidnessAssertions<TModel> WithoutMessages()
         {
             ExecuteWithoutMessages();
@@ -15,6 +17,7 @@ namespace FluentAssertions.Qowaiv.Validation
         }
 
         /// <summary>Asserts that the <see cref="Result"/> contains the specified message.</summary>
+        [Assertion]
         public ResultValidnessAssertions<TModel> WithMessage(IValidationMessage message)
         {
             ExecuteWithMessage(message);
@@ -22,6 +25,7 @@ namespace FluentAssertions.Qowaiv.Validation
         }
 
         /// <summary>Asserts that the <see cref="Result"/> contains the specified messages.</summary>
+        [Assertion]
         public ResultValidnessAssertions<TModel> WithMessages(params IValidationMessage[] messages)
         {
             ExecuteWithMessages(messages);

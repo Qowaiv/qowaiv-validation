@@ -1,5 +1,6 @@
 ﻿using Qowaiv.Validation.Abstractions;
 using System;
+using System.Diagnostics.Contracts;
 using System.Runtime.Serialization;
 
 namespace Qowaiv.Validation.Messages
@@ -30,6 +31,7 @@ namespace Qowaiv.Validation.Messages
         /// <param name="name">
         /// The name of the service.
         /// </param>
+        [Pure]
         public static ServiceUnavailable WithName(string name)
         {
             Guard.NotNullOrEmpty(name, nameof(name));

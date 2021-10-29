@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv.Validation.Abstractions
 {
@@ -13,18 +14,22 @@ namespace Qowaiv.Validation.Abstractions
 
         private class CompareByInterface : IEqualityComparer<IValidationMessage>
         {
+            [Pure]
             public bool Equals(IValidationMessage x, IValidationMessage y)
                 => x is null || y is null
                 ? ReferenceEquals(x, y)
                 : Same(x, y);
 
+            [Pure]
             public int GetHashCode(IValidationMessage obj) => obj is null ? 0 : Hash(obj);
-                        
+
+            [Pure]
             private static bool Same(IValidationMessage x, IValidationMessage y)
                 => x.Message == y.Message
                 && x.Severity == y.Severity
                 && x.PropertyName == y.PropertyName;
 
+            [Pure]
             private static int Hash(IValidationMessage obj)
                 => (obj.Message?.GetHashCode() ?? 0)
                 ^ (obj.PropertyName?.GetHashCode() ?? 0)
