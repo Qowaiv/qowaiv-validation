@@ -16,10 +16,8 @@ namespace FluentValidation
         /// </param>
         [FluentSyntax]
         public static IRuleBuilderOptions<TModel, EmailAddress> NotIPBased<TModel>(this IRuleBuilder<TModel, EmailAddress> ruleBuilder)
-        {
-            return Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
-                .Must(emailAddress => !emailAddress.IsIPBased)
-                .WithMessage(m => QowaivValidationFluentMessages.NoIPBasedEmailAddress);
-        }
+            => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
+            .Must(emailAddress => !emailAddress.IsIPBased)
+            .WithMessage(m => QowaivValidationFluentMessages.NoIPBasedEmailAddress);
     }
 }
