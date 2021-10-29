@@ -18,6 +18,9 @@ indent_size = 2
 # IDE0090: Use 'new(...)'
 dotnet_diagnostic.IDE0090.severity = warning
 
+# QW0003: Decorate Pure functions
+dotnet_diagnostic.QW0003.severity = warning
+
 # S101: Types should be named in PascalCase
 dotnet_diagnostic.S101.severity = none
 
