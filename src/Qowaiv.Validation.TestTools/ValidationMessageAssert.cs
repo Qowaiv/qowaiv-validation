@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 
@@ -78,6 +79,8 @@ namespace Qowaiv.Validation.TestTools
                 Assert.Fail(sb.ToString());
             }
         }
+        
+        [Pure]
         private static string ToString(IEnumerable<IValidationMessage> messages)
         {
             var sb = new StringBuilder();

@@ -6,6 +6,7 @@ namespace Qowaiv.Validation.Abstractions
     public static class Validator
     {
         /// <summary>Gets an empty <see cref="IValidator{TModel}"/>.</summary>
+        [Pure]
         public static IValidator<TModel> Empty<TModel>() => new EmptyValidator<TModel>();
 
         /// <summary>Implementation of an empty validator.</summary>

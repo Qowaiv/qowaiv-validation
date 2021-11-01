@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
 
@@ -25,35 +26,35 @@ namespace Qowaiv.Validation.DataAnnotations
         public IEqualityComparer<object> EqualityComparer { get; }
 
         /// <summary>True if all items in the collection are distinct, otherwise false.</summary>
+        [Pure]
         public override bool IsValid(object value)
         {
-            if (value is null)
+            if (value is null) return true;
+            else
             {
-                return true;
+                var collection = Guard.IsInstanceOf<IEnumerable>(value, nameof(value)).Cast<object>();
+                var checker = new HashSet<object>(EqualityComparer);
+                return collection.All(checker.Add);
             }
-
-            var collection = Guard.IsInstanceOf<IEnumerable>(value, nameof(value)).Cast<object>();
-            var checker = new HashSet<object>(EqualityComparer);
-
-            return collection.All(checker.Add);
         }
 
         /// <summary>Creates the Comparer to do the distinct with.</summary>
+        [Pure]
         private static IEqualityComparer<object> CreateComparer(Type comparer)
         {
             if (comparer is null)
             {
                 return EqualityComparer<object>.Default;
             }
-            if (typeof(IEqualityComparer<object>).IsAssignableFrom(comparer))
+            else if (typeof(IEqualityComparer<object>).IsAssignableFrom(comparer))
             {
                 return (IEqualityComparer<object>)Activator.CreateInstance(comparer);
             }
-            if (typeof(IEqualityComparer).IsAssignableFrom(comparer))
+            else if (typeof(IEqualityComparer).IsAssignableFrom(comparer))
             {
                 return new WrappedComparer((IEqualityComparer)Activator.CreateInstance(comparer));
             }
-            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivValidationMessages.ArgumentException_TypeIsNotEqualityComparer, comparer), nameof(comparer));
+            else throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivValidationMessages.ArgumentException_TypeIsNotEqualityComparer, comparer), nameof(comparer));
         }
 
         /// <summary>As there is no none generic hash set.</summary>
@@ -61,7 +62,11 @@ namespace Qowaiv.Validation.DataAnnotations
         {
             private readonly IEqualityComparer _comparer;
             public WrappedComparer(IEqualityComparer comparer) => _comparer = comparer;
+            
+            [Pure]
             public new bool Equals(object x, object y) => _comparer.Equals(x, y);
+            
+            [Pure]
             public int GetHashCode(object obj) => _comparer.GetHashCode(obj);
         }
     }

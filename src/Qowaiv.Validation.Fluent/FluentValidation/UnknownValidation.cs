@@ -1,4 +1,5 @@
 ﻿using Qowaiv;
+using Qowaiv.Validation.Abstractions.Diagnostics.Contracts;
 using Qowaiv.Validation.Fluent;
 using System.Diagnostics.Contracts;
 
@@ -19,6 +20,7 @@ namespace FluentValidation
         /// <param name="ruleBuilder">
         /// The rule builder on which the validator should be defined.
         /// </param>
+        [FluentSyntax]
         public static IRuleBuilderOptions<TModel, TProperty> NotUnknown<TModel, TProperty>(this IRuleBuilder<TModel, TProperty> ruleBuilder)
             => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
             .Must(prop => prop is null || !Equals(Unknown.Value(typeof(TProperty)), prop))
@@ -28,6 +30,7 @@ namespace FluentValidation
         /// <typeparam name="TModel">Type of object being validated.</typeparam>
         /// <typeparam name="TProperty">Type of property being validated.</typeparam>
         /// <param name="ruleBuilder">The rule builder on which the validator should be defined.</param>
+        [FluentSyntax]
         public static IRuleBuilderOptions<TModel, TProperty> NotEmptyOrUnknown<TModel, TProperty>(this IRuleBuilder<TModel, TProperty> ruleBuilder)
             => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
             .SetValidator(new NotEmptyOrUnknownValidator<TModel, TProperty>())

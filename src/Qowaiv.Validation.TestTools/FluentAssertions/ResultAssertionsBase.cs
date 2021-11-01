@@ -1,5 +1,6 @@
 ﻿using FluentAssertions.Execution;
 using Qowaiv.Validation.Abstractions;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 
@@ -46,13 +47,14 @@ namespace FluentAssertions.Qowaiv.Validation
             }
         }
 
+        [Pure]
         private static StringBuilder Text(string text) => new(text);
 
+        [CustomAssertion]
         private bool SubjectExists()
             => Execute.Assertion
-              .WithDefaultIdentifier()
-              .ForCondition(Subject is not null)
-              .FailWith("{context} is <null>.");
-
+            .WithDefaultIdentifier()
+            .ForCondition(Subject is not null)
+            .FailWith("{context} is <null>.");
     }
 }

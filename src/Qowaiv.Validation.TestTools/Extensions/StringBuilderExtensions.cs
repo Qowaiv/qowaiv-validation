@@ -1,4 +1,5 @@
 ﻿using Qowaiv.Validation.Abstractions;
+using Qowaiv.Validation.Abstractions.Diagnostics.Contracts;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +8,7 @@ namespace FluentAssertions.Qowaiv
 {
     internal static class StringBuilderExtensions
     {
+        [FluentSyntax]
         public static StringBuilder AppendMessages(this StringBuilder sb, IEnumerable<IValidationMessage> messages)
         {
             foreach (var message in messages.OrderByDescending(m => m.Severity))
@@ -16,6 +18,7 @@ namespace FluentAssertions.Qowaiv
             return sb;
         }
 
+        [FluentSyntax]
         public static StringBuilder AppendMessage(this StringBuilder sb, IValidationMessage message)
         {
             sb.AppendFormat("- {0,-7} ", message.Severity.ToString().ToUpperInvariant())

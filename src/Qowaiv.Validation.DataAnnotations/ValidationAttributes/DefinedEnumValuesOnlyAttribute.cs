@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Reflection;
 
@@ -24,23 +25,26 @@ namespace Qowaiv.Validation.DataAnnotations
         /// <exception cref="ArgumentException">
         /// If the type of the value is not an enum.
         /// </exception>
+        [Pure]
         public override bool IsValid(object value)
         {
             // Might be a nullable enum, we just don't know.
-            if (value is null) { return true; }
-
-            var enumType = value.GetType();
-
-            if (!OnlyAllowDefinedFlagsCombinations && enumType.IsEnum && enumType.GetCustomAttributes<FlagsAttribute>().Any())
+            if (value is null) return true;
+            else
             {
-                dynamic dyn = value;
-                var max = Enum.GetValues(enumType)
-                    .Cast<dynamic>()
-                    .Aggregate((e1, e2) => e1 | e2);
+                var enumType = value.GetType();
 
-                return (max & dyn) == dyn;
+                if (!OnlyAllowDefinedFlagsCombinations && enumType.IsEnum && enumType.GetCustomAttributes<FlagsAttribute>().Any())
+                {
+                    dynamic dyn = value;
+                    var max = Enum.GetValues(enumType)
+                        .Cast<dynamic>()
+                        .Aggregate((e1, e2) => e1 | e2);
+
+                    return (max & dyn) == dyn;
+                }
+                return Enum.IsDefined(enumType, value);
             }
-            return Enum.IsDefined(enumType, value);
         }
     }
 }

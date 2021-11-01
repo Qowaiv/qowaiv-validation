@@ -1,6 +1,7 @@
 ﻿using FluentAssertions.Execution;
 using Qowaiv.Validation.Abstractions;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 
@@ -44,12 +45,14 @@ namespace FluentAssertions.Qowaiv.Validation
                 : "Expected messages, but found none.");
         }
 
+        [Pure]
         internal static string WithoutMessages(IEnumerable<IValidationMessage> messages)
             => new StringBuilder()
                 .Append("Expected no messages, but found:")
                 .AppendMessages(messages)
                 .ToString();
 
+        [Pure]
         private static string WithMessage(IValidationMessage expected, IValidationMessage[] actuals)
         {
             if (!actuals.Any()) return "Expected a message, but found none.";
@@ -70,8 +73,10 @@ namespace FluentAssertions.Qowaiv.Validation
             }
         }
 
+        [Pure]
         private static IEqualityComparer<IValidationMessage> Comparer() => ValidationMessageCompare.ByInterface;
 
+        [Pure]
         private static string WithMessages(IValidationMessage[] missing, IValidationMessage[] extra)
         {
             var sb = new StringBuilder();

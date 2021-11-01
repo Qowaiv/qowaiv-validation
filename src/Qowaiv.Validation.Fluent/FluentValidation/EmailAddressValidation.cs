@@ -1,4 +1,5 @@
 ﻿using Qowaiv;
+using Qowaiv.Validation.Abstractions.Diagnostics.Contracts;
 using Qowaiv.Validation.Fluent;
 
 namespace FluentValidation
@@ -13,11 +14,10 @@ namespace FluentValidation
         /// <param name="ruleBuilder">
         /// The rule builder on which the validator should be defined.
         /// </param>
+        [FluentSyntax]
         public static IRuleBuilderOptions<TModel, EmailAddress> NotIPBased<TModel>(this IRuleBuilder<TModel, EmailAddress> ruleBuilder)
-        {
-            return Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
-                .Must(emailAddress => !emailAddress.IsIPBased)
-                .WithMessage(m => QowaivValidationFluentMessages.NoIPBasedEmailAddress);
-        }
+            => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
+            .Must(emailAddress => !emailAddress.IsIPBased)
+            .WithMessage(m => QowaivValidationFluentMessages.NoIPBasedEmailAddress);
     }
 }

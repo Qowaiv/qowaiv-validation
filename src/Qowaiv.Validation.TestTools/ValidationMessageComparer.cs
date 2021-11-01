@@ -1,6 +1,7 @@
 ﻿using Qowaiv.Validation.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv.Validation.TestTools
 {
@@ -9,10 +10,12 @@ namespace Qowaiv.Validation.TestTools
     public class ValidationMessageComparer : IEqualityComparer<IValidationMessage>
     {
         /// <inheritdoc />
+        [Pure]
         public bool Equals(IValidationMessage x, IValidationMessage y)
             => ValidationMessageCompare.ByInterface.Equals(x, y);
 
         /// <inheritdoc />
+        [Pure]
         public int GetHashCode(IValidationMessage obj)
             => ValidationMessageCompare.ByInterface.GetHashCode(obj);
     }

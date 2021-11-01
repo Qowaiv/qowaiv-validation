@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -49,6 +50,7 @@ namespace Qowaiv.Validation.Abstractions
         public IReadOnlyList<IValidationMessage> Errors { get; } = new ReadOnlyCollection<IValidationMessage>(new IValidationMessage[0]);
 
         /// <summary>Creates an <see cref="InvalidModelException"/> for the model.</summary>
+        [Pure]
         public static InvalidModelException For<T>(IEnumerable<IValidationMessage> messages)
         {
             var sb = new StringBuilder().AppendFormat(QowaivValidationMessages.InvalidModelException, typeof(T));
@@ -65,6 +67,7 @@ namespace Qowaiv.Validation.Abstractions
             return new InvalidModelException(sb.ToString(), null, messages);
         }
 
+        [Pure]
         private static IEnumerable<IValidationMessage> Filter(IEnumerable<IValidationMessage> messages)
             => (messages ?? Array.Empty<IValidationMessage>())
             .Where(e => e.Severity >= ValidationSeverity.Error);
@@ -81,6 +84,7 @@ namespace Qowaiv.Validation.Abstractions
                 .AppendLine(PropertySuffix(message));
         }
 
+        [Pure]
         private static string PropertySuffix(IValidationMessage message)
             => string.IsNullOrWhiteSpace(message.PropertyName) ? string.Empty : $" ({message.PropertyName})";
 

@@ -1,4 +1,5 @@
 ﻿using Qowaiv.Validation.Abstractions;
+using Qowaiv.Validation.Abstractions.Diagnostics.Contracts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -74,6 +75,7 @@ namespace Qowaiv.Validation.DataAnnotations
         /// <remarks>
         /// Null and <see cref="ValidationMessage.None"/> Messages are not added.
         /// </remarks>
+        [Impure]
         public bool AddMessage(ValidationResult validationResult)
         {
             var message = ValidationMessage.For(validationResult);
@@ -96,6 +98,7 @@ namespace Qowaiv.Validation.DataAnnotations
             => !string.IsNullOrEmpty(Root) && validationResult.MemberNames.Any();
 
         /// <inheritdoc />
+        [Pure]
         public object GetService(Type serviceType) => ServiceProvider?.GetService(serviceType);
 
         /// <summary>Creates context for the property.</summary>

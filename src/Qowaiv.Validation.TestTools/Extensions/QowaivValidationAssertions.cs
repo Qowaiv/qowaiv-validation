@@ -5,6 +5,7 @@ using FluentAssertions.Primitives;
 using FluentAssertions.Qowaiv.Validation;
 using Qowaiv;
 using Qowaiv.Validation.Abstractions;
+using Qowaiv.Validation.Abstractions.Diagnostics.Contracts;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
 
@@ -29,13 +30,16 @@ namespace FluentAssertions
         public static ResultAssertions<TModel> Should<TModel>(this Result<TModel> result) => new(result);
 
         /// <summary>Asserts thats object is valid for the specified validator.</summary>
+        [CustomAssertion]
         public static ResultValidnessAssertions BeValidFor<TModel>(this ObjectAssertions assertions, IValidator<TModel> validator)
             => assertions.Validate(validator).Should().BeValid();
 
         /// <summary>Asserts thats object is invalid for the specified validator.</summary>
+        [CustomAssertion]
         public static ResultInvalidnessAssertions BeInvalidFor<TModel>(this ObjectAssertions assertions, IValidator<TModel> validator)
             => assertions.Validate(validator).Should().BeInvalid();
 
+        [CustomAssertion]
         private static Result Validate<TModel>(this ObjectAssertions assertions, IValidator<TModel> validator)
         {
             Guard.NotNull(assertions, nameof(assertions));
@@ -43,7 +47,8 @@ namespace FluentAssertions
             return validator.Validate((TModel)assertions.Subject);
         }
 
+        [Impure]
         internal static IAssertionScope WithDefaultIdentifier(this IAssertionScope scope)
-        => scope.WithDefaultIdentifier("Result");
+            => scope.WithDefaultIdentifier("Result");
     }
 }

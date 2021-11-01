@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace Qowaiv.Validation.DataAnnotations
@@ -52,9 +53,11 @@ namespace Qowaiv.Validation.DataAnnotations
         /// <remarks>
         /// This one uses caching.
         /// </remarks>
+        [Pure]
         public static AnnotatedModel Get(Type type) => Store.GetAnnotededModel(type);
 
         /// <summary>Creates an <see cref="AnnotatedModel"/>.</summary>
+        [Pure]
         internal static AnnotatedModel Create(Type type)
         {
             Guard.NotNull(type, nameof(type));

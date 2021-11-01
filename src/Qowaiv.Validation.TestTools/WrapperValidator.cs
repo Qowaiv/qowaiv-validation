@@ -1,4 +1,5 @@
 ﻿using Qowaiv.Validation.Abstractions;
+using System.Diagnostics.Contracts;
 
 namespace Qowaiv.Validation.TestTools
 {
@@ -11,6 +12,7 @@ namespace Qowaiv.Validation.TestTools
         public WrapperValidator(FluentValidation.IValidator<TModel> validator) => _validator = validator;
 
         /// <inheritdoc />
+        [Pure]
         public Result<TModel> Validate(TModel model)
         {
             var context = new FluentValidation.ValidationContext<TModel>(model);

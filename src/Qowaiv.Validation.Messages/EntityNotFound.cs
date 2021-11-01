@@ -1,5 +1,6 @@
 ﻿using Qowaiv.Validation.Abstractions;
 using System;
+using System.Diagnostics.Contracts;
 using System.Runtime.Serialization;
 
 namespace Qowaiv.Validation.Messages
@@ -27,6 +28,7 @@ namespace Qowaiv.Validation.Messages
         public string PropertyName => null;
 
         /// <summary>Creates an <see cref="EntityNotFound"/> for specific ID.</summary>
+        [Pure]
         public static EntityNotFound ForId(object id)
             => new(string.Format(ValidationMessages.EntityNotFound_ForId, id));
     }

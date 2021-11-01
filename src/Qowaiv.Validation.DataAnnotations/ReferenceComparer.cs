@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 
 namespace Qowaiv.Validation.DataAnnotations
@@ -19,9 +20,11 @@ namespace Qowaiv.Validation.DataAnnotations
         private ReferenceComparer() => Do.Nothing();
 
         /// <inheritdoc />
+        [Pure]
         public new bool Equals(object x, object y) => ReferenceEquals(x, y);
 
         /// <inheritdoc />
+        [Pure]
         public int GetHashCode(object obj) => RuntimeHelpers.GetHashCode(obj);
     }
 }

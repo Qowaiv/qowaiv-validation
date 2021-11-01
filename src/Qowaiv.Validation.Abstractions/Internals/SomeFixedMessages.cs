@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace Qowaiv.Validation.Abstractions.Internals
@@ -19,8 +20,10 @@ namespace Qowaiv.Validation.Abstractions.Internals
 
         public override int Count => parent.Count + 1;
 
+        [Pure]
         public override IEnumerator<IValidationMessage> GetEnumerator() => Enumerate().Reverse().GetEnumerator();
 
+        [Pure]
         private IEnumerable<IValidationMessage> Enumerate()
         {
             FixedMessages current = this;

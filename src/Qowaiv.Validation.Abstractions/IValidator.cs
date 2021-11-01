@@ -1,4 +1,6 @@
-﻿namespace Qowaiv.Validation.Abstractions
+﻿using System.Diagnostics.Contracts;
+
+namespace Qowaiv.Validation.Abstractions
 {
     /// <summary>A validator for <typeparamref name="TModel"/>.</summary>
     /// <typeparam name="TModel">
@@ -13,6 +15,7 @@
         /// <returns>
         /// The <see cref="Result{T}"/> containing the validated model or the error messages.
         /// </returns>
+        [Pure]
         Result<TModel> Validate(TModel model);
     }
 }
