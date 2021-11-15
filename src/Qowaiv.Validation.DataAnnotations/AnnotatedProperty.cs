@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Diagnostics.Contracts;
-using System.Linq;
-
-namespace Qowaiv.Validation.DataAnnotations
+﻿namespace Qowaiv.Validation.DataAnnotations
 {
     /// <summary>Represents a property that contains at least one <see cref="ValidationAttribute"/>.</summary>
     [DebuggerDisplay("{DebuggerDisplay}")]

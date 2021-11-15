@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-
-namespace Qowaiv.Validation.Abstractions.Internals
+﻿namespace Qowaiv.Validation.Abstractions.Diagnostics
 {
     /// <summary>Allows the debugger to display collections.</summary>
     [ExcludeFromCodeCoverage]
