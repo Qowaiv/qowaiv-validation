@@ -1,19 +1,15 @@
-﻿using FluentValidation;
-using Qowaiv.Globalization;
+﻿namespace Qowaiv.Validation.Fluent.UnitTests.Models;
 
-namespace Qowaiv.Validation.Fluent.UnitTests.Models
+public class PostalCodeModel
 {
-    public class PostalCodeModel
-    {
-        public PostalCode PostalCode { get; set; }
-        public Country Country { get; set; }
-    }
+    public PostalCode PostalCode { get; set; }
+    public Country Country { get; set; }
+}
 
-    public class PostalCodeModelValidator : AbstractValidator<PostalCodeModel>
+public class PostalCodeModelValidator : AbstractValidator<PostalCodeModel>
+{
+    public PostalCodeModelValidator()
     {
-        public PostalCodeModelValidator()
-        {
-            RuleFor(m => m.PostalCode).ValidFor(m => m.Country);
-        }
+        RuleFor(m => m.PostalCode).ValidFor(m => m.Country);
     }
 }
