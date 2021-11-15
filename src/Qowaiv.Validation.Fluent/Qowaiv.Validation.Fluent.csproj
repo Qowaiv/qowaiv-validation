@@ -3,7 +3,7 @@
   <Import Project="..\..\props\production.props" />
   
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
     <Version>0.1.1</Version>
     <PackageReleaseNotes>
 v0.1.1
