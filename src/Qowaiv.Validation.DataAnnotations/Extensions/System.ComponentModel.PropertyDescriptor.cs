@@ -1,14 +1,9 @@
-﻿using Qowaiv;
-using Qowaiv.Validation.DataAnnotations;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.Contracts;
-using System.Linq;
+﻿using Qowaiv.Validation.DataAnnotations;
 
 namespace System.ComponentModel
 {
     /// <summary>Extensions on <see cref="PropertyDescriptor"/>.</summary>
-    public static class PropertyDescriptorExtensions
+    public static class QowaivPropertyDescriptorExtensions
     {
         /// <summary>Gets the decorated <see cref="RequiredAttribute"/> for the property.</summary>
         [Pure]

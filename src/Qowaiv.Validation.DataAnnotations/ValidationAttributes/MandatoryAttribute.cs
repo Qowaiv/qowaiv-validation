@@ -1,81 +1,77 @@
 ﻿using Qowaiv.Reflection;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.Contracts;
 
-namespace Qowaiv.Validation.DataAnnotations
+namespace Qowaiv.Validation.DataAnnotations;
+
+/// <summary>Specifies that a field is mandatory (for value types the default value is not allowed).</summary>
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+public sealed class MandatoryAttribute : RequiredAttribute
 {
-    /// <summary>Specifies that a field is mandatory (for value types the default value is not allowed).</summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
-    public sealed class MandatoryAttribute : RequiredAttribute
+    /// <summary>Gets or sets a value that indicates whether an empty string is allowed.</summary>
+    public bool AllowUnknownValue { get; set; }
+
+    /// <inheritdoc />
+    public override bool RequiresValidationContext => true;
+
+    /// <inheritdoc />
+    [Pure]
+    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
     {
-        /// <summary>Gets or sets a value that indicates whether an empty string is allowed.</summary>
-        public bool AllowUnknownValue { get; set; }
+        Guard.NotNull(validationContext, nameof(validationContext));
 
-        /// <inheritdoc />
-        public override bool RequiresValidationContext => true;
-
-        /// <inheritdoc />
-        [Pure]
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        if (IsValid(value, GetMemberType(validationContext)))
         {
-            Guard.NotNull(validationContext, nameof(validationContext));
+            return ValidationResult.Success;
+        }
+        else
+        {
+            var memberNames = validationContext.MemberName != null ? new[] { validationContext.MemberName } : null;
+            return ValidationMessage.Error(FormatErrorMessage(validationContext.DisplayName), memberNames);
+        }
+    }
 
-            if (IsValid(value, GetMemberType(validationContext)))
+    /// <summary>Gets the type of the field/property.</summary>
+    /// <remarks>
+    /// Because the values of the member are boxed, this is (unfortunately)
+    /// the only way to determine if the provided value is a nullable type,
+    /// or not.
+    /// </remarks>
+    [Pure]
+    private static Type GetMemberType(ValidationContext context)
+    {
+        if (string.IsNullOrEmpty(context.MemberName)) return null;
+        else
+        {
+            return context.ObjectType.GetProperty(context.MemberName)?.PropertyType
+                ?? context.ObjectType.GetField(context.MemberName)?.FieldType;
+        }
+    }
+
+    /// <summary>Returns true if the value is not null and value types are
+    /// not equal to their default value, otherwise false.
+    /// </summary>
+    /// <remarks>
+    /// The unknown value is expected to be static field or property of the type with the name "Unknown".
+    /// </remarks>
+    [Pure]
+    public override bool IsValid(object value) => IsValid(value, null);
+
+    [Pure]
+    private bool IsValid(object value, Type memberType)
+    {
+        if (value != null)
+        {
+            var type = memberType ?? value.GetType();
+            var underlyingType = QowaivType.GetNotNullableType(type);
+
+            if (!AllowUnknownValue && value.Equals(Unknown.Value(underlyingType)))
             {
-                return ValidationResult.Success;
+                return false;
             }
-            else
+            else if (type.IsValueType)
             {
-                var memberNames = validationContext.MemberName != null ? new[] { validationContext.MemberName } : null;
-                return ValidationMessage.Error(FormatErrorMessage(validationContext.DisplayName), memberNames);
+                return !value.Equals(Activator.CreateInstance(type));
             }
         }
-
-        /// <summary>Gets the type of the field/property.</summary>
-        /// <remarks>
-        /// Because the values of the member are boxed, this is (unfortunately)
-        /// the only way to determine if the provided value is a nullable type,
-        /// or not.
-        /// </remarks>
-        [Pure]
-        private static Type GetMemberType(ValidationContext context)
-        {
-            if (string.IsNullOrEmpty(context.MemberName)) return null;
-            else
-            {
-                return context.ObjectType.GetProperty(context.MemberName)?.PropertyType
-                    ?? context.ObjectType.GetField(context.MemberName)?.FieldType;
-            }
-        }
-
-        /// <summary>Returns true if the value is not null and value types are
-        /// not equal to their default value, otherwise false.
-        /// </summary>
-        /// <remarks>
-        /// The unknown value is expected to be static field or property of the type with the name "Unknown".
-        /// </remarks>
-        [Pure]
-        public override bool IsValid(object value) => IsValid(value, null);
-
-        [Pure]
-        private bool IsValid(object value, Type memberType)
-        {
-            if (value != null)
-            {
-                var type = memberType ?? value.GetType();
-                var underlyingType = QowaivType.GetNotNullableType(type);
-
-                if (!AllowUnknownValue && value.Equals(Unknown.Value(underlyingType)))
-                {
-                    return false;
-                }
-                else if (type.IsValueType)
-                {
-                    return !value.Equals(Activator.CreateInstance(type));
-                }
-            }
-            return base.IsValid(value);
-        }
+        return base.IsValid(value);
     }
 }

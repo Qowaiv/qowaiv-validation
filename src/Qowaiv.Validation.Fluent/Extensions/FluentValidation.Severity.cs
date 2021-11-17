@@ -1,11 +1,7 @@
-﻿using Qowaiv;
-using Qowaiv.Validation.Abstractions;
-using System.Diagnostics.Contracts;
-
-namespace FluentValidation
+﻿namespace FluentValidation
 {
     /// <summary>Extensions on <see cref="Severity"/>.</summary>
-    public static class SeverityExtensions
+    public static class QowaivSeverityExtensions
     {
         /// <summary>Converts <see cref="Severity"/> to <see cref="ValidationSeverity"/>.</summary>
         [Pure]

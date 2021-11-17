@@ -3,7 +3,7 @@
   <Import Project="..\..\props\production.props" />
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
     <Version>0.1.1</Version>
     <PackageReleaseNotes>
 v0.1.1
@@ -16,8 +16,8 @@ v0.0.4
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.6.0" />
-    <PackageReference Include="Qowaiv" Version="5.1.1" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Qowaiv" Version="5.1.4" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
   </ItemGroup>
 

@@ -1,19 +1,10 @@
 ﻿#pragma warning disable CS3001 // Argument type is not CLS-compliant
 
-using FluentAssertions.Execution;
-using FluentAssertions.Primitives;
-using FluentAssertions.Qowaiv.Validation;
-using Qowaiv;
-using Qowaiv.Validation.Abstractions;
-using Qowaiv.Validation.Abstractions.Diagnostics.Contracts;
-using System.Diagnostics;
-using System.Diagnostics.Contracts;
-
 namespace FluentAssertions
 {
     /// <summary>Contains extension methods for custom assertions in unit tests.</summary>
     [DebuggerNonUserCode]
-    public static class QowaivValidationAssertions
+    public static class QowaivFluentAssertions
     {
         /// <summary>
         /// Returns an <see cref="ResultAssertions"/> object that can be used to assert the

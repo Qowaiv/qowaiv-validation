@@ -1,18 +1,15 @@
-﻿using FluentValidation;
+﻿namespace Qowaiv.Validation.Fluent.UnitTests.Models;
 
-namespace Qowaiv.Validation.Fluent.UnitTests.Models
+public class WarningModel
 {
-    public class WarningModel
-    {
-        public string Message { get; set; } = "Some message";
-    }
+    public string Message { get; set; } = "Some message";
+}
 
-    public class WarningModelValidator : ModelValidator<WarningModel>
+public class WarningModelValidator : ModelValidator<WarningModel>
+{
+    public WarningModelValidator()
     {
-        public WarningModelValidator()
-        {
-            RuleFor(m => m.Message).Must(v => false).WithMessage("Test warning.").WithSeverity(Severity.Warning);
-            RuleFor(m => m.Message).Must(v => false).WithMessage("Nice that you validated this.").WithSeverity(Severity.Info);
-        }
+        RuleFor(m => m.Message).Must(v => false).WithMessage("Test warning.").WithSeverity(Severity.Warning);
+        RuleFor(m => m.Message).Must(v => false).WithMessage("Nice that you validated this.").WithSeverity(Severity.Info);
     }
 }

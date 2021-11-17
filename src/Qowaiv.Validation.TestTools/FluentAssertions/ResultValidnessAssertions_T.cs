@@ -1,14 +1,10 @@
-﻿using FluentAssertions.Primitives;
-using Qowaiv.Validation.Abstractions;
+﻿namespace FluentAssertions.Qowaiv.Validation;
 
-namespace FluentAssertions.Qowaiv.Validation
+/// <summary>Contains a number of methods to assert the value of a valid <see cref="Result{TModel}"/>.</summary>
+public class ResultValidnessAssertions<TModel> : ResultValidnessAssertionsBase<Result<TModel>>
 {
-    /// <summary>Contains a number of methods to assert the value of a valid <see cref="Result{TModel}"/>.</summary>
-    public class ResultValidnessAssertions<TModel> : ResultValidnessAssertionsBase<Result<TModel>>
-    {
-        internal ResultValidnessAssertions(Result<TModel> subject) : base(subject) { }
+    internal ResultValidnessAssertions(Result<TModel> subject) : base(subject) { }
 
-        /// <summary>Expose the value, so that the chain of assertions can be continued.</summary>
-        public TModel Value => Subject.Value;
-    }
+    /// <summary>Expose the value, so that the chain of assertions can be continued.</summary>
+    public TModel Value => Subject.Value;
 }

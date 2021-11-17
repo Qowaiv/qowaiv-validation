@@ -3,7 +3,7 @@
   <Import Project="..\..\props\production.props" />
   
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
     <Version>0.1.1</Version>
     <PackageReleaseNotes>
 v0.1.1
@@ -32,7 +32,7 @@ v0.0.1
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="10.2.0" />
-    <PackageReference Include="Qowaiv" Version="5.1.1" />
+    <PackageReference Include="Qowaiv" Version="5.1.4" />
   </ItemGroup>
 
   <ItemGroup>
