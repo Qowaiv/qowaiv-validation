@@ -9,7 +9,7 @@ public static class ValidationMessageCompare
     /// <summary>Compares two instances of <see cref="IValidationMessage"/> using <see cref="EqualityComparer{IValidationMessage}.Default"/>.</summary>
     public static readonly IEqualityComparer<IValidationMessage> Default = EqualityComparer<IValidationMessage>.Default;
 
-    private class CompareByInterface : IEqualityComparer<IValidationMessage>
+    private sealed class CompareByInterface : IEqualityComparer<IValidationMessage>
     {
         [Pure]
         public bool Equals(IValidationMessage x, IValidationMessage y)

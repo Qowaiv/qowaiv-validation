@@ -50,7 +50,7 @@ public sealed class DistinctValuesAttribute : ValidationAttribute
     }
 
     /// <summary>As there is no none generic hash set.</summary>
-    private class WrappedComparer : IEqualityComparer<object>
+    private sealed class WrappedComparer : IEqualityComparer<object>
     {
         private readonly IEqualityComparer _comparer;
         public WrappedComparer(IEqualityComparer comparer) => _comparer = comparer;
