@@ -26,4 +26,12 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Update="NUnit3TestAdapter" Version="4.2.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Update="Qowaiv.TestTools" Version="6.0.0" />
+  </ItemGroup>
+
 </Project>

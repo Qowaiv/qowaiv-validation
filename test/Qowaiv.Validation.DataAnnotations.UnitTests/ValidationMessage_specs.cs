@@ -7,7 +7,7 @@ public class Serializes
     {
         var message = ValidationMessage.Info("Can be serialized", "ErrorMessage", "MemberNames");
 
-        var actual = SerializationTest.SerializeDeserialize(message);
+        var actual = SerializeDeserialize.Binary(message);
 
         Assert.AreEqual(message.Severity, actual.Severity);
         Assert.AreEqual(message.ErrorMessage, actual.ErrorMessage);
@@ -19,7 +19,7 @@ public class Serializes
     {
         var message = ValidationMessage.Warn("Can be serialized", "ErrorMessage", "MemberNames");
 
-        var actual = SerializationTest.SerializeDeserialize(message);
+        var actual = SerializeDeserialize.Binary(message);
 
         Assert.AreEqual(message.Severity, actual.Severity);
         Assert.AreEqual(message.ErrorMessage, actual.ErrorMessage);
@@ -31,7 +31,7 @@ public class Serializes
     {
         var message = ValidationMessage.Error("Can be serialized", "ErrorMessage", "MemberNames");
 
-        var actual = SerializationTest.SerializeDeserialize(message);
+        var actual = SerializeDeserialize.Binary(message);
 
         Assert.AreEqual(message.Severity, actual.Severity);
         Assert.AreEqual(message.ErrorMessage, actual.ErrorMessage);
