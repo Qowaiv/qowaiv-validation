@@ -70,7 +70,7 @@ public static class ResultActExtensions
 
         var result = await promise.ConfigureAwait(continueOnCapturedContext);
         return result is null
-            ? Result.For<TOut>(default)
+            ? Result.Null<TOut>()
             : await result.ActAsync(action).ConfigureAwait(continueOnCapturedContext);
     }
 
@@ -102,7 +102,7 @@ public static class ResultActExtensions
 
         var result = await promise.ConfigureAwait(continueOnCapturedContext);
         return result is null
-            ? Result.For<TModel>(default)
+            ? Result.Null<TModel>()
             : result.Act(action);
     }
 
@@ -134,7 +134,7 @@ public static class ResultActExtensions
 
         var result = await promise.ConfigureAwait(continueOnCapturedContext);
         return result is null
-            ? Result.For<TModel>(default)
+            ? Result.Null<TModel>()
             : await result.ActAsync(action).ConfigureAwait(continueOnCapturedContext);
     }
 

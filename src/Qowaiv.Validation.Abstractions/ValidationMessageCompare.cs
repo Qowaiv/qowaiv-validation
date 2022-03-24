@@ -12,7 +12,7 @@ public static class ValidationMessageCompare
     private sealed class CompareByInterface : IEqualityComparer<IValidationMessage>
     {
         [Pure]
-        public bool Equals(IValidationMessage x, IValidationMessage y)
+        public bool Equals(IValidationMessage? x, IValidationMessage? y)
             => x is null || y is null
             ? ReferenceEquals(x, y)
             : Same(x, y);

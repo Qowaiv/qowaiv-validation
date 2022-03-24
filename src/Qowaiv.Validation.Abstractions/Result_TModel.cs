@@ -13,17 +13,21 @@ public sealed class Result<TModel> : Result
     /// <param name="messages">
     /// The messages related to the result.
     /// </param>
-    internal Result(TModel value, FixedMessages messages) : base(messages)
+    internal Result(TModel? value, FixedMessages messages) : base(messages)
         => _value = IsValid ? value : default;
 
     /// <summary>Gets the value related to result.</summary>
+    /// <remarks>
+    /// Although the value can be null (<see cref="Result.Null{T}(IEnumerable{IValidationMessage})"/>
+    /// in normal flows however, the value is not null when valid.
+    /// </remarks>
     [Pure]
     public TModel Value => IsValid
-        ? _value
+        ? _value!
         : throw InvalidModelException.For<TModel>(Errors);
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly TModel _value;
+    private readonly TModel? _value;
 
     /// <summary>Implicitly casts a model to the <see cref="Result"/>.</summary>
     [Pure]
@@ -130,7 +134,7 @@ public sealed class Result<TModel> : Result
 
         var resolved = Act(action);
         return resolved.IsValid
-            ? new(update(_value, resolved.Value), (FixedMessages)resolved.Messages)
+            ? new(update(_value!, resolved.Value), (FixedMessages)resolved.Messages)
             : new(_value, (FixedMessages)resolved.Messages);
     }
 
@@ -245,12 +249,12 @@ public sealed class Result<TModel> : Result
 
         var resolved = await ActAsync(action).ConfigureAwait(continueOnCapturedContext);
         return resolved.IsValid
-            ? new(update(_value, resolved.Value), (FixedMessages)resolved.Messages)
+            ? new(update(_value!, resolved.Value), (FixedMessages)resolved.Messages)
             : new(_value, (FixedMessages)resolved.Messages);
     }
 
     /// <summary>Explicitly casts the <see cref="Result"/> to the type of the related model.</summary>
-    public static explicit operator TModel(Result<TModel> result) => result == null ? default : result.Value;
+    public static explicit operator TModel?(Result<TModel>? result) => result == null ? default : result.Value;
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
     /// <param name="result">

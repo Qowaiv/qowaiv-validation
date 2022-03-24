@@ -8,7 +8,7 @@ public sealed class ValidationMessage : IValidationMessage, ISerializable, IEqua
     public ValidationMessage() : this(ValidationSeverity.None, null, null) => Do.Nothing();
 
     /// <summary>Initializes a new instance of the <see cref="ValidationMessage"/> class.</summary>
-    internal ValidationMessage(ValidationSeverity severity, string message, string propertyName)
+    internal ValidationMessage(ValidationSeverity severity, string? message, string? propertyName)
     {
         Severity = severity;
         Message = message;
@@ -25,11 +25,11 @@ public sealed class ValidationMessage : IValidationMessage, ISerializable, IEqua
 
     /// <summary>Helper methods to deserialize the <see cref="ValidationMessage"/>.</summary>
     [Pure]
-    private static string GetMessage(SerializationInfo info) => info.GetString(nameof(Message));
+    private static string GetMessage(SerializationInfo info) => info.GetString(nameof(Message))!;
 
     /// <summary>Helper methods to deserialize the <see cref="ValidationMessage"/>.</summary>
     [Pure]
-    private static string GetProperty(SerializationInfo info) => info.GetString(nameof(PropertyName));
+    private static string? GetProperty(SerializationInfo info) => info.GetString(nameof(PropertyName));
 
     /// <inheritdoc />
     public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -45,10 +45,10 @@ public sealed class ValidationMessage : IValidationMessage, ISerializable, IEqua
     public ValidationSeverity Severity { get; }
 
     /// <inheritdoc />
-    public string PropertyName { get; }
+    public string? PropertyName { get; }
 
     /// <inheritdoc />
-    public string Message { get; }
+    public string? Message { get; }
 
     /// <inheritdoc />
     [Pure]
@@ -86,11 +86,11 @@ public sealed class ValidationMessage : IValidationMessage, ISerializable, IEqua
 
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object obj) => obj is ValidationMessage other && Equals(other);
+    public override bool Equals(object? obj) => obj is ValidationMessage other && Equals(other);
 
     /// <inheritdoc />
     [Pure]
-    public bool Equals(ValidationMessage other)
+    public bool Equals(ValidationMessage? other)
         => other is not null
         && Severity == other.Severity
         && PropertyName == other.PropertyName
@@ -111,19 +111,19 @@ public sealed class ValidationMessage : IValidationMessage, ISerializable, IEqua
 
     /// <summary>Creates an error message.</summary>
     [Pure]
-    public static ValidationMessage Error(string message, string propertyName = null) => new(ValidationSeverity.Error, message, propertyName);
+    public static ValidationMessage Error(string message, string? propertyName = null) => new(ValidationSeverity.Error, message, propertyName);
 
     /// <summary>Creates a warning message.</summary>
     [Pure]
-    public static ValidationMessage Warn(string message, string propertyName = null) => new(ValidationSeverity.Warning, message, propertyName);
+    public static ValidationMessage Warn(string message, string? propertyName = null) => new(ValidationSeverity.Warning, message, propertyName);
 
     /// <summary>Creates an info message.</summary>
     [Pure]
-    public static ValidationMessage Info(string message, string propertyName = null) => new(ValidationSeverity.Info, message, propertyName);
+    public static ValidationMessage Info(string message, string? propertyName = null) => new(ValidationSeverity.Info, message, propertyName);
 
     /// <summary>Creates a validation message.</summary>
     [Pure]
-    public static IValidationMessage For(ValidationSeverity severity, string message, string propertyName = null)
+    public static IValidationMessage For(ValidationSeverity severity, string message, string? propertyName = null)
     {
         return severity switch
         {
