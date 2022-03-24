@@ -17,7 +17,7 @@
             TypeConverter = desc.GetTypeConverter();
             IsEnumerable = PropertyType != typeof(string)
                 && PropertyType != typeof(byte[])
-                && !(GetEnumerableType(PropertyType) is null);
+                && GetEnumerableType(PropertyType) is not null;
             IsNestedModel = desc.Attributes[typeof(NestedModelAttribute)] != null;
         }
 
