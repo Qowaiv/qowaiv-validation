@@ -11,19 +11,19 @@
     <ProjectReference Include="..\..\src\Qowaiv.Validation.TestTools\Qowaiv.Validation.TestTools.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Update="FluentAssertions" Version="6.5.1" />
-    <PackageReference Update="FluentAssertions.Analyzers" Version="0.16.0">
+    <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="6.5.1" />
+    <PackageReference Include="FluentAssertions.Analyzers" Version="0.16.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="17.1.0" />
-    <PackageReference Update="nunit" Version="3.13.3" />
-    <PackageReference Update="NUnit3TestAdapter" Version="4.2.1">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+    <PackageReference Include="nunit" Version="3.13.3" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.2.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Update="Qowaiv.TestTools" Version="6.0.0" />
+    <PackageReference Include="Qowaiv.TestTools" Version="6.0.0" />
   </ItemGroup>
 
 </Project>
