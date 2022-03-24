@@ -21,7 +21,7 @@ public class ConcurrencyIssue : InvalidOperationException, IValidationMessage
     public ValidationSeverity Severity => ValidationSeverity.Error;
 
     /// <inheritdoc />
-    public string PropertyName => null;
+    public string? PropertyName => null;
 
     /// <summary>Creates an <see cref="ConcurrencyIssue"/> for the version mismatch.</summary>
     [Pure]
