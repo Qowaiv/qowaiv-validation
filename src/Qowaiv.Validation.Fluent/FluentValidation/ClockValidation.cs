@@ -14,7 +14,7 @@ public static class ClockValidation
     /// An optional function providing now, or if not specified, <see cref="Clock.Now()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, DateTime> InFuture<TModel>(this IRuleBuilder<TModel, DateTime> ruleBuilder, Func<DateTime> now = null)
+    public static IRuleBuilderOptions<TModel, DateTime> InFuture<TModel>(this IRuleBuilder<TModel, DateTime> ruleBuilder, Func<DateTime>? now = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
@@ -36,7 +36,7 @@ public static class ClockValidation
     /// An optional function providing now, or if not specified, <see cref="Clock.Now()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, DateTime?> InFuture<TModel>(this IRuleBuilder<TModel, DateTime?> ruleBuilder, Func<DateTime> now = null)
+    public static IRuleBuilderOptions<TModel, DateTime?> InFuture<TModel>(this IRuleBuilder<TModel, DateTime?> ruleBuilder, Func<DateTime>? now = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
@@ -58,7 +58,7 @@ public static class ClockValidation
     /// An optional function providing today, or if not specified, <see cref="Clock.Today()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, Date> InFuture<TModel>(this IRuleBuilder<TModel, Date> ruleBuilder, Func<Date> today = null)
+    public static IRuleBuilderOptions<TModel, Date> InFuture<TModel>(this IRuleBuilder<TModel, Date> ruleBuilder, Func<Date>? today = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
@@ -80,7 +80,7 @@ public static class ClockValidation
     /// An optional function providing today, or if not specified, <see cref="Clock.Today()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, Date?> InFuture<TModel>(this IRuleBuilder<TModel, Date?> ruleBuilder, Func<Date> today = null)
+    public static IRuleBuilderOptions<TModel, Date?> InFuture<TModel>(this IRuleBuilder<TModel, Date?> ruleBuilder, Func<Date>? today = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
@@ -102,7 +102,7 @@ public static class ClockValidation
     /// An optional function providing now, or if not specified, <see cref="Clock.Now()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, DateTime> NotInFuture<TModel>(this IRuleBuilder<TModel, DateTime> ruleBuilder, Func<DateTime> now = null)
+    public static IRuleBuilderOptions<TModel, DateTime> NotInFuture<TModel>(this IRuleBuilder<TModel, DateTime> ruleBuilder, Func<DateTime>? now = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
@@ -124,7 +124,7 @@ public static class ClockValidation
     /// An optional function providing now, or if not specified, <see cref="Clock.Now()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, DateTime?> NotInFuture<TModel>(this IRuleBuilder<TModel, DateTime?> ruleBuilder, Func<DateTime> now = null)
+    public static IRuleBuilderOptions<TModel, DateTime?> NotInFuture<TModel>(this IRuleBuilder<TModel, DateTime?> ruleBuilder, Func<DateTime>? now = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
@@ -146,7 +146,7 @@ public static class ClockValidation
     /// An optional function providing today, or if not specified, <see cref="Clock.Today()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, Date> NotInFuture<TModel>(this IRuleBuilder<TModel, Date> ruleBuilder, Func<Date> today = null)
+    public static IRuleBuilderOptions<TModel, Date> NotInFuture<TModel>(this IRuleBuilder<TModel, Date> ruleBuilder, Func<Date>? today = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
@@ -168,7 +168,7 @@ public static class ClockValidation
     /// An optional function providing today, or if not specified, <see cref="Clock.Today()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, Date?> NotInFuture<TModel>(this IRuleBuilder<TModel, Date?> ruleBuilder, Func<Date> today = null)
+    public static IRuleBuilderOptions<TModel, Date?> NotInFuture<TModel>(this IRuleBuilder<TModel, Date?> ruleBuilder, Func<Date>? today = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
@@ -190,7 +190,7 @@ public static class ClockValidation
     /// An optional function providing now, or if not specified, <see cref="Clock.Now()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, DateTime> InPast<TModel>(this IRuleBuilder<TModel, DateTime> ruleBuilder, Func<DateTime> now = null)
+    public static IRuleBuilderOptions<TModel, DateTime> InPast<TModel>(this IRuleBuilder<TModel, DateTime> ruleBuilder, Func<DateTime>? now = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
@@ -212,7 +212,7 @@ public static class ClockValidation
     /// An optional function providing now, or if not specified, <see cref="Clock.Now()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, DateTime?> InPast<TModel>(this IRuleBuilder<TModel, DateTime?> ruleBuilder, Func<DateTime> now = null)
+    public static IRuleBuilderOptions<TModel, DateTime?> InPast<TModel>(this IRuleBuilder<TModel, DateTime?> ruleBuilder, Func<DateTime>? now = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
@@ -234,7 +234,7 @@ public static class ClockValidation
     /// An optional function providing today, or if not specified, <see cref="Clock.Today()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, Date> InPast<TModel>(this IRuleBuilder<TModel, Date> ruleBuilder, Func<Date> today = null)
+    public static IRuleBuilderOptions<TModel, Date> InPast<TModel>(this IRuleBuilder<TModel, Date> ruleBuilder, Func<Date>? today = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
@@ -256,7 +256,7 @@ public static class ClockValidation
     /// An optional function providing today, or if not specified, <see cref="Clock.Today()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, Date?> InPast<TModel>(this IRuleBuilder<TModel, Date?> ruleBuilder, Func<Date> today = null)
+    public static IRuleBuilderOptions<TModel, Date?> InPast<TModel>(this IRuleBuilder<TModel, Date?> ruleBuilder, Func<Date>? today = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
@@ -278,7 +278,7 @@ public static class ClockValidation
     /// An optional function providing now, or if not specified, <see cref="Clock.Now()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, DateTime> NotInPast<TModel>(this IRuleBuilder<TModel, DateTime> ruleBuilder, Func<DateTime> now = null)
+    public static IRuleBuilderOptions<TModel, DateTime> NotInPast<TModel>(this IRuleBuilder<TModel, DateTime> ruleBuilder, Func<DateTime>? now = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
@@ -300,7 +300,7 @@ public static class ClockValidation
     /// An optional function providing now, or if not specified, <see cref="Clock.Now()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, DateTime?> NotInPast<TModel>(this IRuleBuilder<TModel, DateTime?> ruleBuilder, Func<DateTime> now = null)
+    public static IRuleBuilderOptions<TModel, DateTime?> NotInPast<TModel>(this IRuleBuilder<TModel, DateTime?> ruleBuilder, Func<DateTime>? now = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
@@ -322,7 +322,7 @@ public static class ClockValidation
     /// An optional function providing today, or if not specified, <see cref="Clock.Today()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, Date> NotInPast<TModel>(this IRuleBuilder<TModel, Date> ruleBuilder, Func<Date> today = null)
+    public static IRuleBuilderOptions<TModel, Date> NotInPast<TModel>(this IRuleBuilder<TModel, Date> ruleBuilder, Func<Date>? today = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
@@ -344,7 +344,7 @@ public static class ClockValidation
     /// An optional function providing today, or if not specified, <see cref="Clock.Today()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, Date?> NotInPast<TModel>(this IRuleBuilder<TModel, Date?> ruleBuilder, Func<Date> today = null)
+    public static IRuleBuilderOptions<TModel, Date?> NotInPast<TModel>(this IRuleBuilder<TModel, Date?> ruleBuilder, Func<Date>? today = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
