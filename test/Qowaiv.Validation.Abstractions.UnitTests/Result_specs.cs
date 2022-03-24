@@ -48,6 +48,9 @@ namespace Result_specs
         public void valid_if_explicit() => Assert.That(Result.Null<object>().IsValid, Is.True);
 
         [Test]
+        public void valid_for_nullable_struct() => Assert.That(Result.Null<int?>().IsValid, Is.True);
+
+        [Test]
         public void valid_if_explicit_with_messages()
         {
             var messages = new List<IValidationMessage> { ValidationMessage.Warn("Some warning") };

@@ -36,12 +36,12 @@ public class Result
 
     /// <summary>Creates a valid null <see cref="Result{T}"/>.</summary>
     [Pure]
-    public static Result<T> Null<T>(IEnumerable<IValidationMessage> messages) where T : class
+    public static Result<T> Null<T>(IEnumerable<IValidationMessage> messages)
         => new(FixedMessages.New(messages));
 
     /// <summary>Creates a valid null <see cref="Result{T}"/>.</summary>
     [Pure]
-    public static Result<T> Null<T>(params IValidationMessage[] messages) where T : class
+    public static Result<T> Null<T>(params IValidationMessage[] messages)
         => new(FixedMessages.New(messages));
 
     /// <summary>Creates a <see cref="Result{T}"/> for the value.</summary>
