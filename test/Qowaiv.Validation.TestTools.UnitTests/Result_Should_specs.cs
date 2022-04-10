@@ -148,14 +148,14 @@ public class Value
     public void is_evaluated_for_a_valid_chain()
     {
         Action assert = () => Result.For(3).Should().BeValid().Value.Should().Be(13);
-        assert.Should().Throw<Exception>().WithMessage("Expected Result.For(3) to be 13, but found 3  (difference of -10).");
+        assert.Should().Throw<Exception>().WithMessage("Expected Result.For(3) to be 13, but found 3 (difference of -10).");
     }
 
     [Test]
     public void is_evaluated_for_a_valid_chain_with_message_assert()
     {
         Action assert = () => Result.For(3).Should().BeValid().WithoutMessages().Value.Should().Be(13);
-        assert.Should().Throw<Exception>().WithMessage("Expected Result.For(3) to be 13, but found 3  (difference of -10).");
+        assert.Should().Throw<Exception>().WithMessage("Expected Result.For(3) to be 13, but found 3 (difference of -10).");
     }
 
     [Test]
