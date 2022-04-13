@@ -1,7 +1,7 @@
 ﻿namespace FluentValidation;
 
 /// <summary>Fluent validation for <see cref="Clock"/>.</summary>
-public static class ClockValidation
+public static partial class ClockValidation
 {
     /// <summary>Requires a date time to be in the future.</summary>
     /// <typeparam name="TModel">
