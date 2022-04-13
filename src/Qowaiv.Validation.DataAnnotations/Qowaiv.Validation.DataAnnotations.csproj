@@ -4,8 +4,10 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
-    <Version>0.2.0</Version>
+    <Version>0.2.1</Version>
     <PackageReleaseNotes>
+v0.2.1
+- Nullable anotations. #48
 v0.2.0
 - Updated Qowaiv dependency.
 v0.1.1
@@ -15,6 +17,7 @@ v0.1.0
 v0.0.4
 - Fix double dots in paths for nested properties.
     </PackageReleaseNotes>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

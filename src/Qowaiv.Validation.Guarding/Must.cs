@@ -71,8 +71,8 @@ public sealed class Must<TSubject> where TSubject : class
     /// The message to communicate the failed guard.
     /// </param>
     [Pure]
-    public Result<TSubject> Exist<TId, TEntity>(TId id, Func<TSubject, TId, TEntity> selector, IValidationMessage message)
-        => Be(Guard.NotNull(selector, nameof(selector)).Invoke(Subject, id) is { }, message ?? EntityNotFound.ForId(id));
+    public Result<TSubject> Exist<TId, TEntity>(TId id, Func<TSubject, TId, TEntity?> selector, IValidationMessage? message)
+        => Be(Guard.NotNull(selector, nameof(selector)).Invoke(Subject, id) is { }, message ?? EntityNotFound.ForId(id!));
 
     /// <summary>Guards the entity to exist for the specified id; returns the
     /// error message otherwise.

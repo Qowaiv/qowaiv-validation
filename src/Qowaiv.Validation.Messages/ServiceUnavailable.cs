@@ -20,7 +20,7 @@ public class ServiceUnavailable : Exception, IValidationMessage
     public ValidationSeverity Severity => ValidationSeverity.Error;
 
     /// <inheritdoc />
-    public string PropertyName { get; set; }
+    public string? PropertyName { get; set; }
 
     /// <summary>Creates <see cref="ServiceUnavailable"/> for the service with the specified name.</summary>
     /// <param name="name">

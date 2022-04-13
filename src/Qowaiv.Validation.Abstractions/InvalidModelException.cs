@@ -8,15 +8,15 @@ public class InvalidModelException : InvalidOperationException
     public InvalidModelException() => Do.Nothing();
 
     /// <summary>Initializes a new instance of the <see cref="InvalidModelException"/> class.</summary>
-    public InvalidModelException(string message)
+    public InvalidModelException(string? message)
         : base(message) => Do.Nothing();
 
     /// <summary>Initializes a new instance of the <see cref="InvalidModelException"/> class.</summary>
-    public InvalidModelException(string message, Exception innerException)
+    public InvalidModelException(string? message, Exception? innerException)
         : base(message, innerException) => Do.Nothing();
 
     /// <summary>Initializes a new instance of the <see cref="InvalidModelException"/> class.</summary>
-    public InvalidModelException(string message, Exception innerException, IEnumerable<IValidationMessage> messages)
+    public InvalidModelException(string? message, Exception? innerException, IEnumerable<IValidationMessage> messages)
         : this(message, innerException)
         => Errors = new ReadOnlyCollection<IValidationMessage>(Filter(messages).ToArray());
 
@@ -27,7 +27,7 @@ public class InvalidModelException : InvalidOperationException
         Guard.NotNull(info, nameof(info));
 
         var errors = info.GetValue(nameof(Errors), typeof(IValidationMessage[])) as IValidationMessage[];
-        Errors = new ReadOnlyCollection<IValidationMessage>(errors);
+        Errors = new ReadOnlyCollection<IValidationMessage>(errors ?? Array.Empty<IValidationMessage>());
     }
 
     /// <inheritdoc />
@@ -39,7 +39,7 @@ public class InvalidModelException : InvalidOperationException
     }
 
     /// <summary>The related validation error(s).</summary>
-    public IReadOnlyList<IValidationMessage> Errors { get; } = new ReadOnlyCollection<IValidationMessage>(new IValidationMessage[0]);
+    public IReadOnlyList<IValidationMessage> Errors { get; } = Array.Empty<IValidationMessage>();
 
     /// <summary>Creates an <see cref="InvalidModelException"/> for the model.</summary>
     [Pure]
@@ -68,7 +68,7 @@ public class InvalidModelException : InvalidOperationException
     {
         var text = string.IsNullOrWhiteSpace(message.Message)
             ? "Validation Error."
-            : message.Message.Trim();
+            : message.Message!.Trim();
         var lines = text.Split(NewLine, StringSplitOptions.None);
         builder
             .Append("* ")

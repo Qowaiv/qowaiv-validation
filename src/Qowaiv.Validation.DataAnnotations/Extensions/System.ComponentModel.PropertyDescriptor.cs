@@ -12,7 +12,7 @@ namespace System.ComponentModel
             .Attributes
             .Cast<Attribute>()
             .OfType<RequiredAttribute>()
-            .FirstOrDefault(attr => !(attr is OptionalAttribute));
+            .FirstOrDefault(attr => attr is not OptionalAttribute);
 
         /// <summary>Gets the decorated <see cref="RequiredAttribute"/> for the property.</summary>
         [Pure]

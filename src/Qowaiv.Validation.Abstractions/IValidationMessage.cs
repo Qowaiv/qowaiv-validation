@@ -7,8 +7,8 @@ public interface IValidationMessage
     ValidationSeverity Severity { get; }
 
     /// <summary>The name of the property.</summary>
-    string PropertyName { get; }
+    string? PropertyName { get; }
 
     /// <summary>Gets the (<see cref="string"/>) message.</summary>
-    string Message { get; }
+    string? Message { get; }
 }

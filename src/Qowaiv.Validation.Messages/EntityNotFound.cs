@@ -25,7 +25,7 @@ namespace Qowaiv.Validation.Messages
         public ValidationSeverity Severity => ValidationSeverity.Error;
 
         /// <inheritdoc />
-        public string PropertyName => null;
+        public string? PropertyName => null;
 
         /// <summary>Creates an <see cref="EntityNotFound"/> for specific ID.</summary>
         [Pure]

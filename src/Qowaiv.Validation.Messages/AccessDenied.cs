@@ -41,5 +41,5 @@ public class AccessDenied : SecurityException, IValidationMessage
     public ValidationSeverity Severity => ValidationSeverity.Error;
 
     /// <inheritdoc />
-    public string PropertyName => null;
+    public string? PropertyName => null;
 }

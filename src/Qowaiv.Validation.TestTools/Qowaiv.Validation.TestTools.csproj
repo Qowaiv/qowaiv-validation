@@ -4,8 +4,10 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
-    <Version>0.1.1</Version>
+    <Version>0.2.1</Version>
     <PackageReleaseNotes>
+v0.2.1
+- Nullable anotations. #48
 v0.1.1
 - Use FluentAssertions to validate Result and Result&lt;T&gt; (#37)
 v0.1.0
@@ -29,7 +31,7 @@ v0.0.2
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="6.5.1" />
+    <PackageReference Include="FluentAssertions" Version="6.6.0" />
   </ItemGroup>
 
 </Project>

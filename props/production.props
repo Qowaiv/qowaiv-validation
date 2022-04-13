@@ -6,6 +6,8 @@
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <DefineConstants>CONTRACTS_FULL</DefineConstants>
+    <DebugType>portable</DebugType>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

@@ -4,27 +4,30 @@
   
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
-    <Version>0.2.0</Version>
+    <Version>0.2.1</Version>
     <PackageReleaseNotes>
+v0.2.1
+- Nullable anotations. #48
+- , `InPast`, `NotInPast`, `InFuture`, and `NotInFuture` available for `DateOnly`. #49
 v0.2.0
 - Updated Qowaiv dependency.
 v0.1.1
-- Decorate pure methods with attribute (#38)
+- Decorate pure methods with attribute. #38
 v0.1.0
 - Qowaiv.Validation.Abstractions dependency.
 v0.0.7
 - Update to FluentValidation v10.2.0.
 v0.0.6
-- ModelValidator instead of FluentModelValidator (#18)
-- Drop FluentValidator (#19)
-- Required with allow unknown is one rule now (#19) fix
+- ModelValidator instead of FluentModelValidator. #18
+- Drop FluentValidator. #19
+- Required with allow unknown is one rule now. #19 (fix)
 v0.0.5
 - Update to FluentValidation v9.0.1
 v0.0.4
-- Support `SetSeverity` and `WithMessage` on `NotEmptyOrUnknown` (#12) fix
+- Support `SetSeverity` and `WithMessage` on `NotEmptyOrUnknown`. #12 (fix)
 v0.0.3
-- Added `Required()` (#4)
-- Severity taken into account (#5) fix
+- Added `Required()`. #4
+- Severity taken into account. #5 (fix)
 v0.0.2
 - Added Guards for null
 v0.0.1
