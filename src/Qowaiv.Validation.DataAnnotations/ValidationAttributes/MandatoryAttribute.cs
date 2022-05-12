@@ -6,6 +6,13 @@ namespace Qowaiv.Validation.DataAnnotations;
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
 public sealed class MandatoryAttribute : RequiredAttribute
 {
+    /// <summary>Creates a new instance of the <see cref="MandatoryAttribute"/> class.</summary>
+    public MandatoryAttribute()
+    {
+        ErrorMessageResourceType = typeof(QowaivValidationMessages);
+        ErrorMessageResourceName = nameof(QowaivValidationMessages.MandatoryAttribute_ValidationError);
+    }
+
     /// <summary>Gets or sets a value that indicates whether an empty string is allowed.</summary>
     public bool AllowUnknownValue { get; set; }
 
@@ -55,11 +62,6 @@ public sealed class MandatoryAttribute : RequiredAttribute
     [Pure]
     public override bool IsValid(object value) => IsValid(value, null);
 
-    /// <inheritdoc />
-    [Pure]
-    public override string FormatErrorMessage(string name)
-        => string.Format(CultureInfo.CurrentCulture, QowaivValidationMessages.MandatoryAttribute_ValidationError, name);
-
     [Pure]
     private bool IsValid(object value, Type memberType)
     {
@@ -79,5 +81,4 @@ public sealed class MandatoryAttribute : RequiredAttribute
         }
         return base.IsValid(value);
     }
-
 }
