@@ -7,7 +7,7 @@
     <Version>0.2.2</Version>
     <PackageReleaseNotes>
 v0.2.2
-- Mandatory attribute supports Dutch messages.
+- Mandatory attribute supports Dutch messages. #51
 v0.2.1
 - Nullable anotations. #48
 v0.2.0
