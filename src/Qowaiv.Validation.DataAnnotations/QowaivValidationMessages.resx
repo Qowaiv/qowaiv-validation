@@ -24,6 +24,9 @@
   <data name="InvalidModelException" xml:space="preserve">
     <value>The {0} model can not be operated on as it is invalid.</value>
   </data>
+  <data name="MandatoryAttribute_ValidationError" xml:space="preserve">
+    <value>The {0} field is required.</value>
+  </data>
   <data name="PostalCodeValidator_ErrorMessage" xml:space="preserve">
     <value>The postal code {0} is not valid for {1}.</value>
   </data>

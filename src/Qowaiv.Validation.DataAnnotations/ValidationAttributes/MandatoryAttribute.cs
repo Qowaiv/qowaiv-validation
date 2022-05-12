@@ -55,6 +55,11 @@ public sealed class MandatoryAttribute : RequiredAttribute
     [Pure]
     public override bool IsValid(object value) => IsValid(value, null);
 
+    /// <inheritdoc />
+    [Pure]
+    public override string FormatErrorMessage(string name)
+        => string.Format(CultureInfo.CurrentCulture, QowaivValidationMessages.MandatoryAttribute_ValidationError, name);
+
     [Pure]
     private bool IsValid(object value, Type memberType)
     {
@@ -74,4 +79,5 @@ public sealed class MandatoryAttribute : RequiredAttribute
         }
         return base.IsValid(value);
     }
+
 }
