@@ -18,6 +18,9 @@
   <data name="DistinctValuesAttribute_ValidationError" xml:space="preserve">
     <value>Alle waarden van het veld {0} zouden verschillend moeten zijn.</value>
   </data>
+  <data name="MandatoryAttribute_ValidationError" xml:space="preserve">
+    <value>Het veld {0} is verplicht.</value>
+  </data>
   <data name="PostalCodeValidator_ErrorMessage" xml:space="preserve">
     <value>De postcode {0} is niet geldig voor {1}.</value>
   </data>

@@ -6,6 +6,13 @@ namespace Qowaiv.Validation.DataAnnotations;
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
 public sealed class MandatoryAttribute : RequiredAttribute
 {
+    /// <summary>Creates a new instance of the <see cref="MandatoryAttribute"/> class.</summary>
+    public MandatoryAttribute()
+    {
+        ErrorMessageResourceType = typeof(QowaivValidationMessages);
+        ErrorMessageResourceName = nameof(QowaivValidationMessages.MandatoryAttribute_ValidationError);
+    }
+
     /// <summary>Gets or sets a value that indicates whether an empty string is allowed.</summary>
     public bool AllowUnknownValue { get; set; }
 
