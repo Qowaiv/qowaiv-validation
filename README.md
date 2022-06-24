@@ -348,15 +348,12 @@ public class Model
 
 #### NestedModel attribute
 The `AnnotatedModelValidator` of this packages support nested validation.
-Microsoft's default implementation doesn't. The validator will only do that if
-a class has been decorated as such.
 
 ``` C#
 public class NestedModelWithChildren
 {
     public ChildModel[] Children { get; set; }
 
-    [NestedModel()]
     public class ChildModel
     {
         [Mandatory()]

@@ -1,22 +1,18 @@
-﻿using System;
+﻿namespace Qowaiv.Validation.DataAnnotations.UnitTests.Models;
 
-namespace Qowaiv.Validation.DataAnnotations.UnitTests.Models
+public class NestedModelWithLoop
 {
-    public class NestedModelWithLoop
+    [Mandatory]
+    public Guid Id { get; set; }
+
+    [Mandatory]
+    public ChildModel Child { get; set; }
+
+    public class ChildModel
     {
         [Mandatory]
-        public Guid Id { get; set; }
+        public string Name { get; set; }
 
-        [Mandatory]
-        public ChildModel Child { get; set; }
-
-        [NestedModel]
-        public class ChildModel
-        {
-            [Mandatory]
-            public string Name { get; set; }
-
-            public NestedModelWithLoop Parent { get; set; }
-        }
+        public NestedModelWithLoop Parent { get; set; }
     }
 }

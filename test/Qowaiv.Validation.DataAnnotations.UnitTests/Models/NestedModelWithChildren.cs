@@ -1,30 +1,25 @@
-﻿using System;
+﻿namespace Qowaiv.Validation.DataAnnotations.UnitTests.Models;
 
-namespace Qowaiv.Validation.DataAnnotations.UnitTests.Models
+public class NestedModelWithChildren
 {
-    public class NestedModelWithChildren
+    [Mandatory]
+    public Guid Id { get; set; }
+
+    [Mandatory]
+    public ChildModel[] Children { get; set; }
+
+    public class ChildModel
     {
         [Mandatory]
-        public Guid Id { get; set; }
+        public string ChildName { get; set; }
 
+        [Optional]
+        public GrandchildModel[] Grandchildren { get; set; }
+    }
+
+    public class GrandchildModel
+    {
         [Mandatory]
-        public ChildModel[] Children { get; set; }
-
-        [NestedModel]
-        public class ChildModel
-        {
-            [Mandatory]
-            public string ChildName { get; set; }
-
-            [Optional]
-            public GrandchildModel[] Grandchildren { get; set; }
-        }
-
-        [NestedModel]
-        public class GrandchildModel
-        {
-            [Mandatory]
-            public string GrandchildName { get; set; }
-        }
+        public string GrandchildName { get; set; }
     }
 }
