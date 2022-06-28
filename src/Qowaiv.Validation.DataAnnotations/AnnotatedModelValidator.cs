@@ -111,14 +111,10 @@ public class AnnotatedModelValidator<TModel> : IValidator<TModel>
                     ValidateModel(nestedContext);
                 }
             }
-            else if (property.IsNestedModel)
+            else
             {
                 var nestedContext = propertyContext.Nested(value);
                 ValidateModel(nestedContext);
-            }
-            else
-            {
-                // Else we can skip further validation.
             }
         }
     }
