@@ -28,6 +28,7 @@
 
         /// <summary>Gets the type converter associated with the property.</summary>
         [Pure]
+        [Obsolete("Will be droped.")]
         public static TypeConverter GetTypeConverter(this PropertyDescriptor descriptor)
         {
             var converter = Guard.NotNull(descriptor, nameof(descriptor)).Attributes
