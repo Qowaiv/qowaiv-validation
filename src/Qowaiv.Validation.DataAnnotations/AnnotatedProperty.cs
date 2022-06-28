@@ -14,7 +14,6 @@
             DisplayAttribute = desc.GetDisplayAttribute() ?? new DisplayAttribute { Name = desc.Name };
             RequiredAttribute = desc.GetRequiredAttribute() ?? OptionalAttribute.Optional;
             ValidationAttributes = desc.GetValidationAttributes().Except(new[] { RequiredAttribute }).ToArray();
-            TypeConverter = desc.GetTypeConverter();
             IsEnumerable = PropertyType != typeof(string)
                 && PropertyType != typeof(byte[])
                 && GetEnumerableType(PropertyType) is not null;
@@ -40,7 +39,8 @@
         /// <remarks>
         /// If not decorated, get the default type converter of the property type.
         /// </remarks>
-        public TypeConverter TypeConverter { get; }
+        [Obsolete("Not longer used, will be dropped.")]
+        public TypeConverter TypeConverter => descriptor.GetTypeConverter();
 
         /// <summary>Gets the display attribute.</summary>
         /// <remarks>

@@ -1,6 +1,4 @@
-﻿using Qowaiv.Validation.DataAnnotations;
-
-namespace System.ComponentModel
+﻿namespace System.ComponentModel
 {
     /// <summary>Extensions on <see cref="PropertyDescriptor"/>.</summary>
     public static class QowaivPropertyDescriptorExtensions
@@ -30,13 +28,35 @@ namespace System.ComponentModel
 
         /// <summary>Gets the type converter associated with the property.</summary>
         [Pure]
+        [Obsolete("Will be droped.")]
         public static TypeConverter GetTypeConverter(this PropertyDescriptor descriptor)
-            => Guard.NotNull(descriptor, nameof(descriptor)).Attributes
+        {
+            var converter = Guard.NotNull(descriptor, nameof(descriptor)).Attributes
                 .Cast<Attribute>()
                 .OfType<TypeConverterAttribute>()
                 .Select(att => Type.GetType(att.ConverterTypeName))
-                .FirstOrDefault() is { } converterType
-            ? (TypeConverter)Activator.CreateInstance(converterType)
-            : TypeDescriptor.GetConverter(descriptor.PropertyType);
+                .FirstOrDefault();
+
+            return Activate(converter, descriptor.PropertyType)
+                ?? TypeDescriptor.GetConverter(descriptor.PropertyType);
+
+            static TypeConverter Activate(Type converter, Type type)
+            {
+                if (converter is { })
+                {
+                    var ctors = converter.GetConstructors();
+                    if (ctors.Any(c => !c.GetParameters().Any()))
+                    {
+                        return (TypeConverter)Activator.CreateInstance(converter);
+                    }
+                    else if (ctors.Any(c => c.GetParameters().Length == 1 && c.GetParameters()[0].ParameterType == typeof(Type)))
+                    {
+                        return (TypeConverter)Activator.CreateInstance(converter, type);
+                    }
+                    else return null;
+                }
+                else return null;
+            }
+        }
     }
 }

@@ -1,9 +1,11 @@
-﻿namespace DataAnnotationsValidator_specs;
+﻿using Qowaiv.Identifiers;
 
-public class DataAnnotationsValidator_specs
+namespace DataAnnotationsValidator_specs;
+
+public class Validates
 {
     [Test]
-    public void Validate_ModelWithMandatoryProperties_with_errors()
+    public void ModelWithMandatoryProperties_with_errors()
     {
         using (CultureInfoScope.NewInvariant())
         {
@@ -16,7 +18,7 @@ public class DataAnnotationsValidator_specs
     }
 
     [Test]
-    public void Validate_ModelWithMandatoryProperties_is_valid()
+    public void ModelWithMandatoryProperties_as_valid()
         => new ModelWithMandatoryProperties
         {
             Email = EmailAddress.Parse("info@qowaiv.org"),
@@ -25,7 +27,7 @@ public class DataAnnotationsValidator_specs
         .Should().BeValidFor(new AnnotatedModelValidator<ModelWithMandatoryProperties>());
 
     [Test]
-    public void Validate_ModelWithAllowedValues_with_error()
+    public void ModelWithAllowedValues_with_error()
         => new ModelWithAllowedValues
         {
             Country = Country.TR
@@ -39,7 +41,7 @@ public class DataAnnotationsValidator_specs
         .Should().BeValidFor(new AnnotatedModelValidator<ModelWithAllowedValues>());
 
     [Test]
-    public void Validate_ModelWithForbiddenValues_with_error()
+    public void ModelWithForbiddenValues_with_error()
         => new ModelWithForbiddenValues
         {
             Email = EmailAddress.Parse("spam@qowaiv.org"),
@@ -48,7 +50,7 @@ public class DataAnnotationsValidator_specs
         .WithMessage(ValidationMessage.Error("The value of the Email field is not allowed.", "Email"));
 
     [Test]
-    public void Validate_ModelWithForbiddenValues_is_valid()
+    public void ModelWithForbiddenValues_as_valid()
         => new ModelWithForbiddenValues
         {
             Email = EmailAddress.Parse("info@qowaiv.org"),
@@ -57,7 +59,7 @@ public class DataAnnotationsValidator_specs
 
 
     [Test]
-    public void Validate_ModelWithCustomizedResource_with_error()
+    public void ModelWithCustomizedResource_with_error()
         => new ModelWithCustomizedResource()
         .Should().BeInvalidFor(new AnnotatedModelValidator<ModelWithCustomizedResource>())
         .WithMessage(ValidationMessage.Error("This IBAN is wrong.", "Iban"));
@@ -72,7 +74,7 @@ public class DataAnnotationsValidator_specs
         .WithMessage(ValidationMessage.Error("The Child field is required.", "Child"));
 
     [Test]
-    public void Validate_NestedModelWithInvalidChild_with_error()
+    public void NestedModelWithInvalidChild_with_error()
         => new NestedModel
         {
             Id = Guid.NewGuid(),
@@ -82,7 +84,7 @@ public class DataAnnotationsValidator_specs
         .WithMessage(ValidationMessage.Error("The Name field is required.", "Child.Name"));
 
     [Test]
-    public void Validate_NestedModelWithInvalidChildren_with_error()
+    public void NestedModelWithInvalidChildren_with_error()
         => new NestedModelWithChildren
         {
             Id = Guid.NewGuid(),
@@ -96,7 +98,7 @@ public class DataAnnotationsValidator_specs
         .WithMessage(ValidationMessage.Error("The ChildName field is required.", "Children[1].ChildName"));
 
     [Test]
-    public void Validate_NestedModelWithInvalidGrandchildren_with_error()
+    public void NestedModelWithInvalidGrandchildren_with_error()
         => new NestedModelWithChildren
         {
             Id = Guid.NewGuid(),
@@ -119,7 +121,7 @@ public class DataAnnotationsValidator_specs
             ValidationMessage.Error("The GrandchildName field is required.", "Children[1].Grandchildren[0].GrandchildName"));
 
     [Test]
-    public void Validate_NestedModelWithLoop_with_error()
+    public void NestedModelWithLoop_with_error()
     {
         var model = new NestedModelWithLoop
         {
@@ -133,8 +135,23 @@ public class DataAnnotationsValidator_specs
     }
 
     [Test]
-    public void Validate_ModelThatReturnsNoneMessage_is_valid()
+    public void ModelThatReturnsNoneMessage_is_valid()
         => new ModelThatReturnsNoneMessage()
         .Should().BeValidFor(new AnnotatedModelValidator<ModelThatReturnsNoneMessage>())
         .WithoutMessages();
+
+    [Test]
+    public void Model_with_generic_without_crashing()
+    {
+        var model = new NestedModelWithGenerics
+        {
+            Id = Id<ForId>.Next(),
+            Children = new List<NestedModelWithGenerics.Child>
+            {
+                new NestedModelWithGenerics.Child{ Name = "Indi" },
+            },
+        };
+        model.Should().BeValidFor(new AnnotatedModelValidator<NestedModelWithGenerics>())
+        .WithoutMessages();
+    }
 }
