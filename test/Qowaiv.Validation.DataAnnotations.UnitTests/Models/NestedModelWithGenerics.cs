@@ -11,6 +11,7 @@ internal class NestedModelWithGenerics
     [Any]
     public List<Child> Children { get; set; } = new();
 
+    [NestedModel]
     internal class Child
     {
         [Mandatory]

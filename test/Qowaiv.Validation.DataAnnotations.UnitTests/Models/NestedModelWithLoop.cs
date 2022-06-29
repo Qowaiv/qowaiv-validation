@@ -1,5 +1,6 @@
 ﻿namespace Qowaiv.Validation.DataAnnotations.UnitTests.Models;
 
+[NestedModel]
 public class NestedModelWithLoop
 {
     [Mandatory]
@@ -8,6 +9,7 @@ public class NestedModelWithLoop
     [Mandatory]
     public ChildModel Child { get; set; }
 
+    [NestedModel]
     public class ChildModel
     {
         [Mandatory]
