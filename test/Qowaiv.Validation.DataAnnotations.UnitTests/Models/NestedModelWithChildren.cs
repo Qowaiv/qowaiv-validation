@@ -1,5 +1,6 @@
 ﻿namespace Qowaiv.Validation.DataAnnotations.UnitTests.Models;
 
+[NestedModel]
 public class NestedModelWithChildren
 {
     [Mandatory]
@@ -8,6 +9,7 @@ public class NestedModelWithChildren
     [Mandatory]
     public ChildModel[] Children { get; set; }
 
+    [NestedModel]
     public class ChildModel
     {
         [Mandatory]
@@ -17,6 +19,7 @@ public class NestedModelWithChildren
         public GrandchildModel[] Grandchildren { get; set; }
     }
 
+    [NestedModel]
     public class GrandchildModel
     {
         [Mandatory]

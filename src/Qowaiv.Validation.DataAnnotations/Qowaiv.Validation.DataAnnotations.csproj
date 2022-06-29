@@ -4,8 +4,10 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
-    <Version>0.2.3</Version>
+    <Version>0.2.4</Version>
     <PackageReleaseNotes>
+v0.2.4
+- Roll back of change #53
 v0.2.3
 - All models are considered to be nested. #52
 - Fix crash on validation models with properties with generic types. #53

@@ -139,19 +139,32 @@ public class Validates
         => new ModelThatReturnsNoneMessage()
         .Should().BeValidFor(new AnnotatedModelValidator<ModelThatReturnsNoneMessage>())
         .WithoutMessages();
-
+}
+public class Validates_without_crashing
+{
     [Test]
-    public void Model_with_generic_without_crashing()
+    public void Model_with_generic_typed_property()
     {
         var model = new NestedModelWithGenerics
         {
             Id = Id<ForId>.Next(),
             Children = new List<NestedModelWithGenerics.Child>
             {
-                new NestedModelWithGenerics.Child{ Name = "Indi" },
+                new NestedModelWithGenerics.Child { Name = "Indi" },
             },
         };
         model.Should().BeValidFor(new AnnotatedModelValidator<NestedModelWithGenerics>())
+        .WithoutMessages();
+    }
+
+    [Test]
+    public void Model_with_not_validatable_child()
+    {
+        var model = new ModelWithNotValidatableChild()
+        {
+            Stream = new System.IO.MemoryStream(),
+        };
+        model.Should().BeValidFor(new AnnotatedModelValidator<ModelWithNotValidatableChild>())
         .WithoutMessages();
     }
 }

@@ -14,6 +14,7 @@ public class AnnotatedProperty
         DisplayAttribute = desc.GetDisplayAttribute() ?? new DisplayAttribute { Name = desc.Name };
         RequiredAttribute = desc.GetRequiredAttribute() ?? OptionalAttribute.Optional;
         ValidationAttributes = desc.GetValidationAttributes().Except(new[] { RequiredAttribute }).ToArray();
+        IsNestedModel = desc.Attributes[typeof(NestedModelAttribute)] is { };
         IsEnumerable = PropertyType != typeof(string)
             && PropertyType != typeof(byte[])
             && GetEnumerableType(PropertyType) is not null;
@@ -26,21 +27,21 @@ public class AnnotatedProperty
     public string Name => descriptor.Name;
 
     /// <summary>True if the property is read-only, otherwise false.</summary>
+    [Obsolete("Not longer used, will be dropped.")]
     public bool IsReadOnly => descriptor.IsReadOnly;
 
     /// <summary>True if the property is an <see cref="IEnumerable{T}"/> type, otherwise false.</summary>
     public bool IsEnumerable { get; }
 
-    /// <summary>Always true.</summary>
-    [Obsolete("Not longer used. Will be dropped.")]
-    public bool IsNestedModel => true;
+    /// <summary>True if the model is decorated with the <see cref="NestedModelAttribute"/>, otherwise false.</summary>
+    public bool IsNestedModel { get; }
 
-        /// <summary>Gets the type converter associated with the property.</summary>
-        /// <remarks>
-        /// If not decorated, get the default type converter of the property type.
-        /// </remarks>
-        [Obsolete("Not longer used, will be dropped.")]
-        public TypeConverter TypeConverter => descriptor.GetTypeConverter();
+    /// <summary>Gets the type converter associated with the property.</summary>
+    /// <remarks>
+    /// If not decorated, get the default type converter of the property type.
+    /// </remarks>
+    [Obsolete("Not longer used, will be dropped.")]
+    public TypeConverter TypeConverter => descriptor.GetTypeConverter();
 
     /// <summary>Gets the display attribute.</summary>
     /// <remarks>
