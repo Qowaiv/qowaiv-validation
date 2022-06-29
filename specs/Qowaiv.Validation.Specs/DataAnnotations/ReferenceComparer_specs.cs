@@ -1,4 +1,6 @@
-﻿namespace ReferenceComparer_specs;
+﻿using Specs.DataAnnotations.Models;
+
+namespace Data_annotations.ReferenceComparer_specs;
 
 public class Equal_by_reference
 {

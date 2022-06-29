@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Attributes.MandatoryAttribute_specs;
+namespace Data_annotations.Attributes.Mandatory_specs;
 
 public class Is_valid_for
 {
