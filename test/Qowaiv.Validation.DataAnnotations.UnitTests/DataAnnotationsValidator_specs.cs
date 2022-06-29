@@ -150,7 +150,7 @@ public class Validates_without_crashing
             Id = Id<ForId>.Next(),
             Children = new List<NestedModelWithGenerics.Child>
             {
-                new NestedModelWithGenerics.Child{ Name = "Indi" },
+                new NestedModelWithGenerics.Child { Name = "Indi" },
             },
         };
         model.Should().BeValidFor(new AnnotatedModelValidator<NestedModelWithGenerics>())
