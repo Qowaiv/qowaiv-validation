@@ -123,7 +123,8 @@ public class AnnotatedModelValidator<TModel> : IValidator<TModel>
     /// <summary>Gets the results for validating the attributes declared on the type of the model.</summary>
     private static void ValidateType(NestedValidationContext context)
     {
-        context.AddMessages(context.Annotations.TypeAttributes.Select(attr => attr.GetValidationMessage(context.Instance, context)));
+        var messages = context.Annotations.TypeAttributes.Select(attr => attr.GetValidationMessage(context.Instance, context));
+        context.AddMessages(messages, onType: true);
     }
 
     /// <summary>Gets the results for validating <see cref="IValidatableObject.Validate(ValidationContext)"/>.</summary>

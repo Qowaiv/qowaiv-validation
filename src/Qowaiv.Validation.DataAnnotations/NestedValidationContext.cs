@@ -53,11 +53,11 @@ internal class NestedValidationContext : IServiceProvider
     private readonly List<IValidationMessage> collection;
 
     /// <summary>Adds a set of messages.</summary>
-    public void AddMessages(IEnumerable<ValidationResult> messages)
+    public void AddMessages(IEnumerable<ValidationResult> messages, bool onType = false)
     {
         foreach (var message in messages)
         {
-            AddMessage(message);
+            AddMessage(message, onType);
         }
     }
 
@@ -69,26 +69,32 @@ internal class NestedValidationContext : IServiceProvider
     /// Null and <see cref="ValidationMessage.None"/> Messages are not added.
     /// </remarks>
     [Impure]
-    public bool AddMessage(ValidationResult validationResult)
+    public bool AddMessage(ValidationResult validationResult, bool onType = false)
     {
         var message = ValidationMessage.For(validationResult);
-        if (message.Severity <= ValidationSeverity.None) { return false; }
-        else
+        if (message.Severity > ValidationSeverity.None)
         {
-            collection.Add(
-                HasNestedPaths(validationResult)
-                ? new ValidationMessage(
-                    message.Severity,
-                    message.Message,
-                    message.MemberNames.Select(name => $"{Root}.{name}").ToArray())
-                : message);
+            collection.Add(Update(message, onType));
             return true;
         }
-    }
+        else return false;
 
-    [Pure]
-    private bool HasNestedPaths(ValidationResult validationResult)
-        => !string.IsNullOrEmpty(Root) && validationResult.MemberNames.Any();
+        ValidationMessage Update(ValidationMessage message, bool onType)
+        {
+            if (string.IsNullOrEmpty(Root)) return message;
+            else
+            {
+                var members = onType && string.IsNullOrEmpty(message.PropertyName)
+                    ? new[] { Root }
+                    : message.MemberNames.Select(name => $"{Root}.{name}").ToArray();
+
+                return new ValidationMessage(
+                    message.Severity,
+                    message.Message,
+                    members);
+            }
+        }
+    }
 
     /// <inheritdoc />
     [Pure]
