@@ -139,9 +139,11 @@ public class Validates
         => new ModelThatReturnsNoneMessage()
         .Should().BeValidFor(new AnnotatedModelValidator<ModelThatReturnsNoneMessage>())
         .WithoutMessages();
-
+}
+public class Validates_without_crashing
+{
     [Test]
-    public void Model_with_generic_without_crashing()
+    public void Model_with_generic_typed_property()
     {
         var model = new NestedModelWithGenerics
         {
@@ -156,7 +158,7 @@ public class Validates
     }
 
     [Test]
-    public void Model_with_not_validatable_child_without_crashing()
+    public void Model_with_not_validatable_child()
     {
         var model = new ModelWithNotValidatableChild()
         {
