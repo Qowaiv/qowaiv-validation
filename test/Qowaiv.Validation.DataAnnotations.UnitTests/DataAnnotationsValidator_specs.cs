@@ -154,4 +154,15 @@ public class Validates
         model.Should().BeValidFor(new AnnotatedModelValidator<NestedModelWithGenerics>())
         .WithoutMessages();
     }
+
+    [Test]
+    public void Model_with_not_validatable_child_without_crashing()
+    {
+        var model = new ModelWithNotValidatableChild()
+        {
+            Stream = new System.IO.MemoryStream(),
+        };
+        model.Should().BeValidFor(new AnnotatedModelValidator<ModelWithNotValidatableChild>())
+        .WithoutMessages();
+    }
 }
