@@ -140,6 +140,47 @@ public class Validates
         .Should().BeValidFor(new AnnotatedModelValidator<ModelThatReturnsNoneMessage>())
         .WithoutMessages();
 }
+
+public class Validates_
+{
+    [Test]
+    public void Model_with_valid_IValidatableObject_child()
+    {
+        var model = new ModelWithIValidatableObjectChild()
+        {
+            Child = new(){ Answer = 42 },
+        };
+        model.Should().BeValidFor(new AnnotatedModelValidator<ModelWithIValidatableObjectChild>())
+        .WithoutMessages();
+    }
+
+    [Test]
+    public void Model_with_valid_decorated_child()
+    {
+        var model = new ModelWithDecoratedChild()
+        {
+            Child = new() { Answer = 42 },
+        };
+        model.Should().BeValidFor(new AnnotatedModelValidator<ModelWithDecoratedChild>())
+        .WithoutMessages();
+    }
+}
+
+public class Invalidates
+{
+    [Test]
+    public void Model_with_invalid_IValidatableObject_child()
+        => new ModelWithIValidatableObjectChild()
+        .Should().BeInvalidFor(new AnnotatedModelValidator<ModelWithIValidatableObjectChild>())
+        .WithMessage(ValidationMessage.Error("Answer to the Ultimate Question of Life, the Universe, and Everything.", "Child.Answer"));
+
+    [Test]
+    public void Model_with_invalid_decorated_child()
+        => new ModelWithDecoratedChild()
+        .Should().BeInvalidFor(new AnnotatedModelValidator<ModelWithDecoratedChild>())
+        .WithMessage(ValidationMessage.Error("Answer to the Ultimate Question of Life, the Universe, and Everything.", "Child"));
+}
+
 public class Validates_without_crashing
 {
     [Test]
