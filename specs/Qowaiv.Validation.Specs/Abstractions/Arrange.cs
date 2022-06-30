@@ -1,4 +1,6 @@
-﻿namespace Qowaiv.Validation.Abstractions.UnitTests
+﻿using Qowaiv.Validation.Abstractions;
+
+namespace Specs.Abstractions
 {
     internal static class Arrange
     {

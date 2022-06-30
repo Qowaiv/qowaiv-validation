@@ -1,9 +1,6 @@
-﻿using FluentAssertions;
-using NUnit.Framework;
-using Qowaiv.TestTools;
-using Qowaiv.Validation.Abstractions;
+﻿using Qowaiv.Validation.Abstractions;
 
-namespace Validation_message_specs;
+namespace Abstractions.Validation_message_specs;
 
 public class None
 {
