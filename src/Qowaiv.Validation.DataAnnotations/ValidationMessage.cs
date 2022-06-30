@@ -83,7 +83,7 @@ public class ValidationMessage : ValidationResult, IValidationMessage, ISerializ
 
     /// <summary>Creates a validation message.</summary>
     [Pure]
-    public static IValidationMessage For(ValidationSeverity severity, string message, string[] memberNames)
+    public static IValidationMessage For(ValidationSeverity severity, string message, params string[] memberNames)
         => severity switch
         {
             ValidationSeverity.None => None,

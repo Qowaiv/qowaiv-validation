@@ -1,4 +1,5 @@
-﻿using Specs.DataAnnotations.Subs;
+﻿using ValidationSeverity = Qowaiv.Validation.Abstractions.ValidationSeverity;
+using Specs.DataAnnotations.Subs;
 using System.ComponentModel.DataAnnotations;
 
 namespace Data_annotations.Valdator_specs;
@@ -22,7 +23,7 @@ public class Validates_children_when_child_type
         => new WithChildWithAttributes()
         .Should().BeInvalidFor(new AnnotatedModelValidator<WithChildWithAttributes>())
         .WithMessage(ValidationMessage.Error("The Answer field is required.", "Child.Answer"));
-
+  
     internal class WithIValidatableChild
     {
         public IValidatableChild Child { get; } = new();
@@ -106,6 +107,24 @@ public class Supports
             ValidationMessage.Error("The Value field is required.", "Records[1].Value"));
     }
 
+    [TestCase(ValidationSeverity.Info)]
+    [TestCase(ValidationSeverity.Warning)]
+    [TestCase(ValidationSeverity.Error)]
+    public void all_serverity_levels(ValidationSeverity severity)
+    {
+        var model = new WithServerity(severity);
+        var validator = new AnnotatedModelValidator<WithServerity>();
+        var result = validator.Validate(model).Messages.Single();
+        result.Severity.Should().Be(severity);
+        result.Message.Should().Be("Has custom severity.");
+    }
+
+    [Test]
+    public void serverity_none_as_no_validation_result()
+        => new WithServerity(ValidationSeverity.None)
+        .Should().BeValidFor(new AnnotatedModelValidator<WithServerity>())
+        .WithoutMessages();
+
     internal class WithDI : IValidatableObject
     {
         public int Answer { get; set; }
@@ -135,4 +154,12 @@ public class Supports
     internal sealed record ChildRecord([property: Mandatory]int? Value);
 
     internal sealed record AnswerService(int Answer);
+
+    internal record WithServerity(ValidationSeverity Severity) : IValidatableObject
+    {
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            yield return (ValidationMessage)ValidationMessage.For(Severity, "Has custom severity.");
+        }
+    }
 }

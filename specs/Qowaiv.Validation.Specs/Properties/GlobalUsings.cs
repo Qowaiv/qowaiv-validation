@@ -8,3 +8,4 @@ global using System.Globalization;
 global using Qowaiv.TestTools;
 global using System.Collections.Generic;
 global using System.Collections;
+global using System.Linq;
