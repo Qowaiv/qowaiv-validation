@@ -114,20 +114,6 @@ public class Validates
             ValidationMessage.Error("The GrandchildName field is required.", "Children[1].Grandchildren[0].GrandchildName"));
 
     [Test]
-    public void NestedModelWithLoop_with_error()
-    {
-        var model = new NestedModelWithLoop
-        {
-            Id = Guid.NewGuid(),
-            Child = new NestedModelWithLoop.ChildModel(),
-        };
-        model.Child.Parent = model;
-
-        model.Should().BeInvalidFor(new AnnotatedModelValidator<NestedModelWithLoop>())
-            .WithMessage(ValidationMessage.Error("The Name field is required.", "Child.Name"));
-    }
-
-    [Test]
     public void ModelThatReturnsNoneMessage_is_valid()
         => new ModelThatReturnsNoneMessage()
         .Should().BeValidFor(new AnnotatedModelValidator<ModelThatReturnsNoneMessage>())
