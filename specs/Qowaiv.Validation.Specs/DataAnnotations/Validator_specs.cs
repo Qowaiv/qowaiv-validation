@@ -97,8 +97,8 @@ public class Supports
         {
             Records = new[]
             {
-                new ChildRecord(),
-                new ChildRecord(),
+                new ChildRecord(null),
+                new ChildRecord(null),
             } 
         };
         model.Should().BeInvalidFor(new AnnotatedModelValidator<WithChildren>()).WithMessages(
@@ -132,11 +132,7 @@ public class Supports
     {
         public ChildRecord[] Records { get; set; }
     }
-    internal sealed record ChildRecord
-    {
-        [Mandatory]
-        public int? Value { get; init; }
-    }
+    internal sealed record ChildRecord([property: Mandatory]int? Value);
 
     internal sealed record AnswerService(int Answer);
 }
