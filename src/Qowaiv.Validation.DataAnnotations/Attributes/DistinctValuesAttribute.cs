@@ -8,7 +8,7 @@ public sealed class DistinctValuesAttribute : ValidationAttribute
     /// <remarks>
     /// The type of the custom <see cref="IEqualityComparer"/> or <see cref="IEqualityComparer{T}"/> (for <see cref="object"/>).
     /// </remarks>
-    public DistinctValuesAttribute(Type comparer = null)
+    public DistinctValuesAttribute(Type? comparer = null)
         : base(() => QowaivValidationMessages.DistinctValuesAttribute_ValidationError)
     {
         EqualityComparer = CreateComparer(comparer);

@@ -12,9 +12,6 @@ public sealed class ForbiddenValuesAttribute : SetOfValuesAttribute
     public ForbiddenValuesAttribute(params string[] values)
         : base(values) => Do.Nothing();
 
-    /// <summary>Gets the forbidden values.</summary>
-    public string[] Forbidden { get; }
-
     /// <summary>Return false if the value of <see cref="SetOfValuesAttribute.IsValid(object)"/>
     /// equals one of the values of the <see cref="ForbiddenValuesAttribute"/>.
     /// </summary>

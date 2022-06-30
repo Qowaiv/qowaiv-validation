@@ -5,6 +5,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Data_annotations.Attributes.Mandatory_specs;
 
+public class Requires
+{
+    [Test]
+    public void ValidationContext()
+        => new MandatoryAttribute().RequiresValidationContext.Should().BeTrue();
+}
 public class Is_valid_for
 {
     [Test]
@@ -15,12 +21,10 @@ public class Is_valid_for
     public void Known_EmailAddress()
         => new MandatoryAttribute().IsValid(EmailAddress.Parse("test@exact.com")).Should().BeTrue();
 
-
     [Test]
     public void EmailAddress_Unknown_when_unknown_values_are_allowed()
         => new MandatoryAttribute { AllowUnknownValue = true }.IsValid(EmailAddress.Unknown).Should().BeTrue();
 }
-
 public class Is_not_valid_for
 {
     [Test]
@@ -35,7 +39,6 @@ public class Is_not_valid_for
     public void EmailAddress_Unknown()
       => new MandatoryAttribute().IsValid(EmailAddress.Unknown).Should().BeFalse();
 }
-
 public class With_message
 {
     [TestCase("nl-NL", "Het veld TestField is verplicht.")]
@@ -46,7 +49,7 @@ public class With_message
         new AnnotatedModelValidator<Model>().Validate(new Model { ReferenceField = "ignore" })
             .Should().BeInvalid().WithMessage(ValidationMessage.Error(message, "TestField"));
     }
-   
+
     [Test]
     [SetCulture("en-GB")]
     public void equal_to_required_message()

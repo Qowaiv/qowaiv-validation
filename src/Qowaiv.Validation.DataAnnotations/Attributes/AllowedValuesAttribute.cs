@@ -6,10 +6,6 @@
 public sealed class AllowedValuesAttribute : SetOfValuesAttribute
 {
     /// <summary>Initializes a new instance of the <see cref="AllowedValuesAttribute"/> class.</summary>
-    public AllowedValuesAttribute(string value1, string value2)
-        : base(new[] { value1, value2 }) => Do.Nothing();
-
-    /// <summary>Initializes a new instance of the <see cref="AllowedValuesAttribute"/> class.</summary>
     /// <param name="values">
     /// String representations of the allowed values.
     /// </param>

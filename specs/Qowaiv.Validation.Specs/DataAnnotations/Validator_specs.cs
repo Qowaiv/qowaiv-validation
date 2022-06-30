@@ -84,6 +84,10 @@ public class Supports
     }
 
     [Test]
+    public void empty_service_provider_by_default()
+        => new WithDI().Should().BeValidFor(new AnnotatedModelValidator<WithDI>());
+
+    [Test]
     public void models_with_circularity()
     {
         var model = new WithLoop();
@@ -128,12 +132,12 @@ public class Supports
 
     internal class WithDI : IValidatableObject
     {
-        public int Answer { get; set; }
+        public int? Answer { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var service = validationContext.GetSevice<AnswerService>();
-            if (Answer != service.Answer) yield return ValidationMessage.Error("Wrong answer!", nameof(Answer));
+            if (Answer != service?.Answer) yield return ValidationMessage.Error("Wrong answer!", nameof(Answer));
         }
     }
 
