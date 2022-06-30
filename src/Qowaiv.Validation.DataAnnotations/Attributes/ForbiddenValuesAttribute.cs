@@ -2,6 +2,7 @@
 
 /// <summary>Validates if the decorated item has a value that is specified in the forbidden values.</summary>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+[CLSCompliant(false)]
 public sealed class ForbiddenValuesAttribute : SetOfValuesAttribute
 {
     /// <summary>Initializes a new instance of the <see cref="ForbiddenValuesAttribute"/> class.</summary>
