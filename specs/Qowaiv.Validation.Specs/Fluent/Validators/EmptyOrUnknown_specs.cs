@@ -1,4 +1,7 @@
-﻿namespace Validation.EmptyOrUnknown_specs;
+﻿using Qowaiv.Validation.Fluent;
+using Specs.Fluent.Models;
+
+namespace Fluent_validation.EmptyOrUnknown_specs;
 
 public class Set_value
 {

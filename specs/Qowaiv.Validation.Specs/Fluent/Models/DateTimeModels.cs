@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.Fluent.UnitTests.Models;
+﻿namespace Specs.Fluent.Models;
 
 public class DateTimeModel
 {

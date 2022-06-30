@@ -1,4 +1,7 @@
-﻿namespace Validate_specs;
+﻿using Qowaiv.Validation.Fluent;
+using Specs.Fluent.Models;
+
+namespace Fluent_validation.Validate_specs;
 
 public class Validation_without_warnings
 {

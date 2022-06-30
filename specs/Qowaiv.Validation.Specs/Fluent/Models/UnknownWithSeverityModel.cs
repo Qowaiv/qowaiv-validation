@@ -1,4 +1,7 @@
-﻿namespace Qowaiv.Validation.Fluent.UnitTests.Models;
+﻿using FluentValidation;
+using Qowaiv.Validation.Fluent;
+
+namespace Specs.Fluent.Models;
 
 public class UnknownWithSeverityModel
 {

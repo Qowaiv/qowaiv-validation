@@ -1,4 +1,7 @@
-﻿namespace Validation.Required_specs;
+﻿using Qowaiv.Validation.Fluent;
+using Specs.Fluent.Models;
+
+namespace Fluent_validation.Required_specs;
 
 public class Known
 {

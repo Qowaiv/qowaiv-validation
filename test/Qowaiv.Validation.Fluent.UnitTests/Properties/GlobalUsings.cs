@@ -1,9 +1,0 @@
-﻿global using FluentAssertions;
-global using FluentValidation;
-global using NUnit.Framework;
-global using Qowaiv;
-global using Qowaiv.Globalization;
-global using Qowaiv.Validation.Fluent;
-global using Qowaiv.Validation.Fluent.UnitTests.Models;
-global using System;
-global using System.Globalization;

@@ -1,4 +1,8 @@
-﻿namespace Validation.NotInFuture_specs
+﻿using FluentValidation;
+using Qowaiv.Validation.Fluent;
+using Specs.Fluent.Models;
+
+namespace Fluent_validation.NotInFuture_specs
 {
     public class Valid_for_not_in_future
     {

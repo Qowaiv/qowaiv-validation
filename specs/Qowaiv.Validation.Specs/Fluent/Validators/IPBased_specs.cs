@@ -1,4 +1,7 @@
-﻿namespace Validation.IPBased_specs;
+﻿using Qowaiv.Validation.Fluent;
+using Specs.Fluent.Models;
+
+namespace Fluent_validation.IPBased_specs;
 
 public class Valid_for
 {

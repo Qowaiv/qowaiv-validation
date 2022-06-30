@@ -1,4 +1,8 @@
-﻿namespace Validation.Postal_code_valid_for_specs;
+﻿using FluentValidation;
+using Qowaiv.Validation.Fluent;
+using Specs.Fluent.Models;
+
+namespace Fluent_validation.Postal_code_valid_for_specs;
 
 public class Valid_for
 {

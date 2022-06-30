@@ -1,4 +1,8 @@
-﻿namespace Validators.NotInPast_specs;
+﻿using FluentValidation;
+using Qowaiv.Validation.Fluent;
+using Specs.Fluent.Models;
+
+namespace Validators.NotInPast_specs;
 
 public class Valid_for_in_past
 {
