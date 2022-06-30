@@ -157,17 +157,6 @@ public class Validates_
         model.Should().BeValidFor(new AnnotatedModelValidator<ModelWithDecoratedChild>())
         .WithoutMessages();
     }
-
-    [Test]
-    public void Model_that_depends_on_service()
-    {
-        var model = new ModelDependingOnService { Answer = 42 };
-        var provider = new ServiceDictionary
-        {
-            { typeof(ModelDependingOnService.AnswerService), new ModelDependingOnService.AnswerService(42) }
-        };
-        model.Should().BeValidFor(new AnnotatedModelValidator<ModelDependingOnService>(provider));
-    }
 }
 
 public class Invalidates
