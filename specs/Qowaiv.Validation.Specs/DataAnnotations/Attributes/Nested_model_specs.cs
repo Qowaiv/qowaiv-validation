@@ -1,4 +1,6 @@
-﻿namespace Data_annotations.Attributes.Nested_model_specs;
+﻿using Qowaiv.Validation.DataAnnotations;
+
+namespace Data_annotations.Attributes.Nested_model_specs;
 
 public class Child_model
 {

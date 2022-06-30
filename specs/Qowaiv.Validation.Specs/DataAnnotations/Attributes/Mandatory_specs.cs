@@ -1,4 +1,5 @@
 ﻿using Qowaiv.Financial;
+using Qowaiv.Validation.DataAnnotations;
 using Specs;
 using System.ComponentModel.DataAnnotations;
 

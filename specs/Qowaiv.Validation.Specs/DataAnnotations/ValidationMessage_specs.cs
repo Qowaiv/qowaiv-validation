@@ -1,4 +1,5 @@
-﻿using ValidationSeverity = Qowaiv.Validation.Abstractions.ValidationSeverity;
+﻿using Qowaiv.Validation.DataAnnotations;
+using ValidationSeverity = Qowaiv.Validation.Abstractions.ValidationSeverity;
 
 namespace Data_annotations.ValidationMessage_specs;
 

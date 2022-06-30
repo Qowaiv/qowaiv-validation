@@ -1,6 +1,7 @@
 ﻿using ValidationSeverity = Qowaiv.Validation.Abstractions.ValidationSeverity;
 using Specs.DataAnnotations.Subs;
 using System.ComponentModel.DataAnnotations;
+using Qowaiv.Validation.DataAnnotations;
 
 namespace Data_annotations.Valdator_specs;
 

@@ -1,4 +1,6 @@
-﻿namespace Data_annotations.ReferenceComparer_specs;
+﻿using Qowaiv.Validation.DataAnnotations;
+
+namespace Data_annotations.ReferenceComparer_specs;
 
 public class Equal_by_reference
 {

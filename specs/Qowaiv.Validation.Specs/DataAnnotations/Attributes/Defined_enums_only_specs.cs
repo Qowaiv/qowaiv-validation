@@ -1,4 +1,6 @@
-﻿namespace Data_annotations.Attributes.Defined_enums_only_specs;
+﻿using Qowaiv.Validation.DataAnnotations;
+
+namespace Data_annotations.Attributes.Defined_enums_only_specs;
 
 public class Does_not_allow
 {

@@ -1,4 +1,6 @@
-﻿namespace Data_annotations.Attributes.Optional_specs;
+﻿using Qowaiv.Validation.DataAnnotations;
+
+namespace Data_annotations.Attributes.Optional_specs;
 
 public class Is_valid_for
 {
