@@ -54,8 +54,8 @@ public class AnnotatedProperty
 
     /// <summary>Gets the value of the property for the specified model.</summary>
     [Pure]
-    public object GetValue(object model) => getValue(model);
-    private readonly Func<object, object> getValue;
+    public object? GetValue(object model) => getValue(model);
+    private readonly Func<object, object?> getValue;
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     internal string DebuggerDisplay
@@ -74,7 +74,7 @@ public class AnnotatedProperty
         .Select(property => new AnnotatedProperty(property));
 
     [Pure]
-    private static Type GetEnumerableType(Type type)
+    private static Type? GetEnumerableType(Type type)
         => type
         .GetInterfaces()
         .FirstOrDefault(iface =>
