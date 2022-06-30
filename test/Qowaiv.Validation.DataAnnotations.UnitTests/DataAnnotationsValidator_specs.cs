@@ -58,25 +58,6 @@ public class Validates
         .Should().BeValidFor(new AnnotatedModelValidator<ModelWithForbiddenValues>());
 
     [Test]
-    public void Validate_NestedModelWithNullChild_with_error()
-        => new NestedModel
-        {
-            Id = Guid.NewGuid()
-        }
-        .Should().BeInvalidFor(new AnnotatedModelValidator<NestedModel>())
-        .WithMessage(ValidationMessage.Error("The Child field is required.", "Child"));
-
-    [Test]
-    public void NestedModelWithInvalidChild_with_error()
-        => new NestedModel
-        {
-            Id = Guid.NewGuid(),
-            Child = new NestedModel.ChildModel()
-        }
-        .Should().BeInvalidFor(new AnnotatedModelValidator<NestedModel>())
-        .WithMessage(ValidationMessage.Error("The Name field is required.", "Child.Name"));
-
-    [Test]
     public void NestedModelWithInvalidChildren_with_error()
         => new NestedModelWithChildren
         {
