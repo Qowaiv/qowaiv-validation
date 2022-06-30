@@ -1,10 +1,7 @@
-using FluentAssertions;
-using NUnit.Framework;
 using Qowaiv.Validation.Abstractions;
 using Qowaiv.Validation.Guarding;
-using System;
 
-namespace Must_specs;
+namespace Guarding.Must_specs;
 
 public class Requires
 {
