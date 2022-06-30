@@ -1,7 +1,7 @@
 ﻿using Qowaiv.Validation.Abstractions;
 using static Specs.Abstractions.Arrange;
 
-namespace Abstactions.Result_specs;
+namespace Abstractions.Result_specs;
 
 public class Valid_result
 {

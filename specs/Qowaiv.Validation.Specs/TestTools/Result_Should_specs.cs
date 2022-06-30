@@ -1,9 +1,6 @@
-using FluentAssertions;
-using NUnit.Framework;
 using Qowaiv.Validation.Abstractions;
-using System;
 
-namespace Result_Should_specs;
+namespace Test_tools.Result_Should_specs;
 
 public class BeValid
 {
