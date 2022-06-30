@@ -6,10 +6,6 @@
 public sealed class ForbiddenValuesAttribute : SetOfValuesAttribute
 {
     /// <summary>Initializes a new instance of the <see cref="ForbiddenValuesAttribute"/> class.</summary>
-    public ForbiddenValuesAttribute(string value1, string value2)
-        : base(new[] { value1, value2 }) => Do.Nothing();
-
-    /// <summary>Initializes a new instance of the <see cref="ForbiddenValuesAttribute"/> class.</summary>
     /// <param name="values">
     /// String representations of the forbidden values.
     /// </param>
