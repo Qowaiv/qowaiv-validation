@@ -35,40 +35,34 @@ public class Is_not_valid_for
       => new MandatoryAttribute().IsValid(EmailAddress.Unknown).Should().BeFalse();
 }
 
-public class Validation_message
+public class With_message
 {
     [TestCase("nl-NL", "Het veld TestField is verplicht.")]
     [TestCase("en-GB", "The TestField field is required.")]
-    public void is_Culture_dependent(CultureInfo culture, string message)
+    public void culture_depedent(CultureInfo culture, string message)
     {
-        using (culture.Scoped())
-        {
-            new AnnotatedModelValidator<Model>().Validate(new Model { ReferenceField = "ignore" })
-                .Should().BeInvalid().WithMessage(ValidationMessage.Error(message, "TestField"));
-        }
+        using var _ = culture.Scoped();
+        new AnnotatedModelValidator<Model>().Validate(new Model { ReferenceField = "ignore" })
+            .Should().BeInvalid().WithMessage(ValidationMessage.Error(message, "TestField"));
     }
-
+   
     [Test]
-    public void English_message_equals_required_message()
-    {
-        using (new CultureInfo("en-GB").Scoped()) 
-        { 
-            new AnnotatedModelValidator<Model>().Validate(new Model())
-                .Should().BeInvalid().WithMessages(
-                    ValidationMessage.Error("The TestField field is required.", "TestField"),
-                    ValidationMessage.Error("The ReferenceField field is required.", "ReferenceField"));
-        }
-    }
+    [SetCulture("en-GB")]
+    public void equal_to_required_message()
+        => new AnnotatedModelValidator<Model>().Validate(new Model())
+            .Should().BeInvalid().WithMessages(
+                ValidationMessage.Error("The TestField field is required.", "TestField"),
+                ValidationMessage.Error("The ReferenceField field is required.", "ReferenceField"));
 
     [Test]
     [SetCulture("en-GB")]
-    public void Supports_a_custom_error_resource_type()
+    public void supporting_custom_error_resource_type()
         => new WithCustomErrorMessageType().Should().BeInvalidFor(new AnnotatedModelValidator<WithCustomErrorMessageType>())
         .WithMessage(ValidationMessage.Error("This Iban is wrong.", "Iban"));
 
     [Test]
     [SetCulture("en-GB")]
-    public void Supports_a_custom_display()
+    public void supporting_custom_display()
         => new WithCustomDisplay().Should().BeInvalidFor(new AnnotatedModelValidator<WithCustomDisplay>())
         .WithMessage(ValidationMessage.Error("The IBAN field is required.", "Iban"));
 

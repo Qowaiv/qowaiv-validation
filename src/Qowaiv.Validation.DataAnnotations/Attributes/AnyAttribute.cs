@@ -4,6 +4,13 @@
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
 public class AnyAttribute : RequiredAttribute
 {
+    /// <summary>Creates a new instance of the <see cref="MandatoryAttribute"/> class.</summary>
+    public AnyAttribute()
+    {
+        ErrorMessageResourceType = typeof(QowaivValidationMessages);
+        ErrorMessageResourceName = nameof(QowaivValidationMessages.MandatoryAttribute_ValidationError);
+    }
+
     /// <summary>Returns true if the value is not null and the collection
     /// has any item, otherwise false.
     /// </summary>

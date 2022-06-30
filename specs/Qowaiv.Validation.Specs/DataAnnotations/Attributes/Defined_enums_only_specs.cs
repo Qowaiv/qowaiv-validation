@@ -58,6 +58,23 @@ public class OnlyAllowDefinedFlagsCombinations
         => new DefinedEnumValuesOnlyAttribute().OnlyAllowDefinedFlagsCombinations.Should().BeFalse();
 }
 
+public class With_message
+{
+    [TestCase("nl", "De waarde van het veld Banners is niet toegestaan.")]
+    [TestCase("en", "The value of the Banners field is not allowed.")]
+    public void culture_depedent(CultureInfo culture, string message)
+    {
+        using var _ = culture.Scoped();
+        new Model().Should().BeInvalidFor(new AnnotatedModelValidator<Model>())
+            .WithMessage(ValidationMessage.Error(message, "Banners"));
+    }
+    internal class Model
+    {
+        [DefinedEnumValuesOnly]
+        public Banners Banners { get; set; } = (Banners)666;
+    }
+}
+
 [Flags]
 public enum Banners
 {
@@ -72,3 +89,4 @@ public enum Number
     Zero,
     One,
 }
+
