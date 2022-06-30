@@ -7,6 +7,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 /// An annotated model should contains at least one <see cref="ValidationAttribute"/>
 /// or implement <see cref="IValidatableObject"/>.
 /// </remarks>
+[DebuggerDisplay("{DebuggerDisplay}")]
 public class AnnotatedModel
 {
     internal static readonly AnnotatedModel None = new(typeof(object), false, new ValidationAttribute[0], new AnnotatedProperty[0]);
@@ -65,4 +66,8 @@ public class AnnotatedModel
             ? new AnnotatedModel(type, isIValidatable, validations, properties)
             : None;
     }
+
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    internal string DebuggerDisplay
+        => $"{ModelType}, Attributes: {TypeAttributes.Count}, Properties: {Properties.Count}";
 }

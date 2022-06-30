@@ -3,7 +3,7 @@
 namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Represents a nested wrapper for a (sealed) <see cref="ValidationContext"/>.</summary>
-internal class NestedValidationContext : IServiceProvider
+internal class NestedValidationContext
 {
     /// <summary>Initializes a new instance of the <see cref="NestedValidationContext"/> class.</summary>
     private NestedValidationContext(
@@ -96,10 +96,6 @@ internal class NestedValidationContext : IServiceProvider
         }
     }
 
-    /// <inheritdoc />
-    [Pure]
-    public object GetService(Type serviceType) => ServiceProvider?.GetService(serviceType);
-
     /// <summary>Creates context for the property.</summary>
     [Pure]
     public NestedValidationContext ForProperty(AnnotatedProperty property)
@@ -137,9 +133,7 @@ internal class NestedValidationContext : IServiceProvider
     /// <summary>Implicitly casts to the (sealed base) <see cref="ValidationContext"/>.</summary>
     [Pure]
     public static implicit operator ValidationContext(NestedValidationContext context)
-        => context is null
-        ? null
-        : new ValidationContext(context.Instance, context.ServiceProvider, context.Items)
+        => new(context.Instance, context.ServiceProvider, context.Items)
         {
             MemberName = context.MemberName,
         };

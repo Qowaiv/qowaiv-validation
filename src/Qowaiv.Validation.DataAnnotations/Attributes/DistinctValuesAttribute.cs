@@ -5,10 +5,13 @@
 public sealed class DistinctValuesAttribute : ValidationAttribute
 {
     /// <summary>Initializes a new instance of the <see cref="DistinctValuesAttribute"/> class.</summary>
+    public DistinctValuesAttribute() : this(null) => Do.Nothing();
+
+    /// <summary>Initializes a new instance of the <see cref="DistinctValuesAttribute"/> class.</summary>
     /// <remarks>
     /// The type of the custom <see cref="IEqualityComparer"/> or <see cref="IEqualityComparer{T}"/> (for <see cref="object"/>).
     /// </remarks>
-    public DistinctValuesAttribute(Type? comparer = null)
+    public DistinctValuesAttribute(Type? comparer)
         : base(() => QowaivValidationMessages.DistinctValuesAttribute_ValidationError)
     {
         EqualityComparer = CreateComparer(comparer);

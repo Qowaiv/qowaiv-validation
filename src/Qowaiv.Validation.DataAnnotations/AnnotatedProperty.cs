@@ -12,7 +12,6 @@ public class AnnotatedProperty
     {
         PropertyType = property.PropertyType;
         Name = property.Name;
-        DisplayAttribute = property.DisplayAttribute();
         RequiredAttribute = property.RequiredAttribute() ?? OptionalAttribute.Optional;
         ValidationAttributes = property.ValidationAttributes().Where(attr => attr is not System.ComponentModel.DataAnnotations.RequiredAttribute).ToArray();
         IsNestedModel = property.PropertyType.IsValidatableObject();
@@ -34,12 +33,6 @@ public class AnnotatedProperty
 
     /// <summary>True if the model is decorated with the <see cref="NestedModelAttribute"/>, otherwise false.</summary>
     public bool IsNestedModel { get; }
-
-    /// <summary>Gets the display attribute.</summary>
-    /// <remarks>
-    /// Returns a display attribute with the name equal to the property name if not decorated.
-    /// </remarks>
-    public DisplayAttribute DisplayAttribute { get; }
 
     /// <summary>Gets the required attribute.</summary>
     /// <remarks>
