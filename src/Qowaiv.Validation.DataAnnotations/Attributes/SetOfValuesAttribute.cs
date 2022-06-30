@@ -2,12 +2,9 @@
 
 /// <summary>Base <see cref="ValidationAttribute"/> for allowing or forbidding a set of values.</summary>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+[CLSCompliant(false)]
 public abstract class SetOfValuesAttribute : ValidationAttribute
 {
-    /// <summary>Initializes a new instance of the <see cref="SetOfValuesAttribute"/> class.</summary>
-    protected SetOfValuesAttribute(string value1, string value2)
-        : this(new[] { value1, value2 }) => Do.Nothing();
-
     /// <summary>Initializes a new instance of the <see cref="SetOfValuesAttribute"/> class.</summary>
     /// <param name="values">
     /// String representations of the values.

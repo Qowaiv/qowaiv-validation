@@ -28,4 +28,19 @@
     <PackageReference Include="Qowaiv.TestTools" Version="6.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="TestMessages.Designer.cs">
+      <DependentUpon>TestMessages.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="TestMessages.resx">
+      <LastGenOutput>TestMessages.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

@@ -58,12 +58,6 @@ public class Validates
         .Should().BeValidFor(new AnnotatedModelValidator<ModelWithForbiddenValues>());
 
     [Test]
-    public void ModelWithCustomizedResource_with_error()
-        => new ModelWithCustomizedResource()
-        .Should().BeInvalidFor(new AnnotatedModelValidator<ModelWithCustomizedResource>())
-        .WithMessage(ValidationMessage.Error("This IBAN is wrong.", "Iban"));
-
-    [Test]
     public void Validate_NestedModelWithNullChild_with_error()
         => new NestedModel
         {

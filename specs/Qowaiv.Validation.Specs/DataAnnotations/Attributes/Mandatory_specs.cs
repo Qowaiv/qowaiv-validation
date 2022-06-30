@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Qowaiv.Financial;
+using Specs;
+using System.ComponentModel.DataAnnotations;
 
 namespace Data_annotations.Attributes.Mandatory_specs;
 
@@ -58,12 +60,37 @@ public class Validation_message
         }
     }
 
+    [Test]
+    [SetCulture("en-GB")]
+    public void Supports_a_custom_error_resource_type()
+        => new WithCustomErrorMessageType().Should().BeInvalidFor(new AnnotatedModelValidator<WithCustomErrorMessageType>())
+        .WithMessage(ValidationMessage.Error("This Iban is wrong.", "Iban"));
+
+    [Test]
+    [SetCulture("en-GB")]
+    public void Supports_a_custom_display()
+        => new WithCustomDisplay().Should().BeInvalidFor(new AnnotatedModelValidator<WithCustomDisplay>())
+        .WithMessage(ValidationMessage.Error("The IBAN field is required.", "Iban"));
+
     internal class Model
     {
         [Mandatory]
-        public string TestField { get; set; }
+        public string TestField { get; }
 
         [Required]
         public string ReferenceField { get; set; }
+    }
+
+    public class WithCustomErrorMessageType
+    {
+        [Mandatory(ErrorMessageResourceType = typeof(TestMessages), ErrorMessageResourceName = "TestError")]
+        public InternationalBankAccountNumber Iban { get; set; }
+    }
+
+    public class WithCustomDisplay
+    {
+        [Mandatory]
+        [Display(Name = "IBAN")]
+        public InternationalBankAccountNumber Iban { get; set; }
     }
 }
