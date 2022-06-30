@@ -22,7 +22,7 @@ public class AnnotatedModelValidator<TModel> : IValidator<TModel>
     /// <param name="items">
     /// A dictionary of key/value pairs to make available to the service consumers. This parameter is optional.
     /// </param>
-    public AnnotatedModelValidator(IDictionary<object, object>? items)
+    public AnnotatedModelValidator(IDictionary<object, object?>? items)
         : this(null, items) => Do.Nothing();
 
     /// <summary>Initializes a new instance of the <see cref="AnnotatedModelValidator{TModel}"/> class.</summary>
@@ -32,17 +32,17 @@ public class AnnotatedModelValidator<TModel> : IValidator<TModel>
     /// <param name="items">
     /// A dictionary of key/value pairs to make available to the service consumers. This parameter is optional.
     /// </param>
-    public AnnotatedModelValidator(IServiceProvider? serviceProvider, IDictionary<object, object>? items)
+    public AnnotatedModelValidator(IServiceProvider? serviceProvider, IDictionary<object, object?>? items)
     {
         ServiceProvider = serviceProvider ?? EmptyProvider.Instance;
-        Items = items ?? new Dictionary<object, object>(0);
+        Items = items ?? new Dictionary<object, object?>(0);
     }
 
     /// <summary>Gets the <see cref="IServiceProvider"/>.</summary>
     protected IServiceProvider ServiceProvider { get; }
 
     /// <summary>Gets the <see cref="IServiceProvider"/>.</summary>
-    protected IDictionary<object, object> Items { get; }
+    protected IDictionary<object, object?> Items { get; }
 
     /// <summary>Validates the model.</summary>
     /// <returns>

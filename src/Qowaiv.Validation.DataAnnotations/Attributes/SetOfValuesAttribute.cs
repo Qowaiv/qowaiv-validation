@@ -25,7 +25,7 @@ public abstract class SetOfValuesAttribute : ValidationAttribute
 
     /// <summary>Returns true if the value occurs to be forbidden, otherwise false.</summary>
     [Pure]
-    public sealed override bool IsValid(object value)
+    public sealed override bool IsValid(object? value)
     {
         if (value == null) return true;
         else

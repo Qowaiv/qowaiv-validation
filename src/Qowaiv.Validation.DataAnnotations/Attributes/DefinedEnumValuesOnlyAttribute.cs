@@ -22,7 +22,7 @@ public class DefinedEnumValuesOnlyAttribute : ValidationAttribute
     /// If the type of the value is not an enum.
     /// </exception>
     [Pure]
-    public override bool IsValid(object value)
+    public override bool IsValid(object? value)
     {
         // Might be a nullable enum, we just don't know.
         if (value is null) return true;

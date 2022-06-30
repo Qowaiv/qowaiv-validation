@@ -21,17 +21,17 @@ public sealed class MandatoryAttribute : RequiredAttribute
 
     /// <inheritdoc />
     [Pure]
-    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+    protected override ValidationResult IsValid(object? value, ValidationContext validationContext)
     {
         Guard.NotNull(validationContext, nameof(validationContext));
 
         if (IsValid(value, GetMemberType(validationContext)))
         {
-            return ValidationResult.Success;
+            return ValidationResult.Success!;
         }
         else
         {
-            var memberNames = validationContext.MemberName != null ? new[] { validationContext.MemberName } : null;
+            var memberNames = validationContext.MemberName != null ? new[] { validationContext.MemberName } : Array.Empty<string>();
             return ValidationMessage.Error(FormatErrorMessage(validationContext.DisplayName), memberNames);
         }
     }
@@ -43,7 +43,7 @@ public sealed class MandatoryAttribute : RequiredAttribute
     /// or not.
     /// </remarks>
     [Pure]
-    private static Type GetMemberType(ValidationContext context)
+    private static Type? GetMemberType(ValidationContext context)
     {
         if (string.IsNullOrEmpty(context.MemberName)) return null;
         else
@@ -60,10 +60,10 @@ public sealed class MandatoryAttribute : RequiredAttribute
     /// The unknown value is expected to be static field or property of the type with the name "Unknown".
     /// </remarks>
     [Pure]
-    public override bool IsValid(object value) => IsValid(value, null);
+    public override bool IsValid(object? value) => IsValid(value, null);
 
     [Pure]
-    private bool IsValid(object value, Type memberType)
+    private bool IsValid(object? value, Type? memberType)
     {
         if (value != null)
         {

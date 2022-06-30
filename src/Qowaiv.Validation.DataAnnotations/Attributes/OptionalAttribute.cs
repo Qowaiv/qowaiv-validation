@@ -13,5 +13,5 @@ public sealed class OptionalAttribute : RequiredAttribute
 
     /// <summary>Returns true as an <see cref="OptionalAttribute"/> is always valid.</summary>
     [Pure]
-    public override bool IsValid(object value) => true;
+    public override bool IsValid(object? value) => true;
 }

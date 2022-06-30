@@ -22,7 +22,7 @@ public sealed class DistinctValuesAttribute : ValidationAttribute
 
     /// <summary>True if all items in the collection are distinct, otherwise false.</summary>
     [Pure]
-    public override bool IsValid(object value)
+    public override bool IsValid(object? value)
     {
         if (value is null) return true;
         else
@@ -35,7 +35,7 @@ public sealed class DistinctValuesAttribute : ValidationAttribute
 
     /// <summary>Creates the Comparer to do the distinct with.</summary>
     [Pure]
-    private static IEqualityComparer<object> CreateComparer(Type comparer)
+    private static IEqualityComparer<object> CreateComparer(Type? comparer)
     {
         if (comparer is null)
         {
@@ -43,11 +43,11 @@ public sealed class DistinctValuesAttribute : ValidationAttribute
         }
         else if (typeof(IEqualityComparer<object>).IsAssignableFrom(comparer))
         {
-            return (IEqualityComparer<object>)Activator.CreateInstance(comparer);
+            return (IEqualityComparer<object>)Activator.CreateInstance(comparer)!;
         }
         else if (typeof(IEqualityComparer).IsAssignableFrom(comparer))
         {
-            return new WrappedComparer((IEqualityComparer)Activator.CreateInstance(comparer));
+            return new WrappedComparer((IEqualityComparer)Activator.CreateInstance(comparer)!);
         }
         else throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivValidationMessages.ArgumentException_TypeIsNotEqualityComparer, comparer), nameof(comparer));
     }
@@ -59,7 +59,7 @@ public sealed class DistinctValuesAttribute : ValidationAttribute
         public WrappedComparer(IEqualityComparer comparer) => _comparer = comparer;
 
         [Pure]
-        public new bool Equals(object x, object y) => _comparer.Equals(x, y);
+        public new bool Equals(object? x, object? y) => _comparer.Equals(x, y);
 
         [Pure]
         public int GetHashCode(object obj) => _comparer.GetHashCode(obj);

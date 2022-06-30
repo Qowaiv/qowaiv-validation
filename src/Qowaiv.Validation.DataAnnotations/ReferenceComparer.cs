@@ -17,7 +17,7 @@ public class ReferenceComparer : IEqualityComparer<object>
 
     /// <inheritdoc />
     [Pure]
-    public new bool Equals(object x, object y) => ReferenceEquals(x, y);
+    public new bool Equals(object? x, object? y) => ReferenceEquals(x, y);
 
     /// <inheritdoc />
     [Pure]

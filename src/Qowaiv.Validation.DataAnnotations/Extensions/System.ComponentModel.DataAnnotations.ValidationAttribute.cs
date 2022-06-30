@@ -14,12 +14,12 @@ public static class QowaivValidationAttributeExtensions
     {
         Guard.NotNull(attribute, nameof(attribute));
 
-        var result = (ValidationResult)IsValid.Invoke(attribute, new object?[] { value, validationContext });
-        return ValidationMessage.For(result);
+        var result = IsValid.Invoke(attribute, new object?[] { value, validationContext })!;
+        return ValidationMessage.For((ValidationResult)result);
     }
 
     /// <summary>Access to the protected <see cref="ValidationAttribute.IsValid(object, ValidationContext)"/>.</summary>
-    private static readonly MethodInfo IsValid = typeof(ValidationAttribute).GetMethod(nameof(IsValid), IsValidBindings);
+    private static readonly MethodInfo IsValid = typeof(ValidationAttribute).GetMethod(nameof(IsValid), IsValidBindings)!;
 
 #pragma warning disable S3011 // Reflection should not be used to increase accessibility of classes, methods, or fields
     ///<remarks>

@@ -10,7 +10,7 @@ internal class NestedValidationContext
         string root,
         object instance,
         IServiceProvider serviceProvider,
-        IDictionary<object, object> items,
+        IDictionary<object, object?> items,
         ISet<object> done,
         List<IValidationMessage> messages)
     {
@@ -36,13 +36,13 @@ internal class NestedValidationContext
     public IServiceProvider ServiceProvider { get; }
 
     /// <summary>Gets the dictionary of key/value pairs that is associated with this context.</summary>
-    public IDictionary<object, object> Items { get; }
+    public IDictionary<object, object?> Items { get; }
 
     /// <summary>Gets the member name.</summary>
     /// <remarks>
     /// Only relevant for testing a property.
     /// </remarks>
-    public string MemberName { get; private set; }
+    public string? MemberName { get; private set; }
 
     /// <summary>Gets the annotated model for this context.</summary>
     public AnnotatedModel Annotations { get; }
@@ -122,7 +122,7 @@ internal class NestedValidationContext
             collection);
 
     [Pure]
-    private static string Combine(string root, string path, int? index)
+    private static string Combine(string root, string? path, int? index)
     {
         var combine = string.IsNullOrEmpty(root) ? string.Empty : ".";
         return index.HasValue
@@ -140,7 +140,7 @@ internal class NestedValidationContext
 
     /// <summary>Creates a root context.</summary>
     [Pure]
-    public static NestedValidationContext CreateRoot(object instance, IServiceProvider serviceProvider, IDictionary<object, object> items)
+    public static NestedValidationContext CreateRoot(object instance, IServiceProvider serviceProvider, IDictionary<object, object?> items)
         => new(
             root: string.Empty,
             Guard.NotNull(instance, nameof(instance)),
