@@ -3,16 +3,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Data_annotations.Valdator_specs;
 
-public class Validates_children_when_child
+public class Validates_children_when_child_type
 {
     [Test]
-    public void Is_IValidatableObject()
+    public void is_IValidatableObject()
         => new WithIValidatableChild()
         .Should().BeInvalidFor(new AnnotatedModelValidator<WithIValidatableChild>())
         .WithMessage(ValidationMessage.Error("Answer to the Ultimate Question of Life, the Universe, and Everything.", "Child.Answer"));
     
     [Test]
-    public void Type_has_any_validation_attribute()
+    public void has_any_validation_attribute()
      => new WithChildTypeDecorated()
         .Should().BeInvalidFor(new AnnotatedModelValidator<WithChildTypeDecorated>())
         .WithMessage(ValidationMessage.Error("Answer to the Ultimate Question of Life, the Universe, and Everything.", "Child"));
@@ -68,7 +68,6 @@ public class Validates_children_when_child
     }
 }
 
-
 public class Supports
 {
     [Test]
@@ -91,6 +90,22 @@ public class Supports
             .WithMessage(ValidationMessage.Error("The Answer field is required.", "Child.Answer"));
     }
 
+    [Test]
+    public void models_with_collections_of_children_to_validate()
+    {
+        var model = new WithChildren
+        {
+            Records = new[]
+            {
+                new ChildRecord(),
+                new ChildRecord(),
+            } 
+        };
+        model.Should().BeInvalidFor(new AnnotatedModelValidator<WithChildren>()).WithMessages(
+            ValidationMessage.Error("The Value field is required.", "Records[0].Value"),
+            ValidationMessage.Error("The Value field is required.", "Records[1].Value"));
+    }
+
     internal class WithDI : IValidatableObject
     {
         public int Answer { get; set; }
@@ -111,6 +126,16 @@ public class Supports
         public WithLoop Parent { get; set; }
         [Mandatory]
         public int? Answer { get; set; }
+    }
+
+    internal class WithChildren
+    {
+        public ChildRecord[] Records { get; set; }
+    }
+    internal sealed record ChildRecord
+    {
+        [Mandatory]
+        public int? Value { get; init; }
     }
 
     internal sealed record AnswerService(int Answer);
