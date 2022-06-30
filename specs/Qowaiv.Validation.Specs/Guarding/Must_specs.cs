@@ -76,7 +76,7 @@ public class ToString_as_type
     public void Displays_type_based_on_TSubject()
     {
         var result = new TestModel().Must();
-        result.ToString().Should().Be("Must<Must_specs.TestModel>");
+        result.ToString().Should().Be("Must<Guarding.Must_specs.TestModel>");
     }
 }
 
