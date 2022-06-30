@@ -46,11 +46,8 @@ public sealed class MandatoryAttribute : RequiredAttribute
     private static Type? GetMemberType(ValidationContext context)
     {
         if (string.IsNullOrEmpty(context.MemberName)) return null;
-        else
-        {
-            return context.ObjectType.GetProperty(context.MemberName)?.PropertyType
-                ?? context.ObjectType.GetField(context.MemberName)?.FieldType;
-        }
+        else return context.ObjectType.GetProperty(context.MemberName)?.PropertyType
+            ?? context.ObjectType.GetField(context.MemberName)?.FieldType;
     }
 
     /// <summary>Returns true if the value is not null and value types are
