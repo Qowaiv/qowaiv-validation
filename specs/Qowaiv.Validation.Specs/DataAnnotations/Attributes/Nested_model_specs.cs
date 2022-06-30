@@ -2,7 +2,7 @@
 
 public class Child_model
 {
-    [Test, Ignore("Somehting is wrong")]
+    [Test]
     public void decorated_with_nested_model_attribute_valides_grand_children()
         => new WithNestedChild().Should()
         .BeInvalidFor(new AnnotatedModelValidator<WithNestedChild>());
@@ -15,7 +15,7 @@ public class Child_model
 
 internal class WithNestedChild
 {
-    public WithNestedChild Child { get; } = new();
+    public NestedChild Child { get; } = new();
 }
 
 internal class WithoutNestedChild
