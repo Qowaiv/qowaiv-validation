@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-namespace System.ComponentModel.DataAnnotations;
+﻿namespace System.ComponentModel.DataAnnotations;
 
 /// <summary>Extensions on <see cref="ValidationContext"/>.</summary>
 public static class ValidationContextExtensions
