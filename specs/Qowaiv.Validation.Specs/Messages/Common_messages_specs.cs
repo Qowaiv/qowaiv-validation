@@ -1,11 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
 using Qowaiv.Validation.Abstractions;
-using System;
 using System.Security;
 using NS = Qowaiv.Validation.Messages;
 
-namespace Common_Messages_specs;
+namespace Validation_messages.Common_messages_specs;
 
 public class AccessDenied
 {

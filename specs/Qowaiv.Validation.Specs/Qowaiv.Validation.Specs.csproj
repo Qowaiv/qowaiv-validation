@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Qowaiv.Validation.DataAnnotations\Qowaiv.Validation.DataAnnotations.csproj" />
+    <ProjectReference Include="..\..\src\Qowaiv.Validation.Messages\Qowaiv.Validation.Messages.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv.Validation.TestTools\Qowaiv.Validation.TestTools.csproj" />
   </ItemGroup>
 
