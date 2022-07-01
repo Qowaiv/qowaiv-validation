@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 
-namespace Qowaiv.Validation.DataAnnotations.Refelection;
+namespace Qowaiv.Validation.DataAnnotations.Reflection;
 
-internal static class DataAnnotationsReflactor
+internal static class DataAnnotationsReflector
 {
     /// <summary>Returns true if type implements <see cref="IValidatableObject"/>,
     /// or if the type has been decorated with any <see cref="ValidationAttribute"/>'s,
@@ -38,10 +38,4 @@ internal static class DataAnnotationsReflactor
     [Pure]
     public static IEnumerable<ValidationAttribute> ValidationAttributes(this Type type)
         => type.GetCustomAttributes<ValidationAttribute>(inherit: true);
-
-    /// <summary>Gets the decorated <see cref="DisplayAttribute"/> for the property.</summary>
-    [Pure]
-    public static DisplayAttribute DisplayAttribute(this PropertyInfo property)
-        => property.GetCustomAttribute<DisplayAttribute>()
-        ?? new DisplayAttribute { Name = property.Name };
 }
