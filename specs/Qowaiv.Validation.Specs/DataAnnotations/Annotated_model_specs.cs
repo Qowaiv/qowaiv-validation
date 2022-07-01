@@ -8,7 +8,7 @@ public  class With_debugger_experience
     public void Has_debugger_display()
     {
         var annotated = AnnotatedModel.Get(typeof(Model));
-        annotated.Should().HaveDebuggerDisplay("DataAnnotations.Annotated_model_specs.With_debugger_experience+Model, Attributes: 1, Properties: 2");
+        annotated.Should().HaveDebuggerDisplay("Data_annotations.Annotated_model_specs.With_debugger_experience+Model, Attributes: 1, Properties: 2");
     }
 
     [NestedModel]
