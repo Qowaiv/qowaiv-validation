@@ -2,7 +2,7 @@
 using Qowaiv.Validation.Fluent;
 using Specs.Fluent.Models;
 
-namespace Validators.InPast_specs;
+namespace Fluent_validation.In_past_specs;
 
 public class Valid_for_in_past
 {
@@ -61,7 +61,8 @@ public class Valid_for_in_past
         }
     }
 }
-public class Not_invalid_for_not_set
+
+public class Valid_for_not_set
 {
     [Test]
     public void Date()
@@ -90,7 +91,8 @@ public class Not_invalid_for_not_set
         }
     }
 }
-public class Invalid_for_not_past
+
+public class Invalid_for_not_in_past
 {
     [TestCase("'Prop' moet in het verleden liggen.", "nl-NL")]
     [TestCase("'Prop' should be in the past.", "en-GB")]
