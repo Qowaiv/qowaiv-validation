@@ -15,10 +15,7 @@ public class AnnotatedProperty
         RequiredAttribute = property.RequiredAttribute() ?? OptionalAttribute.Optional;
         ValidationAttributes = property.ValidationAttributes().Where(attr => attr is not System.ComponentModel.DataAnnotations.RequiredAttribute).ToArray();
         IsValidatableObject = property.PropertyType.IsValidatableObject();
-        IsEnumerable = PropertyType != typeof(string)
-            && PropertyType != typeof(byte[])
-            && GetEnumerableType(PropertyType) is not null;
-
+        IsEnumerable = PropertyType.IsEnumerable();
         getValue = (model) => property.GetValue(model);
     }
 
@@ -65,13 +62,4 @@ public class AnnotatedProperty
     internal static IEnumerable<AnnotatedProperty> CreateAll(Type type)
         => type.GetProperties()
         .Select(property => new AnnotatedProperty(property));
-
-    [Pure]
-    private static Type? GetEnumerableType(Type type)
-        => type
-        .GetInterfaces()
-        .FirstOrDefault(iface =>
-            iface.IsGenericType &&
-            iface.GetGenericTypeDefinition() == typeof(IEnumerable<>))?
-        .GetGenericArguments()[0];
 }

@@ -23,6 +23,25 @@ internal static class DataAnnotationsReflector
             || property.ValidationAttributes().Any();
     }
 
+    /// <summary>Returns true if the type is an <see cref="IEnumerable"/>.</summary>
+    ///  <remarks>
+    ///  Excludes <see cref="string"/> and <see cref="byte"/>[].
+    ///  </remarks>
+    [Pure]
+    public static bool IsEnumerable(this Type type)
+       => type != typeof(string)
+        && type != typeof(byte[])
+        && type.GetEnumerableType() is { };
+
+    [Pure]
+    private static Type? GetEnumerableType(this Type type)
+        => type
+        .GetInterfaces()
+        .FirstOrDefault(iface =>
+            iface.IsGenericType &&
+            iface.GetGenericTypeDefinition() == typeof(IEnumerable<>))?
+        .GetGenericArguments()[0];
+
     /// <summary>Gets the decorated <see cref="System.ComponentModel.DataAnnotations.RequiredAttribute"/> for the property.</summary>
     [Pure]
     public static RequiredAttribute? RequiredAttribute(this PropertyInfo property)
