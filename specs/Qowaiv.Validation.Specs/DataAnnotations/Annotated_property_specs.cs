@@ -1,6 +1,6 @@
 ﻿using Qowaiv.Validation.DataAnnotations;
 
-namespace DataAnnotations.Annotated_property_specs;
+namespace Data_annotations.Annotated_property_specs;
 
 public  class With_debugger_experience
 {
