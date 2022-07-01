@@ -14,7 +14,7 @@ public class AnnotatedProperty
         Name = property.Name;
         RequiredAttribute = property.RequiredAttribute() ?? OptionalAttribute.Optional;
         ValidationAttributes = property.ValidationAttributes().Where(attr => attr is not System.ComponentModel.DataAnnotations.RequiredAttribute).ToArray();
-        IsNestedModel = property.PropertyType.IsValidatableObject();
+        IsValidatableObject = property.PropertyType.IsValidatableObject();
         IsEnumerable = PropertyType != typeof(string)
             && PropertyType != typeof(byte[])
             && GetEnumerableType(PropertyType) is not null;
@@ -28,11 +28,11 @@ public class AnnotatedProperty
     /// <summary>Gets the name of the property.</summary>
     public string Name { get; }
 
-    /// <summary>True if the property is an <see cref="IEnumerable{T}"/> type, otherwise false.</summary>
+    /// <summary>True if the property is an <see cref="IEnumerable{T}"/> type.</summary>
     public bool IsEnumerable { get; }
 
-    /// <summary>True if the model is decorated with the <see cref="NestedModelAttribute"/>, otherwise false.</summary>
-    public bool IsNestedModel { get; }
+    /// <summary>True if the model an validatable object.</summary>
+    public bool IsValidatableObject { get; }
 
     /// <summary>Gets the required attribute.</summary>
     /// <remarks>
