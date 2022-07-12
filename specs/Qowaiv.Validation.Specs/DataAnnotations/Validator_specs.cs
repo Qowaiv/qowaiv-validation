@@ -73,7 +73,7 @@ public class Validates_children_when_child_type
 public class Supports
 {
     [Test]
-    public void denpedency_injection()
+    public void dependency_injection()
     {
         var model = new WithDI { Answer = 42 };
         var provider = new ServiceProviderStub
