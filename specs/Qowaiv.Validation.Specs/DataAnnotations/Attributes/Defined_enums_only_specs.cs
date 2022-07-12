@@ -64,7 +64,7 @@ public class With_message
 {
     [TestCase("nl", "De waarde van het veld Banners is niet toegestaan.")]
     [TestCase("en", "The value of the Banners field is not allowed.")]
-    public void culture_depedent(CultureInfo culture, string message)
+    public void culture_dependent(CultureInfo culture, string message)
     {
         using var _ = culture.Scoped();
         new Model().Should().BeInvalidFor(new AnnotatedModelValidator<Model>())

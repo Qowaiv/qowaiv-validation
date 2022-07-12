@@ -7,7 +7,7 @@ internal static class DataAnnotationsReflector
     /// <summary>Returns true if type implements <see cref="IValidatableObject"/>,
     /// or if the type has been decorated with any <see cref="ValidationAttribute"/>'s,
     /// or any of its properties.
-        /// </summary>
+    /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
     [Pure]

@@ -1,4 +1,4 @@
-﻿namespace Specs.DataAnnotations.Subs;
+﻿namespace Specs.DataAnnotations.Stubs;
 
 internal sealed class ServiceProviderStub : Dictionary<Type, object>, IServiceProvider
 {

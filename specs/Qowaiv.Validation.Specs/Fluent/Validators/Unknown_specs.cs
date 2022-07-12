@@ -1,7 +1,7 @@
 ﻿using Qowaiv.Validation.Fluent;
 using Specs.Fluent.Models;
 
-namespace Fluent_validation.Unkown_specs;
+namespace Fluent_validation.Unknown_specs;
 
 public class Set_value
 {

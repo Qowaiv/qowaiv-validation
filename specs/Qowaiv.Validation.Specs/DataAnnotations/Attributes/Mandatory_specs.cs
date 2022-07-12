@@ -43,7 +43,7 @@ public class With_message
 {
     [TestCase("nl-NL", "Het veld TestField is verplicht.")]
     [TestCase("en-GB", "The TestField field is required.")]
-    public void culture_depedent(CultureInfo culture, string message)
+    public void culture_dependent(CultureInfo culture, string message)
     {
         using var _ = culture.Scoped();
         new AnnotatedModelValidator<Model>().Validate(new Model { ReferenceField = "ignore" })

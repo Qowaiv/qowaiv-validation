@@ -28,7 +28,7 @@ public class AnnotatedProperty
     /// <summary>True if the property is an <see cref="IEnumerable{T}"/> type.</summary>
     public bool IsEnumerable { get; }
 
-    /// <summary>True if the model an validatable object.</summary>
+    /// <summary>True if the model a validatable object.</summary>
     public bool IsValidatableObject { get; }
 
     /// <summary>Gets the required attribute.</summary>

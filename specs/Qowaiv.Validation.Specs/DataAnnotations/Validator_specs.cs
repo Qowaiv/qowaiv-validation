@@ -1,9 +1,9 @@
 ﻿using ValidationSeverity = Qowaiv.Validation.Abstractions.ValidationSeverity;
-using Specs.DataAnnotations.Subs;
+using Specs.DataAnnotations.Stubs;
 using System.ComponentModel.DataAnnotations;
 using Qowaiv.Validation.DataAnnotations;
 
-namespace Data_annotations.Valdator_specs;
+namespace Data_annotations.Validator_specs;
 
 public class Validates_children_when_child_type
 {
@@ -73,7 +73,7 @@ public class Validates_children_when_child_type
 public class Supports
 {
     [Test]
-    public void depedency_injection()
+    public void denpedency_injection()
     {
         var model = new WithDI { Answer = 42 };
         var provider = new ServiceProviderStub
@@ -115,19 +115,19 @@ public class Supports
     [TestCase(ValidationSeverity.Info)]
     [TestCase(ValidationSeverity.Warning)]
     [TestCase(ValidationSeverity.Error)]
-    public void all_serverity_levels(ValidationSeverity severity)
+    public void all_severity_levels(ValidationSeverity severity)
     {
-        var model = new WithServerity(severity);
-        var validator = new AnnotatedModelValidator<WithServerity>();
+        var model = new WithSeverity(severity);
+        var validator = new AnnotatedModelValidator<WithSeverity>();
         var result = validator.Validate(model).Messages.Single();
         result.Severity.Should().Be(severity);
         result.Message.Should().Be("Has custom severity.");
     }
 
     [Test]
-    public void serverity_none_as_no_validation_result()
-        => new WithServerity(ValidationSeverity.None)
-        .Should().BeValidFor(new AnnotatedModelValidator<WithServerity>())
+    public void severity_none_as_no_validation_result()
+        => new WithSeverity(ValidationSeverity.None)
+        .Should().BeValidFor(new AnnotatedModelValidator<WithSeverity>())
         .WithoutMessages();
 
     internal class WithDI : IValidatableObject
@@ -160,7 +160,7 @@ public class Supports
 
     internal sealed record AnswerService(int Answer);
 
-    internal record WithServerity(ValidationSeverity Severity) : IValidatableObject
+    internal record WithSeverity(ValidationSeverity Severity) : IValidatableObject
     {
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

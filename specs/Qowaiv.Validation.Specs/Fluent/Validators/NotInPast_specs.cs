@@ -4,7 +4,7 @@ using Specs.Fluent.Models;
 
 namespace Validators.NotInPast_specs;
 
-public class Valid_for_in_past
+public class Valid_for_not_in_past
 {
     [Test]
     public void Date()

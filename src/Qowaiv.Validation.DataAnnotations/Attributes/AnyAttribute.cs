@@ -4,7 +4,7 @@
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
 public class AnyAttribute : RequiredAttribute
 {
-    /// <summary>Creates a new instance of the <see cref="MandatoryAttribute"/> class.</summary>
+    /// <summary>Creates a new instance of the <see cref="AnyAttribute"/> class.</summary>
     public AnyAttribute()
     {
         ErrorMessageResourceType = typeof(QowaivValidationMessages);

@@ -124,7 +124,7 @@ public class AnnotatedModelValidator<TModel> : IValidator<TModel>
     private static void ValidateType(NestedValidationContext context)
     {
         var messages = context.Annotations.TypeAttributes.Select(attr => attr.GetValidationMessage(context.Instance, context));
-        context.AddMessages(messages, onType: true);
+        context.AddMessages(messages, violationOnType: true);
     }
 
     /// <summary>Gets the results for validating <see cref="IValidatableObject.Validate(ValidationContext)"/>.</summary>

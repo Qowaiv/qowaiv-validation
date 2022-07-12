@@ -53,11 +53,11 @@ internal class NestedValidationContext
     private readonly List<IValidationMessage> collection;
 
     /// <summary>Adds a set of messages.</summary>
-    public void AddMessages(IEnumerable<ValidationResult> messages, bool onType = false)
+    public void AddMessages(IEnumerable<ValidationResult> messages, bool violationOnType = false)
     {
         foreach (var message in messages)
         {
-            AddMessage(message, onType);
+            AddMessage(message, violationOnType);
         }
     }
 
@@ -69,22 +69,22 @@ internal class NestedValidationContext
     /// Null and <see cref="ValidationMessage.None"/> Messages are not added.
     /// </remarks>
     [Impure]
-    public bool AddMessage(ValidationResult validationResult, bool onType = false)
+    public bool AddMessage(ValidationResult validationResult, bool violationOnType = false)
     {
         var message = ValidationMessage.For(validationResult);
         if (message.Severity > ValidationSeverity.None)
         {
-            collection.Add(Update(message, onType));
+            collection.Add(Update(message, violationOnType));
             return true;
         }
         else return false;
 
-        ValidationMessage Update(ValidationMessage message, bool onType)
+        ValidationMessage Update(ValidationMessage message, bool violationOnType)
         {
             if (string.IsNullOrEmpty(Root)) return message;
             else
             {
-                var members = onType && string.IsNullOrEmpty(message.PropertyName)
+                var members = violationOnType && string.IsNullOrEmpty(message.PropertyName)
                     ? new[] { Root }
                     : message.MemberNames.Select(name => $"{Root}.{name}").ToArray();
 

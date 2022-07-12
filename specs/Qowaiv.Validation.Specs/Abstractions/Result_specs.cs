@@ -84,7 +84,7 @@ public class Filtering
     }
 
     [Test]
-    public void Info_messages_are_is_done_via_the_Infos_property()
+    public void Info_messages_is_done_via_the_Infos_property()
     {
         var result = Result.WithMessages(TestMessages);
         var act = result.Infos;
@@ -103,7 +103,7 @@ public class Casting
     }
 
     [Test]
-    public void Expicit_from_Result_of_T_to_T_is_supported()
+    public void Explicit_from_Result_of_T_to_T_is_supported()
     {
         var result = Result.For(666);
         Assert.That((int)result, Is.EqualTo(666));

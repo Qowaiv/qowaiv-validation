@@ -31,30 +31,30 @@ public class Is_valid_for
        => new DistinctValuesAttribute().IsValid(Array.Empty<int>()).Should().BeTrue();
 
     [Test]
-    public void distict_list_according_using_default_comparer()
+    public void distinct_list_according_to_default_comparer()
         => new DistinctValuesAttribute().IsValid(new[] { 42, 69 }).Should().BeTrue();
 
     [Test]
-    public void distict_list_according_to_IEqualityComparer()
+    public void distinct_list_according_to_IEqualityComparer()
         => new DistinctValuesAttribute(typeof(EqualityComparer)).IsValid(new[] { 42, 69 }).Should().BeTrue();
 
     [Test]
-    public void distict_list_according_to_IEqualityComparer_of_object()
+    public void distinct_list_according_to_IEqualityComparer_of_object()
         => new DistinctValuesAttribute(typeof(EqualityComparer_of_object)).IsValid(new[] { 42, 69 }).Should().BeTrue();
 }
 
-public class Is__not_valid_for
+public class Is_not_valid_for
 {
     [Test]
-    public void nondistict_list_according_using_default_comparer()
+    public void nondistinct_list_according_to_default_comparer()
         => new DistinctValuesAttribute().IsValid(new[] { 42, 69, 69 }).Should().BeFalse();
 
     [Test]
-    public void nondistict_list_according_to_IEqualityComparer()
+    public void nondistinct_list_according_to_IEqualityComparer()
         => new DistinctValuesAttribute(typeof(EqualityComparer)).IsValid(new[] { 42, 69, 69 }).Should().BeFalse();
 
     [Test]
-    public void nondistict_list_according_to_IEqualityComparer_of_object()
+    public void nondistinct_list_according_to_IEqualityComparer_of_object()
         => new DistinctValuesAttribute(typeof(EqualityComparer_of_object)).IsValid(new[] { 42, 69, 69 }).Should().BeFalse();
 }
 
