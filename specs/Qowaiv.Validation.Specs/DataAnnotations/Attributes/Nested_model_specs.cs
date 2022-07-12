@@ -5,7 +5,7 @@ namespace Data_annotations.Attributes.Nested_model_specs;
 public class Child_model
 {
     [Test]
-    public void decorated_with_nested_model_attribute_valides_grand_children()
+    public void decorated_with_nested_model_attribute_validates_grand_children()
         => new WithNestedChild().Should()
         .BeInvalidFor(new AnnotatedModelValidator<WithNestedChild>());
 
