@@ -4,8 +4,11 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
-    <Version>0.2.4</Version>
+    <Version>1.0.0</Version>
     <PackageReleaseNotes>
+v1.0.0
+- Properties are considered validatable objects without [NestedModel] attribute #55
+- Removed unused properties from NestedModel
 v0.2.4
 - Roll back of change #53
 v0.2.3
