@@ -3,14 +3,14 @@
 namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Represents a nested wrapper for a (sealed) <see cref="ValidationContext"/>.</summary>
-internal class NestedValidationContext : IServiceProvider
+internal class NestedValidationContext
 {
     /// <summary>Initializes a new instance of the <see cref="NestedValidationContext"/> class.</summary>
     private NestedValidationContext(
         string root,
         object instance,
         IServiceProvider serviceProvider,
-        IDictionary<object, object> items,
+        IDictionary<object, object?> items,
         ISet<object> done,
         List<IValidationMessage> messages)
     {
@@ -36,13 +36,13 @@ internal class NestedValidationContext : IServiceProvider
     public IServiceProvider ServiceProvider { get; }
 
     /// <summary>Gets the dictionary of key/value pairs that is associated with this context.</summary>
-    public IDictionary<object, object> Items { get; }
+    public IDictionary<object, object?> Items { get; }
 
     /// <summary>Gets the member name.</summary>
     /// <remarks>
     /// Only relevant for testing a property.
     /// </remarks>
-    public string MemberName { get; private set; }
+    public string? MemberName { get; private set; }
 
     /// <summary>Gets the annotated model for this context.</summary>
     public AnnotatedModel Annotations { get; }
@@ -53,11 +53,11 @@ internal class NestedValidationContext : IServiceProvider
     private readonly List<IValidationMessage> collection;
 
     /// <summary>Adds a set of messages.</summary>
-    public void AddMessages(IEnumerable<ValidationResult> messages)
+    public void AddMessages(IEnumerable<ValidationResult> messages, bool violationOnType = false)
     {
         foreach (var message in messages)
         {
-            AddMessage(message);
+            AddMessage(message, violationOnType);
         }
     }
 
@@ -69,30 +69,32 @@ internal class NestedValidationContext : IServiceProvider
     /// Null and <see cref="ValidationMessage.None"/> Messages are not added.
     /// </remarks>
     [Impure]
-    public bool AddMessage(ValidationResult validationResult)
+    public bool AddMessage(ValidationResult validationResult, bool violationOnType = false)
     {
         var message = ValidationMessage.For(validationResult);
-        if (message.Severity <= ValidationSeverity.None) { return false; }
-        else
+        if (message.Severity > ValidationSeverity.None)
         {
-            collection.Add(
-                HasNestedPaths(validationResult)
-                ? new ValidationMessage(
-                    message.Severity,
-                    message.Message,
-                    message.MemberNames.Select(name => $"{Root}.{name}").ToArray())
-                : message);
+            collection.Add(Update(message, violationOnType));
             return true;
         }
+        else return false;
+
+        ValidationMessage Update(ValidationMessage message, bool violationOnType)
+        {
+            if (string.IsNullOrEmpty(Root)) return message;
+            else
+            {
+                var members = violationOnType && string.IsNullOrEmpty(message.PropertyName)
+                    ? new[] { Root }
+                    : message.MemberNames.Select(name => $"{Root}.{name}").ToArray();
+
+                return new ValidationMessage(
+                    message.Severity,
+                    message.Message,
+                    members);
+            }
+        }
     }
-
-    [Pure]
-    private bool HasNestedPaths(ValidationResult validationResult)
-        => !string.IsNullOrEmpty(Root) && validationResult.MemberNames.Any();
-
-    /// <inheritdoc />
-    [Pure]
-    public object GetService(Type serviceType) => ServiceProvider?.GetService(serviceType);
 
     /// <summary>Creates context for the property.</summary>
     [Pure]
@@ -120,7 +122,7 @@ internal class NestedValidationContext : IServiceProvider
             collection);
 
     [Pure]
-    private static string Combine(string root, string path, int? index)
+    private static string Combine(string root, string? path, int? index)
     {
         var combine = string.IsNullOrEmpty(root) ? string.Empty : ".";
         return index.HasValue
@@ -131,16 +133,14 @@ internal class NestedValidationContext : IServiceProvider
     /// <summary>Implicitly casts to the (sealed base) <see cref="ValidationContext"/>.</summary>
     [Pure]
     public static implicit operator ValidationContext(NestedValidationContext context)
-        => context is null
-        ? null
-        : new ValidationContext(context.Instance, context.ServiceProvider, context.Items)
+        => new(context.Instance, context.ServiceProvider, context.Items)
         {
             MemberName = context.MemberName,
         };
 
     /// <summary>Creates a root context.</summary>
     [Pure]
-    public static NestedValidationContext CreateRoot(object instance, IServiceProvider serviceProvider, IDictionary<object, object> items)
+    public static NestedValidationContext CreateRoot(object instance, IServiceProvider serviceProvider, IDictionary<object, object?> items)
         => new(
             root: string.Empty,
             Guard.NotNull(instance, nameof(instance)),

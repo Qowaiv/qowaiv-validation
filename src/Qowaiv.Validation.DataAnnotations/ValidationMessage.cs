@@ -9,11 +9,9 @@ public class ValidationMessage : ValidationResult, IValidationMessage, ISerializ
     /// <summary>Initializes a new instance of the <see cref="ValidationMessage"/> class.</summary>
     public ValidationMessage() : this(ValidationSeverity.None, null, null) => Do.Nothing();
 
-    internal ValidationMessage(ValidationSeverity severity, string message, string[] memberNames)
-        : base(message, memberNames)
-    {
-        Severity = severity;
-    }
+    internal ValidationMessage(ValidationSeverity severity, string? message, string[]? memberNames)
+        : base(message, memberNames ?? Array.Empty<string>())
+        => Severity = severity;
 
     /// <summary>Initializes a new instance of the <see cref="ValidationMessage"/> class.</summary>
     protected ValidationMessage(SerializationInfo info, StreamingContext context)
@@ -25,11 +23,11 @@ public class ValidationMessage : ValidationResult, IValidationMessage, ISerializ
 
     /// <summary>Helper methods to deserialize the <see cref="ValidationMessage"/>.</summary>
     [Pure]
-    private static string GetMessage(SerializationInfo info) => info.GetString(nameof(Message));
+    private static string? GetMessage(SerializationInfo info) => info.GetString(nameof(Message));
 
     /// <summary>Helper methods to deserialize the <see cref="ValidationMessage"/>.</summary>
     [Pure]
-    private static string[] GetMemberNames(SerializationInfo info) => info.GetValue(nameof(MemberNames), typeof(string[])) as string[];
+    private static string[]? GetMemberNames(SerializationInfo info) => info.GetValue(nameof(MemberNames), typeof(string[])) as string[];
 
     /// <inheritdoc />
     public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -45,10 +43,10 @@ public class ValidationMessage : ValidationResult, IValidationMessage, ISerializ
     public ValidationSeverity Severity { get; }
 
     /// <inheritdoc />
-    public string PropertyName => MemberNames.FirstOrDefault();
+    public string? PropertyName => MemberNames.FirstOrDefault();
 
     /// <inheritdoc />
-    public string Message => ErrorMessage;
+    public string? Message => ErrorMessage;
 
     /// <summary>Creates a None message.</summary>
     [Pure]
@@ -56,15 +54,15 @@ public class ValidationMessage : ValidationResult, IValidationMessage, ISerializ
 
     /// <summary>Creates an error message.</summary>
     [Pure]
-    public static ValidationMessage Error(string message, params string[] memberNames) => new(ValidationSeverity.Error, message, memberNames);
+    public static ValidationMessage Error(string? message, params string[] memberNames) => new(ValidationSeverity.Error, message, memberNames);
 
     /// <summary>Creates a warning message.</summary>
     [Pure]
-    public static ValidationMessage Warn(string message, params string[] memberNames) => new(ValidationSeverity.Warning, message, memberNames);
+    public static ValidationMessage Warn(string? message, params string[] memberNames) => new(ValidationSeverity.Warning, message, memberNames);
 
     /// <summary>Creates an info message.</summary>
     [Pure]
-    public static ValidationMessage Info(string message, params string[] memberNames) => new(ValidationSeverity.Info, message, memberNames);
+    public static ValidationMessage Info(string? message, params string[] memberNames) => new(ValidationSeverity.Info, message, memberNames);
 
     /// <summary>Creates a validation message for a validation result.</summary>
     /// <param name="validationResult">
@@ -83,7 +81,7 @@ public class ValidationMessage : ValidationResult, IValidationMessage, ISerializ
 
     /// <summary>Creates a validation message.</summary>
     [Pure]
-    public static IValidationMessage For(ValidationSeverity severity, string message, string[] memberNames)
+    public static IValidationMessage For(ValidationSeverity severity, string message, params string[] memberNames)
         => severity switch
         {
             ValidationSeverity.None => None,

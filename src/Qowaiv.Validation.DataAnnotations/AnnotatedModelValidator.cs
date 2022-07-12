@@ -15,14 +15,14 @@ public class AnnotatedModelValidator<TModel> : IValidator<TModel>
     /// <param name="serviceProvider">
     /// The object that implements the System.IServiceProvider interface. This parameter is optional.
     /// </param>
-    public AnnotatedModelValidator(IServiceProvider serviceProvider)
+    public AnnotatedModelValidator(IServiceProvider? serviceProvider)
         : this(serviceProvider, null) => Do.Nothing();
 
     /// <summary>Initializes a new instance of the <see cref="AnnotatedModelValidator{TModel}"/> class.</summary>
     /// <param name="items">
     /// A dictionary of key/value pairs to make available to the service consumers. This parameter is optional.
     /// </param>
-    public AnnotatedModelValidator(IDictionary<object, object> items)
+    public AnnotatedModelValidator(IDictionary<object, object?>? items)
         : this(null, items) => Do.Nothing();
 
     /// <summary>Initializes a new instance of the <see cref="AnnotatedModelValidator{TModel}"/> class.</summary>
@@ -32,17 +32,17 @@ public class AnnotatedModelValidator<TModel> : IValidator<TModel>
     /// <param name="items">
     /// A dictionary of key/value pairs to make available to the service consumers. This parameter is optional.
     /// </param>
-    public AnnotatedModelValidator(IServiceProvider serviceProvider, IDictionary<object, object> items)
+    public AnnotatedModelValidator(IServiceProvider? serviceProvider, IDictionary<object, object?>? items)
     {
-        ServiceProvider = serviceProvider;
-        Items = items;
+        ServiceProvider = serviceProvider ?? EmptyProvider.Instance;
+        Items = items ?? new Dictionary<object, object?>(0);
     }
 
     /// <summary>Gets the <see cref="IServiceProvider"/>.</summary>
     protected IServiceProvider ServiceProvider { get; }
 
     /// <summary>Gets the <see cref="IServiceProvider"/>.</summary>
-    protected IDictionary<object, object> Items { get; }
+    protected IDictionary<object, object?> Items { get; }
 
     /// <summary>Validates the model.</summary>
     /// <returns>
@@ -51,7 +51,7 @@ public class AnnotatedModelValidator<TModel> : IValidator<TModel>
     [Pure]
     public Result<TModel> Validate(TModel model)
     {
-        var context = NestedValidationContext.CreateRoot(model, ServiceProvider, Items);
+        var context = NestedValidationContext.CreateRoot(model!, ServiceProvider, Items);
         ValidateModel(context);
 
         return Result.For(model, context.Messages);
@@ -111,7 +111,7 @@ public class AnnotatedModelValidator<TModel> : IValidator<TModel>
                     ValidateModel(nestedContext);
                 }
             }
-            else if (property.IsNestedModel)
+            else if (property.IsValidatableObject)
             {
                 var nestedContext = propertyContext.Nested(value);
                 ValidateModel(nestedContext);
@@ -123,7 +123,8 @@ public class AnnotatedModelValidator<TModel> : IValidator<TModel>
     /// <summary>Gets the results for validating the attributes declared on the type of the model.</summary>
     private static void ValidateType(NestedValidationContext context)
     {
-        context.AddMessages(context.Annotations.TypeAttributes.Select(attr => attr.GetValidationMessage(context.Instance, context)));
+        var messages = context.Annotations.TypeAttributes.Select(attr => attr.GetValidationMessage(context.Instance, context));
+        context.AddMessages(messages, violationOnType: true);
     }
 
     /// <summary>Gets the results for validating <see cref="IValidatableObject.Validate(ValidationContext)"/>.</summary>
@@ -136,5 +137,13 @@ public class AnnotatedModelValidator<TModel> : IValidator<TModel>
         {
             context.AddMessages(((IValidatableObject)context.Instance).Validate(context));
         }
+    }
+
+    private sealed class EmptyProvider : IServiceProvider
+    {
+        public static readonly EmptyProvider Instance = new();
+        
+        [Pure]
+        public object? GetService(Type serviceType) => null;
     }
 }
