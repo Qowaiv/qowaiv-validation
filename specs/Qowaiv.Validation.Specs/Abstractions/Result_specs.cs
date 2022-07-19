@@ -93,43 +93,82 @@ public class Filtering
     }
 }
 
-public class Casting
+public class Casts
 {
     [Test]
     public void Implicit_from_T_to_Result_of_T_is_supported()
     {
         Result<int> result = 17;
-        Assert.That(result.Value, Is.EqualTo(17));
+        result.Value.Should().Be(17);;
     }
 
     [Test]
     public void Explicit_from_Result_of_T_to_T_is_supported()
     {
         var result = Result.For(666);
-        Assert.That((int)result, Is.EqualTo(666));
+        ((int)result).Should().Be(666);
     }
 }
 
-public class Result_Of_TModel
+public class Result_of_TModel
 {
     [Test]
     public void As_Task_with_AsTask()
-        => Assert.That(Result.For(17).AsTask(), Is.InstanceOf<Task<Result<int>>>());
+        => Result.For(17).AsTask().Should().BeOfType<Task<Result<int>>>();
 }
 
-public class ThrowIfInvalid
+public class Throw_if_invalid
 {
     [Test]
     public void Nothing_when_valid()
     {
-        Assert.That(() => Result.For(17).ThrowIfInvalid(), Throws.Nothing);
+        Action action = () => Result.For(17).ThrowIfInvalid();
+        action.Should().NotThrow();
     }
 
     [Test]
     public void InvalidModelException_when_invalid()
     {
-        Assert.That(
-            () => Result.WithMessages<int>(ValidationMessage.Error("Oops")).ThrowIfInvalid()
-            , Throws.InstanceOf<InvalidModelException>());
+        Action action = () => Result.For(17, ValidationMessage.Error("Oops")).ThrowIfInvalid();
+        action.Should().Throw<InvalidModelException>();
+    }
+}
+
+public class Warnings_as_errors
+{
+    [Test]
+    public void has_no_effect_on_result_without_warnings()
+    {
+        var original = Result.WithMessages(Error1, Error2, Info1);
+        var transformed = original.WarningsAsErrors();
+        transformed.Messages.Should().BeEquivalentTo(original.Messages);
+    }
+
+    [Test]
+    public void has_no_effect_on_result_of_T_without_warnings()
+    {
+        var original = Result.For(69, Error1, Error2, Info1);
+        var transformed = original.WarningsAsErrors();
+        transformed.Messages.Should().BeEquivalentTo(original.Messages);
+    }
+
+    [Test]
+    public void transforms_warings_for_result()
+    {
+        var original = Result.WithMessages(Error1, Error2, Warning1, Warning2, Info1);
+        var transformed = original.WarningsAsErrors();
+        transformed.Should().BeInvalid().WithMessages(Error1, Error2, Info1,
+            ValidationMessage.Error(Warning1.Message, Warning1.PropertyName),
+            ValidationMessage.Error(Warning2.Message, Warning2.PropertyName));
+    }
+
+    [Test]
+    public void transforms_warings_for_result_of_T()
+    {
+        var original = Result.For(69, Error1, Error2, Warning1, Warning2, Info1);
+        var transformed = original.WarningsAsErrors();
+        transformed.Should().BeInvalid().WithMessages(Error1, Error2, Info1,
+            ValidationMessage.Error(Warning1.Message, Warning1.PropertyName),
+            ValidationMessage.Error(Warning2.Message, Warning2.PropertyName));
     }
 }

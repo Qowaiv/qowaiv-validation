@@ -18,8 +18,21 @@ public class Result
     [Pure]
     public bool IsValid => !Errors.Any();
 
-    /// <summary>Gets all messages with <see cref="ValidationSeverity.Error"/>.</summary>
+    /// <summary>Returns a result where all warnings are converted into error messages.</summary>
+    /// <remarks>
+    /// The type of the messages that where warnings might change due to this.
+    /// </remarks>
+    [Pure]
+    public Result WarningsAsErrors() 
+        => new(FixedMessages.Empty.AddRange(Messages.Select(WarningAsError)));
 
+    [Pure]
+    static internal IValidationMessage WarningAsError(IValidationMessage message)
+        => message.Severity == ValidationSeverity.Warning
+        ? ValidationMessage.Error(message.Message!, message.PropertyName)
+        : message;
+
+    /// <summary>Gets all messages with <see cref="ValidationSeverity.Error"/>.</summary>
     [Pure]
     public IEnumerable<IValidationMessage> Errors => Messages.GetErrors();
 
