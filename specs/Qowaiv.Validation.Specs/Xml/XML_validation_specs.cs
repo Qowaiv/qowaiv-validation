@@ -13,6 +13,7 @@ public class Invalidates
 {
     private static Stream Schema => Embedded.Stream("Specs/Xml/Files/schema.xsd");
     private static Stream Xml => Embedded.Stream("Specs/Xml/Files/invalid-document.xml");
+    private static Stream XmlWithNamespacePrefix => Embedded.Stream("Specs/Xml/Files/invalid-document-namespace.xml");
 
     [Test]
     public void model()
@@ -52,6 +53,16 @@ public class Invalidates
             ValidationMessage.Error("The required attribute 'publicationdate' is missing.", "/bookstore/book[4]"),
             ValidationMessage.Error("The required attribute 'ISBN' is missing.", "/bookstore/book[4]"),
             ValidationMessage.Error("The element 'book' in namespace 'http://www.contoso.com/books' has invalid child element 'price' in namespace 'http://www.contoso.com/books'. List of possible elements expected: 'author' in namespace 'http://www.contoso.com/books'.", "/bookstore/book[4]/price[1]"));
+
+    [Test]
+    public void communicating_namespace_prefix_if_any()
+        => XDocument.Load(XmlWithNamespacePrefix)
+        .Validate(Schema)
+        .Should().BeInvalid().WithMessages(
+            ValidationMessage.Error("The required attribute 'genre' is missing.", "/bk:bookstore/bk:book[2]"),
+            ValidationMessage.Error("The required attribute 'publicationdate' is missing.", "/bk:bookstore/bk:book[2]"),
+            ValidationMessage.Error("The required attribute 'ISBN' is missing.", "/bk:bookstore/bk:book[2]"),
+            ValidationMessage.Error("The element 'book' in namespace 'http://www.contoso.com/books' has invalid child element 'price' in namespace 'http://www.contoso.com/books'. List of possible elements expected: 'author' in namespace 'http://www.contoso.com/books'.", "/bk:bookstore/bk:book[2]/bk:price[1]"));
 }
 
 public class Validates
@@ -99,5 +110,18 @@ public class Validates
         => XDocument.Load(Xml)
         .Validate(Schema)
         .Should().BeValid().WithoutMessages();
+}
+
+public class Invalid_XML
+{
+    private static Stream Schema => Embedded.Stream("Specs/Xml/Files/schema.xsd");
+
+    [Test]
+    public void trhows_via_XDocument()
+    {
+        var validator = new SchemaValidator<Bookstore>(Schema);
+        Func<object> deserialize = () => validator.Deserialize("<invalid xml");
+        deserialize.Should().Throw<System.Xml.XmlException>();
+    }
 }
 

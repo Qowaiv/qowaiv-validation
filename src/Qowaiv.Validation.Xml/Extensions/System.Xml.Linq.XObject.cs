@@ -45,8 +45,7 @@ public static class QowaivXObjectExtensions
     {
         Guard.NotNull(element, nameof(element));
         return string.Concat(element
-            .Ancestors().Select(RelativePath).Reverse()
-            .Append(element.RelativePath()));
+            .AncestorsAndSelf().Select(RelativePath).Reverse());
     }
 
     [Pure]
@@ -55,6 +54,14 @@ public static class QowaivXObjectExtensions
         int index = element.IndexPosition();
         string name = element.Name.LocalName;
 
+        if (element.AncestorsAndSelf()
+            .SelectMany(x => x.Attributes())
+            .FirstOrDefault(x => x.IsNamespaceDeclaration && x.Value == element.Name.NamespaceName) is { } alias
+            && !string.IsNullOrEmpty(alias.Name.NamespaceName)
+            && !string.IsNullOrEmpty(alias.Name.LocalName))
+        {
+            name = $"{alias.Name.LocalName}:{name}";
+        }
         return index == -1
             ? $"/{name}"
             : $"/{name}[{index}]";
