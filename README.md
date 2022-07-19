@@ -10,6 +10,7 @@
 |![v](https://img.shields.io/badge/version-0.2.1-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Fluent](https://www.nuget.org/packages/Qowaiv.Validation.Fluent)                  |
 |![v](https://img.shields.io/badge/version-0.2.1-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Guarding](https://www.nuget.org/packages/Qowaiv.Validation.Guarding)              |
 |![v](https://img.shields.io/badge/version-0.2.1-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Messages](https://www.nuget.org/packages/Qowaiv.Validation.Messages)              |
+|![v](https://img.shields.io/badge/version-0.2.1-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Xml](https://www.nuget.org/packages/Qowaiv.Validation.Xml)                        |
 |![v](https://img.shields.io/badge/version-0.2.1-darkred.svg?cacheSeconds=3600) |[Qowaiv.Validation.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools)                       |
 
 # Qowaiv Validation
@@ -361,6 +362,30 @@ public class NestedModelWithChildren
     }
 }
 ```
+
+## XML validation
+Valdating XML document via XSD schemas is a common scenario. To benefit from
+`Result<T>` the following scenario is supported:
+
+``` C#
+var document = XDocument.Parse("<some xml />");
+Result<XDocument> result = document.Validate(schema);
+```
+Where the schema can be a `System.IO.Stream`, an `System.Xml.Schema.XmlSchema`
+or `System.Xml.Schema.XmlSchemaSet`.
+
+A schema can also be the source of a model validator:
+
+``` C#
+var validator = new SchemaValidator<MyModel>(schema);
+Result<MyModel> result = validator.Validate(model);
+// or
+Result<MyModel> deserialized = validator.Deserialize(stream);
+```
+
+So validation can be triggered on an existing model, or when deserializing.
+
+Note that TModel (obviously) has to be XML serializable.
 
 ## Guarding
 To guard pre-conditions, the fluent syntax `.Must()` guards conditions using a

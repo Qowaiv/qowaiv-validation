@@ -55,6 +55,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Guarding"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Specs", "specs\Qowaiv.Validation.Specs\Qowaiv.Validation.Specs.csproj", "{1FC5B4EB-46D8-49AA-963A-495CBD39807B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.Validation.Xml", "src\Qowaiv.Validation.Xml\Qowaiv.Validation.Xml.csproj", "{3DF5D2ED-87EE-4D3B-942E-789143777229}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,6 +91,10 @@ Global
 		{1FC5B4EB-46D8-49AA-963A-495CBD39807B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FC5B4EB-46D8-49AA-963A-495CBD39807B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FC5B4EB-46D8-49AA-963A-495CBD39807B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DF5D2ED-87EE-4D3B-942E-789143777229}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DF5D2ED-87EE-4D3B-942E-789143777229}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DF5D2ED-87EE-4D3B-942E-789143777229}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DF5D2ED-87EE-4D3B-942E-789143777229}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
