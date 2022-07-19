@@ -9,11 +9,11 @@ public sealed class AnnotatedModelStore
     internal AnnotatedModelStore()
     {
         _models = new ConcurrentDictionary<Type, AnnotatedModel>(new Dictionary<Type, AnnotatedModel>
-            {
-                { typeof(Guid), AnnotatedModel.None },
-                { typeof(DateTime), AnnotatedModel.None },
-                { typeof(DateTimeOffset), AnnotatedModel.None },
-            });
+        {
+            { typeof(Guid), AnnotatedModel.None },
+            { typeof(DateTime), AnnotatedModel.None },
+            { typeof(DateTimeOffset), AnnotatedModel.None },
+        });
         foreach (var tp in typeof(Date).Assembly.GetTypes().Where(tp => tp.IsValueType && tp.IsVisible))
         {
             _models[tp] = AnnotatedModel.None;
@@ -35,7 +35,7 @@ public sealed class AnnotatedModelStore
         {
             return AnnotatedModel.None;
         }
-        if (!_models.TryGetValue(tp, out AnnotatedModel model))
+        if (!_models.TryGetValue(tp, out var model))
         {
             model = AnnotatedModel.Create(tp);
             _models[type] = model;
