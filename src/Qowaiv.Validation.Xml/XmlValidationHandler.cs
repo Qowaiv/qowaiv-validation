@@ -1,8 +1,4 @@
-﻿using System.Xml;
-using System.Xml.Linq;
-using System.Xml.Schema;
-
-namespace Qowaiv.Validation.Xml;
+﻿namespace Qowaiv.Validation.Xml;
 
 /// <summary>An <see cref="ValidationEventHandler"/> that collects all issues as <see cref="IValidationMessage"/>'s.</summary>
 public class XmlValidationHandler

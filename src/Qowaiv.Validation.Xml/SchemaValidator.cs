@@ -1,10 +1,4 @@
-﻿using System.IO;
-using System.Xml;
-using System.Xml.Linq;
-using System.Xml.Schema;
-using System.Xml.Serialization;
-
-namespace Qowaiv.Validation.Xml;
+﻿namespace Qowaiv.Validation.Xml;
 
 /// <summary>Implements <see cref="IValidator{TModel}"/> using <see cref="XmlSchema"/>'s.</summary>
 /// <typeparam name="TModel">
@@ -51,10 +45,17 @@ public class SchemaValidator<TModel> : IValidator<TModel>
     public Result<TModel> Deserialize(Stream stream)
         => XDocument.Load(stream)
         .Validate(Schemas)
-        .Act(Desirialize);
+        .Act(Deserialize);
+
+    /// <summary>XML deserialize the model using the <see cref="XmlSchemaSet"/> to validate.</summary>
+    [Pure]
+    public Result<TModel> Deserialize(string xml)
+        => XDocument.Parse(xml)
+        .Validate(Schemas)
+        .Act(Deserialize);
 
     [Pure]
-    private Result<TModel> Desirialize(XDocument document)
+    private Result<TModel> Deserialize(XDocument document)
         => (TModel)Serializer.Deserialize(document.CreateReader())!;
     
     private readonly XmlSerializer Serializer = new(typeof(TModel));

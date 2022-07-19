@@ -1,7 +1,4 @@
-﻿using System.Xml.Schema;
-using System.Xml;
-
-namespace System.IO;
+﻿namespace System.IO;
 
 internal static class QowaivValidationStreamExtensions
 {
