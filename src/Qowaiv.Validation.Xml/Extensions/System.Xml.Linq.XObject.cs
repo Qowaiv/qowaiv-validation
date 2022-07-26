@@ -27,7 +27,7 @@ public static class QowaivXObjectExtensions
 
     /// <summary>Get the absolute XPath of the attribute.</summary>
     /// <remarks>
-    /// e.g.: /people/person[6]/name[1]/last[1]/@prefx
+    /// e.g.: /people/person[6]/name[1]/last[1]/@prefix
     /// </remarks>
     [Pure]
     internal static string AbsoluteXPath(this XAttribute attribute)

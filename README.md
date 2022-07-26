@@ -364,15 +364,15 @@ public class NestedModelWithChildren
 ```
 
 ## XML validation
-Valdating XML document via XSD schemas is a common scenario. To benefit from
+Valdating XML documents via XSD schemas is a common scenario. To benefit from
 `Result<T>` the following scenario is supported:
 
 ``` C#
 var document = XDocument.Parse("<some xml />");
 Result<XDocument> result = document.Validate(schema);
 ```
-Where the schema can be a `System.IO.Stream`, an `System.Xml.Schema.XmlSchema`
-or `System.Xml.Schema.XmlSchemaSet`.
+Where the schema can be `System.IO.Stream`, `System.Xml.Schema.XmlSchema`, or 
+`System.Xml.Schema.XmlSchemaSet`.
 
 A schema can also be the source of a model validator:
 

@@ -117,7 +117,7 @@ public class Invalid_XML
     private static Stream Schema => Embedded.Stream("Specs/Xml/Files/schema.xsd");
 
     [Test]
-    public void trhows_via_XDocument()
+    public void throws_via_XDocument()
     {
         var validator = new SchemaValidator<Bookstore>(Schema);
         Func<object> deserialize = () => validator.Deserialize("<invalid xml");
