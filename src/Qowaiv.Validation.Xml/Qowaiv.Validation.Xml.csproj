@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\props\production.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
+    <Version>0.2.1</Version>
+    <PackageReleaseNotes>
+v0.2.1
+- Support validation via XSD Schemas. #56
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\shared\Do.cs" Link="Do.cs" />
+    <Compile Include="..\..\shared\Guard.cs" Link="Guard.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" Condition="'$(TargetFramework)'=='netstandard2.0'" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Qowaiv.Validation.Abstractions\Qowaiv.Validation.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>
