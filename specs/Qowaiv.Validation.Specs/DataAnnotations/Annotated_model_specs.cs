@@ -23,22 +23,26 @@ public class Does_not_crash_on
       .Validate(new())
       .Should().BeValid();
 
-    class ModelWithInaccassibleProperty
+    public class ModelWithInaccassibleProperty
     {
         public int SomeProperty => throw new NotImplementedException();
     }
 
-    class ModelWithIndexedProperty
+    public class ModelWithIndexedProperty
     {
         public int this[int index] => index * 42;
     }
 
-    class ModelWithSetOnlyProperty
+    public class ModelWithSetOnlyProperty
     {
+#pragma warning disable S2376 // Write-only properties should not be used
+        // This is a test to check if write-only properties are handled correctly.
         public int SomeProperty
         {
-            set => Console.WriteLine(value);
+            set => number = value;
         }
+        private int number;
+#pragma warning restore S2376 // Write-only properties should not be used
     }
 }
 
