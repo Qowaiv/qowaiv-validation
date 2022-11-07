@@ -7,7 +7,7 @@
     <Version>1.0.1</Version>
     <PackageReleaseNotes>
 v1.0.1
-- Inaccessible properties do not crash but validate as invalid #57
+- Inaccessible properties do not crash but validate as invalid #58
 - Indexed properties are ignored
 v1.0.0
 - Properties are considered validatable objects without [NestedModel] attribute #55
