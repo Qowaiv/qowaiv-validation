@@ -2,6 +2,49 @@
 
 namespace Data_annotations.Annotated_model_specs;
 
+public class Does_not_crash_on
+{
+    [Test]
+    public void inaccessible_property()
+        => new AnnotatedModelValidator<ModelWithInaccassibleProperty>()
+        .Validate(new())
+        .Should().BeInvalid()
+        .WithMessage(ValidationMessage.Error("The value is inaccessible.", "SomeProperty"));
+
+    [Test]
+    public void indexed_property()
+       => new AnnotatedModelValidator<ModelWithIndexedProperty>()
+       .Validate(new())
+       .Should().BeValid();
+
+    class ModelWithInaccassibleProperty
+    {
+        public int SomeProperty => throw new NotImplementedException();
+    }
+
+    class ModelWithIndexedProperty
+    {
+        public int this[int index] => index * 42;
+    }
+}
+
+public class Has_no_properties_for
+{
+    [TestCase(typeof(int))]
+    [TestCase(typeof(double))]
+    [TestCase(typeof(bool))]
+    public void primitives(Type primitive)
+        => AnnotatedModel.Get(primitive).Properties.Should().BeEmpty();
+
+    [Test]
+    public void @string()
+        => AnnotatedModel.Get(typeof(string)).Properties.Should().BeEmpty();
+
+    [Test]
+    public void enums()
+        => AnnotatedModel.Get(typeof(TypeCode)).Properties.Should().BeEmpty();
+}
+
 public  class With_debugger_experience
 {
     [Test]

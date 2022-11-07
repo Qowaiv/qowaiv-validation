@@ -4,8 +4,11 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <PackageReleaseNotes>
+v1.0.1
+- Inaccessible properties do not crash but validate as invalid #57
+- Indexed properties are ignored
 v1.0.0
 - Properties are considered validatable objects without [NestedModel] attribute #55
 - Removed unused properties from NestedModel

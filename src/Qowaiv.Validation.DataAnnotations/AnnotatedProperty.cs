@@ -61,5 +61,6 @@ public sealed class AnnotatedProperty
     [Pure]
     internal static IEnumerable<AnnotatedProperty> CreateAll(Type type)
         => type.GetProperties()
+        .Where(property => !property.GetIndexParameters().Any())
         .Select(property => new AnnotatedProperty(property));
 }

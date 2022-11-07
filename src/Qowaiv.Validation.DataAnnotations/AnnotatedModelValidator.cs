@@ -85,9 +85,18 @@ public class AnnotatedModelValidator<TModel> : IValidator<TModel>
     private void ValidateProperty(AnnotatedProperty property, NestedValidationContext context)
     {
         var model = context.Instance;
-        var value = property.GetValue(model);
-
         var propertyContext = context.ForProperty(property);
+
+        object? value;
+        try
+        {
+            value = property.GetValue(model);
+        }
+        catch
+        {
+            propertyContext.AddMessage(ValidationMessage.Error($"The value is inaccessible.", property.Name));
+            return;
+        }
 
         // Only validate the other properties if the required condition was not met.
         if (propertyContext.AddMessage(property.RequiredAttribute.GetValidationMessage(value, propertyContext)))
@@ -142,7 +151,7 @@ public class AnnotatedModelValidator<TModel> : IValidator<TModel>
     private sealed class EmptyProvider : IServiceProvider
     {
         public static readonly EmptyProvider Instance = new();
-        
+
         [Pure]
         public object? GetService(Type serviceType) => null;
     }
