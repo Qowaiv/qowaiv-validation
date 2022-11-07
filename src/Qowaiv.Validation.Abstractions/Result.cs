@@ -1,6 +1,7 @@
 ﻿namespace Qowaiv.Validation.Abstractions;
 
 /// <summary>Represents a result of a validation, executed command, etcetera.</summary>
+[Inheritable]
 public class Result
 {
     /// <summary>Initializes a new instance of the <see cref="Result"/> class.</summary>

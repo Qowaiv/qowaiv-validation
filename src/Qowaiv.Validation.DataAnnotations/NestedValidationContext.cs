@@ -3,7 +3,7 @@
 namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Represents a nested wrapper for a (sealed) <see cref="ValidationContext"/>.</summary>
-internal class NestedValidationContext
+internal sealed class NestedValidationContext
 {
     /// <summary>Initializes a new instance of the <see cref="NestedValidationContext"/> class.</summary>
     private NestedValidationContext(

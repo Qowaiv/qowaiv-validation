@@ -1,6 +1,6 @@
 ﻿namespace Qowaiv.Validation.Abstractions.Internals;
 
-internal class SomeFixedMessages : FixedMessages
+internal sealed class SomeFixedMessages : FixedMessages
 {
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly FixedMessages parent;

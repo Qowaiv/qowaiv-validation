@@ -4,6 +4,7 @@
 /// <typeparam name="TModel">
 /// The type of the model to validate.
 /// </typeparam>
+[WillBeSealed]
 public class SchemaValidator<TModel> : IValidator<TModel>
     where TModel : class
 {

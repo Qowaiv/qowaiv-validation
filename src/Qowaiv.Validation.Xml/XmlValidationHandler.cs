@@ -1,6 +1,7 @@
 ﻿namespace Qowaiv.Validation.Xml;
 
 /// <summary>An <see cref="ValidationEventHandler"/> that collects all issues as <see cref="IValidationMessage"/>'s.</summary>
+[WillBeSealed]
 public class XmlValidationHandler
 {
     /// <summary>The collection of validation messages.</summary>
