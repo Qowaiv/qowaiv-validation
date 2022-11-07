@@ -6,7 +6,7 @@
 /// <see cref="object.GetHashCode()"/> and <see cref="object.Equals(object)"/>
 /// overrides.
 /// </remarks>
-public class ReferenceComparer : IEqualityComparer<object>
+public sealed class ReferenceComparer : IEqualityComparer<object>
 {
     /// <summary>Gets the singleton instance.</summary>
     public static readonly IEqualityComparer<object> Instance = new ReferenceComparer();

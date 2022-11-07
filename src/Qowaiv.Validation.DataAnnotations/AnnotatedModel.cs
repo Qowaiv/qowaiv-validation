@@ -8,7 +8,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 /// or implement <see cref="IValidatableObject"/>.
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
-public class AnnotatedModel
+public sealed class AnnotatedModel
 {
     internal static readonly AnnotatedModel None = new(typeof(object), false, new ValidationAttribute[0], new AnnotatedProperty[0]);
 
