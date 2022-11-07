@@ -17,6 +17,12 @@ public class Does_not_crash_on
        .Validate(new())
        .Should().BeValid();
 
+    [Test]
+    public void set_only_property()
+      => new AnnotatedModelValidator<ModelWithSetOnlyProperty>()
+      .Validate(new())
+      .Should().BeValid();
+
     class ModelWithInaccassibleProperty
     {
         public int SomeProperty => throw new NotImplementedException();
@@ -25,6 +31,14 @@ public class Does_not_crash_on
     class ModelWithIndexedProperty
     {
         public int this[int index] => index * 42;
+    }
+
+    class ModelWithSetOnlyProperty
+    {
+        public int SomeProperty
+        {
+            set => Console.WriteLine(value);
+        }
     }
 }
 
