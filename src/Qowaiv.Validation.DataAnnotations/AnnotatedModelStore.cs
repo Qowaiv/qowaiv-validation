@@ -35,7 +35,7 @@ public sealed class AnnotatedModelStore
         {
             return AnnotatedModel.None;
         }
-        if (!_models.TryGetValue(tp, out AnnotatedModel model))
+        if (!_models.TryGetValue(tp, out var model))
         {
             model = AnnotatedModel.Create(tp);
             _models[type] = model;

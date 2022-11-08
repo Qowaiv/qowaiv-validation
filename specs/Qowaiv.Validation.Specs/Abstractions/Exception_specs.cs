@@ -48,7 +48,7 @@ public class InvalidModel
 "));
     }
 
-    [Test]
+    [Test, Obsolete("Binary serialization is considered harmful.")]
     public void Serializes_the_error_messages()
     {
         var exception = InvalidModelException.For<int>(TestMessages);

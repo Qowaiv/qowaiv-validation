@@ -8,6 +8,8 @@
     <DefineConstants>CONTRACTS_FULL</DefineConstants>
     <DebugType>portable</DebugType>
     <Nullable>enable</Nullable>
+    <!-- We ship package version for obsolete versions too -->
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
