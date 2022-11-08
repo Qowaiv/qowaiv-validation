@@ -9,11 +9,12 @@ public sealed class AnnotatedModelStore
     internal AnnotatedModelStore()
     {
         _models = new ConcurrentDictionary<Type, AnnotatedModel>(new Dictionary<Type, AnnotatedModel>
-            {
-                { typeof(Guid), AnnotatedModel.None },
-                { typeof(DateTime), AnnotatedModel.None },
-                { typeof(DateTimeOffset), AnnotatedModel.None },
-            });
+        {
+            { typeof(string), AnnotatedModel.None },
+            { typeof(Guid), AnnotatedModel.None },
+            { typeof(DateTime), AnnotatedModel.None },
+            { typeof(DateTimeOffset), AnnotatedModel.None },
+        });
         foreach (var tp in typeof(Date).Assembly.GetTypes().Where(tp => tp.IsValueType && tp.IsVisible))
         {
             _models[tp] = AnnotatedModel.None;
@@ -25,7 +26,7 @@ public sealed class AnnotatedModelStore
 
     /// <summary>Gets an <see cref="AnnotatedModel"/> based on the <see cref="Type"/>.</summary>
     [Pure]
-    public AnnotatedModel GetAnnotededModel(Type type)
+    public AnnotatedModel GetAnnotatedModel(Type type)
     {
         Guard.NotNull(type, nameof(type));
 
@@ -42,4 +43,8 @@ public sealed class AnnotatedModelStore
         }
         return model;
     }
+
+    /// <summary>Gets an <see cref="AnnotatedModel"/> based on the <see cref="Type"/>.</summary>
+    [Pure, Obsolete("Use GetAnnotatedModel(type) instead.")]
+    public AnnotatedModel GetAnnotededModel(Type type) => GetAnnotatedModel(type);
 }

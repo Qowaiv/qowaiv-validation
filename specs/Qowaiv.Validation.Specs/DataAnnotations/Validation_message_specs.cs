@@ -1,7 +1,7 @@
 ﻿using Qowaiv.Validation.DataAnnotations;
 using ValidationSeverity = Qowaiv.Validation.Abstractions.ValidationSeverity;
 
-namespace Data_annotations.ValidationMessage_specs;
+namespace Data_annotations.Validation_message_specs;
 
 public class Serializes
 {

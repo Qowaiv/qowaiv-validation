@@ -61,5 +61,11 @@ public sealed class AnnotatedProperty
     [Pure]
     internal static IEnumerable<AnnotatedProperty> CreateAll(Type type)
         => type.GetProperties()
+        .Where(Include)
         .Select(property => new AnnotatedProperty(property));
+
+    [Pure]
+    private static bool Include(PropertyInfo property)
+        => property.CanRead
+        && !property.GetIndexParameters().Any();
 }
