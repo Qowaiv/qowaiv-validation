@@ -6,7 +6,7 @@ public class Does_not_crash_on
 {
     [Test]
     public void inaccessible_property()
-        => new AnnotatedModelValidator<ModelWithInaccassibleProperty>()
+        => new AnnotatedModelValidator<ModelWithInaccessibleProperty>()
         .Validate(new())
         .Should().BeInvalid()
         .WithMessage(ValidationMessage.Error("The value is inaccessible.", "SomeProperty"));
@@ -23,7 +23,7 @@ public class Does_not_crash_on
       .Validate(new())
       .Should().BeValid();
 
-    public class ModelWithInaccassibleProperty
+    public class ModelWithInaccessibleProperty
     {
         public int SomeProperty => throw new NotImplementedException();
     }
