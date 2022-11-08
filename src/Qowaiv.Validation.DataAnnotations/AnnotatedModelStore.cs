@@ -26,7 +26,7 @@ public sealed class AnnotatedModelStore
 
     /// <summary>Gets an <see cref="AnnotatedModel"/> based on the <see cref="Type"/>.</summary>
     [Pure]
-    public AnnotatedModel GetAnnotededModel(Type type)
+    public AnnotatedModel GetAnnotatedModel(Type type)
     {
         Guard.NotNull(type, nameof(type));
 
@@ -43,4 +43,8 @@ public sealed class AnnotatedModelStore
         }
         return model;
     }
+
+    /// <summary>Gets an <see cref="AnnotatedModel"/> based on the <see cref="Type"/>.</summary>
+    [Pure, Obsolete("Use GetAnnotatedModel(type) instead.")]
+    public AnnotatedModel GetAnnotededModel(Type type) => GetAnnotatedModel(type);
 }

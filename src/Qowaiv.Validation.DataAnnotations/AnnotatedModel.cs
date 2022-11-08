@@ -50,7 +50,7 @@ public sealed class AnnotatedModel
     /// This one uses caching.
     /// </remarks>
     [Pure]
-    public static AnnotatedModel Get(Type type) => Store.GetAnnotededModel(type);
+    public static AnnotatedModel Get(Type type) => Store.GetAnnotatedModel(type);
 
     /// <summary>Creates an <see cref="AnnotatedModel"/>.</summary>
     [Pure]
