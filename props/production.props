@@ -18,7 +18,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <NoWarn>NU1701</NoWarn>
     </PackageReference>
-    <PackageReference Include="Qowaiv.Analyzers.CSharp" Version="0.0.4.1">
+    <PackageReference Include="Qowaiv.Analyzers.CSharp" Version="0.*">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
