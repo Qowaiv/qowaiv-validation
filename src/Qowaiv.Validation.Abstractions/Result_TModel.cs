@@ -42,6 +42,24 @@ public sealed class Result<TModel> : Result
         }
     }
 
+    /// <summary>Casts the result of <typeparamref name="TModel"/> to a result of <typeparamref name="TOut"/>.</summary>
+    /// <typeparam name="TOut">
+    /// The new type of the value.
+    /// </typeparam>
+    /// <exception cref="InvalidCastException">
+    /// if <typeparamref name="TOut"/> is not a subtype of <typeparamref name="TModel"/>.
+    /// </exception>
+    [Pure]
+    public Result<TOut> Cast<TOut>()
+    {
+        return For(_value is null ? default! : Cast(), Messages);
+
+        TOut Cast() 
+            => _value is TOut cast
+            ? cast
+            : throw new InvalidCastException($"Unable to cast object of type 'Result<{typeof(TModel)}>' to type 'Result<{typeof(TOut)}>'.");
+    }
+
     /// <summary>Gets the <see cref="Result{TModel}"/> as a <see cref="Task{TResult}"/>.</summary>
     [Pure]
     public Task<Result<TModel>> AsTask() => Task.FromResult(this);

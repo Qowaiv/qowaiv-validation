@@ -132,6 +132,16 @@ Result<Context> context = NewContext()
     .Act(c => Service.GetOther(), (c, other) => /* return Context */ c.Update(other));
 ```
 
+#### Casting
+The following castings are supported:
+``` C#
+Result<T> implicit = new T();
+T explicit = Result.For<T>(new T());
+Result<TOut> casted = Result.For<T>(new T()).Cast<TOut>();
+```
+The explicit casts fails if the result was not valid. The `Cast<TOut>()` fails
+when `TOut` is not a subclass of `T`.
+
 ### IValidationMessage
 The common ground of validation messages.
 ``` C#
