@@ -1,13 +1,12 @@
 ﻿using FluentValidation;
 using Qowaiv.Validation.Fluent;
-using Specs.Fluent.Models;
 
 namespace Fluent_validation.Postal_code_valid_for_specs;
 
 public class Valid_for
 {
     [Test]
-    public void postal_code_for_countr()
+    public void postal_code_for_country()
         => new PostalCodeModel
         {
             PostalCode = PostalCode.Parse("2628ZD"),
