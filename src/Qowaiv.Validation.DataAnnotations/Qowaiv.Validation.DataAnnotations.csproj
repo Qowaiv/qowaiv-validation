@@ -4,8 +4,10 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
-    <Version>1.0.1</Version>
+    <Version>1.3.0</Version>
     <PackageReleaseNotes>
+v1.3.0
+- Support .NET 7.0. #62
 v1.0.1
 - Inaccessible properties do not crash but validate as invalid #58
 - Indexed properties are ignored

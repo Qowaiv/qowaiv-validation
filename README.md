@@ -5,13 +5,13 @@
 
 | version                                                                       | package                                                                                             |
 |-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-0.2.1-darkblue.svg?cacheSeconds=3600)|[Qowaiv.Validation.Abstractions](https://www.nuget.org/packages/Qowaiv.Validation.Abstractions)      |
-|![v](https://img.shields.io/badge/version-1.0.1-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.DataAnnotations](https://www.nuget.org/packages/Qowaiv.Validation.DataAnnotations)|
-|![v](https://img.shields.io/badge/version-0.2.1-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Fluent](https://www.nuget.org/packages/Qowaiv.Validation.Fluent)                  |
-|![v](https://img.shields.io/badge/version-0.2.1-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Guarding](https://www.nuget.org/packages/Qowaiv.Validation.Guarding)              |
-|![v](https://img.shields.io/badge/version-0.2.1-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Messages](https://www.nuget.org/packages/Qowaiv.Validation.Messages)              |
-|![v](https://img.shields.io/badge/version-0.2.1-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Xml](https://www.nuget.org/packages/Qowaiv.Validation.Xml)                        |
-|![v](https://img.shields.io/badge/version-0.2.1-darkred.svg?cacheSeconds=3600) |[Qowaiv.Validation.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools)                       |
+|![v](https://img.shields.io/badge/version-0.3.0-darkblue.svg?cacheSeconds=3600)|[Qowaiv.Validation.Abstractions](https://www.nuget.org/packages/Qowaiv.Validation.Abstractions)      |
+|![v](https://img.shields.io/badge/version-1.3.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.DataAnnotations](https://www.nuget.org/packages/Qowaiv.Validation.DataAnnotations)|
+|![v](https://img.shields.io/badge/version-0.3.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Fluent](https://www.nuget.org/packages/Qowaiv.Validation.Fluent)                  |
+|![v](https://img.shields.io/badge/version-0.3.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Guarding](https://www.nuget.org/packages/Qowaiv.Validation.Guarding)              |
+|![v](https://img.shields.io/badge/version-0.3.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Messages](https://www.nuget.org/packages/Qowaiv.Validation.Messages)              |
+|![v](https://img.shields.io/badge/version-0.3.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Xml](https://www.nuget.org/packages/Qowaiv.Validation.Xml)                        |
+|![v](https://img.shields.io/badge/version-0.3.0-darkred.svg?cacheSeconds=3600) |[Qowaiv.Validation.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools)                       |
 
 # Qowaiv Validation
 There are multiple ways to support validation within .NET. Most notable are
@@ -131,6 +131,16 @@ Result<Context> context = NewContext()
     .Act(c => Service.GetValue(), (c, value) => /* return Context */ c.Update(value))
     .Act(c => Service.GetOther(), (c, other) => /* return Context */ c.Update(other));
 ```
+
+#### Casting
+The following castings are supported:
+``` C#
+Result<T> implicit = new T();
+T explicit = Result.For<T>(new T());
+Result<TOut> casted = Result.For<T>(new T()).Cast<TOut>();
+```
+The explicit casts fails if the result was not valid. The `Cast<TOut>()` fails
+when `TOut` is not a subclass of `T`.
 
 ### IValidationMessage
 The common ground of validation messages.
