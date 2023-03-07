@@ -52,7 +52,7 @@ public sealed class Result<TModel> : Result
     [Pure]
     public Result<TOut> Cast<TOut>()
     {
-        return For(_value is null ? default! : Cast(), Messages);
+        return new(_value is null ? default : Cast(), (FixedMessages)Messages);
 
         TOut Cast() 
             => _value is TOut cast
