@@ -118,20 +118,20 @@ public class Casting
             .Value.Should().BeSameAs(value);
     }
 
+    [Test]
+    public void With_method_of_null_value_with_subtype_of_T_is_supported()
+        => Result.Null<XDocument>().Cast<XNode>().Should().BeValid()
+        .Value.Should().BeNull();
 
     [Test]
     public void With_method_to_Result_of_invalid_with_subtype_of_T_is_supported()
-    {
-        Result.WithMessages<XDocument>(Error1).Cast<XNode>().Should().BeInvalid();
-    }
+        => Result.WithMessages<XDocument>(Error1).Cast<XNode>().Should().BeInvalid();
 
     [Test]
     public void With_method_is_not_supported_TOut_not_being_subtype_of_TModel()
-    {
-        Result.For(42).Invoking(r => r.Cast<long>())
+        => Result.For(42).Invoking(r => r.Cast<long>())
             .Should().Throw<InvalidCastException>()
             .WithMessage("Unable to cast object of type 'Result<System.Int32>' to type 'Result<System.Int64>'.");
-    }
 }
 
 public class Result_Of_TModel
