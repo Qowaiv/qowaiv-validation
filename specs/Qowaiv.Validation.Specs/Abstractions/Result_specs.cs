@@ -111,7 +111,7 @@ public class Casting
     }
 
     [Test]
-    public void With_method_to_Result_of_valid__wiht_subtype_of_T_is_supported()
+    public void With_method_to_Result_of_valid_with_subtype_of_T_is_supported()
     {
         var value = XDocument.Parse("<root />");
         Result.For(value).Cast<XNode>().Should().BeValid()
@@ -126,7 +126,7 @@ public class Casting
     }
 
     [Test]
-    public void With_method_is_not_supported_TOut_not_bein_subtype_of_TModel()
+    public void With_method_is_not_supported_TOut_not_being_subtype_of_TModel()
     {
         Result.For(42).Invoking(r => r.Cast<long>())
             .Should().Throw<InvalidCastException>()
