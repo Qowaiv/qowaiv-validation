@@ -4,8 +4,10 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
-    <Version>0.2.1</Version>
+    <Version>0.3.0</Version>
     <PackageReleaseNotes>
+v0.3.0
+- Support .NET 7.0. #62
 v0.2.1
 - Support validation via XSD Schemas. #56
     </PackageReleaseNotes>

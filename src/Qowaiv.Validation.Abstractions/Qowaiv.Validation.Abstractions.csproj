@@ -4,12 +4,11 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
-    <Version>0.2.1</Version>
-    <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
-    <Version>0.2.2</Version>
+    <Version>0.3.0</Version>
     <PackageReleaseNotes>
-v0.2.2
-- Add Result&lt;T&gt;.Cast&lt;TOut&gt;(). #50
+v0.3.0
+- Add Result&lt;T&gt;.Cast&lt;TOut&gt;(). #61
+- Support .NET 7.0. #62
 v0.2.1
 - Nullable anotations. #48
 v0.1.3
