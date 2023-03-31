@@ -6,6 +6,7 @@ internal sealed class ActFailed : IReadOnlyCollection<StackFrame>, IValidationMe
 {
     public ActFailed()
     {
+        // TODO: a workable toggle.
         if (Math.Sqrt(9) == 3)
         {
             Trace = new(1, true);
