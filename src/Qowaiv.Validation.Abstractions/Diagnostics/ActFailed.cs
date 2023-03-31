@@ -5,7 +5,7 @@
 internal sealed class ActFailed : IReadOnlyCollection<StackFrame>, IValidationMessage
 {
     /// <summary>Initiates a new instance of the <see cref="ActFailed"/> class.</summary>
-    public ActFailed(bool isValid) => Trace = !isValid && Debugger.IsAttached ? new(1) : null;
+    private ActFailed() => Trace = new(2);
 
     /// <inheritdoc />
     public ValidationSeverity Severity
@@ -17,12 +17,12 @@ internal sealed class ActFailed : IReadOnlyCollection<StackFrame>, IValidationMe
     public string? PropertyName => null;
 
     /// <inheritdoc />
-    public string? Message => Trace?.ToString();
+    public string Message => Trace.ToString();
 
-    public StackTrace? Trace { get; }
+    public StackTrace Trace { get; }
 
     /// <inheritdoc />
-    public int Count => Trace?.GetFrames().Length ?? 0;
+    public int Count => Trace.GetFrames().Length;
 
     /// <inheritdoc />
     [Pure]
@@ -32,4 +32,11 @@ internal sealed class ActFailed : IReadOnlyCollection<StackFrame>, IValidationMe
     /// <inheritdoc />
     [Pure]
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+    [Pure]
+    public static IValidationMessage New(bool isValid)
+        => isValid || !Debugger.IsAttached
+        ? ValidationMessage.None
+        : new ActFailed();
+
 }
