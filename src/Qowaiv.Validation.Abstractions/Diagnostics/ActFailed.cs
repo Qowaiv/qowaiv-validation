@@ -5,7 +5,7 @@
 internal sealed class ActFailed : IReadOnlyCollection<StackFrame>, IValidationMessage
 {
     /// <summary>Initiates a new instance of the <see cref="ActFailed"/> class.</summary>
-    public ActFailed() => Trace = Debugger.IsAttached ? new(1) : null;
+    public ActFailed(bool isValid) => Trace = !isValid && Debugger.IsAttached ? new(1) : null;
 
     /// <inheritdoc />
     public ValidationSeverity Severity
