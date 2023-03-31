@@ -103,7 +103,7 @@ public sealed class Result<TModel> : Result
         if (IsValid)
         {
             var outcome = action(Value);
-            return For(Value, ((FixedMessages)Messages).AddRange(outcome.Messages).Add(new ActFailed(outcome.IsValid)));
+            return For(Value, ((FixedMessages)Messages).AddRange(outcome.Messages).Add(ActFailed.New(outcome.IsValid)));
         }
         else return WithMessages<TModel>(Messages);
     }
