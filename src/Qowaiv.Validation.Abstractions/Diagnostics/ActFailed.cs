@@ -4,14 +4,8 @@
 [DebuggerTypeProxy(typeof(CollectionDebugView))]
 internal sealed class ActFailed : IReadOnlyCollection<StackFrame>, IValidationMessage
 {
-    public ActFailed()
-    {
-        // TODO: a workable toggle.
-        if (Math.Sqrt(9) == 3)
-        {
-            Trace = new(1, true);
-        }
-    }
+    /// <summary>Initiates a new instance of the <see cref="ActFailed"/> class.</summary>
+    public ActFailed() => Trace = Debugger.IsAttached ? new(1) : null;
 
     /// <inheritdoc />
     public ValidationSeverity Severity
