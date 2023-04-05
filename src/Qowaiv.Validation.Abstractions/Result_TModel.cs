@@ -82,6 +82,7 @@ public sealed class Result<TModel> : Result
         if (IsValid)
         {
             var outcome = action(Value);
+            outcome.BreakIfInvalid();
             return new(outcome.IsValid
                 ? outcome.Value
                 : default,
@@ -105,6 +106,7 @@ public sealed class Result<TModel> : Result
         if (IsValid)
         {
             var outcome = action(Value);
+            outcome.BreakIfInvalid();
             return For(Value, ((FixedMessages)Messages).AddRange(outcome.Messages));
         }
         else return WithMessages<TModel>(Messages);

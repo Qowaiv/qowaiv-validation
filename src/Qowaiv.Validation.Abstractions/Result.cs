@@ -32,6 +32,15 @@ public class Result
     [Pure]
     public IEnumerable<IValidationMessage> Infos => Messages.GetInfos();
 
+    /// <summary>Applies <see cref="Debugger.Break"/> when not valid and with <see cref="Debugger.IsAttached"/>.</summary>
+    internal void BreakIfInvalid()
+    {
+        if (!IsValid && DebuggerWrapper.IsAttached())
+        {
+            DebuggerWrapper.Break();
+        }
+    }
+
     /// <summary>Represents an OK <see cref="Result"/>.</summary>
     public static readonly Result OK = new(FixedMessages.Empty);
 
