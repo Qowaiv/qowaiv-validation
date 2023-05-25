@@ -7,7 +7,7 @@
     <Version>0.3.1</Version>
     <PackageReleaseNotes>
 V0.3.1
-- Fixed lacking nullable annotations. #63
+- Fixed lacking nullable annotations. #67
 v0.3.0
 - Support .NET 7.0. #62
 v0.2.1
