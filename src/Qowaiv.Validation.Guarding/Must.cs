@@ -84,7 +84,7 @@ public sealed class Must<TSubject> where TSubject : class
     /// The selector that tries to find the entity based on the subject.
     /// </param>
     [Pure]
-    public Result<TSubject> Exist<TId, TEntity>(TId id, Func<TSubject, TId, TEntity> selector)
+    public Result<TSubject> Exist<TId, TEntity>(TId id, Func<TSubject, TId, TEntity?> selector)
         where TEntity : class
         => Exist(id, selector, null);
 
