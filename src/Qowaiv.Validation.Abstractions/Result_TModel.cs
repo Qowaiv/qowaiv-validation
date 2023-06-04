@@ -85,7 +85,7 @@ public sealed class Result<TModel> : Result
             return new(outcome.IsValid
                 ? outcome.Value
                 : default,
-                ((FixedMessages)Messages).AddRange(outcome.Messages));
+                ((FixedMessages)Messages).AddRange(outcome.Messages).Add(ActFailed.New(outcome.IsValid)));
         }
         else return WithMessages<TOut>(Messages);
     }
@@ -105,7 +105,7 @@ public sealed class Result<TModel> : Result
         if (IsValid)
         {
             var outcome = action(Value);
-            return For(Value, ((FixedMessages)Messages).AddRange(outcome.Messages));
+            return For(Value, ((FixedMessages)Messages).AddRange(outcome.Messages).Add(ActFailed.New(outcome.IsValid)));
         }
         else return WithMessages<TModel>(Messages);
     }
