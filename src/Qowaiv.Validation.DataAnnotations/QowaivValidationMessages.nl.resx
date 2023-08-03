@@ -19,6 +19,6 @@
     <value>Het veld {0} is verplicht.</value>
   </data>
   <data name="MultipleOfAttribute_ValidationError" xml:space="preserve">
-    <value>De waarde van veld {0} field is geen veelvoud van {1}.</value>
+    <value>De waarde van veld {0} is geen veelvoud van {1}.</value>
   </data>
 </root>

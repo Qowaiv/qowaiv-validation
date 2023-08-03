@@ -40,13 +40,18 @@ public sealed class MultipleOfAttribute : ValidationAttribute
     [Pure]
     public override bool IsValid(object? value) => value switch
     {
+        null => true,
+        string str => string.IsNullOrEmpty(str),
+        bool => false,
+
         float flt => IsValid(flt),
         double dbl => IsValid(dbl),
         decimal dec => IsValid(dec),
         Amount amount => IsValid((decimal)amount),
         Money money => IsValid((decimal)money.Amount),
-        Percentage perentage => IsValid(100 * (decimal)perentage),
-        _ => true,
+        Percentage percentage => IsValid(100 * (decimal)percentage),
+        IConvertible convertible => IsValid(convertible),
+        _ => false,
     };
 
     [Pure]
@@ -63,6 +68,9 @@ public sealed class MultipleOfAttribute : ValidationAttribute
         => IsFinite(value)
         && AsDecimal(value) is { } dec
         && IsValid(dec);
+
+    [Pure]
+    private bool IsValid(IConvertible value) => IsValid(Convert.ToDecimal(value));
 
     [Pure]
     private static bool IsFinite(double value) => !double.IsNaN(value) && !double.IsInfinity(value);

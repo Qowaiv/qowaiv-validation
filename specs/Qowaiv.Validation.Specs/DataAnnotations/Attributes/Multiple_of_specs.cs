@@ -5,12 +5,34 @@ namespace Data_Annotations.Attributes.Multiple_of_specs;
 
 public class Valid_for
 {
-    [TestCase("45.000", 5.000)]
-    [TestCase("45.000", 1.000)]
-    [TestCase("45.100", 0.100)]
-    [TestCase("45.170", 0.010)]
-    [TestCase("45.178", 0.001)]
-    public void floats(float value, double factor)
+    [Test]
+    public void Null() => new MultipleOfAttribute(0.1).IsValid(null).Should().BeTrue();
+
+    [Test]
+    public void empty_string() => new MultipleOfAttribute(0.1).IsValid(string.Empty).Should().BeTrue();
+
+    [TestCase(45, 5.000)]
+    [TestCase(45, 1.000)]
+    [TestCase(45, 0.100)]
+    [TestCase(45, 0.010)]
+    [TestCase(45, 0.001)]
+    public void shorts(short value, double factor)
+      => new MultipleOfAttribute(factor).IsValid(value).Should().BeTrue();
+
+    [TestCase(45, 5.000)]
+    [TestCase(45, 1.000)]
+    [TestCase(45, 0.100)]
+    [TestCase(45, 0.010)]
+    [TestCase(45, 0.001)]
+    public void ints(int value, double factor)
+       => new MultipleOfAttribute(factor).IsValid(value).Should().BeTrue();
+
+    [TestCase(45, 5.000)]
+    [TestCase(45, 1.000)]
+    [TestCase(45, 0.100)]
+    [TestCase(45, 0.010)]
+    [TestCase(45, 0.001)]
+    public void longs(long value, double factor)
         => new MultipleOfAttribute(factor).IsValid(value).Should().BeTrue();
 
     [TestCase("45.000", 5.000)]
@@ -52,34 +74,15 @@ public class Valid_for
     [TestCase("45.178%", 0.001)]
     public void percentages(Percentage value, double factor)
        => new MultipleOfAttribute(factor).IsValid(value).Should().BeTrue();
-
-    [TestCase(nameof(NonFloatingPoints))]
-    public void non_floating_points(object model)
-      => new MultipleOfAttribute(10).IsValid(model).Should().BeTrue();
-
-    static IEnumerable<object?> NonFloatingPoints()
-    {
-        yield return null;
-        yield return string.Empty;
-        yield return new[] { 42 };
-        yield return new object();
-    }
-}
-
-public class Initialization
-{
-    [Test]
-    public void has_sufficient_precision([Range(1, 23)]int decimals)
-    {
-        var factor = (decimal)Math.Pow(10, -decimals);
-        factor.Should().Be(Pow(-decimals));
-    }
-
-    private static decimal Pow(int decimals) => new(1, 0, 0, false, scale: (byte)-decimals);
 }
 
 public class Not_valid_for
 {
+    [TestCase(45, 06)]
+    [TestCase(45, 10)]
+    public void integers(long value, double factor)
+        => new MultipleOfAttribute(factor).IsValid(value).Should().BeFalse();
+
     [TestCase(float.NaN, 1)]
     [TestCase(float.NegativeInfinity, 1)]
     [TestCase(float.PositiveInfinity, 1)]
@@ -129,11 +132,35 @@ public class Not_valid_for
     [TestCase("45.178%", 0.01)]
     public void percentages(Percentage value, double factor)
        => new MultipleOfAttribute(factor).IsValid(value).Should().BeFalse();
+
+    [TestCase(nameof(NotSupportedTypes))]
+    public void not_supported_types(object model)
+    => new MultipleOfAttribute(10).IsValid(model).Should().BeFalse();
+
+    static IEnumerable<object?> NotSupportedTypes()
+    {
+        yield return true;
+        yield return 'C';
+        yield return new[] { 42 };
+        yield return new object();
+    }
+}
+
+public class Initialization
+{
+    [Test]
+    public void has_sufficient_precision([Range(1, 23)] int decimals)
+    {
+        var factor = (decimal)Math.Pow(10, -decimals);
+        factor.Should().Be(Pow(-decimals));
+    }
+
+    private static decimal Pow(int decimals) => new(1, 0, 0, false, scale: (byte)-decimals);
 }
 
 public class With_message
 {
-    [TestCase("nl", "De waarde van veld Total field is geen veelvoud van 0,001.")]
+    [TestCase("nl", "De waarde van veld Total is geen veelvoud van 0,001.")]
     [TestCase("en", "The value of the Total field is not a multiple of 0.001.")]
     public void culture_dependent(CultureInfo culture, string message)
     {
