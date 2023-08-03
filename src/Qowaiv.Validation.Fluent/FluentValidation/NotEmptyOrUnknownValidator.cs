@@ -1,12 +1,12 @@
 ﻿namespace FluentValidation;
 
-/// <remarks>
+/// <summary>
 /// To ensure that NotEmpty is validated equally for
 /// <see cref="UnknownValidation.NotEmptyOrUnknown{TModel, TProperty}(IRuleBuilder{TModel, TProperty})"/>
 /// and
 /// <see cref="UnknownValidation.NotUnknown{TModel, TProperty}(IRuleBuilder{TModel, TProperty})"/>
 /// the <see cref="NotEmptyValidator{TModel, TProperty}"/> is overridden.
-/// </remarks>
+/// </summary>
 internal sealed class NotEmptyOrUnknownValidator<TModel, TProperty> : NotEmptyValidator<TModel, TProperty>
 {
     /// <inheritdoc />

@@ -31,6 +31,5 @@ public static class ValidationMessageCompare
             => (obj.Message?.GetHashCode() ?? 0)
             ^ (obj.PropertyName?.GetHashCode() ?? 0)
             ^ (int)obj.Severity;
-
     }
 }

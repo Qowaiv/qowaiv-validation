@@ -2,38 +2,39 @@
 <Project>
 
   <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <IsPublishable>false</IsPublishable>
+    <NuGetAudit>true</NuGetAudit>
+    <OutputType>library</OutputType>
+    <DefineConstants>CONTRACTS_FULL</DefineConstants>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package info">
     <Description>Qowaiv Validation supports a generic interface for (domain) model validation.</Description>
     <Authors>Corniel Nobel</Authors>
     <Owners>Qowaiv community</Owners>
-    <PackageTags>qowaiv domain model</PackageTags>
     <Company>Qowaiv community</Company>
     <Copyright>Copyright © Qowaiv community 2013-current</Copyright>
-    <LangVersion>latest</LangVersion>
-
-    <PackageIcon>package-icon.png</PackageIcon>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <RepositoryType>git</RepositoryType>
-    <PackageProjectUrl>http://www.github.com/Qowaiv/qowaiv-validation</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Qowaiv/qwowaiv-validation</RepositoryUrl>
   </PropertyGroup>
-
-  <PropertyGroup>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  
+  <PropertyGroup Label="Signing">
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)..\build\Qowaiv.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.*">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+  <ItemGroup Label="Analyzers">
+    <PackageReference Include="AsyncFixer" Version="*" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+    <PackageReference Include="DotNetProjectFile.Analyzers" Version="1.*" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="*" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
   </ItemGroup>
-  
-  <!-- for code coverage an proper debugging -->
-  <PropertyGroup>
-    <DebugType>full</DebugType>
-  </PropertyGroup>
+
+  <ItemGroup Label="Additional files">
+    <AdditionalFiles Include="*.csproj" Visible="false" />
+    <AdditionalFiles Include="../../props/common.props" Link="Properties/common.props" />
+  </ItemGroup>
 
 </Project>

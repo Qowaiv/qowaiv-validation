@@ -27,7 +27,7 @@ public static class QowaivXObjectExtensions
 
     /// <summary>Get the absolute XPath of the attribute.</summary>
     /// <remarks>
-    /// e.g.: /people/person[6]/name[1]/last[1]/@prefix
+    /// e.g.: /people/person[6]/name[1]/last[1]/@prefix.
     /// </remarks>
     [Pure]
     internal static string AbsoluteXPath(this XAttribute attribute)
@@ -38,7 +38,7 @@ public static class QowaivXObjectExtensions
 
     /// <summary>Get the absolute XPath of the element.</summary>
     /// <remarks>
-    /// e.g.: /people/person[6]/name[1]/last[1]
+    /// e.g.: /people/person[6]/name[1]/last[1].
     /// </remarks>
     [Pure]
     internal static string AbsoluteXPath(this XElement element)
@@ -87,7 +87,7 @@ public static class QowaivXObjectExtensions
                 index++;
                 if (sibling == element) return index;
             }
-            throw new InvalidOperationException("element has been removed from its parent.");
+            throw new InvalidOperationException("Element has been removed from its parent.");
         }
         else return -1;
     }

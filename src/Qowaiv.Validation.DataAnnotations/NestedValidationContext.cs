@@ -49,6 +49,7 @@ internal sealed class NestedValidationContext
 
     /// <summary>Gets the enumerable of collected messages.</summary>
     public IReadOnlyCollection<IValidationMessage> Messages => collection;
+
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly List<IValidationMessage> collection;
 

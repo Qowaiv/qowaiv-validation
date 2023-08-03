@@ -18,8 +18,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{696E5B2C-1F1D-4ACD-BBD4-40594FC7BF11}"
 	ProjectSection(SolutionItems) = preProject
 		props\common.props = props\common.props
-		props\production.props = props\production.props
-		props\test.props = props\test.props
+		props\package.props = props\package.props
+		props\specs.props = props\specs.props
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Abstractions", "src\Qowaiv.Validation.Abstractions\Qowaiv.Validation.Abstractions.csproj", "{71FE5C6E-2A11-468E-9E8F-AC4B3A780A33}"
@@ -55,7 +55,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Guarding"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Specs", "specs\Qowaiv.Validation.Specs\Qowaiv.Validation.Specs.csproj", "{1FC5B4EB-46D8-49AA-963A-495CBD39807B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.Validation.Xml", "src\Qowaiv.Validation.Xml\Qowaiv.Validation.Xml.csproj", "{3DF5D2ED-87EE-4D3B-942E-789143777229}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Xml", "src\Qowaiv.Validation.Xml\Qowaiv.Validation.Xml.csproj", "{3DF5D2ED-87EE-4D3B-942E-789143777229}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

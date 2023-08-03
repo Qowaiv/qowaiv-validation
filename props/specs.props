@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+  <Import Project="common.props" />
+  
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup Label="Additional files">
+    <AdditionalFiles Include="../../props/specs.props" Link="Properties/specs.props" />
+  </ItemGroup>
+
+</Project>

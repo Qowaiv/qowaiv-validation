@@ -24,9 +24,9 @@ public class Equal_by_reference
 
 internal sealed class SingleState : IEquatable<SingleState>
 {
-    public override bool Equals(object obj) => Equals(obj as SingleState);
+    public override bool Equals(object? obj) => Equals(obj as SingleState);
 
-    public bool Equals(SingleState other) => other is { };
+    public bool Equals(SingleState? other) => other is { };
 
     public override int GetHashCode() => 17;
 }

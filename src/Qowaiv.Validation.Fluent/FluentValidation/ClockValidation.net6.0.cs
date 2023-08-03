@@ -20,7 +20,7 @@ public static partial class ClockValidation
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
-       today ??= DateOnlyToday;
+        today ??= DateOnlyToday;
 
         return ruleBuilder
             .Must(date => date > today())
@@ -42,7 +42,7 @@ public static partial class ClockValidation
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
-       today ??= DateOnlyToday;
+        today ??= DateOnlyToday;
 
         return ruleBuilder
             .Must(date => !date.HasValue || date.Value > today())
@@ -64,7 +64,7 @@ public static partial class ClockValidation
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
-       today ??= DateOnlyToday;
+        today ??= DateOnlyToday;
 
         return ruleBuilder
             .Must(date => date <= today())
@@ -86,7 +86,7 @@ public static partial class ClockValidation
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
-       today ??= DateOnlyToday;
+        today ??= DateOnlyToday;
 
         return ruleBuilder
             .Must(date => !date.HasValue || date.Value <= today())
@@ -108,7 +108,7 @@ public static partial class ClockValidation
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
-       today ??= DateOnlyToday;
+        today ??= DateOnlyToday;
 
         return ruleBuilder
             .Must(date => date < today())
@@ -130,7 +130,7 @@ public static partial class ClockValidation
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
-       today ??= DateOnlyToday;
+        today ??= DateOnlyToday;
 
         return ruleBuilder
             .Must(date => !date.HasValue || date.Value < today())
@@ -152,7 +152,7 @@ public static partial class ClockValidation
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
-       today ??= DateOnlyToday;
+        today ??= DateOnlyToday;
 
         return ruleBuilder
             .Must(date => date >= today())
@@ -174,7 +174,7 @@ public static partial class ClockValidation
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
-       today ??= DateOnlyToday;
+        today ??= DateOnlyToday;
 
         return ruleBuilder
             .Must(date => !date.HasValue || date.Value >= today())

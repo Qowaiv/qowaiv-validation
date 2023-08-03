@@ -104,7 +104,7 @@ public class Task_Invalid_Model
 
 internal record Context(string Value)
 {
-    public static Result<Context> Valid => Result.For(new Context((string)null));
+    public static Result<Context> Valid => Result.For(new Context((string)null!));
     public static Result<Context> Invalid => Result.WithMessages<Context>(ValidationMessage.Error("InvalidContext"));
 
     public bool Updated { get; private set; }

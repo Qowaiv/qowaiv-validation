@@ -168,7 +168,7 @@ public class Null
     [Test]
     public void Should_BeValid_fails()
     {
-        Result result = null;
+        Result? result = null;
         Action assert = () => result.Should().BeValid();
         assert.Should().Throw<AssertionException>().WithMessage("Result is <null>.");
     }
@@ -176,7 +176,7 @@ public class Null
     [Test]
     public void Result_Should_BeInvalid_fails()
     {
-        Result result = null;
+        Result? result = null;
         Action assert = () => result.Should().BeInvalid();
         assert.Should().Throw<AssertionException>().WithMessage("Result is <null>.");
     }

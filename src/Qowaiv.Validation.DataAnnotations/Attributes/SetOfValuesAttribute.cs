@@ -31,7 +31,7 @@ public abstract class SetOfValuesAttribute : ValidationAttribute
         else
         {
             var converter = TypeDescriptor.GetConverter(value.GetType());
-            return OnEqual == Values.Any(val => value.Equals(converter.ConvertFromString(val)));
+            return OnEqual == Values.Exists(val => value.Equals(converter.ConvertFromString(val)));
         }
     }
 }

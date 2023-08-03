@@ -30,7 +30,7 @@ namespace Fluent_validation.NotInFuture_specs
         {
             using (Clock.SetTimeForCurrentContext(() => new Date(2017, 06, 11)))
             {
-                new DateTimeModel { Prop = new DateTime(2017, 06, 10) }.Should().BeValidFor(new DateTimeNotInFutureValidator());
+                new DateTimeModel { Prop = new DateTime(2017, 06, 10, 00, 00, 00, DateTimeKind.Utc) }.Should().BeValidFor(new DateTimeNotInFutureValidator());
             }
         }
 

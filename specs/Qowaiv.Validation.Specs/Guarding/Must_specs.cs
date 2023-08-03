@@ -8,7 +8,7 @@ public class Requires
     [Test]
     public void Subject_not_to_be_null()
     {
-        Func<object> create = () => ((TestModel)null).Must();
+        Func<object> create = () => ((TestModel)null!).Must();
         create.Should().Throw<ArgumentNullException>();
     }
 }
@@ -39,7 +39,7 @@ public class Continues_when
     public void Must_Exist_resolves_entity()
     {
         var model = new TestModel();
-        var result = model.Must().Exist(8, (m, id) => new object());
+        var result = model.Must().Exist(8, (_, _) => new object());
 
         result.Should().BeValid().WithoutMessages()
             .Value.Should().BeSameAs(model);
@@ -65,7 +65,7 @@ public class Blocks_when
     [Test]
     public void Must_Exist_does_not_resolve_entity()
     {
-        var result = new TestModel().Must().Exist(666, (m, id) => (object)null);
+        var result = new TestModel().Must().Exist(666, (_, _) => (object)null!);
         result.Should().BeInvalid().WithMessage(ValidationMessage.Error("Entity with ID 666 could not be found."));
     }
 }
@@ -80,4 +80,5 @@ public class ToString_as_type
     }
 }
 
+[Serializable]
 internal class TestModel { }
