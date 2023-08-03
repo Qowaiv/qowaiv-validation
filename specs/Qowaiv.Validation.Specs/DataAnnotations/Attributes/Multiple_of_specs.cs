@@ -146,7 +146,6 @@ public class Not_valid_for
         yield return new object();
         yield return new DateTime(2017, 06, 11, 06, 15, 00, DateTimeKind.Local);
         yield return DBNull.Value;
-
     }
 }
 
