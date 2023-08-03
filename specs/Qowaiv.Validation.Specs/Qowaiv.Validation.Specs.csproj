@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\props\test.props" />
+  <Import Project="..\..\props\specs.props" />
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>Specs</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Label="XML files as embedded">
     <None Remove="Xml\Files\*" />
     <EmbeddedResource Include="Xml\Files\*" />
   </ItemGroup>
@@ -21,21 +21,24 @@
     <ProjectReference Include="..\..\src\Qowaiv.Validation.Xml\Qowaiv.Validation.Xml.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Label="Depedencies">
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.*" />
+    <PackageReference Include="Qowaiv" Version="6.*" />
+  </ItemGroup>
+
+  <ItemGroup Label="TestTools">
+    <PackageReference Include="coverlet.collector" Version="*" PrivateAssets="all" />
+    <PackageReference Include="coverlet.msbuild" Version="*" PrivateAssets="all" />
     <PackageReference Include="FluentAssertions" Version="6.*" />
-    <PackageReference Include="FluentAssertions.Analyzers" Version="0.*">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" />
-    <PackageReference Include="nunit" Version="3.*" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.*">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Qowaiv" Version="6.4.1" />
+    <PackageReference Include="NUnit" Version="3.*" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.*" PrivateAssets="all" />
     <PackageReference Include="Qowaiv.TestTools" Version="6.*" />
+  </ItemGroup>
+
+  <ItemGroup Label="Analyzers">
+    <PackageReference Include="FluentAssertions.Analyzers" Version="*" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+    <PackageReference Include="NUnit.Analyzers" Version="*" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive"  />
   </ItemGroup>
 
   <ItemGroup>
