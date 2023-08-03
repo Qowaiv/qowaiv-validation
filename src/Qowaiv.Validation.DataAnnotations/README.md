@@ -14,7 +14,7 @@ Result<SomeModel> result = validator.Validate(model);
 ## Validation messages
 `Qowaiv.Validation.DataAnnotations.ValidationMessage` inherits Microsoft's
 `ValidationResult`, and implements `Qowaiv.Validation.Abstractions.IValidationMessage`.
-This allows the creates messages with different severities:
+This allows the creation of messages with different severities:
 
 ``` C#
 var none = ValidationMessage.None;
@@ -45,7 +45,7 @@ public class Model
 
 ### Any
 The `[Required]` attribute does not work (well) for collections. The `[Any]`
-attribute does. It is only valid as he collection contains at least one item.
+attribute does. It is only valid if the collection contains at least one item.
 
 ``` C#
 public class Model
@@ -56,7 +56,7 @@ public class Model
 ```
 
 ### Allowed values
-The `]AllowedValues]` attribute allows to define a subset of allowed values. It
+The `[AllowedValues]` attribute allows to define a subset of allowed values. It
 supports type converters to get the allowed values based on a string value.
 
 ``` C#
