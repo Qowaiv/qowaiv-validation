@@ -4,10 +4,13 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
-    <Version>1.3.0</Version>
+    <Version>1.4.0</Version>
     <PackageReleaseNotes>
 ToBeReleased
 - Marked [NestedModel] attribute as obsolete. #70
+v1.4.0
+- Introduced [MultipleOf] validation attribute.
+- Marked [NestedModel] attribute as obsolete.
 v1.3.0
 - Support .NET 7.0. #62
 v1.0.1
@@ -36,8 +39,11 @@ v0.0.4
     </PackageReleaseNotes>
   </PropertyGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'" >
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0"/>
+  </ItemGroup>
+
   <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" Condition="'$(TargetFramework)'=='netstandard2.0'" />
     <PackageReference Include="Qowaiv" Version="6.0.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
   </ItemGroup>

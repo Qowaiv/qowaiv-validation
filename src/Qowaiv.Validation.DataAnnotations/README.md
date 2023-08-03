@@ -104,3 +104,25 @@ public class Model
     public IEnumerable<int> Numbers { get; set; }
 }
 ```
+
+### Multiple of
+The `[MultipleOf]` attribute validates that the value of a field is a multiple
+of the specified factor..
+
+``` C#
+public class Model
+{
+    [MultipleOf(0.001)]
+    public Amount Total { get; set; }
+}
+```
+### Optional 
+The `[Optional]` attribute indicates explicitly that a field is optional.
+
+``` C#
+public class Model
+{
+    [Optional]
+    public string? Message { get; set; }
+}
+```
