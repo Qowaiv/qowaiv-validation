@@ -20,7 +20,6 @@ public class Result
     public bool IsValid => !Errors.Any();
 
     /// <summary>Gets all messages with <see cref="ValidationSeverity.Error"/>.</summary>
-
     [Pure]
     public IEnumerable<IValidationMessage> Errors => Messages.GetErrors();
 

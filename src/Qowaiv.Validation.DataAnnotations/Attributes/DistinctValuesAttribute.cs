@@ -56,6 +56,7 @@ public sealed class DistinctValuesAttribute : ValidationAttribute
     private sealed class WrappedComparer : IEqualityComparer<object>
     {
         private readonly IEqualityComparer _comparer;
+
         public WrappedComparer(IEqualityComparer comparer) => _comparer = comparer;
 
         [Pure]

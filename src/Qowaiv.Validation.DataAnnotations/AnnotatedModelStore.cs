@@ -45,6 +45,7 @@ public sealed class AnnotatedModelStore
     }
 
     /// <summary>Gets an <see cref="AnnotatedModel"/> based on the <see cref="Type"/>.</summary>
-    [Pure, Obsolete("Use GetAnnotatedModel(type) instead.")]
+    [Pure]
+    [Obsolete("Use GetAnnotatedModel(type) instead.")]
     public AnnotatedModel GetAnnotededModel(Type type) => GetAnnotatedModel(type);
 }

@@ -4,14 +4,14 @@
 public class ResultValidnessAssertionsBase<TSubject>
     where TSubject : Result
 {
-    /// <summary>Creates a new instance of the <see cref="ResultValidnessAssertionsBase{TSubject}"/> class.</summary>
-    protected ResultValidnessAssertionsBase(TSubject subject) => Subject = subject;
+    /// <summary>Initializes a new instance of the <see cref="ResultValidnessAssertionsBase{TSubject}"/> class.</summary>
+    protected ResultValidnessAssertionsBase(TSubject? subject) => Subject = subject;
 
     /// <summary>Gets the object which value is being asserted.</summary>
-    protected TSubject Subject { get; }
+    protected TSubject? Subject { get; }
 
     /// <summary>Gets the <see cref="Result.Messages"/>.</summary>
-    protected IEnumerable<IValidationMessage> Messages => Subject.Messages;
+    protected IEnumerable<IValidationMessage> Messages => Subject?.Messages ?? Array.Empty<IValidationMessage>();
 
     internal void ExecuteWithoutMessages()
         => Execute.Assertion

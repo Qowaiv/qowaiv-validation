@@ -8,7 +8,7 @@ public class Is_valid_for
     public void Not_empty_collection(object model)
        => new OptionalAttribute().IsValid(model).Should().BeTrue();
 
-    static IEnumerable<object> Models()
+    static IEnumerable<object?> Models()
     {
         yield return null;
         yield return string.Empty;

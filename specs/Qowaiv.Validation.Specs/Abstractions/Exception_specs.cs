@@ -8,7 +8,7 @@ public class InvalidModel
     [Test]
     public void Null_messages_is_fine()
     {
-        var exception = InvalidModelException.For<int>(null);
+        var exception = InvalidModelException.For<int>(null!);
         Assert.That(exception.Message, Is.EqualTo("The System.Int32 model can not be operated on as it is invalid."));
     }
 

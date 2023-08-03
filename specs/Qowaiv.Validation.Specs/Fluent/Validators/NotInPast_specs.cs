@@ -27,9 +27,9 @@ public class Valid_for_not_in_past
     [Test]
     public void DateTime()
     {
-        using (Clock.SetTimeForCurrentContext(() => new DateTime(2017, 06, 11)))
+        using (Clock.SetTimeForCurrentContext(() => new DateTime(2017, 06, 11, 00, 00, 00, DateTimeKind.Utc)))
         {
-            new DateTimeModel { Prop = new DateTime(2017, 06, 12) }.Should().BeValidFor(new DateTimeNotInPastValidator());
+            new DateTimeModel { Prop = new DateTime(2017, 06, 12, 00, 00, 00, DateTimeKind.Utc) }.Should().BeValidFor(new DateTimeNotInPastValidator());
         }
     }
 
@@ -54,9 +54,9 @@ public class Valid_for_not_in_past
     [Test]
     public void Nullable_DateTime()
     {
-        using (Clock.SetTimeForCurrentContext(() => new DateTime(2017, 06, 11)))
+        using (Clock.SetTimeForCurrentContext(() => new DateTime(2017, 06, 11, 00, 00, 00, DateTimeKind.Utc)))
         {
-            new NullableDateTimeModel { Prop = new DateTime(2017, 06, 12) }.Should().BeValidFor(new NullableDateTimeNotInPastValidator());
+            new NullableDateTimeModel { Prop = new DateTime(2017, 06, 12, 00, 00, 00, DateTimeKind.Utc) }.Should().BeValidFor(new NullableDateTimeNotInPastValidator());
         }
     }
 }
@@ -129,7 +129,7 @@ public class Invalid_for_not_past
         {
             using (Clock.SetTimeForCurrentContext(() => new Date(2017, 06, 11)))
             {
-                new DateTimeModel { Prop = new DateTime(2017, 06, 10) }.Should()
+                new DateTimeModel { Prop = new DateTime(2017, 06, 10, 00, 00, 00, DateTimeKind.Utc) }.Should()
                     .BeInvalidFor(new DateTimeNotInPastValidator())
                     .WithMessage(ValidationMessage.Error(message, "Prop"));
             }
@@ -174,7 +174,7 @@ public class Invalid_for_not_past
         {
             using (Clock.SetTimeForCurrentContext(() => new Date(2017, 06, 11)))
             {
-                new NullableDateTimeModel { Prop = new DateTime(2017, 06, 10) }.Should()
+                new NullableDateTimeModel { Prop = new DateTime(2017, 06, 10, 00, 00, 00, DateTimeKind.Utc) }.Should()
                     .BeInvalidFor(new NullableDateTimeNotInPastValidator())
                     .WithMessage(ValidationMessage.Error(message, "Prop"));
             }

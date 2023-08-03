@@ -54,7 +54,7 @@ public sealed class Result<TModel> : Result
     {
         return new(_value is null ? default : Cast(), (FixedMessages)Messages);
 
-        TOut Cast() 
+        TOut Cast()
             => _value is TOut cast
             ? cast
             : throw new InvalidCastException($"Unable to cast object of type 'Result<{typeof(TModel)}>' to type 'Result<{typeof(TOut)}>'.");
@@ -82,10 +82,8 @@ public sealed class Result<TModel> : Result
         if (IsValid)
         {
             var outcome = action(Value);
-            return new(outcome.IsValid
-                ? outcome.Value
-                : default,
-                ((FixedMessages)Messages).AddRange(outcome.Messages));
+            var value = outcome.IsValid ? outcome.Value : default;
+            return new(value, ((FixedMessages)Messages).AddRange(outcome.Messages));
         }
         else return WithMessages<TOut>(Messages);
     }
@@ -180,14 +178,10 @@ public sealed class Result<TModel> : Result
         if (IsValid)
         {
             var outcome = await action(Value).ConfigureAwait(continueOnCapturedContext);
-            return new(outcome.IsValid
-                ? outcome.Value
-                : default,
-                ((FixedMessages)Messages).AddRange(outcome.Messages));
+            var value = outcome.IsValid ? outcome.Value : default;
+            return new(value, ((FixedMessages)Messages).AddRange(outcome.Messages));
         }
         else return WithMessages<TOut>(Messages);
-
-
     }
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>

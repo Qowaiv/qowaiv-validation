@@ -55,7 +55,7 @@ public class Null_result
 
     [Test]
     public void invalid_if_implicit() 
-        => Assert.That(() => Result.For<object>(null), Throws.TypeOf<NoValue>().With.Message.EqualTo("The value of the Result<Object> can not be null. (Parameter 'Value')"));
+        => Assert.That(() => Result.For<object>(null!), Throws.TypeOf<NoValue>().With.Message.EqualTo("The value of the Result<Object> can not be null. (Parameter 'Value')"));
 
     [Test]
     public void invalid_if_implicit_with_messages()

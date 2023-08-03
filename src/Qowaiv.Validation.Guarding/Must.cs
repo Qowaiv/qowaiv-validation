@@ -6,7 +6,7 @@
 /// </typeparam>
 public sealed class Must<TSubject> where TSubject : class
 {
-    /// <summary>Creates a new instance of the <see cref="Must{TSubject}"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Must{TSubject}"/> class.</summary>
     internal Must(TSubject subject) => Subject = Guard.NotNull(subject, nameof(subject));
 
     /// <summary>Gets the subject to guard.</summary>

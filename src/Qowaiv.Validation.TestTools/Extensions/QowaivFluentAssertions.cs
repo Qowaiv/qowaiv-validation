@@ -11,7 +11,7 @@ public static class QowaivFluentAssertions
     /// current <see cref="Result"/>.
     /// </summary>
     [Pure]
-    public static ResultAssertions Should(this Result result) => new(result);
+    public static ResultAssertions Should(this Result? result) => new(result);
 
     /// <summary>
     /// Returns an <see cref="ResultAssertions{TModel}"/> object that can be used to assert the

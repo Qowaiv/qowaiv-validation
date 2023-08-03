@@ -3,7 +3,7 @@
 /// <summary>Contains a number of methods to assert the messages of a valid <see cref="Result"/>.</summary>
 public sealed class ResultValidnessAssertions : ResultValidnessAssertionsBase<Result>
 {
-    internal ResultValidnessAssertions(Result subject) : base(subject) { }
+    internal ResultValidnessAssertions(Result? subject) : base(subject) { }
 
     /// <summary>Asserts that the <see cref="Result"/> contains no messages.</summary>
     [CustomAssertion]

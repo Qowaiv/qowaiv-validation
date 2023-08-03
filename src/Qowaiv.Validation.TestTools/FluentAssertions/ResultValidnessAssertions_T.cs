@@ -7,5 +7,5 @@ public class ResultValidnessAssertions<TModel> : ResultValidnessAssertionsBase<R
     internal ResultValidnessAssertions(Result<TModel> subject) : base(subject) { }
 
     /// <summary>Expose the value, so that the chain of assertions can be continued.</summary>
-    public TModel Value => Subject.Value;
+    public TModel Value => Subject!.Value;
 }

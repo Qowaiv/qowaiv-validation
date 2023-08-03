@@ -88,11 +88,11 @@ public class Task_Invalid_Model
 
 internal class Context
 {
-    public static Task<Result<Context>> NullTask => Task.FromResult<Result<Context>>(null);
+    public static Task<Result<Context>> NullTask => Task.FromResult<Result<Context>>(null!);
     public static Result<Context> Valid => Result.For(new Context());
     public static Result<Context> Invalid => Result.WithMessages<Context>(ValidationMessage.Error("InvalidContext"));
 
-    public string Value { get; set; }
+    public string? Value { get; set; }
     public bool Updated => Value is { };
 
     public static void Update(Context context, string value) => context.Value = value;

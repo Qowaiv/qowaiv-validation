@@ -60,11 +60,12 @@ public class Validates_children_when_child_type
         public int? Answer { get; set; }
     }
 
-    internal sealed class MustHaveTheAnswerAttribute : ValidationAttribute
+    public sealed class MustHaveTheAnswerAttribute : ValidationAttribute
     {
-        public override bool IsValid(object value)
+        public override bool IsValid(object? value)
             => value is ChildTypeDecorated model
             && model.Answer == 42;
+
         public override string FormatErrorMessage(string name)
             => "Answer to the Ultimate Question of Life, the Universe, and Everything.";
     }
@@ -147,14 +148,15 @@ public class Supports
     }
     internal class ChildWithLoop
     {
-        public WithLoop Parent { get; set; }
+        public WithLoop? Parent { get; set; }
+        
         [Mandatory]
         public int? Answer { get; set; }
     }
 
     internal class WithChildren
     {
-        public ChildRecord[] Records { get; set; }
+        public ChildRecord[]? Records { get; set; }
     }
     internal sealed record ChildRecord([property: Mandatory]int? Value);
 

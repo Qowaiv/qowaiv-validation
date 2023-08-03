@@ -61,7 +61,7 @@ public class Is_not_valid_for
 
 internal class EqualityComparer : IEqualityComparer
 {
-    public new bool Equals(object x, object y) 
+    public new bool Equals(object? x, object? y) 
         => object.Equals(x, y)
         || (x is int x_ && y is int y_ && x_ == y_);
 
@@ -72,7 +72,7 @@ internal class EqualityComparer : IEqualityComparer
 
 internal class EqualityComparer_of_object : IEqualityComparer<object>
 {
-    public new bool Equals(object x, object y) 
+    public new bool Equals(object? x, object? y) 
         => object.Equals(x, y)
         || (x is int x_ && y is int y_ && x_ == y_);
 

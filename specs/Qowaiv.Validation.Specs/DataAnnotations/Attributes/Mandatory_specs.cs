@@ -73,10 +73,10 @@ public class With_message
     internal class Model
     {
         [Mandatory]
-        public string TestField { get; }
+        public string? TestField { get; }
 
         [Required]
-        public string ReferenceField { get; set; }
+        public string? ReferenceField { get; set; }
     }
 
     public class WithCustomErrorMessageType

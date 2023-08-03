@@ -76,6 +76,7 @@ public  class With_debugger_experience
     internal class Model
     {
         public Guid Id { get; }
-        public string Name { get; }
+        
+        public string? Name { get; }
     }
 }

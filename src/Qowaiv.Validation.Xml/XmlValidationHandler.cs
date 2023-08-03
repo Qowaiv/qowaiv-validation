@@ -15,12 +15,10 @@ public class XmlValidationHandler
         .Add(ValidationMessage.For(e.Severity.ToValidationSeverity(), e.Message, PropertyName(sender)));
 
     [Pure]
-    private static string? PropertyName(object? sender)
-        => sender switch
-        {
-            XElement x => x.AbsoluteXPath(),
-            XAttribute x => x.AbsoluteXPath(),
-            _ => null,
-        };
+    private static string? PropertyName(object? sender) => sender switch
+    {
+        XElement x => x.AbsoluteXPath(),
+        XAttribute x => x.AbsoluteXPath(),
+        _ => null,
+    };
 }
-        

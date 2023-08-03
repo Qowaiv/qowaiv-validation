@@ -3,7 +3,7 @@
 /// <summary>Contains a number of methods to assert the messages of an invalid <see cref="Result"/>.</summary>
 public sealed class ResultInvalidnessAssertions : ResultValidnessAssertionsBase<Result>
 {
-    /// <summary>Creates a new instance of the <see cref="ResultInvalidnessAssertions"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="ResultInvalidnessAssertions"/> class.</summary>
     internal ResultInvalidnessAssertions(Result subject) : base(subject) { }
 
     /// <summary>Asserts that the <see cref="Result"/> contains the specified message.</summary>
@@ -15,4 +15,3 @@ public sealed class ResultInvalidnessAssertions : ResultValidnessAssertionsBase<
     public void WithMessages(params IValidationMessage[] messages)
         => ExecuteWithMessages(messages);
 }
-

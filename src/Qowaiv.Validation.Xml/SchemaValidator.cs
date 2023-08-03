@@ -8,24 +8,24 @@
 public class SchemaValidator<TModel> : IValidator<TModel>
     where TModel : class
 {
-    /// <summary>Creates a new instance of the <see cref="SchemaValidator{TModel}"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="SchemaValidator{TModel}"/> class.</summary>
     /// <param name="stream">
     /// A stream representing an <see cref="XmlSchema"/>.
     /// </param>
     public SchemaValidator(Stream stream) : this(stream.AsXmlSchema()) => Do.Nothing();
 
-    /// <summary>Creates a new instance of the <see cref="SchemaValidator{TModel}"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="SchemaValidator{TModel}"/> class.</summary>
     /// <param name="schema">
     /// The main of <see cref="XmlSchema"/>'.
     /// </param>
     public SchemaValidator(XmlSchema schema) : this(new XmlSchemaSet().Append(schema)) => Do.Nothing();
 
-    /// <summary>Creates a new instance of the <see cref="SchemaValidator{TModel}"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="SchemaValidator{TModel}"/> class.</summary>
     /// <param name="schemas">
     /// A set of <see cref="XmlSchema"/>'s.
     /// </param>
     public SchemaValidator(XmlSchemaSet schemas) => Schemas = Guard.NotNull(schemas, nameof(schemas));
-    
+
     /// <summary>The XML Schema('s) used to validate the model.</summary>
     public XmlSchemaSet Schemas { get; }
 
@@ -58,6 +58,6 @@ public class SchemaValidator<TModel> : IValidator<TModel>
     [Pure]
     private Result<TModel> Deserialize(XDocument document)
         => (TModel)Serializer.Deserialize(document.CreateReader())!;
-    
+
     private readonly XmlSerializer Serializer = new(typeof(TModel));
 }

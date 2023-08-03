@@ -16,7 +16,7 @@ public static class PostalCodeValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, PostalCode> ValidFor<TModel>(this IRuleBuilder<TModel, PostalCode> ruleBuilder, Country country)
         => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
-        .ValidFor((model) => country);
+        .ValidFor(_ => country);
 
     /// <summary>The postal code should be valid for the specified country.</summary>
     /// <typeparam name="TModel">

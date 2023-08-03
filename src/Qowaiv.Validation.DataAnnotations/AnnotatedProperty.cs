@@ -45,6 +45,8 @@ public sealed class AnnotatedProperty
     /// <summary>Gets the value of the property for the specified model.</summary>
     [Pure]
     public object? GetValue(object model) => getValue(model);
+
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly Func<object, object?> getValue;
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
