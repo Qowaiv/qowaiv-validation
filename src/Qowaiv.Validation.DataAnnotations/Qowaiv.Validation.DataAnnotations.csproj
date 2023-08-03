@@ -6,11 +6,9 @@
     <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
     <Version>1.4.0</Version>
     <PackageReleaseNotes>
-ToBeReleased
-- Marked [NestedModel] attribute as obsolete. #70
 v1.4.0
-- Introduced [MultipleOf] validation attribute.
-- Marked [NestedModel] attribute as obsolete.
+- Introduced [MultipleOf] validation attribute. #69
+- Marked [NestedModel] attribute as obsolete. #70
 v1.3.0
 - Support .NET 7.0. #62
 v1.0.1
