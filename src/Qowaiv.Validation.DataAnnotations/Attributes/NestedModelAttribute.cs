@@ -3,6 +3,7 @@
 /// <summary>Decorates a class so that the <see cref="AnnotatedModelValidator{Tmodel}"/>
 /// will also validate its children.
 /// </summary>
+[Obsolete("Not needed anymore. Will be dropped.")]
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
 public sealed class NestedModelAttribute : ValidationAttribute
 {
