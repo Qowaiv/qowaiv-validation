@@ -7,10 +7,6 @@ namespace Qowaiv.Validation.DataAnnotations;
 public sealed class MultipleOfAttribute : ValidationAttribute
 {
     /// <summary>Initializes a new instance of the <see cref="MultipleOfAttribute"/> class.</summary>
-    public MultipleOfAttribute(string factor)
-        : this(decimal.Parse(factor, CultureInfo.InvariantCulture)) { }
-
-    /// <summary>Initializes a new instance of the <see cref="MultipleOfAttribute"/> class.</summary>
     public MultipleOfAttribute(double factor)
         : this(AsDecimal(factor) ?? throw new ArgumentOutOfRangeException(nameof(factor), "Can not be represented by a decimal.")) { }
 
@@ -32,7 +28,7 @@ public sealed class MultipleOfAttribute : ValidationAttribute
     [Pure]
     protected override ValidationResult IsValid(object? value, ValidationContext validationContext)
         => IsValid(value)
-        ? ValidationResult.Success
+        ? ValidationResult.Success!
         : ValidationMessage.Error(FormatErrorMessage(validationContext.DisplayName), validationContext.MemberNames());
 
     /// <inheritdoc />

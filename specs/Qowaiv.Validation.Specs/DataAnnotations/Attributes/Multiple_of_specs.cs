@@ -66,6 +66,18 @@ public class Valid_for
     }
 }
 
+public class Initialization
+{
+    [Test]
+    public void has_sufficient_precision([Range(1, 23)]int decimals)
+    {
+        var factor = (decimal)Math.Pow(10, -decimals);
+        factor.Should().Be(Pow(-decimals));
+    }
+
+    private static decimal Pow(int decimals) => new(1, 0, 0, false, scale: (byte)-decimals);
+}
+
 public class Not_valid_for
 {
     [TestCase(float.NaN, 1)]
@@ -129,6 +141,7 @@ public class With_message
         new Model().Should().BeInvalidFor(new AnnotatedModelValidator<Model>())
             .WithMessage(ValidationMessage.Error(message, "Total"));
     }
+
     internal class Model
     {
         [MultipleOf(0.001)]

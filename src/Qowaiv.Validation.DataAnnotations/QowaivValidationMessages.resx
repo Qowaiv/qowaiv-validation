@@ -4,10 +4,10 @@
     <value>text/microsoft-resx</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+    <value>System.Resources.ResXResourceReader</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+    <value>System.Resources.ResXResourceWriter</value>
   </resheader>
   <data name="AllowedValuesAttribute_ValidationError" xml:space="preserve">
     <value>The value of the {0} field is not allowed.</value>

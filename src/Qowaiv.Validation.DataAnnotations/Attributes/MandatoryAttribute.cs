@@ -23,7 +23,7 @@ public sealed class MandatoryAttribute : RequiredAttribute
     [Pure]
     protected override ValidationResult IsValid(object? value, ValidationContext validationContext)
         => IsValid(value, GetMemberType(Guard.NotNull(validationContext, nameof(validationContext))))
-        ? ValidationResult.Success
+        ? ValidationResult.Success!
         : ValidationMessage.Error(FormatErrorMessage(validationContext.DisplayName), validationContext.MemberNames());
 
     /// <summary>Gets the type of the field/property.</summary>
