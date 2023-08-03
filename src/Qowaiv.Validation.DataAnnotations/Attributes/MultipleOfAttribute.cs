@@ -40,9 +40,9 @@ public sealed class MultipleOfAttribute : ValidationAttribute
     [Pure]
     public override bool IsValid(object? value) => value switch
     {
+        // should be handled by required.
         null => true,
         string str => string.IsNullOrEmpty(str),
-        bool => false,
 
         float flt => IsValid(flt),
         double dbl => IsValid(dbl),
@@ -51,6 +51,7 @@ public sealed class MultipleOfAttribute : ValidationAttribute
         Money money => IsValid((decimal)money.Amount),
         Percentage percentage => IsValid(100 * (decimal)percentage),
         IConvertible convertible => IsValid(convertible),
+
         _ => false,
     };
 
@@ -70,7 +71,14 @@ public sealed class MultipleOfAttribute : ValidationAttribute
         && IsValid(dec);
 
     [Pure]
-    private bool IsValid(IConvertible value) => IsValid(Convert.ToDecimal(value));
+    private bool IsValid(IConvertible value)
+        => IsValid(value.GetTypeCode()) 
+        && IsValid(Convert.ToDecimal(value));
+
+    [Pure]
+    private bool IsValid(TypeCode type)
+        => type >= TypeCode.SByte 
+        && type <= TypeCode.UInt64;
 
     [Pure]
     private static bool IsFinite(double value) => !double.IsNaN(value) && !double.IsInfinity(value);
