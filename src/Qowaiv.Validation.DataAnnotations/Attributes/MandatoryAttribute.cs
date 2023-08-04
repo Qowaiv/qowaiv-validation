@@ -22,19 +22,9 @@ public sealed class MandatoryAttribute : RequiredAttribute
     /// <inheritdoc />
     [Pure]
     protected override ValidationResult IsValid(object? value, ValidationContext validationContext)
-    {
-        Guard.NotNull(validationContext, nameof(validationContext));
-
-        if (IsValid(value, GetMemberType(validationContext)))
-        {
-            return ValidationResult.Success!;
-        }
-        else
-        {
-            var memberNames = validationContext.MemberName != null ? new[] { validationContext.MemberName } : Array.Empty<string>();
-            return ValidationMessage.Error(FormatErrorMessage(validationContext.DisplayName), memberNames);
-        }
-    }
+        => IsValid(value, GetMemberType(Guard.NotNull(validationContext, nameof(validationContext))))
+        ? ValidationResult.Success!
+        : ValidationMessage.Error(FormatErrorMessage(validationContext.DisplayName), validationContext.MemberNames());
 
     /// <summary>Gets the type of the field/property.</summary>
     /// <remarks>
@@ -62,7 +52,7 @@ public sealed class MandatoryAttribute : RequiredAttribute
     [Pure]
     private bool IsValid(object? value, Type? memberType)
     {
-        if (value != null)
+        if (value is { })
         {
             var type = memberType ?? value.GetType();
             var underlyingType = QowaivType.GetNotNullableType(type);

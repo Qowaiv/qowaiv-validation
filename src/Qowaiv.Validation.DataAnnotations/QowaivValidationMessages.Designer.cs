@@ -88,15 +88,6 @@ namespace Qowaiv.Validation.DataAnnotations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The {0} model can not be operated on as it is invalid..
-        /// </summary>
-        internal static string InvalidModelException {
-            get {
-                return ResourceManager.GetString("InvalidModelException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The {0} field is required..
         /// </summary>
         internal static string MandatoryAttribute_ValidationError {
@@ -106,29 +97,11 @@ namespace Qowaiv.Validation.DataAnnotations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The postal code {0} is not valid for {1}..
+        ///   Looks up a localized string similar to The value of the {0} field is not a multiple of {1}..
         /// </summary>
-        internal static string PostalCodeValidator_ErrorMessage {
+        internal static string MultipleOfAttribute_ValidationError {
             get {
-                return ResourceManager.GetString("PostalCodeValidator_ErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The property &apos;{1}&apos; on resource type &apos;{0}&apos; is not a string type..
-        /// </summary>
-        internal static string ValidationRule_ResourcePropertyNotStringType {
-            get {
-                return ResourceManager.GetString("ValidationRule_ResourcePropertyNotStringType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The resource type &apos;{0}&apos; does not have an accessible static property named &apos;{1}&apos;..
-        /// </summary>
-        internal static string ValidationRule_ResourceTypeDoesNotHaveProperty {
-            get {
-                return ResourceManager.GetString("ValidationRule_ResourceTypeDoesNotHaveProperty", resourceCulture);
+                return ResourceManager.GetString("MultipleOfAttribute_ValidationError", resourceCulture);
             }
         }
     }

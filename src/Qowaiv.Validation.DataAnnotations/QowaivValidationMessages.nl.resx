@@ -3,14 +3,11 @@
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter</value>
   </resheader>
   <data name="AllowedValuesAttribute_ValidationError" xml:space="preserve">
     <value>De waarde van het veld {0} is niet toegestaan.</value>
@@ -21,7 +18,7 @@
   <data name="MandatoryAttribute_ValidationError" xml:space="preserve">
     <value>Het veld {0} is verplicht.</value>
   </data>
-  <data name="PostalCodeValidator_ErrorMessage" xml:space="preserve">
-    <value>De postcode {0} is niet geldig voor {1}.</value>
+  <data name="MultipleOfAttribute_ValidationError" xml:space="preserve">
+    <value>De waarde van veld {0} is geen veelvoud van {1}.</value>
   </data>
 </root>
