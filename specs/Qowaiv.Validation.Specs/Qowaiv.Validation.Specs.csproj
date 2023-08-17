@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Depedencies">
+    <PackageReference Include="FluentValidation" Version="11.*" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.*" />
     <PackageReference Include="Qowaiv" Version="6.*" />
   </ItemGroup>
