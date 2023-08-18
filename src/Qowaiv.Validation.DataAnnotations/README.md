@@ -105,9 +105,21 @@ public class Model
 }
 ```
 
+### Is finite
+The `[IsFinite]` attribute validates that the floating point value of the field
+represents a finite (e.a. not NaN, or infinity).
+
+``` C#
+public class Model
+{
+    [IsFinite]
+    public double Number { get; set; }
+}
+```
+
 ### Multiple of
 The `[MultipleOf]` attribute validates that the value of a field is a multiple
-of the specified factor..
+of the specified factor.
 
 ``` C#
 public class Model

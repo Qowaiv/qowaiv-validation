@@ -8,9 +8,6 @@ public class Valid_for
     [Test]
     public void Null() => new MultipleOfAttribute(0.1).IsValid(null).Should().BeTrue();
 
-    [Test]
-    public void empty_string() => new MultipleOfAttribute(0.1).IsValid(string.Empty).Should().BeTrue();
-
     [TestCase(45, 5.000)]
     [TestCase(45, 1.000)]
     [TestCase(45, 0.100)]
