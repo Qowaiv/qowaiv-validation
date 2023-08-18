@@ -13,7 +13,7 @@ internal static class FloatingPointExtensions
     [Pure]
     public static bool IsFinite(this float f)
 #if NETSTANDARD
-    => !float.IsNaN(f) && !float.IsInfinity(f);
+        => !float.IsNaN(f) && !float.IsInfinity(f);
 #else
         => float.IsFinite(f);
 #endif

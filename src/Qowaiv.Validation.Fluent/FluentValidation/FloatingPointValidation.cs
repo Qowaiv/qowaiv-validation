@@ -3,7 +3,7 @@
 /// <summary>FLuent validation for <see cref="double"/> and <see cref="float"/>.</summary>
 public static class FloatingPointValidation
 {
-    /// <summary>The floating point should be a finite number..</summary>
+    /// <summary>The floating point should be a finite number.</summary>
     /// <typeparam name="TModel">
     /// Type of the model being validated.
     /// </typeparam>
@@ -16,7 +16,7 @@ public static class FloatingPointValidation
         .Must(number => number.IsFinite())
         .WithMessage(m => QowaivValidationFluentMessages.IsFinite);
 
-    /// <summary>The floating point should be a finite number..</summary>
+    /// <summary>The floating point should be a finite number.</summary>
     /// <typeparam name="TModel">
     /// Type of the model being validated.
     /// </typeparam>
@@ -29,7 +29,7 @@ public static class FloatingPointValidation
         .Must(number => !number.HasValue || number.Value.IsFinite())
         .WithMessage(m => QowaivValidationFluentMessages.IsFinite);
 
-    /// <summary>The floating point should be a finite number..</summary>
+    /// <summary>The floating point should be a finite number.</summary>
     /// <typeparam name="TModel">
     /// Type of the model being validated.
     /// </typeparam>
@@ -42,7 +42,7 @@ public static class FloatingPointValidation
         .Must(number => number.IsFinite())
         .WithMessage(m => QowaivValidationFluentMessages.IsFinite);
 
-    /// <summary>The floating point should be a finite number..</summary>
+    /// <summary>The floating point should be a finite number.</summary>
     /// <typeparam name="TModel">
     /// Type of the model being validated.
     /// </typeparam>

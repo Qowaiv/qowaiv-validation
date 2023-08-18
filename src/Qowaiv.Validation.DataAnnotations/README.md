@@ -107,7 +107,7 @@ public class Model
 
 ### Is finite
 The `[IsFinite]` attribute validates that the floating point value of the field
-represents a finite (e.a. not NaN, of infinity).
+represents a finite (e.a. not NaN, or infinity).
 
 ``` C#
 public class Model
