@@ -181,7 +181,7 @@ for communicating that a service was unavailable. A use case for this can be to
 communicate a `503 - Service Unavailable` response.
 
 ## Qowaiv exensions on [*Fluent Validation](https://fluentvalidation.net/)
-Provides a Fluent Valdation based implentation of the `Qowaiv.Validation.Abstractions.IValidator`
+Provides a Fluent Validation based implementation of the `Qowaiv.Validation.Abstractions.IValidator`
 and custom validation extensions [(..)](src/Qowaiv.Validation.Fluent/README.md).
 
 ## Qowaiv DataAnnotations based validation

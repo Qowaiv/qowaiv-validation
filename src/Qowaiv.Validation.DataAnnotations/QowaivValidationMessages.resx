@@ -19,7 +19,7 @@
     <value>All values of the {0} field should be distinct.</value>
   </data>
   <data name="IsFiniteAttribute_ValidationError" xml:space="preserve">
-    <value>The value of the {0} field is not a finate number.</value>
+    <value>The value of the {0} field is not a finite number.</value>
   </data>
   <data name="MandatoryAttribute_ValidationError" xml:space="preserve">
     <value>The {0} field is required.</value>

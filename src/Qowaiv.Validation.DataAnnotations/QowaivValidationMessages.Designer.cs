@@ -88,7 +88,7 @@ namespace Qowaiv.Validation.DataAnnotations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value of the {0} field is not a finate number..
+        ///   Looks up a localized string similar to The value of the {0} field is not a finite number..
         /// </summary>
         internal static string IsFiniteAttribute_ValidationError {
             get {

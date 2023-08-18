@@ -29,20 +29,20 @@ public class Is_invalid_for
     [TestCase(double.NaN)]
     [TestCase(double.NegativeInfinity)]
     [TestCase(double.PositiveInfinity)]
-    public void not_finate(object value)
+    public void not_finite(object value)
         => new IsFiniteAttribute().IsValid(value).Should().BeFalse();
 
     [TestCase("Hello")]
     [TestCase(42)]
     [TestCase(128L)]
     [TestCase(1024UL)]
-    public void non_floating_poitns(object value)
+    public void non_floating_points(object value)
        => new IsFiniteAttribute().IsValid(value).Should().BeFalse();
 }
 public class With_message
 {
     [TestCase("nl", "De waarde van het Total veld is geen eindig getal.")]
-    [TestCase("en", "The value of the Total field is not a finate number.")]
+    [TestCase("en", "The value of the Total field is not a finite number.")]
     public void culture_dependent(CultureInfo culture, string message)
     {
         using var _ = culture.Scoped();
