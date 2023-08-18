@@ -79,7 +79,7 @@ public class CustomValidator : AbstractValidator<Model>
     }
 }
 ```
-### Email address should no be IP-based
+### Email address should not be IP-based
 The `EmailAddressValidation` validates that an `EmailAddress`
 does not have an IP-based domain.
 
