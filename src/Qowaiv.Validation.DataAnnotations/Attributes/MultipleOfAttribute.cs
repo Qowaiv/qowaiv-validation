@@ -22,51 +22,38 @@ public sealed class MultipleOfAttribute : ValidationAttribute
     public decimal Factor { get; }
 
     /// <inheritdoc />
-    public override bool RequiresValidationContext => true;
-
-    /// <inheritdoc />
-    [Pure]
-    protected override ValidationResult IsValid(object? value, ValidationContext validationContext)
-        => IsValid(value)
-        ? ValidationResult.Success!
-        : ValidationMessage.Error(FormatErrorMessage(validationContext.DisplayName), validationContext.MemberNames());
-
-    /// <inheritdoc />
     [Pure]
     public override string FormatErrorMessage(string? name)
         => string.Format(CultureInfo.CurrentCulture, ErrorMessageString, name, Factor);
 
     /// <inheritdoc />
     [Pure]
-    public override bool IsValid(object? value) => value switch
-    {
-        // should be handled by required.
-        null => true,
-        string str => string.IsNullOrEmpty(str),
-
-        float flt => IsValid(flt),
-        double dbl => IsValid(dbl),
-        decimal dec => IsValid(dec),
-        Amount amount => IsValid((decimal)amount),
-        Money money => IsValid((decimal)money.Amount),
-        Percentage percentage => IsValid(100 * (decimal)percentage),
-        IConvertible convertible => IsValid(convertible),
-
-        _ => false,
-    };
+    public override bool IsValid(object? value)
+        => value is null
+        || value switch
+        {
+            float flt => IsValid(flt),
+            double dbl => IsValid(dbl),
+            decimal dec => IsValid(dec),
+            Amount amount => IsValid((decimal)amount),
+            Money money => IsValid((decimal)money.Amount),
+            Percentage percentage => IsValid(100 * (decimal)percentage),
+            IConvertible convertible => IsValid(convertible),
+            _ => false,
+        };
 
     [Pure]
     private bool IsValid(decimal value) => value % Factor == 0;
 
     [Pure]
     private bool IsValid(float value)
-       => IsFinite(value)
+       => value.IsFinite()
        && AsDecimal(value) is { } dec
        && IsValid(dec);
 
     [Pure]
     private bool IsValid(double value)
-        => IsFinite(value)
+        => value.IsFinite()
         && AsDecimal(value) is { } dec
         && IsValid(dec);
 
@@ -77,11 +64,8 @@ public sealed class MultipleOfAttribute : ValidationAttribute
 
     [Pure]
     private bool IsValid(TypeCode type)
-        => type >= TypeCode.SByte 
+        => type >= TypeCode.SByte
         && type <= TypeCode.UInt64;
-
-    [Pure]
-    private static bool IsFinite(double value) => !double.IsNaN(value) && !double.IsInfinity(value);
 
     [Pure]
     private static decimal? AsDecimal(float value)

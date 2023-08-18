@@ -88,6 +88,15 @@ namespace Qowaiv.Validation.DataAnnotations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value of the {0} field is not a finate number..
+        /// </summary>
+        internal static string IsFiniteAttribute_ValidationError {
+            get {
+                return ResourceManager.GetString("IsFiniteAttribute_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The {0} field is required..
         /// </summary>
         internal static string MandatoryAttribute_ValidationError {

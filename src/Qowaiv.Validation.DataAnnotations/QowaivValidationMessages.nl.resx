@@ -15,6 +15,9 @@
   <data name="DistinctValuesAttribute_ValidationError" xml:space="preserve">
     <value>Alle waarden van het veld {0} zouden verschillend moeten zijn.</value>
   </data>
+  <data name="IsFiniteAttribute_ValidationError" xml:space="preserve">
+    <value>De waarde van het {0} veld is geen eindig getal.</value>
+  </data>
   <data name="MandatoryAttribute_ValidationError" xml:space="preserve">
     <value>Het veld {0} is verplicht.</value>
   </data>

@@ -13,7 +13,7 @@ public static class FloatingPointValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, double> IsFinite<TModel>(this IRuleBuilder<TModel, double> ruleBuilder)
         => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
-        .Must(IsFinite)
+        .Must(number => number.IsFinite())
         .WithMessage(m => QowaivValidationFluentMessages.IsFinite);
 
     /// <summary>The floating point should be a finite number..</summary>
@@ -26,7 +26,7 @@ public static class FloatingPointValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, double?> IsFinite<TModel>(this IRuleBuilder<TModel, double?> ruleBuilder)
         => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
-        .Must(number => !number.HasValue || IsFinite(number.Value))
+        .Must(number => !number.HasValue || number.Value.IsFinite())
         .WithMessage(m => QowaivValidationFluentMessages.IsFinite);
 
     /// <summary>The floating point should be a finite number..</summary>
@@ -39,7 +39,7 @@ public static class FloatingPointValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, float> IsFinite<TModel>(this IRuleBuilder<TModel, float> ruleBuilder)
         => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
-        .Must(IsFinite)
+        .Must(number => number.IsFinite())
         .WithMessage(m => QowaivValidationFluentMessages.IsFinite);
 
     /// <summary>The floating point should be a finite number..</summary>
@@ -52,22 +52,6 @@ public static class FloatingPointValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, float?> IsFinite<TModel>(this IRuleBuilder<TModel, float?> ruleBuilder)
         => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
-        .Must(number => !number.HasValue || IsFinite(number.Value))
+        .Must(number => !number.HasValue || number.Value.IsFinite())
         .WithMessage(m => QowaivValidationFluentMessages.IsFinite);
-
-    [Pure]
-    private static bool IsFinite(double number)
-#if NETSTANDARD
-        => !double.IsNaN(number) && !double.IsInfinity(number);
-#else
-        => double.IsFinite(number);
-#endif
-
-    [Pure]
-    private static bool IsFinite(float number)
-#if NETSTANDARD
-        => !float.IsNaN(number) && !float.IsInfinity(number);
-#else
-        => float.IsFinite(number);
-#endif
 }
