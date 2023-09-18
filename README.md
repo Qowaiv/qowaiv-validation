@@ -1,17 +1,17 @@
-![Qowaiv](https://github.com/Qowaiv/Qowaiv/blob/master/design/qowaiv-logo_linkedin_100x060.jpg)
+﻿![Qowaiv](https://github.com/Qowaiv/Qowaiv/blob/master/design/qowaiv-logo_linkedin_100x060.jpg)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Code of Conduct](https://img.shields.io/badge/%E2%9D%A4-code%20of%20conduct-blue.svg?style=flat)](https://github.com/Qowaiv/qowaiv-validation/blob/master/CODE_OF_CONDUCT.md)
 
-| version                                                                       | package                                                                                             |
-|-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-0.3.0-darkblue.svg?cacheSeconds=3600)|[Qowaiv.Validation.Abstractions](https://www.nuget.org/packages/Qowaiv.Validation.Abstractions)      |
-|![v](https://img.shields.io/badge/version-1.4.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.DataAnnotations](https://www.nuget.org/packages/Qowaiv.Validation.DataAnnotations)|
-|![v](https://img.shields.io/badge/version-0.3.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Fluent](https://www.nuget.org/packages/Qowaiv.Validation.Fluent)                  |
-|![v](https://img.shields.io/badge/version-0.3.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Guarding](https://www.nuget.org/packages/Qowaiv.Validation.Guarding)              |
-|![v](https://img.shields.io/badge/version-0.3.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Messages](https://www.nuget.org/packages/Qowaiv.Validation.Messages)              |
-|![v](https://img.shields.io/badge/version-0.3.0-blue.svg?cacheSeconds=3600)    |[Qowaiv.Validation.Xml](https://www.nuget.org/packages/Qowaiv.Validation.Xml)                        |
-|![v](https://img.shields.io/badge/version-0.3.0-darkred.svg?cacheSeconds=3600) |[Qowaiv.Validation.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools)                       |
+| version                                                                        | downloads                                                             | package                                                                                              |
+|--------------------------------------------------------------------------------|-----------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
+|![v](https://img.shields.io/nuget/v/Qowaiv.Validation.Abstractions?color=18C)   |![v](https://img.shields.io/nuget/dt/Qowaiv.Validation.Abstractions)   |[Qowaiv.Validation.Abstractions](https://www.nuget.org/packages/Qowaiv.Validation.Abstractions/)      |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Validation.DataAnnotations?color=18C)|![v](https://img.shields.io/nuget/dt/Qowaiv.Validation.DataAnnotations)|[Qowaiv.Validation.DataAnnotations](https://www.nuget.org/packages/Qowaiv.Validation.DataAnnotations/)|
+|![v](https://img.shields.io/nuget/v/Qowaiv.Validation.Fluent?color=18C)         |![v](https://img.shields.io/nuget/dt/Qowaiv.Validation.Fluent)         |[Qowaiv.Validation.Fluent](https://www.nuget.org/packages/Qowaiv.Validation.Fluent/)                  |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Validation.Guarding?color=18C)       |![v](https://img.shields.io/nuget/dt/Qowaiv.Validation.Guarding)       |[Qowaiv.Validation.Guarding](https://www.nuget.org/packages/Qowaiv.Validation.Guarding/)              |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Validation.Messages?color=18C)       |![v](https://img.shields.io/nuget/dt/Qowaiv.Validation.Messages)       |[Qowaiv.Validation.Messages](https://www.nuget.org/packages/Qowaiv.Validation.Messages/)              |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Validation.Xml?color=18C)            |![v](https://img.shields.io/nuget/dt/Qowaiv.Validation.Xml)            |[Qowaiv.Validation.Xml](https://www.nuget.org/packages/Qowaiv.Validation.Xml/)                        |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Validation.TestTools?color=118)      |![v](https://img.shields.io/nuget/dt/Qowaiv.Validation.TestTools)      |[Qowaiv.Validation.TestTools](https://www.nuget.org/packages/Qowaiv.Validation.TestTools/)            |
 
 # Qowaiv Validation
 There are multiple ways to support validation within .NET. Most notable are
