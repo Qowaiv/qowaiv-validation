@@ -36,4 +36,10 @@ public class ConcurrencyIssue : InvalidOperationException, IValidationMessage
     [Pure]
     public static ConcurrencyIssue MidAirCollision()
         => new(ValidationMessages.MidAirCollision);
+
+    /// <summary>Creates an <see cref="ConcurrencyIssue"/> for mid-air collision.</summary>
+    [Pure]
+    public static ConcurrencyIssue MidAirCollision(Exception innerException)
+        => new(ValidationMessages.MidAirCollision, innerException);
+
 }
