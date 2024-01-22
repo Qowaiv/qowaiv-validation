@@ -59,11 +59,11 @@ public sealed class MultipleOfAttribute : ValidationAttribute
 
     [Pure]
     private bool IsValid(IConvertible value)
-        => IsValid(value.GetTypeCode()) 
+        => IsValid(value.GetTypeCode())
         && IsValid(Convert.ToDecimal(value));
 
     [Pure]
-    private bool IsValid(TypeCode type)
+    private static bool IsValid(TypeCode type)
         => type >= TypeCode.SByte
         && type <= TypeCode.UInt64;
 

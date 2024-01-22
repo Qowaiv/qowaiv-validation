@@ -10,14 +10,14 @@ public class Valid_result
     public void Contains_no_ErrorMessages()
     {
         var result = Result.WithMessages<int>(Warning1, Info1, Info2);
-        Assert.That(result.IsValid, Is.True);
+        result.IsValid.Should().BeTrue();
     }
 
     [Test]
     public void Has_access_to_Value()
     {
         var result = Result.For(2);
-        Assert.That(result.Value, Is.EqualTo(2));
+        result.Value.Should().Be(2);
     }
 }
 
@@ -27,43 +27,52 @@ public class Invalid_result
     public void Contains_at_least_one_ErrorMessage()
     {
         var result = Result.WithMessages(TestMessages.AsEnumerable());
-        Assert.That(result.IsValid, Is.False);
+        result.IsValid.Should().BeFalse();
     }
 
     [Test]
     public void Has_no_access_to_Value()
     {
         var result = Result.For(new object(), ValidationMessage.Error("Not OK"));
-        Assert.That(() => result.Value, Throws.TypeOf<InvalidModelException>());
+        result.Invoking(r => r.Value)
+            .Should().Throw<InvalidModelException>();
     }
 }
 
 public class Null_result
 {
     [Test]
-    public void valid_if_explicit() => Assert.That(Result.Null<object>().IsValid, Is.True);
+    public void valid_if_explicit() => Result.Null<object>().IsValid.Should().BeTrue();
 
     [Test]
-    public void valid_for_nullable_struct() => Assert.That(Result.Null<int?>().IsValid, Is.True);
+    public void valid_for_nullable_struct() => Result.Null<int?>().IsValid.Should().BeTrue();
 
     [Test]
     public void valid_if_explicit_with_messages()
     {
         var messages = new List<IValidationMessage> { ValidationMessage.Warn("Some warning") };
-        Assert.That(Result.Null<object>(messages).IsValid, Is.True);
+        Result.Null<object>(messages).IsValid.Should().BeTrue();
     }
 
     [Test]
-    public void invalid_if_implicit() 
-        => Assert.That(() => Result.For<object>(null!), Throws.TypeOf<NoValue>().With.Message.EqualTo("The value of the Result<Object> can not be null. (Parameter 'Value')"));
+    public void invalid_if_implicit()
+    {
+        Func<object> for_Null = () => Result.For<object>(null!);
+        for_Null.Should().Throw<ArgumentNullException>()
+            .WithMessage(("The value of the Result<Object> can not be null. (Parameter 'Value')"));
+    }
 
     [Test]
     public void invalid_if_implicit_with_messages()
-        => Assert.That(() => Result.WithMessages<object>(), Throws.TypeOf<NoValue>());
+        => new object()
+            .Invoking(_ => Result.WithMessages<object>())
+            .Should().Throw<NoValue>();
 
     [Test]
     public void invalid_if_implicit_with_empty_messages()
-        => Assert.That(() => Result.WithMessages<object>(Array.Empty<IValidationMessage>()), Throws.TypeOf<NoValue>());
+        => Array.Empty<IValidationMessage>()
+            .Invoking(Result.WithMessages<object>)
+            .Should().Throw<NoValue>();
 }
 
 public class Filtering
@@ -72,25 +81,21 @@ public class Filtering
     public void Error_messages_is_done_via_the_Errors_property()
     {
         var result = Result.WithMessages(TestMessages);
-        Assert.That(result.Errors, Is.EqualTo(new[] { Error1, Error2 }));
+        result.Errors.Should().BeEquivalentTo(new[] { Error1, Error2 });
     }
 
     [Test]
     public void Warning_messages_is_done_via_the_Warnings_property()
     {
         var result = Result.WithMessages(TestMessages);
-        var act = result.Warnings;
-        var exp = new[] { Warning1, Warning2 };
-        Assert.AreEqual(exp, act);
+        result.Warnings.Should().BeEquivalentTo(new[] { Warning1, Warning2 });
     }
 
     [Test]
     public void Info_messages_is_done_via_the_Infos_property()
     {
         var result = Result.WithMessages(TestMessages);
-        var act = result.Infos;
-        var exp = new[] { Info1, Info2 };
-        Assert.AreEqual(exp, act);
+        result.Infos.Should().BeEquivalentTo(new[] { Info1, Info2 });
     }
 }
 

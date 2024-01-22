@@ -5,13 +5,12 @@ namespace Abstractions.Validation_message_specs;
 public class None
 {
     [Test]
-    public void Has_an_empty_string_representation()
-    {
-        var message = ValidationMessage.None;
-        Assert.AreEqual("", message.ToString());
-    }
+    public void Has_an_empty_string_representation() 
+        => ValidationMessage.None.Message.Should().BeNull();
 }
 
+#if NET8_0_OR_GREATER
+#else
 public class Serialization
 {
     [Test, Obsolete("Binary serialization is considered harmful.")]
@@ -35,3 +34,4 @@ public class Serialization
         SerializeDeserialize.Binary(message).Should().BeEquivalentTo(message);
     }
 }
+#endif

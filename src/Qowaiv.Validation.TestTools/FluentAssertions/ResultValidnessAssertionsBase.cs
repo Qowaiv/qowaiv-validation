@@ -31,7 +31,7 @@ public class ResultValidnessAssertionsBase<TSubject>
         var extra = Messages.Except(messages, Comparer()).ToArray();
 
         Execute.Assertion
-        .ForCondition(!missing.Any() && !extra.Any())
+        .ForCondition(missing.Length == 0 && extra.Length == 0)
         .WithDefaultIdentifier()
         .FailWith(Messages.Any()
             ? WithMessages(missing, extra)
@@ -48,7 +48,7 @@ public class ResultValidnessAssertionsBase<TSubject>
     [Pure]
     private static string WithMessage(IValidationMessage expected, IValidationMessage[] actuals)
     {
-        if (!actuals.Any()) return "Expected a message, but found none.";
+        if (actuals.Length == 0) return "Expected a message, but found none.";
         else if (actuals.Length == 1)
         {
             return new StringBuilder()
@@ -73,12 +73,12 @@ public class ResultValidnessAssertionsBase<TSubject>
     private static string WithMessages(IValidationMessage[] missing, IValidationMessage[] extra)
     {
         var sb = new StringBuilder();
-        if (missing.Any())
+        if (missing.Length > 0)
         {
             sb.Append($"Missing message{(missing.Length == 1 ? string.Empty : "s")}:")
                 .AppendMessages(missing);
         }
-        if (extra.Any())
+        if (extra.Length > 0)
         {
             sb.Append($"Extra message{(extra.Length == 1 ? string.Empty : "s")}:")
                 .AppendMessages(extra);

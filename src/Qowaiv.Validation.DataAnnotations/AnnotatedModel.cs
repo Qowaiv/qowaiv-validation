@@ -62,7 +62,7 @@ public sealed class AnnotatedModel
         var validations = type.ValidationAttributes().ToArray();
         var properties = AnnotatedProperty.CreateAll(type).ToArray();
 
-        return isIValidatable || validations.Any() || properties.Any()
+        return isIValidatable || validations.Length > 0 || properties.Length > 0
             ? new AnnotatedModel(type, isIValidatable, validations, properties)
             : None;
     }

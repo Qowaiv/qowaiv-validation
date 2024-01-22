@@ -3,7 +3,7 @@
   <Import Project="..\..\props\specs.props" />
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>Specs</RootNamespace>
   </PropertyGroup>
 
@@ -23,23 +23,26 @@
 
   <ItemGroup Label="Depedencies">
     <PackageReference Include="FluentValidation" Version="11.*" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.*" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.*" />
     <PackageReference Include="Qowaiv" Version="6.*" />
   </ItemGroup>
 
   <ItemGroup Label="TestTools">
-    <PackageReference Include="coverlet.collector" Version="*" PrivateAssets="all" />
-    <PackageReference Include="coverlet.msbuild" Version="*" PrivateAssets="all" />
     <PackageReference Include="FluentAssertions" Version="6.*" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" />
-    <PackageReference Include="NUnit" Version="3.*" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.*" PrivateAssets="all" />
+    <PackageReference Include="NUnit" Version="4.*" />
     <PackageReference Include="Qowaiv.TestTools" Version="6.*" />
   </ItemGroup>
 
+  <ItemGroup Label="Build tools">
+    <PackageReference Include="coverlet.collector" Version="*" PrivateAssets="all" />
+    <PackageReference Include="coverlet.msbuild" Version="*" PrivateAssets="all" />
+    <PackageReference Include="NUnit3TestAdapter" Version="*" PrivateAssets="all" />
+  </ItemGroup>
+
   <ItemGroup Label="Analyzers">
-    <PackageReference Include="FluentAssertions.Analyzers" Version="*" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
-    <PackageReference Include="NUnit.Analyzers" Version="*" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive"  />
+    <PackageReference Include="FluentAssertions.Analyzers" Version="*" PrivateAssets="all" />
+    <PackageReference Include="NUnit.Analyzers" Version="*" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>

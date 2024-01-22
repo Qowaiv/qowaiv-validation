@@ -34,7 +34,12 @@ internal class FixedMessages : IReadOnlyList<IValidationMessage>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => $"Count = {Count}";
 
-    public IValidationMessage this[int index] => this.Skip(index).FirstOrDefault() ?? throw new IndexOutOfRangeException();
+    public IValidationMessage this[int index]
+#pragma warning disable S112 // General or reserved exceptions should never be thrown
+        // An index out of range is what happens.
+        => this.Skip(index).FirstOrDefault()
+        ?? throw new IndexOutOfRangeException();
+#pragma warning restore S112 // General or reserved exceptions should never be thrown
 
     [Pure]
     public virtual IEnumerator<IValidationMessage> GetEnumerator() => Enumerable.Empty<IValidationMessage>().GetEnumerator();
