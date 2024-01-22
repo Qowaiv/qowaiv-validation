@@ -71,7 +71,7 @@ public class EntityNotFound
 
     [Test]
     public void Contains_Id_in_message_when_specified()
-        => Assert.AreEqual("Entity with ID 17 could not be found.", NS.EntityNotFound.ForId(17).Message);
+        => NS.EntityNotFound.ForId(17).Message.Should().Be("Entity with ID 17 could not be found.");
 }
 
 public class ServiceUnavailable

@@ -5,11 +5,8 @@ namespace Abstractions.Validation_message_specs;
 public class None
 {
     [Test]
-    public void Has_an_empty_string_representation()
-    {
-        var message = ValidationMessage.None;
-        Assert.AreEqual("", message.ToString());
-    }
+    public void Has_an_empty_string_representation() 
+        => ValidationMessage.None.Message.Should().BeEmpty();
 }
 
 public class Serialization

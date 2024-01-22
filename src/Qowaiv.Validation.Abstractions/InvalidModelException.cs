@@ -27,7 +27,7 @@ public class InvalidModelException : InvalidOperationException
         Guard.NotNull(info, nameof(info));
 
         var errors = info.GetValue(nameof(Errors), typeof(IValidationMessage[])) as IValidationMessage[];
-        Errors = new ReadOnlyCollection<IValidationMessage>(errors ?? Array.Empty<IValidationMessage>());
+        Errors = new ReadOnlyCollection<IValidationMessage>(errors ?? []);
     }
 
     /// <inheritdoc />
@@ -80,5 +80,5 @@ public class InvalidModelException : InvalidOperationException
     private static string PropertySuffix(IValidationMessage message)
         => string.IsNullOrWhiteSpace(message.PropertyName) ? string.Empty : $" ({message.PropertyName})";
 
-    private static readonly string[] NewLine = new[] { "\r\n", "\n" };
+    private static readonly string[] NewLine = ["\r\n", "\n"];
 }
