@@ -41,5 +41,4 @@ public class ConcurrencyIssue : InvalidOperationException, IValidationMessage
     [Pure]
     public static ConcurrencyIssue MidAirCollision(Exception innerException)
         => new(ValidationMessages.MidAirCollision, innerException);
-
 }

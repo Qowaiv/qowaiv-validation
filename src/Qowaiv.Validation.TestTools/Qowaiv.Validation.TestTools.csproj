@@ -3,8 +3,9 @@
   <Import Project="..\..\props\package.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
     <Version>0.3.0</Version>
+    <PackageId>Qowaiv.Validation.TestTools</PackageId>
     <PackageReleaseNotes>
 v0.3.0
 - Support .NET 7.0. #62
@@ -31,7 +32,7 @@ v0.0.2
   </ItemGroup>
 
   <ItemGroup Label="Analyzers">
-    <PackageReference Include="NUnit.Analyzers" Version="*" PrivateAssets="all" />
+    <PackageReference Include="FluentAssertions.Analyzers" Version="*" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>

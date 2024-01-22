@@ -25,6 +25,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageTags>qowaiv domain model</PackageTags>
     <PackageIcon>package-icon.png</PackageIcon>
+    <PackageIconUrl>https://github.com/Qowaiv/qowaiv-validation/blob/master/design/package-icon.png</PackageIconUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>http://www.github.com/Qowaiv/qowaiv-validation</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
