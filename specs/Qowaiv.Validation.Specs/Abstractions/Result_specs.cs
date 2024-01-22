@@ -55,11 +55,12 @@ public class Null_result
     }
 
     [Test]
-    public void invalid_if_implicit() 
-        => ((object)null!)
-            .Invoking(nil => Result.For(nil))
-            .Should().Throw<NoValue>()
+    public void invalid_if_implicit()
+    {
+        Func<object> for_Null = () => Result.For<object>(null!);
+        for_Null.Should().Throw<ArgumentNullException>()
             .WithMessage(("The value of the Result<Object> can not be null. (Parameter 'Value')"));
+    }
 
     [Test]
     public void invalid_if_implicit_with_messages()

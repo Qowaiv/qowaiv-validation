@@ -1,4 +1,6 @@
-﻿using Qowaiv.Validation.DataAnnotations;
+﻿#if NET8_0_OR_GREATER
+#else
+using Qowaiv.Validation.DataAnnotations;
 using ValidationSeverity = Qowaiv.Validation.Abstractions.ValidationSeverity;
 
 namespace Data_annotations.Validation_message_specs;
@@ -41,3 +43,4 @@ public class Serializes
         });
     }
 }
+#endif

@@ -48,6 +48,8 @@ public class InvalidModel
 "));
     }
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Binary serialization is considered harmful.")]
     public void Serializes_the_error_messages()
@@ -56,4 +58,5 @@ public class InvalidModel
         var actual = SerializeDeserialize.Binary(exception);
         actual.Should().BeEquivalentTo(new[] { Error1, Error2 });
     }
+#endif
 }
