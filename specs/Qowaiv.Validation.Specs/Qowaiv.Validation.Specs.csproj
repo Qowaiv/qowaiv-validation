@@ -3,7 +3,7 @@
   <Import Project="..\..\props\specs.props" />
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>Specs</RootNamespace>
   </PropertyGroup>
 
