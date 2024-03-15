@@ -22,7 +22,7 @@ public static partial class ClockValidation
 
         return ruleBuilder
             .Must(date => date > now())
-            .WithMessage(m => QowaivValidationFluentMessages.InFuture);
+            .WithMessage(_ => QowaivValidationFluentMessages.InFuture);
     }
 
     /// <summary>Requires a date time to be in the future (if set).</summary>
@@ -44,7 +44,7 @@ public static partial class ClockValidation
 
         return ruleBuilder
             .Must(date => !date.HasValue || date.Value > now())
-            .WithMessage(m => QowaivValidationFluentMessages.InFuture);
+            .WithMessage(_ => QowaivValidationFluentMessages.InFuture);
     }
 
     /// <summary>Requires a date to be in the future.</summary>
@@ -66,7 +66,7 @@ public static partial class ClockValidation
 
         return ruleBuilder
             .Must(date => date > today())
-            .WithMessage(m => QowaivValidationFluentMessages.InFuture);
+            .WithMessage(_ => QowaivValidationFluentMessages.InFuture);
     }
 
     /// <summary>Requires a date to be in the future (if set).</summary>
@@ -88,7 +88,7 @@ public static partial class ClockValidation
 
         return ruleBuilder
             .Must(date => !date.HasValue || date.Value > today())
-            .WithMessage(m => QowaivValidationFluentMessages.InFuture);
+            .WithMessage(_ => QowaivValidationFluentMessages.InFuture);
     }
 
     /// <summary>Requires a date time not to be in the future.</summary>
@@ -110,7 +110,7 @@ public static partial class ClockValidation
 
         return ruleBuilder
             .Must(date => date <= now())
-            .WithMessage(m => QowaivValidationFluentMessages.NotInFuture);
+            .WithMessage(_ => QowaivValidationFluentMessages.NotInFuture);
     }
 
     /// <summary>Requires a date time not to be in the future (if set).</summary>
@@ -132,7 +132,7 @@ public static partial class ClockValidation
 
         return ruleBuilder
             .Must(date => !date.HasValue || date.Value <= now())
-            .WithMessage(m => QowaivValidationFluentMessages.NotInFuture);
+            .WithMessage(_ => QowaivValidationFluentMessages.NotInFuture);
     }
 
     /// <summary>Requires a date not to be in the future.</summary>
@@ -154,7 +154,7 @@ public static partial class ClockValidation
 
         return ruleBuilder
             .Must(date => date <= today())
-            .WithMessage(m => QowaivValidationFluentMessages.NotInFuture);
+            .WithMessage(_ => QowaivValidationFluentMessages.NotInFuture);
     }
 
     /// <summary>Requires a date not to be in the future (if set).</summary>
@@ -176,7 +176,7 @@ public static partial class ClockValidation
 
         return ruleBuilder
             .Must(date => !date.HasValue || date.Value <= today())
-            .WithMessage(m => QowaivValidationFluentMessages.NotInFuture);
+            .WithMessage(_ => QowaivValidationFluentMessages.NotInFuture);
     }
 
     /// <summary>Requires a date time to be in the past.</summary>
@@ -198,7 +198,7 @@ public static partial class ClockValidation
 
         return ruleBuilder
             .Must(date => date < now())
-            .WithMessage(m => QowaivValidationFluentMessages.InPast);
+            .WithMessage(_ => QowaivValidationFluentMessages.InPast);
     }
 
     /// <summary>Requires a date time to be in the past (if set).</summary>
@@ -220,7 +220,7 @@ public static partial class ClockValidation
 
         return ruleBuilder
             .Must(date => !date.HasValue || date.Value < now())
-            .WithMessage(m => QowaivValidationFluentMessages.InPast);
+            .WithMessage(_ => QowaivValidationFluentMessages.InPast);
     }
 
     /// <summary>Requires a date to be in the past.</summary>
@@ -242,7 +242,7 @@ public static partial class ClockValidation
 
         return ruleBuilder
             .Must(date => date < today())
-            .WithMessage(m => QowaivValidationFluentMessages.InPast);
+            .WithMessage(_ => QowaivValidationFluentMessages.InPast);
     }
 
     /// <summary>Requires a date to be in the past (if set).</summary>
@@ -264,7 +264,7 @@ public static partial class ClockValidation
 
         return ruleBuilder
             .Must(date => !date.HasValue || date.Value < today())
-            .WithMessage(m => QowaivValidationFluentMessages.InPast);
+            .WithMessage(_ => QowaivValidationFluentMessages.InPast);
     }
 
     /// <summary>Requires a date time not to be in the past.</summary>
@@ -286,7 +286,7 @@ public static partial class ClockValidation
 
         return ruleBuilder
             .Must(date => date >= now())
-            .WithMessage(m => QowaivValidationFluentMessages.NotInPast);
+            .WithMessage(_ => QowaivValidationFluentMessages.NotInPast);
     }
 
     /// <summary>Requires a date time not to be in the past (if set).</summary>
@@ -308,7 +308,7 @@ public static partial class ClockValidation
 
         return ruleBuilder
             .Must(date => !date.HasValue || date.Value >= now())
-            .WithMessage(m => QowaivValidationFluentMessages.NotInPast);
+            .WithMessage(_ => QowaivValidationFluentMessages.NotInPast);
     }
 
     /// <summary>Requires a date not to be in the past.</summary>
@@ -330,7 +330,7 @@ public static partial class ClockValidation
 
         return ruleBuilder
             .Must(date => date >= today())
-            .WithMessage(m => QowaivValidationFluentMessages.NotInPast);
+            .WithMessage(_ => QowaivValidationFluentMessages.NotInPast);
     }
 
     /// <summary>Requires a date not to be in the past (if set).</summary>
@@ -352,6 +352,6 @@ public static partial class ClockValidation
 
         return ruleBuilder
             .Must(date => !date.HasValue || date.Value >= today())
-            .WithMessage(m => QowaivValidationFluentMessages.NotInPast);
+            .WithMessage(_ => QowaivValidationFluentMessages.NotInPast);
     }
 }

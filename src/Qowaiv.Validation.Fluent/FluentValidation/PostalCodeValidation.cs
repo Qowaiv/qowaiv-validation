@@ -32,7 +32,7 @@ public static class PostalCodeValidation
     public static IRuleBuilderOptions<TModel, PostalCode> ValidFor<TModel>(this IRuleBuilder<TModel, PostalCode> ruleBuilder, Func<TModel, Country> country)
         => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
             .Must((model, postalCode, context) => IsValidFor(postalCode, country(model), context))
-            .WithMessage(m => QowaivValidationFluentMessages.PostalCodeValidForCountry);
+            .WithMessage(_ => QowaivValidationFluentMessages.PostalCodeValidForCountry);
 
     [Impure]
     private static bool IsValidFor<TModel>(PostalCode postalCode, Country country, ValidationContext<TModel> context)

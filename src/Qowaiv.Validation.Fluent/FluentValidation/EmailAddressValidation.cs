@@ -14,5 +14,5 @@ public static class EmailAddressValidation
     public static IRuleBuilderOptions<TModel, EmailAddress> NotIPBased<TModel>(this IRuleBuilder<TModel, EmailAddress> ruleBuilder)
         => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
         .Must(emailAddress => !emailAddress.IsIPBased)
-        .WithMessage(m => QowaivValidationFluentMessages.NoIPBasedEmailAddress);
+        .WithMessage(_ => QowaivValidationFluentMessages.NoIPBasedEmailAddress);
 }
