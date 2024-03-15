@@ -14,7 +14,7 @@ public static class FloatingPointValidation
     public static IRuleBuilderOptions<TModel, double> IsFinite<TModel>(this IRuleBuilder<TModel, double> ruleBuilder)
         => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
         .Must(number => number.IsFinite())
-        .WithMessage(m => QowaivValidationFluentMessages.IsFinite);
+        .WithMessage(_ => QowaivValidationFluentMessages.IsFinite);
 
     /// <summary>The floating point should be a finite number.</summary>
     /// <typeparam name="TModel">
@@ -27,7 +27,7 @@ public static class FloatingPointValidation
     public static IRuleBuilderOptions<TModel, double?> IsFinite<TModel>(this IRuleBuilder<TModel, double?> ruleBuilder)
         => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
         .Must(number => !number.HasValue || number.Value.IsFinite())
-        .WithMessage(m => QowaivValidationFluentMessages.IsFinite);
+        .WithMessage(_ => QowaivValidationFluentMessages.IsFinite);
 
     /// <summary>The floating point should be a finite number.</summary>
     /// <typeparam name="TModel">
@@ -40,7 +40,7 @@ public static class FloatingPointValidation
     public static IRuleBuilderOptions<TModel, float> IsFinite<TModel>(this IRuleBuilder<TModel, float> ruleBuilder)
         => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
         .Must(number => number.IsFinite())
-        .WithMessage(m => QowaivValidationFluentMessages.IsFinite);
+        .WithMessage(_ => QowaivValidationFluentMessages.IsFinite);
 
     /// <summary>The floating point should be a finite number.</summary>
     /// <typeparam name="TModel">
@@ -53,5 +53,5 @@ public static class FloatingPointValidation
     public static IRuleBuilderOptions<TModel, float?> IsFinite<TModel>(this IRuleBuilder<TModel, float?> ruleBuilder)
         => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
         .Must(number => !number.HasValue || number.Value.IsFinite())
-        .WithMessage(m => QowaivValidationFluentMessages.IsFinite);
+        .WithMessage(_ => QowaivValidationFluentMessages.IsFinite);
 }

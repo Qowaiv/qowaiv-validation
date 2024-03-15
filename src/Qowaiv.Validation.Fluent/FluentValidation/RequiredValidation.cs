@@ -37,8 +37,8 @@ public static class RequiredValidation
 
         return allowUnknown
             ? ruleBuilder
-                .NotEmpty().WithMessage(QowaivValidationFluentMessages.Required)
+                .NotEmpty().WithMessage(_ => QowaivValidationFluentMessages.Required)
             : ruleBuilder
-                .NotEmptyOrUnknown().WithMessage(QowaivValidationFluentMessages.Required);
+                .NotEmptyOrUnknown().WithMessage(_ => QowaivValidationFluentMessages.Required);
     }
 }
