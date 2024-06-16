@@ -97,6 +97,33 @@ namespace Qowaiv.Validation.DataAnnotations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The length of the {0} field should be at least {1}..
+        /// </summary>
+        internal static string Length_AtLeast_ValdationError {
+            get {
+                return ResourceManager.GetString("Length_AtLeast_ValdationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The length of the {0} field should be at most {1}..
+        /// </summary>
+        internal static string Length_AtMost_ValidationError {
+            get {
+                return ResourceManager.GetString("Length_AtMost_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The length of the {0} field should be between {1} and {2}..
+        /// </summary>
+        internal static string Length_InRange_ValidationError {
+            get {
+                return ResourceManager.GetString("Length_InRange_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The {0} field is required..
         /// </summary>
         internal static string MandatoryAttribute_ValidationError {

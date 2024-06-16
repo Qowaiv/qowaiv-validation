@@ -18,6 +18,15 @@
   <data name="IsFiniteAttribute_ValidationError" xml:space="preserve">
     <value>De waarde van het {0} veld is geen eindig getal.</value>
   </data>
+  <data name="Length_AtLeast_ValdationError" xml:space="preserve">
+    <value>De lengte van het veld  {0} moet minstens {1} zijn.</value>
+  </data>
+  <data name="Length_AtMost_ValidationError" xml:space="preserve">
+    <value>De lengte van het veld {0} mag niet meer dan {1} zijn.</value>
+  </data>
+  <data name="Length_InRange_ValidationError" xml:space="preserve">
+    <value>De lengte van het veld {1} moet tussen de {1} en {2} zijn.</value>
+  </data>
   <data name="MandatoryAttribute_ValidationError" xml:space="preserve">
     <value>Het veld {0} is verplicht.</value>
   </data>
