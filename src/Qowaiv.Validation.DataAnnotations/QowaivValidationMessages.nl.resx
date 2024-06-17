@@ -19,7 +19,7 @@
     <value>De waarde van het {0} veld is geen eindig getal.</value>
   </data>
   <data name="Length_AtLeast_ValdationError" xml:space="preserve">
-    <value>De lengte van het veld  {0} moet minstens {1} zijn.</value>
+    <value>De lengte van het veld {0} moet minstens {1} zijn.</value>
   </data>
   <data name="Length_AtMost_ValidationError" xml:space="preserve">
     <value>De lengte van het veld {0} mag niet meer dan {1} zijn.</value>
