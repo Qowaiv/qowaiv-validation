@@ -12,6 +12,15 @@
   <data name="AllowedValuesAttribute_ValidationError" xml:space="preserve">
     <value>De waarde van het veld {0} is niet toegestaan.</value>
   </data>
+  <data name="Collection_AtLeast_ValdationError" xml:space="preserve">
+    <value>Veld {0} moet tenminste {1} items bevatten.</value>
+  </data>
+  <data name="Collection_AtMost_ValidationError" xml:space="preserve">
+    <value>Veld {0} mag niet meer dan {1} items bevatten.</value>
+  </data>
+  <data name="Collection_InRange_ValidationError" xml:space="preserve">
+    <value>Het aantal items van veld {0} moet tussen {1} en {2} zitten.</value>
+  </data>
   <data name="DistinctValuesAttribute_ValidationError" xml:space="preserve">
     <value>Alle waarden van het veld {0} zouden verschillend moeten zijn.</value>
   </data>
@@ -32,5 +41,14 @@
   </data>
   <data name="MultipleOfAttribute_ValidationError" xml:space="preserve">
     <value>De waarde van veld {0} is geen veelvoud van {1}.</value>
+  </data>
+  <data name="Size_AtLeast_ValdationError" xml:space="preserve">
+    <value>De grootte van het veld {0} moet minstens {1: F} zijn.</value>
+  </data>
+  <data name="Size_AtMost_ValidationError" xml:space="preserve">
+    <value>De grootte van het veld {0} mag niet meer dan {1: F} zijn.</value>
+  </data>
+  <data name="Size_InRange_ValidationError" xml:space="preserve">
+    <value>De grootte van het veld {1} moet tussen de {1: F} en {2: F} zijn.</value>
   </data>
 </root>

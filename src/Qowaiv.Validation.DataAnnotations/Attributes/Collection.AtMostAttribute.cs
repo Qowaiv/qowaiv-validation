@@ -1,21 +1,21 @@
 ﻿namespace Qowaiv.Validation.DataAnnotations;
 
-/// <summary>Validation attributes on the length of a value.</summary>
-public static partial class Length
+/// <summary>Validation attributes on the size of the collection.</summary>
+public static partial class Collection
 {
     /// <summary>Specifies the maximum the length of property, field or parameter.</summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
     public sealed class AtMostAttribute(long maximum)
-        : ValidationAttribute(() => QowaivValidationMessages.Length_AtMost_ValidationError)
+        : ValidationAttribute(() => QowaivValidationMessages.Collection_AtMost_ValidationError)
     {
         /// <summary>The maximum length.</summary>
         public long Maximum { get; } = maximum;
 
         /// <inheritdoc />
         [Pure]
-        public override bool IsValid(object? value) 
-            => GetLength<AtMostAttribute>(value) is not long length
-            || length <= Maximum;
+        public override bool IsValid(object? value)
+            => GetCount<AtMostAttribute>(value) is not long count
+            || count <= Maximum;
 
         /// <inheritdoc />
         [Pure]
