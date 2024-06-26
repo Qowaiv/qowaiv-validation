@@ -14,7 +14,7 @@ public class Empty
     public void for_succesfull_trace()
     {
         var result = Result.For(42).Act(MyClass.WithResult);
-        result.StackTrace.Should().BeEmpty();
+        result.StackTrace.Frames.Should().BeEmpty();
         result.StackTrace.ToString().Should().BeEmpty();
     }
 }
@@ -30,11 +30,7 @@ public class Not_Empty
             .Act(MyClass.NowInvalid)
             .Act(MyClass.StillInvalid);
 
-        outcome.StackTrace.Should().NotBeEmpty();
-
-        var str = outcome.StackTrace.ToString();
-
-        
+        outcome.StackTrace.Frames.Should().NotBeEmpty();
     }
 }
 
