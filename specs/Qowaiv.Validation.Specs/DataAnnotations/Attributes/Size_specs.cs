@@ -90,8 +90,8 @@ public class At_most
     [Test]
     public void Invalidates([Range(12, 20)] int value) => new Size.AtMostAttribute(11).IsValid(new byte[value]).Should().BeFalse();
 
-    [TestCase("en", "The AtMostProp field should have at most 4 items.")]
     [TestCase("nl", "De grootte van het veld AtMostProp mag niet meer dan 4 byte zijn.")]
+    [TestCase("en", "The size of the AtMostProp field should be at most 4 byte.")]
     public void With_message(CultureInfo culture, string message)
     {
         using var _ = culture.Scoped();
