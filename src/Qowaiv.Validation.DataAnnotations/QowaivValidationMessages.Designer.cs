@@ -79,6 +79,33 @@ namespace Qowaiv.Validation.DataAnnotations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The {0} field should have at least {1} items..
+        /// </summary>
+        internal static string Collection_AtLeast_ValidationError {
+            get {
+                return ResourceManager.GetString("Collection_AtLeast_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The {0} field should have at most {1} items..
+        /// </summary>
+        internal static string Collection_AtMost_ValidationError {
+            get {
+                return ResourceManager.GetString("Collection_AtMost_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The number of items of the {0} field should be between {1} and {2}..
+        /// </summary>
+        internal static string Collection_InRange_ValidationError {
+            get {
+                return ResourceManager.GetString("Collection_InRange_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All values of the {0} field should be distinct..
         /// </summary>
         internal static string DistinctValuesAttribute_ValidationError {
@@ -97,6 +124,33 @@ namespace Qowaiv.Validation.DataAnnotations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The length of the {0} field should be at least {1}..
+        /// </summary>
+        internal static string Length_AtLeast_ValidationError {
+            get {
+                return ResourceManager.GetString("Length_AtLeast_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The length of the {0} field should be at most {1}..
+        /// </summary>
+        internal static string Length_AtMost_ValidationError {
+            get {
+                return ResourceManager.GetString("Length_AtMost_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The length of the {0} field should be between {1} and {2}..
+        /// </summary>
+        internal static string Length_InRange_ValidationError {
+            get {
+                return ResourceManager.GetString("Length_InRange_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The {0} field is required..
         /// </summary>
         internal static string MandatoryAttribute_ValidationError {
@@ -111,6 +165,42 @@ namespace Qowaiv.Validation.DataAnnotations {
         internal static string MultipleOfAttribute_ValidationError {
             get {
                 return ResourceManager.GetString("MultipleOfAttribute_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The size of the {0} field should be at least {1: F}..
+        /// </summary>
+        internal static string Size_AtLeast_ValidationError {
+            get {
+                return ResourceManager.GetString("Size_AtLeast_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The size of the {0} field should be at most {1: F}..
+        /// </summary>
+        internal static string Size_AtMost_ValidationError {
+            get {
+                return ResourceManager.GetString("Size_AtMost_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The size of the {0} field should be between {1: F} and {2: F}..
+        /// </summary>
+        internal static string Size_InRange_ValidationError {
+            get {
+                return ResourceManager.GetString("Size_InRange_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} does not support properties of the type {1}..
+        /// </summary>
+        internal static string UnsupportedType_ForAttribute {
+            get {
+                return ResourceManager.GetString("UnsupportedType_ForAttribute", resourceCulture);
             }
         }
     }

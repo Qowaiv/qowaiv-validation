@@ -9,6 +9,9 @@
     <PackageReleaseNotes>
 ToBeReleased
 - Introduction of [IsFinite] validation attribute.
+- Introduction of [Length.AtLeast], [Length.AtMost], [Length.InRange].
+- Introduction of [Collection.AtLeast], [Collection.AtMost], [Collection.InRange].
+- Introduction of [Size.AtLeast], [Size.AtMost], [Size.InRange].
 v1.4.0
 - Introduced [MultipleOf] validation attribute. #69
 - Marked [NestedModel] attribute as obsolete. #70

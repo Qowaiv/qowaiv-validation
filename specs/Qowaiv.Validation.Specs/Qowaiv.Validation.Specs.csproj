@@ -43,6 +43,7 @@
   <ItemGroup Label="Analyzers">
     <PackageReference Include="FluentAssertions.Analyzers" Version="*" PrivateAssets="all" />
     <PackageReference Include="NUnit.Analyzers" Version="*" PrivateAssets="all" />
+    <PackageReference Include="System.Memory.Data" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
