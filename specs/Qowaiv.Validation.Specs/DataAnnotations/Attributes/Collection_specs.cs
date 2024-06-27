@@ -22,7 +22,7 @@ public class At_least
             .Should().Throw<UnsupportedType>().WithMessage("Collection.AtLeastAttribute does not support properties of the type object.");
     }
 
-    public class Ingores
+    public class Ignores
     {
         [Test]
         public void @null() => new Collection.AtLeastAttribute(0).IsValid(null).Should().BeTrue();
@@ -66,7 +66,7 @@ public class At_most
             .Should().Throw<UnsupportedType>().WithMessage("Collection.AtMostAttribute does not support properties of the type object.");
     }
 
-    public class Ingores
+    public class Ignores
     {
         [Test]
         public void @null() => new Collection.AtMostAttribute(0).IsValid(null).Should().BeTrue();
@@ -108,7 +108,7 @@ public class In_range
     }
 
 
-    public class Ingores
+    public class Ignores
     {
         [Test]
         public void @null() => new Collection.InRangeAttribute(2, 4).IsValid(null).Should().BeTrue();

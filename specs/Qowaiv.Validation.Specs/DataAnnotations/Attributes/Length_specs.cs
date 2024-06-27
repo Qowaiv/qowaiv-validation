@@ -26,7 +26,7 @@ public class At_least
             .Should().Throw<UnsupportedType>().WithMessage("Length.AtLeastAttribute does not support properties of the type List<int>.");
     }
 
-    public class Ingores
+    public class Ignores
     {
         [Test]
         public void @null() => new Length.AtLeastAttribute(0).IsValid(null).Should().BeTrue();
@@ -73,7 +73,7 @@ public class At_most
             .Should().Throw<UnsupportedType>().WithMessage("Length.AtMostAttribute does not support properties of the type List<int>.");
     }
 
-    public class Ingores
+    public class Ignores
     {
         [Test]
         public void @null() => new Length.AtMostAttribute(0).IsValid(null).Should().BeTrue();
@@ -118,7 +118,7 @@ public class In_range
     }
 
 
-    public class Ingores
+    public class Ignores
     {
         [Test]
         public void @null() => new Length.InRangeAttribute(2, 4).IsValid(null).Should().BeTrue();
@@ -138,7 +138,7 @@ public class In_range
     [TestCase(7)]
     public void Invalidates(int value) => new Length.InRangeAttribute(3, 4).IsValid(new byte[value]).Should().BeFalse();
 
-    [TestCase("nl", "De lengte van het veld 3 moet tussen de 3 en 4 zijn.")]
+    [TestCase("nl", "De lengte van het veld InRangeProp moet tussen de 3 en 4 zijn.")]
     [TestCase("en", "The length of the InRangeProp field should be between 3 and 4.")]
     public void With_message(CultureInfo culture, string message)
     {

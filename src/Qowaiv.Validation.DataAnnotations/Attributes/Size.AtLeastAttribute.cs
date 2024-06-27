@@ -8,7 +8,7 @@ public static partial class Size
     /// <summary>Specifies the minimum the size of property, field or parameter.</summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
     public sealed class AtLeastAttribute(long minimum)
-        : ValidationAttribute(() => QowaivValidationMessages.Size_AtLeast_ValdationError)
+        : ValidationAttribute(() => QowaivValidationMessages.Size_AtLeast_ValidationError)
     {
         /// <summary>Initializes a new instance of the <see cref="AtLeastAttribute"/> class.</summary>
         public AtLeastAttribute(string minimum)

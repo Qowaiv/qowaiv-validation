@@ -28,7 +28,7 @@ public class At_least
             .Should().Throw<UnsupportedType>().WithMessage("Size.AtLeastAttribute does not support properties of the type object.");
     }
 
-    public class Ingores
+    public class Ignores
     {
         [Test]
         public void @null() => new Size.AtLeastAttribute(0).IsValid(null).Should().BeTrue();
@@ -78,7 +78,7 @@ public class At_most
             .Should().Throw<UnsupportedType>().WithMessage("Size.AtMostAttribute does not support properties of the type object.");
     }
 
-    public class Ingores
+    public class Ignores
     {
         [Test]
         public void @null() => new Size.AtMostAttribute(0).IsValid(null).Should().BeTrue();
@@ -126,7 +126,7 @@ public class In_range
     }
 
 
-    public class Ingores
+    public class Ignores
     {
         [Test]
         public void @null() => new Size.InRangeAttribute(2, 4).IsValid(null).Should().BeTrue();
@@ -146,7 +146,7 @@ public class In_range
     [TestCase(7)]
     public void Invalidates(int value) => new Size.InRangeAttribute(3, 4).IsValid(new byte[value]).Should().BeFalse();
 
-    [TestCase("nl", "De grootte van het veld 3 moet tussen de 3 byte en 4 byte zijn.")]
+    [TestCase("nl", "De grootte van het veld InRangeProp moet tussen de 3 byte en 4 byte zijn.")]
     [TestCase("en", "The size of the InRangeProp field should be between 3 byte and 4 byte.")]
     public void With_message(CultureInfo culture, string message)
     {

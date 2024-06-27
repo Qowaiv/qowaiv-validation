@@ -19,7 +19,7 @@ public class UnsupportedType : NotSupportedException
     [Pure]
     public static UnsupportedType ForAttribute<TAttribute>(Type type) where TAttribute : ValidationAttribute
         => new(string.Format(
-            QowaivValidationMessages.UnsupportedProperyType_For,
+            QowaivValidationMessages.UnsupportedType_ForAttribute,
             typeof(TAttribute).ToCSharpString(),
             type.ToCSharpString()));
 }

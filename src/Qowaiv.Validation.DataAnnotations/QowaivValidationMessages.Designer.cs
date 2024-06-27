@@ -81,9 +81,9 @@ namespace Qowaiv.Validation.DataAnnotations {
         /// <summary>
         ///   Looks up a localized string similar to The {0} field should have at least {1} items..
         /// </summary>
-        internal static string Collection_AtLeast_ValdationError {
+        internal static string Collection_AtLeast_ValidationError {
             get {
-                return ResourceManager.GetString("Collection_AtLeast_ValdationError", resourceCulture);
+                return ResourceManager.GetString("Collection_AtLeast_ValidationError", resourceCulture);
             }
         }
         
@@ -126,9 +126,9 @@ namespace Qowaiv.Validation.DataAnnotations {
         /// <summary>
         ///   Looks up a localized string similar to The length of the {0} field should be at least {1}..
         /// </summary>
-        internal static string Length_AtLeast_ValdationError {
+        internal static string Length_AtLeast_ValidationError {
             get {
-                return ResourceManager.GetString("Length_AtLeast_ValdationError", resourceCulture);
+                return ResourceManager.GetString("Length_AtLeast_ValidationError", resourceCulture);
             }
         }
         
@@ -171,9 +171,9 @@ namespace Qowaiv.Validation.DataAnnotations {
         /// <summary>
         ///   Looks up a localized string similar to The size of the {0} field should be at least {1: F}..
         /// </summary>
-        internal static string Size_AtLeast_ValdationError {
+        internal static string Size_AtLeast_ValidationError {
             get {
-                return ResourceManager.GetString("Size_AtLeast_ValdationError", resourceCulture);
+                return ResourceManager.GetString("Size_AtLeast_ValidationError", resourceCulture);
             }
         }
         
@@ -198,9 +198,9 @@ namespace Qowaiv.Validation.DataAnnotations {
         /// <summary>
         ///   Looks up a localized string similar to {0} does not support properties of the type {1}..
         /// </summary>
-        internal static string UnsupportedProperyType_For {
+        internal static string UnsupportedType_ForAttribute {
             get {
-                return ResourceManager.GetString("UnsupportedProperyType_For", resourceCulture);
+                return ResourceManager.GetString("UnsupportedType_ForAttribute", resourceCulture);
             }
         }
     }
