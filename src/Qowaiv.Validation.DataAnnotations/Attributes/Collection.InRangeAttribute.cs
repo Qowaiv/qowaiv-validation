@@ -18,7 +18,7 @@ public static partial class Collection
         [Pure]
         public override bool IsValid(object? value)
             => GetCount<InRangeAttribute>(value) is not long count
-            || count == 0
+            || count == 0 // should be dealt with by mandatory/required.
             || (count >= Minimum && count <= Maximum);
 
         /// <inheritdoc />

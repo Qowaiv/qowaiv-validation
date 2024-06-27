@@ -25,7 +25,7 @@ public static partial class Size
         [Pure]
         public override bool IsValid(object? value)
             => GetSize<InRangeAttribute>(value) is not StreamSize size
-            || size == StreamSize.Zero
+            || size == StreamSize.Zero // should be dealt with by mandatory/required.
             || (size >= Minimum && size <= Maximum);
 
         /// <inheritdoc />
