@@ -1,4 +1,6 @@
-﻿namespace FluentValidation;
+﻿#pragma warning disable QW0010 // Use System.DateOnly instead of Qowaiv.Date: We support netstandard 2.0.
+
+namespace FluentValidation;
 
 /// <summary>Fluent validation for <see cref="Clock"/>.</summary>
 public static partial class ClockValidation
@@ -10,18 +12,18 @@ public static partial class ClockValidation
     /// <param name="ruleBuilder">
     /// The rule builder on which the validator should be defined.
     /// </param>
-    /// <param name="now">
-    /// An optional function providing now, or if not specified, <see cref="Clock.Now()"/>.
+    /// <param name="utcNow">
+    /// An optional function providing now, or if not specified, <see cref="Clock.UtcNow()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, DateTime> InFuture<TModel>(this IRuleBuilder<TModel, DateTime> ruleBuilder, Func<DateTime>? now = null)
+    public static IRuleBuilderOptions<TModel, DateTime> InFuture<TModel>(this IRuleBuilder<TModel, DateTime> ruleBuilder, Func<DateTime>? utcNow = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
-        now ??= () => Clock.Now();
+        utcNow ??= Clock.UtcNow;
 
         return ruleBuilder
-            .Must(date => date > now())
+            .Must(date => date > utcNow())
             .WithMessage(_ => QowaivValidationFluentMessages.InFuture);
     }
 
@@ -32,18 +34,18 @@ public static partial class ClockValidation
     /// <param name="ruleBuilder">
     /// The rule builder on which the validator should be defined.
     /// </param>
-    /// <param name="now">
-    /// An optional function providing now, or if not specified, <see cref="Clock.Now()"/>.
+    /// <param name="utcNow">
+    /// An optional function providing now, or if not specified, <see cref="Clock.UtcNow()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, DateTime?> InFuture<TModel>(this IRuleBuilder<TModel, DateTime?> ruleBuilder, Func<DateTime>? now = null)
+    public static IRuleBuilderOptions<TModel, DateTime?> InFuture<TModel>(this IRuleBuilder<TModel, DateTime?> ruleBuilder, Func<DateTime>? utcNow = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
-        now ??= () => Clock.Now();
+        utcNow ??= Clock.UtcNow;
 
         return ruleBuilder
-            .Must(date => !date.HasValue || date.Value > now())
+            .Must(date => !date.HasValue || date.Value > utcNow())
             .WithMessage(_ => QowaivValidationFluentMessages.InFuture);
     }
 
@@ -98,18 +100,18 @@ public static partial class ClockValidation
     /// <param name="ruleBuilder">
     /// The rule builder on which the validator should be defined.
     /// </param>
-    /// <param name="now">
-    /// An optional function providing now, or if not specified, <see cref="Clock.Now()"/>.
+    /// <param name="utcNow">
+    /// An optional function providing now, or if not specified, <see cref="Clock.UtcNow()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, DateTime> NotInFuture<TModel>(this IRuleBuilder<TModel, DateTime> ruleBuilder, Func<DateTime>? now = null)
+    public static IRuleBuilderOptions<TModel, DateTime> NotInFuture<TModel>(this IRuleBuilder<TModel, DateTime> ruleBuilder, Func<DateTime>? utcNow = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
-        now ??= () => Clock.Now();
+        utcNow ??= Clock.UtcNow;
 
         return ruleBuilder
-            .Must(date => date <= now())
+            .Must(date => date <= utcNow())
             .WithMessage(_ => QowaivValidationFluentMessages.NotInFuture);
     }
 
@@ -120,18 +122,18 @@ public static partial class ClockValidation
     /// <param name="ruleBuilder">
     /// The rule builder on which the validator should be defined.
     /// </param>
-    /// <param name="now">
-    /// An optional function providing now, or if not specified, <see cref="Clock.Now()"/>.
+    /// <param name="utcNow">
+    /// An optional function providing now, or if not specified, <see cref="Clock.UtcNow()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, DateTime?> NotInFuture<TModel>(this IRuleBuilder<TModel, DateTime?> ruleBuilder, Func<DateTime>? now = null)
+    public static IRuleBuilderOptions<TModel, DateTime?> NotInFuture<TModel>(this IRuleBuilder<TModel, DateTime?> ruleBuilder, Func<DateTime>? utcNow = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
-        now ??= () => Clock.Now();
+        utcNow ??= Clock.UtcNow;
 
         return ruleBuilder
-            .Must(date => !date.HasValue || date.Value <= now())
+            .Must(date => !date.HasValue || date.Value <= utcNow())
             .WithMessage(_ => QowaivValidationFluentMessages.NotInFuture);
     }
 
@@ -186,18 +188,18 @@ public static partial class ClockValidation
     /// <param name="ruleBuilder">
     /// The rule builder on which the validator should be defined.
     /// </param>
-    /// <param name="now">
-    /// An optional function providing now, or if not specified, <see cref="Clock.Now()"/>.
+    /// <param name="utcNow">
+    /// An optional function providing now, or if not specified, <see cref="Clock.UtcNow()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, DateTime> InPast<TModel>(this IRuleBuilder<TModel, DateTime> ruleBuilder, Func<DateTime>? now = null)
+    public static IRuleBuilderOptions<TModel, DateTime> InPast<TModel>(this IRuleBuilder<TModel, DateTime> ruleBuilder, Func<DateTime>? utcNow = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
-        now ??= () => Clock.Now();
+        utcNow ??= Clock.UtcNow;
 
         return ruleBuilder
-            .Must(date => date < now())
+            .Must(date => date < utcNow())
             .WithMessage(_ => QowaivValidationFluentMessages.InPast);
     }
 
@@ -208,18 +210,18 @@ public static partial class ClockValidation
     /// <param name="ruleBuilder">
     /// The rule builder on which the validator should be defined.
     /// </param>
-    /// <param name="now">
-    /// An optional function providing now, or if not specified, <see cref="Clock.Now()"/>.
+    /// <param name="utcNow">
+    /// An optional function providing now, or if not specified, <see cref="Clock.UtcNow()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, DateTime?> InPast<TModel>(this IRuleBuilder<TModel, DateTime?> ruleBuilder, Func<DateTime>? now = null)
+    public static IRuleBuilderOptions<TModel, DateTime?> InPast<TModel>(this IRuleBuilder<TModel, DateTime?> ruleBuilder, Func<DateTime>? utcNow = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
-        now ??= () => Clock.Now();
+        utcNow ??= Clock.UtcNow;
 
         return ruleBuilder
-            .Must(date => !date.HasValue || date.Value < now())
+            .Must(date => !date.HasValue || date.Value < utcNow())
             .WithMessage(_ => QowaivValidationFluentMessages.InPast);
     }
 
@@ -274,18 +276,18 @@ public static partial class ClockValidation
     /// <param name="ruleBuilder">
     /// The rule builder on which the validator should be defined.
     /// </param>
-    /// <param name="now">
-    /// An optional function providing now, or if not specified, <see cref="Clock.Now()"/>.
+    /// <param name="utcNow">
+    /// An optional function providing now, or if not specified, <see cref="Clock.UtcNow()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, DateTime> NotInPast<TModel>(this IRuleBuilder<TModel, DateTime> ruleBuilder, Func<DateTime>? now = null)
+    public static IRuleBuilderOptions<TModel, DateTime> NotInPast<TModel>(this IRuleBuilder<TModel, DateTime> ruleBuilder, Func<DateTime>? utcNow = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
-        now ??= () => Clock.Now();
+        utcNow ??= Clock.UtcNow;
 
         return ruleBuilder
-            .Must(date => date >= now())
+            .Must(date => date >= utcNow())
             .WithMessage(_ => QowaivValidationFluentMessages.NotInPast);
     }
 
@@ -296,18 +298,18 @@ public static partial class ClockValidation
     /// <param name="ruleBuilder">
     /// The rule builder on which the validator should be defined.
     /// </param>
-    /// <param name="now">
-    /// An optional function providing now, or if not specified, <see cref="Clock.Now()"/>.
+    /// <param name="utcNow">
+    /// An optional function providing now, or if not specified, <see cref="Clock.UtcNow()"/>.
     /// </param>
     [FluentSyntax]
-    public static IRuleBuilderOptions<TModel, DateTime?> NotInPast<TModel>(this IRuleBuilder<TModel, DateTime?> ruleBuilder, Func<DateTime>? now = null)
+    public static IRuleBuilderOptions<TModel, DateTime?> NotInPast<TModel>(this IRuleBuilder<TModel, DateTime?> ruleBuilder, Func<DateTime>? utcNow = null)
     {
         Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
 
-        now ??= () => Clock.Now();
+        utcNow ??= Clock.UtcNow;
 
         return ruleBuilder
-            .Must(date => !date.HasValue || date.Value >= now())
+            .Must(date => !date.HasValue || date.Value >= utcNow())
             .WithMessage(_ => QowaivValidationFluentMessages.NotInPast);
     }
 
