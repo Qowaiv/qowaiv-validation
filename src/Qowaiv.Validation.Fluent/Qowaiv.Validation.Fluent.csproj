@@ -11,6 +11,8 @@ v1.0.0
 - Drop support .NET 5.0 and .NET 7.0. (breaking)
 - Update to Qowaiv v7.0.0. (breaking)
 - Update to FluentValidation v11.9.2. (breaking)
+- ullable anotations. #48
+- `InPast`, `NotInPast`, `InFuture`, and `NotInFuture` is now `Clock.UtcNow()`.
 v0.3.1
 - FIx so that Required to be current culture dependent. #74
 - `.IsFinite()` for doubles and floats.
