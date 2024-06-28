@@ -24,14 +24,14 @@
   <ItemGroup Label="Depedencies">
     <PackageReference Include="FluentValidation" Version="11.*" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.*" />
-    <PackageReference Include="Qowaiv" Version="7.0.0-rc.1" />
+    <PackageReference Include="Qowaiv" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup Label="TestTools">
     <PackageReference Include="FluentAssertions" Version="6.*" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" />
     <PackageReference Include="NUnit" Version="4.*" />
-    <PackageReference Include="Qowaiv.TestTools" Version="7.0.0-rc.1" />
+    <PackageReference Include="Qowaiv.TestTools" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup Label="Build tools">
