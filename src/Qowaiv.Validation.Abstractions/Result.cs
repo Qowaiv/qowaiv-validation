@@ -8,16 +8,31 @@ public class Result
     /// <param name="messages">
     /// The messages related to the result.
     /// </param>
-    internal Result(FixedMessages messages)
-        => Messages = Guard.NotNull(messages, nameof(messages));
+    /// <param name="trace">
+    /// The involved stack trace.
+    /// </param>
+    internal Result(FixedMessages messages, ResultTrace trace)
+    {
+        Messages = Guard.NotNull(messages, nameof(messages));
+        StackTrace = Guard.NotNull(trace, nameof(trace));
+    }
+
+    /// <summary>Initializes a new instance of the <see cref="Result"/> class.</summary>
+    internal Result(FixedMessages messages) 
+        : this(messages, ResultTrace.New(messages)) { }
 
     /// <summary>Gets the messages related to the result.</summary>
     [Pure]
     public IReadOnlyList<IValidationMessage> Messages { get; }
 
     /// <summary>Return true if there are no error messages, otherwise false.</summary>
-    [Pure]
     public bool IsValid => !Errors.Any();
+
+    /// <summary>The result stack trace.</summary>
+    /// <remarks>
+    /// Only set when the result is invalid.
+    /// </remarks>
+    public ResultTrace StackTrace { get; }
 
     /// <summary>Gets all messages with <see cref="ValidationSeverity.Error"/>.</summary>
     [Pure]
@@ -32,7 +47,7 @@ public class Result
     public IEnumerable<IValidationMessage> Infos => Messages.GetInfos();
 
     /// <summary>Represents an OK <see cref="Result"/>.</summary>
-    public static readonly Result OK = new(FixedMessages.Empty);
+    public static readonly Result OK = new(FixedMessages.Empty, ResultTrace.Empty);
 
     /// <summary>Creates a valid null <see cref="Result{T}"/>.</summary>
     [Pure]

@@ -31,11 +31,11 @@ public class ResultValidnessAssertionsBase<TSubject>
         var extra = Messages.Except(messages, Comparer()).ToArray();
 
         Execute.Assertion
-        .ForCondition(missing.Length == 0 && extra.Length == 0)
-        .WithDefaultIdentifier()
-        .FailWith(Messages.Any()
-            ? WithMessages(missing, extra)
-            : "Expected messages, but found none.");
+            .ForCondition(missing.Length == 0 && extra.Length == 0)
+            .WithDefaultIdentifier()
+            .FailWith(Messages.Any()
+                ? WithMessages(missing, extra)
+                : "Expected messages, but found none.");
     }
 
     [Pure]
