@@ -3,10 +3,14 @@
   <Import Project="..\..\props\package.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
-    <Version>0.3.1</Version>
+    <TargetFrameworks>netstandard2.0;net8.0;net9.0</TargetFrameworks>
+    <Version>1.0.0</Version>
     <PackageId>Qowaiv.Validation.Messages</PackageId>
     <PackageReleaseNotes>
+      <![CDATA[
+v1.0.0
+- Add .NET 9.0 target.
+- Drop .NET 5.0, NET6.0, NET7.0 targets. (BREAKING)
 v0.3.1
 - Extend ConcurrencyIssue factory method with innerException overload.
 v0.3.0
@@ -21,6 +25,7 @@ v0.0.1
 - AccessDenied (#22)
 - ConcurrencyIssue (#22)
 - EntityNotFound (#22)
+]]>
     </PackageReleaseNotes>
   </PropertyGroup>
 
