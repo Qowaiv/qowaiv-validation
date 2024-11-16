@@ -198,7 +198,7 @@ internal static partial class Guard
         => parameter == Guid.Empty
         ? throw new ArgumentException(Messages.ArgumentException_GuidEmpty, paramName)
         : parameter;
-   
+
     /// <summary>Throws an ArgumentException if the parameter is not positive, otherwise the parameter is passed.</summary>
     /// <param name="parameter">The parameter to guard.</param>
     /// <param name="paramName">The name of the parameter.</param>
