@@ -4,9 +4,13 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
-    <Version>2.0.0</Version>
+    <Version>3.0.0</Version>
     <PackageId>Qowaiv.Validation.DataAnnotations</PackageId>
     <PackageReleaseNotes>
+      <![CDATA[
+v3.0.0
+- Add .NET 9.0 target.
+- Drop .NET 5.0, NET6.0, NET7.0 targets. (BREAKING)
 v2.0.0.
 - Drop support .NET 5.0 and .NET 7.0. (breaking)
 - Update to Qowaiv v7.0.0. (breaking)
@@ -42,6 +46,7 @@ v0.1.0
 - Qowaiv.Validation.Abstractions dependency
 v0.0.4
 - Fix double dots in paths for nested properties.
+]]>
     </PackageReleaseNotes>
   </PropertyGroup>
 
@@ -50,7 +55,7 @@ v0.0.4
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Qowaiv" Version="7.0.0" />
+    <PackageReference Include="Qowaiv" Version="7.2.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
   </ItemGroup>
 
