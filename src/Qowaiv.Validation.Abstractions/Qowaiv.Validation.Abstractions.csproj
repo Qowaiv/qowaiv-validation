@@ -11,7 +11,8 @@
 v1.0.0
 - Add .NET 9.0 target.
 - Drop .NET 5.0, NET6.0, NET7.0 targets. (BREAKING)
-- Drop public Diagnostics.Contracts. BREAKING)
+- Drop public Diagnostics.Contracts. (BREAKING)
+- Drop binary serialization on exceptions. (BREAKING)
 v0.3.0
 - Add Result&lt;T&gt;.Cast&lt;TOut&gt;(). #61
 - Support .NET 7.0. #62
