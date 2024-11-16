@@ -20,24 +20,6 @@ public class InvalidModelException : InvalidOperationException
         : this(message, innerException)
         => Errors = new ReadOnlyCollection<IValidationMessage>(Filter(messages).ToArray());
 
-    /// <summary>Initializes a new instance of the <see cref="InvalidModelException"/> class.</summary>
-    protected InvalidModelException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
-    {
-        Guard.NotNull(info, nameof(info));
-
-        var errors = info.GetValue(nameof(Errors), typeof(IValidationMessage[])) as IValidationMessage[];
-        Errors = new ReadOnlyCollection<IValidationMessage>(errors ?? []);
-    }
-
-    /// <inheritdoc />
-    public override void GetObjectData(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info, nameof(info));
-        base.GetObjectData(info, context);
-        info.AddValue(nameof(Errors), Errors.ToArray());
-    }
-
     /// <summary>The related validation error(s).</summary>
     public IReadOnlyList<IValidationMessage> Errors { get; } = Array.Empty<IValidationMessage>();
 

@@ -13,9 +13,6 @@ public class EntityNotFound : InvalidOperationException, IValidationMessage
     /// <summary>Initializes a new instance of the <see cref="EntityNotFound"/> class.</summary>
     public EntityNotFound(string message, Exception innerException) : base(message, innerException) => Do.Nothing();
 
-    /// <summary>Initializes a new instance of the <see cref="EntityNotFound"/> class.</summary>
-    protected EntityNotFound(SerializationInfo info, StreamingContext context) : base(info, context) => Do.Nothing();
-
     /// <inheritdoc />
     public ValidationSeverity Severity => ValidationSeverity.Error;
 
