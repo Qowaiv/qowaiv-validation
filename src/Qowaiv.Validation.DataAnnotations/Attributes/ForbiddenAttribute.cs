@@ -13,7 +13,7 @@ public sealed class ForbiddenAttribute<TValue> : SetOfAttribute<TValue>
         : base(values) => Do.Nothing();
 
     /// <summary>Return false if the value of <see cref="SetOfValuesAttribute.IsValid(object)"/>
-    /// equals one of the values of the <see cref="ForbiddenValuesAttribute"/>.
+    /// equals one of the values of the <see cref="ForbiddenAttribute{TValue}"/>.
     /// </summary>
     protected override bool OnEqual => false;
 }
