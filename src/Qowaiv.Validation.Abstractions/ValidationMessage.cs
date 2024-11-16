@@ -2,7 +2,7 @@ namespace Qowaiv.Validation.Abstractions;
 
 /// <summary>Implementation of an <see cref="IValidationMessage"/>.</summary>
 [Serializable]
-public sealed class ValidationMessage : IValidationMessage, ISerializable, IEquatable<ValidationMessage>
+public sealed class ValidationMessage : IValidationMessage, IEquatable<ValidationMessage>
 {
     /// <summary>Initializes a new instance of the <see cref="ValidationMessage"/> class.</summary>
     public ValidationMessage() : this(ValidationSeverity.None, null, null) => Do.Nothing();
@@ -13,32 +13,6 @@ public sealed class ValidationMessage : IValidationMessage, ISerializable, IEqua
         Severity = severity;
         Message = message;
         PropertyName = propertyName;
-    }
-
-    /// <summary>Initializes a new instance of the <see cref="ValidationMessage"/> class.</summary>
-    private ValidationMessage(SerializationInfo info, StreamingContext context)
-        : this(GetSeverity(info), GetMessage(info), GetProperty(info)) => Do.Nothing();
-
-    /// <summary>Helper methods to deserialize the <see cref="ValidationMessage"/>.</summary>
-    [Pure]
-    private static ValidationSeverity GetSeverity(SerializationInfo info) => (ValidationSeverity)info.GetInt32(nameof(Severity));
-
-    /// <summary>Helper methods to deserialize the <see cref="ValidationMessage"/>.</summary>
-    [Pure]
-    private static string GetMessage(SerializationInfo info) => info.GetString(nameof(Message))!;
-
-    /// <summary>Helper methods to deserialize the <see cref="ValidationMessage"/>.</summary>
-    [Pure]
-    private static string? GetProperty(SerializationInfo info) => info.GetString(nameof(PropertyName));
-
-    /// <inheritdoc />
-    public void GetObjectData(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info, nameof(info));
-
-        info.AddValue(nameof(Severity), Severity);
-        info.AddValue(nameof(Message), Message);
-        info.AddValue(nameof(PropertyName), PropertyName);
     }
 
     /// <inheritdoc />

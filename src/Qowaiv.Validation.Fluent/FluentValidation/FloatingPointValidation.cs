@@ -12,7 +12,7 @@ public static class FloatingPointValidation
     /// </param>
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, double> IsFinite<TModel>(this IRuleBuilder<TModel, double> ruleBuilder)
-        => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
+        => Guard.NotNull(ruleBuilder)
         .Must(number => number.IsFinite())
         .WithMessage(_ => QowaivValidationFluentMessages.IsFinite);
 
@@ -25,7 +25,7 @@ public static class FloatingPointValidation
     /// </param>
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, double?> IsFinite<TModel>(this IRuleBuilder<TModel, double?> ruleBuilder)
-        => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
+        => Guard.NotNull(ruleBuilder)
         .Must(number => !number.HasValue || number.Value.IsFinite())
         .WithMessage(_ => QowaivValidationFluentMessages.IsFinite);
 
@@ -38,7 +38,7 @@ public static class FloatingPointValidation
     /// </param>
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, float> IsFinite<TModel>(this IRuleBuilder<TModel, float> ruleBuilder)
-        => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
+        => Guard.NotNull(ruleBuilder)
         .Must(number => number.IsFinite())
         .WithMessage(_ => QowaivValidationFluentMessages.IsFinite);
 
@@ -51,7 +51,7 @@ public static class FloatingPointValidation
     /// </param>
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, float?> IsFinite<TModel>(this IRuleBuilder<TModel, float?> ruleBuilder)
-        => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
+        => Guard.NotNull(ruleBuilder)
         .Must(number => !number.HasValue || number.Value.IsFinite())
         .WithMessage(_ => QowaivValidationFluentMessages.IsFinite);
 }

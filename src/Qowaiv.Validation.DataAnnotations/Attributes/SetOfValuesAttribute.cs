@@ -12,7 +12,7 @@ public abstract class SetOfValuesAttribute : ValidationAttribute
     protected SetOfValuesAttribute(params string[] values)
         : base(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError)
     {
-        Values = Guard.NotNull(values, nameof(values));
+        Values = Guard.NotNull(values);
     }
 
     /// <summary>The result to return when the value of <see cref="IsValid(object)"/>

@@ -27,7 +27,7 @@ public sealed class DistinctValuesAttribute : ValidationAttribute
         if (value is null) return true;
         else
         {
-            var collection = Guard.IsInstanceOf<IEnumerable>(value, nameof(value)).Cast<object>();
+            var collection = Guard.IsInstanceOf<IEnumerable>(value).Cast<object>();
             var checker = new HashSet<object>(EqualityComparer);
             return collection.All(checker.Add);
         }

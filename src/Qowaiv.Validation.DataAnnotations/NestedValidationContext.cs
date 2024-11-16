@@ -141,12 +141,11 @@ internal sealed class NestedValidationContext
 
     /// <summary>Creates a root context.</summary>
     [Pure]
-    public static NestedValidationContext CreateRoot(object instance, IServiceProvider serviceProvider, IDictionary<object, object?> items)
-        => new(
-            root: string.Empty,
-            Guard.NotNull(instance, nameof(instance)),
-            serviceProvider,
-            items,
-            new HashSet<object>(ReferenceComparer.Instance),
-            new List<IValidationMessage>());
+    public static NestedValidationContext CreateRoot(object instance, IServiceProvider serviceProvider, IDictionary<object, object?> items) => new(
+        root: string.Empty,
+        Guard.NotNull(instance),
+        serviceProvider,
+        items,
+        new HashSet<object>(ReferenceComparer.Instance),
+        []);
 }

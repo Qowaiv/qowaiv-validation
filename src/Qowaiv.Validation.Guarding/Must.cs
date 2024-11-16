@@ -7,7 +7,7 @@ namespace Qowaiv.Validation.Guarding;
 public sealed class Must<TSubject> where TSubject : class
 {
     /// <summary>Initializes a new instance of the <see cref="Must{TSubject}"/> class.</summary>
-    internal Must(TSubject subject) => Subject = Guard.NotNull(subject, nameof(subject));
+    internal Must(TSubject subject) => Subject = Guard.NotNull(subject);
 
     /// <summary>Gets the subject to guard.</summary>
     public TSubject Subject { get; }
@@ -72,7 +72,7 @@ public sealed class Must<TSubject> where TSubject : class
     /// </param>
     [Pure]
     public Result<TSubject> Exist<TId, TEntity>(TId id, Func<TSubject, TId, TEntity?> selector, IValidationMessage? message)
-        => Be(Guard.NotNull(selector, nameof(selector)).Invoke(Subject, id) is { }, message ?? EntityNotFound.ForId(id!));
+        => Be(Guard.NotNull(selector).Invoke(Subject, id) is { }, message ?? EntityNotFound.ForId(id!));
 
     /// <summary>Guards the entity to exist for the specified id; returns the
     /// error message otherwise.
