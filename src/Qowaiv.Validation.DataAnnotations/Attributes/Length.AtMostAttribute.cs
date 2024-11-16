@@ -13,7 +13,7 @@ public static partial class Length
 
         /// <inheritdoc />
         [Pure]
-        public override bool IsValid(object? value) 
+        public override bool IsValid(object? value)
             => GetLength<AtMostAttribute>(value) is not long length
             || length <= Maximum;
 

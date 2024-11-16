@@ -34,9 +34,6 @@ public class AccessDenied : SecurityException, IValidationMessage
     /// </param>
     public AccessDenied(string message, Type type, string state) : base(message, type, state) => Do.Nothing();
 
-    /// <summary>Initializes a new instance of the <see cref="AccessDenied"/> class.</summary>
-    protected AccessDenied(SerializationInfo info, StreamingContext context) : base(info, context) => Do.Nothing();
-
     /// <inheritdoc />
     public ValidationSeverity Severity => ValidationSeverity.Error;
 

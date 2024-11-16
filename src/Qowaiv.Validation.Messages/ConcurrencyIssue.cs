@@ -5,11 +5,7 @@ namespace Qowaiv.Validation.Messages;
 public class ConcurrencyIssue : InvalidOperationException, IValidationMessage
 {
     /// <summary>Initializes a new instance of the <see cref="ConcurrencyIssue"/> class.</summary>
-    public ConcurrencyIssue()
-        : base(ValidationMessages.ConcurrencyIssue) => Do.Nothing();
-
-    /// <summary>Initializes a new instance of the <see cref="ConcurrencyIssue"/> class.</summary>
-    protected ConcurrencyIssue(SerializationInfo info, StreamingContext context) : base(info, context) => Do.Nothing();
+    public ConcurrencyIssue() : base(ValidationMessages.ConcurrencyIssue) => Do.Nothing();
 
     /// <summary>Initializes a new instance of the <see cref="ConcurrencyIssue"/> class.</summary>
     public ConcurrencyIssue(string message) : base(message) => Do.Nothing();

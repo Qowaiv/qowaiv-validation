@@ -16,9 +16,6 @@ public class NoValue : ArgumentNullException
     /// <summary>Initializes a new instance of the <see cref="NoValue"/> class.</summary>
     public NoValue(string paramName, string message) : base(paramName, message) => Do.Nothing();
 
-    /// <summary>Initializes a new instance of the <see cref="NoValue"/> class.</summary>
-    protected NoValue(SerializationInfo info, StreamingContext context) : base(info, context) => Do.Nothing();
-
     /// <summary>Creates a new <see cref="NoValue"/> exception for a <see cref="Result{TModel}"/>.</summary>
     /// <typeparam name="T">
     /// The type of the result.

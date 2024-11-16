@@ -10,6 +10,7 @@
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <CheckEolTargetFramework>true</CheckEolTargetFramework>
     <SuppressTfmSupportBuildWarnings>false</SuppressTfmSupportBuildWarnings>
+    <NoWarn>NU1507</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Label="Package info">
