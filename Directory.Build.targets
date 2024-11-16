@@ -1,0 +1,26 @@
+<Project>
+  <ItemGroup>
+    <PackageReference Update="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Update="Qowaiv" Version="7.2.0" />
+    <PackageReference Update="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Update="FluentValidation" Version="11.10.0" />
+    <PackageReference Update="FluentAssertions" Version="6.12.2" />
+    <PackageReference Update="FluentAssertions.Analyzers" Version="*" />
+    <PackageReference Update="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+    <PackageReference Update="NUnit" Version="4.2.2" />
+    <PackageReference Update="Qowaiv.TestTools" Version="7.2.0" />
+    <PackageReference Update="coverlet.collector" Version="*" />
+    <PackageReference Update="coverlet.msbuild" Version="*" />
+    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="17.*" />
+    <PackageReference Update="NUnit3TestAdapter" Version="*" />
+    <PackageReference Update="FluentAssertions.Analyzers" Version="*" />
+    <PackageReference Update="NUnit.Analyzers" Version="*" />
+    <PackageReference Update="System.Memory.Data" Version="9.0.0" />
+    <PackageReference Update="Qowaiv.Analyzers.CSharp" Version="*" />
+    <PackageReference Update="StyleCop.Analyzers" Version="*-*" />
+    <PackageReference Update="DotNetProjectFile.Analyzers.Sdk" Version="1.5.0" />
+    <PackageReference Update="AsyncFixer" Version="*" PrivateAssets="all" />
+    <PackageReference Update="DotNetProjectFile.Analyzers" Version="1.*" />
+    <PackageReference Update="SonarAnalyzer.CSharp" Version="*" />
+  </ItemGroup>
+</Project>

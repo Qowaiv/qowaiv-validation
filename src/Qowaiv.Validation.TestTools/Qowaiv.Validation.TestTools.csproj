@@ -33,11 +33,11 @@ v0.0.2
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="6.12.2" />
+    <PackageReference Include="FluentAssertions" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzers">
-    <PackageReference Include="FluentAssertions.Analyzers" Version="*" PrivateAssets="all" />
+    <PackageReference Include="FluentAssertions.Analyzers" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
