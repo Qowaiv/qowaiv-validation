@@ -9,6 +9,9 @@
     <PackageReleaseNotes>
       <![CDATA[
 v3.0.0
+- Introduction of UniqueAttribute<T> as alternative to DistinctValuesAttribute.
+- Marked DistinctValuesAttribute as obsolete.
+- Introduction of UniqueAttribute<T>
 - Add .NET 9.0 target.
 - Drop .NET 5.0, NET6.0, NET7.0 targets. (BREAKING)
 - Drop binary serialization on exceptions. (BREAKING)

@@ -93,18 +93,6 @@ public class Model
 }
 ```
 
-### Distinct values
-The `[DistinctValues]` attribute validates that all items of the collection are
-distinct. If needed, a custom `IEqualityComparer` comparer can be defined.
-
-``` C#
-public class Model
-{
-    [DistinctValues(typeof(CustomEqualityComparer))]
-    public IEnumerable<int> Numbers { get; set; }
-}
-```
-
 ### Is finite
 The `[IsFinite]` attribute validates that the floating point value of the field
 represents a finite (e.a. not NaN, or infinity).
@@ -136,5 +124,17 @@ public class Model
 {
     [Optional]
     public string? Message { get; set; }
+}
+```
+
+### Unique values
+The `[Unique&lt;TValue&gt;]` attribute validates that all items of the collection are
+distinct. If needed, a custom `IEqualityComparer&lt;TValue&gt` comparer can be defined.
+
+``` C#
+public class Model
+{
+    [Unique<int>(typeof(CustomEqualityComparer))]
+    public IEnumerable<int> Numbers { get; set; }
 }
 ```

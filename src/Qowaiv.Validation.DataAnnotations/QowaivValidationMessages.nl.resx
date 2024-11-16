@@ -51,4 +51,7 @@
   <data name="Size_InRange_ValidationError" xml:space="preserve">
     <value>De grootte van het veld {0} moet tussen de {1: F} en {2: F} zijn.</value>
   </data>
+  <data name="UniqueValuesAttribute_ValidationError" xml:space="preserve">
+    <value>Alle waarden van het veld {0} zouden verschillend moeten zijn.</value>
+  </data>
 </root>
