@@ -62,7 +62,7 @@ supports type converters to get the allowed values based on a string value.
 ``` C#
 public class Model
 {
-    [AllowedValues("DE", "FR", "GB")]
+    [Allowed<Country>("DE", "FR", "GB")]
     public Country CountryOfBirth { get; set; }
 }
 ```
@@ -74,7 +74,7 @@ supports type converters to get the forbidden values based on a string value.
 ``` C#
 public class Model
 {
-    [ForbiddenValues("US", "IR")]
+    [Forbidden<Country>("US", "IR")]
     public Country CountryOfBirth { get; set; }
 }
 ```

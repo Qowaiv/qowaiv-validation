@@ -3,18 +3,17 @@ namespace Qowaiv.Validation.DataAnnotations;
 /// <summary>Validates if the decorated item has a value that is specified in the allowed values.</summary>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
 [CLSCompliant(false)]
-[Obsolete("Use AllowedAttribute<T> instead.")]
-public sealed class AllowedValuesAttribute : SetOfValuesAttribute
+public sealed class AllowedAttribute<TValue> : SetOfAttribute<TValue>
 {
-    /// <summary>Initializes a new instance of the <see cref="AllowedValuesAttribute"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="AllowedAttribute{TValue}"/> class.</summary>
     /// <param name="values">
     /// String representations of the allowed values.
     /// </param>
-    public AllowedValuesAttribute(params string[] values)
+    public AllowedAttribute(params object[] values)
         : base(values) => Do.Nothing();
 
-    /// <summary>Return true the value of <see cref="SetOfValuesAttribute.IsValid(object)"/>
-    /// equals one of the values of the <see cref="AllowedValuesAttribute"/>.
+    /// <summary>Return true the value of <see cref="SetOfAttribute{TValue}.IsValid(object)"/>
+    /// equals one of the values of the <see cref="SetOfAttribute{TValue}" />.
     /// </summary>
     protected override bool OnEqual => true;
 }
