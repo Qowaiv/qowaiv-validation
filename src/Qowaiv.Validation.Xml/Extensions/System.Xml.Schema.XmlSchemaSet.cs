@@ -4,12 +4,10 @@ namespace System.Xml.Schema;
 public static class QowaivXmlSchemaSetExtensions
 {
     /// <summary>Appends an <see cref="XmlSchema"/> to the <see cref="XmlSchemaSet"/>.</summary>
-    [Impure]
+    [FluentSyntax]
     public static XmlSchemaSet Append(this XmlSchemaSet set, XmlSchema schema)
     {
-        Guard.NotNull(set, nameof(set));
-        Guard.NotNull(schema, nameof(schema));
-        set.Add(schema);
+        Guard.NotNull(set).Add(Guard.NotNull(schema));
         return set;
     }
 }

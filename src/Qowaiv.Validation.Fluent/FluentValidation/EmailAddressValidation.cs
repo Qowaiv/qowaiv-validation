@@ -12,7 +12,7 @@ public static class EmailAddressValidation
     /// </param>
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, EmailAddress> NotIPBased<TModel>(this IRuleBuilder<TModel, EmailAddress> ruleBuilder)
-        => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
+        => Guard.NotNull(ruleBuilder)
         .Must(emailAddress => !emailAddress.IsIPBased)
         .WithMessage(_ => QowaivValidationFluentMessages.NoIPBasedEmailAddress);
 }

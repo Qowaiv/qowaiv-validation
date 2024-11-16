@@ -3,8 +3,9 @@ using Qowaiv.Validation.Abstractions;
 namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Represents a <see cref="ValidationResult"/> as a <see cref="IValidationMessage"/>.</summary>
+[Inheritable]
 [Serializable]
-public class ValidationMessage : ValidationResult, IValidationMessage, ISerializable
+public class ValidationMessage : ValidationResult, IValidationMessage
 {
     /// <summary>Initializes a new instance of the <see cref="ValidationMessage"/> class.</summary>
     public ValidationMessage() : this(ValidationSeverity.None, null, null) => Do.Nothing();
@@ -12,32 +13,6 @@ public class ValidationMessage : ValidationResult, IValidationMessage, ISerializ
     internal ValidationMessage(ValidationSeverity severity, string? message, string[]? memberNames)
         : base(message, memberNames ?? [])
         => Severity = severity;
-
-    /// <summary>Initializes a new instance of the <see cref="ValidationMessage"/> class.</summary>
-    protected ValidationMessage(SerializationInfo info, StreamingContext context)
-        : this(GetSeverity(info), GetMessage(info), GetMemberNames(info)) => Do.Nothing();
-
-    /// <summary>Helper methods to deserialize the <see cref="ValidationMessage"/>.</summary>
-    [Pure]
-    private static ValidationSeverity GetSeverity(SerializationInfo info) => (ValidationSeverity)info.GetInt32(nameof(Severity));
-
-    /// <summary>Helper methods to deserialize the <see cref="ValidationMessage"/>.</summary>
-    [Pure]
-    private static string? GetMessage(SerializationInfo info) => info.GetString(nameof(Message));
-
-    /// <summary>Helper methods to deserialize the <see cref="ValidationMessage"/>.</summary>
-    [Pure]
-    private static string[]? GetMemberNames(SerializationInfo info) => info.GetValue(nameof(MemberNames), typeof(string[])) as string[];
-
-    /// <inheritdoc />
-    public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info, nameof(info));
-
-        info.AddValue(nameof(Severity), Severity);
-        info.AddValue(nameof(Message), Message);
-        info.AddValue(nameof(MemberNames), MemberNames.ToArray());
-    }
 
     /// <inheritdoc />
     public ValidationSeverity Severity { get; }
@@ -49,7 +24,6 @@ public class ValidationMessage : ValidationResult, IValidationMessage, ISerializ
     public string? Message => ErrorMessage;
 
     /// <summary>Creates a None message.</summary>
-    [Pure]
     public static ValidationMessage None => new();
 
     /// <summary>Creates an error message.</summary>

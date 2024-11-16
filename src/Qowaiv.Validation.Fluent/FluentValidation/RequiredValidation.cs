@@ -33,7 +33,7 @@ public static class RequiredValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, TProperty> Required<TModel, TProperty>(this IRuleBuilder<TModel, TProperty> ruleBuilder, bool allowUnknown)
     {
-        Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
+        Guard.NotNull(ruleBuilder);
 
         return allowUnknown
             ? ruleBuilder

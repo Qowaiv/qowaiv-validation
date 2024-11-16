@@ -18,7 +18,7 @@ public static partial class ClockValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, DateTime> InFuture<TModel>(this IRuleBuilder<TModel, DateTime> ruleBuilder, Func<DateTime>? utcNow = null)
     {
-        Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
+        Guard.NotNull(ruleBuilder);
 
         utcNow ??= Clock.UtcNow;
 
@@ -40,7 +40,7 @@ public static partial class ClockValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, DateTime?> InFuture<TModel>(this IRuleBuilder<TModel, DateTime?> ruleBuilder, Func<DateTime>? utcNow = null)
     {
-        Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
+        Guard.NotNull(ruleBuilder);
 
         utcNow ??= Clock.UtcNow;
 
@@ -62,7 +62,7 @@ public static partial class ClockValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, Date> InFuture<TModel>(this IRuleBuilder<TModel, Date> ruleBuilder, Func<Date>? today = null)
     {
-        Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
+        Guard.NotNull(ruleBuilder);
 
         today ??= Clock.Today;
 
@@ -84,7 +84,7 @@ public static partial class ClockValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, Date?> InFuture<TModel>(this IRuleBuilder<TModel, Date?> ruleBuilder, Func<Date>? today = null)
     {
-        Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
+        Guard.NotNull(ruleBuilder);
 
         today ??= Clock.Today;
 
@@ -106,7 +106,7 @@ public static partial class ClockValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, DateTime> NotInFuture<TModel>(this IRuleBuilder<TModel, DateTime> ruleBuilder, Func<DateTime>? utcNow = null)
     {
-        Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
+        Guard.NotNull(ruleBuilder);
 
         utcNow ??= Clock.UtcNow;
 
@@ -128,7 +128,7 @@ public static partial class ClockValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, DateTime?> NotInFuture<TModel>(this IRuleBuilder<TModel, DateTime?> ruleBuilder, Func<DateTime>? utcNow = null)
     {
-        Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
+        Guard.NotNull(ruleBuilder);
 
         utcNow ??= Clock.UtcNow;
 
@@ -150,7 +150,7 @@ public static partial class ClockValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, Date> NotInFuture<TModel>(this IRuleBuilder<TModel, Date> ruleBuilder, Func<Date>? today = null)
     {
-        Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
+        Guard.NotNull(ruleBuilder);
 
         today ??= Clock.Today;
 
@@ -172,7 +172,7 @@ public static partial class ClockValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, Date?> NotInFuture<TModel>(this IRuleBuilder<TModel, Date?> ruleBuilder, Func<Date>? today = null)
     {
-        Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
+        Guard.NotNull(ruleBuilder);
 
         today ??= Clock.Today;
 
@@ -194,7 +194,7 @@ public static partial class ClockValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, DateTime> InPast<TModel>(this IRuleBuilder<TModel, DateTime> ruleBuilder, Func<DateTime>? utcNow = null)
     {
-        Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
+        Guard.NotNull(ruleBuilder);
 
         utcNow ??= Clock.UtcNow;
 
@@ -216,7 +216,7 @@ public static partial class ClockValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, DateTime?> InPast<TModel>(this IRuleBuilder<TModel, DateTime?> ruleBuilder, Func<DateTime>? utcNow = null)
     {
-        Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
+        Guard.NotNull(ruleBuilder);
 
         utcNow ??= Clock.UtcNow;
 
@@ -238,7 +238,7 @@ public static partial class ClockValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, Date> InPast<TModel>(this IRuleBuilder<TModel, Date> ruleBuilder, Func<Date>? today = null)
     {
-        Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
+        Guard.NotNull(ruleBuilder);
 
         today ??= Clock.Today;
 
@@ -260,7 +260,7 @@ public static partial class ClockValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, Date?> InPast<TModel>(this IRuleBuilder<TModel, Date?> ruleBuilder, Func<Date>? today = null)
     {
-        Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
+        Guard.NotNull(ruleBuilder);
 
         today ??= Clock.Today;
 
@@ -282,7 +282,7 @@ public static partial class ClockValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, DateTime> NotInPast<TModel>(this IRuleBuilder<TModel, DateTime> ruleBuilder, Func<DateTime>? utcNow = null)
     {
-        Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
+        Guard.NotNull(ruleBuilder);
 
         utcNow ??= Clock.UtcNow;
 
@@ -304,7 +304,7 @@ public static partial class ClockValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, DateTime?> NotInPast<TModel>(this IRuleBuilder<TModel, DateTime?> ruleBuilder, Func<DateTime>? utcNow = null)
     {
-        Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
+        Guard.NotNull(ruleBuilder);
 
         utcNow ??= Clock.UtcNow;
 
@@ -326,7 +326,7 @@ public static partial class ClockValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, Date> NotInPast<TModel>(this IRuleBuilder<TModel, Date> ruleBuilder, Func<Date>? today = null)
     {
-        Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
+        Guard.NotNull(ruleBuilder);
 
         today ??= Clock.Today;
 
@@ -348,7 +348,7 @@ public static partial class ClockValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, Date?> NotInPast<TModel>(this IRuleBuilder<TModel, Date?> ruleBuilder, Func<Date>? today = null)
     {
-        Guard.NotNull(ruleBuilder, nameof(ruleBuilder));
+        Guard.NotNull(ruleBuilder);
 
         today ??= Clock.Today;
 
