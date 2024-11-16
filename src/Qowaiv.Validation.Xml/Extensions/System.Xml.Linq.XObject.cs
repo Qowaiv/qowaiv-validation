@@ -1,4 +1,4 @@
-﻿namespace System.Xml.Linq;
+namespace System.Xml.Linq;
 
 /// <summary>Extensions on <see cref="XObject"/>.</summary>
 public static class QowaivXObjectExtensions

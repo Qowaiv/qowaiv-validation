@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.Abstractions;
+namespace Qowaiv.Validation.Abstractions;
 
 /// <summary>A validator for <typeparamref name="TModel"/>.</summary>
 /// <typeparam name="TModel">

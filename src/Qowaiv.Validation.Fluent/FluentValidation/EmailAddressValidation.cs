@@ -1,4 +1,4 @@
-﻿namespace FluentValidation;
+namespace FluentValidation;
 
 /// <summary>Fluent validation for <see cref="EmailAddress"/>.</summary>
 public static class EmailAddressValidation

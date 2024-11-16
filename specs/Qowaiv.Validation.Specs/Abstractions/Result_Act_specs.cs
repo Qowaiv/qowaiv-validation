@@ -1,4 +1,4 @@
-﻿using Qowaiv.Validation.Abstractions;
+using Qowaiv.Validation.Abstractions;
 
 namespace Abstractions.Result_Act_specs;
 

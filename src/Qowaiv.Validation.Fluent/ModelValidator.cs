@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.Fluent;
+namespace Qowaiv.Validation.Fluent;
 
 /// <summary>Base class for an <see cref="Abstractions.IValidator{TModel}"/> using FluentValidation.NET.</summary>
 /// <typeparam name="TModel">

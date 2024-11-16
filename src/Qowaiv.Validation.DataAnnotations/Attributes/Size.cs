@@ -1,4 +1,4 @@
-﻿using Qowaiv.IO;
+using Qowaiv.IO;
 using Qowaiv.Validation.DataAnnotations.Reflection;
 using System.IO;
 

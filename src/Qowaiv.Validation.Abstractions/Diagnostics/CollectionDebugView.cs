@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.Abstractions.Diagnostics;
+namespace Qowaiv.Validation.Abstractions.Diagnostics;
 
 /// <summary>Allows the debugger to display collections.</summary>
 [ExcludeFromCodeCoverage]

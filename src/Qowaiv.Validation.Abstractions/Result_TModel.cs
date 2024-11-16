@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.Abstractions;
+namespace Qowaiv.Validation.Abstractions;
 
 /// <summary>Represents a result of a validation, executed command, etcetera.</summary>
 public sealed class Result<TModel> : Result

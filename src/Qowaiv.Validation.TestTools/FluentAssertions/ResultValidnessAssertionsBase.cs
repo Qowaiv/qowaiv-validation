@@ -1,4 +1,4 @@
-﻿namespace FluentAssertions.Qowaiv.Validation;
+namespace FluentAssertions.Qowaiv.Validation;
 
 /// <summary>Contains a number of methods to assert the state of a <see cref="Result"/>.</summary>
 public class ResultValidnessAssertionsBase<TSubject>

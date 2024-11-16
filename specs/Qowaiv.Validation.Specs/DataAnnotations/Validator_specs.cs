@@ -1,4 +1,4 @@
-﻿using ValidationSeverity = Qowaiv.Validation.Abstractions.ValidationSeverity;
+using ValidationSeverity = Qowaiv.Validation.Abstractions.ValidationSeverity;
 using Specs.DataAnnotations.Stubs;
 using System.ComponentModel.DataAnnotations;
 using Qowaiv.Validation.DataAnnotations;

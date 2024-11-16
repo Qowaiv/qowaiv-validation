@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.Guarding;
+namespace Qowaiv.Validation.Guarding;
 
 /// <summary>A monad to allow declarative guarding conditions on a subject.</summary>
 /// <typeparam name="TSubject">

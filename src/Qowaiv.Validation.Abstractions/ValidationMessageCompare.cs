@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.Abstractions;
+namespace Qowaiv.Validation.Abstractions;
 
 /// <summary><see cref="IEqualityComparer{IValidationMessage}"/> helper.</summary>
 public static class ValidationMessageCompare

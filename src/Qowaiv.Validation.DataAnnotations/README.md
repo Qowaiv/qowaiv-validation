@@ -1,4 +1,4 @@
-﻿# Qowaiv DataAnnotations based validation
+# Qowaiv DataAnnotations based validation
 Provides an data annotations based implementation of the `Qowaiv.Validation.Abstractions.IValidator`
 and data annotation attributes.
 

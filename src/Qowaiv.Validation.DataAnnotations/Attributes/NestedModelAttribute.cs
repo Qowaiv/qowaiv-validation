@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.DataAnnotations;
+namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Decorates a class so that the <see cref="AnnotatedModelValidator{Tmodel}"/>
 /// will also validate its children.

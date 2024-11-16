@@ -1,4 +1,4 @@
-﻿using Qowaiv.Validation.Abstractions;
+using Qowaiv.Validation.Abstractions;
 
 namespace Qowaiv.Validation.DataAnnotations;
 

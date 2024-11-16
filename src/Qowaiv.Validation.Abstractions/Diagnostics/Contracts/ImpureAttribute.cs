@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.Abstractions.Diagnostics.Contracts;
+namespace Qowaiv.Validation.Abstractions.Diagnostics.Contracts;
 
 /// <summary>To mark a method explicitly as impure.</summary>
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]

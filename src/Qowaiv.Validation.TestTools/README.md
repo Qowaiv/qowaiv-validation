@@ -1,4 +1,4 @@
-﻿# Qowaiv.Validation Test Tools
+# Qowaiv.Validation Test Tools
 
 These test tools help writing meaningful tests an asserting the state of a
 `Result` or `Result<T>`. This is done by extending on

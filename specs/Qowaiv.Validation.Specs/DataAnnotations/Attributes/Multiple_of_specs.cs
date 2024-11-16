@@ -1,4 +1,4 @@
-﻿using Qowaiv.Financial;
+using Qowaiv.Financial;
 using Qowaiv.Validation.DataAnnotations;
 
 namespace Data_Annotations.Attributes.Multiple_of_specs;

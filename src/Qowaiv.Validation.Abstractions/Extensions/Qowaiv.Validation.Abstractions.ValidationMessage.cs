@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.Abstractions;
+namespace Qowaiv.Validation.Abstractions;
 
 /// <summary>Extensions on <see cref="IValidationMessage"/>.</summary>
 public static class ValidationMessageExtensions

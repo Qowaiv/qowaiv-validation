@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.Xml;
+namespace Qowaiv.Validation.Xml;
 
 /// <summary>An <see cref="ValidationEventHandler"/> that collects all issues as <see cref="IValidationMessage"/>'s.</summary>
 [WillBeSealed]

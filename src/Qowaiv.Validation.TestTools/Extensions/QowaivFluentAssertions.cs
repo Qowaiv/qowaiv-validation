@@ -1,4 +1,4 @@
-﻿#pragma warning disable CS3001 // Argument type is not CLS-compliant
+#pragma warning disable CS3001 // Argument type is not CLS-compliant
 
 namespace FluentAssertions;
 

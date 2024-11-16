@@ -1,1 +1,1 @@
-﻿# Qowaiv Validation
+# Qowaiv Validation

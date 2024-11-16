@@ -1,4 +1,4 @@
-﻿using Qowaiv.Validation.DataAnnotations.Reflection;
+using Qowaiv.Validation.DataAnnotations.Reflection;
 
 namespace Qowaiv.Validation.DataAnnotations;
 

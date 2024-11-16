@@ -1,4 +1,4 @@
-﻿# Qowaiv exensions on [*Fluent Validation](https://fluentvalidation.net/)
+# Qowaiv exensions on [*Fluent Validation](https://fluentvalidation.net/)
 
 ## Validators
 

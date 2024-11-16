@@ -1,4 +1,4 @@
-﻿using Qowaiv.Financial;
+using Qowaiv.Financial;
 using System.Xml.Serialization;
 
 namespace Specs.Xml;

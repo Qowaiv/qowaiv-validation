@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.Messages;
+namespace Qowaiv.Validation.Messages;
 
 /// <summary>Message to communicate if a entity could not be found.</summary>
 [Serializable]

@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+using FluentValidation;
 using Qowaiv.Validation.Fluent;
 
 namespace Fluent_validation.Postal_code_valid_for_specs;

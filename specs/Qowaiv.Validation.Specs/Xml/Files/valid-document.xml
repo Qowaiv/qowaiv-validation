@@ -1,4 +1,4 @@
-﻿<bookstore xmlns="http://www.contoso.com/books">
+<bookstore xmlns="http://www.contoso.com/books">
   <book genre="autobiography" publicationdate="1981-03-22" ISBN="1-861003-11-0">
     <title>The Autobiography of Benjamin Franklin</title>
     <author>
