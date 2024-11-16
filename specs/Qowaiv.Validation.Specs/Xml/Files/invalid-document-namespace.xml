@@ -1,4 +1,4 @@
-﻿<bk:bookstore xmlns:bk="http://www.contoso.com/books">
+<bk:bookstore xmlns:bk="http://www.contoso.com/books">
   <bk:book genre="autobiography" publicationdate="1981-03-22" ISBN="1-861003-11-0">
     <bk:title>The Autobiography of Benjamin Franklin</bk:title>
     <bk:author>

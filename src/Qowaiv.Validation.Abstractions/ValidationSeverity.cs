@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.Abstractions;
+namespace Qowaiv.Validation.Abstractions;
 
 /// <summary>The validation severity of a <see cref="IValidationMessage"/>.</summary>
 public enum ValidationSeverity

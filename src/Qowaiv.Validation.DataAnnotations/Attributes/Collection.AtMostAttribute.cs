@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.DataAnnotations;
+namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Validation attributes on the size of the collection.</summary>
 public static partial class Collection

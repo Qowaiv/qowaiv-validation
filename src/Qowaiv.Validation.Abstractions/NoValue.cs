@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.Abstractions;
+namespace Qowaiv.Validation.Abstractions;
 
 /// <summary>Exception to communicate that <see cref="Result{TModel}.Value"/> has no value (unintentionally).</summary>
 [Serializable]

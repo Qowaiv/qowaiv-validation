@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.DataAnnotations;
+namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Validation attributes on the length of a value.</summary>
 public static partial class Length

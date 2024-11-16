@@ -1,4 +1,4 @@
-﻿#if NET8_0_OR_GREATER
+#if NET8_0_OR_GREATER
 #else
 using Qowaiv.Validation.DataAnnotations;
 using ValidationSeverity = Qowaiv.Validation.Abstractions.ValidationSeverity;

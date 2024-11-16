@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <Project>
 
   <PropertyGroup>
@@ -8,11 +7,13 @@
     <NuGetAudit>true</NuGetAudit>
     <OutputType>library</OutputType>
     <DefineConstants>CONTRACTS_FULL</DefineConstants>
-    <CheckEolTargetFramework>false</CheckEolTargetFramework>
-    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <CheckEolTargetFramework>true</CheckEolTargetFramework>
+    <SuppressTfmSupportBuildWarnings>false</SuppressTfmSupportBuildWarnings>
   </PropertyGroup>
 
   <PropertyGroup Label="Package info">
+    <ProductName>Qowaiv Validation</ProductName>
     <Description>Qowaiv Validation supports a generic interface for (domain) model validation.</Description>
     <Authors>Corniel Nobel</Authors>
     <Owners>Qowaiv community</Owners>
@@ -23,18 +24,17 @@
   <PropertyGroup Label="Signing">
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
-    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)..\build\Qowaiv.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)/build/Qowaiv.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup Label="Analyzers">
-    <PackageReference Include="AsyncFixer" Version="*" PrivateAssets="all" />
-    <PackageReference Include="DotNetProjectFile.Analyzers" Version="1.*" PrivateAssets="all"/>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="*" PrivateAssets="all" Condition="'$(TargetFramework)'=='net8.0'" />
+    <PackageReference Include="AsyncFixer" PrivateAssets="all" />
+    <PackageReference Include="DotNetProjectFile.Analyzers" PrivateAssets="all"/>
+    <PackageReference Include="SonarAnalyzer.CSharp" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup Label="Additional files">
     <AdditionalFiles Include="*.csproj" Visible="false" />
-    <AdditionalFiles Include="../../props/common.props" Link="Properties/common.props" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.Abstractions;
+namespace Qowaiv.Validation.Abstractions;
 
 /// <summary>Extensions on asynchronous <see cref="Result{TModel}"/>.</summary>
 public static class ResultActExtensions

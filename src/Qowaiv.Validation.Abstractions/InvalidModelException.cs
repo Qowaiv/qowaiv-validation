@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.Abstractions;
+namespace Qowaiv.Validation.Abstractions;
 
 /// <summary>Represents an exception that is shown once tried to access the invalid model of a <see cref="Result{T}"/>.</summary>
 [Serializable]

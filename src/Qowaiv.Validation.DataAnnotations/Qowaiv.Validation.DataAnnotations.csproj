@@ -1,6 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\props\package.props" />
+  <Import Project="../../props/package.props" />
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
@@ -50,22 +50,22 @@ v0.0.4
     </PackageReleaseNotes>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Qowaiv" />
+    <PackageReference Include="System.ComponentModel.Annotations" />
+  </ItemGroup>
+  
   <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.CSharp" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Qowaiv" Version="7.2.0" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <ProjectReference Include="../Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Qowaiv.Validation.Abstractions\Qowaiv.Validation.Abstractions.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="..\..\shared\Do.cs" Link="Do.cs" />
-    <Compile Include="..\..\shared\Guard.cs" Link="Guard.cs" />
+    <Compile Include="../../shared/Do.cs" Link="Do.cs" />
+    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -85,3 +85,4 @@ v0.0.4
   </ItemGroup>
 
 </Project>
+ 

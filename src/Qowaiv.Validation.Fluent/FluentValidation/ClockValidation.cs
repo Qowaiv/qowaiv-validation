@@ -1,4 +1,4 @@
-﻿#pragma warning disable QW0010 // Use System.DateOnly instead of Qowaiv.Date: We support netstandard 2.0.
+#pragma warning disable QW0010 // Use System.DateOnly instead of Qowaiv.Date: We support netstandard 2.0.
 
 namespace FluentValidation;
 

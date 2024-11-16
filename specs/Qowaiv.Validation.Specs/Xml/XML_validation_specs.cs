@@ -1,4 +1,4 @@
-﻿using Qowaiv.Financial;
+using Qowaiv.Financial;
 using Qowaiv.Validation.Abstractions;
 using Qowaiv.Validation.Xml;
 using Specs.TestTools;

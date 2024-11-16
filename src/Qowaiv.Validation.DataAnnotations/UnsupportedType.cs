@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.DataAnnotations;
+namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>The exception that is thrown is a type is not supported.</summary>
 public class UnsupportedType : NotSupportedException

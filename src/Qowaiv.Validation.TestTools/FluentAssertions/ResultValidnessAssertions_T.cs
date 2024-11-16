@@ -1,4 +1,4 @@
-﻿namespace FluentAssertions.Qowaiv.Validation;
+namespace FluentAssertions.Qowaiv.Validation;
 
 /// <summary>Contains a number of methods to assert the value of a valid <see cref="Result{TModel}"/>.</summary>
 [Inheritable]

@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+using FluentValidation;
 using Qowaiv.Validation.Fluent;
 using Specs.Fluent.Models;
 

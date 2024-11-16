@@ -1,4 +1,4 @@
-﻿global using Qowaiv;
+global using Qowaiv;
 global using Qowaiv.Validation.Abstractions.Diagnostics.Contracts;
 global using Qowaiv.Validation.DataAnnotations;
 global using System;

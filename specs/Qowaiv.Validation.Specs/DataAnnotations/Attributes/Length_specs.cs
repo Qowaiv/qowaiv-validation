@@ -1,4 +1,4 @@
-﻿using Qowaiv.Validation.DataAnnotations;
+using Qowaiv.Validation.DataAnnotations;
 using System.ComponentModel.DataAnnotations;
 using RangeAttribute = NUnit.Framework.RangeAttribute;
 

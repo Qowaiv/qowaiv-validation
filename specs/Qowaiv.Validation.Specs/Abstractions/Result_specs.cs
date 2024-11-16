@@ -1,4 +1,4 @@
-﻿using Qowaiv.Validation.Abstractions;
+using Qowaiv.Validation.Abstractions;
 using System.Xml.Linq;
 using static Specs.Abstractions.Arrange;
 

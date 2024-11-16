@@ -1,4 +1,4 @@
-﻿using Qowaiv.Validation.Abstractions;
+using Qowaiv.Validation.Abstractions;
 using System.Xml.Schema;
 
 namespace XML_severity_type_specs;

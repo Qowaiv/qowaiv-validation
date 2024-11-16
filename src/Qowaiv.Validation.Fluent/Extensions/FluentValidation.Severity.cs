@@ -1,4 +1,4 @@
-﻿namespace FluentValidation;
+namespace FluentValidation;
 
 /// <summary>Extensions on <see cref="Severity"/>.</summary>
 public static class QowaivSeverityExtensions

@@ -1,4 +1,4 @@
-﻿namespace FluentValidation;
+namespace FluentValidation;
 
 /// <summary>Fluent validation for <see cref="PostalCode"/>.</summary>
 public static class PostalCodeValidation

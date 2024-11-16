@@ -1,4 +1,4 @@
-﻿namespace FluentValidation;
+namespace FluentValidation;
 
 /// <summary>FLuent validation for <see cref="double"/> and <see cref="float"/>.</summary>
 public static class FloatingPointValidation

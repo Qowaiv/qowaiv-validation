@@ -1,4 +1,4 @@
-﻿namespace Specs.Fluent.Models;
+namespace Specs.Fluent.Models;
 
 public class DateTimeModel
 {

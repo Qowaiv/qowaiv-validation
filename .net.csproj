@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <NoWarn>NU1504</NoWarn>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <None Include="shared/**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="build/**" />
+    <AdditionalFiles Include="props/**" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="DotNetProjectFile.Analyzers.Sdk" PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>

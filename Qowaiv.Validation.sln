@@ -1,26 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 15.0
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A4C3C9FF-4EED-41FE-8849-C896429254B5}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-		.gitattributes = .gitattributes
-		.gitignore = .gitignore
-		LICENSE.txt = LICENSE.txt
-		README.md = README.md
-		ReleaseNotes.md = ReleaseNotes.md
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "specs", "specs", "{40C1E942-8DB1-4E58-8FB4-71F5EDA66029}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{696E5B2C-1F1D-4ACD-BBD4-40594FC7BF11}"
-	ProjectSection(SolutionItems) = preProject
-		props\common.props = props\common.props
-		props\package.props = props\package.props
-		props\specs.props = props\specs.props
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Abstractions", "src\Qowaiv.Validation.Abstractions\Qowaiv.Validation.Abstractions.csproj", "{71FE5C6E-2A11-468E-9E8F-AC4B3A780A33}"
 EndProject
@@ -28,26 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Fluent", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.DataAnnotations", "src\Qowaiv.Validation.DataAnnotations\Qowaiv.Validation.DataAnnotations.csproj", "{9F6C3C67-299E-4C60-B8E9-14A7B6B59627}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{C036985A-F17D-405A-B3FD-37F30FA154FB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{8E1F869D-393B-4F6C-A3C0-1D1D336F9FA8}"
-	ProjectSection(SolutionItems) = preProject
-		.github\workflows\build-test.yaml = .github\workflows\build-test.yaml
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{F74D9EF2-39B5-40EB-8C44-1D6015C38D70}"
-	ProjectSection(SolutionItems) = preProject
-		build\Qowaiv.snk = build\Qowaiv.snk
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.TestTools", "src\Qowaiv.Validation.TestTools\Qowaiv.Validation.TestTools.csproj", "{5E3985BF-DA26-4983-84C2-CFC3C423334F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{31165360-F096-402C-A6D3-8972543BD430}"
-	ProjectSection(SolutionItems) = preProject
-		shared\Do.cs = shared\Do.cs
-		shared\Guard.cs = shared\Guard.cs
-		shared\ProductInfo.cs = shared\ProductInfo.cs
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Messages", "src\Qowaiv.Validation.Messages\Qowaiv.Validation.Messages.csproj", "{885B894C-FA99-44F3-806C-6244A885E4CC}"
 EndProject
@@ -56,6 +20,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Specs", "specs\Qowaiv.Validation.Specs\Qowaiv.Validation.Specs.csproj", "{1FC5B4EB-46D8-49AA-963A-495CBD39807B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Validation.Xml", "src\Qowaiv.Validation.Xml\Qowaiv.Validation.Xml.csproj", "{3DF5D2ED-87EE-4D3B-942E-789143777229}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = ".net", ".net.csproj", "{3DEEF29D-13A3-4739-80CD-1A60BDEC30A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,16 +61,15 @@ Global
 		{3DF5D2ED-87EE-4D3B-942E-789143777229}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DF5D2ED-87EE-4D3B-942E-789143777229}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DF5D2ED-87EE-4D3B-942E-789143777229}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DEEF29D-13A3-4739-80CD-1A60BDEC30A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DEEF29D-13A3-4739-80CD-1A60BDEC30A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DEEF29D-13A3-4739-80CD-1A60BDEC30A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DEEF29D-13A3-4739-80CD-1A60BDEC30A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{696E5B2C-1F1D-4ACD-BBD4-40594FC7BF11} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
-		{C036985A-F17D-405A-B3FD-37F30FA154FB} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
-		{8E1F869D-393B-4F6C-A3C0-1D1D336F9FA8} = {C036985A-F17D-405A-B3FD-37F30FA154FB}
-		{F74D9EF2-39B5-40EB-8C44-1D6015C38D70} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
-		{31165360-F096-402C-A6D3-8972543BD430} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{1FC5B4EB-46D8-49AA-963A-495CBD39807B} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

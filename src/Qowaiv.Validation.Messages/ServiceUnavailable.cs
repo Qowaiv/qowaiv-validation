@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.Messages;
+namespace Qowaiv.Validation.Messages;
 
 /// <summary>Message to communicate that a (external) service/system/process is unavailable.</summary>
 [Serializable]

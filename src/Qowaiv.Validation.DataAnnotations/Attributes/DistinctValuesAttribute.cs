@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.DataAnnotations;
+namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Specifies that all values are distinct.</summary>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]

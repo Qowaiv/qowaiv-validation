@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.Abstractions.Internals;
+namespace Qowaiv.Validation.Abstractions.Internals;
 
 [DebuggerDisplay("{DebuggerDisplay}")]
 [DebuggerTypeProxy(typeof(CollectionDebugView))]

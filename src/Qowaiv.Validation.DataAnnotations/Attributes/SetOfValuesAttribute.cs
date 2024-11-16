@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.DataAnnotations;
+namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Base <see cref="ValidationAttribute"/> for allowing or forbidding a set of values.</summary>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]

@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.Guarding;
+namespace Qowaiv.Validation.Guarding;
 
 /// <summary>Extension method to define guarding conditions.</summary>
 public static class Guarding

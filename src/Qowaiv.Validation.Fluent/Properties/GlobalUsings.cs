@@ -1,4 +1,4 @@
-﻿global using FluentValidation;
+global using FluentValidation;
 global using FluentValidation.Results;
 global using FluentValidation.Validators;
 global using Qowaiv;

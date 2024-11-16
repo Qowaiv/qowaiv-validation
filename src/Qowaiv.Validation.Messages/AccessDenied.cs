@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Validation.Messages;
+namespace Qowaiv.Validation.Messages;
 
 /// <summary>Message to communicate that access has been denied.</summary>
 [Serializable]

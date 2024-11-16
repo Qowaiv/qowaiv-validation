@@ -1,4 +1,4 @@
-﻿using Qowaiv.Validation.DataAnnotations;
+using Qowaiv.Validation.DataAnnotations;
 using RangeAttribute = NUnit.Framework.RangeAttribute;
 
 namespace Data_annotations.Attributes.Size_specs;

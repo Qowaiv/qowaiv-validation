@@ -1,4 +1,4 @@
-﻿global using Qowaiv.Validation.Abstractions;
+global using Qowaiv.Validation.Abstractions;
 global using System;
 global using System.Collections;
 global using System.Collections.Generic;

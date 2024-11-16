@@ -1,4 +1,4 @@
-﻿namespace System.Xml.Schema;
+namespace System.Xml.Schema;
 
 /// <summary>Extensions on <see cref="XmlSchemaSet"/>.</summary>
 public static class QowaivXmlSchemaSetExtensions

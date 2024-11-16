@@ -1,4 +1,4 @@
-﻿namespace FluentValidation;
+namespace FluentValidation;
 
 /// <summary>Fluent validation for Single Value Objects being required.</summary>
 public static class RequiredValidation

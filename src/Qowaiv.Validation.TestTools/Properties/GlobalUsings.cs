@@ -1,4 +1,4 @@
-﻿global using FluentAssertions.Execution;
+global using FluentAssertions.Execution;
 global using FluentAssertions.Primitives;
 global using FluentAssertions.Qowaiv.Validation;
 global using Qowaiv;

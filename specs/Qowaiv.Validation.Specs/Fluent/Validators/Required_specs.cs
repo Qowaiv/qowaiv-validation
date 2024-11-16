@@ -1,4 +1,4 @@
-﻿using Qowaiv.Validation.Fluent;
+using Qowaiv.Validation.Fluent;
 using Specs.Fluent.Models;
 
 namespace Fluent_validation.Required_specs;

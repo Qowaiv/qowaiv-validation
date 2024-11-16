@@ -1,4 +1,4 @@
-﻿namespace FluentValidation;
+namespace FluentValidation;
 
 /// <summary>Fluent validation for Single Value Objects being (not) unknown.</summary>
 public static class UnknownValidation
