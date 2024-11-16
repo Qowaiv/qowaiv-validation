@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\props\package.props" />
+  <Import Project="../../props/package.props" />
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net8.0;net9.0</TargetFrameworks>
@@ -25,12 +25,12 @@ v0.1.2
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\shared\Guard.cs" Link="Guard.cs" />
+    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Qowaiv.Validation.Abstractions\Qowaiv.Validation.Abstractions.csproj" />
-    <ProjectReference Include="..\Qowaiv.Validation.Messages\Qowaiv.Validation.Messages.csproj" />
+    <ProjectReference Include="../Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
+    <ProjectReference Include="../Qowaiv.Validation.Messages/Qowaiv.Validation.Messages.csproj" />
   </ItemGroup>
   
 </Project>
