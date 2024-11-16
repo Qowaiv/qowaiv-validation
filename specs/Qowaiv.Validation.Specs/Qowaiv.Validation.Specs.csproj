@@ -1,9 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/specs.props" />
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
+    <IsTestProject>true</IsTestProject>
     <RootNamespace>Specs</RootNamespace>
   </PropertyGroup>
 
@@ -29,7 +30,6 @@
 
   <ItemGroup Label="TestTools">
     <PackageReference Include="FluentAssertions" Version="6.12.2" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" />
     <PackageReference Include="NUnit" Version="4.*" />
     <PackageReference Include="Qowaiv.TestTools" Version="7.2.0" />
   </ItemGroup>
@@ -37,6 +37,7 @@
   <ItemGroup Label="Build tools">
     <PackageReference Include="coverlet.collector" Version="*" PrivateAssets="all" />
     <PackageReference Include="coverlet.msbuild" Version="*" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" PrivateAssets="all" />
     <PackageReference Include="NUnit3TestAdapter" Version="*" PrivateAssets="all" />
   </ItemGroup>
 

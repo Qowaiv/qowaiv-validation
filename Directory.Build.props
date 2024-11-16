@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Project>
 
   <PropertyGroup>
@@ -8,11 +7,13 @@
     <NuGetAudit>true</NuGetAudit>
     <OutputType>library</OutputType>
     <DefineConstants>CONTRACTS_FULL</DefineConstants>
-    <CheckEolTargetFramework>false</CheckEolTargetFramework>
-    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <CheckEolTargetFramework>true</CheckEolTargetFramework>
+    <SuppressTfmSupportBuildWarnings>false</SuppressTfmSupportBuildWarnings>
   </PropertyGroup>
 
   <PropertyGroup Label="Package info">
+    <ProductName>Qowaiv Validation</ProductName>
     <Description>Qowaiv Validation supports a generic interface for (domain) model validation.</Description>
     <Authors>Corniel Nobel</Authors>
     <Owners>Qowaiv community</Owners>
