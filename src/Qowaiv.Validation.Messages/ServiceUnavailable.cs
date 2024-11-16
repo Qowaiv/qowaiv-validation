@@ -26,7 +26,7 @@ public class ServiceUnavailable : Exception, IValidationMessage
     [Pure]
     public static ServiceUnavailable WithName(string name)
     {
-        Guard.NotNullOrEmpty(name, nameof(name));
+        Guard.NotNullOrEmpty(name);
         return new ServiceUnavailable(string.Format(ValidationMessages.ServiceUnavailable_WithName, name))
         {
             PropertyName = name,

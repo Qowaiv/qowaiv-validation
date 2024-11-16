@@ -17,8 +17,8 @@ public static class QowaivXObjectExtensions
     [Pure]
     public static Result<XDocument> Validate(this XDocument document, XmlSchemaSet schemas)
     {
-        Guard.NotNull(document, nameof(document));
-        Guard.NotNull(schemas, nameof(schemas));
+        Guard.NotNull(document);
+        Guard.NotNull(schemas);
 
         var handler = new XmlValidationHandler();
         document.Validate(schemas, handler.Validate);
@@ -32,7 +32,7 @@ public static class QowaivXObjectExtensions
     [Pure]
     internal static string AbsoluteXPath(this XAttribute attribute)
     {
-        Guard.NotNull(attribute, nameof(attribute));
+        Guard.NotNull(attribute);
         return $"{attribute.Parent?.AbsoluteXPath()}/@{attribute.Name.LocalName}";
     }
 
@@ -43,7 +43,7 @@ public static class QowaivXObjectExtensions
     [Pure]
     internal static string AbsoluteXPath(this XElement element)
     {
-        Guard.NotNull(element, nameof(element));
+        Guard.NotNull(element);
         return string.Concat(element
             .AncestorsAndSelf().Select(RelativePath).Reverse());
     }

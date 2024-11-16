@@ -56,7 +56,7 @@ public sealed class AnnotatedModel
     [Pure]
     internal static AnnotatedModel Create(Type type)
     {
-        Guard.NotNull(type, nameof(type));
+        Guard.NotNull(type);
 
         var isIValidatable = typeof(IValidatableObject).IsAssignableFrom(type);
         var validations = type.ValidationAttributes().ToArray();

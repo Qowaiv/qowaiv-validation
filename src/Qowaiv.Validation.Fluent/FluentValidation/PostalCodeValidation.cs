@@ -15,7 +15,7 @@ public static class PostalCodeValidation
     /// </param>
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, PostalCode> ValidFor<TModel>(this IRuleBuilder<TModel, PostalCode> ruleBuilder, Country country)
-        => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
+        => Guard.NotNull(ruleBuilder)
         .ValidFor(_ => country);
 
     /// <summary>The postal code should be valid for the specified country.</summary>
@@ -30,7 +30,7 @@ public static class PostalCodeValidation
     /// </param>
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, PostalCode> ValidFor<TModel>(this IRuleBuilder<TModel, PostalCode> ruleBuilder, Func<TModel, Country> country)
-        => Guard.NotNull(ruleBuilder, nameof(ruleBuilder))
+        => Guard.NotNull(ruleBuilder)
             .Must((model, postalCode, context) => IsValidFor(postalCode, country(model), context))
             .WithMessage(_ => QowaivValidationFluentMessages.PostalCodeValidForCountry);
 

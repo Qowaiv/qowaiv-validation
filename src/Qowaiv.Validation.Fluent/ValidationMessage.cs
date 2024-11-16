@@ -24,12 +24,12 @@ public class ValidationMessage : ValidationFailure, IValidationMessage
     /// </summary>
     [Pure]
     public static IEnumerable<ValidationMessage> For(IEnumerable<ValidationFailure> messages)
-        => Guard.NotNull(messages, nameof(messages)).Select(message => For(message));
+        => Guard.NotNull(messages).Select(message => For(message));
 
     /// <summary>Gets a <see cref="ValidationMessage"/> based on a <see cref="ValidationFailure"/>.</summary>
     [Pure]
     public static ValidationMessage For(ValidationFailure failure)
-        => Guard.NotNull(failure, nameof(failure)) is ValidationMessage message
+        => Guard.NotNull(failure) is ValidationMessage message
         ? message
         : new(failure.PropertyName, failure.ErrorMessage)
         {

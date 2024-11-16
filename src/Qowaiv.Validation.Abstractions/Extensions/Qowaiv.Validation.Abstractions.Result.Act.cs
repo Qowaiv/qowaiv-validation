@@ -29,8 +29,8 @@ public static class ResultActExtensions
         Func<TModel, Result<TOut>> action,
         bool continueOnCapturedContext = false)
     {
-        _ = Guard.NotNull(promise, nameof(promise));
-        Guard.NotNull(action, nameof(action));
+        _ = Guard.NotNull(promise);
+        Guard.NotNull(action);
 
         var result = await promise.ConfigureAwait(continueOnCapturedContext);
 
@@ -65,8 +65,8 @@ public static class ResultActExtensions
         Func<TModel, Task<Result<TOut>>> action,
         bool continueOnCapturedContext = false)
     {
-        _ = Guard.NotNull(promise, nameof(promise));
-        Guard.NotNull(action, nameof(action));
+        _ = Guard.NotNull(promise);
+        Guard.NotNull(action);
 
         var result = await promise.ConfigureAwait(continueOnCapturedContext);
         return result is null
@@ -97,8 +97,8 @@ public static class ResultActExtensions
         Func<TModel, Result> action,
         bool continueOnCapturedContext = false)
     {
-        _ = Guard.NotNull(promise, nameof(promise));
-        Guard.NotNull(action, nameof(action));
+        _ = Guard.NotNull(promise);
+        Guard.NotNull(action);
 
         var result = await promise.ConfigureAwait(continueOnCapturedContext);
         return result is null
@@ -129,8 +129,8 @@ public static class ResultActExtensions
         Func<TModel, Task<Result>> action,
         bool continueOnCapturedContext = false)
     {
-        _ = Guard.NotNull(promise, nameof(promise));
-        Guard.NotNull(action, nameof(action));
+        _ = Guard.NotNull(promise);
+        Guard.NotNull(action);
 
         var result = await promise.ConfigureAwait(continueOnCapturedContext);
         return result is null
@@ -168,8 +168,8 @@ public static class ResultActExtensions
         Action<TModel, TOut> update,
         bool continueOnCapturedContext = false)
     {
-        _ = Guard.NotNull(promise, nameof(promise));
-        Guard.NotNull(action, nameof(action));
+        _ = Guard.NotNull(promise);
+        Guard.NotNull(action);
 
         var result = await promise.ConfigureAwait(continueOnCapturedContext);
         return result is null
@@ -207,8 +207,8 @@ public static class ResultActExtensions
         Action<TModel, TOut> update,
         bool continueOnCapturedContext = false)
     {
-        _ = Guard.NotNull(promise, nameof(promise));
-        Guard.NotNull(action, nameof(action));
+        _ = Guard.NotNull(promise);
+        Guard.NotNull(action);
 
         var result = await promise.ConfigureAwait(continueOnCapturedContext);
         return result is null
@@ -246,8 +246,8 @@ public static class ResultActExtensions
         Func<TModel, TOut, TModel> update,
         bool continueOnCapturedContext = false)
     {
-        _ = Guard.NotNull(promise, nameof(promise));
-        Guard.NotNull(action, nameof(action));
+        _ = Guard.NotNull(promise);
+        Guard.NotNull(action);
 
         var result = await promise.ConfigureAwait(continueOnCapturedContext);
         return result is null
@@ -285,8 +285,8 @@ public static class ResultActExtensions
         Func<TModel, TOut, TModel> update,
         bool continueOnCapturedContext = false)
     {
-        _ = Guard.NotNull(promise, nameof(promise));
-        Guard.NotNull(action, nameof(action));
+        _ = Guard.NotNull(promise);
+        Guard.NotNull(action);
 
         var result = await promise.ConfigureAwait(continueOnCapturedContext);
         return result is null

@@ -12,7 +12,7 @@ public static class QowaivValidationAttributeExtensions
     [Pure]
     public static ValidationMessage GetValidationMessage(this ValidationAttribute attribute, object? value, ValidationContext validationContext)
     {
-        Guard.NotNull(attribute, nameof(attribute));
+        Guard.NotNull(attribute);
 
         var result = IsValid.Invoke(attribute, [value, validationContext])!;
         return ValidationMessage.For((ValidationResult)result);

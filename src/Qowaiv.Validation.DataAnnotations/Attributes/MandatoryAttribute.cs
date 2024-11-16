@@ -22,7 +22,7 @@ public sealed class MandatoryAttribute : RequiredAttribute
     /// <inheritdoc />
     [Pure]
     protected override ValidationResult IsValid(object? value, ValidationContext validationContext)
-        => IsValid(value, GetMemberType(Guard.NotNull(validationContext, nameof(validationContext))))
+        => IsValid(value, GetMemberType(Guard.NotNull(validationContext)))
         ? ValidationResult.Success!
         : ValidationMessage.Error(FormatErrorMessage(validationContext.DisplayName), validationContext.MemberNames());
 

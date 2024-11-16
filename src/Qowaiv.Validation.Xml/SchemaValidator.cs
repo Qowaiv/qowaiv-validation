@@ -24,7 +24,7 @@ public class SchemaValidator<TModel> : IValidator<TModel>
     /// <param name="schemas">
     /// A set of <see cref="XmlSchema"/>'s.
     /// </param>
-    public SchemaValidator(XmlSchemaSet schemas) => Schemas = Guard.NotNull(schemas, nameof(schemas));
+    public SchemaValidator(XmlSchemaSet schemas) => Schemas = Guard.NotNull(schemas);
 
     /// <summary>The XML Schema('s) used to validate the model.</summary>
     public XmlSchemaSet Schemas { get; }

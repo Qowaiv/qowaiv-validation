@@ -28,7 +28,7 @@ public sealed class AnnotatedModelStore
     [Pure]
     public AnnotatedModel GetAnnotatedModel(Type type)
     {
-        Guard.NotNull(type, nameof(type));
+        Guard.NotNull(type);
 
         var tp = QowaivType.GetNotNullableType(type);
 
