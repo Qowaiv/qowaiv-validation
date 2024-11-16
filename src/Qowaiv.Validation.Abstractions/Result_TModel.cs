@@ -4,7 +4,7 @@ namespace Qowaiv.Validation.Abstractions;
 public sealed class Result<TModel> : Result
 {
     /// <summary>Initializes a new instance of the <see cref="Result{T}"/> class.</summary>
-    internal Result(FixedMessages messages) : base(messages) => Do.Nothing();
+    internal Result(FixedMessages messages, ResultTrace trace) : base(messages, trace) => Do.Nothing();
 
     /// <summary>Initializes a new instance of the <see cref="Result{T}"/> class.</summary>
     /// <param name="value">
@@ -13,8 +13,19 @@ public sealed class Result<TModel> : Result
     /// <param name="messages">
     /// The messages related to the result.
     /// </param>
-    internal Result(TModel? value, FixedMessages messages) : base(messages)
+    /// <param name="trace">
+    /// The stack trace.
+    /// </param>
+    internal Result(TModel? value, FixedMessages messages, ResultTrace trace) : base(messages, trace)
         => _value = IsValid ? value : default;
+
+    /// <summary>Initializes a new instance of the <see cref="Result{T}"/> class.</summary>
+    internal Result(FixedMessages messages)
+        : this(messages, ResultTrace.New(messages)) { }
+
+    /// <summary>Initializes a new instance of the <see cref="Result{T}"/> class.</summary>
+    internal Result(TModel? value, FixedMessages messages)
+        : this(value, messages, ResultTrace.New(messages)) { }
 
     /// <summary>Gets the value related to result.</summary>
     /// <remarks>
@@ -52,7 +63,7 @@ public sealed class Result<TModel> : Result
     [Pure]
     public Result<TOut> Cast<TOut>()
     {
-        return new(_value is null ? default : Cast(), (FixedMessages)Messages);
+        return new(_value is null ? default : Cast(), (FixedMessages)Messages, StackTrace);
 
         TOut Cast()
             => _value is TOut cast
@@ -83,9 +94,13 @@ public sealed class Result<TModel> : Result
         {
             var outcome = action(Value);
             var value = outcome.IsValid ? outcome.Value : default;
-            return new(value, ((FixedMessages)Messages).AddRange(outcome.Messages));
+            var messages = ((FixedMessages)Messages).AddRange(outcome.Messages);
+            return new(value, messages, ResultTrace.New(messages));
         }
-        else return WithMessages<TOut>(Messages);
+        else
+        {
+            return new Result<TOut>(default, (FixedMessages)Messages, StackTrace);
+        }
     }
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
@@ -105,7 +120,10 @@ public sealed class Result<TModel> : Result
             var outcome = action(Value);
             return For(Value, ((FixedMessages)Messages).AddRange(outcome.Messages));
         }
-        else return WithMessages<TModel>(Messages);
+        else
+        {
+            return new Result<TModel>(default, (FixedMessages)Messages, StackTrace);
+        }
     }
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
