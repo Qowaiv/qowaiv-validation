@@ -9,6 +9,10 @@
     <PackageReleaseNotes>
       <![CDATA[
 v3.0.0
+- Introduction of AllowedAttribute<T> as alternative to AllowedValuesAttribute.
+- Introduction of ForbiddenAttribute<T> as alternative to FobiddenValuesAttribute.
+- Marked AllowedValuesAttribute as obsolete.
+- Marked FobiddenValuesAttribute as obsolete.
 - Add .NET 9.0 target.
 - Drop .NET 5.0, NET6.0, NET7.0 targets. (BREAKING)
 - Drop binary serialization on exceptions. (BREAKING)
