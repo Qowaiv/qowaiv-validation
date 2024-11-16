@@ -6,6 +6,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 /// <typeparam name="TModel">
 /// The type of the annotated model to validate.
 /// </typeparam>
+[Mutable]
 public class AnnotatedModelValidator<TModel> : IValidator<TModel>
 {
     /// <summary>Initializes a new instance of the <see cref="AnnotatedModelValidator{TModel}"/> class.</summary>
@@ -125,7 +126,10 @@ public class AnnotatedModelValidator<TModel> : IValidator<TModel>
                 var nestedContext = propertyContext.Nested(value);
                 ValidateModel(nestedContext);
             }
-            else { /* Else we can skip further validation. */ }
+            else
+            {
+                // Else we can skip further validation.
+            }
         }
     }
 
@@ -147,12 +151,12 @@ public class AnnotatedModelValidator<TModel> : IValidator<TModel>
             context.AddMessages(((IValidatableObject)context.Instance).Validate(context));
         }
     }
+}
 
-    private sealed class EmptyProvider : IServiceProvider
-    {
-        public static readonly EmptyProvider Instance = new();
+file sealed class EmptyProvider : IServiceProvider
+{
+    public static readonly EmptyProvider Instance = new();
 
-        [Pure]
-        public object? GetService(Type serviceType) => null;
-    }
+    [Pure]
+    public object? GetService(Type serviceType) => null;
 }

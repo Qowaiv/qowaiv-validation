@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <NoWarn>NU1504</NoWarn>
+    <NoWarn>$(NoWarn);NU1504</NoWarn>
   </PropertyGroup>
   
   <ItemGroup>

@@ -12,7 +12,7 @@ public class At_least
         public void @string() => new Length.AtLeastAttribute(4).IsValid("1234").Should().BeTrue();
 
         [Test]
-        public void @array() => new Length.AtLeastAttribute(2).IsValid(new int[] { 1, 2 }).Should().BeTrue();
+        public void @array() => new Length.AtLeastAttribute(2).IsValid(new[] { 1, 2 }).Should().BeTrue();
 
         [Test]
         public void type_with_length_property() => new Length.AtLeastAttribute(4).IsValid(EmailAddress.Parse("test@qowaiv.org")).Should().BeTrue();
@@ -46,7 +46,7 @@ public class At_least
     public void with_message(CultureInfo culture, string message)
     {
         using var _ = culture.Scoped();
-        new Model() {AtLeastProp = "a" }.Should().BeInvalidFor(new AnnotatedModelValidator<Model>())
+        new Model() { AtLeastProp = "a" }.Should().BeInvalidFor(new AnnotatedModelValidator<Model>())
             .WithMessage(ValidationMessage.Error(message, "AtLeastProp"));
     }
 }
@@ -59,7 +59,7 @@ public class At_most
         public void @string() => new Length.AtMostAttribute(4).IsValid("1234").Should().BeTrue();
 
         [Test]
-        public void @array() => new Length.AtMostAttribute(2).IsValid(new int[] { 1, 2 }).Should().BeTrue();
+        public void @array() => new Length.AtMostAttribute(2).IsValid(new[] { 1, 2 }).Should().BeTrue();
 
         [Test]
         public void type_with_length_property() => new Length.AtMostAttribute(40).IsValid(EmailAddress.Parse("test@qowaiv.org")).Should().BeTrue();
@@ -100,10 +100,10 @@ public class In_range
     public class Supports
     {
         [Test]
-        public void @string() => new Length.InRangeAttribute(1,4).IsValid("1234").Should().BeTrue();
+        public void @string() => new Length.InRangeAttribute(1, 4).IsValid("1234").Should().BeTrue();
 
         [Test]
-        public void @array() => new Length.InRangeAttribute(1, 2).IsValid(new int[] { 1, 2 }).Should().BeTrue();
+        public void @array() => new Length.InRangeAttribute(1, 2).IsValid(new[] { 1, 2 }).Should().BeTrue();
 
         [Test]
         public void type_with_length_property() => new Length.InRangeAttribute(3, 40).IsValid(EmailAddress.Parse("test@qowaiv.org")).Should().BeTrue();

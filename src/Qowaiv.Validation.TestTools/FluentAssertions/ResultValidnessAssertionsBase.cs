@@ -11,7 +11,7 @@ public class ResultValidnessAssertionsBase<TSubject>
     protected TSubject? Subject { get; }
 
     /// <summary>Gets the <see cref="Result.Messages"/>.</summary>
-    protected IEnumerable<IValidationMessage> Messages => Subject?.Messages ?? Array.Empty<IValidationMessage>();
+    protected IEnumerable<IValidationMessage> Messages => Subject?.Messages ?? [];
 
     internal void ExecuteWithoutMessages()
         => Execute.Assertion

@@ -25,7 +25,7 @@ public class Does_not_crash_on
 
     public class ModelWithInaccessibleProperty
     {
-        public int SomeProperty => throw new NotImplementedException();
+        public int SomeProperty => throw new NotImplementedException(ToString());
     }
 
     public class ModelWithIndexedProperty

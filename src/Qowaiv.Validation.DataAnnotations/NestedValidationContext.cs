@@ -86,7 +86,7 @@ internal sealed class NestedValidationContext
             else
             {
                 var members = violationOnType && string.IsNullOrEmpty(message.PropertyName)
-                    ? new[] { Root }
+                    ? [Root]
                     : message.MemberNames.Select(name => $"{Root}.{name}").ToArray();
 
                 return new ValidationMessage(

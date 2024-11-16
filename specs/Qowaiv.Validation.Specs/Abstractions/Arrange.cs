@@ -11,8 +11,8 @@ namespace Specs.Abstractions
         public static readonly ValidationMessage Info1 = ValidationMessage.Info("Info 1");
         public static readonly ValidationMessage Info2 = ValidationMessage.Info("Info 2");
         public static readonly ValidationMessage[] TestMessages =
-        {
+        [
             Error1, Error2, Warning1, Warning2, Info1, Info2
-        };
+        ];
     }
 }

@@ -10,7 +10,7 @@ public class ValidationMessage : ValidationResult, IValidationMessage, ISerializ
     public ValidationMessage() : this(ValidationSeverity.None, null, null) => Do.Nothing();
 
     internal ValidationMessage(ValidationSeverity severity, string? message, string[]? memberNames)
-        : base(message, memberNames ?? Array.Empty<string>())
+        : base(message, memberNames ?? [])
         => Severity = severity;
 
     /// <summary>Initializes a new instance of the <see cref="ValidationMessage"/> class.</summary>

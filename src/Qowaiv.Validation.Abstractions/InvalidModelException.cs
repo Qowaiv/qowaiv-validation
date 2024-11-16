@@ -21,7 +21,7 @@ public class InvalidModelException : InvalidOperationException
         => Errors = new ReadOnlyCollection<IValidationMessage>(Filter(messages).ToArray());
 
     /// <summary>The related validation error(s).</summary>
-    public IReadOnlyList<IValidationMessage> Errors { get; } = Array.Empty<IValidationMessage>();
+    public IReadOnlyList<IValidationMessage> Errors { get; } = [];
 
     /// <summary>Creates an <see cref="InvalidModelException"/> for the model.</summary>
     [Pure]
@@ -43,7 +43,7 @@ public class InvalidModelException : InvalidOperationException
 
     [Pure]
     private static IEnumerable<IValidationMessage> Filter(IEnumerable<IValidationMessage> messages)
-        => (messages ?? Array.Empty<IValidationMessage>())
+        => (messages ?? [])
         .Where(e => e.Severity >= ValidationSeverity.Error);
 
     private static void Append(StringBuilder builder, IValidationMessage message)
