@@ -5,4 +5,4 @@ namespace Qowaiv.Validation.TestTools.Diagnostics.Contracts;
 /// </summary>
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
 [Conditional("CONTRACTS_FULL")]
-public sealed class AssertionAttribute : ImpureAttribute { }
+internal sealed class AssertionAttribute : ImpureAttribute { }
