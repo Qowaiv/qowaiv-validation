@@ -12,6 +12,6 @@ public static class ValidationContextExtensions
     [Pure]
     internal static string[] MemberNames(this ValidationContext? validationContext)
         => validationContext?.MemberName is { }
-        ? new[] { validationContext.MemberName }
-        : Array.Empty<string>();
+        ? [validationContext.MemberName]
+        : [];
 }

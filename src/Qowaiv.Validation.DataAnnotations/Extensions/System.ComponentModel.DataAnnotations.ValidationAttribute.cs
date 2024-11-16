@@ -14,7 +14,7 @@ public static class QowaivValidationAttributeExtensions
     {
         Guard.NotNull(attribute, nameof(attribute));
 
-        var result = IsValid.Invoke(attribute, new object?[] { value, validationContext })!;
+        var result = IsValid.Invoke(attribute, [value, validationContext])!;
         return ValidationMessage.For((ValidationResult)result);
     }
 

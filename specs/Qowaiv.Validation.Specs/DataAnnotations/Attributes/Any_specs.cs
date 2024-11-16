@@ -33,6 +33,6 @@ public class With_message
     internal class Model
     {
         [Any]
-        public IEnumerable<string> Values { get; set; } = Array.Empty<string>();
+        public IEnumerable<string> Values { get; set; } = [];
     }
 }

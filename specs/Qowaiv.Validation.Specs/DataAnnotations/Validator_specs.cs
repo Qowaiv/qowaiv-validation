@@ -60,6 +60,7 @@ public class Validates_children_when_child_type
         public int? Answer { get; set; }
     }
 
+    [AttributeUsage(AttributeTargets.Class)]
     public sealed class MustHaveTheAnswerAttribute : ValidationAttribute
     {
         public override bool IsValid(object? value)
@@ -102,11 +103,7 @@ public class Supports
     {
         var model = new WithChildren
         {
-            Records = new[]
-            {
-                new ChildRecord(null),
-                new ChildRecord(null),
-            } 
+            Records = [new ChildRecord(null), new ChildRecord(null)],
         };
         model.Should().BeInvalidFor(new AnnotatedModelValidator<WithChildren>()).WithMessages(
             ValidationMessage.Error("The Value field is required.", "Records[0].Value"),
