@@ -446,7 +446,6 @@ internal static partial class Guard
         public const string ArgumentOutOfRangeException_DefinedEnum = "Argument {0} is not a defined value of {1}.";
         public const string ArgumentOutOfRangeException_Negative = "Argument should not be negative.";
         public const string ArgumentOutOfRangeException_NotPositive = "Argument should be positive.";
-        public const string ArgumentOutOfRangeException_NoFinite = "Argument should be a finite number.";
     }
 
     /// <summary>Marks the NotNull argument as being validated for not being null, to satisfy the static code analysis.</summary>
