@@ -1,23 +1,54 @@
+using Qowaiv.Financial;
 using Qowaiv.Validation.DataAnnotations;
 
 namespace Data_annotations.Attributes.Forbidden_values_specs;
 
 public class Is_valid_for
 {
-    [Test]
-    public void Null()
-        => new ForbiddenValuesAttribute("DE", "FR", "GB").IsValid(null).Should().BeTrue();
+    public class Generic
+    {
+        [Test]
+        public void Null()
+            => new ForbiddenAttribute<Country>("DE", "FR", "GB").IsValid(null).Should().BeTrue();
 
-    [Test]
-    public void value_not_in_allowed_values()
-        => new ForbiddenValuesAttribute("DE", "FR", "GB").IsValid(Country.TR).Should().BeTrue();
+        [Test]
+        public void value_not_in_allowed_values()
+            => new ForbiddenAttribute<Country>("DE", "FR", "GB").IsValid(Country.TR).Should().BeTrue();
+
+        [Test]
+        public void based_on_other_than_string()
+            => new ForbiddenAttribute<Amount>(12.00, 17.23).IsValid(64.28.Amount()).Should().BeTrue();
+    }
+
+    [Obsolete("Will be dropped with next major.")]
+    public class Non_generic
+    {
+        [Test]
+        public void Null()
+            => new ForbiddenValuesAttribute("DE", "FR", "GB").IsValid(null).Should().BeTrue();
+
+        [Test]
+        public void value_not_in_allowed_values()
+            => new ForbiddenValuesAttribute("DE", "FR", "GB").IsValid(Country.TR).Should().BeTrue();
+    }
 }
 
 public class Is_not_valid_for
 {
-    [Test]
-    public void value_in_allowed_values()
+    public class Generic
+    {
+        [Test]
+        public void value_in_allowed_values()
+       => new ForbiddenAttribute<Country>("DE", "FR", "GB").IsValid(Country.GB).Should().BeFalse();
+    }
+
+    [Obsolete("Will be dropped with next major.")]
+    public class Non_generic
+    {
+        [Test]
+        public void value_in_allowed_values()
        => new ForbiddenValuesAttribute("DE", "FR", "GB").IsValid(Country.GB).Should().BeFalse();
+    }
 }
 
 public class With_message
@@ -32,7 +63,7 @@ public class With_message
     }
     internal class Model
     {
-        [ForbiddenValues("DE", "FR", "GB")]
+        [Forbidden<Country>("DE", "FR", "GB")]
         public Country Country { get; set; } = Country.DE;
     }
 }

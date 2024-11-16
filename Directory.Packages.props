@@ -7,6 +7,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="AsyncFixer" Version="*" />
+    <PackageVersion Include="BenchmarkDotNet" Version="0.14.0" />
     <PackageVersion Include="coverlet.collector" Version="*" />
     <PackageVersion Include="DotNetProjectFile.Analyzers" Version="*" />
     <PackageVersion Include="DotNetProjectFile.Analyzers.Sdk" Version="*" />
