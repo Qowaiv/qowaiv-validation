@@ -80,7 +80,7 @@ public class Model
 ```
 
 ### Defined enum values only
-The `[DefinedEnumValuesOnly]` attribute limits the allowed values to defined
+The `[DefinedsOnly&lt;TEnum&gt;]` attribute limits the allowed values to defined
 enums only. By default it supports all possible combinations of defined enums 
 when dealing with flags, but that can be restricted by setting 
 `OnlyAllowDefinedFlagsCombinations` to true.
@@ -88,7 +88,7 @@ when dealing with flags, but that can be restricted by setting
 ``` C#
 public class Model
 {
-    [DefinedEnumValuesOnly(OnlyAllowDefinedFlagsCombinations = false)]
+    [DefinedOnly&lt;SomeEnum&gt;(OnlyAllowDefinedFlagsCombinations = false)]
     public SomeEnum CountryOfBirth { get; set; }
 }
 ```

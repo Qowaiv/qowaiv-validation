@@ -3,12 +3,15 @@ using System.Reflection;
 namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Validates if the decorated enum has a value that is a defined.</summary>
+/// <typeparam name="TEnum">
+/// The type of the enum.
+/// </typeparam>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
-[Obsolete("Use DefinedAttribute<TEnum> instead.")]
-public class DefinedEnumValuesOnlyAttribute : ValidationAttribute
+public class DefinedOnlyAttribute<TEnum> : ValidationAttribute
+    where TEnum : struct, Enum
 {
-    /// <summary>Initializes a new instance of the <see cref="DefinedEnumValuesOnlyAttribute"/> class.</summary>
-    public DefinedEnumValuesOnlyAttribute()
+    /// <summary>Initializes a new instance of the <see cref="DefinedOnlyAttribute{TEnum}"/> class.</summary>
+    public DefinedOnlyAttribute()
         : base(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError) => Do.Nothing();
 
     /// <summary>If true, for flag enums, also combinations of defined single values are allowed, that are not defined themselves explicitly.</summary>
@@ -16,31 +19,42 @@ public class DefinedEnumValuesOnlyAttribute : ValidationAttribute
     /// When enabled, the logic falls back on <see cref="Enum.IsDefined(Type, object)"/>, as
     /// that is stricter than, our implementation.
     /// </remarks>
-    public bool OnlyAllowDefinedFlagsCombinations { get; set; }
+    public bool OnlyAllowDefinedFlagsCombinations { get; init; }
 
     /// <summary>Returns true if the value is defined for the enum, otherwise false.</summary>
-    /// <exception cref="ArgumentException">
+    /// <exception cref="InvalidCastException">
     /// If the type of the value is not an enum.
     /// </exception>
     [Pure]
     public override bool IsValid(object? value)
     {
         // Might be a nullable enum, we just don't know.
-        if (value is null) return true;
+        if (value is null)
+        {
+            return true;
+        }
         else
         {
-            var enumType = value.GetType();
+            var val = (TEnum)value;
 
-            if (!OnlyAllowDefinedFlagsCombinations && enumType.IsEnum && enumType.GetCustomAttributes<FlagsAttribute>().Any())
+            if (!OnlyAllowDefinedFlagsCombinations && AllFlags is { } all)
             {
-                dynamic dyn = value;
-                var max = Enum.GetValues(enumType)
-                    .Cast<dynamic>()
-                    .Aggregate((e1, e2) => e1 | e2);
-
-                return (max & dyn) == dyn;
+                return all.HasFlag(val);
             }
-            return Enum.IsDefined(enumType, value);
+            else
+            {
+                return Enum.IsDefined(typeof(TEnum), val);
+            }
         }
     }
+
+    private static readonly TEnum? AllFlags = GetAllFlags();
+
+    [Pure]
+    private static TEnum? GetAllFlags()
+        => typeof(TEnum).GetCustomAttributes<FlagsAttribute>().Any()
+        ? Enum.GetValues(typeof(TEnum))
+            .Cast<dynamic>()
+            .Aggregate((e1, e2) => e1 | e2)
+        : null;
 }
