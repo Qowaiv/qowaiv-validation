@@ -88,7 +88,7 @@ when dealing with flags, but that can be restricted by setting
 ``` C#
 public class Model
 {
-    [DefinedOnly&lt;SomeEnum&gt;(OnlyAllowDefinedFlagsCombinations = false)]
+    [DefinedOnly<SomeEnum>(OnlyAllowDefinedFlagsCombinations = false)]
     public SomeEnum CountryOfBirth { get; set; }
 }
 ```
