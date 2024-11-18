@@ -14,10 +14,10 @@ public class DefinedOnlyAttribute<TEnum> : ValidationAttribute
     public DefinedOnlyAttribute()
         : base(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError) => Do.Nothing();
 
-    /// <summary>If true, for flag enums, also combinations of defined single values are allowed, that are not defined themselves explicitly.</summary>
+    /// <summary>If true, combinations of defined single values, that are not defined explicitly themselves, are allowed for flag enums.</summary>
     /// <remarks>
-    /// When enabled, the logic falls back on <see cref="Enum.IsDefined(Type, object)"/>, as
-    /// that is stricter than, our implementation.
+    /// When enabled, the logic falls back on <see cref="Enum.IsDefined(Type, object)"/>,
+    /// because that is stricter than our implementation.
     /// </remarks>
     public bool OnlyAllowDefinedFlagsCombinations { get; init; }
 
