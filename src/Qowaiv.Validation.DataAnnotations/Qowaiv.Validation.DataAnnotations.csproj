@@ -10,7 +10,7 @@
       <![CDATA[
 v3.0.0
 - Introduction of AllowedAttribute<T> as alternative to AllowedValuesAttribute.
-- Introduction of DefinedAttribute<T> as alternative to DefinedEnumValuesOnlyAttribute.
+- Introduction of DefinedOnlyAttribute<T> as alternative to DefinedEnumValuesOnlyAttribute.
 - Introduction of ForbiddenAttribute<T> as alternative to FobiddenValuesAttribute.
 - Marked AllowedValuesAttribute as obsolete.
 - Marked DefinedEnumValuesOnlyAttribute as obsolete.
