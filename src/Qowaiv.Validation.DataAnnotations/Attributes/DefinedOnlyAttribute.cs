@@ -2,7 +2,7 @@ using System.Reflection;
 
 namespace Qowaiv.Validation.DataAnnotations;
 
-/// <summary>Validates if the decorated enum has a value that is a defined.</summary>
+/// <summary>Validates if the decorated enum has a value that is defined.</summary>
 /// <typeparam name="TEnum">
 /// The type of the enum.
 /// </typeparam>
