@@ -21,7 +21,7 @@ public class DefinedOnlyAttribute<TEnum> : ValidationAttribute
     /// </remarks>
     public bool OnlyAllowDefinedFlagsCombinations { get; init; }
 
-    /// <summary>Returns true if the value is defined for the enum, otherwise false.</summary>
+    /// <summary>Returns true if the value is null or is defined for the enum, otherwise false.</summary>
     /// <exception cref="InvalidCastException">
     /// If the type of the value is not an enum.
     /// </exception>
