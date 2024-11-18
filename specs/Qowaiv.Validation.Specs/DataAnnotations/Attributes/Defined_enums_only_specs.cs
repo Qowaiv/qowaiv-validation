@@ -51,7 +51,7 @@ public class Is_valid_for
 
         [TestCase(1)]
         [TestCase(Banners.UnionJack)]
-        public void castible_values(object value)
+        public void castable_values(object value)
             => new DefinedOnlyAttribute<Number>().IsValid(value).Should().BeTrue();
     }
 
