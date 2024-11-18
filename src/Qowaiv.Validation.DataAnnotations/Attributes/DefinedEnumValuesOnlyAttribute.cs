@@ -4,7 +4,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Validates if the decorated enum has a value that is a defined.</summary>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
-[Obsolete("Use DefinedAttribute<TEnum> instead.")]
+[Obsolete("Use DefinedOnlyAttribute<TEnum> instead.")]
 public class DefinedEnumValuesOnlyAttribute : ValidationAttribute
 {
     /// <summary>Initializes a new instance of the <see cref="DefinedEnumValuesOnlyAttribute"/> class.</summary>
