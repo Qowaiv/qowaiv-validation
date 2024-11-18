@@ -194,7 +194,18 @@ namespace Qowaiv.Validation.DataAnnotations {
                 return ResourceManager.GetString("Size_InRange_ValidationError", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to All values of the {0} field should be unique.
+        /// </summary>
+        internal static string UniqueValuesAttribute_ValidationError
+        {
+            get
+            {
+                return ResourceManager.GetString("UniqueValuesAttribute_ValidationError", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to {0} does not support properties of the type {1}..
         /// </summary>
@@ -205,3 +216,4 @@ namespace Qowaiv.Validation.DataAnnotations {
         }
     }
 }
+
