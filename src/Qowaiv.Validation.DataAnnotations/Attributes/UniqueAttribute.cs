@@ -20,7 +20,7 @@ public sealed class UniqueAttribute<TValue> : ValidationAttribute
     /// <summary>Gets and set a custom <see cref="IEqualityComparer"/>.</summary>
     public IEqualityComparer<TValue> EqualityComparer { get; }
 
-    /// <summary>True if all items in the collection are distinct, otherwise false.</summary>
+    /// <summary>True if null or all items in the collection are distinct, otherwise false.</summary>
     [Pure]
     public override bool IsValid(object? value)
     {
