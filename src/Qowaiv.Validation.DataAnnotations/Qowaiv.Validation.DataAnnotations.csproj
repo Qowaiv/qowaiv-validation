@@ -10,7 +10,7 @@
       <![CDATA[
 v3.0.0
 - Introduction of AllowedAttribute<T> as alternative to AllowedValuesAttribute.
-- Introduction of ForbiddenAttribute<T> as alternative to FobiddenValuesAttribute.
+- Introduction of ForbiddenAttribute<T> as alternative to ForbiddenValuesAttribute.
 - Introduction of UniqueAttribute<T> as alternative to DistinctValuesAttribute.
 - Marked AllowedValuesAttribute as obsolete.
 - Marked FobiddenValuesAttribute as obsolete.
