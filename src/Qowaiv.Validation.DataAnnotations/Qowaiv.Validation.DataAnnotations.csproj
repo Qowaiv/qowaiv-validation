@@ -13,7 +13,7 @@ v3.0.0
 - Introduction of ForbiddenAttribute<T> as alternative to ForbiddenValuesAttribute.
 - Introduction of UniqueAttribute<T> as alternative to DistinctValuesAttribute.
 - Marked AllowedValuesAttribute as obsolete.
-- Marked FobiddenValuesAttribute as obsolete.
+- Marked ForbiddenValuesAttribute as obsolete.
 - Marked DistinctValuesAttribute as obsolete.
 - Add .NET 9.0 target.
 - Drop .NET 5.0, NET6.0, NET7.0 targets. (BREAKING)
