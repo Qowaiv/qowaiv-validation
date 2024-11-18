@@ -4,11 +4,12 @@ namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Validates if the decorated enum has a value that is a defined.</summary>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+[Obsolete("Use DefinedOnlyAttribute<TEnum> instead.")]
 public class DefinedEnumValuesOnlyAttribute : ValidationAttribute
 {
     /// <summary>Initializes a new instance of the <see cref="DefinedEnumValuesOnlyAttribute"/> class.</summary>
     public DefinedEnumValuesOnlyAttribute()
-    : base(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError) => Do.Nothing();
+        : base(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError) => Do.Nothing();
 
     /// <summary>If true, for flag enums, also combinations of defined single values are allowed, that are not defined themselves explicitly.</summary>
     /// <remarks>
