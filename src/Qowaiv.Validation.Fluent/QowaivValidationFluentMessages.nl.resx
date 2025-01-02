@@ -25,7 +25,7 @@
     <value>'{PropertyName}' moet een eindig getal zijn.</value>
   </data>
   <data name="NotAfter" xml:space="preserve">
-    <value>'{PropertyName}' mag niet voor  {Value} zijn.</value>
+    <value>'{PropertyName}' mag niet voor {Value} zijn.</value>
   </data>
   <data name="NotBefore" xml:space="preserve">
     <value>'{PropertyName}' mag niet na {Value} zijn.</value>
