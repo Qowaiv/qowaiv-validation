@@ -4,6 +4,7 @@
   
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net8.0;net9.0</TargetFrameworks>
+    <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
     <Version>2.0.0</Version>
     <PackageId>Qowaiv.Validation.Fluent</PackageId>
     <PackageReleaseNotes>
@@ -53,6 +54,7 @@ v0.0.1
 - Initial version
 ]]>
     </PackageReleaseNotes>
+    <UserSecretsId>dd510743-1ccb-4f89-800a-f658d42b4bf6</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
