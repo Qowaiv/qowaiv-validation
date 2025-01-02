@@ -13,7 +13,7 @@ namespace FluentValidation;
 public static class NotBeforeValidation
 {
     /// <summary>
-    /// Defines a 'greater than or equal' validator on the current rule builder.
+    /// Defines a 'not before' validator on the current rule builder.
     /// The validation will succeed if the property value is greater than or equal the specified value.
     /// The validation will fail if the property value is less than the specified value.
     /// </summary>
@@ -28,7 +28,7 @@ public static class NotBeforeValidation
         => ruleBuilder.GreaterThanOrEqualTo(valueToCompare).WithMessage(QowaivValidationFluentMessages.NotBefore);
 
     /// <summary>
-    /// Defines a 'greater than or equal' validator on the current rule builder.
+    /// Defines a 'not before' validator on the current rule builder.
     /// The validation will succeed if the property value is greater than or equal the specified value.
     /// The validation will fail if the property value is less than the specified value.
     /// </summary>
