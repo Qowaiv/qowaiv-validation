@@ -32,6 +32,24 @@ public class CustomValidator : AbstractValidator<Model>
 }
 ```
 
+### (Not) before and (not) after
+To have messages that use the phrasing `'{PropertyName}' should be after {Value}`
+instead of `'{PropertyName}' should be greater than {Value}` makes sense for a
+big range of property types, including date (time) related values.
+
+``` C#
+public class CustomValidator : AbstractValidator<Model>
+{
+    public CustomValidator()
+    {
+        RuleFor(m => m.EndDate).After(m => Clock.Today().AddYears(20));
+        RuleFor(m => m.EndDate).NotAfter(m => Clock.Today().AddYears(20));
+        RuleFor(m => m.EndDate).Before(m => Clock.Today().AddYears(20));
+        RuleFor(m => m.EndDate).NotBefore(m => Clock.Today().AddYears(20));
+    }
+}
+```
+
 ### Relative to the clock
 
 The `ClockValidation` validates if a date (time) is in the past, or future.
