@@ -8,20 +8,20 @@
   <ItemGroup>
     <PackageVersion Include="AsyncFixer" Version="*" />
     <PackageVersion Include="BenchmarkDotNet" Version="0.14.0" />
-    <PackageVersion Include="coverlet.collector" Version="*" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.3" />
     <PackageVersion Include="DotNetProjectFile.Analyzers" Version="*" />
     <PackageVersion Include="DotNetProjectFile.Analyzers.Sdk" Version="*" />
-    <PackageVersion Include="FluentAssertions" Version="6.12.2" />
+    <PackageVersion Include="FluentAssertions" Version="7.0.0" />
     <PackageVersion Include="FluentAssertions.Analyzers" Version="*" />
-    <PackageVersion Include="FluentValidation" Version="11.10.0" />
+    <PackageVersion Include="FluentValidation" Version="11.11.0" />
     <PackageVersion Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="*" />
-    <PackageVersion Include="NUnit" Version="4.2.2" />
+    <PackageVersion Include="NUnit" Version="4.3.2" />
     <PackageVersion Include="NUnit3TestAdapter" Version="*" />
     <PackageVersion Include="NUnit.Analyzers" Version="*" />
-    <PackageVersion Include="PolySharp" Version="1.14.1" />
-    <PackageVersion Include="Qowaiv" Version="7.2.0" />
+    <PackageVersion Include="PolySharp" Version="1.15.0" />
+    <PackageVersion Include="Qowaiv" Version="7.2.1" />
     <PackageVersion Include="Qowaiv.Analyzers.CSharp" Version="*" />
     <PackageVersion Include="Qowaiv.Diagnostics.Contracts" Version="2.0.3" />
     <PackageVersion Include="Qowaiv.TestTools" Version="7.2.0" />
