@@ -87,7 +87,7 @@ public class Is_not_valid
 
 internal sealed class Model
 {
-    public Date DateOfBirth { get; init; }
+    public Date DateOfBirth { get; init; } = new Date(2000, 01, 02);
 
     public Date? DateOfDeath { get; init; }
 }
