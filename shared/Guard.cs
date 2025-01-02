@@ -137,7 +137,6 @@ internal static partial class Guard
         ? guarded
         : throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Messages.ArgumentException_NotAnInstanceOf, typeof(T)), paramName);
 
-
     /// <summary>Guards that the parameter is not null or an empty collection, otherwise throws an argument (null) exception.</summary>
     /// <typeparam name="T">The type to guard; must be an <see cref="ICollection" />.</typeparam>
     /// <param name="parameter">The parameter to guard.</param>
@@ -417,7 +416,6 @@ internal static partial class Guard
         => parameter < TimeSpan.Zero
         ? throw new ArgumentOutOfRangeException(paramName, Messages.ArgumentOutOfRangeException_Negative)
         : parameter;
-
 
     /// <summary>Throws an ArgumentException if the parameter is negative, otherwise the parameter is passed.</summary>
     /// <param name="parameter">The parameter to guard.</param>
