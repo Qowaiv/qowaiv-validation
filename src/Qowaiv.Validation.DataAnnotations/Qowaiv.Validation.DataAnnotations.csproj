@@ -8,6 +8,8 @@
     <PackageId>Qowaiv.Validation.DataAnnotations</PackageId>
     <PackageReleaseNotes>
       <![CDATA[
+ToBeReleased:
+- Update to Qowaiv v7.2.1.
 v3.0.0
 - Introduction of AllowedAttribute<T> as alternative to AllowedValuesAttribute.
 - Introduction of DefinedOnlyAttribute<T> as alternative to DefinedEnumValuesOnlyAttribute.
