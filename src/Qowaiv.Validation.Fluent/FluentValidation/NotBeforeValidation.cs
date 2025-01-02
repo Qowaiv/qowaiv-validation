@@ -25,7 +25,7 @@ public static class NotBeforeValidation
     public static IRuleBuilderOptions<T, TProperty> NotBefore<T, TProperty>(
         this IRuleBuilder<T, TProperty> ruleBuilder, TProperty valueToCompare) where TProperty : IComparable<TProperty>, IComparable
 
-        => ruleBuilder.GreaterThanOrEqualTo(valueToCompare);
+        => ruleBuilder.GreaterThanOrEqualTo(valueToCompare).WithMessage(QowaivValidationFluentMessages.NotBefore);
 
     /// <summary>
     /// Defines a 'greater than or equal' validator on the current rule builder.
