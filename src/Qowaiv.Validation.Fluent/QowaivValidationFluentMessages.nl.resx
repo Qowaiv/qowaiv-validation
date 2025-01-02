@@ -9,6 +9,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter</value>
   </resheader>
+  <data name="After" xml:space="preserve">
+    <value>'{PropertyName}' moet na {Value} zijn.</value>
+  </data>
+  <data name="Before" xml:space="preserve">
+    <value>'{PropertyName}' moet voor {Value} zijn.</value>
+  </data>
   <data name="InFuture" xml:space="preserve">
     <value>'{PropertyName}' moet in de toekomst liggen.</value>
   </data>
@@ -17,6 +23,12 @@
   </data>
   <data name="IsFinite" xml:space="preserve">
     <value>'{PropertyName}' moet een eindig getal zijn.</value>
+  </data>
+  <data name="NotAfter" xml:space="preserve">
+    <value>'{PropertyName}' mag niet voor  {Value} zijn.</value>
+  </data>
+  <data name="NotBefore" xml:space="preserve">
+    <value>'{PropertyName}' mag niet na {Value} zijn.</value>
   </data>
   <data name="NoIPBasedEmailAddress" xml:space="preserve">
     <value>'{PropertyName}' heeft een IP-adres als domein.</value>
