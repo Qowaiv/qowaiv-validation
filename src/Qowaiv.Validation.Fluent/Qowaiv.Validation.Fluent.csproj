@@ -9,7 +9,8 @@
     <PackageReleaseNotes>
       <![CDATA[
 ToBeReleased:
-- Update to Qowaiv v7.2.1.
+- Update to Qowaiv v7.2.1. #88
+- Update to FluentValidation 11.11.0. #88
 v2.0.0
 - Add .NET 9.0 target.
 - Drop .NET 6.0 target. (BREAKING)
