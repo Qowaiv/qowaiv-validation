@@ -1,4 +1,3 @@
-using FluentValidation.Internal;
 using System.Linq.Expressions;
 
 namespace FluentValidation;
@@ -7,7 +6,7 @@ namespace FluentValidation;
 /// <remarks>
 /// This syntactic sugar to:
 /// <code>
-/// ruleBuilder.GreaterThanOrEqualTo(valueToCompare).WithMessage().
+/// ruleBuilder.LessThanOrEqualTo(valueToCompare).WithMessage().
 /// </code>
 /// </remarks>
 public static class NotAfterValidation

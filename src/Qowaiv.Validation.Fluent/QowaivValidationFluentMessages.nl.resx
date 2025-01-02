@@ -10,10 +10,10 @@
     <value>System.Resources.ResXResourceWriter</value>
   </resheader>
   <data name="After" xml:space="preserve">
-    <value>'{PropertyName}' moet na {Value} zijn.</value>
+    <value>'{PropertyName}' is niet na {ComparisonValue}.</value>
   </data>
   <data name="Before" xml:space="preserve">
-    <value>'{PropertyName}' moet voor {Value} zijn.</value>
+    <value>'{PropertyName}' is niet voor {ComparisonValue}.</value>
   </data>
   <data name="InFuture" xml:space="preserve">
     <value>'{PropertyName}' moet in de toekomst liggen.</value>
@@ -25,10 +25,10 @@
     <value>'{PropertyName}' moet een eindig getal zijn.</value>
   </data>
   <data name="NotAfter" xml:space="preserve">
-    <value>'{PropertyName}' mag niet voor {Value} zijn.</value>
+    <value>'{PropertyName}' is na {ComparisonValue}.</value>
   </data>
   <data name="NotBefore" xml:space="preserve">
-    <value>'{PropertyName}' mag niet na {Value} zijn.</value>
+    <value>'{PropertyName}' is voor {ComparisonValue}.</value>
   </data>
   <data name="NoIPBasedEmailAddress" xml:space="preserve">
     <value>'{PropertyName}' heeft een IP-adres als domein.</value>
@@ -46,7 +46,7 @@
     <value>'{PropertyName}' mag niet onbekend zijn.</value>
   </data>
   <data name="PostalCodeValidForCountry" xml:space="preserve">
-    <value>'{PropertyName}' {Value} is niet geldig voor {Country}.</value>
+    <value>'{PropertyName}' {ComparisonValue} is niet geldig voor {Country}.</value>
   </data>
   <data name="Required" xml:space="preserve">
     <value>'{PropertyName}' is verplicht.</value>

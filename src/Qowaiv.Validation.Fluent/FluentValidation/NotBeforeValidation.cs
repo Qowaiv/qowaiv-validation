@@ -1,4 +1,3 @@
-using FluentValidation.Internal;
 using System.Linq.Expressions;
 
 namespace FluentValidation;
