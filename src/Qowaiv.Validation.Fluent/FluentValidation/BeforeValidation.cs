@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace FluentValidation;
 
-/// <summary>Validates if a <see cref="IComparable"/> is after a specific value.</summary>
+/// <summary>Validates if a <see cref="IComparable"/> is before a specific value.</summary>
 /// <remarks>
 /// This syntactic sugar to:
 /// <code>
