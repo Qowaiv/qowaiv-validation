@@ -37,6 +37,10 @@
     <None Include="README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
+  <ItemGroup Label="SBOM">
+    <PackageReference Include="Microsoft.Sbom.Targets" PrivateAssets="all" />
+  </ItemGroup>
+
   <ItemGroup Label="Analyzers">
     <PackageReference Include="Qowaiv.Analyzers.CSharp" PrivateAssets="all" />
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" />
