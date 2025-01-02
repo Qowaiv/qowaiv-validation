@@ -1,7 +1,8 @@
 <Project>
 
-  <PropertyGroup Condition="'$(CompileConfig)' != 'DEBUG'">
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateSBOM>true</GenerateSBOM>
   </PropertyGroup>
 
   <PropertyGroup Label="Debug Symbols">
@@ -28,7 +29,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Qowaiv/qwowaiv-validation</RepositoryUrl>
-    <EnablePackageValidation>false</EnablePackageValidation>
+    <EnablePackageValidation>true</EnablePackageValidation>
   </PropertyGroup>
 
   <ItemGroup Label="Package files">
@@ -44,5 +45,5 @@
   <ItemGroup Label="Additional files">
     <AdditionalFiles Include="../../props/package.props" Link="Properties/package.props" />
   </ItemGroup>
-  
+
 </Project>

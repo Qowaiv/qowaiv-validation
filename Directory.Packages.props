@@ -18,8 +18,8 @@
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="*" />
     <PackageVersion Include="NUnit" Version="4.3.2" />
-    <PackageVersion Include="NUnit3TestAdapter" Version="*" />
     <PackageVersion Include="NUnit.Analyzers" Version="*" />
+    <PackageVersion Include="NUnit3TestAdapter" Version="*" />
     <PackageVersion Include="PolySharp" Version="1.15.0" />
     <PackageVersion Include="Qowaiv" Version="7.2.1" />
     <PackageVersion Include="Qowaiv.Analyzers.CSharp" Version="*" />
