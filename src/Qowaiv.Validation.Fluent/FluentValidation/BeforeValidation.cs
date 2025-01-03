@@ -4,7 +4,7 @@ namespace FluentValidation;
 
 /// <summary>Validates if a <see cref="IComparable"/> is before a specific value.</summary>
 /// <remarks>
-/// This syntactic sugar to:
+/// This is syntactic sugar for:
 /// <code>
 /// ruleBuilder.LessThan(valueToCompare).WithMessage().
 /// </code>
