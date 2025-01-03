@@ -3,6 +3,19 @@ using Qowaiv.Validation.Fluent;
 
 namespace Fluent_validation.Postal_code_valid_for_specs;
 
+public class Required
+{
+    [TestCase("DE")]
+    [TestCase("NL")]
+    [TestCase("PT")]
+    public void for_countries_with_postal_code_system(Country country)
+        => new PostalCodeModel
+        {
+            PostalCode = PostalCode.Parse("1234"),
+            Country = country,
+        }.Should().BeValidFor(new RequiredPostalCodeValidator());
+}
+
 public class Valid_for
 {
     [Test]
@@ -68,4 +81,10 @@ internal class PostalCodeModelValidator : ModelValidator<PostalCodeModel>
 {
     public PostalCodeModelValidator()
         => RuleFor(m => m.PostalCode).ValidFor(m => m.Country);
+}
+
+internal class RequiredPostalCodeValidator : ModelValidator<PostalCodeModel>
+{
+    public RequiredPostalCodeValidator()
+        => RuleFor(m => m.PostalCode).ValidFor(m => m.Country).Required();
 }

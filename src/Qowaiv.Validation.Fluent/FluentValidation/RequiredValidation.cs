@@ -28,7 +28,7 @@ public static class RequiredValidation
     /// The rule builder on which the validator should be defined.
     /// </param>
     /// <param name="allowUnknown">
-    /// If true, unknown values are seen.
+    /// If true, unknown values are considered a set value.
     /// </param>
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, TProperty> Required<TModel, TProperty>(this IRuleBuilder<TModel, TProperty> ruleBuilder, bool allowUnknown)
