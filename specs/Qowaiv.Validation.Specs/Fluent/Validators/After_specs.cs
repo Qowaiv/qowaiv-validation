@@ -5,15 +5,17 @@ namespace Fluent_validation.After_specs;
 
 public class Is_valid
 {
-    [Test]
-    public void When_after()
+    [TestCaseSource(nameof(Validators))]
+    public void When_after(ModelValidator<Model> validator)
         => new Model { DateOfBirth = new(2000, 01, 02), DateOfDeath = new Date(2000, 01, 02) }
-        .Should().BeValidFor(new FixedValidator());
+        .Should().BeValidFor(validator);
 
-    [Test]
-    public void When_nullable_not_set()
+    [TestCaseSource(nameof(Validators))]
+    public void When_nullable_not_set(ModelValidator<Model> validator)
        => new Model { DateOfBirth = new(2000, 01, 02), DateOfDeath = null }
-       .Should().BeValidFor(new FixedValidator());
+       .Should().BeValidFor(validator);
+
+    static readonly IEnumerable<ModelValidator<Model>> Validators = [new FixedValidator(), new ExpressionValidator(), new ExpressionNullableValidator()];
 }
 
 public class Is_not_valid
@@ -85,7 +87,7 @@ public class Is_not_valid
     }
 }
 
-internal sealed class Model
+public sealed class Model
 {
     public Date DateOfBirth { get; init; } = new Date(2000, 01, 02);
 
