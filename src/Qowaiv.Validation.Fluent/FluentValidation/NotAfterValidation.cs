@@ -24,7 +24,7 @@ public static class NotAfterValidation
     public static IRuleBuilderOptions<T, TProperty> NotAfter<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder, TProperty valueToCompare)
         where TProperty : IComparable<TProperty>, IComparable
 
-        => ruleBuilder.LessThanOrEqualTo(valueToCompare).WithMessage(QowaivValidationFluentMessages.NotAfter);
+        => ruleBuilder.LessThanOrEqualTo(valueToCompare).WithMessage(_ => QowaivValidationFluentMessages.NotAfter);
 
     /// <summary>
     /// Defines a 'not after' validator on the current rule builder.
@@ -38,7 +38,7 @@ public static class NotAfterValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<T, TProperty?> NotAfter<T, TProperty>(this IRuleBuilder<T, TProperty?> ruleBuilder, TProperty valueToCompare) where TProperty : struct, IComparable<TProperty>, IComparable
 
-        => ruleBuilder.LessThanOrEqualTo(valueToCompare).WithMessage(QowaivValidationFluentMessages.NotAfter);
+        => ruleBuilder.LessThanOrEqualTo(valueToCompare).WithMessage(_ => QowaivValidationFluentMessages.NotAfter);
 
     /// <summary>
     /// Defines a 'not after' validator on the current rule builder using a lambda expression.
@@ -54,7 +54,7 @@ public static class NotAfterValidation
         this IRuleBuilder<T, TProperty> ruleBuilder, Expression<Func<T, TProperty>> expression)
         where TProperty : IComparable<TProperty>, IComparable
 
-        => ruleBuilder.LessThanOrEqualTo(expression).WithMessage(QowaivValidationFluentMessages.NotAfter);
+        => ruleBuilder.LessThanOrEqualTo(expression).WithMessage(_ => QowaivValidationFluentMessages.NotAfter);
 
     /// <summary>
     /// Defines a 'not after' validator on the current rule builder using a lambda expression.
@@ -69,7 +69,7 @@ public static class NotAfterValidation
     public static IRuleBuilderOptions<T, TProperty> NotAfter<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder, Expression<Func<T, TProperty?>> expression)
         where TProperty : struct, IComparable<TProperty>, IComparable
 
-        => ruleBuilder.LessThanOrEqualTo(expression).WithMessage(QowaivValidationFluentMessages.NotAfter);
+        => ruleBuilder.LessThanOrEqualTo(expression).WithMessage(_ => QowaivValidationFluentMessages.NotAfter);
 
     /// <summary>
     /// Defines a 'not after' validator on the current rule builder using a lambda expression.
@@ -84,7 +84,7 @@ public static class NotAfterValidation
     public static IRuleBuilderOptions<T, TProperty?> NotAfter<T, TProperty>(this IRuleBuilder<T, TProperty?> ruleBuilder, Expression<Func<T, TProperty>> expression)
         where TProperty : struct, IComparable<TProperty>, IComparable
 
-        => ruleBuilder.LessThanOrEqualTo(expression).WithMessage(QowaivValidationFluentMessages.NotAfter);
+        => ruleBuilder.LessThanOrEqualTo(expression).WithMessage(_ => QowaivValidationFluentMessages.NotAfter);
 
     /// <summary>
     /// Defines a 'not after' validator on the current rule builder using a lambda expression.
@@ -99,5 +99,5 @@ public static class NotAfterValidation
     public static IRuleBuilderOptions<T, TProperty?> NotAfter<T, TProperty>(this IRuleBuilder<T, TProperty?> ruleBuilder, Expression<Func<T, TProperty?>> expression)
         where TProperty : struct, IComparable<TProperty>, IComparable
 
-        => ruleBuilder.LessThanOrEqualTo(expression).WithMessage(QowaivValidationFluentMessages.NotAfter);
+        => ruleBuilder.LessThanOrEqualTo(expression).WithMessage(_ => QowaivValidationFluentMessages.NotAfter);
 }

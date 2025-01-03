@@ -24,7 +24,7 @@ public static class BeforeValidation
     public static IRuleBuilderOptions<T, TProperty> Before<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder, TProperty valueToCompare)
         where TProperty : IComparable<TProperty>, IComparable
 
-        => ruleBuilder.LessThan(valueToCompare).WithMessage(QowaivValidationFluentMessages.Before);
+        => ruleBuilder.LessThan(valueToCompare).WithMessage(_ => QowaivValidationFluentMessages.Before);
 
     /// <summary>
     /// Defines a 'before' validator on the current rule builder.
@@ -39,7 +39,7 @@ public static class BeforeValidation
     public static IRuleBuilderOptions<T, TProperty?> Before<T, TProperty>(this IRuleBuilder<T, TProperty?> ruleBuilder, TProperty valueToCompare)
         where TProperty : struct, IComparable<TProperty>, IComparable
 
-        => ruleBuilder.LessThan(valueToCompare).WithMessage(QowaivValidationFluentMessages.Before);
+        => ruleBuilder.LessThan(valueToCompare).WithMessage(_ => QowaivValidationFluentMessages.Before);
 
     /// <summary>
     /// Defines a 'before' validator on the current rule builder using a lambda expression.
@@ -54,7 +54,7 @@ public static class BeforeValidation
     public static IRuleBuilderOptions<T, TProperty> Before<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder, Expression<Func<T, TProperty>> expression)
         where TProperty : IComparable<TProperty>, IComparable
 
-        => ruleBuilder.LessThan(expression).WithMessage(QowaivValidationFluentMessages.Before);
+        => ruleBuilder.LessThan(expression).WithMessage(_ => QowaivValidationFluentMessages.Before);
 
     /// <summary>
     /// Defines a 'before' validator on the current rule builder using a lambda expression.
@@ -69,7 +69,7 @@ public static class BeforeValidation
     public static IRuleBuilderOptions<T, TProperty> Before<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder, Expression<Func<T, TProperty?>> expression)
         where TProperty : struct, IComparable<TProperty>, IComparable
 
-        => ruleBuilder.LessThan(expression).WithMessage(QowaivValidationFluentMessages.Before);
+        => ruleBuilder.LessThan(expression).WithMessage(_ => QowaivValidationFluentMessages.Before);
 
     /// <summary>
     /// Defines a 'before' validator on the current rule builder using a lambda expression.
@@ -84,7 +84,7 @@ public static class BeforeValidation
     public static IRuleBuilderOptions<T, TProperty?> Before<T, TProperty>(this IRuleBuilder<T, TProperty?> ruleBuilder, Expression<Func<T, TProperty>> expression)
         where TProperty : struct, IComparable<TProperty>, IComparable
 
-        => ruleBuilder.LessThan(expression).WithMessage(QowaivValidationFluentMessages.Before);
+        => ruleBuilder.LessThan(expression).WithMessage(_ => QowaivValidationFluentMessages.Before);
 
     /// <summary>
     /// Defines a 'before' validator on the current rule builder using a lambda expression.
@@ -99,5 +99,5 @@ public static class BeforeValidation
     public static IRuleBuilderOptions<T, TProperty?> Before<T, TProperty>(this IRuleBuilder<T, TProperty?> ruleBuilder, Expression<Func<T, TProperty?>> expression)
         where TProperty : struct, IComparable<TProperty>, IComparable
 
-        => ruleBuilder.LessThan(expression).WithMessage(QowaivValidationFluentMessages.Before);
+        => ruleBuilder.LessThan(expression).WithMessage(_ => QowaivValidationFluentMessages.Before);
 }
