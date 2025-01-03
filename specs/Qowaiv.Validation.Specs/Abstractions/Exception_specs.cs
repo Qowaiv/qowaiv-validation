@@ -1,5 +1,4 @@
 using Qowaiv.Validation.Abstractions;
-using static Specs.Abstractions.Arrange;
 
 namespace Abstractions.Exception_specs;
 

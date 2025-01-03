@@ -10,6 +10,7 @@
     <PackageReleaseNotes>
       <![CDATA[
 ToBeReleased:
+- `Before`, `After`, `NotBefore`, and `NotAfter` available for `IComparable`. #90
 - Update to Qowaiv v7.2.1. #88
 - Update to FluentValidation 11.11.0. #88
 v2.0.0

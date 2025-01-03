@@ -45,7 +45,7 @@ public static class PostalCodeValidation
         }
         context.MessageFormatter
             .AppendArgument(nameof(Country), country.DisplayName)
-            .AppendArgument("Value", postalCode);
+            .AppendArgument("ComparisonValue", postalCode);
 
         return false;
     }

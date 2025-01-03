@@ -23,7 +23,7 @@ public static class UnknownValidation
 
     /// <summary>Defines a 'not empty' and a 'not unkmown' validator on the current rule builder.</summary>
     /// <typeparam name="TModel">Type of object being validated.</typeparam>
-    /// <typeparam name="TProperty">Type of property being validated.</typeparam>
+    /// <typeparam name="TProperty">Type of the property being validated.</typeparam>
     /// <param name="ruleBuilder">The rule builder on which the validator should be defined.</param>
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, TProperty> NotEmptyOrUnknown<TModel, TProperty>(this IRuleBuilder<TModel, TProperty> ruleBuilder)

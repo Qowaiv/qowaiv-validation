@@ -9,6 +9,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter</value>
   </resheader>
+  <data name="After" xml:space="preserve">
+    <value>'{PropertyName}' is not after {ComparisonValue}.</value>
+  </data>
+  <data name="Before" xml:space="preserve">
+    <value>'{PropertyName}' is not before {ComparisonValue}.</value>
+  </data>
   <data name="InFuture" xml:space="preserve">
     <value>'{PropertyName}' should be in the future.</value>
   </data>
@@ -17,6 +23,12 @@
   </data>
   <data name="IsFinite" xml:space="preserve">
     <value>'{PropertyName}' must be a finite number.</value>
+  </data>
+  <data name="NotAfter" xml:space="preserve">
+    <value>'{PropertyName}' is after {ComparisonValue}.</value>
+  </data>
+  <data name="NotBefore" xml:space="preserve">
+    <value>'{PropertyName}' is before {ComparisonValue}.</value>
   </data>
   <data name="NoIPBasedEmailAddress" xml:space="preserve">
     <value>'{PropertyName}' has a IP address based domain.</value>
@@ -34,7 +46,7 @@
     <value>'{PropertyName}' must not be unknown.</value>
   </data>
   <data name="PostalCodeValidForCountry" xml:space="preserve">
-    <value>'{PropertyName}' {Value} is not valid for {Country}.</value>
+    <value>'{PropertyName}' {ComparisonValue} is not valid for {Country}.</value>
   </data>
   <data name="Required" xml:space="preserve">
     <value>'{PropertyName}' is required.</value>
