@@ -10,7 +10,7 @@ Result.For(17).Should().BeValid()
     .WithoutMessages()
     .Value.Should().Be(17); 
 ```
-Where the chain after `.Value` is exposes the value.
+Where the chain after `.Value` exposes the value.
 
 Other options for `.IsValid()` are:
 
