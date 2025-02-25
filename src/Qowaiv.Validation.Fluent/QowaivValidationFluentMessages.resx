@@ -25,7 +25,7 @@
     <value>'{PropertyName}' must be a finite number.</value>
   </data>
   <data name="NoIPBasedEmailAddress" xml:space="preserve">
-    <value>'{PropertyName}' has a IP address based domain.</value>
+    <value>'{PropertyName}' has an IP address based domain.</value>
   </data>
   <data name="NotAfter" xml:space="preserve">
     <value>'{PropertyName}' is after {ComparisonValue}.</value>
