@@ -46,6 +46,11 @@ There is also some syntactic sugar for testing validators on a model of choice:
 ``` C#
 var model = new MyModel();
 
-Result<MyModel> result = model.ValidateWith(new ValidatorForMyModel);
+Result<MyModel> result = model.ValidateWith(new ValidatorForMyModel());
 ```
-And this result can be changed with the assertions described on top.
+And this result can be changed with the assertions described on top:
+
+``` C#
+var model = new MyModel();
+model.ValidateWith(new ValidatorForMyModel()).Should().BeValid();
+```
