@@ -41,7 +41,7 @@ accessible for an invalid result.
 All (except for the `.Value`) is also for the non-generic `Result`.
 
 ## Validate with
-There is also some syntatic sugar for testing validators on a model of choise:
+There is also some syntactic sugar for testing validators on a model of choice:
 
 ``` C#
 var model = new MyModel();
