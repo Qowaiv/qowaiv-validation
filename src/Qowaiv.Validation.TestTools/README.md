@@ -1,6 +1,6 @@
 # Qowaiv.Validation Test Tools
 
-These test tools help writing meaningful tests an asserting the state of a
+These test tools help to write meaningful tests and assert the state of a
 `Result` or `Result<T>`. The syntax is inspired by [FluentAssertions](https://fluentassertions.com).
 
 These assertions could look like this:
