@@ -7,7 +7,7 @@ public sealed class ResultAssertions : ResultAssertionsBase<Result>
     internal ResultAssertions(Result? subject, string? expression) : base(subject, expression) { }
 
     /// <summary>Asserts thats <see cref="Result"/> is invalid.</summary>
-    [Impure]
+    [Assertion]
     public ResultValidnessAssertions BeValid(string because = "", params object[] becauseArgs)
     {
         ExecuteBeValid(because, becauseArgs);
