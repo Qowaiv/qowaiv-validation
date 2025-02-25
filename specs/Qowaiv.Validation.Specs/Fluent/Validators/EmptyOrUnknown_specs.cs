@@ -31,7 +31,7 @@ public class Unknown
     public void Is_valid_with_warning_severity()
         => new UnknownWithSeverityModel { Email = EmailAddress.Unknown }
             .ValidateWith(new UnknownWithSeverityModelValidator())
-            .Should().BeInvalid()
+            .Should().BeValid()
             .WithMessage(ValidationMessage.Warn("'Email' must not be empty or unknown.", "Email"));
 }
 
@@ -54,6 +54,6 @@ public class Empty
     public void Is_valid_with_warning_severity()
         => new UnknownWithSeverityModel { Email = EmailAddress.Empty }
         .ValidateWith(new UnknownWithSeverityModelValidator())
-        .Should().BeInvalid()
+        .Should().BeValid()
         .WithMessage(ValidationMessage.Warn("'Email' must not be empty or unknown.", "Email"));
 }
