@@ -8,7 +8,7 @@ public class Set_value
     [Test]
     public void Is_valid()
         => new UnknownModel { Email = EmailAddress.Parse("info@qowaiv.corg") }
-        .Should().BeValidFor(new UnknownModelValidator());
+        .ShouldBeValidFor(new UnknownModelValidator());
 }
 
 public class Unknown
@@ -20,7 +20,7 @@ public class Unknown
         using (new CultureInfoScope(culture))
         {
             new UnknownModel { Email = EmailAddress.Unknown }
-                .Should().BeInvalidFor(new UnknownModelValidator())
+                .ShouldBeInvalidFor(new UnknownModelValidator())
                 .WithMessage(ValidationMessage.Error(message, "Email"));
         }
     }
@@ -31,5 +31,5 @@ public class Empty
     [Test]
     public void Is_valid()
         => new UnknownModel { Email = EmailAddress.Empty }
-        .Should().BeValidFor(new UnknownModelValidator());
+        .ShouldBeValidFor(new UnknownModelValidator());
 }

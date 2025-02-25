@@ -11,7 +11,7 @@ public class Valid_for_in_future
     {
         using (Clock.SetTimeForCurrentContext(() => new Date(2017, 06, 11)))
         {
-            new DateModel { Prop = new Date(2017, 06, 12) }.Should().BeValidFor(new DateInFutureValidator());
+            new DateModel { Prop = new Date(2017, 06, 12) }.ShouldBeValidFor(new DateInFutureValidator());
         }
     }
 
@@ -20,7 +20,7 @@ public class Valid_for_in_future
     {
         using (Clock.SetTimeForCurrentContext(() => new Date(2017, 06, 11)))
         {
-            new DateOnlyModel { Prop = new DateOnly(2017, 06, 12) }.Should().BeValidFor(new DateOnlyInFutureValidator());
+            new DateOnlyModel { Prop = new DateOnly(2017, 06, 12) }.ShouldBeValidFor(new DateOnlyInFutureValidator());
         }
     }
 
@@ -29,7 +29,7 @@ public class Valid_for_in_future
     {
         using (Clock.SetTimeForCurrentContext(() => new Date(2017, 06, 11)))
         {
-            new DateTimeModel { Prop = new DateTime(2017, 06, 12, 00, 00, 00, DateTimeKind.Utc) }.Should().BeValidFor(new DateTimeInFutureValidator());
+            new DateTimeModel { Prop = new DateTime(2017, 06, 12, 00, 00, 00, DateTimeKind.Utc) }.ShouldBeValidFor(new DateTimeInFutureValidator());
         }
     }
 
@@ -38,7 +38,7 @@ public class Valid_for_in_future
     {
         using (Clock.SetTimeForCurrentContext(() => new Date(2017, 06, 11)))
         {
-            new NullableDateModel { Prop = new Date(2017, 06, 12) }.Should().BeValidFor(new NullableDateInFutureValidator());
+            new NullableDateModel { Prop = new Date(2017, 06, 12) }.ShouldBeValidFor(new NullableDateInFutureValidator());
         }
     }
 
@@ -47,7 +47,7 @@ public class Valid_for_in_future
     {
         using (Clock.SetTimeForCurrentContext(() => new Date(2017, 06, 11)))
         {
-            new NullableDateOnlyModel { Prop = new DateOnly(2017, 06, 12) }.Should().BeValidFor(new NullableDateOnlyInFutureValidator());
+            new NullableDateOnlyModel { Prop = new DateOnly(2017, 06, 12) }.ShouldBeValidFor(new NullableDateOnlyInFutureValidator());
         }
     }
 
@@ -56,7 +56,7 @@ public class Valid_for_in_future
     {
         using (Clock.SetTimeForCurrentContext(() => new Date(2017, 06, 11)))
         {
-            new NullableDateTimeModel { Prop = new DateTime(2017, 06, 12, 00, 00, 00, DateTimeKind.Utc) }.Should().BeValidFor(new NullableDateTimeInFutureValidator());
+            new NullableDateTimeModel { Prop = new DateTime(2017, 06, 12, 00, 00, 00, DateTimeKind.Utc) }.ShouldBeValidFor(new NullableDateTimeInFutureValidator());
         }
     }
 }
@@ -68,7 +68,7 @@ public class Not_invalid_for_not_set
     {
         using (Clock.SetTimeForCurrentContext(() => new Date(2017, 06, 11)))
         {
-            new NullableDateModel { Prop = null }.Should().BeValidFor(new NullableDateInFutureValidator());
+            new NullableDateModel { Prop = null }.ShouldBeValidFor(new NullableDateInFutureValidator());
         }
     }
 
@@ -77,7 +77,7 @@ public class Not_invalid_for_not_set
     {
         using (Clock.SetTimeForCurrentContext(() => new Date(2017, 06, 11)))
         {
-            new NullableDateOnlyModel { Prop = null }.Should().BeValidFor(new NullableDateOnlyInFutureValidator());
+            new NullableDateOnlyModel { Prop = null }.ShouldBeValidFor(new NullableDateOnlyInFutureValidator());
         }
     }
 
@@ -86,7 +86,7 @@ public class Not_invalid_for_not_set
     {
         using (Clock.SetTimeForCurrentContext(() => new Date(2017, 06, 11)))
         {
-            new NullableDateTimeModel { Prop = null }.Should().BeValidFor(new NullableDateTimeInFutureValidator());
+            new NullableDateTimeModel { Prop = null }.ShouldBeValidFor(new NullableDateTimeInFutureValidator());
         }
     }
 }
@@ -101,8 +101,8 @@ public class Invalid_for_not_in_future
         {
             using (Clock.SetTimeForCurrentContext(() => new Date(2017, 06, 11)))
             {
-                new DateModel { Prop = new Date(2017, 06, 11) }.Should()
-                    .BeInvalidFor(new DateInFutureValidator())
+                new DateModel { Prop = new Date(2017, 06, 11) }
+                    .ShouldBeInvalidFor(new DateInFutureValidator())
                     .WithMessage(ValidationMessage.Error(message, "Prop"));
             }
         }
@@ -116,8 +116,8 @@ public class Invalid_for_not_in_future
         {
             using (Clock.SetTimeForCurrentContext(() => new Date(2017, 06, 11)))
             {
-                new DateOnlyModel { Prop = new DateOnly(2017, 06, 11) }.Should()
-                    .BeInvalidFor(new DateOnlyInFutureValidator())
+                new DateOnlyModel { Prop = new DateOnly(2017, 06, 11) }
+                    .ShouldBeInvalidFor(new DateOnlyInFutureValidator())
                     .WithMessage(ValidationMessage.Error(message, "Prop"));
             }
         }
@@ -131,8 +131,8 @@ public class Invalid_for_not_in_future
         {
             using (Clock.SetTimeForCurrentContext(() => new Date(2017, 06, 11)))
             {
-                new DateTimeModel { Prop = new DateTime(2017, 06, 11, 00, 00, 00, DateTimeKind.Utc) }.Should()
-                    .BeInvalidFor(new DateTimeInFutureValidator())
+                new DateTimeModel { Prop = new DateTime(2017, 06, 11, 00, 00, 00, DateTimeKind.Utc) }
+                    .ShouldBeInvalidFor(new DateTimeInFutureValidator())
                     .WithMessage(ValidationMessage.Error(message, "Prop"));
             }
         }
@@ -146,9 +146,9 @@ public class Invalid_for_not_in_future
         {
             using (Clock.SetTimeForCurrentContext(() => new Date(2017, 06, 11)))
             {
-                new NullableDateModel { Prop = new Date(2017, 06, 11) }.Should()
-                   .BeInvalidFor(new NullableDateInFutureValidator())
-                   .WithMessage(ValidationMessage.Error(message, "Prop"));
+                new NullableDateModel { Prop = new Date(2017, 06, 11) }
+                    .ShouldBeInvalidFor(new NullableDateInFutureValidator())
+                    .WithMessage(ValidationMessage.Error(message, "Prop"));
             }
         }
     }
@@ -161,8 +161,8 @@ public class Invalid_for_not_in_future
         {
             using (Clock.SetTimeForCurrentContext(() => new Date(2017, 06, 11)))
             {
-                new NullableDateOnlyModel { Prop = new DateOnly(2017, 06, 11) }.Should()
-                    .BeInvalidFor(new NullableDateOnlyInFutureValidator())
+                new NullableDateOnlyModel { Prop = new DateOnly(2017, 06, 11) }
+                    .ShouldBeInvalidFor(new NullableDateOnlyInFutureValidator())
                     .WithMessage(ValidationMessage.Error(message, "Prop"));
             }
         }
@@ -176,8 +176,8 @@ public class Invalid_for_not_in_future
         {
             using (Clock.SetTimeForCurrentContext(() => new Date(2017, 06, 11)))
             {
-                new NullableDateTimeModel { Prop = new DateTime(2017, 06, 11, 00, 00, 00, DateTimeKind.Utc) }.Should()
-                    .BeInvalidFor(new NullableDateTimeInFutureValidator())
+                new NullableDateTimeModel { Prop = new DateTime(2017, 06, 11, 00, 00, 00, DateTimeKind.Utc) }
+                    .ShouldBeInvalidFor(new NullableDateTimeInFutureValidator())
                     .WithMessage(ValidationMessage.Error(message, "Prop"));
             }
         }

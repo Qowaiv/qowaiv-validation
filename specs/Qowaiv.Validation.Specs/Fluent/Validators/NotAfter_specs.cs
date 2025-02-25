@@ -8,12 +8,12 @@ public class Is_valid
     [TestCaseSource(nameof(Validators))]
     public void When_not_after(ModelValidator<Model> validator)
         => new Model { DateOfBirth = new(1942, 11, 27), DateOfDeath = new Date(1970, 09, 18) }
-        .Should().BeValidFor(validator);
+        .ShouldBeValidFor(validator);
 
     [TestCaseSource(nameof(Validators))]
     public void When_nullable_not_set(ModelValidator<Model> validator)
         => new Model { DateOfBirth = new(1942, 11, 27), DateOfDeath = null }
-        .Should().BeValidFor(validator);
+        .ShouldBeValidFor(validator);
 
     static readonly IEnumerable<ModelValidator<Model>> Validators = [new FixedValidator(), new ExpressionValidator(), new ExpressionNullableValidator()];
 }
@@ -27,7 +27,7 @@ public class Is_not_valid
         using var _ = culture.Scoped();
 
         new Model { DateOfBirth = dt }
-            .Should().BeInvalidFor(new FixedValidator())
+            .ShouldBeInvalidFor(new FixedValidator())
             .WithMessage(ValidationMessage.Error(message, "DateOfBirth"));
     }
 
@@ -38,7 +38,7 @@ public class Is_not_valid
         using var _ = culture.Scoped();
 
         new Model { DateOfDeath = dt }
-            .Should().BeInvalidFor(new FixedValidator())
+            .ShouldBeInvalidFor(new FixedValidator())
             .WithMessage(ValidationMessage.Error(message, "DateOfDeath"));
     }
 
@@ -49,7 +49,7 @@ public class Is_not_valid
         using var _ = culture.Scoped();
 
         new Model { DateOfBirth = dt }
-            .Should().BeInvalidFor(new ExpressionValidator())
+            .ShouldBeInvalidFor(new ExpressionValidator())
             .WithMessage(ValidationMessage.Error(message, "DateOfBirth"));
     }
 
@@ -60,7 +60,7 @@ public class Is_not_valid
         using var _ = culture.Scoped();
 
         new Model { DateOfDeath = dt }
-            .Should().BeInvalidFor(new ExpressionValidator())
+            .ShouldBeInvalidFor(new ExpressionValidator())
             .WithMessage(ValidationMessage.Error(message, "DateOfDeath"));
     }
 
@@ -71,7 +71,7 @@ public class Is_not_valid
         using var _ = culture.Scoped();
 
         new Model { DateOfBirth = dt }
-            .Should().BeInvalidFor(new ExpressionNullableValidator())
+            .ShouldBeInvalidFor(new ExpressionNullableValidator())
             .WithMessage(ValidationMessage.Error(message, "DateOfBirth"));
     }
 
@@ -82,7 +82,7 @@ public class Is_not_valid
         using var _ = culture.Scoped();
 
         new Model { DateOfDeath = dt }
-            .Should().BeInvalidFor(new ExpressionNullableValidator())
+            .ShouldBeInvalidFor(new ExpressionNullableValidator())
             .WithMessage(ValidationMessage.Error(message, "DateOfDeath"));
     }
 }

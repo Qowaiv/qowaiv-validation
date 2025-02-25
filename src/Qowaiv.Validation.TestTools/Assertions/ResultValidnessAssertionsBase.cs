@@ -1,41 +1,39 @@
-namespace FluentAssertions.Qowaiv.Validation;
+namespace Qowaiv.Validation.TestTools;
 
 /// <summary>Contains a number of methods to assert the state of a <see cref="Result"/>.</summary>
-public class ResultValidnessAssertionsBase<TSubject>
+public class ResultValidnessAssertionsBase<TSubject>(TSubject subject, string? expression)
     where TSubject : Result
 {
-    /// <summary>Initializes a new instance of the <see cref="ResultValidnessAssertionsBase{TSubject}"/> class.</summary>
-    protected ResultValidnessAssertionsBase(TSubject? subject) => Subject = subject;
-
     /// <summary>Gets the object which value is being asserted.</summary>
-    protected TSubject? Subject { get; }
+    protected TSubject Subject { get; } = Guard.NotNull(subject);
+
+    protected string Expression { get; } = expression ?? "Result";
 
     /// <summary>Gets the <see cref="Result.Messages"/>.</summary>
     protected IEnumerable<IValidationMessage> Messages => Subject?.Messages ?? [];
 
-    internal void ExecuteWithoutMessages()
-        => Execute.Assertion
-        .ForCondition(!Messages.Any())
-        .WithDefaultIdentifier()
-        .FailWith(WithoutMessages(Messages));
+    internal void ExecuteWithoutMessages() => Assertion
+        .For(Expression)
+        .WithMessage(WithoutMessages(Messages))
+        .Ensure(!Messages.Any());
 
-    internal void ExecuteWithMessage(IValidationMessage message)
-        => Execute.Assertion
-        .ForCondition(Messages.Count() == 1 && Comparer().Equals(Messages.Single(), message))
-        .WithDefaultIdentifier()
-        .FailWith(WithMessage(message, Messages.ToArray()));
+    internal void ExecuteWithMessage(IValidationMessage message) => Assertion
+        .For(Expression)
+        .WithMessage(WithMessage(message, [.. Messages]))
+        .Ensure(Messages.Count() == 1 && Comparer().Equals(message, Messages.Single()));
 
     internal void ExecuteWithMessages(IValidationMessage[] messages)
     {
         var missing = messages.Except(Messages, Comparer()).ToArray();
         var extra = Messages.Except(messages, Comparer()).ToArray();
+        var error = Messages.Any()
+                ? WithMessages(missing, extra)
+                : "Expected messages, but found none.";
 
-        Execute.Assertion
-        .ForCondition(missing.Length == 0 && extra.Length == 0)
-        .WithDefaultIdentifier()
-        .FailWith(Messages.Any()
-            ? WithMessages(missing, extra)
-            : "Expected messages, but found none.");
+        Assertion
+            .For(Expression)
+            .WithMessage(error)
+            .Ensure(!missing.Any() && !extra.Any());
     }
 
     [Pure]

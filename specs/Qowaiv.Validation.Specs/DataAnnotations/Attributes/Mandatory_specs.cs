@@ -61,13 +61,13 @@ public class With_message
     [Test]
     [SetCulture("en-GB")]
     public void supporting_custom_error_resource_type()
-        => new WithCustomErrorMessageType().Should().BeInvalidFor(new AnnotatedModelValidator<WithCustomErrorMessageType>())
+        => new WithCustomErrorMessageType().ShouldBeInvalidFor(new AnnotatedModelValidator<WithCustomErrorMessageType>())
         .WithMessage(ValidationMessage.Error("This Iban is wrong.", "Iban"));
 
     [Test]
     [SetCulture("en-GB")]
     public void supporting_custom_display()
-        => new WithCustomDisplay().Should().BeInvalidFor(new AnnotatedModelValidator<WithCustomDisplay>())
+        => new WithCustomDisplay().ShouldBeInvalidFor(new AnnotatedModelValidator<WithCustomDisplay>())
         .WithMessage(ValidationMessage.Error("The IBAN field is required.", "Iban"));
 
     internal class Model

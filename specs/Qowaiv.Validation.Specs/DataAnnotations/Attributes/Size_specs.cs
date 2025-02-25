@@ -48,7 +48,7 @@ public class At_least
     public void with_message(CultureInfo culture, string message)
     {
         using var _ = culture.Scoped();
-        new Model() {AtLeastProp = new([1, 2]) }.Should().BeInvalidFor(new AnnotatedModelValidator<Model>())
+        new Model() {AtLeastProp = new([1, 2]) }.ShouldBeInvalidFor(new AnnotatedModelValidator<Model>())
             .WithMessage(ValidationMessage.Error(message, "AtLeastProp"));
     }
 }
@@ -95,7 +95,7 @@ public class At_most
     public void with_message(CultureInfo culture, string message)
     {
         using var _ = culture.Scoped();
-        new Model() { AtMostProp = new([1, 2, 3, 4, 5]) }.Should().BeInvalidFor(new AnnotatedModelValidator<Model>())
+        new Model() { AtMostProp = new([1, 2, 3, 4, 5]) }.ShouldBeInvalidFor(new AnnotatedModelValidator<Model>())
             .WithMessage(ValidationMessage.Error(message, "AtMostProp"));
     }
 }
@@ -151,7 +151,7 @@ public class In_range
     public void with_message(CultureInfo culture, string message)
     {
         using var _ = culture.Scoped();
-        new Model() { InRangeProp = new([1, 2]) }.Should().BeInvalidFor(new AnnotatedModelValidator<Model>())
+        new Model() { InRangeProp = new([1, 2]) }.ShouldBeInvalidFor(new AnnotatedModelValidator<Model>())
             .WithMessage(ValidationMessage.Error(message, "InRangeProp"));
     }
 }
