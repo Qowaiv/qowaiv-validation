@@ -38,7 +38,7 @@ as `Result` is defined to be invalid bases on containing at least one error
 message. Furthermore, it does not exposes the `.Value` as that is not
 accessible for an invalid result.
 
-All (except for the `.Value`) is also for the non-generic `Result`.
+All (except for the `.Value`) is also applicable for the non-generic `Result`.
 
 ## Validate with
 There is also some syntactic sugar for testing validators on a model of choice:
