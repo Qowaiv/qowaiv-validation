@@ -8,7 +8,8 @@ public class Validation_without_warnings
     [Test]
     public void Is_valid()
     {
-        new WarningModel().Should().BeValidFor(new WarningModelValidator())
+        new WarningModel().ValidateWith(new WarningModelValidator())
+            .Should().BeValid()
             .WithMessages(
                 ValidationMessage.Warn("Test warning.", "Message"),
                 ValidationMessage.Info("Nice that you validated this.", "Message"));

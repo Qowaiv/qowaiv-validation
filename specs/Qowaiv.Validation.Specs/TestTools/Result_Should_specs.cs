@@ -9,7 +9,7 @@ public class BeValid
     {
         var result = Result.WithMessages(ValidationMessage.Error("Broken"));
         Action assert = () => result.Should().BeValid("something went wrong");
-        assert.Should().Throw<AssertionException>().WithMessage(
+        assert.Should().Throw<AssertionFailed>().WithMessage(
 @"Actual Result is not valid because something went wrong:
 - ERROR   Broken");
     }
@@ -27,7 +27,7 @@ public class BeInvalid
     public void fails_for_OK_result()
     {
         Action assert = () => Result.OK.Should().BeInvalid("something went wrong");
-        assert.Should().Throw<AssertionException>().WithMessage(@"Actual Result.OK is not invalid because something went wrong.");
+        assert.Should().Throw<AssertionFailed>().WithMessage(@"Actual Result.OK is not invalid because something went wrong.");
     }
 
     [Test]
@@ -45,7 +45,7 @@ public class WithoutMessage
     {
         var result = Result.WithMessages(ValidationMessage.Warn("Almost broken"), ValidationMessage.Info("Just that you know.", "Data"));
         Action assert = () => result.Should().BeValid().WithoutMessages();
-        assert.Should().Throw<AssertionException>().WithMessage(
+        assert.Should().Throw<AssertionFailed>().WithMessage(
 @"Expected no messages, but found:
 - WARNING Almost broken
 - INFO    Just that you know. Prop: Data");
@@ -64,7 +64,7 @@ public class WithMessage
     public void fails_for_no_message()
     {
         Action assert = () => Result.OK.Should().BeValid().WithMessage(ValidationMessage.Info("Just that you know.", "Data"));
-        assert.Should().Throw<AssertionException>().WithMessage("Expected a message, but found none.");
+        assert.Should().Throw<AssertionFailed>().WithMessage("Expected a message, but found none.");
     }
 
     [Test]
@@ -72,7 +72,7 @@ public class WithMessage
     {
         var result = Result.WithMessages(ValidationMessage.Warn("Almost broken"));
         Action assert = () => result.Should().BeValid().WithMessage(ValidationMessage.Info("Just that you know.", "Data"));
-        assert.Should().Throw<AssertionException>().WithMessage(
+        assert.Should().Throw<AssertionFailed>().WithMessage(
 @"Expected:
 - INFO    Just that you know. Prop: Data
 Actual:
@@ -84,7 +84,7 @@ Actual:
     {
         var result = Result.WithMessages(ValidationMessage.Warn("Almost broken"), ValidationMessage.Info("Just that you know.", "Data"));
         Action assert = () => result.Should().BeValid().WithMessage(ValidationMessage.Info("Just that you know.", "NoData"));
-        assert.Should().Throw<AssertionException>().WithMessage(
+        assert.Should().Throw<AssertionFailed>().WithMessage(
 @"Missing message:
 - INFO    Just that you know. Prop: NoData
 Extra messages:
@@ -108,7 +108,7 @@ public class WithMessages
             ValidationMessage.Warn("Almost broken"),
             ValidationMessage.Info("Just that you know.", "Data"));
 
-        assert.Should().Throw<AssertionException>().WithMessage("Expected messages, but found none.");
+        assert.Should().Throw<AssertionFailed>().WithMessage("Expected messages, but found none.");
     }
 
     [Test]
@@ -119,7 +119,7 @@ public class WithMessages
             ValidationMessage.Warn("Almost broken"),
             ValidationMessage.Info("Just that you know.", "Data"));
 
-        assert.Should().Throw<AssertionException>().WithMessage(
+        assert.Should().Throw<AssertionFailed>().WithMessage(
 @"Missing message:
 - INFO    Just that you know. Prop: Data");
     }
@@ -170,7 +170,7 @@ public class Null
     {
         Result? result = null;
         Action assert = () => result.Should().BeValid();
-        assert.Should().Throw<AssertionException>().WithMessage("Result is <null>.");
+        assert.Should().Throw<ArgumentNullException>();
     }
 
     [Test]
@@ -178,6 +178,6 @@ public class Null
     {
         Result? result = null;
         Action assert = () => result.Should().BeInvalid();
-        assert.Should().Throw<AssertionException>().WithMessage("Result is <null>.");
+        assert.Should().Throw<ArgumentNullException>();
     }
 }

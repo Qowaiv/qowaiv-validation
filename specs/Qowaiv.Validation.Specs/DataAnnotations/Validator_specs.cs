@@ -10,19 +10,22 @@ public class Validates_children_when_child_type
     [Test]
     public void is_IValidatableObject()
         => new WithIValidatableChild()
-        .Should().BeInvalidFor(new AnnotatedModelValidator<WithIValidatableChild>())
+        .ValidateWith(new AnnotatedModelValidator<WithIValidatableChild>())
+        .Should().BeInvalid()
         .WithMessage(ValidationMessage.Error("Answer to the Ultimate Question of Life, the Universe, and Everything.", "Child.Answer"));
     
     [Test]
     public void has_any_validation_attribute()
      => new WithChildTypeDecorated()
-        .Should().BeInvalidFor(new AnnotatedModelValidator<WithChildTypeDecorated>())
+        .ValidateWith(new AnnotatedModelValidator<WithChildTypeDecorated>())
+        .Should().BeInvalid()
         .WithMessage(ValidationMessage.Error("Answer to the Ultimate Question of Life, the Universe, and Everything.", "Child"));
 
     [Test]
     public void Has_any_property_with_validation_attribute()
         => new WithChildWithAttributes()
-        .Should().BeInvalidFor(new AnnotatedModelValidator<WithChildWithAttributes>())
+        .ValidateWith(new AnnotatedModelValidator<WithChildWithAttributes>())
+        .Should().BeInvalid()
         .WithMessage(ValidationMessage.Error("The Answer field is required.", "Child.Answer"));
   
     internal class WithIValidatableChild
@@ -82,19 +85,21 @@ public class Supports
         {
             { typeof(AnswerService), new AnswerService(42) }
         };
-        model.Should().BeValidFor(new AnnotatedModelValidator<WithDI>(provider));
+        model.ValidateWith(new AnnotatedModelValidator<WithDI>(provider))
+            .Should().BeValid();
     }
 
     [Test]
     public void empty_service_provider_by_default()
-        => new WithDI().Should().BeValidFor(new AnnotatedModelValidator<WithDI>());
+        => new WithDI().ValidateWith(new AnnotatedModelValidator<WithDI>()).Should().BeValid();
 
     [Test]
     public void models_with_circularity()
     {
         var model = new WithLoop();
         model.Child.Parent = model;
-        model.Should().BeInvalidFor(new AnnotatedModelValidator<WithLoop>())
+        model.ValidateWith(new AnnotatedModelValidator<WithLoop>())
+            .Should().BeInvalid()
             .WithMessage(ValidationMessage.Error("The Answer field is required.", "Child.Answer"));
     }
 
@@ -105,9 +110,11 @@ public class Supports
         {
             Records = [new ChildRecord(null), new ChildRecord(null)],
         };
-        model.Should().BeInvalidFor(new AnnotatedModelValidator<WithChildren>()).WithMessages(
-            ValidationMessage.Error("The Value field is required.", "Records[0].Value"),
-            ValidationMessage.Error("The Value field is required.", "Records[1].Value"));
+        model.ValidateWith(new AnnotatedModelValidator<WithChildren>())
+            .Should().BeInvalid()
+            .WithMessages(
+                ValidationMessage.Error("The Value field is required.", "Records[0].Value"),
+                ValidationMessage.Error("The Value field is required.", "Records[1].Value"));
     }
 
     [TestCase(ValidationSeverity.Info)]
@@ -125,7 +132,8 @@ public class Supports
     [Test]
     public void severity_none_as_no_validation_result()
         => new WithSeverity(ValidationSeverity.None)
-        .Should().BeValidFor(new AnnotatedModelValidator<WithSeverity>())
+        .ValidateWith(new AnnotatedModelValidator<WithSeverity>())
+        .Should().BeValid()
         .WithoutMessages();
 
     internal class WithDI : IValidatableObject

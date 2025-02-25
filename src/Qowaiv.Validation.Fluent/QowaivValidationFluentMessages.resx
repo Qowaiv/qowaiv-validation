@@ -24,14 +24,14 @@
   <data name="IsFinite" xml:space="preserve">
     <value>'{PropertyName}' must be a finite number.</value>
   </data>
+  <data name="NoIPBasedEmailAddress" xml:space="preserve">
+    <value>'{PropertyName}' has an IP address based domain.</value>
+  </data>
   <data name="NotAfter" xml:space="preserve">
     <value>'{PropertyName}' is after {ComparisonValue}.</value>
   </data>
   <data name="NotBefore" xml:space="preserve">
     <value>'{PropertyName}' is before {ComparisonValue}.</value>
-  </data>
-  <data name="NoIPBasedEmailAddress" xml:space="preserve">
-    <value>'{PropertyName}' has a IP address based domain.</value>
   </data>
   <data name="NotEmptyOrUnknown" xml:space="preserve">
     <value>'{PropertyName}' must not be empty or unknown.</value>

@@ -8,7 +8,8 @@ public class Set_value
     [Test]
     public void Is_valid()
         => new UnknownModel { Country = Country.NL }
-        .Should().BeValidFor(new UnknownModelValidator());
+        .ValidateWith(new UnknownModelValidator())
+        .Should().BeValid();
 }
 
 public class Unknown
@@ -20,16 +21,18 @@ public class Unknown
         using (culture.Scoped())
         {
             new UnknownModel { Country = Country.Unknown }
-                .Should().BeInvalidFor(new UnknownModelValidator())
+                .ValidateWith(new UnknownModelValidator())
+                .Should().BeInvalid()
                 .WithMessage(ValidationMessage.Error(message, "Country"));
         }
     }
 
     [Test]
     public void Is_valid_with_warning_severity()
-=> new UnknownWithSeverityModel { Email = EmailAddress.Unknown }
-.Should().BeValidFor(new UnknownWithSeverityModelValidator())
-.WithMessage(ValidationMessage.Warn("'Email' must not be empty or unknown.", "Email"));
+        => new UnknownWithSeverityModel { Email = EmailAddress.Unknown }
+            .ValidateWith(new UnknownWithSeverityModelValidator())
+            .Should().BeValid()
+            .WithMessage(ValidationMessage.Warn("'Email' must not be empty or unknown.", "Email"));
 }
 
 public class Empty
@@ -41,14 +44,16 @@ public class Empty
         using (culture.Scoped())
         {
             new UnknownModel { Country = Country.Empty }
-                .Should().BeInvalidFor(new UnknownModelValidator())
-                .WithMessage(ValidationMessage.Error(message, "Country"));
+            .ValidateWith(new UnknownModelValidator())
+            .Should().BeInvalid()
+            .WithMessage(ValidationMessage.Error(message, "Country"));
         }
     }
 
     [Test]
     public void Is_valid_with_warning_severity()
         => new UnknownWithSeverityModel { Email = EmailAddress.Empty }
-        .Should().BeValidFor(new UnknownWithSeverityModelValidator())
+        .ValidateWith(new UnknownWithSeverityModelValidator())
+        .Should().BeValid()
         .WithMessage(ValidationMessage.Warn("'Email' must not be empty or unknown.", "Email"));
 }

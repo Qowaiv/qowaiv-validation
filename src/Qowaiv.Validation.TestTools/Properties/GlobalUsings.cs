@@ -1,7 +1,3 @@
-global using FluentAssertions.Execution;
-global using FluentAssertions.Primitives;
-global using FluentAssertions.Qowaiv.Validation;
-global using Qowaiv;
 global using Qowaiv.Diagnostics.Contracts;
 global using Qowaiv.Validation.Abstractions;
 global using Qowaiv.Validation.TestTools.Diagnostics.Contracts;

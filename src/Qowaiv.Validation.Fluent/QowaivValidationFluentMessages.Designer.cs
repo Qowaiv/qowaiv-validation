@@ -61,7 +61,7 @@ namespace Qowaiv.Validation.Fluent {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{PropertyName}&apos; should be after {Value}..
+        ///   Looks up a localized string similar to &apos;{PropertyName}&apos; is not after {ComparisonValue}..
         /// </summary>
         internal static string After {
             get {
@@ -70,7 +70,7 @@ namespace Qowaiv.Validation.Fluent {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{PropertyName}&apos; should be before {Value}..
+        ///   Looks up a localized string similar to &apos;{PropertyName}&apos; is not before {ComparisonValue}..
         /// </summary>
         internal static string Before {
             get {
@@ -106,7 +106,7 @@ namespace Qowaiv.Validation.Fluent {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{PropertyName}&apos; has a IP address based domain..
+        ///   Looks up a localized string similar to &apos;{PropertyName}&apos; has an IP address based domain..
         /// </summary>
         internal static string NoIPBasedEmailAddress {
             get {
@@ -115,7 +115,7 @@ namespace Qowaiv.Validation.Fluent {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{PropertyName}&apos; should not be after {Value}..
+        ///   Looks up a localized string similar to &apos;{PropertyName}&apos; is after {ComparisonValue}..
         /// </summary>
         internal static string NotAfter {
             get {
@@ -124,7 +124,7 @@ namespace Qowaiv.Validation.Fluent {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{PropertyName}&apos; should not be before {Value}..
+        ///   Looks up a localized string similar to &apos;{PropertyName}&apos; is before {ComparisonValue}..
         /// </summary>
         internal static string NotBefore {
             get {
@@ -169,7 +169,7 @@ namespace Qowaiv.Validation.Fluent {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{PropertyName}&apos; {Value} is not valid for {Country}..
+        ///   Looks up a localized string similar to &apos;{PropertyName}&apos; {ComparisonValue} is not valid for {Country}..
         /// </summary>
         internal static string PostalCodeValidForCountry {
             get {
