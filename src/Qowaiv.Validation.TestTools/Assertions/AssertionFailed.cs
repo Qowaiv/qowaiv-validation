@@ -1,6 +1,6 @@
 namespace Qowaiv.Validation.TestTools;
 
-/// <summary>Thorn when an assertion fails.</summary>
+/// <summary>Thrown when an assertion fails.</summary>
 public class AssertionFailed : Exception
 {
     /// <summary>Initializes a new instance of the <see cref="AssertionFailed"/> class.</summary>
