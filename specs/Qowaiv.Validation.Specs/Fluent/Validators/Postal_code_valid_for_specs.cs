@@ -11,7 +11,9 @@ public class Valid_for
         {
             PostalCode = PostalCode.Parse("2628ZD"),
             Country = Country.NL,
-        }.ShouldBeValidFor(new PostalCodeModelValidator());
+        }
+        .ValidateWith(new PostalCodeModelValidator())
+        .Should().BeValid();
 }
 
 public class Not_invalid_for
@@ -22,7 +24,9 @@ public class Not_invalid_for
         {
             PostalCode = PostalCode.Empty,
             Country = Country.Empty,
-        }.ShouldBeValidFor(new PostalCodeModelValidator());
+        }
+        .ValidateWith(new PostalCodeModelValidator())
+        .Should().BeValid();
 
     [Test]
     public void Empty_postal_code_for_country()
@@ -30,7 +34,9 @@ public class Not_invalid_for
          {
              PostalCode = PostalCode.Empty,
              Country = Country.NL,
-         }.ShouldBeValidFor(new PostalCodeModelValidator());
+         }
+         .ValidateWith(new PostalCodeModelValidator())
+         .Should().BeValid();
 
     [Test]
     public void Postal_code_for_empty_country()
@@ -38,7 +44,9 @@ public class Not_invalid_for
          {
              PostalCode = PostalCode.Parse("12345"),
              Country = Country.Empty,
-         }.ShouldBeValidFor(new PostalCodeModelValidator());
+         }
+         .ValidateWith(new PostalCodeModelValidator())
+        .Should().BeValid();
 }
 public class Invalid_for
 {
@@ -52,7 +60,9 @@ public class Invalid_for
             {
                 Country = Country.NL,
                 PostalCode = PostalCode.Parse("12345")
-            }.ShouldBeInvalidFor(new PostalCodeModelValidator())
+            }
+            .ValidateWith(new PostalCodeModelValidator())
+            .Should().BeInvalid()
             .WithMessage(ValidationMessage.Error(message, "PostalCode"));
         }
     }

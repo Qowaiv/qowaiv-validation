@@ -8,7 +8,8 @@ public class Known
     [Test]
     public void Is_valid()
         => new RequiredModel { Email = EmailAddress.Parse("test@qowaiv.org"), Country = Country.NL }
-        .ShouldBeValidFor(new RequiredModelValidator());
+        .ValidateWith(new RequiredModelValidator())
+        .Should().BeValid();
 }
 public class Uknown
 {
@@ -19,15 +20,17 @@ public class Uknown
         using (culture.Scoped())
         {
             new RequiredModel { Email = EmailAddress.Unknown, Country = Country.NL }
-            .ShouldBeInvalidFor(new RequiredModelValidator())
-            .WithMessage(ValidationMessage.Error(message, "Email"));
+                .ValidateWith(new RequiredModelValidator())
+                .Should().BeInvalid()
+                .WithMessage(ValidationMessage.Error(message, "Email"));
         }
     }
 
     [Test]
     public void Is_valid_when_explictly_allowed()
         => new RequiredModel { Email = EmailAddress.Parse("test@qowaiv.org"), Country = Country.Unknown }
-        .ShouldBeValidFor(new RequiredModelValidator());
+        .ValidateWith(new RequiredModelValidator())
+        .Should().BeValid();
 }
 public class Empty
 { 
@@ -38,7 +41,8 @@ public class Empty
         using (culture.Scoped())
         {
             new RequiredModel { Email = EmailAddress.Empty, Country = Country.NL }
-            .ShouldBeInvalidFor(new RequiredModelValidator())
+            .ValidateWith(new RequiredModelValidator())
+            .Should().BeInvalid()
             .WithMessage(ValidationMessage.Error(message, "Email"));
         }
     }

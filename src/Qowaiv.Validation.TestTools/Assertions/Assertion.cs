@@ -1,4 +1,3 @@
-
 namespace Qowaiv.Validation.TestTools;
 
 internal sealed record Assertion
@@ -44,6 +43,4 @@ internal sealed record Assertion
             throw new AssertionFailed(error);
         }
     }
-
-
 }

@@ -8,7 +8,7 @@ public abstract class ResultAssertionsBase<TSubject>(TSubject? subject, string? 
     public TSubject Subject { get; } = Guard.NotNull(subject);
 
     /// <summary>Gets the expression asserted oon.</summary>
-    protected string Expression { get; } = expression ?? "Result";
+    internal string Expression { get; } = expression ?? "Result";
 
     /// <summary>Asserts thats <typeparamref name="TSubject"/> is invalid.</summary>
     [Assertion]

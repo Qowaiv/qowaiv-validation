@@ -64,7 +64,8 @@ public class With_message
     public void culture_dependent(CultureInfo culture, string message)
     {
         using var _ = culture.Scoped();
-        new Model().ShouldBeInvalidFor(new AnnotatedModelValidator<Model>())
+        new Model().ValidateWith(new AnnotatedModelValidator<Model>())
+            .Should().BeInvalid()
             .WithMessage(ValidationMessage.Error(message, "Values"));
     }
     internal class Model

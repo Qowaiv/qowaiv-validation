@@ -7,7 +7,8 @@ public class ResultValidnessAssertionsBase<TSubject>(TSubject subject, string? e
     /// <summary>Gets the object which value is being asserted.</summary>
     protected TSubject Subject { get; } = Guard.NotNull(subject);
 
-    protected string Expression { get; } = expression ?? "Result";
+    /// <summary>Gets the expression asserted oon.</summary>
+    internal string Expression { get; } = expression ?? "Result";
 
     /// <summary>Gets the <see cref="Result.Messages"/>.</summary>
     protected IEnumerable<IValidationMessage> Messages => Subject?.Messages ?? [];

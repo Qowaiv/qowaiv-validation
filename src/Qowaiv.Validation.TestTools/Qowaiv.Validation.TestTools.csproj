@@ -11,7 +11,7 @@
 <![CDATA[
 v2.0.0
 - Drop FluentAssertions depedency. (BREAKING)
-- API change: model.ShouldBeValidFor() => model.ShouldBeValidFor(). (BREAKING)
+- API change: model.ShouldBeValidFor<Validator>() => model.ValidateWith<Validator>().Should().BeValid() (BREAKING)
 - Drop .NET standard 2.0. (BREAKING)
 v1.0.0
 - Add .NET 9.0 target.
