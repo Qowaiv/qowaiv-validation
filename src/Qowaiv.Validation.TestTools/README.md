@@ -1,8 +1,7 @@
 # Qowaiv.Validation Test Tools
 
 These test tools help writing meaningful tests an asserting the state of a
-`Result` or `Result<T>`. This is done by extending on
-[FluentAssertions](https://fluentassertions.com).
+`Result` or `Result<T>`. The syntax is inspired by [FluentAssertions](https://fluentassertions.com).
 
 These assertions could look like this:
 
@@ -11,7 +10,7 @@ Result.For(17).Should().BeValid()
     .WithoutMessages()
     .Value.Should().Be(17); 
 ```
-Where the chain after `.Value` is regular FluentAssertions.
+Where the chain after `.Value` is exposes the value.
 
 Other options for `.IsValid()` are:
 
@@ -40,3 +39,13 @@ message. Furthermore, it does not exposes the `.Value` as that is not
 accessible for an invalid result.
 
 All (except for the `.Value`) is also for the non-generic `Result`.
+
+## Validate with
+There is also some syntatic sugar for testing validators on a model of choise:
+
+``` C#
+var model = new MyModel();
+
+Result<MyModel> result = model.ValidateWith(new ValidatorForMyModel);
+```
+And this result can be changed with the assertions described on top.
