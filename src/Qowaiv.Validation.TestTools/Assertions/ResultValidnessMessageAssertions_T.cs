@@ -26,6 +26,6 @@ public sealed class ResultValidnessMessageAssertions<TModel> : ResultValidnessAs
     public ResultValidnessAssertions<TModel> WithMessages(params IValidationMessage[] messages)
     {
         ExecuteWithMessages(messages);
-        return new ResultValidnessAssertions<TModel>(Subject, Expression!);
+        return new ResultValidnessAssertions<TModel>(Subject, Expression);
     }
 }
