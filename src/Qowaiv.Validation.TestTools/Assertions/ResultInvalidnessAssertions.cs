@@ -4,7 +4,7 @@ namespace Qowaiv.Validation.TestTools;
 public sealed class ResultInvalidnessAssertions : ResultValidnessAssertionsBase<Result>
 {
     /// <summary>Initializes a new instance of the <see cref="ResultInvalidnessAssertions"/> class.</summary>
-    internal ResultInvalidnessAssertions(Result subject, string? epxression) : base(subject, epxression) { }
+    internal ResultInvalidnessAssertions(Result subject, string? expression) : base(subject, expression) { }
 
     /// <summary>Asserts that the <see cref="Result"/> contains the specified message.</summary>
     [Assertion]
