@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup Label="XML files as embedded">
-    <None Remove="Xml/Files/*" />
     <EmbeddedResource Include="Xml/Files/*" />
   </ItemGroup>
 

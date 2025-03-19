@@ -5,7 +5,7 @@ namespace Qowaiv.Validation.DataAnnotations.Reflection;
 internal static class DataAnnotationsReflector
 {
     private static readonly RequiredAttribute RequiredMember = new();
-    
+
     /// <summary>Returns true if type implements <see cref="IValidatableObject"/>,
     /// or if the type has been decorated with any <see cref="ValidationAttribute"/>'s,
     /// or any of its properties.
@@ -51,7 +51,6 @@ internal static class DataAnnotationsReflector
     /// Get the <see cref="RequiredMember"/> attribute instance for reference types
     /// that are not nullable and defined as required properties.
     /// </summary>
-
     [Pure]
     public static RequiredAttribute? RequiredMemberAttribute(this PropertyInfo property)
     {
