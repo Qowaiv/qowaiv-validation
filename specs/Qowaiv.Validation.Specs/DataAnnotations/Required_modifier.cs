@@ -79,7 +79,7 @@ public class Required_modifier
         public required EmailAddress Svo { get; init; }
     }
 
-    internal class DecorateddModel
+    internal class DecoratedModel
     {
         [Required(AllowEmptyStrings = true)]
         public required string NotNullable { get; init; }
