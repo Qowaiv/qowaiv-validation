@@ -4,6 +4,8 @@ namespace Qowaiv.Validation.DataAnnotations.Reflection;
 
 internal static class DataAnnotationsReflector
 {
+    private static readonly RequiredAttribute RequiredMember = new();
+
     /// <summary>Returns true if type implements <see cref="IValidatableObject"/>,
     /// or if the type has been decorated with any <see cref="ValidationAttribute"/>'s,
     /// or any of its properties.
@@ -32,8 +34,7 @@ internal static class DataAnnotationsReflector
         && type.GetEnumerableType() is { };
 
     [Pure]
-    private static Type? GetEnumerableType(this Type type)
-        => type
+    private static Type? GetEnumerableType(this Type type) => type
         .GetInterfaces()
         .Find(iface =>
             iface.IsGenericType &&
@@ -42,9 +43,26 @@ internal static class DataAnnotationsReflector
 
     /// <summary>Gets the decorated <see cref="System.ComponentModel.DataAnnotations.RequiredAttribute"/> for the property.</summary>
     [Pure]
-    public static RequiredAttribute? RequiredAttribute(this PropertyInfo property)
-        => property.GetCustomAttributes<RequiredAttribute>(inherit: true)
-        .FirstOrDefault(attr => attr is not OptionalAttribute);
+    public static RequiredAttribute? RequiredAttribute(this PropertyInfo property) => property
+        .GetCustomAttributes<RequiredAttribute>(inherit: true)
+        .FirstOrDefault();
+
+    /// <summary>
+    /// Get the <see cref="RequiredMember"/> attribute instance for reference types
+    /// that are not nullable and defined as required properties.
+    /// </summary>
+    [Pure]
+    public static RequiredAttribute? RequiredMemberAttribute(this PropertyInfo property)
+    {
+        if (property.PropertyType.IsValueType) return null;
+
+        var attributes = property.GetCustomAttributes(inherit: true).Select(a => a.GetType());
+
+        return attributes.Any(a => a.FullName == "System.Runtime.CompilerServices.RequiredMemberAttribute")
+            && !attributes.Any(a => a.FullName == "System.Runtime.CompilerServices.NullableAttribute")
+            ? RequiredMember
+            : null;
+    }
 
     /// <summary>Gets the decorated <see cref="ValidationAttribute"/>'s for the property.</summary>
     [Pure]

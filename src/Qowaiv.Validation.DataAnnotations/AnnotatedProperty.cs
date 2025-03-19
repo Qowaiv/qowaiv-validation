@@ -12,11 +12,13 @@ public sealed class AnnotatedProperty
     {
         PropertyType = property.PropertyType;
         Name = property.Name;
-        RequiredAttribute = property.RequiredAttribute() ?? OptionalAttribute.Optional;
+        RequiredAttribute = property.RequiredAttribute()
+            ?? property.RequiredMemberAttribute()
+            ?? OptionalAttribute.Optional;
         ValidationAttributes = property.ValidationAttributes().Where(attr => attr is not System.ComponentModel.DataAnnotations.RequiredAttribute).ToArray();
         IsValidatableObject = property.PropertyType.IsValidatableObject();
         IsEnumerable = PropertyType.IsEnumerable();
-        getValue = (model) => property.GetValue(model);
+        getValue = property.GetValue;
     }
 
     /// <summary>Gets the type of the property.</summary>
