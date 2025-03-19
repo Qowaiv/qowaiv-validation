@@ -26,7 +26,7 @@ public class Required_modifier
     [Test]
     public void has_lower_priority_than_attributes()
     {
-        var model = new DecorateddModel { NotNullable = string.Empty };
+        var model = new DecoratedModel { NotNullable = string.Empty };
 
         var validator = new AnnotatedModelValidator<DecorateddModel>();
 
