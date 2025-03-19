@@ -1,6 +1,7 @@
 namespace Qowaiv.Validation.TestTools;
 
 /// <summary>Contains a number of methods to assert the (in)validness of a <see cref="Result"/>.</summary>
+[StackTraceHidden]
 public abstract class ResultAssertionsBase<TSubject>(TSubject? subject, string? expression)
     where TSubject : Result
 {
