@@ -10,6 +10,7 @@
     <PackageReleaseNotes>
       <![CDATA[
 ToBeReleased:
+- Support requiredness via the required modifier.
 - Update to Qowaiv v7.2.1. #88
 v3.0.0
 - Introduction of AllowedAttribute<T> as alternative to AllowedValuesAttribute.
