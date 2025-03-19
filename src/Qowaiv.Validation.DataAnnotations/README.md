@@ -30,7 +30,6 @@ decorated with a `[Required]` attribute via the `required` modifier when the
 property:
 1. is a reference type
 2. lacks a nullable (`?`) annotation
-3. is not actually decorated with a `[Required]` attribute.
 
 So in this example:
 
@@ -46,8 +45,8 @@ public class Model
 }
 ```
 
-The first property is considered required by the `AnnotatedModelValidator`. The
-second one is considered optional. The third one is also considered required,
+The first property is considered required by the `AnnotatedModelValidator`, and
+the second one is considered optional. The third one is also considered required,
 but via the attribute it was decorated with, not because of the `required` modifier.
 
 ## Validation attributes
