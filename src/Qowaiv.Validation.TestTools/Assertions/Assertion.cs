@@ -1,5 +1,6 @@
 namespace Qowaiv.Validation.TestTools;
 
+[StackTraceHidden]
 internal sealed record Assertion
 {
     public string? Because { get; init; }
