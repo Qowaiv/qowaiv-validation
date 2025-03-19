@@ -3,6 +3,7 @@ global using NUnit.Framework;
 global using Qowaiv;
 global using Qowaiv.Globalization;
 global using Qowaiv.Validation.TestTools;
+global using Specs.TestTools;
 global using System;
 global using System.Collections;
 global using System.Collections.Generic;

@@ -1,4 +1,5 @@
 using Qowaiv.Validation.DataAnnotations.Reflection;
+using System.Reflection;
 
 namespace Qowaiv.Validation.DataAnnotations;
 
@@ -57,6 +58,11 @@ public sealed class AnnotatedModel
     internal static AnnotatedModel Create(Type type)
     {
         Guard.NotNull(type);
+
+        if (type.GetCustomAttribute<SkipValidationAttribute>() is { })
+        {
+            return None;
+        }
 
         var isIValidatable = typeof(IValidatableObject).IsAssignableFrom(type);
         var validations = type.ValidationAttributes().ToArray();

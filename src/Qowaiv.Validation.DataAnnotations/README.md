@@ -131,6 +131,19 @@ public class Model
 }
 ```
 
+### Skip validation
+The `[SkipValidation]` attribute allows to skip the validation of property or
+type.
+
+``` C#
+[SkipValidation]
+public class Model
+{
+    [SkipValidation]
+    public double Number { get; set; }
+}
+```
+
 ### Multiple of
 The `[MultipleOf]` attribute validates that the value of a field is a multiple
 of the specified factor.
