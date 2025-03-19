@@ -25,7 +25,7 @@ var error = ValidationMessage.Error(message, args);
 
 ## Required modifier
 The [`required`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/required) modifier is available since C# 11.
-When a model has a property with `required` modifier, it is considered beining
+When a model has a property with a `required` modifier, it is considered being
 decorated with a `[Required]` attribute when the property:
 1. is a reference type
 2. lacks a nullable (`?`) annotation
@@ -46,7 +46,7 @@ public class Model
 ```
 
 the first property is considered required by the `AnnotatedModelValidator`. The
-second one is considered optional. The third one is also considered reqruied,
+second one is considered optional. The third one is also considered required,
 but via the attribute it was decorated with, not because of the `required` modifier.
 
 ## Validation attributes

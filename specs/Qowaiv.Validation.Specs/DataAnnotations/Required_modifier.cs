@@ -28,7 +28,7 @@ public class Required_modifier
     {
         var model = new DecoratedModel { NotNullable = string.Empty };
 
-        var validator = new AnnotatedModelValidator<DecorateddModel>();
+        var validator = new AnnotatedModelValidator<DecoratedModel>();
 
         validator.Validate(model)
             .Should().BeValid()
