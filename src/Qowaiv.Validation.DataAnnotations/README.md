@@ -26,10 +26,11 @@ var error = ValidationMessage.Error(message, args);
 ## Required modifier
 The [`required`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/required) modifier is available since C# 11.
 When a model has a property with a `required` modifier, it is considered being
-decorated with a `[Required]` attribute when the property:
+decorated with a `[Required]` attribute via the `required` modifier when the
+property:
 1. is a reference type
 2. lacks a nullable (`?`) annotation
-3. is not decorated with a `[Required]` attribute.
+3. is not actually decorated with a `[Required]` attribute.
 
 So in this example:
 
@@ -45,7 +46,7 @@ public class Model
 }
 ```
 
-the first property is considered required by the `AnnotatedModelValidator`. The
+The first property is considered required by the `AnnotatedModelValidator`. The
 second one is considered optional. The third one is also considered required,
 but via the attribute it was decorated with, not because of the `required` modifier.
 
