@@ -71,5 +71,6 @@ public sealed class AnnotatedProperty
     [Pure]
     private static bool Include(PropertyInfo property)
         => property.CanRead
-        && !property.GetIndexParameters().Any();
+        && property.GetCustomAttribute<SkipValidationAttribute>() is null
+        && property.GetIndexParameters() is { Length: 0 };
 }
