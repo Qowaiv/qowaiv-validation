@@ -7,13 +7,13 @@ namespace TestTools.StackTrace_specs;
 public class Hides
 {
     [Test]
-    public void asserion_logic()
+    public void assertion_logic()
     {
-        var valdiator = new AnnotatedModelValidator<Model>();
+        var validator = new AnnotatedModelValidator<Model>();
 
         try
         {
-            valdiator
+            validator
                 .Validate(new() { Prop = null })
                 .Should().BeValid();
         }
