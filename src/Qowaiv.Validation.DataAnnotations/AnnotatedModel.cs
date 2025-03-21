@@ -9,6 +9,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 /// or implement <see cref="IValidatableObject"/>.
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
+[Obsolete("Will be dropped in v4.0.0. Use TypeAnnotations instead.")]
 public sealed class AnnotatedModel
 {
     internal static readonly AnnotatedModel None = new(typeof(object), false, [], []);

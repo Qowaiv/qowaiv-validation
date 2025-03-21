@@ -55,11 +55,12 @@ public class ValidationMessage : ValidationResult, IValidationMessage
 
     /// <summary>Creates a validation message.</summary>
     [Pure]
-    public static IValidationMessage? For(ValidationSeverity severity, string message, params string[] memberNames) => severity switch
-    {
-        ValidationSeverity.None => None,
-        ValidationSeverity.Info => Info(message, memberNames),
-        ValidationSeverity.Warning => Warn(message, memberNames),
-        _ => Error(message, memberNames),
-    };
+    public static IValidationMessage For(ValidationSeverity severity, string message, params string[] memberNames)
+        => severity switch
+        {
+            ValidationSeverity.None => None,
+            ValidationSeverity.Info => Info(message, memberNames),
+            ValidationSeverity.Warning => Warn(message, memberNames),
+            _ => Error(message, memberNames),
+        };
 }

@@ -3,6 +3,7 @@ using Qowaiv.Reflection;
 namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Represents a store for <see cref="AnnotatedModel"/>s.</summary>
+[Obsolete("Will be dropped in v4.0.0.")]
 public sealed class AnnotatedModelStore
 {
     /// <summary>Initializes a new instance of the <see cref="AnnotatedModelStore"/> class.</summary>
@@ -26,6 +27,7 @@ public sealed class AnnotatedModelStore
 
     /// <summary>Gets an <see cref="AnnotatedModel"/> based on the <see cref="Type"/>.</summary>
     [Pure]
+    [Obsolete("Use Annotator.Annotate(type) instead.")]
     public AnnotatedModel GetAnnotatedModel(Type type)
     {
         Guard.NotNull(type);
@@ -46,6 +48,5 @@ public sealed class AnnotatedModelStore
 
     /// <summary>Gets an <see cref="AnnotatedModel"/> based on the <see cref="Type"/>.</summary>
     [Pure]
-    [Obsolete("Use GetAnnotatedModel(type) instead.")]
     public AnnotatedModel GetAnnotededModel(Type type) => GetAnnotatedModel(type);
 }

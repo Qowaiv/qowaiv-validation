@@ -1,4 +1,6 @@
 using Qowaiv.Validation.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
+using System.IO;
 
 namespace Data_annotations.Annotated_model_specs;
 
@@ -9,7 +11,7 @@ public class Does_not_crash_on
         => new AnnotatedModelValidator<ModelWithInaccessibleProperty>()
         .Validate(new())
         .Should().BeInvalid()
-        .WithMessage(ValidationMessage.Error("The value is inaccessible.", "SomeProperty"));
+        .WithMessage(ValidationMessage.Error("The value is inaccessible.", "ThrowsOnGet"));
 
     [Test]
     public void indexed_property()
@@ -25,7 +27,8 @@ public class Does_not_crash_on
 
     public class ModelWithInaccessibleProperty
     {
-        public int SomeProperty => throw new NotImplementedException(ToString());
+        [Allowed<int>("42")]
+        public int ThrowsOnGet => throw new NotImplementedException(ToString());
     }
 
     public class ModelWithIndexedProperty
@@ -39,11 +42,33 @@ public class Does_not_crash_on
         // This is a test to check if write-only properties are handled correctly.
         public int SomeProperty
         {
-            set => number = value;
+            set => field = value;
         }
-        private int number;
-#pragma warning restore S2376 // Write-only properties should not be used
+#pragma warning restore S2376
     }
+}
+
+public class Resolves_property
+{
+    [Test]
+    public void on_type_validation()
+    {
+        var annotated = Annotator.Annotate(typeof(ModelWithAnnotatedClassProp));
+        var prop = annotated!.Properties.Single();
+
+        prop.Should().BeEquivalentTo(new
+        {
+            Name = "Child",
+            TypeAnnotations = new { Attributes = new { Count = 1 } },            
+        });
+    }
+
+    [Test]
+    public void validates_it()
+        => new ModelWithAnnotatedClassProp()
+        .ValidateAnnotations()
+        .Should().BeInvalid()
+        .WithMessage(ValidationMessage.Error("This is a class", "Child"));
 }
 
 public class Has_no_properties_for
@@ -52,13 +77,66 @@ public class Has_no_properties_for
     [TestCase(typeof(double))]
     [TestCase(typeof(bool))]
     public void primitives(Type primitive)
-        => AnnotatedModel.Get(primitive).Properties.Should().BeEmpty();
+        => Annotator.Annotate(primitive).Should().BeNull();
 
     [Test]
     public void @string()
-        => AnnotatedModel.Get(typeof(string)).Properties.Should().BeEmpty();
+        => Annotator.Annotate(typeof(string)).Should().BeNull();
 
     [Test]
     public void enums()
-        => AnnotatedModel.Get(typeof(TypeCode)).Properties.Should().BeEmpty();
+        => Annotator.Annotate(typeof(TypeCode)).Should().BeNull();
+}
+
+public class Is_None_for
+{
+    [Test]
+    public void not_annotated_model()
+    {
+        var annotated = Annotator.Annotate(typeof(ModelWithoutAnnotations));
+        annotated.Should().BeNull();
+    }
+}
+
+file class ModelWithoutAnnotations
+{
+    public FileInfo? File { get; init; }
+
+    public string? Name { get; init; }
+
+    public int Number { get; init; }
+
+    public DateTime CreatedUtc => File?.CreationTimeUtc ?? Clock.UtcNow();
+
+    [SkipValidation]
+    public required string Required { get; init; }
+
+    public Parent? WithLoop { get; init; }
+}
+
+file class Parent
+{
+    public Child[] Childen { get; init; } = [];
+}
+
+file class Child
+{
+    public Parent? Parent { get; init; }
+}
+
+file class ModelWithAnnotatedClassProp
+{
+    public AnnotatedClass Child { get; init; } = new();
+}
+
+[IsClass]
+file class AnnotatedClass
+{
+    public string? Name { get; init; }
+}
+
+[AttributeUsage(AttributeTargets.Class)]
+file sealed class IsClassAttribute() : ValidationAttribute("This is a class")
+{
+    public override bool IsValid(object? value) => false;
 }

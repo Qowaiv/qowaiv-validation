@@ -5,6 +5,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Represents a property that contains at least one <see cref="ValidationAttribute"/>.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
+[Obsolete("Will be dropped in v4.0.0. Use PropertyAnnotations instead.")]
 public sealed class AnnotatedProperty
 {
     /// <summary>Initializes a new instance of the <see cref="AnnotatedProperty"/> class.</summary>
