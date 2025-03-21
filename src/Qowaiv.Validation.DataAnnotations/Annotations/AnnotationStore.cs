@@ -44,7 +44,7 @@ internal sealed class AnnotationStore
     {
         var attributes = type.ValidationAttributes().ToArray();
         var properties = type
-            .GetProperties()
+            .GetProperties(BindingFlags.Public | BindingFlags.Instance)
             .Where(Include)
             .Select(p => Annotate(p, visited))
             .OfType<MemberAnnotations>()

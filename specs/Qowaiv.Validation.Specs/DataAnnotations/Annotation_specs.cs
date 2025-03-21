@@ -40,6 +40,7 @@ public class Does_not_crash_on
     {
 #pragma warning disable S2376 // Write-only properties should not be used
         // This is a test to check if write-only properties are handled correctly.
+        [Mandatory]
         public int SomeProperty
         {
             set => field = value;
