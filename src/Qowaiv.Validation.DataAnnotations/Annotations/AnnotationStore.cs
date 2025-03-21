@@ -1,5 +1,4 @@
 using Qowaiv.Validation.DataAnnotations.Reflection;
-using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Qowaiv.Validation.DataAnnotations;
@@ -89,7 +88,7 @@ internal sealed class AnnotationStore
         var typeAnnotations = Get(prop.PropertyType, visited);
 
         return typeAnnotations is { } || attributes is { Count: > 0 }
-            ? new(prop.Name, typeAnnotations, display, attributes.ToArray(), PropertyHelper.MakeNullSafeFastPropertyGetter(prop))
+            ? new(prop.Name, typeAnnotations, display, attributes.ToArray(), prop.GetValue)
             : null;
     }
 
@@ -120,20 +119,10 @@ internal sealed class AnnotationStore
     [Pure]
     private static KeyValuePair<Type, TypeAnnotations?> None(Type tp) => new(tp, null);
 
-    [Pure]
-    private static Func<object, object?> Compile(PropertyInfo prop)
-    {
-        var model = Expression.Parameter(typeof(object), "model");
-        var typed = Expression.Convert(model, prop.DeclaringType!);
-        var accss = Expression.MakeMemberAccess(typed, prop);
-        var body = Expression.Convert(accss, typeof(object));
-        return Expression.Lambda<Func<object, object?>>(body, model).Compile();
-    }
-
     private sealed class AttributeSorter : IComparer<ValidationAttribute>
     {
         [Pure]
-        public int Compare(ValidationAttribute x, ValidationAttribute y)
+        public int Compare(ValidationAttribute? x, ValidationAttribute? y)
             => (y is RequiredAttribute).CompareTo(x is RequiredAttribute);
     }
 }
