@@ -16,9 +16,11 @@ internal sealed class AnnotationStore
         [
             None<object>(),
             None<string>(),
+            None<decimal>(),
             None<Guid>(),
 #if NET6_0_OR_GREATER
             None<DateOnly>(),
+            None<TimeOnly>(),
 #endif
             None<DateTime>(),
             None<DateTimeOffset>(),
@@ -92,8 +94,9 @@ internal sealed class AnnotationStore
 
     [Pure]
     private static bool LackAnnotations(Type type)
-        => type.IsEnum
-        || type.IsPrimitive
+        => type.IsPrimitive
+        || type.IsEnum
+        || type.IsPointer
         || type.GetCustomAttribute<SkipValidationAttribute>() is { };
 
     [Pure]
