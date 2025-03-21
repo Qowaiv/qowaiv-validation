@@ -76,7 +76,7 @@ internal sealed class AnnotationStore
             || required is not OptionalAttribute
             || attributes is { Length: > 0 })
         {
-            return new(prop.Name, typeAnnotations, required, attributes, Compile(prop));
+            return new(prop.Name, typeAnnotations, required, attributes, PropertyHelper.MakeNullSafeFastPropertyGetter(prop));
         }
         else
         {
