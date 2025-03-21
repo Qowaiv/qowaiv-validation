@@ -67,7 +67,7 @@ internal readonly struct MemberPath
         return Builder.ToString();
     }
 
-    /// <<inheritdoc />
+    /// <inheritdoc />
     [Pure]
     public override string ToString() => Property();
 

@@ -38,7 +38,7 @@ internal static class DataAnnotationsReflector
         && type.GetEnumerableType() is { };
 
     [Pure]
-    private static Type? GetEnumerableType(this Type type) => type
+    public static Type? GetEnumerableType(this Type type) => type
         .GetInterfaces()
         .Find(iface =>
             iface.IsGenericType &&
