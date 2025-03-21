@@ -62,6 +62,13 @@ public class Resolves
         .ValidateAnnotations()
         .Should().BeInvalid()
         .WithMessage(ValidationMessage.Error("The length of the Property field should be at most 2.", "Prop"));
+
+    [Test]
+    public void inherritable_member()
+        => new Model.With.InheritableMember { Member = new Model.Inherited { Value = 17 } }
+        .ValidateAnnotations()
+        .Should().BeInvalid()
+        .WithMessage(ValidationMessage.Error("The value of the Value field is not allowed.", "Member.Value"));
 }
 
 public class Has_no_properties_for

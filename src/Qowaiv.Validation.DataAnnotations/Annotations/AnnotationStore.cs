@@ -86,9 +86,10 @@ internal sealed class AnnotationStore
         attributes.Sort(Sorter);
 
         var typeAnnotations = Get(prop.PropertyType, visited);
+        var isSealed = Trim(prop.PropertyType).IsSealed;
 
-        return typeAnnotations is { } || attributes is { Count: > 0 }
-            ? new(prop.Name, typeAnnotations, display, attributes.ToArray(), prop.GetValue)
+        return !isSealed || typeAnnotations is { } || attributes is { Count: > 0 }
+            ? new(prop.Name, isSealed, typeAnnotations, display, attributes.ToArray(), prop.GetValue)
             : null;
     }
 

@@ -9,7 +9,7 @@ internal static class Validates
         {
             Members(context);
             Type(context);
-            ValidatableObject(context);
+            IValidatableObject(context);
         }
     }
 
@@ -30,18 +30,8 @@ internal static class Validates
     /// </remarks>
     private static void Member(NestedContext context, MemberAnnotations annotations)
     {
-        if (!context.TryMember(annotations, out var value)) { return; }
-
-        foreach (var attribute in annotations.Attributes)
-        {
-            // Stop on first required failure.
-            if (context.AddMessage(attribute.GetValidationMessage(value, context)) && attribute is RequiredAttribute)
-            {
-                return;
-            }
-        }
-
-        if (value is null || annotations.TypeAnnotations is not { } typeAnnotations) { return; }
+        if (MemberAttributes(context, annotations) is not { } value ||
+            TypeAnnotations(annotations, value) is not { } typeAnnotations) { return; }
 
         if (value is IEnumerable enumerable)
         {
@@ -60,6 +50,29 @@ internal static class Validates
         }
     }
 
+    [Impure]
+    private static object? MemberAttributes(NestedContext context, MemberAnnotations annotations)
+    {
+        if (!context.TryMember(annotations, out var value)) { return null; }
+
+        foreach (var attribute in annotations.Attributes)
+        {
+            // Stop on first required failure.
+            if (context.AddMessage(attribute.GetValidationMessage(value, context)) && attribute is RequiredAttribute)
+            {
+                return value;
+            }
+        }
+        return value;
+    }
+
+    /// <summary>Gets the type annotations.</summary>
+    [Pure]
+    private static TypeAnnotations? TypeAnnotations(MemberAnnotations annotations, object value)
+        => annotations.IsSealed
+        ? annotations.TypeAnnotations
+        : Annotator.Annotate(value.GetType());
+
     /// <summary>Gets the results for validating the attributes declared on the type of the model.</summary>
     public static void Type(NestedContext context)
     {
@@ -74,9 +87,9 @@ internal static class Validates
 
     /// <summary>Gets the results for validating <see cref="IValidatableObject.Validate(ValidationContext)"/>.</summary>
     /// <remarks>
-    /// If the model is not <see cref="IValidatableObject"/> nothing is done.
+    /// If the model is not <see cref="System.ComponentModel.DataAnnotations.IValidatableObject"/> nothing is done.
     /// </remarks>
-    public static void ValidatableObject(NestedContext context)
+    public static void IValidatableObject(NestedContext context)
     {
         if (context.Instance is IValidatableObject validatable)
         {

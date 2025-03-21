@@ -1,3 +1,4 @@
+using Qowaiv.Diagnostics.Contracts;
 using Qowaiv.Validation.DataAnnotations;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
@@ -31,6 +32,11 @@ internal static class Model
         {
             [Required]
             public int this[int index] => index * 42;
+        }
+
+        public sealed class InheritableMember
+        {
+            public Inheritable? Member { get; init; }
         }
 
         public sealed class SetOnlyProperty
@@ -81,6 +87,15 @@ internal static class Model
                 public Parent? Parent { get; init; }
             }
         }
+    }
+
+    [Inheritable]
+    public class Inheritable { }
+
+    public class Inherited : Inheritable
+    {
+        [Allowed<int>("42")]
+        public int Value { get; init; }
     }
 }
 

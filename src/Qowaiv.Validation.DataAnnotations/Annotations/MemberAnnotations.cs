@@ -7,12 +7,14 @@ public sealed class MemberAnnotations
     /// <summary>Initializes a new instance of the <see cref="MemberAnnotations"/> class.</summary>
     internal MemberAnnotations(
         string name,
+        bool isSealed,
         TypeAnnotations? typeAnnotations,
         DisplayAttribute? display,
         IReadOnlyCollection<ValidationAttribute> attributes,
         Func<object, object?> getValue)
     {
         Name = name;
+        IsSealed = isSealed;
         TypeAnnotations = typeAnnotations;
         Display = display;
         Attributes = attributes;
@@ -21,6 +23,12 @@ public sealed class MemberAnnotations
 
     /// <summary>Gets the name of the member.</summary>
     public string Name { get; }
+
+    /// <summary>Indicates that the type of the member is sealed.</summary>
+    /// <remarks>
+    /// When sealed, the status of the <see cref="TypeAnnotations"/> is final.
+    /// </remarks>
+    public bool IsSealed { get; }
 
     /// <summary>Gets <see cref="TypeAnnotations"/> of the member type.</summary>
     public TypeAnnotations? TypeAnnotations { get; }
