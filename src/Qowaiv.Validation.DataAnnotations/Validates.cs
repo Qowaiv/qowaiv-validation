@@ -5,7 +5,7 @@ internal static class Validates
     public static void Model(NestedContext context)
     {
         // instance has not been validated yet.
-        if (context.Done.Add(context.Instance))
+        if (!context.Visited(context.Instance))
         {
             Properties(context);
             Type(context);
@@ -32,17 +32,25 @@ internal static class Validates
     {
         if (!context.TryProperty(annotations, out var value)) { return; }
 
-        // Only validate the other properties if the required condition was not met.
-        if (annotations.Required is not OptionalAttribute &&
-            context.AddMessage(annotations.Required.GetValidationMessage(value, context)))
-        {
-            return;
-        }
+        context.Buffer.Clear();
 
-        foreach (var attribute in annotations.Attributes)
-        {
-            context.AddMessage(attribute.GetValidationMessage(value, context));
-        }
+        Validator.TryValidateValue(value, context, context.Buffer, annotations.Attributes);
+
+        context.AddMessages(context.Buffer);
+
+        
+
+        //// Only validate the other properties if the required condition was not met.
+        //if (annotations.Required is not OptionalAttribute &&
+        //    context.AddMessage(annotations.Required.GetValidationMessage(value, context)))
+        //{
+        //    return;
+        //}
+
+        //foreach (var attribute in annotations.Attributes)
+        //{
+        //    context.AddMessage(attribute.GetValidationMessage(value, context));
+        //}
 
         if (value is null || annotations.TypeAnnotations is not { } typeAnnotations) { return; }
 
@@ -66,10 +74,11 @@ internal static class Validates
     /// <summary>Gets the results for validating the attributes declared on the type of the model.</summary>
     public static void Type(NestedContext context)
     {
-        if (context.Annotations is { } annotations)
+        if (context.Annotations?.Attributes is { Count: > 0 } attributes)
         {
-            var messages = annotations.Attributes.Select(attr => attr.GetValidationMessage(context.Instance, context));
-            context.AddMessages(messages, violationOnType: true);
+            context.Buffer.Clear();
+            Validator.TryValidateValue(context.Instance, context, context.Buffer, attributes);
+            context.AddMessages(context.Buffer, violationOnType: true);
         }
     }
 
