@@ -75,7 +75,7 @@ public class Resolves_property
         => new AnnotatedModel() { Name = "An" }
         .ValidateAnnotations()
         .Should().BeInvalid()
-        .WithMessage(ValidationMessage.Error("The length of the Name field should be at least 3", "Name"));
+        .WithMessage(ValidationMessage.Error("The length of the Name field should be at least 3.", "Name"));
 }
 
 public class Has_no_properties_for
