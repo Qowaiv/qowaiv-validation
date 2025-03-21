@@ -7,18 +7,18 @@ public sealed class TypeAnnotations
     /// <summary>Initializes a new instance of the <see cref="TypeAnnotations"/> class.</summary>
     internal TypeAnnotations(
         IReadOnlyCollection<ValidationAttribute> attributes,
-        IReadOnlyCollection<PropertyAnnotations> properties)
+        IReadOnlyCollection<MemberAnnotations> members)
     {
         Attributes = attributes;
-        Properties = properties;
+        Members = members;
     }
 
     /// <summary>Gets the <see cref="ValidationAttribute"/>s defined on the type.</summary>
     public IReadOnlyCollection<ValidationAttribute> Attributes { get; }
 
-    /// <summary>Gets the annotated properties.</summary>
-    public IReadOnlyCollection<PropertyAnnotations> Properties { get; }
+    /// <summary>Gets the annotated members.</summary>
+    public IReadOnlyCollection<MemberAnnotations> Members { get; }
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private string DebuggerDisplay => $"Attributes: {Attributes.Count}, Properties: {Properties.Count}";
+    private string DebuggerDisplay => $"Attributes: {Attributes.Count}, Members: {Members.Count}";
 }

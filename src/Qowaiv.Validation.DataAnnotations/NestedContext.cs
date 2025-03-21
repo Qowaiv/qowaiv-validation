@@ -98,7 +98,7 @@ internal readonly struct NestedContext
     }
 
     /// <summary>Creates context for the property.</summary>
-    public bool TryProperty(PropertyAnnotations annotations, out object? value)
+    public bool TryMember(MemberAnnotations annotations, out object? value)
     {
         Base.MemberName = annotations.Name;
         Base.DisplayName = Base.GetDisplayName();

@@ -47,7 +47,7 @@ internal sealed class AnnotationStore
             .GetProperties()
             .Where(Include)
             .Select(p => Annotate(p, visited))
-            .OfType<PropertyAnnotations>()
+            .OfType<MemberAnnotations>()
             .ToArray();
 
         if (attributes.Length > 0 || properties.Length > 0 || type.ImplementsIValidatableObject())
@@ -63,7 +63,7 @@ internal sealed class AnnotationStore
     }
 
     [Pure]
-    private PropertyAnnotations? Annotate(PropertyInfo prop, HashSet<Type> visited)
+    private MemberAnnotations? Annotate(PropertyInfo prop, HashSet<Type> visited)
     {
         var attributes = prop.ValidationAttributes()
             .OrderByDescending(attr => attr is RequiredAttribute)

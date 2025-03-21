@@ -1,11 +1,11 @@
 namespace Qowaiv.Validation.DataAnnotations;
 
-/// <summary>Represents annotations of a property.</summary>
+/// <summary>Represents annotations of a member.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-public sealed class PropertyAnnotations
+public sealed class MemberAnnotations
 {
-    /// <summary>Initializes a new instance of the <see cref="PropertyAnnotations"/> class.</summary>
-    internal PropertyAnnotations(
+    /// <summary>Initializes a new instance of the <see cref="MemberAnnotations"/> class.</summary>
+    internal MemberAnnotations(
         string name,
         TypeAnnotations? typeAnnotations,
         IReadOnlyCollection<ValidationAttribute> attributes,
@@ -17,16 +17,16 @@ public sealed class PropertyAnnotations
         Accessor = getValue;
     }
 
-    /// <summary>Gets the name of the property.</summary>
+    /// <summary>Gets the name of the member.</summary>
     public string Name { get; }
 
-    /// <summary>Gets <see cref="TypeAnnotations"/> of the property type.</summary>
+    /// <summary>Gets <see cref="TypeAnnotations"/> of the member type.</summary>
     public TypeAnnotations? TypeAnnotations { get; }
 
-    /// <summary>Gets the <see cref="ValidationAttribute"/>s defined on the property.</summary>
+    /// <summary>Gets the <see cref="ValidationAttribute"/>s defined on the member.</summary>
     public IReadOnlyCollection<ValidationAttribute> Attributes { get; }
 
-    /// <summary>Gets the value of the property.</summary>
+    /// <summary>Gets the value of the member.</summary>
     [Pure]
     public object? GetValue(object model) => Accessor(model);
 

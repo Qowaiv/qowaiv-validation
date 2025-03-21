@@ -7,20 +7,20 @@ internal static class Validates
         // instance has not been validated yet.
         if (!context.Visited(context.Instance))
         {
-            Properties(context);
+            Members(context);
             Type(context);
             ValidatableObject(context);
         }
     }
 
-    /// <summary>Gets the results for validating the (annotated )properties.</summary>
-    public static void Properties(NestedContext context)
+    /// <summary>Gets the results for validating the (annotated) members.</summary>
+    public static void Members(NestedContext context)
     {
         if (context.Annotations is not { } annotations) { return; }
 
-        foreach (var property in annotations.Properties)
+        foreach (var property in annotations.Members)
         {
-            Property(context, property);
+            Member(context, property);
         }
     }
 
@@ -28,9 +28,9 @@ internal static class Validates
     /// <remarks>
     /// It creates a sub validation context.
     /// </remarks>
-    private static void Property(NestedContext context, PropertyAnnotations annotations)
+    private static void Member(NestedContext context, MemberAnnotations annotations)
     {
-        if (!context.TryProperty(annotations, out var value)) { return; }
+        if (!context.TryMember(annotations, out var value)) { return; }
 
         foreach (var attribute in annotations.Attributes)
         {

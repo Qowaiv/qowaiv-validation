@@ -2,7 +2,7 @@ using Qowaiv.Validation.DataAnnotations;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 
-namespace Data_annotations.Annotated_model_specs;
+namespace Data_annotations.Annotation_specs;
 
 public class Does_not_crash_on
 {
@@ -54,12 +54,12 @@ public class Resolves_property
     public void on_type_validation()
     {
         var annotated = Annotator.Annotate(typeof(ModelWithAnnotatedClassProp));
-        var prop = annotated!.Properties.Single();
+        var prop = annotated!.Members.Single();
 
         prop.Should().BeEquivalentTo(new
         {
             Name = "Child",
-            TypeAnnotations = new { Attributes = new { Count = 1 } },            
+            TypeAnnotations = new { Attributes = new { Count = 1 } },
         });
     }
 
@@ -69,6 +69,13 @@ public class Resolves_property
         .ValidateAnnotations()
         .Should().BeInvalid()
         .WithMessage(ValidationMessage.Error("This is a class", "Child"));
+
+    [Test]
+    public void validates_attributes()
+        => new AnnotatedModel() { Name = "An" }
+        .ValidateAnnotations()
+        .Should().BeInvalid()
+        .WithMessage(ValidationMessage.Error("The length of the Name field should be at least 3", "Name"));
 }
 
 public class Has_no_properties_for
@@ -139,4 +146,10 @@ file class AnnotatedClass
 file sealed class IsClassAttribute() : ValidationAttribute("This is a class")
 {
     public override bool IsValid(object? value) => false;
+}
+
+file sealed class AnnotatedModel
+{
+    [Length.AtLeast(3)]
+    public string? Name { get; init; }
 }
