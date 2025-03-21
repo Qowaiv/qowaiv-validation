@@ -6,20 +6,20 @@ public class Does_not_crash_on
 {
     [Test]
     public void inaccessible_property()
-        => new AnnotatedModelValidator<Model.WithInaccessibleProperty>()
+        => new AnnotatedModelValidator<Model.With.InaccessibleProperty>()
         .Validate(new())
         .Should().BeInvalid()
         .WithMessage(ValidationMessage.Error("The value is inaccessible.", "ThrowsOnGet"));
 
     [Test]
     public void indexed_property()
-        => new AnnotatedModelValidator<Model.WithIndexedProperty>()
+        => new AnnotatedModelValidator<Model.With.IndexedProperty>()
         .Validate(new())
         .Should().BeValid();
 
     [Test]
     public void set_only_property()
-        => new AnnotatedModelValidator<Model.WithSetOnlyProperty>()
+        => new AnnotatedModelValidator<Model.With.SetOnlyProperty>()
         .Validate(new())
         .Should().BeValid();
 }
@@ -29,7 +29,7 @@ public class Resolves_property
     [Test]
     public void on_type_validation()
     {
-        var annotated = Annotator.Annotate(typeof(Model.WithTypeAnnotatedMember));
+        var annotated = Annotator.Annotate(typeof(Model.With.TypeAnnotatedMember));
         var prop = annotated!.Members.Single();
 
         prop.Should().BeEquivalentTo(new
@@ -41,14 +41,14 @@ public class Resolves_property
 
     [Test]
     public void validates_it()
-        => new Model.WithTypeAnnotatedMember() { Member = new() }
+        => new Model.With.TypeAnnotatedMember() { Member = new() }
         .ValidateAnnotations()
         .Should().BeInvalid()
         .WithMessage(ValidationMessage.Error("This is an invalid class", "Member"));
 
     [Test]
     public void validates_attributes()
-        => new Model.WithAnnotatedProperty() { Name = "An" }
+        => new Model.With.AnnotatedProperty() { Name = "An" }
         .ValidateAnnotations()
         .Should().BeInvalid()
         .WithMessage(ValidationMessage.Error("The length of the Name field should be at least 3.", "Name"));
@@ -58,7 +58,7 @@ public class Resolves
 {
     [Test]
     public void Display_attribute()
-        => new Model.WithDisplay() { Prop = "Too long" }
+        => new Model.With.Display() { Prop = "Too long" }
         .ValidateAnnotations()
         .Should().BeInvalid()
         .WithMessage(ValidationMessage.Error("The length of the Property field should be at most 2.", "Prop"));
@@ -86,7 +86,7 @@ public class Is_None_for
     [Test]
     public void not_annotated_model()
     {
-        var annotated = Annotator.Annotate(typeof(Model.WithoutAnnotations));
+        var annotated = Annotator.Annotate(typeof(Model.Without.Annotations));
         annotated.Should().BeNull();
     }
 }

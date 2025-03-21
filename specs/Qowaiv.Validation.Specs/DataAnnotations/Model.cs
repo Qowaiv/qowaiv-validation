@@ -6,76 +6,82 @@ namespace Data_annotations;
 
 internal static class Model
 {
-    public sealed class WithDisplay
+    public static class With
     {
-        [Length.AtMost(2)]
-        [Display(Name = "Property")]
-        public string? Prop { get; init; }
-    }
-
-    public sealed class WithAnnotatedProperty
-    {
-        [Length.AtLeast(3)]
-        public string? Name { get; init; }
-    }
-
-    public sealed class WithIndexedProperty
-    {
-        [Required]
-        public int this[int index] => index * 42;
-    }
-
-    public sealed class WithInaccessibleProperty
-    {
-        [Allowed<int>("42")]
-        public int ThrowsOnGet => throw new NotImplementedException(ToString());
-    }
-
-    public sealed class WithoutAnnotations
-    {
-        public FileInfo? File { get; init; }
-
-        public string? Name { get; init; }
-
-        public int Number { get; init; }
-
-        public DateTime CreatedUtc => File?.CreationTimeUtc ?? Clock.UtcNow();
-
-        [SkipValidation]
-        public required string Required { get; init; }
-
-        public Parent? WithLoop { get; init; }
-
-        public sealed class Parent
+        public sealed class AnnotatedProperty
         {
-            public Child[] Childen { get; init; } = [];
+            [Length.AtLeast(3)]
+            public string? Name { get; init; }
         }
 
-        public sealed class Child
+        public sealed class Display
         {
-            public Parent? Parent { get; init; }
+            [Length.AtMost(2)]
+            [Display(Name = "Property")]
+            public string? Prop { get; init; }
         }
-    }
 
-    public sealed class WithSetOnlyProperty
-    {
+        public sealed class InaccessibleProperty
+        {
+            [Allowed<int>("42")]
+            public int ThrowsOnGet => throw new NotImplementedException(ToString());
+        }
+
+        public sealed class IndexedProperty
+        {
+            [Required]
+            public int this[int index] => index * 42;
+        }
+
+        public sealed class SetOnlyProperty
+        {
 #pragma warning disable S2376 // Write-only properties should not be used
-        // This is a test to check if write-only properties are handled correctly.
-        [Mandatory]
-        public int SomeProperty
-        {
-            set => field = value;
-        }
+            // This is a test to check if write-only properties are handled correctly.
+            [Mandatory]
+            public int SomeProperty
+            {
+                set => field = value;
+            }
 #pragma warning restore S2376
+        }
+
+        public sealed class TypeAnnotatedMember
+        {
+            public TypeAnnotation? Member { get; init; }
+        }
+
+        [InvalidClass]
+        public sealed class TypeAnnotation { }
     }
 
-    public sealed class WithTypeAnnotatedMember
+    public static class Without
     {
-        public WithTypeAnnotation? Member { get; init; }
-    }
+        public sealed class Annotations
+        {
+            public FileInfo? File { get; init; }
 
-    [InvalidClass]
-    public sealed class WithTypeAnnotation { }
+            public string? Name { get; init; }
+
+            public int Number { get; init; }
+
+            public DateTime CreatedUtc => File?.CreationTimeUtc ?? Clock.UtcNow();
+
+            [SkipValidation]
+            public required string Required { get; init; }
+
+            public Parent? WithLoop { get; init; }
+
+            public sealed class Parent
+            {
+                public Child[] Childen { get; init; } = [];
+            }
+
+            public sealed class Child
+            {
+                public Parent? Parent { get; init; }
+            }
+        }
+    }
 }
 
 
