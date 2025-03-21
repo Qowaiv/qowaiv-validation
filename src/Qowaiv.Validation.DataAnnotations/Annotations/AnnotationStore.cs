@@ -65,23 +65,28 @@ internal sealed class AnnotationStore
     [Pure]
     private PropertyAnnotations? Annotate(PropertyInfo prop, HashSet<Type> visited)
     {
-        var attributes = prop.ValidationAttributes().Where(attr => attr is not System.ComponentModel.DataAnnotations.RequiredAttribute).ToArray();
-        var required = prop.RequiredAttribute()
-            ?? prop.RequiredMemberAttribute()
-            ?? OptionalAttribute.Optional;
+        var attributes = prop.ValidationAttributes()
+            .OrderByDescending(attr => attr is RequiredAttribute)
+            .ToList();
+
+        // Add required member attribute if no Required (including Optional] attribute has been defined.
+        if (attributes.FirstOrDefault() is not RequiredAttribute &&
+            prop.RequiredMemberAttribute() is { } required)
+        {
+            attributes.Insert(0, required);
+        }
+
+        // We do not want optional to occur in this list.
+        if (attributes.FirstOrDefault() is OptionalAttribute)
+        {
+            attributes.RemoveAt(0);
+        }
 
         var typeAnnotations = Get(prop.PropertyType, visited);
 
-        if (typeAnnotations is { }
-            || required is not OptionalAttribute
-            || attributes is { Length: > 0 })
-        {
-            return new(prop.Name, typeAnnotations, required, attributes, PropertyHelper.MakeNullSafeFastPropertyGetter(prop));
-        }
-        else
-        {
-            return null;
-        }
+        return typeAnnotations is { } || attributes is { Count: > 0 }
+            ? new(prop.Name, typeAnnotations, attributes.ToArray(), PropertyHelper.MakeNullSafeFastPropertyGetter(prop))
+            : null;
     }
 
     [Pure]

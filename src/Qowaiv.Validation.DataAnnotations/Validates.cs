@@ -32,25 +32,14 @@ internal static class Validates
     {
         if (!context.TryProperty(annotations, out var value)) { return; }
 
-        context.Buffer.Clear();
-
-        Validator.TryValidateValue(value, context, context.Buffer, annotations.Attributes);
-
-        context.AddMessages(context.Buffer);
-
-        
-
-        //// Only validate the other properties if the required condition was not met.
-        //if (annotations.Required is not OptionalAttribute &&
-        //    context.AddMessage(annotations.Required.GetValidationMessage(value, context)))
-        //{
-        //    return;
-        //}
-
-        //foreach (var attribute in annotations.Attributes)
-        //{
-        //    context.AddMessage(attribute.GetValidationMessage(value, context));
-        //}
+        foreach (var attribute in annotations.Attributes)
+        {
+            // Stop on first required failure.
+            if (context.AddMessage(attribute.GetValidationMessage(value, context)) && attribute is RequiredAttribute)
+            {
+                return;
+            }
+        }
 
         if (value is null || annotations.TypeAnnotations is not { } typeAnnotations) { return; }
 
@@ -76,9 +65,10 @@ internal static class Validates
     {
         if (context.Annotations?.Attributes is { Count: > 0 } attributes)
         {
-            context.Buffer.Clear();
-            Validator.TryValidateValue(context.Instance, context, context.Buffer, attributes);
-            context.AddMessages(context.Buffer, violationOnType: true);
+            foreach (var attribute in attributes)
+            {
+                context.AddMessage(attribute.GetValidationMessage(context.Instance, context), violationOnType: true);
+            }
         }
     }
 

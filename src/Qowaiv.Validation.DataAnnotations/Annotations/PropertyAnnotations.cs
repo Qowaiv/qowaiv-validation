@@ -8,13 +8,11 @@ public sealed class PropertyAnnotations
     internal PropertyAnnotations(
         string name,
         TypeAnnotations? typeAnnotations,
-        RequiredAttribute required,
         IReadOnlyCollection<ValidationAttribute> attributes,
         Func<object, object?> getValue)
     {
         Name = name;
         TypeAnnotations = typeAnnotations;
-        Required = required;
         Attributes = attributes;
         Accessor = getValue;
     }
@@ -24,12 +22,6 @@ public sealed class PropertyAnnotations
 
     /// <summary>Gets <see cref="TypeAnnotations"/> of the property type.</summary>
     public TypeAnnotations? TypeAnnotations { get; }
-
-    /// <summary>Gets the required attribute.</summary>
-    /// <remarks>
-    /// <see cref="OptionalAttribute"/> if the property is not decorated.
-    /// </remarks>
-    public RequiredAttribute Required { get; }
 
     /// <summary>Gets the <see cref="ValidationAttribute"/>s defined on the property.</summary>
     public IReadOnlyCollection<ValidationAttribute> Attributes { get; }
@@ -42,10 +34,7 @@ public sealed class PropertyAnnotations
     private readonly Func<object, object?> Accessor;
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private string DebuggerDisplay => $"{Name}, Attributes: {string.Join(", ", GetAll().Select(Shorten))}";
-
-    [Pure]
-    private IEnumerable<ValidationAttribute> GetAll() => [Required, .. Attributes];
+    private string DebuggerDisplay => $"{Name}, Attributes: {string.Join(", ", Attributes.Select(Shorten))}";
 
     [Pure]
     private static string Shorten(Attribute attr) => attr.GetType().Name.Replace("Attribute", string.Empty);

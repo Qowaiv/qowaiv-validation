@@ -15,14 +15,12 @@ internal readonly struct NestedContext
         MemberPath path,
         TypeAnnotations? annotations,
         List<IValidationMessage> messages,
-        List<ValidationResult> buffer,
         HashSet<object> done,
         ValidationContext @base)
     {
         Path = path;
         Annotations = annotations;
         Messages = messages;
-        Buffer = buffer;
         Done = done;
         Base = @base;
     }
@@ -35,9 +33,6 @@ internal readonly struct NestedContext
 
     /// <summary>The collected messages.</summary>
     public readonly List<IValidationMessage> Messages;
-
-    /// <summary>The buffer to use for the <see cref="System.ComponentModel.DataAnnotations.Validator"/> to write to.</summary>
-    public readonly List<ValidationResult> Buffer;
 
     /// <summary>Keeps track of objects that already have been validated.</summary>
     private readonly HashSet<object> Done;
@@ -126,7 +121,6 @@ internal readonly struct NestedContext
         Path.Nested(Base.MemberName!, index),
         annotations,
         Messages,
-        Buffer,
         Done,
         new(instance, Base, Base.Items));
 
@@ -144,7 +138,6 @@ internal readonly struct NestedContext
         IDictionary<object, object?> items) => new(
             MemberPath.Root,
             Annotator.Annotate(typeof(TModel)),
-            [],
             [],
             new(ReferenceComparer.Instance),
             new ValidationContext(instance!, serviceProvider, items));
