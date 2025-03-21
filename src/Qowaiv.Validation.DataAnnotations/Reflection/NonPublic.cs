@@ -13,10 +13,4 @@ internal static class NonPublic
         public static readonly MethodInfo IsValid = typeof(System.ComponentModel.DataAnnotations.ValidationAttribute)
             .GetMethod(nameof(IsValid), Instance)!;
     }
-
-    public static class ValidationContext
-    {
-        public static readonly MethodInfo GetDisplayName = typeof(System.ComponentModel.DataAnnotations.ValidationContext)
-        .GetMethod(nameof(GetDisplayName), Instance)!;
-    }
 }

@@ -78,6 +78,16 @@ public class Resolves_property
         .WithMessage(ValidationMessage.Error("The length of the Name field should be at least 3.", "Name"));
 }
 
+public class Resolves
+{
+    [Test]
+    public void Display_attribute()
+        => new WithDisplay() { Prop = "Too long" }
+        .ValidateAnnotations()
+        .Should().BeInvalid()
+        .WithMessage(ValidationMessage.Error("The length of the Property field should be at most 2.", "Prop"));
+}
+
 public class Has_no_properties_for
 {
     [TestCase(typeof(int))]
@@ -152,4 +162,11 @@ file sealed class AnnotatedModel
 {
     [Length.AtLeast(3)]
     public string? Name { get; init; }
+}
+
+file sealed class WithDisplay
+{
+    [Length.AtMost(2)]
+    [Display(Name = "Property")]
+    public string? Prop { get; init; }
 }

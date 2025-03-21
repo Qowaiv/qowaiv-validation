@@ -7,6 +7,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 /// <summary>Store of resolved <see cref="TypeAnnotations"/>.</summary>
 internal sealed class AnnotationStore
 {
+    private static readonly AttributeSorter Sorter = new();
     private readonly ConcurrentDictionary<Type, TypeAnnotations?> Annotations;
 
     /// <summary>Initializes a new instance of the <see cref="AnnotationStore"/> class.</summary>
@@ -65,27 +66,30 @@ internal sealed class AnnotationStore
     [Pure]
     private MemberAnnotations? Annotate(PropertyInfo prop, HashSet<Type> visited)
     {
-        var attributes = prop.ValidationAttributes()
-            .OrderByDescending(attr => attr is RequiredAttribute)
-            .ToList();
+        List<ValidationAttribute> attributes = [];
+        DisplayAttribute? display = null;
+        var required = false;
 
-        // Add required member attribute if no Required (including Optional] attribute has been defined.
-        if (attributes.FirstOrDefault() is not RequiredAttribute &&
-            prop.RequiredMemberAttribute() is { } required)
+        foreach (var attr in prop.GetCustomAttributes(inherit: true))
         {
-            attributes.Insert(0, required);
+            switch (attr)
+            {
+                case OptionalAttribute: required = true; break;
+                case RequiredAttribute req: required = true; attributes.Add(req); break;
+                case ValidationAttribute val: attributes.Add(val); break;
+                case DisplayAttribute d: display = d; break;
+            }
         }
-
-        // We do not want optional to occur in this list.
-        if (attributes.FirstOrDefault() is OptionalAttribute)
+        if (!required && prop.RequiredMemberAttribute() is { } member)
         {
-            attributes.RemoveAt(0);
+            attributes.Insert(0, member);
         }
+        attributes.Sort(Sorter);
 
         var typeAnnotations = Get(prop.PropertyType, visited);
 
         return typeAnnotations is { } || attributes is { Count: > 0 }
-            ? new(prop.Name, typeAnnotations, attributes.ToArray(), PropertyHelper.MakeNullSafeFastPropertyGetter(prop))
+            ? new(prop.Name, typeAnnotations, display, attributes.ToArray(), PropertyHelper.MakeNullSafeFastPropertyGetter(prop))
             : null;
     }
 
@@ -124,5 +128,12 @@ internal sealed class AnnotationStore
         var accss = Expression.MakeMemberAccess(typed, prop);
         var body = Expression.Convert(accss, typeof(object));
         return Expression.Lambda<Func<object, object?>>(body, model).Compile();
+    }
+
+    private sealed class AttributeSorter : IComparer<ValidationAttribute>
+    {
+        [Pure]
+        public int Compare(ValidationAttribute x, ValidationAttribute y)
+            => (y is RequiredAttribute).CompareTo(x is RequiredAttribute);
     }
 }

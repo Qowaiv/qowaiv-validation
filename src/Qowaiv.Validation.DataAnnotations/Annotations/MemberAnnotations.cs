@@ -8,11 +8,13 @@ public sealed class MemberAnnotations
     internal MemberAnnotations(
         string name,
         TypeAnnotations? typeAnnotations,
+        DisplayAttribute? display,
         IReadOnlyCollection<ValidationAttribute> attributes,
         Func<object, object?> getValue)
     {
         Name = name;
         TypeAnnotations = typeAnnotations;
+        Display = display;
         Attributes = attributes;
         Accessor = getValue;
     }
@@ -22,6 +24,9 @@ public sealed class MemberAnnotations
 
     /// <summary>Gets <see cref="TypeAnnotations"/> of the member type.</summary>
     public TypeAnnotations? TypeAnnotations { get; }
+
+    /// <summary>Gets the (optional) display attribute.</summary>
+    public DisplayAttribute? Display { get; }
 
     /// <summary>Gets the <see cref="ValidationAttribute"/>s defined on the member.</summary>
     public IReadOnlyCollection<ValidationAttribute> Attributes { get; }

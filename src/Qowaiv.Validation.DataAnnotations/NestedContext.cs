@@ -101,7 +101,7 @@ internal readonly struct NestedContext
     public bool TryMember(MemberAnnotations annotations, out object? value)
     {
         Base.MemberName = annotations.Name;
-        Base.DisplayName = Base.GetDisplayName();
+        Base.DisplayName = annotations.Display?.GetName() ?? annotations.Name;
 
         try
         {
