@@ -25,7 +25,7 @@
     <PackageVersion Include="PolySharp" Version="1.15.0" />
     <PackageVersion Include="Qowaiv" Version="7.2.1" />
     <PackageVersion Include="Qowaiv.Analyzers.CSharp" Version="*" />
-    <PackageVersion Include="Qowaiv.Diagnostics.Contracts" Version="2.0.4" />
+    <PackageVersion Include="Qowaiv.Diagnostics.Contracts" Version="2.0.5" />
     <PackageVersion Include="Qowaiv.TestTools" Version="7.2.0" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="*" />
     <PackageVersion Include="StyleCop.Analyzers" Version="*-*" />

@@ -8,8 +8,6 @@ namespace Qowaiv.Validation.DataAnnotations;
 public class ValidationMessage : ValidationResult, IValidationMessage
 {
     /// <summary>Initializes a new instance of the <see cref="ValidationMessage"/> class.</summary>
-    public ValidationMessage() : this(ValidationSeverity.None, null, null) => Do.Nothing();
-
     internal ValidationMessage(ValidationSeverity severity, string? message, string[]? memberNames)
         : base(message, memberNames ?? [])
         => Severity = severity;
@@ -23,8 +21,12 @@ public class ValidationMessage : ValidationResult, IValidationMessage
     /// <inheritdoc />
     public string? Message => ErrorMessage;
 
-    /// <summary>Creates a None message.</summary>
-    public static ValidationMessage None => new();
+    /// <summary>Represents a validation message with severity <see cref="ValidationSeverity.None"/>.</summary>
+    /// <remarks>
+    /// Other tooling can not work properly with <see cref="ValidationMessage"/>s
+    /// that try to represent <see cref="ValidationResult.Success"/>.
+    /// </remarks>
+    public static readonly ValidationMessage? None = null;
 
     /// <summary>Creates an error message.</summary>
     [Pure]
@@ -43,24 +45,21 @@ public class ValidationMessage : ValidationResult, IValidationMessage
     /// The validation result to convert.
     /// </param>
     [Pure]
-    public static ValidationMessage For(ValidationResult validationResult)
-        => validationResult switch
-        {
-            null => None,
-            ValidationMessage message => message,
-            _ => validationResult == Success
-                ? None
-                : Error(validationResult.ErrorMessage, validationResult.MemberNames.ToArray()),
-        };
+    public static ValidationMessage? For(ValidationResult validationResult) => validationResult switch
+    {
+        ValidationMessage message => message,
+        null => None,
+        var r when r == Success => None,
+        _ => Error(validationResult.ErrorMessage, validationResult.MemberNames.ToArray()),
+    };
 
     /// <summary>Creates a validation message.</summary>
     [Pure]
-    public static IValidationMessage For(ValidationSeverity severity, string message, params string[] memberNames)
-        => severity switch
-        {
-            ValidationSeverity.None => None,
-            ValidationSeverity.Info => Info(message, memberNames),
-            ValidationSeverity.Warning => Warn(message, memberNames),
-            _ => Error(message, memberNames),
-        };
+    public static IValidationMessage? For(ValidationSeverity severity, string message, params string[] memberNames) => severity switch
+    {
+        ValidationSeverity.None => None,
+        ValidationSeverity.Info => Info(message, memberNames),
+        ValidationSeverity.Warning => Warn(message, memberNames),
+        _ => Error(message, memberNames),
+    };
 }

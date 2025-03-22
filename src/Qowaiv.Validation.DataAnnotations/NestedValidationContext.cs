@@ -72,13 +72,15 @@ internal sealed class NestedValidationContext
     [Impure]
     public bool AddMessage(ValidationResult validationResult, bool violationOnType = false)
     {
-        var message = ValidationMessage.For(validationResult);
-        if (message.Severity > ValidationSeverity.None)
+        if (ValidationMessage.For(validationResult) is { Severity: not ValidationSeverity.None } message)
         {
             collection.Add(Update(message, violationOnType));
             return true;
         }
-        else return false;
+        else
+        {
+            return false;
+        }
 
         ValidationMessage Update(ValidationMessage message, bool violationOnType)
         {
