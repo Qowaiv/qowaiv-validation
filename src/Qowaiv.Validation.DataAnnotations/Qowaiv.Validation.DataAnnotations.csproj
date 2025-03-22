@@ -7,12 +7,17 @@
     <PackageValidationBaselineVersion>3.0.0</PackageValidationBaselineVersion>
     <Version>3.0.0</Version>
     <PackageId>Qowaiv.Validation.DataAnnotations</PackageId>
-    <PackageReleaseNotes>
+    <ToBeReleased>
       <![CDATA[
-ToBeReleased:
+v4.0.0
 - Support requiredness via the required modifier.
 - Introduction of [SkipValidation] to explictly skip validation of types and properties.
+- Qowaiv.Validation.DataAnnotations.ValidationMessage.None returns null. (BREAKING)
 - Update to Qowaiv v7.2.1. #88
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
+      <![CDATA[
 v3.0.0
 - Introduction of AllowedAttribute<T> as alternative to AllowedValuesAttribute.
 - Introduction of DefinedOnlyAttribute<T> as alternative to DefinedEnumValuesOnlyAttribute.
