@@ -17,7 +17,7 @@ Result<SomeModel> result = validator.Validate(model);
 This allows the creation of messages with different severities:
 
 ``` C#
-var none = ValidationMessage.None;
+var none = ValidationMessage.None; // returns null, but for telling the story ValidationMessage.None is preferred.
 var info = ValidationMessage.Info(message, args);
 var warn = ValidationMessage.Warning(message, args);
 var error = ValidationMessage.Error(message, args);
@@ -167,8 +167,8 @@ public class Model
 ```
 
 ### Unique values
-The `[Unique&lt;TValue&gt;]` attribute validates that all items of the collection are
-distinct. If needed, a custom `IEqualityComparer&lt;TValue&gt` comparer can be defined.
+The `[Unique<Value>]` attribute validates that all items of the collection are
+distinct. If needed, a custom `IEqualityComparer<Value>` comparer can be defined.
 
 ``` C#
 public class Model
