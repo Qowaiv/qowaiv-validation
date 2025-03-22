@@ -74,6 +74,7 @@ public class Required_modifier
     {
         public required string? Nullable { get; init; }
 
+        [Length.AtLeast(2)]
         public required string NotNullable { get; init; }
 
         public required EmailAddress Svo { get; init; }
@@ -81,6 +82,7 @@ public class Required_modifier
 
     internal class DecoratedModel
     {
+        [Length.AtLeast(2)]
         [Required(AllowEmptyStrings = true)]
         public required string NotNullable { get; init; }
     }

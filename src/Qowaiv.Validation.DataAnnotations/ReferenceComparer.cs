@@ -13,7 +13,7 @@ public sealed class ReferenceComparer : IEqualityComparer<object>
 
     /// <summary>Initializes a new instance of the <see cref="ReferenceComparer"/> class.</summary>
     /// <remarks>No public accessor.</remarks>
-    private ReferenceComparer() => Do.Nothing();
+    private ReferenceComparer() { }
 
     /// <inheritdoc />
     [Pure]

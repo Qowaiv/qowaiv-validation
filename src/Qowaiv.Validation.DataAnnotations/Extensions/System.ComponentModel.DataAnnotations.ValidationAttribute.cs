@@ -1,4 +1,4 @@
-using System.Reflection;
+using Qowaiv.Validation.DataAnnotations.Reflection;
 
 namespace System.ComponentModel.DataAnnotations;
 
@@ -14,16 +14,7 @@ public static class QowaivValidationAttributeExtensions
     {
         Guard.NotNull(attribute);
 
-        var result = IsValid.Invoke(attribute, [value, validationContext])!;
+        var result = NonPublic.ValidationAttribute.IsValid.Invoke(attribute, [value, validationContext])!;
         return ValidationMessage.For((ValidationResult)result);
     }
-
-    /// <summary>Access to the protected <see cref="ValidationAttribute.IsValid(object, ValidationContext)"/>.</summary>
-    private static readonly MethodInfo IsValid = typeof(ValidationAttribute).GetMethod(nameof(IsValid), IsValidBindings)!;
-
-#pragma warning disable S3011 // Reflection should not be used to increase accessibility of classes, methods, or fields
-    // To access the protected <see cref="ValidationAttribute.IsValid(object, ValidationContext)"/>
-    // We - unfortunately - have to use reflection.
-    private const BindingFlags IsValidBindings = BindingFlags.Instance | BindingFlags.NonPublic;
-#pragma warning restore S3011 // Reflection should not be used to increase accessibility of classes, methods, or fields
 }
