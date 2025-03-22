@@ -1,4 +1,6 @@
+
 namespace Qowaiv.Validation.Abstractions;
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 
 /// <summary>Extensions on asynchronous <see cref="Result{TModel}"/>.</summary>
 public static class ResultActExtensions

@@ -3,7 +3,6 @@ using Qowaiv.Validation.Abstractions;
 namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>A static validator to validate models based on their data annotations.</summary>
-
 public static class AnnotatedModelValidator
 {
     /// <summary>Validates the model.</summary>

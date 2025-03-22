@@ -81,10 +81,6 @@ internal sealed class AnnotationStore
                         required = true;
                         attributes.Add(req);
                     }
-                    else
-                    {
-
-                    }
                     break;
                 case ValidationAttribute val: attributes.Add(val); break;
                 case DisplayAttribute d: display = d; break;
