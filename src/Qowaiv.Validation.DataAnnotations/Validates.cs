@@ -31,7 +31,7 @@ internal static class Validates
     private static void Member(NestedContext context, MemberAnnotations annotations)
     {
         if (MemberAttributes(context, annotations) is not { } value ||
-            TypeAnnotations(annotations, value) is not { } typeAnnotations) { return; }
+             Annotator.Annotate(value.GetType()) is not { } typeAnnotations) { return; }
 
         if (value is IEnumerable enumerable)
         {
@@ -65,13 +65,6 @@ internal static class Validates
         }
         return value;
     }
-
-    /// <summary>Gets the type annotations.</summary>
-    [Pure]
-    private static TypeAnnotations? TypeAnnotations(MemberAnnotations annotations, object value)
-        => annotations.IsSealed
-        ? annotations.TypeAnnotations
-        : Annotator.Annotate(value.GetType());
 
     /// <summary>Gets the results for validating the attributes declared on the type of the model.</summary>
     public static void Type(NestedContext context)

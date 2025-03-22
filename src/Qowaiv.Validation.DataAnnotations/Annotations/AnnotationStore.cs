@@ -89,7 +89,7 @@ internal sealed class AnnotationStore
         var isSealed = Trim(prop.PropertyType).IsSealed;
 
         return !isSealed || typeAnnotations is { } || attributes is { Count: > 0 }
-            ? new(prop.Name, isSealed, typeAnnotations, display, attributes.ToArray(), prop.GetValue)
+            ? new(prop.Name, display, attributes.ToArray(), prop.GetValue)
             : null;
     }
 
