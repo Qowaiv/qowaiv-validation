@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/package.props" />
 
@@ -10,6 +10,7 @@
     <ToBeReleased>
       <![CDATA[
 v4.0.0
+- Support primitives of the same type on [ValueOf<TValue>] attributes.
 - Support requiredness via the required modifier.
 - Introduction of [SkipValidation] to explictly skip validation of types and properties.
 - Qowaiv.Validation.DataAnnotations.ValidationMessage.None returns null. (BREAKING)

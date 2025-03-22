@@ -10,13 +10,27 @@ public abstract class SetOfAttribute<TValue> : ValidationAttribute
 {
     /// <summary>Initializes a new instance of the <see cref="SetOfAttribute{TValue}"/> class.</summary>
     /// <param name="values">
-    /// String representations of the values.
+    /// Representations of the values.
     /// </param>
     protected SetOfAttribute(params object[] values)
         : base(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError)
     {
-        var converter = TypeDescriptor.GetConverter(typeof(TValue));
-        Values = new HashSet<TValue>(values.Select(converter.ConvertFrom).OfType<TValue>());
+        var all = new HashSet<TValue>();
+
+        TypeConverter converter = TypeDescriptor.GetConverter(typeof(TValue));
+
+        foreach (var value in values)
+        {
+            if (value is TValue typed)
+            {
+                all.Add(typed);
+            }
+            else if (converter.ConvertFrom(value) is TValue converted)
+            {
+                all.Add(converted);
+            }
+        }
+        Values = all;
     }
 
     /// <summary>The result to return when the value of <see cref="IsValid(object)"/>
