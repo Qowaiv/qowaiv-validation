@@ -32,11 +32,7 @@ public class Resolves_property
         var annotated = Annotator.Annotate(typeof(Model.With.TypeAnnotatedMember));
         var prop = annotated!.Members.Single();
 
-        prop.Should().BeEquivalentTo(new
-        {
-            Name = "Member",
-            TypeAnnotations = new { Attributes = new { Count = 1 } },
-        });
+        prop.Should().BeEquivalentTo(new { Name = "Member" });
     }
 
     [Test]

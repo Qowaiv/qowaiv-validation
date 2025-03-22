@@ -68,8 +68,7 @@ internal readonly struct NestedContext
     [Impure]
     public bool AddMessage(ValidationResult validationResult, bool violationOnType = false)
     {
-        var message = ValidationMessage.For(validationResult);
-        if (message.Severity > ValidationSeverity.None)
+        if (ValidationMessage.For(validationResult) is {Severity: >ValidationSeverity.None } message)
         {
             Messages.Add(Update(message, violationOnType));
             return true;
