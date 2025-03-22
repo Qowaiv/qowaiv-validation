@@ -7,7 +7,7 @@ namespace Data_Annotations.Attributes.SetOf_values_specs;
 public class Supports
 {
     [Test]
-    public void pimitive_params_of_same_type_as_TValue()
+    public void primitive_params_of_same_type_as_TValue()
         => new AllowedAttribute<int>(17, 42).Values
         .Should().BeEquivalentTo([17, 42]);
 
