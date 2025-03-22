@@ -83,7 +83,7 @@ public class Model
 
 ### Allowed values
 The `[AllowedValues]` attribute allows to define a subset of allowed values. It
-supports type converters to get the allowed values based on a string value.
+supports type converters to get the allowed values based on a primitive value.
 
 ``` C#
 public class Model
@@ -95,7 +95,7 @@ public class Model
 
 ### Forbidden values
 The `[ForbiddenValues]` attribute allows to define a subset of forbidden values. It
-supports type converters to get the forbidden values based on a string value.
+supports type converters to get the forbidden values based on a primitive value.
 
 ``` C#
 public class Model
