@@ -28,15 +28,6 @@ public class Resolves_property
 {
     [Test]
     public void on_type_validation()
-    {
-        var annotated = Annotator.Annotate(typeof(Model.With.TypeAnnotatedMember));
-        var prop = annotated!.Members.Single();
-
-        prop.Should().BeEquivalentTo(new { Name = "Member" });
-    }
-
-    [Test]
-    public void validates_it()
         => new Model.With.TypeAnnotatedMember() { Member = new() }
         .ValidateAnnotations()
         .Should().BeInvalid()
@@ -67,29 +58,12 @@ public class Resolves
         .WithMessage(ValidationMessage.Error("The value of the Value field is not allowed.", "Member.Value"));
 }
 
-public class Has_no_properties_for
-{
-    [TestCase(typeof(int))]
-    [TestCase(typeof(double))]
-    [TestCase(typeof(bool))]
-    public void primitives(Type primitive)
-        => Annotator.Annotate(primitive).Should().BeNull();
-
-    [Test]
-    public void @string()
-        => Annotator.Annotate(typeof(string)).Should().BeNull();
-
-    [Test]
-    public void enums()
-        => Annotator.Annotate(typeof(TypeCode)).Should().BeNull();
-}
-
 public class Is_None_for
 {
     [Test]
     public void not_annotated_model()
-    {
-        var annotated = Annotator.Annotate(typeof(Model.Without.Annotations));
-        annotated.Should().BeNull();
-    }
+        => new Model.Without.Annotations() { Required = null! }
+            .ValidateAnnotations()
+            .Should().BeValid()
+            .WithoutMessages();
 }

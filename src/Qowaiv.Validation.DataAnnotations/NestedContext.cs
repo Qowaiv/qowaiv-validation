@@ -136,7 +136,7 @@ internal readonly struct NestedContext
         IServiceProvider serviceProvider,
         IDictionary<object, object?> items) => new(
             MemberPath.Root,
-            Annotator.Annotate(typeof(TModel)),
+            TypeAnnotations.Get(typeof(TModel)),
             [],
             new(ReferenceComparer.Instance),
             new ValidationContext(instance!, serviceProvider, items));

@@ -31,7 +31,7 @@ internal static class Validates
     private static void Member(NestedContext context, MemberAnnotations annotations)
     {
         if (MemberAttributes(context, annotations) is not { } value ||
-             Annotator.Annotate(value.GetType()) is not { } typeAnnotations) { return; }
+             TypeAnnotations.Get(value.GetType()) is not { } typeAnnotations) { return; }
 
         if (value is IEnumerable enumerable)
         {
@@ -69,7 +69,7 @@ internal static class Validates
     /// <summary>Gets the results for validating the attributes declared on the type of the model.</summary>
     public static void Type(NestedContext context)
     {
-        if (context.Annotations?.Attributes is { Count: > 0 } attributes)
+        if (context.Annotations?.Attributes is { Length: > 0 } attributes)
         {
             foreach (var attribute in attributes)
             {
