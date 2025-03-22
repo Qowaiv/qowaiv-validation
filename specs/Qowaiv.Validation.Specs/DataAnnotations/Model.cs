@@ -39,6 +39,18 @@ internal static class Model
             public Inheritable? Member { get; init; }
         }
 
+        public sealed class RequiredOnValueType
+        {
+            [Required]
+            public int? Required { get; init; }
+
+            [Required]
+            public bool Ignored { get; init; }
+
+            [Mandatory]
+            public EmailAddress Mandatory { get; init; } 
+        }
+
         public sealed class SetOnlyProperty
         {
 #pragma warning disable S2376 // Write-only properties should not be used

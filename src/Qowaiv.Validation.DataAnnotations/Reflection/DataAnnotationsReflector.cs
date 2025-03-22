@@ -10,6 +10,12 @@ internal static class DataAnnotationsReflector
     [Pure]
     public static bool ImplementsIValidatableObject(this Type type) => typeof(IValidatableObject).IsAssignableFrom(type);
 
+    /// <summary>Returns true for all value types except <see cref="Nullable{T}" />,</summary>
+    [Pure]
+    public static bool IsNonNullableValueType(this Type type)
+        => type.IsValueType
+        && (!type.IsGenericType || type.GetGenericTypeDefinition() != typeof(Nullable<>));
+
     /// <summary>Returns true if type implements <see cref="IValidatableObject"/>,
     /// or if the type has been decorated with any <see cref="ValidationAttribute"/>'s,
     /// or any of its properties.

@@ -68,13 +68,25 @@ internal sealed class AnnotationStore
         List<ValidationAttribute> attributes = [];
         DisplayAttribute? display = null;
         var required = false;
+        var skipRequired = prop.PropertyType.IsNonNullableValueType();
 
         foreach (var attr in prop.GetCustomAttributes(inherit: true))
         {
             switch (attr)
             {
                 case OptionalAttribute: required = true; break;
-                case RequiredAttribute req: required = true; attributes.Add(req); break;
+                case RequiredAttribute req:
+                    // The default [Required] will always return true for value types so can be skipped.
+                    if (!skipRequired || req.GetType() != typeof(RequiredAttribute))
+                    {
+                        required = true;
+                        attributes.Add(req);
+                    }
+                    else
+                    {
+
+                    }
+                    break;
                 case ValidationAttribute val: attributes.Add(val); break;
                 case DisplayAttribute d: display = d; break;
             }

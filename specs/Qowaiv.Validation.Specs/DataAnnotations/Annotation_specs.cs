@@ -58,7 +58,7 @@ public class Resolves
         .WithMessage(ValidationMessage.Error("The value of the Value field is not allowed.", "Member.Value"));
 }
 
-public class Is_None_for
+public class Ingores
 {
     [Test]
     public void not_annotated_model()
@@ -66,4 +66,14 @@ public class Is_None_for
             .ValidateAnnotations()
             .Should().BeValid()
             .WithoutMessages();
+
+    [Test]
+    public void required_attribute_on_value_type()
+        => new Model.With.RequiredOnValueType()
+            .ValidateAnnotations()
+            .Should().BeInvalid()
+            .WithMessages(
+                ValidationMessage.Error("The Required field is required.", "Required"),
+                ValidationMessage.Error("The Mandatory field is required.", "Mandatory"));
 }
+
