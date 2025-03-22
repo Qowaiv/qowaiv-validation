@@ -12,7 +12,7 @@ public class Supports
         .Should().BeEquivalentTo([17, 42]);
 
     [Test]
-    public void pimitive_params_that_can_be_converted()
+    public void primitive_params_that_can_be_converted()
     {
         using (TestCultures.en_US.Scoped())
         {
