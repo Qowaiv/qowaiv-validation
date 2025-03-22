@@ -10,11 +10,11 @@ public static class QowaivValidationAttributeExtensions
     /// The original function messes up with <see cref="ValidationMessage.None"/>, as it has no error message.
     /// </remarks>
     [Pure]
-    public static ValidationMessage GetValidationMessage(this ValidationAttribute attribute, object? value, ValidationContext validationContext)
+    public static ValidationMessage? GetValidationMessage(this ValidationAttribute attribute, object? value, ValidationContext validationContext)
     {
         Guard.NotNull(attribute);
 
-        var result = NonPublic.ValidationAttribute.IsValid.Invoke(attribute, [value, validationContext])!;
-        return ValidationMessage.For((ValidationResult)result);
+        var result = NonPublic.ValidationAttribute.IsValid.Invoke(attribute, [value, validationContext]);
+        return ValidationMessage.For(result as ValidationResult);
     }
 }

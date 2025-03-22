@@ -8,8 +8,5 @@ public static class AnnotationsValidations
     [Pure]
     public static Qowaiv.Validation.Abstractions.Result<TModel> ValidateAnnotations<TModel>(this TModel model)
         where TModel : class
-    {
-        var validator = new AnnotatedModelValidator<TModel>();
-        return  validator.Validate(model);
-    }
+        => AnnotatedModelValidator.Validate(model);
 }
