@@ -7,10 +7,9 @@ public sealed class ForbiddenAttribute<TValue> : SetOfAttribute<TValue>
 {
     /// <summary>Initializes a new instance of the <see cref="ForbiddenAttribute{TValue}"/> class.</summary>
     /// <param name="values">
-    /// String representations of the forbidden values.
+    /// Representations of the forbidden values.
     /// </param>
-    public ForbiddenAttribute(params object[] values)
-        : base(values) => Do.Nothing();
+    public ForbiddenAttribute(params object[] values) : base(values) { }
 
     /// <summary>Return false if the value of <see cref="SetOfValuesAttribute.IsValid(object)"/>
     /// equals one of the values of the <see cref="ForbiddenAttribute{TValue}"/>.

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/package.props" />
 
@@ -7,12 +7,17 @@
     <PackageValidationBaselineVersion>3.0.0</PackageValidationBaselineVersion>
     <Version>3.0.0</Version>
     <PackageId>Qowaiv.Validation.DataAnnotations</PackageId>
-    <PackageReleaseNotes>
+    <ToBeReleased>
       <![CDATA[
-ToBeReleased:
+      <![CDATA[
+v4.0.0
+- Support primitives of the same type on [ValueOf<TValue>] attributes.
 - Support requiredness via the required modifier.
 - Introduction of [SkipValidation] to explictly skip validation of types and properties.
-- Update to Qowaiv v7.2.1. #88
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
+      <![CDATA[
 v3.0.0
 - Introduction of AllowedAttribute<T> as alternative to AllowedValuesAttribute.
 - Introduction of DefinedOnlyAttribute<T> as alternative to DefinedEnumValuesOnlyAttribute.
