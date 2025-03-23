@@ -6,17 +6,20 @@ namespace Qowaiv.Validation.DataAnnotations;
 /// </typeparam>
 [AttributeUsage(AttributeTargets.Property|AttributeTargets.Field|AttributeTargets.Parameter, AllowMultiple = true, Inherited = false)]
 [CLSCompliant(false)]
-public sealed class ItemsAttribute<TValidator> : ValidationAttribute
+public class ItemsAttribute<TValidator> : ValidationAttribute
     where TValidator : ValidationAttribute
 {
     /// <summary>Initializes a new instance of the <see cref="ItemsAttribute{TValidator}"/> class.</summary>
     /// <param name="args">
     /// The args to provide to the constructor of <typeparamref name="TValidator"/> .
     /// </param>
-    public ItemsAttribute(params object[] args)
-    {
-        Validator = Create(args);
-    }
+    public ItemsAttribute(params object[] args) : this(Create(args)) { }
+
+    /// <summary>Initializes a new instance of the <see cref="ItemsAttribute{TValidator}"/> class.</summary>
+    /// <param name="validator">
+    /// The validator to use.
+    /// </param>
+    protected ItemsAttribute(TValidator validator) => Validator = Guard.NotNull(validator);
 
     private readonly TValidator Validator;
 
