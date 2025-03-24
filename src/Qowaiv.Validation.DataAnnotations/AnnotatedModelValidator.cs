@@ -41,7 +41,7 @@ public static class AnnotatedModelValidator
         IDictionary<object, object?>? items)
     {
         var context = NestedContext.Root(model!, serviceProvider ?? EmptyProvider.Instance, items ?? new Dictionary<object, object?>(0));
-        Validates.Model(context);
+        DataAnnotations.Validate.Model(context);
 
         return Result.For(model, context.Messages);
     }

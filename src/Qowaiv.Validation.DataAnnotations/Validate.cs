@@ -1,6 +1,6 @@
 namespace Qowaiv.Validation.DataAnnotations;
 
-internal static class Validates
+internal static class Validate
 {
     public static void Model(NestedContext context)
     {

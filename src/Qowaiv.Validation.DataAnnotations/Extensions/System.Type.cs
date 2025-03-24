@@ -16,7 +16,7 @@ internal static class TypeExtensions
     [Pure]
     public static bool ImplementsIValidatableObject(this Type type) => typeof(IValidatableObject).IsAssignableFrom(type);
 
-    /// <summary>Returns true for all value types except <see cref="Nullable{T}" />,</summary>
+    /// <summary>Returns true for all value types except <see cref="Nullable{T}" />.</summary>
     [Pure]
     public static bool IsNonNullableValueType(this Type type)
         => type.IsValueType

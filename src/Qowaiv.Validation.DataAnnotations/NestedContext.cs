@@ -66,9 +66,9 @@ internal readonly struct NestedContext
     /// Null and <see cref="ValidationMessage.None"/> Messages are not added.
     /// </remarks>
     [Impure]
-    public bool AddMessage(ValidationResult validationResult, bool violationOnType = false)
+    public bool AddMessage(ValidationResult? validationResult, bool violationOnType = false)
     {
-        if (ValidationMessage.For(validationResult) is {Severity: >ValidationSeverity.None } message)
+        if (ValidationMessage.For(validationResult) is { Severity: > ValidationSeverity.None } message)
         {
             Messages.Add(Update(message, violationOnType));
             return true;
