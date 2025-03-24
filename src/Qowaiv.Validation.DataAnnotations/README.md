@@ -119,6 +119,24 @@ public class Model
 }
 ```
 
+### Items validation
+The `[Items<TValidator>]` attribute to define a validation attribute to apply
+on all items of a collection. This is useful in multiple cases:
+
+``` C#
+public class Model
+{
+    [Items<Mandatory>] // ensures none of the items is null or empty
+    public string[] Names { get; init; } = [];
+
+    [Items<Allowed<int>(42, 2017)] // ensures that all items have either the value 42 or 2017.
+    public int[] Numbers { get; init; } = [];
+}
+```
+
+By defining either `ErrorMessage` or both `ErrorMessageResourceName` and `ErrorMessageResourceType`,
+those values are set to the `TValidator` allowing full control of the error message generation.
+
 ### Is finite
 The `[IsFinite]` attribute validates that the floating point value of the field
 represents a finite (e.a. not NaN, or infinity).

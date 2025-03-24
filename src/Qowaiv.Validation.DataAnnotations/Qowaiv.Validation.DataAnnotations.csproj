@@ -12,6 +12,7 @@
 v4.0.0
 - Support primitives of the same type on [ValueOf<TValue>] attributes.
 - Support requiredness via the required modifier.
+- Introduction of [Items<TValidator>] to define a validator on the items of a collection.
 - Introduction of [SkipValidation] to explictly skip validation of types and properties.
 - Qowaiv.Validation.DataAnnotations.ValidationMessage.None returns null. (BREAKING)
 - Refactor annotations resolving.
