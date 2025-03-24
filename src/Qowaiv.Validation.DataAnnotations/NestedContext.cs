@@ -68,31 +68,32 @@ internal readonly struct NestedContext
     [Impure]
     public bool AddMessage(ValidationResult? validationResult, bool violationOnType = false)
     {
-        if (ValidationMessage.For(validationResult) is { Severity: > ValidationSeverity.None } message)
+        if (validationResult is { } && validationResult != ValidationResult.Success)
         {
-            Messages.Add(Update(message, violationOnType));
+            var added = false;
+
+            // We want to have a message per member name
+            foreach (var member in validationResult.MemberNames.Where(m => m is { Length: > 0 }))
+            {
+                added = true;
+
+                Messages.Add(validationResult is ValidationMessage m
+                   ? ValidationMessage.For(m.Severity, m.Message!, Path.Property(member))!
+                   : ValidationMessage.Error(validationResult.ErrorMessage, Path.Property(member)));
+            }
+
+            // If no member name has been specified, we add one message with an updated property.
+            if (!added)
+            {
+                Messages.Add(validationResult is ValidationMessage m
+                   ? ValidationMessage.For(m.Severity, m.Message!, Path.Property())!
+                   : ValidationMessage.Error(validationResult.ErrorMessage, Path.Property()));
+            }
             return true;
         }
         else
         {
             return false;
-        }
-    }
-
-    [Pure]
-    private ValidationMessage Update(ValidationMessage message, bool violationOnType)
-    {
-        if (Path is { Length: > 0 })
-        {
-            string[] members = violationOnType && message.PropertyName is not { Length: > 0 }
-                ? [Path.Property()]
-                : [.. message.MemberNames.Select(Path.Property)];
-
-            return new(message.Severity, message.Message, members);
-        }
-        else
-        {
-            return message;
         }
     }
 

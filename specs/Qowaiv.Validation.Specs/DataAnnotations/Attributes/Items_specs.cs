@@ -15,7 +15,8 @@ public class Validates
         model.ValidateAnnotations()
             .Should().BeInvalid()
             .WithMessages(
-                ValidationMessage.Error("The value of the Number field is not allowed.", "Numbers[0]", "Numbers[2]"),
+                ValidationMessage.Error("The value of the Number field is not allowed.", "Numbers[0]"),
+                ValidationMessage.Error("The value of the Number field is not allowed.", "Numbers[2]"),
                 ValidationMessage.Error("Emails must be specified.", "Emails[1]"));
     }
 }
