@@ -5,7 +5,7 @@ namespace Data_annotations.Attributes.Items_specs;
 public class Validates
 {
     [Test]
-    public void itmes_according_to_wrapped_attribute()
+    public void items_according_to_wrapped_attribute()
     {
         var model = new Data_Annotations.Model.With.ValidatableArrayItems 
         {
