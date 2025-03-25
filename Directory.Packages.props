@@ -7,12 +7,12 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="AsyncFixer" Version="*" />
+    <PackageVersion Include="AwesomeAssertions" Version="8.0.2" />
+    <PackageVersion Include="AwesomeAssertions.Analyzers" Version="0.34.2" />
     <PackageVersion Include="BenchmarkDotNet" Version="0.14.0" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="DotNetProjectFile.Analyzers" Version="*" />
     <PackageVersion Include="DotNetProjectFile.Analyzers.Sdk" Version="*" />
-    <PackageVersion Include="FluentAssertions" Version="7.0.0" />
-    <PackageVersion Include="FluentAssertions.Analyzers" Version="*" />
     <PackageVersion Include="FluentValidation" Version="11.11.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="*" />
     <PackageVersion Include="Microsoft.CSharp" Version="4.7.0" />
@@ -23,10 +23,10 @@
     <PackageVersion Include="NUnit.Analyzers" Version="*" />
     <PackageVersion Include="NUnit3TestAdapter" Version="*" />
     <PackageVersion Include="PolySharp" Version="1.15.0" />
-    <PackageVersion Include="Qowaiv" Version="7.2.1" />
+    <PackageVersion Include="Qowaiv" Version="7.2.3" />
     <PackageVersion Include="Qowaiv.Analyzers.CSharp" Version="*" />
     <PackageVersion Include="Qowaiv.Diagnostics.Contracts" Version="2.0.5" />
-    <PackageVersion Include="Qowaiv.TestTools" Version="7.2.0" />
+    <PackageVersion Include="Qowaiv.TestTools" Version="8.0.0" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="*" />
     <PackageVersion Include="StyleCop.Analyzers" Version="*-*" />
     <PackageVersion Include="System.ComponentModel.Annotations" Version="5.0.0" />
