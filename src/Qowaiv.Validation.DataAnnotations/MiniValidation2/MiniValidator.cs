@@ -424,11 +424,11 @@ public static class MiniValidator
         if (recurse && currentDepth <= MaxDepth)
         {
             // Validate IEnumerable
-            if (target is IEnumerable)
+            if (target is IEnumerable targets)
             {
                 RuntimeHelpers.EnsureSufficientExecutionStack();
 
-                var validateTask = TryValidateEnumerable(target, serviceProvider, recurse, allowAsync, workingErrors, validatedObjects, validationResults, prefix, currentDepth);
+                var validateTask = TryValidateEnumerable(targets, serviceProvider, recurse, allowAsync, workingErrors, validatedObjects, validationResults, prefix, currentDepth);
 
                 try
                 {
@@ -456,11 +456,11 @@ public static class MiniValidator
                     {
                         RuntimeHelpers.EnsureSufficientExecutionStack();
 
-                        if (propertyDetails.IsEnumerable)
+                        if (propertyValue is IEnumerable enumerable)
                         {
                             var thePrefix = $"{prefix}{propertyDetails.Name}";
 
-                            var validateTask = TryValidateEnumerable(propertyValue, serviceProvider, recurse, allowAsync, workingErrors, validatedObjects, validationResults, thePrefix, currentDepth);
+                            var validateTask = TryValidateEnumerable(enumerable, serviceProvider, recurse, allowAsync, workingErrors, validatedObjects, validationResults, thePrefix, currentDepth);
                             try
                             {
                                 ThrowIfAsyncNotAllowed(validateTask.IsCompleted, allowAsync);
@@ -556,7 +556,7 @@ public static class MiniValidator
 #else
     private static async Task<bool> TryValidateEnumerable(
 #endif
-        object target,
+        IEnumerable items,
         IServiceProvider? serviceProvider,
         bool recurse,
         bool allowAsync,
@@ -567,39 +567,36 @@ public static class MiniValidator
         int currentDepth = 0)
     {
         var isValid = true;
-        if (target is IEnumerable items)
+        // Validate each instance in the collection
+        var index = 0;
+        foreach (var item in items)
         {
-            // Validate each instance in the collection
-            var index = 0;
-            foreach (var item in items)
+            if (item is null)
             {
-                if (item is null)
-                {
-                    continue;
-                }
-
-                var itemPrefix = $"{prefix}[{index}].";
-
-                var validateTask = TryValidateImpl(item, serviceProvider, recurse, allowAsync, workingErrors, validatedObjects, validationResults, itemPrefix, currentDepth + 1);
-                try
-                {
-                    ThrowIfAsyncNotAllowed(validateTask.IsCompleted, allowAsync);
-                }
-                catch (Exception)
-                {
-                    // Always observe the ValueTask
-                    _ = await validateTask.ConfigureAwait(false);
-                    throw;
-                }
-
-                isValid = await validateTask.ConfigureAwait(false);
-
-                if (!isValid)
-                {
-                    break;
-                }
-                index++;
+                continue;
             }
+
+            var itemPrefix = $"{prefix}[{index}].";
+
+            var validateTask = TryValidateImpl(item, serviceProvider, recurse, allowAsync, workingErrors, validatedObjects, validationResults, itemPrefix, currentDepth + 1);
+            try
+            {
+                ThrowIfAsyncNotAllowed(validateTask.IsCompleted, allowAsync);
+            }
+            catch (Exception)
+            {
+                // Always observe the ValueTask
+                _ = await validateTask.ConfigureAwait(false);
+                throw;
+            }
+
+            isValid = await validateTask.ConfigureAwait(false);
+
+            if (!isValid)
+            {
+                break;
+            }
+            index++;
         }
         return isValid;
     }
