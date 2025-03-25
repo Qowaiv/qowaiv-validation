@@ -22,7 +22,12 @@ v4.0.0
 - Support requiredness via the required modifier.
 - Introduction of [SkipValidation] to explictly skip validation of types and properties.
 - Reduce size of AnnotatedModel and AnnotatedModelStore.
-- Update to Qowaiv v7.2.1. #88
+- Update to Qowaiv v7.2.1.
+- Drop of [AllowedValues] in favor of [Allowed<TValue>]. (BREAKING)
+- Drop of [DefinedEnumValues] in favor of [DefinedOnly<TEnum>]. (BREAKING)
+- Drop of [ForbiddenValues] in favor of [Forbidden<TValue>]. (BREAKING)
+- Drop of [NestedModel]. (BREAKING)
+- Drop of [SetOfValues] in favor of [SetOf<TValue>]. (BREAKING)
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
