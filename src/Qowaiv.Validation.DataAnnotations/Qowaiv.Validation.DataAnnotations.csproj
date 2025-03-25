@@ -29,6 +29,7 @@ v4.0.0
 - Drop of [ForbiddenValues] in favor of [Forbidden<TValue>]. (BREAKING)
 - Drop of [NestedModel]. (BREAKING)
 - Drop of [SetOfValues] in favor of [SetOf<TValue>]. (BREAKING)
+- Update to Qowaiv v7.2.1. #88
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

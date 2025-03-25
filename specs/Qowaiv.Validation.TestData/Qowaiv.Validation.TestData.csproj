@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Qowaiv.Validation.DataAnnotations/Qowaiv.Validation.DataAnnotations.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Validation.Fluent/Qowaiv.Validation.Fluent.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Validation.Guarding/Qowaiv.Validation.Guarding.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Validation.Messages/Qowaiv.Validation.Messages.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Validation.Xml/Qowaiv.Validation.Xml.csproj" />
+  </ItemGroup>
+
+</Project>
