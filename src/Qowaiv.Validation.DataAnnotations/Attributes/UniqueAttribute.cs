@@ -6,7 +6,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 public sealed class UniqueAttribute<TValue> : ValidationAttribute
 {
     /// <summary>Initializes a new instance of the <see cref="UniqueAttribute{TValue}"/> class.</summary>
-    public UniqueAttribute() : this(null) => Do.Nothing();
+    public UniqueAttribute() : this(null) { }
 
     /// <summary>Initializes a new instance of the <see cref="UniqueAttribute{TValue}"/> class.</summary>
     /// <remarks>

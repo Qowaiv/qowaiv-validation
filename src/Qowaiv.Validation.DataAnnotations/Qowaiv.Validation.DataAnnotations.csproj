@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/package.props" />
 
@@ -98,7 +98,6 @@ v0.0.4
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="../../shared/Do.cs" Link="Do.cs" />
     <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
   </ItemGroup>
 

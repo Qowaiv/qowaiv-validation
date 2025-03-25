@@ -7,7 +7,7 @@ namespace Qowaiv.Validation.Fluent;
 public class ModelValidator<TModel> : AbstractValidator<TModel>, Abstractions.IValidator<TModel>
 {
     /// <summary>Initializes a new instance of the <see cref="ModelValidator{TModel}"/> class.</summary>
-    protected ModelValidator() => Do.Nothing();
+    protected ModelValidator() { }
 
     /// <inheritdoc />
     [Pure]

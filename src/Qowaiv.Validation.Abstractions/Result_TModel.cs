@@ -4,7 +4,7 @@ namespace Qowaiv.Validation.Abstractions;
 public sealed class Result<TModel> : Result
 {
     /// <summary>Initializes a new instance of the <see cref="Result{T}"/> class.</summary>
-    internal Result(FixedMessages messages) : base(messages) => Do.Nothing();
+    internal Result(FixedMessages messages) : base(messages) { }
 
     /// <summary>Initializes a new instance of the <see cref="Result{T}"/> class.</summary>
     /// <param name="value">

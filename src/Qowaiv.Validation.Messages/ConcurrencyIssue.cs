@@ -5,13 +5,13 @@ namespace Qowaiv.Validation.Messages;
 public class ConcurrencyIssue : InvalidOperationException, IValidationMessage
 {
     /// <summary>Initializes a new instance of the <see cref="ConcurrencyIssue"/> class.</summary>
-    public ConcurrencyIssue() : base(ValidationMessages.ConcurrencyIssue) => Do.Nothing();
+    public ConcurrencyIssue() : base(ValidationMessages.ConcurrencyIssue) { }
 
     /// <summary>Initializes a new instance of the <see cref="ConcurrencyIssue"/> class.</summary>
-    public ConcurrencyIssue(string message) : base(message) => Do.Nothing();
+    public ConcurrencyIssue(string message) : base(message) { }
 
     /// <summary>Initializes a new instance of the <see cref="ConcurrencyIssue"/> class.</summary>
-    public ConcurrencyIssue(string message, Exception innerException) : base(message, innerException) => Do.Nothing();
+    public ConcurrencyIssue(string message, Exception innerException) : base(message, innerException) { }
 
     /// <inheritdoc />
     public ValidationSeverity Severity => ValidationSeverity.Error;

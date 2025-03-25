@@ -42,7 +42,6 @@ v0.0.4
   </PropertyGroup>
  
   <ItemGroup>
-    <Compile Include="../../shared/Do.cs" Link="Do.cs" />
     <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
   </ItemGroup>
 

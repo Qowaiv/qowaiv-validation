@@ -13,7 +13,7 @@ public class DefinedOnlyAttribute<TEnum> : ValidationAttribute
 {
     /// <summary>Initializes a new instance of the <see cref="DefinedOnlyAttribute{TEnum}"/> class.</summary>
     public DefinedOnlyAttribute()
-        : base(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError) => Do.Nothing();
+        : base(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError) { }
 
     /// <summary>If false, combinations of defined single values, that are not defined explicitly themselves, are allowed for flag enums.</summary>
     /// <remarks>

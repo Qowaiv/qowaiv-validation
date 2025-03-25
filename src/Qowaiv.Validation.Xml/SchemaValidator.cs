@@ -12,13 +12,13 @@ public class SchemaValidator<TModel> : IValidator<TModel>
     /// <param name="stream">
     /// A stream representing an <see cref="XmlSchema"/>.
     /// </param>
-    public SchemaValidator(Stream stream) : this(stream.AsXmlSchema()) => Do.Nothing();
+    public SchemaValidator(Stream stream) : this(stream.AsXmlSchema()) { }
 
     /// <summary>Initializes a new instance of the <see cref="SchemaValidator{TModel}"/> class.</summary>
     /// <param name="schema">
     /// The main of <see cref="XmlSchema"/>'.
     /// </param>
-    public SchemaValidator(XmlSchema schema) : this(new XmlSchemaSet().Append(schema)) => Do.Nothing();
+    public SchemaValidator(XmlSchema schema) : this(new XmlSchemaSet().Append(schema)) { }
 
     /// <summary>Initializes a new instance of the <see cref="SchemaValidator{TModel}"/> class.</summary>
     /// <param name="schemas">
