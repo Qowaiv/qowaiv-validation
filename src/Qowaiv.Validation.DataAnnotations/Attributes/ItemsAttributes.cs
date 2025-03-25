@@ -4,7 +4,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 /// <typeparam name="TValidator">
 /// The validator to validate the items with.
 /// </typeparam>
-[AttributeUsage(AttributeTargets.Property|AttributeTargets.Field|AttributeTargets.Parameter, AllowMultiple = true, Inherited = false)]
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = true, Inherited = false)]
 [CLSCompliant(false)]
 public class ItemsAttribute<TValidator> : ValidationAttribute
     where TValidator : ValidationAttribute
@@ -87,7 +87,7 @@ public class ItemsAttribute<TValidator> : ValidationAttribute
                 return Activator.CreateInstance<TValidator>();
             }
 
-            // if there are multiple ctors with 
+            // if there are multiple ctors with arguments.
             var ctor = typeof(TValidator).GetConstructors().Single(c => c.GetParameters().Length > 0);
             var input = new List<object>();
             var i = 0;
