@@ -1,4 +1,5 @@
 using Qowaiv.IO;
+using System.IO;
 
 namespace Qowaiv.Validation.DataAnnotations;
 
@@ -7,6 +8,10 @@ public static partial class Size
 {
     /// <summary>Specifies the maximum the length of property, field or parameter.</summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+    [Validates(typeof(Stream))]
+    [Validates(typeof(ICollection<byte>))]
+    [Validates(typeof(IReadOnlyCollection<byte>))]
+    [Validates("System.BinaryData")]
     public sealed class AtMostAttribute(long maximum)
         : ValidationAttribute(() => QowaivValidationMessages.Size_AtMost_ValidationError)
     {

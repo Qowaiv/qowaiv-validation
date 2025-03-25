@@ -4,6 +4,13 @@ namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Specifies that a field is a multiple of a factor.</summary>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+[Validates(typeof(float))]
+[Validates(typeof(double))]
+[Validates(typeof(decimal))]
+[Validates(typeof(Amount))]
+[Validates(typeof(Money))]
+[Validates(typeof(Percentage))]
+[Validates(typeof(IConvertible))]
 public sealed class MultipleOfAttribute : ValidationAttribute
 {
     /// <summary>Initializes a new instance of the <see cref="MultipleOfAttribute"/> class.</summary>
@@ -28,19 +35,18 @@ public sealed class MultipleOfAttribute : ValidationAttribute
 
     /// <inheritdoc />
     [Pure]
-    public override bool IsValid(object? value)
-        => value is null
-        || value switch
-        {
-            float flt => IsValid(flt),
-            double dbl => IsValid(dbl),
-            decimal dec => IsValid(dec),
-            Amount amount => IsValid((decimal)amount),
-            Money money => IsValid((decimal)money.Amount),
-            Percentage percentage => IsValid(100 * (decimal)percentage),
-            IConvertible convertible => IsValid(convertible),
-            _ => false,
-        };
+    public override bool IsValid(object? value) => value switch
+    {
+        null => true,
+        float flt => IsValid(flt),
+        double dbl => IsValid(dbl),
+        decimal dec => IsValid(dec),
+        Amount amount => IsValid((decimal)amount),
+        Money money => IsValid((decimal)money.Amount),
+        Percentage percentage => IsValid(100 * (decimal)percentage),
+        IConvertible convertible => IsValid(convertible),
+        _ => throw UnsupportedType.ForAttribute<MultipleOfAttribute>(value.GetType()),
+    };
 
     [Pure]
     private bool IsValid(decimal value) => value % Factor == 0;

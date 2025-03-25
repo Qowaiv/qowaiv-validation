@@ -4,6 +4,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Specifies that a field is mandatory (for value types the default value is not allowed).</summary>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+[Validates(typeof(object))]
 public sealed class MandatoryAttribute : RequiredAttribute
 {
     /// <summary>Initializes a new instance of the <see cref="MandatoryAttribute"/> class.</summary>
@@ -21,9 +22,9 @@ public sealed class MandatoryAttribute : RequiredAttribute
 
     /// <inheritdoc />
     [Pure]
-    protected override ValidationResult IsValid(object? value, ValidationContext validationContext)
+    protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         => IsValid(value, GetMemberType(Guard.NotNull(validationContext)))
-        ? ValidationResult.Success!
+        ? null
         : ValidationMessage.Error(FormatErrorMessage(validationContext.DisplayName), validationContext.MemberNames());
 
     /// <summary>Gets the type of the field/property.</summary>

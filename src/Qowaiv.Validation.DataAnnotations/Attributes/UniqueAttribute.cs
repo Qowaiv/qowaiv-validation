@@ -2,6 +2,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Specifies that all values are distinct.</summary>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+[Validates(GenericArgument = true)]
 public sealed class UniqueAttribute<TValue> : ValidationAttribute
 {
     /// <summary>Initializes a new instance of the <see cref="UniqueAttribute{TValue}"/> class.</summary>
