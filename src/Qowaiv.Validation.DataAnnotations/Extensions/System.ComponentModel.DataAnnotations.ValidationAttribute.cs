@@ -1,4 +1,4 @@
-using System.Reflection;
+using Qowaiv.Validation.DataAnnotations.Reflection;
 
 namespace System.ComponentModel.DataAnnotations;
 
@@ -10,20 +10,11 @@ public static class QowaivValidationAttributeExtensions
     /// The original function messes up with <see cref="ValidationMessage.None"/>, as it has no error message.
     /// </remarks>
     [Pure]
-    public static ValidationMessage GetValidationMessage(this ValidationAttribute attribute, object? value, ValidationContext validationContext)
+    public static ValidationMessage? GetValidationMessage(this ValidationAttribute attribute, object? value, ValidationContext validationContext)
     {
         Guard.NotNull(attribute);
 
-        var result = IsValid.Invoke(attribute, [value, validationContext])!;
-        return ValidationMessage.For((ValidationResult)result);
+        var result = NonPublic.ValidationAttribute.IsValid.Invoke(attribute, [value, validationContext]);
+        return ValidationMessage.For(result as ValidationResult);
     }
-
-    /// <summary>Access to the protected <see cref="ValidationAttribute.IsValid(object, ValidationContext)"/>.</summary>
-    private static readonly MethodInfo IsValid = typeof(ValidationAttribute).GetMethod(nameof(IsValid), IsValidBindings)!;
-
-#pragma warning disable S3011 // Reflection should not be used to increase accessibility of classes, methods, or fields
-    // To access the protected <see cref="ValidationAttribute.IsValid(object, ValidationContext)"/>
-    // We - unfortunately - have to use reflection.
-    private const BindingFlags IsValidBindings = BindingFlags.Instance | BindingFlags.NonPublic;
-#pragma warning restore S3011 // Reflection should not be used to increase accessibility of classes, methods, or fields
 }

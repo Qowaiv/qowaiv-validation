@@ -45,7 +45,7 @@ public class ValidationMessage : ValidationResult, IValidationMessage
     /// The validation result to convert.
     /// </param>
     [Pure]
-    public static ValidationMessage? For(ValidationResult validationResult) => validationResult switch
+    public static ValidationMessage? For(ValidationResult? validationResult) => validationResult switch
     {
         ValidationMessage message => message,
         null => None,

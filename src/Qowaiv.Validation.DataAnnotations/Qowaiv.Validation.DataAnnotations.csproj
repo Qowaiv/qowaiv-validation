@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/package.props" />
 
@@ -15,6 +15,13 @@ v4.0.0
 - Introduction of [Items<TValidator>] to define a validator on the items of a collection.
 - Introduction of [SkipValidation] to explictly skip validation of types and properties.
 - Qowaiv.Validation.DataAnnotations.ValidationMessage.None returns null. (BREAKING)
+- Refactor annotations resolving.
+- Marked AnnotatedModel as obsolete.
+- Marked AnnotatedProperty as obsolete.
+- Marked AnnotatedValidator as obsolete.
+- Support requiredness via the required modifier.
+- Introduction of [SkipValidation] to explictly skip validation of types and properties.
+- Reduce size of AnnotatedModel and AnnotatedModelStore.
 - Update to Qowaiv v7.2.1. #88
 ]]>
     </ToBeReleased>
