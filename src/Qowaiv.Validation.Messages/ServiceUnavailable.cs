@@ -5,13 +5,13 @@ namespace Qowaiv.Validation.Messages;
 public class ServiceUnavailable : Exception, IValidationMessage
 {
     /// <summary>Initializes a new instance of the <see cref="ServiceUnavailable"/> class.</summary>
-    public ServiceUnavailable() : this(ValidationMessages.ServiceUnavailable) => Do.Nothing();
+    public ServiceUnavailable() : this(ValidationMessages.ServiceUnavailable) { }
 
     /// <summary>Initializes a new instance of the <see cref="ServiceUnavailable"/> class.</summary>
-    public ServiceUnavailable(string message) : base(message) => Do.Nothing();
+    public ServiceUnavailable(string message) : base(message) { }
 
     /// <summary>Initializes a new instance of the <see cref="ServiceUnavailable"/> class.</summary>
-    public ServiceUnavailable(string message, Exception innerException) : base(message, innerException) => Do.Nothing();
+    public ServiceUnavailable(string message, Exception innerException) : base(message, innerException) { }
 
     /// <inheritdoc />
     public ValidationSeverity Severity => ValidationSeverity.Error;

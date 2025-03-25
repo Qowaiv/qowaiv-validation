@@ -5,13 +5,13 @@ namespace Qowaiv.Validation.Messages;
 public class AccessDenied : SecurityException, IValidationMessage
 {
     /// <summary>Initializes a new instance of the <see cref="AccessDenied"/> class.</summary>
-    public AccessDenied() : this(ValidationMessages.AccessDenied) => Do.Nothing();
+    public AccessDenied() : this(ValidationMessages.AccessDenied) { }
 
     /// <summary>Initializes a new instance of the <see cref="AccessDenied"/> class.</summary>
-    public AccessDenied(string message) : base(message) => Do.Nothing();
+    public AccessDenied(string message) : base(message) { }
 
     /// <summary>Initializes a new instance of the <see cref="AccessDenied"/> class.</summary>
-    public AccessDenied(string message, Exception inner) : base(message, inner) => Do.Nothing();
+    public AccessDenied(string message, Exception inner) : base(message, inner) { }
 
     /// <summary>Initializes a new instance of the <see cref="AccessDenied"/> class.</summary>
     /// <param name="message">
@@ -20,7 +20,7 @@ public class AccessDenied : SecurityException, IValidationMessage
     /// <param name="type">
     /// The type of the permission that caused the exception to be thrown.
     /// </param>
-    public AccessDenied(string message, Type type) : base(message, type) => Do.Nothing();
+    public AccessDenied(string message, Type type) : base(message, type) { }
 
     /// <summary>Initializes a new instance of the <see cref="AccessDenied"/> class.</summary>
     /// <param name="message">
@@ -32,7 +32,7 @@ public class AccessDenied : SecurityException, IValidationMessage
     /// <param name="state">
     /// The state of the permission that caused the exception to be thrown.
     /// </param>
-    public AccessDenied(string message, Type type, string state) : base(message, type, state) => Do.Nothing();
+    public AccessDenied(string message, Type type, string state) : base(message, type, state) { }
 
     /// <inheritdoc />
     public ValidationSeverity Severity => ValidationSeverity.Error;

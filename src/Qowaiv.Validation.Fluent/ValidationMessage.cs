@@ -6,7 +6,7 @@ public class ValidationMessage : ValidationFailure, IValidationMessage
 {
     /// <summary>Initializes a new instance of the <see cref="ValidationMessage"/> class.</summary>
     protected ValidationMessage(string propertyName, string errorMessage)
-        : base(propertyName, errorMessage) => Do.Nothing();
+        : base(propertyName, errorMessage) { }
 
     /// <inheritdoc />
     [Pure]

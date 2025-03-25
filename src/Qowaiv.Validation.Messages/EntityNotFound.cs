@@ -5,13 +5,13 @@ namespace Qowaiv.Validation.Messages;
 public class EntityNotFound : InvalidOperationException, IValidationMessage
 {
     /// <summary>Initializes a new instance of the <see cref="EntityNotFound"/> class.</summary>
-    public EntityNotFound() : this(ValidationMessages.EntityNotFound) => Do.Nothing();
+    public EntityNotFound() : this(ValidationMessages.EntityNotFound) { }
 
     /// <summary>Initializes a new instance of the <see cref="EntityNotFound"/> class.</summary>
-    public EntityNotFound(string message) : base(message) => Do.Nothing();
+    public EntityNotFound(string message) : base(message) { }
 
     /// <summary>Initializes a new instance of the <see cref="EntityNotFound"/> class.</summary>
-    public EntityNotFound(string message, Exception innerException) : base(message, innerException) => Do.Nothing();
+    public EntityNotFound(string message, Exception innerException) : base(message, innerException) { }
 
     /// <inheritdoc />
     public ValidationSeverity Severity => ValidationSeverity.Error;

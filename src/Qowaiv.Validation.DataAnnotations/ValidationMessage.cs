@@ -50,7 +50,7 @@ public class ValidationMessage : ValidationResult, IValidationMessage
         ValidationMessage message => message,
         null => None,
         var r when r == Success => None,
-        _ => Error(validationResult.ErrorMessage, validationResult.MemberNames.ToArray()),
+        _ => Error(validationResult.ErrorMessage, [.. validationResult.MemberNames]),
     };
 
     /// <summary>Creates a validation message.</summary>

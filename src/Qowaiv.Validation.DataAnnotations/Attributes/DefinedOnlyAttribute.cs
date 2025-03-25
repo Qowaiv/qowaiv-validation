@@ -13,7 +13,7 @@ public class DefinedOnlyAttribute<TEnum> : ValidationAttribute
 {
     /// <summary>Initializes a new instance of the <see cref="DefinedOnlyAttribute{TEnum}"/> class.</summary>
     public DefinedOnlyAttribute()
-        : base(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError) => Do.Nothing();
+        : base(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError) { }
 
     /// <summary>If false, combinations of defined single values, that are not defined explicitly themselves, are allowed for flag enums.</summary>
     /// <remarks>
@@ -27,35 +27,39 @@ public class DefinedOnlyAttribute<TEnum> : ValidationAttribute
     /// If the type of the value is not an enum.
     /// </exception>
     [Pure]
-    public override bool IsValid(object? value)
+    public override bool IsValid(object? value) => value switch
     {
-        // Might be a nullable enum, we just don't know.
-        if (value is null)
-        {
-            return true;
-        }
-        else
-        {
-            var val = (TEnum)value;
-
-            if (!OnlyAllowDefinedFlagsCombinations && AllFlags is { } all)
-            {
-                return all.HasFlag(val);
-            }
-            else
-            {
-                return Enum.IsDefined(typeof(TEnum), val);
-            }
-        }
-    }
+        null => true,
+        TEnum val => !OnlyAllowDefinedFlagsCombinations && AllFlags is { } all
+            ? all.HasFlag(val)
+            : EnumIsDefined(val),
+        _ => throw UnsupportedType.ForAttribute<DefinedOnlyAttribute<TEnum>>(value.GetType()),
+    };
 
     private static readonly TEnum? AllFlags = GetAllFlags();
 
     [Pure]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static TEnum? GetAllFlags()
         => typeof(TEnum).GetCustomAttributes<FlagsAttribute>().Any()
-        ? Enum.GetValues(typeof(TEnum))
-            .Cast<dynamic>()
-            .Aggregate((e1, e2) => e1 | e2)
+        ? GetEnumValues().Cast<dynamic>().Aggregate((e1, e2) => e1 | e2)
         : null;
+
+    [Pure]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static bool EnumIsDefined(TEnum val)
+#if NETSTANDARD2_0
+        => Enum.IsDefined(typeof(TEnum), val);
+#else
+        => Enum.IsDefined(val);
+#endif
+
+    [Pure]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static TEnum[] GetEnumValues()
+#if NETSTANDARD2_0
+        => [.. Enum.GetValues(typeof(TEnum)).Cast<TEnum>()];
+#else
+        => Enum.GetValues<TEnum>();
+#endif
 }

@@ -5,7 +5,7 @@ namespace Qowaiv.Validation.Abstractions;
 public sealed class ValidationMessage : IValidationMessage, IEquatable<ValidationMessage>
 {
     /// <summary>Initializes a new instance of the <see cref="ValidationMessage"/> class.</summary>
-    public ValidationMessage() : this(ValidationSeverity.None, null, null) => Do.Nothing();
+    public ValidationMessage() : this(ValidationSeverity.None, null, null) { }
 
     /// <summary>Initializes a new instance of the <see cref="ValidationMessage"/> class.</summary>
     internal ValidationMessage(ValidationSeverity severity, string? message, string? propertyName)

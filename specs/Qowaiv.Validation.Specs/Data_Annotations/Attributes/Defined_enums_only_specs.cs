@@ -10,7 +10,7 @@ public class Does_not_allow
         public void validation_on_non_enum_values()
         {
             Func<bool> validate = () => new DefinedOnlyAttribute<Number>().IsValid("value");
-            validate.Should().Throw<InvalidCastException>();
+            validate.Should().Throw<UnsupportedType>();
         }
     }
 }
@@ -37,11 +37,6 @@ public class Is_valid_for
         [Test]
         public void not_defined_mix_of_defined_enum_flag_values()
             => new DefinedOnlyAttribute<Banners>().IsValid(Banners.UnionJack | Banners.StarsAndStripes).Should().BeTrue();
-
-        [TestCase(1)]
-        [TestCase(Banners.UnionJack)]
-        public void castable_values(object value)
-            => new DefinedOnlyAttribute<Number>().IsValid(value).Should().BeTrue();
     }
 }
 
@@ -55,7 +50,8 @@ public class Is_not_valid_for
 
         [Test]
         public void not_defined_enum_flag_value()
-            => new DefinedOnlyAttribute<Number>().IsValid((Banners)42).Should().BeFalse();
+            => ((Banners)42).Invoking(v => new DefinedOnlyAttribute<Number>().IsValid(v))
+            .Should().Throw<UnsupportedType>();
 
         [Test]
         public void not_defined_mix_of_defined_enum_flag_values_when_defined_flag_combinations_are_required()

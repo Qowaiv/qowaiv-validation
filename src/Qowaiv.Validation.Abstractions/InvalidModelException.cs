@@ -5,20 +5,20 @@ namespace Qowaiv.Validation.Abstractions;
 public class InvalidModelException : InvalidOperationException
 {
     /// <summary>Initializes a new instance of the <see cref="InvalidModelException"/> class.</summary>
-    public InvalidModelException() => Do.Nothing();
+    public InvalidModelException() { }
 
     /// <summary>Initializes a new instance of the <see cref="InvalidModelException"/> class.</summary>
     public InvalidModelException(string? message)
-        : base(message) => Do.Nothing();
+        : base(message) { }
 
     /// <summary>Initializes a new instance of the <see cref="InvalidModelException"/> class.</summary>
     public InvalidModelException(string? message, Exception? innerException)
-        : base(message, innerException) => Do.Nothing();
+        : base(message, innerException) { }
 
     /// <summary>Initializes a new instance of the <see cref="InvalidModelException"/> class.</summary>
     public InvalidModelException(string? message, Exception? innerException, IEnumerable<IValidationMessage> messages)
         : this(message, innerException)
-        => Errors = new ReadOnlyCollection<IValidationMessage>(Filter(messages).ToArray());
+        => Errors = new ReadOnlyCollection<IValidationMessage>([.. Filter(messages)]);
 
     /// <summary>The related validation error(s).</summary>
     public IReadOnlyList<IValidationMessage> Errors { get; } = [];

@@ -2,13 +2,10 @@ namespace Qowaiv.Validation.Abstractions.Diagnostics;
 
 /// <summary>Allows the debugger to display collections.</summary>
 [ExcludeFromCodeCoverage]
-internal sealed class CollectionDebugView
+internal sealed class CollectionDebugView<T>(IEnumerable<T> enumeration)
 {
-    /// <summary>Initializes a new instance of the <see cref="CollectionDebugView"/> class.</summary>
-    public CollectionDebugView(IEnumerable enumeration) => _enumeration = enumeration;
-
     /// <summary>A reference to the enumeration to display.</summary>
-    private readonly IEnumerable _enumeration;
+    private readonly IEnumerable<T> _enumeration = enumeration;
 
     /// <summary>The array that is shown by the debugger.</summary>
     /// <remarks>
@@ -18,6 +15,5 @@ internal sealed class CollectionDebugView
     [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
 #pragma warning disable S2365 // Properties should not make collection or array copies
     // The only way to get the behavior while debugging.
-    public object[] Items => _enumeration.Cast<object>().ToArray();
-#pragma warning restore S2365 // Properties should not make collection or array copies
+    public T[] Items => [.. _enumeration];
 }

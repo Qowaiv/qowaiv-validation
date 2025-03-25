@@ -1,12 +1,9 @@
 namespace Qowaiv.Validation.TestTools;
 
 /// <summary>Implements <see cref="IValidator{TModel}"/> using <see cref="FluentValidation.IValidator{T}"/>.</summary>
-internal sealed class WrapperValidator<TModel> : IValidator<TModel>
+internal sealed class WrapperValidator<TModel>(FluentValidation.IValidator<TModel> validator) : IValidator<TModel>
 {
-    private readonly FluentValidation.IValidator<TModel> _validator;
-
-    /// <summary>Initializes a new instance of the <see cref="WrapperValidator{TModel}"/> class.</summary>
-    public WrapperValidator(FluentValidation.IValidator<TModel> validator) => _validator = validator;
+    private readonly FluentValidation.IValidator<TModel> _validator = validator;
 
     /// <inheritdoc />
     [Pure]
