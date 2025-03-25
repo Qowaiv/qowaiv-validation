@@ -10,6 +10,6 @@ public class All
         .Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(ValidationAttribute)));
 
     [TestCaseSource(nameof(Attributes))]
-    public void are_decorated_with_ValidatesAttribute(Type attrribute)
-        => attrribute.Should().BeDecoratedWith<ValidatesAttribute>();
+    public void are_decorated_with_ValidatesAttribute(Type attribute)
+        => attribute.Should().BeDecoratedWith<ValidatesAttribute>();
 }

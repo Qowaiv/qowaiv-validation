@@ -37,7 +37,7 @@ public class Is_invalid_for
     [TestCase(128L)]
     [TestCase(1024UL)]
     public void non_floating_points(object value)
-       => value.Invoking(_ => new IsFiniteAttribute().IsValid(value))
+        => value.Invoking(_ => new IsFiniteAttribute().IsValid(value))
         .Should().Throw<UnsupportedType>();
 }
 public class With_message
