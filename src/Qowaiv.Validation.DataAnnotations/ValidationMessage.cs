@@ -30,14 +30,29 @@ public class ValidationMessage : ValidationResult, IValidationMessage
 
     /// <summary>Creates an error message.</summary>
     [Pure]
+    public static ValidationMessage Error(string? message, params string[] memberNames) => new(ValidationSeverity.Error, message, memberNames);
+
+    /// <summary>Creates an error message.</summary>
+    [Pure]
+    [OverloadResolutionPriority(1)]
     public static ValidationMessage Error(string? message, params IEnumerable<string> memberNames) => new(ValidationSeverity.Error, message, memberNames);
 
     /// <summary>Creates a warning message.</summary>
     [Pure]
+    public static ValidationMessage Warn(string? message, params string[] memberNames) => new(ValidationSeverity.Warning, message, memberNames);
+
+    /// <summary>Creates a warning message.</summary>
+    [Pure]
+    [OverloadResolutionPriority(1)]
     public static ValidationMessage Warn(string? message, params IEnumerable<string> memberNames) => new(ValidationSeverity.Warning, message, memberNames);
 
     /// <summary>Creates an info message.</summary>
     [Pure]
+    public static ValidationMessage Info(string? message, params string[] memberNames) => new(ValidationSeverity.Info, message, memberNames);
+
+    /// <summary>Creates an info message.</summary>
+    [Pure]
+    [OverloadResolutionPriority(1)]
     public static ValidationMessage Info(string? message, params IEnumerable<string> memberNames) => new(ValidationSeverity.Info, message, memberNames);
 
     /// <summary>Creates a validation message for a validation result.</summary>
