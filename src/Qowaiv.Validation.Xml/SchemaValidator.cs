@@ -1,3 +1,5 @@
+using System.IO;
+
 namespace Qowaiv.Validation.Xml;
 
 /// <summary>Implements <see cref="IValidator{TModel}"/> using <see cref="XmlSchema"/>'s.</summary>
