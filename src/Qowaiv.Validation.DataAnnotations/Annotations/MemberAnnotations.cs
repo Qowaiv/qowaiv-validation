@@ -2,9 +2,9 @@ namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Represents annotations of a member.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-internal readonly struct MemberAnnotations
+internal sealed class MemberAnnotations
 {
-    /// <summary>Initializes a new instance of the <see cref="MemberAnnotations"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="MemberAnnotations"/> class.</summary>
     internal MemberAnnotations(
         string name,
         DisplayAttribute? display,

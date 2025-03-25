@@ -4,14 +4,13 @@ namespace MiniValidation2;
 
 internal class TypeDetailsCache
 {
-    private static readonly PropertyDetails[] _emptyPropertyDetails = Array.Empty<PropertyDetails>();
-    private readonly ConcurrentDictionary<Type, (PropertyDetails[] Properties, bool RequiresAsync)> _cache = new();
+    private readonly ConcurrentDictionary<Type, TypeDetails> _cache = new();
 
-    public (PropertyDetails[] Properties, bool RequiresAsync) Get(Type? type)
+    public TypeDetails Get(Type? type)
     {
         if (type is null)
         {
-            return (_emptyPropertyDetails, false);
+            return TypeDetails.Empty;
         }
 
         if (!_cache.ContainsKey(type))
@@ -43,7 +42,7 @@ internal class TypeDetailsCache
 
         if (DoNotRecurseIntoPropertiesOf(type))
         {
-            _cache[type] = (_emptyPropertyDetails, false);
+            _cache[type] = TypeDetails.Empty;
             return;
         }
 
@@ -136,7 +135,7 @@ internal class TypeDetailsCache
             }
         }
 
-        _cache[type] = (propertiesToValidate?.ToArray() ?? _emptyPropertyDetails, requiresAsync);
+        _cache[type] = new(propertiesToValidate?.ToArray() ?? [], requiresAsync);
     }
 
     private static bool DoNotRecurseIntoPropertiesOf(Type type) =>

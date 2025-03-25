@@ -366,9 +366,8 @@ public static class MiniValidator
         }
 
         // Once we get to this point we have to box the target in order to track whether we've validated it or not
-        if (validatedObjects.ContainsKey(target))
+        if (validatedObjects.TryGetValue(target, out var result))
         {
-            var result = validatedObjects[target];
             // If there's a null result it means this object is the one currently being validated
             // so just skip this reference to it by returning true. If there is a result it means
             // we already validated this object as part of this validation operation.
@@ -376,7 +375,7 @@ public static class MiniValidator
         }
 
         // Add current target to tracking dictionary in null (validating) state
-        validatedObjects.Add(target, null);
+        validatedObjects[target] = null;
 
         var targetType = target.GetType();
         var (typeProperties, _) = _typeDetailsCache.Get(targetType);
