@@ -6,6 +6,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 /// </typeparam>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = true, Inherited = false)]
 [CLSCompliant(false)]
+[Validates(typeof(IEnumerable))]
 public class ItemsAttribute<TValidator> : ValidationAttribute
     where TValidator : ValidationAttribute
 {

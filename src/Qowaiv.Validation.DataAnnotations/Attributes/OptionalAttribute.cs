@@ -6,6 +6,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 /// See: https://en.wikipedia.org/wiki/Null_object_pattern.
 /// </remarks>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
+[Validates(typeof(object))]
 public sealed class OptionalAttribute : RequiredAttribute
 {
     /// <summary>Gets a (singleton) <see cref="OptionalAttribute"/>.</summary>

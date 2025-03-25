@@ -5,6 +5,7 @@ public static partial class Collection
 {
     /// <summary>Specifies the minimum the length of property, field or parameter.</summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+    [Validates(typeof(object))]
     public sealed class AtLeastAttribute(long minimum)
         : ValidationAttribute(() => QowaivValidationMessages.Collection_AtLeast_ValidationError)
     {

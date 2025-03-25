@@ -5,6 +5,7 @@ public static partial class Collection
 {
     /// <summary>Specifies the maximum the length of property, field or parameter.</summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+    [Validates(typeof(object))]
     public sealed class AtMostAttribute(long maximum)
         : ValidationAttribute(() => QowaivValidationMessages.Collection_AtMost_ValidationError)
     {
