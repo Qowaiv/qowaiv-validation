@@ -35,20 +35,20 @@ public class ItemsAttribute<TValidator> : ValidationAttribute
 
         if (value is IEnumerable enumerable)
         {
-            var violations = new List<int>();
+            var memberNames = new MemberNames(validationContext.MemberName!);
 
             foreach (var item in enumerable)
             {
                 if (!Validator.IsValid(item))
                 {
-                    violations.Add(index);
+                    memberNames.AddIndex(index);
                 }
                 index++;
             }
 
-            if (violations.Count > 0)
+            if (memberNames.Count > 0)
             {
-                return ValidationMessage.Error(FormatErrorMessage(validationContext.DisplayName), [.. violations.Select(i => $"{validationContext.MemberName}[{i}]")]);
+                return ValidationMessage.Error(FormatErrorMessage(validationContext.DisplayName), memberNames);
             }
         }
         return null;
