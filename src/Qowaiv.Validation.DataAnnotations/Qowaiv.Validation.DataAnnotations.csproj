@@ -14,6 +14,7 @@ v4.0.0
 - Support requiredness via the required modifier.
 - Introduction of [Items<TValidator>] to define a validator on the items of a collection.
 - Introduction of [SkipValidation] to explictly skip validation of types and properties.
+- Introduction of the [Validates(type)] attribute to decorate [Validation] attributes.
 - Qowaiv.Validation.DataAnnotations.ValidationMessage.None returns null. (BREAKING)
 - Refactor annotations resolving.
 - Marked AnnotatedModel as obsolete.
