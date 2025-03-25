@@ -1,3 +1,5 @@
+using System.IO;
+
 namespace System.Xml.Linq;
 
 /// <summary>Extensions on <see cref="XObject"/>.</summary>
