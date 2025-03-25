@@ -197,6 +197,6 @@ public class Model
 ```
 
 ### Validates attribute
-The `[Validates]`` attribute is designed to help the [QW0102](https://github.com/Qowaiv/qowaiv-analyzers/blob/main/rules/QW0102.md)
+The `[Validates]` attribute is designed to help the [QW0102](https://github.com/Qowaiv/qowaiv-analyzers/blob/main/rules/QW0102.md)
 to report on misusage of the attribute. By decorating an `[Validation]` attribute
 the analyzer knows on which member types the attribute can be set.
