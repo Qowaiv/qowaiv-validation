@@ -32,5 +32,11 @@ public static class Data_Annotations
             => MiniValidation.MiniValidator.TryValidate(Model, out var errors)
             ? Empty
             : errors;
+
+        [Benchmark]
+        public IDictionary<string, string[]> MiniValidator2()
+           => MiniValidation2.MiniValidator.TryValidate(Model, out var errors)
+           ? Empty
+           : errors;
     }
 }
