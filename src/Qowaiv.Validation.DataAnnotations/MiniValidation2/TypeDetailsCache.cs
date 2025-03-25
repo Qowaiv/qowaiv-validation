@@ -100,7 +100,7 @@ internal class TypeDetailsCache
             if (type == property.PropertyType && !hasSkipRecursionOnProperty)
             {
                 propertiesToValidate ??= new List<PropertyDetails>();
-                propertiesToValidate.Add(new(property.Name, displayAttribute, property.PropertyType, PropertyHelper.MakeNullSafeFastPropertyGetter(property), validationAttributes, true, enumerableType));
+                propertiesToValidate.Add(new(property.Name, displayAttribute, property.PropertyType, property.GetValue, validationAttributes, true, enumerableType));
                 hasPropertiesOfOwnType = true;
                 continue;
             }
@@ -121,7 +121,7 @@ internal class TypeDetailsCache
             if (recurse || hasValidationOnProperty)
             {
                 propertiesToValidate ??= new List<PropertyDetails>();
-                propertiesToValidate.Add(new(property.Name, displayAttribute, property.PropertyType, PropertyHelper.MakeNullSafeFastPropertyGetter(property), validationAttributes, recurse, enumerableTypeHasProperties ? enumerableType : null));
+                propertiesToValidate.Add(new(property.Name, displayAttribute, property.PropertyType, property.GetValue, validationAttributes, recurse, enumerableTypeHasProperties ? enumerableType : null));
                 hasValidatableProperties = true;
             }
         }

@@ -1,5 +1,4 @@
 using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Jobs;
 using Qowaiv.Validation.Abstractions;
 using Qowaiv.Validation.DataAnnotations;
 using Qowaiv.Validation.TestData;
@@ -7,9 +6,10 @@ using System.Collections.Generic;
 
 namespace Benchmarks;
 
-[MemoryDiagnoser]
+
 public static class Data_Annotations
 {
+    [MemoryDiagnoser]
     public class Validate
     {
         const int Count = 1000;
