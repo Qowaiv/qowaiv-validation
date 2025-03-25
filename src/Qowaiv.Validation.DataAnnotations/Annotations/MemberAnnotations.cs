@@ -8,7 +8,7 @@ internal readonly struct MemberAnnotations
     internal MemberAnnotations(
         string name,
         DisplayAttribute? display,
-        IReadOnlyCollection<ValidationAttribute> attributes,
+        ValidationAttribute[] attributes,
         Func<object, object?> getValue)
     {
         Name = name;
@@ -24,7 +24,7 @@ internal readonly struct MemberAnnotations
     public readonly DisplayAttribute? Display;
 
     /// <summary>Gets the <see cref="ValidationAttribute"/>s defined on the member.</summary>
-    public IReadOnlyCollection<ValidationAttribute> Attributes { get; }
+    public ValidationAttribute[] Attributes { get; }
 
     /// <summary>Gets the value of the member.</summary>
     [Pure]

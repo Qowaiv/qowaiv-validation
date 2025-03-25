@@ -24,7 +24,7 @@ public static class Data_Annotations
         public Result Qowaiv() => AnnotatedModelValidator.Validate(Model);
 
 
-        [Benchmark]
+        //[Benchmark]
         public FluentValidation.Results.ValidationResult Fluent() => FluentValidator.Validate(Model);
 
         [Benchmark]
