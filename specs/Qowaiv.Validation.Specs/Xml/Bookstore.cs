@@ -7,7 +7,7 @@ namespace Specs.Xml;
 public class Bookstore
 {
     [XmlElement("book")]
-    public List<Book> Books { get; set; } = new();
+    public List<Book> Books { get; set; } = [];
 }
 public class Book
 {

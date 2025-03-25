@@ -100,15 +100,15 @@ internal class Context
 
 internal static class Actions
 {
-    public static Result<string> Success(Context context)
+    public static Result<string> Success(Context _)
         => Result.For(nameof(Success));
 
-    public static Task<Result<string>> SuccessAsync(Context context)
+    public static Task<Result<string>> SuccessAsync(Context _)
         => Result.For(nameof(SuccessAsync)).AsTask();
     
-    public static Result<string> Failure(Context context) 
+    public static Result<string> Failure(Context _) 
         => Result.WithMessages<string>(ValidationMessage.Error(nameof(Failure)));
 
-    public static Task<Result<string>> FailureAsync(Context context)
+    public static Task<Result<string>> FailureAsync(Context _)
         => Result.WithMessages<string>(ValidationMessage.Error(nameof(FailureAsync))).AsTask();
 }

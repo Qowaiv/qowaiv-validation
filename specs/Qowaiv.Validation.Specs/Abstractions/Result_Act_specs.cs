@@ -4,7 +4,7 @@ namespace Abstractions.Result_Act_specs;
 
 public class ValidModel
 {
-    internal static Result<TestModel> Model() => Result.For(new TestModel());
+    private static Result<TestModel> Model() => Result.For(new TestModel());
 
     [Test]
     public void Act_on_nonfailing_function_is_executed_and_result_stays_valid()
@@ -57,7 +57,7 @@ public class ValidModel
 
 public class AsyncValidModel
 {
-    internal static Task<Result<TestModel>> ModelAsync() => Result.For(new TestModel()).AsTask();
+    private static Task<Result<TestModel>> ModelAsync() => Result.For(new TestModel()).AsTask();
 
     [Test]
     public async Task ActAsync_on_sync_nonfailing_function_is_executed_and_result_stays_valid()
@@ -110,7 +110,7 @@ public class AsyncValidModel
 
 public class InvalidModel
 {
-    internal static Result<TestModel> Model() => Result.WithMessages<TestModel>(ValidationMessage.Error("FailingModel"));
+    private static Result<TestModel> Model() => Result.WithMessages<TestModel>(ValidationMessage.Error("FailingModel"));
 
     [Test]
     public void Act_is_never_triggered()
@@ -127,7 +127,7 @@ public class InvalidModel
 
 public class AsyncInvalidModel
 {
-    internal static Task<Result<TestModel>> ModelAsync() => Result.WithMessages<TestModel>(ValidationMessage.Error("FailingModelAsync")).AsTask();
+    private static Task<Result<TestModel>> ModelAsync() => Result.WithMessages<TestModel>(ValidationMessage.Error("FailingModelAsync")).AsTask();
 
     [Test]
     public async Task ActAsync_with_sync_function_is_never_triggered()
@@ -175,11 +175,9 @@ public class Pipe_Symbol
     }
 }
 
-internal class TestModel
+internal class TestModel(int actions = 0)
 {
-    public TestModel(int actions = 0) => Actions = actions;
-
-    public int Actions { get; private set; }
+    public int Actions { get; private set; } = actions;
 
     public Result<TestModel> NonfailingFunction()
     {
