@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- https://learn.microsoft.com/dotnet/fundamentals/package-validation/diagnostic-ids -->
-<Suppressions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<Suppressions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:System.Runtime.CompilerServices.IsExternalInit</Target>
@@ -12,6 +12,27 @@
     <Target>T:System.Runtime.CompilerServices.RequiresLocationAttribute</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Xml.dll</Left>
     <Right>lib/net8.0/Qowaiv.Validation.Xml.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Xml.XmlValidationHandler.get_Messages:[T:System.Runtime.CompilerServices.CompilerGeneratedAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Xml.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.Xml.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Xml.XmlValidationHandler.get_Messages:[T:System.Runtime.CompilerServices.CompilerGeneratedAttribute]</Target>
+    <Left>lib/net9.0/Qowaiv.Validation.Xml.dll</Left>
+    <Right>lib/net9.0/Qowaiv.Validation.Xml.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Xml.XmlValidationHandler.get_Messages:[T:System.Runtime.CompilerServices.CompilerGeneratedAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.Xml.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Xml.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
