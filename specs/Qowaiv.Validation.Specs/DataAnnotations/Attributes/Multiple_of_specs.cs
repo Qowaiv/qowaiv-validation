@@ -132,7 +132,7 @@ public class Not_valid_for
 
     [TestCaseSource(nameof(NotSupportedTypes))]
     public void not_supported_types(object model)
-        =>  new MultipleOfAttribute(10).IsValid(model).Should().BeFalse();
+        => new MultipleOfAttribute(10).IsValid(model).Should().BeFalse();
 
     static IEnumerable<object?> NotSupportedTypes()
     {
