@@ -1,5 +1,3 @@
-using System;
-
 namespace MiniValidation2;
 
 /// <summary>

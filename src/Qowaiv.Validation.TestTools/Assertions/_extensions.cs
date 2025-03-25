@@ -1,5 +1,3 @@
-using System.Runtime.CompilerServices;
-
 namespace Qowaiv.Validation.TestTools;
 
 /// <summary>Contains extension methods for custom assertions in unit tests.</summary>
