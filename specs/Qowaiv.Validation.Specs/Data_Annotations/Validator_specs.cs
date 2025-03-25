@@ -171,7 +171,7 @@ public class Supports
     {
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            yield return (ValidationMessage)ValidationMessage.For(Severity, "Has custom severity.");
+            yield return (ValidationMessage)ValidationMessage.For(Severity, "Has custom severity.")!;
         }
     }
 }

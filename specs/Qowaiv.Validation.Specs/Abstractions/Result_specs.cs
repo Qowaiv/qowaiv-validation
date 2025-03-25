@@ -81,21 +81,21 @@ public class Filtering
     public void Error_messages_is_done_via_the_Errors_property()
     {
         var result = Result.WithMessages(TestMessages);
-        result.Errors.Should().BeEquivalentTo(new[] { Error1, Error2 });
+        result.Errors.Should().BeEquivalentTo([Error1, Error2]);
     }
 
     [Test]
     public void Warning_messages_is_done_via_the_Warnings_property()
     {
         var result = Result.WithMessages(TestMessages);
-        result.Warnings.Should().BeEquivalentTo(new[] { Warning1, Warning2 });
+        result.Warnings.Should().BeEquivalentTo([Warning1, Warning2]);
     }
 
     [Test]
     public void Info_messages_is_done_via_the_Infos_property()
     {
         var result = Result.WithMessages(TestMessages);
-        result.Infos.Should().BeEquivalentTo(new[] { Info1, Info2 });
+        result.Infos.Should().BeEquivalentTo([Info1, Info2]);
     }
 }
 
@@ -143,22 +143,20 @@ public class Result_Of_TModel
 {
     [Test]
     public void As_Task_with_AsTask()
-        => Assert.That(Result.For(17).AsTask(), Is.InstanceOf<Task<Result<int>>>());
+        => Result.For(17).AsTask().Should().BeOfType<Task<Result<int>>>();
 }
 
 public class ThrowIfInvalid
 {
     [Test]
     public void Nothing_when_valid()
-    {
-        Assert.That(() => Result.For(17).ThrowIfInvalid(), Throws.Nothing);
-    }
+        => 17.Invoking(v => Result.For(v)).Should().NotThrow();
 
     [Test]
     public void InvalidModelException_when_invalid()
     {
-        Assert.That(
-            () => Result.WithMessages<int>(ValidationMessage.Error("Oops")).ThrowIfInvalid()
-            , Throws.InstanceOf<InvalidModelException>());
+        var result = Result.WithMessages<int>(ValidationMessage.Error("Oops"));
+        result.Invoking(_ => result.ThrowIfInvalid())
+            .Should().Throw<InvalidModelException>();
     }
 }
