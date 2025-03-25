@@ -1,7 +1,6 @@
 using Qowaiv.Financial;
 using Qowaiv.Validation.Abstractions;
 using Qowaiv.Validation.Xml;
-using Specs.TestTools;
 using Specs.Xml;
 using System.IO;
 using System.Xml.Linq;
@@ -20,10 +19,7 @@ public class Invalidates
     {
         var model = new Bookstore
         {
-            Books = new()
-            {
-                new Book { Genre = "fiction", Price = 11.99.Amount(), PublicationDate = "not-a-date" },
-            }
+            Books = [new Book { Genre = "fiction", Price = 11.99.Amount(), PublicationDate = "not-a-date" }]
         };
         var validator = new SchemaValidator<Bookstore>(Schema);
         validator.Validate(model)
@@ -75,8 +71,8 @@ public class Validates
     {
         var model = new Bookstore
         {
-            Books = new()
-            {
+            Books =
+            [
                 new Book 
                 {
                     Genre = "fiction",
@@ -91,7 +87,7 @@ public class Validates
                     ISBN = "0-330-25864-8",
                     PublicationDate = "1979-10-12" 
                 },
-            }
+            ]
         };
         var validator = new SchemaValidator<Bookstore>(Schema);
         validator.Validate(model)

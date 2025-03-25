@@ -50,11 +50,11 @@ internal readonly struct NestedContext
     public bool Visited(object value) => Annotations is { } && !Done.Add(value);
 
     /// <summary>Adds a set of messages.</summary>
-    public void AddMessages(IEnumerable<ValidationResult> messages, bool violationOnType = false)
+    public void AddMessages(IEnumerable<ValidationResult> messages)
     {
         foreach (var message in messages)
         {
-            AddMessage(message, violationOnType);
+            AddMessage(message);
         }
     }
 
@@ -66,7 +66,7 @@ internal readonly struct NestedContext
     /// Null and <see cref="ValidationMessage.None"/> Messages are not added.
     /// </remarks>
     [Impure]
-    public bool AddMessage(ValidationResult? validationResult, bool violationOnType = false)
+    public bool AddMessage(ValidationResult? validationResult)
     {
         if (validationResult is { } && validationResult != ValidationResult.Success)
         {

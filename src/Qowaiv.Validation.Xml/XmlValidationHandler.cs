@@ -5,14 +5,15 @@ namespace Qowaiv.Validation.Xml;
 public class XmlValidationHandler
 {
     /// <summary>The collection of validation messages.</summary>
-    public IReadOnlyCollection<IValidationMessage> Messages { get; } = new List<IValidationMessage>();
+    public IReadOnlyCollection<IValidationMessage> Messages => messages;
+
+    private readonly List<IValidationMessage> messages = [];
 
     /// <summary>The <see cref="ValidationEventHandler"/> delegate.</summary>
-    public ValidationEventHandler Validate => (sender, e) => OnIssue(sender, e);
+    public ValidationEventHandler Validate => OnIssue;
 
     private void OnIssue(object? sender, ValidationEventArgs e)
-        => ((List<IValidationMessage>)Messages)
-        .Add(ValidationMessage.For(e.Severity.ToValidationSeverity(), e.Message, PropertyName(sender)));
+        => messages.Add(ValidationMessage.For(e.Severity.ToValidationSeverity(), e.Message, PropertyName(sender)));
 
     [Pure]
     private static string? PropertyName(object? sender) => sender switch

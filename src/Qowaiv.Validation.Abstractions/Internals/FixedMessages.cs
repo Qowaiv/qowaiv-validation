@@ -1,7 +1,7 @@
 namespace Qowaiv.Validation.Abstractions.Internals;
 
 [DebuggerDisplay("{DebuggerDisplay}")]
-[DebuggerTypeProxy(typeof(CollectionDebugView))]
+[DebuggerTypeProxy(typeof(CollectionDebugView<IValidationMessage>))]
 internal class FixedMessages : IReadOnlyList<IValidationMessage>
 {
     [Pure]
@@ -10,7 +10,7 @@ internal class FixedMessages : IReadOnlyList<IValidationMessage>
             ? @internal
             : Empty.AddRange(messages);
 
-    public static readonly FixedMessages Empty = new();
+    public static readonly FixedMessages Empty = [];
 
     public virtual int Count => 0;
 

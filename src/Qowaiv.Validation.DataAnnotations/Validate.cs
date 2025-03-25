@@ -16,7 +16,7 @@ internal static class Validate
     /// <summary>Gets the results for validating the (annotated) members.</summary>
     public static void Members(NestedContext context)
     {
-        if (context.Annotations is not { } annotations) { return; }
+        if (context.Annotations is not { } annotations) return;
 
         foreach (var property in annotations.Members)
         {
@@ -73,7 +73,7 @@ internal static class Validate
         {
             foreach (var attribute in attributes)
             {
-                context.AddMessage(attribute.GetValidationMessage(context.Instance, context), violationOnType: true);
+                context.AddMessage(attribute.GetValidationMessage(context.Instance, context));
             }
         }
     }

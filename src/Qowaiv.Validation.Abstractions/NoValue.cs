@@ -5,7 +5,7 @@ namespace Qowaiv.Validation.Abstractions;
 public class NoValue : ArgumentNullException
 {
     /// <summary>Initializes a new instance of the <see cref="NoValue"/> class.</summary>
-    public NoValue() : this(nameof(Result<object>.Value), QowaivValidationMessages.NoValue) { }
+    public NoValue() : this(nameof(Result<>.Value), QowaivValidationMessages.NoValue) { }
 
     /// <summary>Initializes a new instance of the <see cref="NoValue"/> class.</summary>
     public NoValue(string paramName) : base(paramName) { }
@@ -21,5 +21,5 @@ public class NoValue : ArgumentNullException
     /// The type of the result.
     /// </typeparam>
     [Pure]
-    public static NoValue For<T>() => new(nameof(Result<T>.Value), string.Format(QowaivValidationMessages.NoValue_ForT, typeof(T).Name));
+    public static NoValue For<T>() => new(nameof(Result<>.Value), string.Format(QowaivValidationMessages.NoValue_ForT, typeof(T).Name));
 }

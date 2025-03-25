@@ -34,7 +34,7 @@ public class ResultValidnessAssertionsBase<TSubject>(TSubject subject, string? e
         Assertion
             .For(Expression)
             .WithMessage(error)
-            .Ensure(!missing.Any() && !extra.Any());
+            .Ensure(missing.Length == 0 && extra.Length == 0);
     }
 
     [Pure]
@@ -61,7 +61,7 @@ public class ResultValidnessAssertionsBase<TSubject>(TSubject subject, string? e
         else
         {
             var all = new[] { expected };
-            return WithMessages(all.Except(actuals, Comparer()).ToArray(), actuals.Except(all, Comparer()).ToArray());
+            return WithMessages([.. all.Except(actuals, Comparer())], [.. actuals.Except(all, Comparer())]);
         }
     }
 

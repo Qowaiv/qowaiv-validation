@@ -1,17 +1,11 @@
 namespace Qowaiv.Validation.Abstractions.Internals;
 
-internal sealed class SomeFixedMessages : FixedMessages
+internal sealed class SomeFixedMessages(FixedMessages parent, IValidationMessage value) : FixedMessages
 {
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly FixedMessages parent;
+    private readonly FixedMessages parent = parent;
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly IValidationMessage value;
-
-    public SomeFixedMessages(FixedMessages parent, IValidationMessage value)
-    {
-        this.parent = parent;
-        this.value = value;
-    }
+    private readonly IValidationMessage value = value;
 
     public override int Count => parent.Count + 1;
 
