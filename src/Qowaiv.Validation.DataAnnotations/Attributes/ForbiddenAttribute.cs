@@ -11,8 +11,8 @@ public sealed class ForbiddenAttribute<TValue> : SetOfAttribute<TValue>
     /// </param>
     public ForbiddenAttribute(params object[] values) : base(values) { }
 
-    /// <summary>Return false if the value of <see cref="SetOfValuesAttribute.IsValid(object)"/>
-    /// equals one of the values of the <see cref="ForbiddenAttribute{TValue}"/>.
+    /// <summary>Return false if the value of <see cref="SetOfAttribute{TValue}.IsValid(object)" />
+    /// equals one of the values of the <see cref="ForbiddenAttribute{TValue}" />.
     /// </summary>
     protected override bool OnEqual => false;
 }

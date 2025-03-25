@@ -33,8 +33,8 @@ public abstract class SetOfAttribute<TValue> : ValidationAttribute
         Values = all;
     }
 
-    /// <summary>The result to return when the value of <see cref="IsValid(object)"/>
-    /// equals one of the values of the <see cref="SetOfValuesAttribute"/>.
+    /// <summary>The result to return when the value of <see cref="IsValid(object)" />
+    /// equals one of the values of the <see cref="SetOfAttribute{TValue}" />.
     /// </summary>
     protected abstract bool OnEqual { get; }
 
