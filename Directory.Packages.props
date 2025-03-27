@@ -24,7 +24,7 @@
     <PackageVersion Include="NUnit3TestAdapter" Version="*" />
     <PackageVersion Include="PolySharp" Version="1.15.0" />
     <PackageVersion Include="Qowaiv" Version="7.2.3" />
-    <PackageVersion Include="Qowaiv.Analyzers.CSharp" Version="*" />
+    <PackageVersion Include="Qowaiv.Analyzers.CSharp" Version="2.0.5" />
     <PackageVersion Include="Qowaiv.Diagnostics.Contracts" Version="2.0.5" />
     <PackageVersion Include="Qowaiv.TestTools" Version="8.0.0" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="*" />

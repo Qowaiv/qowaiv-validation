@@ -9,6 +9,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 [Validates(typeof(DateOnly))]
 #endif
 [Validates(typeof(Year))]
+[CLSCompliant(false)]
 public sealed class InPastAttribute() : ClockAttribute(() => QowaivValidationMessages.InPast)
 {
     /// <inheritdoc />
