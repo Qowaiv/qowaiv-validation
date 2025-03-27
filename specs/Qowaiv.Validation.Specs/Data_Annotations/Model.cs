@@ -62,14 +62,6 @@ internal static class Model
             }
 #pragma warning restore S2376
         }
-
-        public sealed class TypeAnnotatedMember
-        {
-            public TypeAnnotation? Member { get; init; }
-        }
-
-        [InvalidClass]
-        public sealed class TypeAnnotation { }
     }
 
     public static class Without
@@ -109,11 +101,4 @@ internal static class Model
         [Allowed<int>("42")]
         public int Value { get; init; }
     }
-}
-
-
-[AttributeUsage(AttributeTargets.Class)]
-internal sealed class InvalidClassAttribute() : ValidationAttribute("This is an invalid class")
-{
-    public override bool IsValid(object? value) => false;
 }

@@ -13,14 +13,7 @@ public class Validates_children_when_child_type
         .ValidateWith(new AnnotatedModelValidator<WithIValidatableChild>())
         .Should().BeInvalid()
         .WithMessage(ValidationMessage.Error("Answer to the Ultimate Question of Life, the Universe, and Everything.", "Child.Answer"));
-    
-    [Test]
-    public void has_any_validation_attribute()
-     => new WithChildTypeDecorated()
-        .ValidateWith(new AnnotatedModelValidator<WithChildTypeDecorated>())
-        .Should().BeInvalid()
-        .WithMessage(ValidationMessage.Error("Answer to the Ultimate Question of Life, the Universe, and Everything.", "Child"));
-
+  
     [Test]
     public void Has_any_property_with_validation_attribute()
         => new WithChildWithAttributes()
@@ -32,10 +25,7 @@ public class Validates_children_when_child_type
     {
         public IValidatableChild Child { get; } = new();
     }
-    internal class WithChildTypeDecorated
-    {
-        public ChildTypeDecorated Child { get; } = new();
-    }
+   
     internal class WithChildWithAttributes
     {
         public ChildWithAttributes Child { get; } = new();
@@ -51,27 +41,10 @@ public class Validates_children_when_child_type
         }
     }
 
-    [MustHaveTheAnswer]
-    internal class ChildTypeDecorated
-    {
-        public int Answer { get; set; }
-    }
-
     internal class ChildWithAttributes
     {
         [Mandatory]
         public int? Answer { get; set; }
-    }
-
-    [AttributeUsage(AttributeTargets.Class)]
-    public sealed class MustHaveTheAnswerAttribute : ValidationAttribute
-    {
-        public override bool IsValid(object? value)
-            => value is ChildTypeDecorated model
-            && model.Answer == 42;
-
-        public override string FormatErrorMessage(string name)
-            => "Answer to the Ultimate Question of Life, the Universe, and Everything.";
     }
 }
 

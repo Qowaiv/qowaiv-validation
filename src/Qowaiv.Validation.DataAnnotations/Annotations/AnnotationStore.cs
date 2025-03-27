@@ -2,16 +2,16 @@ using System.Reflection;
 
 namespace Qowaiv.Validation.DataAnnotations;
 
-/// <summary>Store of resolved <see cref="TypeAnnotations"/>.</summary>
+/// <summary>Store of resolved <see cref="MemberAnnotations"/>.</summary>
 internal sealed class AnnotationStore
 {
     private static readonly AttributeSorter Sorter = new();
-    private readonly ConcurrentDictionary<Type, TypeAnnotations?> Annotations;
+    private readonly ConcurrentDictionary<Type, MemberAnnotations[]?> Annotations;
 
     /// <summary>Initializes a new instance of the <see cref="AnnotationStore"/> class.</summary>
     public AnnotationStore()
     {
-        Annotations = new ConcurrentDictionary<Type, TypeAnnotations?>(
+        Annotations = new ConcurrentDictionary<Type, MemberAnnotations[]?>(
         [
             None<object>(),
             None<string>(),
@@ -30,7 +30,7 @@ internal sealed class AnnotationStore
     }
 
     [Pure]
-    public TypeAnnotations? Get(Type type, HashSet<Type> visited) => Trim(type) switch
+    public MemberAnnotations[]? Get(Type type, HashSet<Type> visited) => Trim(type) switch
     {
         var t when LackAnnotations(t) => null,
         var t when Annotations.TryGetValue(t, out var annotations) => annotations,
@@ -39,21 +39,19 @@ internal sealed class AnnotationStore
     };
 
     [Pure]
-    private TypeAnnotations? Annotate(Type type, HashSet<Type> visited)
+    private MemberAnnotations[]? Annotate(Type type, HashSet<Type> visited)
     {
-        var attributes = type.ValidationAttributes().ToArray();
-        var properties = type
+        var members = type
             .GetProperties(BindingFlags.Public | BindingFlags.Instance)
             .Where(Include)
             .Select(p => Annotate(p, visited))
             .OfType<MemberAnnotations>()
             .ToArray();
 
-        if (attributes.Length > 0 || properties.Length > 0 || type.ImplementsIValidatableObject())
+        if (members.Length > 0 || type.ImplementsIValidatableObject())
         {
-            var annotations = new TypeAnnotations(attributes, properties);
-            Annotations[type] = annotations;
-            return annotations;
+            Annotations[type] = members;
+            return members;
         }
         else
         {
@@ -122,10 +120,10 @@ internal sealed class AnnotationStore
         && prop.GetCustomAttribute<SkipValidationAttribute>() is null;
 
     [Pure]
-    private static KeyValuePair<Type, TypeAnnotations?> None<T>() => new(typeof(T), null);
+    private static KeyValuePair<Type, MemberAnnotations[]?> None<T>() => new(typeof(T), null);
 
     [Pure]
-    private static KeyValuePair<Type, TypeAnnotations?> None(Type tp) => new(tp, null);
+    private static KeyValuePair<Type, MemberAnnotations[]?> None(Type tp) => new(tp, null);
 
     private sealed class AttributeSorter : IComparer<ValidationAttribute>
     {

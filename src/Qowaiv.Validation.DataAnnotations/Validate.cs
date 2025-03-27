@@ -8,7 +8,6 @@ internal static class Validate
         if (!context.Visited(context.Instance))
         {
             Members(context);
-            Type(context);
             IValidatableObject(context);
         }
     }
@@ -18,9 +17,9 @@ internal static class Validate
     {
         if (context.Annotations is not { } annotations) return;
 
-        foreach (var property in annotations.Members)
+        foreach (var member in annotations)
         {
-            Member(context, property);
+            Member(context, member);
         }
     }
 
@@ -31,7 +30,7 @@ internal static class Validate
     private static void Member(NestedContext context, MemberAnnotations annotations)
     {
         if (MemberAttributes(context, annotations) is not { } value ||
-             TypeAnnotations.Get(value.GetType()) is not { } typeAnnotations) { return; }
+             MemberAnnotations.Get(value.GetType()) is not { } memberAnnotations) { return; }
 
         if (value is IEnumerable enumerable)
         {
@@ -41,12 +40,12 @@ internal static class Validate
                 index++;
                 if (item is null) { continue; }
 
-                Model(context.Nested(item, typeAnnotations, index));
+                Model(context.Nested(item, memberAnnotations, index));
             }
         }
         else
         {
-            Model(context.Nested(value, typeAnnotations));
+            Model(context.Nested(value, memberAnnotations));
         }
     }
 
@@ -64,18 +63,6 @@ internal static class Validate
             }
         }
         return value;
-    }
-
-    /// <summary>Gets the results for validating the attributes declared on the type of the model.</summary>
-    public static void Type(NestedContext context)
-    {
-        if (context.Annotations?.Attributes is { Length: > 0 } attributes)
-        {
-            foreach (var attribute in attributes)
-            {
-                context.AddMessage(attribute.GetValidationMessage(context.Instance, context));
-            }
-        }
     }
 
     /// <summary>Gets the results for validating <see cref="IValidatableObject.Validate(ValidationContext)"/>.</summary>
