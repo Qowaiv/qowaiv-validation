@@ -18,7 +18,7 @@ public abstract class ClockAttribute(Func<string> errorMessageAccessor) : Valida
 #if NET8_0_OR_GREATER
         DateOnly d /*.*/ => ValidateCompare(d.CompareTo(Clock.Today())),
 #endif
-        Year y /*.....*/ => ValidateCompare(y.CompareTo(Clock.Today().Year)),
+        Year y /*.....*/ => ValidateCompare(y.CompareTo(Clock.Today().Year.CE())),
         _ => false,
     };
 
