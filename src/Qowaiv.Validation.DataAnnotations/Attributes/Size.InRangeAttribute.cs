@@ -7,7 +7,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 public static partial class Size
 {
     /// <summary>Specifies the allowed range of the size of property, field or parameter.</summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+    [AttributeUsage(AttributeTarget.Member, AllowMultiple = false)]
     [Validates(typeof(Stream))]
     [Validates(typeof(ICollection<byte>))]
     [Validates(typeof(IReadOnlyCollection<byte>))]

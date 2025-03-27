@@ -115,6 +115,24 @@ namespace Qowaiv.Validation.DataAnnotations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value of the {0} field should be in the future..
+        /// </summary>
+        internal static string InFuture {
+            get {
+                return ResourceManager.GetString("InFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value of the {0} field should be in the past,.
+        /// </summary>
+        internal static string InPast {
+            get {
+                return ResourceManager.GetString("InPast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The value of the {0} field is not a finite number..
         /// </summary>
         internal static string IsFiniteAttribute_ValidationError {
@@ -169,6 +187,24 @@ namespace Qowaiv.Validation.DataAnnotations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value of the {0} field should not be in the future..
+        /// </summary>
+        internal static string NotInFuture {
+            get {
+                return ResourceManager.GetString("NotInFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value of the {0} field should not be in the past..
+        /// </summary>
+        internal static string NotInPast {
+            get {
+                return ResourceManager.GetString("NotInPast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The size of the {0} field should be at least {1: F}..
         /// </summary>
         internal static string Size_AtLeast_ValidationError {
@@ -194,18 +230,16 @@ namespace Qowaiv.Validation.DataAnnotations {
                 return ResourceManager.GetString("Size_InRange_ValidationError", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to All values of the {0} field should be unique.
+        ///   Looks up a localized string similar to All values of the {0} field should be unique..
         /// </summary>
-        internal static string UniqueValuesAttribute_ValidationError
-        {
-            get
-            {
+        internal static string UniqueValuesAttribute_ValidationError {
+            get {
                 return ResourceManager.GetString("UniqueValuesAttribute_ValidationError", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to {0} does not support properties of the type {1}..
         /// </summary>
@@ -216,4 +250,3 @@ namespace Qowaiv.Validation.DataAnnotations {
         }
     }
 }
-

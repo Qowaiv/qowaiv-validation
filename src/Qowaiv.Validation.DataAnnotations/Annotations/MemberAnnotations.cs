@@ -54,5 +54,4 @@ internal readonly struct MemberAnnotations
         => Store.Get(Guard.NotNull(type), []);
 
     private static readonly AnnotationStore Store = new();
-
 }

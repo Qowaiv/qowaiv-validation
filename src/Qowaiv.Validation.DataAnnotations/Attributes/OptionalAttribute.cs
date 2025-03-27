@@ -5,7 +5,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 /// Null object pattern implementation for a <see cref="RequiredAttribute"/>.
 /// See: https://en.wikipedia.org/wiki/Null_object_pattern.
 /// </remarks>
-[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
+[AttributeUsage(AttributeTarget.Member, AllowMultiple = false)]
 [Validates(typeof(object))]
 public sealed class OptionalAttribute : RequiredAttribute
 {

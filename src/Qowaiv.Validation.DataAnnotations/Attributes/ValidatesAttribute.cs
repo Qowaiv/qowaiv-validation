@@ -7,7 +7,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 [CLSCompliant(false)]
 [Conditional("CONTRACTS_FULL")]
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
-public sealed class ValidatesAttribute : Attribute
+public class ValidatesAttribute : Attribute
 {
     /// <summary>Initializes a new instance of the <see cref="ValidatesAttribute"/> class.</summary>
     public ValidatesAttribute() : this(typeof(object)) { }
