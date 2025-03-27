@@ -128,7 +128,7 @@ using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/REA
 public class Model
 {
     [InFuture]
-    public DateOnly? DateOfDeath { get; init; }
+    public DateOnly? ExpiryDate { get; init; }
 }
 ```
 

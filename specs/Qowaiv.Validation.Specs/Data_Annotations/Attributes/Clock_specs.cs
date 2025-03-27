@@ -47,8 +47,20 @@ public class InFuture
             new InFutureAttribute().IsValid(year).Should().BeTrue();
         }
     }
-}
 
+    [TestCase("nl", "De waarde van het ExpiryDate veld moet in de toekomst liggen.")]
+    [TestCase("en", "The value of the ExpiryDate field should be in the future.")]
+    public void fails_with_message(CultureInfo culture, string message)
+    {
+        using var clock = Clock.SetTimeForCurrentContext(() => 11.June(2017).At(06, 15));
+        using var _ = culture.Scoped();
+        new Model.ClockDependent.InFuture { ExpiryDate = new(2017, 06, 10) }
+            .ValidateAnnotations()
+            .Should()
+            .BeInvalid()
+            .WithMessage(ValidationMessage.Error(message, "ExpiryDate"));
+    }
+}
 public class InPast
 {
     public class Guards
@@ -92,6 +104,19 @@ public class InPast
             using var clock = Clock.SetTimeForCurrentContext(() => 11.June(2017).At(06, 15));
             new InPastAttribute().IsValid(year).Should().BeTrue();
         }
+    }
+
+    [TestCase("nl", "De waarde van het YearOfConstruction veld moet in het verleden liggen.")]
+    [TestCase("en", "The value of the YearOfConstruction field should be in the past.")]
+    public void fails_with_message(CultureInfo culture, string message)
+    {
+        using var clock = Clock.SetTimeForCurrentContext(() => 11.June(2017).At(06, 15));
+        using var _ = culture.Scoped();
+        new Model.ClockDependent.InPast { YearOfConstruction = 2017.CE() }
+            .ValidateAnnotations()
+            .Should()
+            .BeInvalid()
+            .WithMessage(ValidationMessage.Error(message, "YearOfConstruction"));
     }
 }
 
@@ -144,6 +169,19 @@ public class NotInFuture
             new NotInFutureAttribute().IsValid(year).Should().BeTrue();
         }
     }
+
+    [TestCase("nl", "De waarde van veld DateOfBirth mag niet in de toekomst liggen.")]
+    [TestCase("en", "The value of the DateOfBirth field should not be in the future.")]
+    public void fails_with_message(CultureInfo culture, string message)
+    {
+        using var clock = Clock.SetTimeForCurrentContext(() => 11.June(2017).At(06, 15));
+        using var _ = culture.Scoped();
+        new Model.ClockDependent.NotInFuture { DateOfBirth = new(2018, 06, 12) }
+            .ValidateAnnotations()
+            .Should()
+            .BeInvalid()
+            .WithMessage(ValidationMessage.Error(message, "DateOfBirth"));
+    }
 }
 
 public class NotInPast
@@ -194,6 +232,19 @@ public class NotInPast
             using var clock = Clock.SetTimeForCurrentContext(() => 11.June(2017).At(06, 15));
             new NotInPastAttribute().IsValid(year).Should().BeTrue();
         }
+    }
+
+    [TestCase("nl", "De waarde van veld ExpiryDate mag niet in het verleden liggen.")]
+    [TestCase("en", "The value of the ExpiryDate field should not be in the past.")]
+    public void fails_with_message(CultureInfo culture, string message)
+    {
+        using var clock = Clock.SetTimeForCurrentContext(() => 11.June(2017).At(06, 15));
+        using var _ = culture.Scoped();
+        new Model.ClockDependent.NotInPast { ExpiryDate = new(2017, 06, 10) }
+            .ValidateAnnotations()
+            .Should()
+            .BeInvalid()
+            .WithMessage(ValidationMessage.Error(message, "ExpiryDate"));
     }
 }
 
