@@ -38,4 +38,21 @@ internal readonly struct MemberAnnotations
 
     [Pure]
     private static string Shorten(Attribute attr) => attr.GetType().Name.Replace("Attribute", string.Empty);
+
+    /// <summary>Gets the <see cref="MemberAnnotations"/> of the <see cref="Type"/>.</summary>
+    /// <param name="type">
+    /// The type to get the annotations from.
+    /// </param>
+    /// <exception cref="ArgumentNullException">
+    /// When the type is null.
+    /// </exception>
+    /// <returns>
+    /// The annotations of the type or null if the type lacks annotations.
+    /// </returns>
+    [Pure]
+    internal static MemberAnnotations[]? Get(Type type)
+        => Store.Get(Guard.NotNull(type), []);
+
+    private static readonly AnnotationStore Store = new();
+
 }

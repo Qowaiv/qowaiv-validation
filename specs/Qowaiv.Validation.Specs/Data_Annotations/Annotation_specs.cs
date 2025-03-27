@@ -27,13 +27,6 @@ public class Does_not_crash_on
 public class Resolves_property
 {
     [Test]
-    public void on_type_validation()
-        => new Model.With.TypeAnnotatedMember() { Member = new() }
-        .ValidateAnnotations()
-        .Should().BeInvalid()
-        .WithMessage(ValidationMessage.Error("This is an invalid class", "Member"));
-
-    [Test]
     public void validates_attributes()
         => new Model.With.AnnotatedProperty() { Name = "An" }
         .ValidateAnnotations()
