@@ -7,6 +7,32 @@ namespace Data_annotations;
 
 internal static class Model
 {
+    public static class ClockDependent
+    {
+        public sealed class InFuture
+        {
+            [InFuture]
+            public DateOnly? ExpiryDate { get; init; }
+        }
+
+        public sealed class InPast
+        {
+            [InPast]
+            public Year YearOfConstruction { get; init; }
+        }
+
+        public sealed class NotInFuture
+        {
+            [NotInFuture]
+            public DateOnly DateOfBirth { get; init; }
+        }
+
+        public sealed class NotInPast
+        {
+            [NotInPast]
+            public DateOnly ExpiryDate { get; init; }
+        }
+    }
     public static class With
     {
         public sealed class AnnotatedProperty

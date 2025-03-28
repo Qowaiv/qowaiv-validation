@@ -62,10 +62,10 @@ valid for the Unknown value, unless that is explicitly allowed.
 public class Model
 {
     [Mandatory(AllowUnknownValue = true)]
-    public EmailAddress Email { get; set; }
+    public EmailAddress Email { get; init; }
 
     [Mandatory()]
-    public string SomeString { get; set; }
+    public string SomeString { get; init; }
 }
 ```
 
@@ -77,7 +77,7 @@ attribute does. It is only valid if the collection contains at least one item.
 public class Model
 {
     [Any()]
-    public List<int> Numbers { get; set; }
+    public List<int> Numbers { get; init; }
 }
 ```
 
@@ -89,7 +89,7 @@ supports type converters to get the allowed values based on a primitive value.
 public class Model
 {
     [Allowed<Country>("DE", "FR", "GB")]
-    public Country CountryOfBirth { get; set; }
+    public Country CountryOfBirth { get; init; }
 }
 ```
 
@@ -101,7 +101,7 @@ supports type converters to get the forbidden values based on a primitive value.
 public class Model
 {
     [Forbidden<Country>("US", "IR")]
-    public Country CountryOfBirth { get; set; }
+    public Country CountryOfBirth { get; init; }
 }
 ```
 
@@ -115,7 +115,33 @@ when dealing with flags, but that can be restricted by setting
 public class Model
 {
     [DefinedOnly<SomeEnum>(OnlyAllowDefinedFlagsCombinations = false)]
-    public SomeEnum CountryOfBirth { get; set; }
+    public SomeEnum CountryOfBirth { get; init; }
+}
+```
+
+# In future
+The `[InFuture]` attributes requires the `DateTime`, `DateTimeOffset`, `Date`,
+`DateOnly`, or `Year` value to be in the future. The current time is resolved
+using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
+
+``` C#
+public class Model
+{
+    [InFuture]
+    public DateOnly? ExpiryDate { get; init; }
+}
+```
+
+# In past
+The `[InPast]` attributes requires the `DateTime`, `DateTimeOffset`, `Date`,
+`DateOnly`, or `Year` value to be in the past. The current time is resolved
+using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
+
+``` C#
+public class Model
+{
+    [InPast]
+    public DateOnly DateOfBirth { get; init; }
 }
 ```
 
@@ -145,7 +171,7 @@ represents a finite (e.a. not NaN, or infinity).
 public class Model
 {
     [IsFinite]
-    public double Number { get; set; }
+    public double Number { get; init; }
 }
 ```
 
@@ -158,7 +184,7 @@ type.
 public class Model
 {
     [SkipValidation]
-    public double Number { get; set; }
+    public double Number { get; init; }
 }
 ```
 
@@ -170,9 +196,36 @@ of the specified factor.
 public class Model
 {
     [MultipleOf(0.001)]
-    public Amount Total { get; set; }
+    public Amount Total { get; init; }
 }
 ```
+
+# Not in future
+The `[NotInFuture]` attributes requires the `DateTime`, `DateTimeOffset`, `Date`,
+`DateOnly`, or `Year` value not to be in the future. The current time is resolved
+using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
+
+``` C#
+public class Model
+{
+    [InFuture]
+    public DateTime CreationTime { get; init; }
+}
+```
+
+# Not in past
+The `[NotInPast]` attributes requires the `DateTime`, `DateTimeOffset`, `Date`,
+`DateOnly`, or `Year` value not to be in the past. The current time is resolved
+using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
+
+``` C#
+public class Model
+{
+    [InPast]
+    public DateOnly Start { get; init; }
+}
+```
+
 ### Optional 
 The `[Optional]` attribute indicates explicitly that a field is optional.
 
@@ -180,7 +233,7 @@ The `[Optional]` attribute indicates explicitly that a field is optional.
 public class Model
 {
     [Optional]
-    public string? Message { get; set; }
+    public string? Message { get; init; }
 }
 ```
 
@@ -192,7 +245,7 @@ distinct. If needed, a custom `IEqualityComparer<Value>` comparer can be defined
 public class Model
 {
     [Unique<int>(typeof(CustomEqualityComparer))]
-    public IEnumerable<int> Numbers { get; set; }
+    public IEnumerable<int> Numbers { get; init; }
 }
 ```
 

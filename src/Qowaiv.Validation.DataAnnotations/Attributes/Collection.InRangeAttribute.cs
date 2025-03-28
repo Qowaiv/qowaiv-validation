@@ -4,7 +4,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 public static partial class Collection
 {
     /// <summary>Specifies the allowed range of the length of property, field or parameter.</summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+    [AttributeUsage(AttributeTarget.Member, AllowMultiple = false)]
     [Validates(typeof(object))]
     public sealed class InRangeAttribute(long minimum, long maximum)
         : ValidationAttribute(() => QowaivValidationMessages.Collection_InRange_ValidationError)

@@ -3,7 +3,7 @@ using Qowaiv.Reflection;
 namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Specifies that a field is mandatory (for value types the default value is not allowed).</summary>
-[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+[AttributeUsage(AttributeTarget.Member, AllowMultiple = false)]
 [Validates(typeof(object))]
 public sealed class MandatoryAttribute : RequiredAttribute
 {

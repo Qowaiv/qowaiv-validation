@@ -4,7 +4,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 public static partial class Length
 {
     /// <summary>Specifies the maximum the length of property, field or parameter.</summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+    [AttributeUsage(AttributeTarget.Member, AllowMultiple = false)]
     [Validates(typeof(object))]
     public sealed class AtMostAttribute(long maximum)
         : ValidationAttribute(() => QowaivValidationMessages.Length_AtMost_ValidationError)

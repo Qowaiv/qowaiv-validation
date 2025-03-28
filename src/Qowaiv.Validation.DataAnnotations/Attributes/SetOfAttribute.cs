@@ -4,7 +4,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 /// <typeparam name="TValue">
 /// The type of the value.
 /// </typeparam>
-[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+[AttributeUsage(AttributeTarget.Member, AllowMultiple = false)]
 [CLSCompliant(false)]
 public abstract class SetOfAttribute<TValue> : ValidationAttribute
 {

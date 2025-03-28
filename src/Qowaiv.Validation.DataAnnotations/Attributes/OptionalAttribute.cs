@@ -5,13 +5,10 @@ namespace Qowaiv.Validation.DataAnnotations;
 /// Null object pattern implementation for a <see cref="RequiredAttribute"/>.
 /// See: https://en.wikipedia.org/wiki/Null_object_pattern.
 /// </remarks>
-[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
+[AttributeUsage(AttributeTarget.Member, AllowMultiple = false)]
 [Validates(typeof(object))]
 public sealed class OptionalAttribute : RequiredAttribute
 {
-    /// <summary>Gets a (singleton) <see cref="OptionalAttribute"/>.</summary>
-    internal static readonly OptionalAttribute Optional = new();
-
     /// <summary>Returns true as an <see cref="OptionalAttribute"/> is always valid.</summary>
     [Pure]
     public override bool IsValid(object? value) => true;

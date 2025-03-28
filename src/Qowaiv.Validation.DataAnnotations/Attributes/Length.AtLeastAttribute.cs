@@ -4,7 +4,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 public static partial class Length
 {
     /// <summary>Specifies the minimum the length of property, field or parameter.</summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+    [AttributeUsage(AttributeTarget.Member, AllowMultiple = false)]
     [Validates(typeof(object))]
     public sealed class AtLeastAttribute(long minimum)
         : ValidationAttribute(() => QowaivValidationMessages.Length_AtLeast_ValidationError)

@@ -6,7 +6,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 /// <typeparam name="TEnum">
 /// The type of the enum.
 /// </typeparam>
-[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+[AttributeUsage(AttributeTarget.Member, AllowMultiple = false)]
 [Validates(GenericArgument = true)]
 public class DefinedOnlyAttribute<TEnum> : ValidationAttribute
     where TEnum : struct, Enum

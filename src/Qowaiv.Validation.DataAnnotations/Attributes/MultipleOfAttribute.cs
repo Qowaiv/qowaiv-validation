@@ -3,7 +3,7 @@ using Qowaiv.Financial;
 namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Specifies that a field is a multiple of a factor.</summary>
-[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+[AttributeUsage(AttributeTarget.Member, AllowMultiple = false)]
 [Validates(typeof(float))]
 [Validates(typeof(double))]
 [Validates(typeof(decimal))]

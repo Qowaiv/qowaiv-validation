@@ -12,6 +12,10 @@
 v4.0.0
 - Support primitives of the same type on [ValueOf<TValue>] attributes.
 - Support requiredness via the required modifier.
+- Introduction of [InPast] valiation attribute.
+- Introduction of [InFuture] valiation attribute.
+- Introduction of [NotInPast] valiation attribute.
+- Introduction of [NotInFuture] valiation attribute.
 - Introduction of [Items<TValidator>] to define a validator on the items of a collection.
 - Introduction of [SkipValidation] to explictly skip validation of types and properties.
 - Introduction of the [Validates(type)] attribute to decorate [Validation] attributes.

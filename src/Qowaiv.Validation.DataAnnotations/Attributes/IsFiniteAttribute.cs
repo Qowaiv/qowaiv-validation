@@ -1,7 +1,7 @@
 namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Specifies that a field is a finite number.</summary>
-[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+[AttributeUsage(AttributeTarget.Member, AllowMultiple = false)]
 [Validates(typeof(float))]
 [Validates(typeof(double))]
 public sealed class IsFiniteAttribute : ValidationAttribute
