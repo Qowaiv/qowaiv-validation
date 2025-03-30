@@ -1,9 +1,17 @@
+using Qowaiv.Validation.DataAnnotations.Reflection;
 using System.Reflection;
 
 namespace System;
 
 internal static class TypeExtensions
 {
+    [Pure]
+    public static IEnumerable<Member> GetPublicInstanceMembers(this Type type) =>
+    [
+        .. type.GetProperties(BindingFlags.Instance | BindingFlags.Public).Select(Member.New),
+        .. type.GetFields(BindingFlags.Instance | BindingFlags.Public).Select(Member.New),
+    ];
+
     [Pure]
     public static Type? GetEnumerableType(this Type type) => type
         .GetInterfaces()

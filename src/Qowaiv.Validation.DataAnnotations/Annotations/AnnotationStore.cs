@@ -1,3 +1,4 @@
+using Qowaiv.Validation.DataAnnotations.Reflection;
 using System.Reflection;
 
 namespace Qowaiv.Validation.DataAnnotations;
@@ -41,12 +42,14 @@ internal sealed class AnnotationStore
     [Pure]
     private MemberAnnotations[]? Annotate(Type type, HashSet<Type> visited)
     {
-        var members = type
-            .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-            .Where(Include)
-            .Select(p => Annotate(p, visited))
-            .OfType<MemberAnnotations>()
-            .ToArray();
+        MemberAnnotations[] members =
+        [
+            .. type
+                .GetPublicInstanceMembers()
+                .Where(Include)
+                .Select(i => Annotate(i, visited))
+                .OfType<MemberAnnotations>()
+        ];
 
         if (members.Length > 0 || type.ImplementsIValidatableObject())
         {
@@ -60,17 +63,18 @@ internal sealed class AnnotationStore
     }
 
     [Pure]
-    private MemberAnnotations? Annotate(PropertyInfo prop, HashSet<Type> visited)
+    private MemberAnnotations? Annotate(Member info, HashSet<Type> visited)
     {
         List<ValidationAttribute> attributes = [];
         DisplayAttribute? display = null;
         var required = false;
-        var skipRequired = prop.PropertyType.IsNonNullableValueType();
+        var skipRequired = info.MemberType.IsNonNullableValueType();
 
-        foreach (var attr in prop.GetCustomAttributes(inherit: true))
+        foreach (var attr in info.GetCustomAttributes())
         {
             switch (attr)
             {
+                case SkipValidationAttribute: return null;
                 case OptionalAttribute: required = true; break;
                 case RequiredAttribute req:
                     // The default [Required] will always return true for value types so can be skipped.
@@ -84,17 +88,17 @@ internal sealed class AnnotationStore
                 case DisplayAttribute d: display = d; break;
             }
         }
-        if (!required && prop.RequiredMemberAttribute() is { } member)
+        if (!required && info.GetRequiredMemberAttribute() is { } member)
         {
             attributes.Insert(0, member);
         }
         attributes.Sort(Sorter);
 
-        var typeAnnotations = Get(prop.PropertyType, visited);
-        var isSealed = Trim(prop.PropertyType).IsSealed;
+        var typeAnnotations = Get(info.MemberType, visited);
+        var isSealed = Trim(info.MemberType).IsSealed;
 
         return !isSealed || typeAnnotations is { } || attributes is { Count: > 0 }
-            ? new(prop.Name, display, attributes.ToArray(), prop.GetValue)
+            ? new(info.Name, display, attributes.ToArray(), info.GetValue)
             : null;
     }
 
@@ -114,10 +118,9 @@ internal sealed class AnnotationStore
         || type.GetCustomAttribute<SkipValidationAttribute>() is { };
 
     [Pure]
-    private static bool Include(PropertyInfo prop)
-        => prop.CanRead
-        && prop.GetIndexParameters() is { Length: 0 }
-        && prop.GetCustomAttribute<SkipValidationAttribute>() is null;
+    private static bool Include(Member member)
+        => member.CanRead
+        && member.IsNotIndexed;
 
     [Pure]
     private static KeyValuePair<Type, MemberAnnotations[]?> None<T>() => new(typeof(T), null);

@@ -67,6 +67,13 @@ public class Supports
         => new WithDI().ValidateWith(new AnnotatedModelValidator<WithDI>()).Should().BeValid();
 
     [Test]
+    public void fields()
+    => new Model.With.Fields()
+        .ValidateAnnotations()
+        .Should().BeInvalid()
+        .WithMessage(ValidationMessage.Error("The value of the Answer field is not allowed.", "Answer"));
+
+    [Test]
     public void models_with_circularity()
     {
         var model = new WithLoop();
