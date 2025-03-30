@@ -120,7 +120,7 @@ internal sealed class AnnotationStore
     [Pure]
     private static bool Include(Member member)
         => member.CanRead
-        && member.IsNonIndexed;
+        && member.IsNotIndexed;
 
     [Pure]
     private static KeyValuePair<Type, MemberAnnotations[]?> None<T>() => new(typeof(T), null);
