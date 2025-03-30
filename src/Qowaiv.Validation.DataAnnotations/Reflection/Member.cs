@@ -10,6 +10,9 @@ internal abstract class Member
     /// <summary>Gets the type of the member.</summary>
     public abstract Type MemberType { get; }
 
+    /// <summary>Indicates if the member can be read.</summary>
+    public abstract bool CanRead { get; }
+
     /// <inheritdoc cref="MemberInfo.GetCustomAttributes(bool)" />
     [Pure]
     public abstract object[] GetCustomAttributes();
@@ -17,6 +20,10 @@ internal abstract class Member
     /// <summary>Gets the value of the member.</summary>
     [Pure]
     public abstract object? GetValue(object obj);
+
+    /// <summary>Indicates that the members in indexed.</summary>
+    [Pure]
+    public abstract bool IsNonIndexed { get; }
 
     /// <summary>
     /// Get the <see cref="RequiredMemberAttribute"/> attribute instance for reference types
@@ -53,11 +60,16 @@ internal abstract class Member
 
         public override Type MemberType => Info.FieldType;
 
+        public override bool CanRead => true;
+
         [Pure]
         public override object[] GetCustomAttributes() => Info.GetCustomAttributes(inherit: true);
 
         [Pure]
         public override object? GetValue(object obj) => Info.GetValue(obj);
+
+        [Pure]
+        public override bool IsNonIndexed => true;
     }
 
     private sealed class Property(PropertyInfo prop) : Member
@@ -68,10 +80,15 @@ internal abstract class Member
 
         public override Type MemberType => Info.PropertyType;
 
+        public override bool CanRead => Info.CanRead;
+
         [Pure]
         public override object[] GetCustomAttributes() => Info.GetCustomAttributes(inherit: true);
 
         [Pure]
         public override object? GetValue(object obj) => Info.GetValue(obj);
+
+        [Pure]
+        public override bool IsNonIndexed => Info.GetIndexParameters() is not { Length: > 0 };
     }
 }

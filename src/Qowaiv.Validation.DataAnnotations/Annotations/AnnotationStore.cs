@@ -44,16 +44,11 @@ internal sealed class AnnotationStore
     {
         MemberAnnotations[] members =
         [
-            ..type
-                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+            .. type
+                .GetPublicInstanceMembers()
                 .Where(Include)
-                .Select(i => Annotate(Member.New(i), visited))
-                .OfType<MemberAnnotations>(),
-
-            ..type
-                .GetFields(BindingFlags.Public | BindingFlags.Instance)
-                .Select(i => Annotate(Member.New(i), visited))
-                 .OfType<MemberAnnotations>(),
+                .Select(i => Annotate(i, visited))
+                .OfType<MemberAnnotations>()
         ];
 
         if (members.Length > 0 || type.ImplementsIValidatableObject())
@@ -79,6 +74,7 @@ internal sealed class AnnotationStore
         {
             switch (attr)
             {
+                case SkipValidationAttribute: return null;
                 case OptionalAttribute: required = true; break;
                 case RequiredAttribute req:
                     // The default [Required] will always return true for value types so can be skipped.
@@ -122,10 +118,9 @@ internal sealed class AnnotationStore
         || type.GetCustomAttribute<SkipValidationAttribute>() is { };
 
     [Pure]
-    private static bool Include(PropertyInfo prop)
-        => prop.CanRead
-        && prop.GetIndexParameters() is { Length: 0 }
-        && prop.GetCustomAttribute<SkipValidationAttribute>() is null;
+    private static bool Include(Member member)
+        => member.CanRead
+        && member.IsNonIndexed;
 
     [Pure]
     private static KeyValuePair<Type, MemberAnnotations[]?> None<T>() => new(typeof(T), null);
