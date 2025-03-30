@@ -33,6 +33,7 @@ internal static class Model
             public DateOnly ExpiryDate { get; init; }
         }
     }
+
     public static class With
     {
         public sealed class AnnotatedProperty
@@ -86,7 +87,7 @@ internal static class Model
             public bool Ignored { get; init; }
 
             [Mandatory]
-            public EmailAddress Mandatory { get; init; } 
+            public EmailAddress Mandatory { get; init; }
         }
 
         public sealed class SetOnlyProperty
