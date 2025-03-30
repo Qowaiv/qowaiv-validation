@@ -89,6 +89,6 @@ internal abstract class Member
         public override object? GetValue(object obj) => Info.GetValue(obj);
 
         [Pure]
-        public override bool IsNonIndexed => Info.GetIndexParameters() is not { Length: > 0 };
+        public override bool IsNotIndexed => Info.GetIndexParameters() is not { Length: > 0 };
     }
 }
