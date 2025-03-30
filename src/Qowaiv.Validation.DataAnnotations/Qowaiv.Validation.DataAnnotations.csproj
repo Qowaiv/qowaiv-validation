@@ -10,6 +10,7 @@
     <ToBeReleased>
       <![CDATA[
 v4.0.0
+- Validate public fields.
 - Support primitives of the same type on [ValueOf<TValue>] attributes.
 - Support requiredness via the required modifier.
 - Introduction of [InPast] valiation attribute.
