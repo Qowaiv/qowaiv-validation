@@ -21,9 +21,9 @@ internal abstract class Member
     [Pure]
     public abstract object? GetValue(object obj);
 
-    /// <summary>Indicates that the members in indexed.</summary>
+    /// <summary>Indicates that the members is indexed.</summary>
     [Pure]
-    public abstract bool IsNonIndexed { get; }
+    public abstract bool IsNotIndexed { get; }
 
     /// <summary>
     /// Get the <see cref="RequiredMemberAttribute"/> attribute instance for reference types
@@ -69,7 +69,7 @@ internal abstract class Member
         public override object? GetValue(object obj) => Info.GetValue(obj);
 
         [Pure]
-        public override bool IsNonIndexed => true;
+        public override bool IsNotIndexed => true;
     }
 
     private sealed class Property(PropertyInfo prop) : Member
