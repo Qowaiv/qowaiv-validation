@@ -2,6 +2,7 @@
   <Folder Name="/specs/">
     <Project Path="specs/Benchmarks/Benchmarks.csproj" />
     <Project Path="specs/Qowaiv.Validation.Specs/Qowaiv.Validation.Specs.csproj" />
+    <Project Path="specs/Qowaiv.Validation.TestData/Qowaiv.Validation.TestData.csproj" Id="8ae26c79-aeb7-4625-b545-91bc412a176a" />
   </Folder>
   <Project Path=".net.csproj" />
   <Project Path="src/Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
