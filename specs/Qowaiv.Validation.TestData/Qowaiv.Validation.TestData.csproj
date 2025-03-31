@@ -1,24 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net9.0</TargetFramework>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" />
-    <PackageReference Include="MiniValidation" />
-  </ItemGroup>
-
-  <ItemGroup Label="Analyzers">
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="../../src/Qowaiv.Validation.DataAnnotations/Qowaiv.Validation.DataAnnotations.csproj" />
     <ProjectReference Include="../../src/Qowaiv.Validation.Fluent/Qowaiv.Validation.Fluent.csproj" />
-    <ProjectReference Include="../Qowaiv.Validation.TestData/Qowaiv.Validation.TestData.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Validation.Guarding/Qowaiv.Validation.Guarding.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Validation.Messages/Qowaiv.Validation.Messages.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Validation.Xml/Qowaiv.Validation.Xml.csproj" />
   </ItemGroup>
 
 </Project>
