@@ -5,21 +5,18 @@ internal static class Validate
     public static void Model(NestedContext context)
     {
         // instance has not been validated yet.
-        if (!context.Visited(context.Instance))
-        {
-            Members(context);
-            IValidatableObject(context);
-        }
-    }
+        if (context.Visited(context.Instance)) return;
 
-    /// <summary>Gets the results for validating the (annotated) members.</summary>
-    public static void Members(NestedContext context)
-    {
-        if (context.Annotations is not { } annotations) return;
+        var annotations = context.Annotations;
 
-        foreach (var member in annotations)
+        foreach (var member in annotations.Members)
         {
             Member(context, member);
+        }
+
+        if (annotations.CheckValidatable && context.Instance is IValidatableObject validatable)
+        {
+            context.AddMessages(validatable.Validate(context));
         }
     }
 
@@ -27,12 +24,12 @@ internal static class Validate
     /// <remarks>
     /// It creates a sub validation context.
     /// </remarks>
-    private static void Member(NestedContext context, MemberAnnotations annotations)
+    private static void Member(NestedContext context, MemberAnnotations memberAnnotations)
     {
-        if (MemberAttributes(context, annotations) is not { } value ||
-             MemberAnnotations.Get(value.GetType()) is not { } memberAnnotations) { return; }
+        if (MemberAttributes(context, memberAnnotations) is not { } value) { return; }
+        if (TypeAnnotations.Get(value.GetType()) is not { } annotations) { return; }
 
-        if (value is IEnumerable enumerable)
+        if (annotations.CheckEnumerable && value is IEnumerable enumerable)
         {
             var index = -1;
             foreach (var item in enumerable)
@@ -40,12 +37,12 @@ internal static class Validate
                 index++;
                 if (item is null) { continue; }
 
-                Model(context.Nested(item, memberAnnotations, index));
+                //(context.Nested(item, annotations, index))
             }
         }
-        else
+        if (annotations.CheckRecursive)
         {
-            Model(context.Nested(value, memberAnnotations));
+            Model(context.Nested(value, annotations));
         }
     }
 
@@ -56,24 +53,12 @@ internal static class Validate
 
         foreach (var attribute in annotations.Attributes)
         {
-            // Stop on first required failure.
+            // Stop on first required failure and do not validate further.
             if (context.AddMessage(attribute.GetValidationMessage(value, context)) && attribute is RequiredAttribute)
             {
-                return value;
+                return null;
             }
         }
         return value;
-    }
-
-    /// <summary>Gets the results for validating <see cref="IValidatableObject.Validate(ValidationContext)"/>.</summary>
-    /// <remarks>
-    /// If the model is not <see cref="System.ComponentModel.DataAnnotations.IValidatableObject"/> nothing is done.
-    /// </remarks>
-    public static void IValidatableObject(NestedContext context)
-    {
-        if (context.Instance is IValidatableObject validatable)
-        {
-            context.AddMessages(validatable.Validate(context));
-        }
     }
 }

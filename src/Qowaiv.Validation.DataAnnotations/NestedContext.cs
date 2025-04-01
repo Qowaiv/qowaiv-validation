@@ -13,7 +13,7 @@ internal readonly struct NestedContext
 {
     private NestedContext(
         MemberPath path,
-        MemberAnnotations[] annotations,
+        TypeAnnotations annotations,
         List<IValidationMessage> messages,
         HashSet<object> done,
         ValidationContext @base)
@@ -29,7 +29,7 @@ internal readonly struct NestedContext
     public readonly MemberPath Path;
 
     /// <summary>The annotations for nested context.</summary>
-    public readonly MemberAnnotations[] Annotations;
+    public readonly TypeAnnotations Annotations;
 
     /// <summary>The collected messages.</summary>
     public readonly List<IValidationMessage> Messages;
@@ -117,7 +117,7 @@ internal readonly struct NestedContext
     }
 
     [Pure]
-    public NestedContext Nested(object instance, MemberAnnotations[] annotations, int index = -1) => new(
+    public NestedContext Nested(object instance, TypeAnnotations annotations, int index = -1) => new(
         Path.Nested(Base.MemberName!, index),
         annotations,
         Messages,
@@ -137,7 +137,7 @@ internal readonly struct NestedContext
         IServiceProvider serviceProvider,
         IDictionary<object, object?> items) => new(
             MemberPath.Root,
-            MemberAnnotations.Get(typeof(TModel))!,
+            TypeAnnotations.Get(typeof(TModel))!,
             [],
             new(ReferenceComparer.Instance),
             new ValidationContext(instance!, serviceProvider, items));

@@ -7,12 +7,12 @@ namespace Qowaiv.Validation.DataAnnotations;
 internal sealed class AnnotationStore
 {
     private static readonly AttributeSorter Sorter = new();
-    private readonly ConcurrentDictionary<Type, MemberAnnotations[]?> Annotations;
+    private readonly ConcurrentDictionary<Type, TypeAnnotations?> Annotations;
 
     /// <summary>Initializes a new instance of the <see cref="AnnotationStore"/> class.</summary>
     public AnnotationStore()
     {
-        Annotations = new ConcurrentDictionary<Type, MemberAnnotations[]?>(
+        Annotations = new ConcurrentDictionary<Type, TypeAnnotations?>(
         [
             None<object>(),
             None<string>(),
@@ -31,7 +31,7 @@ internal sealed class AnnotationStore
     }
 
     [Pure]
-    public MemberAnnotations[]? Get(Type type, HashSet<Type> visited) => Trim(type) switch
+    public TypeAnnotations? Get(Type type, HashSet<Type> visited) => Trim(type) switch
     {
         var t when LackAnnotations(t) => null,
         var t when Annotations.TryGetValue(t, out var annotations) => annotations,
@@ -40,7 +40,7 @@ internal sealed class AnnotationStore
     };
 
     [Pure]
-    private MemberAnnotations[]? Annotate(Type type, HashSet<Type> visited)
+    private TypeAnnotations? Annotate(Type type, HashSet<Type> visited)
     {
         MemberAnnotations[] members =
         [
@@ -51,10 +51,17 @@ internal sealed class AnnotationStore
                 .OfType<MemberAnnotations>()
         ];
 
-        if (members.Length > 0 || type.ImplementsIValidatableObject())
+        var checks = AnnotationChecks.None;
+        checks |= members.Length > 0 ? AnnotationChecks.Attributes : default;
+        checks |= type.ImplementsIValidatableObject() ? AnnotationChecks.Validatable : default;
+        
+        // checks |= AnnotationChecks.Recursive;
+
+        if (checks != AnnotationChecks.None)
         {
-            Annotations[type] = members;
-            return members;
+            var annotations = new TypeAnnotations(checks, members);
+            Annotations[type] = annotations;
+            return annotations;
         }
         else
         {
@@ -98,7 +105,7 @@ internal sealed class AnnotationStore
         var isSealed = Trim(info.MemberType).IsSealed;
 
         return !isSealed || typeAnnotations is { } || attributes is { Count: > 0 }
-            ? new(info.Name, display, attributes.ToArray(), info.GetValue)
+            ? new(default, info.Name, display, attributes.ToArray(), info.GetValue)
             : null;
     }
 
@@ -123,10 +130,10 @@ internal sealed class AnnotationStore
         && member.IsNotIndexed;
 
     [Pure]
-    private static KeyValuePair<Type, MemberAnnotations[]?> None<T>() => new(typeof(T), null);
+    private static KeyValuePair<Type, TypeAnnotations?> None<T>() => new(typeof(T), null);
 
     [Pure]
-    private static KeyValuePair<Type, MemberAnnotations[]?> None(Type tp) => new(tp, null);
+    private static KeyValuePair<Type, TypeAnnotations?> None(Type tp) => new(tp, null);
 
     private sealed class AttributeSorter : IComparer<ValidationAttribute>
     {
