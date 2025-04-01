@@ -22,6 +22,12 @@ internal enum AnnotationChecks
 
     /// <summary>Recursion should be applied if any of the flags is checked.</summary>
     Recursive = Members | Enumerable | Validatable,
+
+    /// <summary>
+    /// The creation of <see cref="ValidateContext"/> is only needed for types
+    /// with members or when implementing <see cref="IValidatableObject"/>.
+    /// </summary>
+    WithContext = Members | Validatable,
 }
 
 internal static class AnnotationCheck

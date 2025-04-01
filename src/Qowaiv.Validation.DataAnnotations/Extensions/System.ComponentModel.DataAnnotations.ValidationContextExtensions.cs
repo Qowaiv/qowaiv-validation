@@ -10,8 +10,8 @@ public static class ValidationContextExtensions
 
     /// <summary>Gets the <see cref="ValidationContext.MemberName"/> as an array.</summary>
     [Pure]
-    internal static string[] MemberNames(this ValidationContext? validationContext)
-        => validationContext?.MemberName is { }
+    internal static string[] MemberNames(this ValidationContext validationContext)
+        => validationContext.MemberName is { Length: > 0 }
         ? [validationContext.MemberName]
         : [];
 }

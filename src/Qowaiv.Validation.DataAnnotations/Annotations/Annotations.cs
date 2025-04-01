@@ -11,4 +11,6 @@ internal abstract class Annotations(AnnotationChecks checks)
     public bool CheckValidatable => Checks.HasFlag(AnnotationChecks.Validatable);
 
     public bool CheckRecursive => (Checks & AnnotationChecks.Recursive) != AnnotationChecks.None;
+
+    public bool CheckWithContext => (Checks & AnnotationChecks.WithContext) != AnnotationChecks.None;
 }

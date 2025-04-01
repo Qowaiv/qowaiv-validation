@@ -1,4 +1,3 @@
-
 namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Represents a wrapper for a (sealed) <see cref="ValidationContext"/>.</summary>

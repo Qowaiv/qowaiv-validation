@@ -118,7 +118,7 @@ internal sealed class AnnotationStore
         => type.IsPrimitive
         || type.IsEnum
         || type.IsPointer
-        || (Nullable.GetUnderlyingType(type) is { } nulable &&  LackAnnotations(nulable));
+        || (Nullable.GetUnderlyingType(type) is { } nulable && LackAnnotations(nulable));
 
     [Pure]
     private static bool Include(Member member)

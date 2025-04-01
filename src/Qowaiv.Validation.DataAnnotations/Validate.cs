@@ -9,7 +9,7 @@ internal static class Validate
 
         (var instance, var annotations, var path) = nested;
 
-        var context = ctx.Validation(nested.Instance);
+        var context = ctx.Validation(nested);
 
         foreach (var member in annotations.Members)
         {
@@ -30,8 +30,7 @@ internal static class Validate
                 index++;
                 if (item is null || (enumTyped ?? TypeAnnotations.Get(item.GetType())) is not { } typed) continue;
 
-                var child = new Nested(item, typed, path.Child(index));
-                Model(child, ctx);
+                Model(new Nested(item, typed, path.Child(index)), ctx);
             }
         }
 
@@ -45,6 +44,7 @@ internal static class Validate
         }
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static void Member(MemberAnnotations member, Nested nested, ValidateContext ctx, ValidationContext context)
     {
         object? value;
@@ -70,8 +70,7 @@ internal static class Validate
 
         if (value is { } && TypeAnnotations.Get(value.GetType()) is { CheckRecursive: true } typed)
         {
-            var child = new Nested(value, typed, nested.Path.Child(member.Name));
-            Model(child, ctx);
+            Model(new Nested(value, typed, nested.Path.Child(member.Name)), ctx);
         }
     }
 }

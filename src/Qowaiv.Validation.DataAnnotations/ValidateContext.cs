@@ -62,5 +62,10 @@ internal sealed class ValidateContext(IServiceProvider? serviceProvider, IDictio
     }
 
     [Pure]
-    public ValidationContext Validation(object instance) => new(instance, ServiceProvider, Items);
+    public ValidationContext Validation(Nested nested)
+        => nested.Annotations.CheckWithContext
+        ? new(nested.Instance, ServiceProvider, Items)
+        : None;
+
+    private static readonly ValidationContext None = new(new object(), EmptyProvider.Instance, new Dictionary<object, object?>(0));
 }
