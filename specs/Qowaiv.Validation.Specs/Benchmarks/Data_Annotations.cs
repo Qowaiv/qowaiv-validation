@@ -15,7 +15,7 @@ public class Validate_is_valid_for
     public void FluentValidation_AbstractValidator()
         => new BenchmarkModelValidator().Validate(Model).IsValid.Should().BeTrue();
 
-    //[Test]
-    //public void MiniValidator()
-    //    => MiniValidation.MiniValidator.TryValidate(Model, out var _).Should().BeTrue();
+    [Test]
+    public void MiniValidator()
+        => MiniValidation.MiniValidator.TryValidate(Model, out var _).Should().BeTrue();
 }

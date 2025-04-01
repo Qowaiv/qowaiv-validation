@@ -2,78 +2,75 @@ namespace Qowaiv.Validation.DataAnnotations;
 
 internal static class Validate
 {
-    public static void Model(NestedContext context)
+    public static void Model(Nested nested, ValidateContext ctx)
     {
         // instance has not been validated yet.
-        if (!context.Visited(context.Instance))
+        if (!ctx.Done.Add(nested.Instance)) return;
+
+        (var instance, var annotations, var path) = nested;
+
+        var context = ctx.Validation(nested);
+
+        foreach (var member in annotations.Members)
         {
-            Members(context);
-            IValidatableObject(context);
+            Member(member, nested, ctx, context);
         }
-    }
 
-    /// <summary>Gets the results for validating the (annotated) members.</summary>
-    public static void Members(NestedContext context)
-    {
-        if (context.Annotations is not { } annotations) return;
-
-        foreach (var member in annotations)
+        if (annotations.CheckEnumerable && instance is IEnumerable enumerable)
         {
-            Member(context, member);
-        }
-    }
+            var enumTyped = TypeAnnotations.Get(enumerable.GetType().GetEnumerableType()!);
 
-    /// <summary>Gets the results for validating a single annotated property.</summary>
-    /// <remarks>
-    /// It creates a sub validation context.
-    /// </remarks>
-    private static void Member(NestedContext context, MemberAnnotations annotations)
-    {
-        if (MemberAttributes(context, annotations) is not { } value ||
-             MemberAnnotations.Get(value.GetType()) is not { } memberAnnotations) { return; }
+            // We have to reset it if the type is not sealed.
+            if (enumTyped?.CheckInheritance is true) enumTyped = null;
 
-        if (value is IEnumerable enumerable)
-        {
             var index = -1;
+
             foreach (var item in enumerable)
             {
                 index++;
-                if (item is null) { continue; }
+                if (item is null || (enumTyped ?? TypeAnnotations.Get(item.GetType())) is not { } typed) continue;
 
-                Model(context.Nested(item, memberAnnotations, index));
+                Model(new Nested(item, typed, path.Child(index)), ctx);
             }
         }
-        else
+
+        if (annotations.CheckValidatable && instance is IValidatableObject validatable)
         {
-            Model(context.Nested(value, memberAnnotations));
+            // Reset validation context
+            context.MemberName = null;
+            context.DisplayName = context.ObjectType.Name;
+
+            ctx.AddMessages(validatable.Validate(context), path);
         }
     }
 
-    [Impure]
-    private static object? MemberAttributes(NestedContext context, MemberAnnotations annotations)
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static void Member(MemberAnnotations member, Nested nested, ValidateContext ctx, ValidationContext context)
     {
-        if (!context.TryMember(annotations, out var value)) { return null; }
+        object? value;
 
-        foreach (var attribute in annotations.Attributes)
+        try { value = member.GetValue(nested.Instance); }
+        catch
         {
-            // Stop on first required failure.
-            if (context.AddMessage(attribute.GetValidationMessage(value, context)) && attribute is RequiredAttribute)
+            ctx.AddMessage(ValidationMessage.Error($"The value is inaccessible.", member.Name), nested.Path);
+            return;
+        }
+
+        context.MemberName = member.Name;
+        context.DisplayName = member.Display?.GetName() ?? member.Name;
+
+        foreach (var attribute in member.Attributes)
+        {
+            // Stop on first required failure and do not validate further.
+            if (ctx.AddMessage(attribute.GetValidationMessage(value, context), nested.Path) && attribute is RequiredAttribute)
             {
-                return value;
+                return;
             }
         }
-        return value;
-    }
 
-    /// <summary>Gets the results for validating <see cref="IValidatableObject.Validate(ValidationContext)"/>.</summary>
-    /// <remarks>
-    /// If the model is not <see cref="System.ComponentModel.DataAnnotations.IValidatableObject"/> nothing is done.
-    /// </remarks>
-    public static void IValidatableObject(NestedContext context)
-    {
-        if (context.Instance is IValidatableObject validatable)
+        if (value is { } && TypeAnnotations.Get(value.GetType()) is { CheckRecursive: true } typed)
         {
-            context.AddMessages(validatable.Validate(context));
+            Model(new Nested(value, typed, nested.Path.Child(member.Name)), ctx);
         }
     }
 }

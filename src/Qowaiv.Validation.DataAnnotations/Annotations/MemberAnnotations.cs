@@ -2,14 +2,15 @@ namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Represents annotations of a member.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-internal readonly struct MemberAnnotations
+internal sealed class MemberAnnotations : Annotations
 {
-    /// <summary>Initializes a new instance of the <see cref="MemberAnnotations"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="MemberAnnotations"/> class.</summary>
     internal MemberAnnotations(
+        AnnotationChecks checks,
         string name,
         DisplayAttribute? display,
         IReadOnlyCollection<ValidationAttribute> attributes,
-        Func<object, object?> getValue)
+        Func<object, object?> getValue) : base(checks)
     {
         Name = name;
         Display = display;
@@ -34,24 +35,8 @@ internal readonly struct MemberAnnotations
     private readonly Func<object, object?> Accessor;
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private string DebuggerDisplay => $"{Name}, Attributes: {string.Join(", ", Attributes.Select(Shorten))}";
+    private string DebuggerDisplay => $"{Name}, Checks = {Checks}, Attributes = {string.Join(", ", Attributes.Select(Shorten))}";
 
     [Pure]
     private static string Shorten(Attribute attr) => attr.GetType().Name.Replace("Attribute", string.Empty);
-
-    /// <summary>Gets the <see cref="MemberAnnotations"/> of the <see cref="Type"/>.</summary>
-    /// <param name="type">
-    /// The type to get the annotations from.
-    /// </param>
-    /// <exception cref="ArgumentNullException">
-    /// When the type is null.
-    /// </exception>
-    /// <returns>
-    /// The annotations of the type or null if the type lacks annotations.
-    /// </returns>
-    [Pure]
-    internal static MemberAnnotations[]? Get(Type type)
-        => Store.Get(Guard.NotNull(type), []);
-
-    private static readonly AnnotationStore Store = new();
 }

@@ -16,7 +16,8 @@ public static class AnnotatedModelValidator
     /// A result including the model and the <see cref="ValidationResult"/>s.
     /// </returns>
     [Pure]
-    public static Result<TModel> Validate<TModel>(TModel model) => Validate(model, null, null);
+    public static Result<TModel> Validate<TModel>(TModel model) where TModel : notnull
+        => Validate(model, null, null);
 
     /// <summary>Validates the model.</summary>
     /// <typeparam name="TModel">
@@ -38,11 +39,15 @@ public static class AnnotatedModelValidator
     public static Result<TModel> Validate<TModel>(
         TModel model,
         IServiceProvider? serviceProvider,
-        IDictionary<object, object?>? items)
+        IDictionary<object, object?>? items) where TModel : notnull
     {
-        var context = NestedContext.Root(model!, serviceProvider ?? EmptyProvider.Instance, items ?? new Dictionary<object, object?>(0));
-        DataAnnotations.Validate.Model(context);
+        if (TypeAnnotations.Get(model.GetType()) is not { } annotations) return Result.For(model);
 
-        return Result.For(model, context.Messages);
+        var nested = new Nested(model, annotations, MemberPath.Root);
+        var ctx = new ValidateContext(serviceProvider, items);
+
+        DataAnnotations.Validate.Model(nested, ctx);
+
+        return Result.For(model, ctx.Messages);
     }
 }
