@@ -31,7 +31,7 @@ internal sealed class AnnotationStore
     }
 
     [Pure]
-    public TypeAnnotations? Get(Type type, HashSet<Type> visited) => Trim(type) switch
+    public TypeAnnotations? Get(Type type, HashSet<Type> visited) => type switch
     {
         var t when LackAnnotations(t) => null,
         var t when Annotations.TryGetValue(t, out var annotations) => annotations,
@@ -42,6 +42,8 @@ internal sealed class AnnotationStore
     [Pure]
     private TypeAnnotations? Annotate(Type type, HashSet<Type> visited)
     {
+        if (type.GetCustomAttribute<SkipValidationAttribute>() is { }) return null;
+
         MemberAnnotations[] members =
         [
             .. type
@@ -51,11 +53,7 @@ internal sealed class AnnotationStore
                 .OfType<MemberAnnotations>()
         ];
 
-        var checks = AnnotationChecks.None;
-        checks |= members.Length > 0 ? AnnotationChecks.Attributes : default;
-        checks |= type.ImplementsIValidatableObject() ? AnnotationChecks.Validatable : default;
-        
-        // checks |= AnnotationChecks.Recursive;
+        var checks = AnnotationCheck.New(type) | (members.Any() ? AnnotationChecks.Members : default);
 
         if (checks != AnnotationChecks.None)
         {
@@ -101,28 +99,20 @@ internal sealed class AnnotationStore
         }
         attributes.Sort(Sorter);
 
-        var typeAnnotations = Get(info.MemberType, visited);
-        var isSealed = Trim(info.MemberType).IsSealed;
+        var typeAnnotations = Get(info.MemberType, visited)?.Checks ?? default;
+        typeAnnotations |= attributes is { Count: > 0 } ? AnnotationChecks.Attributes : default;
 
-        return !isSealed || typeAnnotations is { } || attributes is { Count: > 0 }
-            ? new(default, info.Name, display, attributes.ToArray(), info.GetValue)
+        return typeAnnotations != AnnotationChecks.None
+            ? new(typeAnnotations, info.Name, display, attributes.ToArray(), info.GetValue)
             : null;
     }
-
-    [Pure]
-    private static Type Trim(Type type) => type switch
-    {
-        _ when Nullable.GetUnderlyingType(type) is { } underlying => Trim(underlying),
-        _ when type.GetEnumerableType() is { } enumerable => Trim(enumerable),
-        _ => type,
-    };
 
     [Pure]
     private static bool LackAnnotations(Type type)
         => type.IsPrimitive
         || type.IsEnum
         || type.IsPointer
-        || type.GetCustomAttribute<SkipValidationAttribute>() is { };
+        || (Nullable.GetUnderlyingType(type) is { } nulable &&  LackAnnotations(nulable));
 
     [Pure]
     private static bool Include(Member member)

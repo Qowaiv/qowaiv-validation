@@ -1,5 +1,6 @@
 namespace Qowaiv.Validation.DataAnnotations;
 
+[DebuggerDisplay("Checks = {Checks}, Members = {Members.Length}")]
 internal sealed class TypeAnnotations(AnnotationChecks checks, MemberAnnotations[] members) : Annotations(checks)
 {
     public readonly MemberAnnotations[] Members = members;

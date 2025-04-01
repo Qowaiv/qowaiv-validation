@@ -35,7 +35,7 @@ internal sealed class MemberAnnotations : Annotations
     private readonly Func<object, object?> Accessor;
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private string DebuggerDisplay => $"{Name}, Attributes: {string.Join(", ", Attributes.Select(Shorten))}";
+    private string DebuggerDisplay => $"{Name}, Checks = {Checks}, Attributes = {string.Join(", ", Attributes.Select(Shorten))}";
 
     [Pure]
     private static string Shorten(Attribute attr) => attr.GetType().Name.Replace("Attribute", string.Empty);

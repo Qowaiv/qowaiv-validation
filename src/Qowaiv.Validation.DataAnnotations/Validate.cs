@@ -2,63 +2,71 @@ namespace Qowaiv.Validation.DataAnnotations;
 
 internal static class Validate
 {
-    public static void Model(NestedContext context)
+    public static void Model(Nested nested, ValidateContext ctx)
     {
         // instance has not been validated yet.
-        if (context.Visited(context.Instance)) return;
+        if (!ctx.Done.Add(nested.Instance)) return;
 
-        var annotations = context.Annotations;
+        (var instance, var annotations, var path) = nested;
+
+        var context = ctx.Validation(nested.Instance);
 
         foreach (var member in annotations.Members)
         {
-            Member(context, member);
+            Member(member, nested, ctx, context);
         }
 
-        if (annotations.CheckValidatable && context.Instance is IValidatableObject validatable)
-        {
-            context.AddMessages(validatable.Validate(context));
-        }
-    }
-
-    /// <summary>Gets the results for validating a single annotated property.</summary>
-    /// <remarks>
-    /// It creates a sub validation context.
-    /// </remarks>
-    private static void Member(NestedContext context, MemberAnnotations memberAnnotations)
-    {
-        if (MemberAttributes(context, memberAnnotations) is not { } value) { return; }
-        if (TypeAnnotations.Get(value.GetType()) is not { } annotations) { return; }
-
-        if (annotations.CheckEnumerable && value is IEnumerable enumerable)
+        if (annotations.CheckEnumerable && instance is IEnumerable enumerable)
         {
             var index = -1;
+
             foreach (var item in enumerable)
             {
                 index++;
-                if (item is null) { continue; }
+                if (item is null || TypeAnnotations.Get(item.GetType().GetEnumerableType()!) is not { } typed) continue;
 
-                //(context.Nested(item, annotations, index))
+                var child = new Nested(item, typed, path.Child(index));
+                Model(child, ctx);
             }
         }
-        if (annotations.CheckRecursive)
+
+        if (annotations.CheckValidatable && instance is IValidatableObject validatable)
         {
-            Model(context.Nested(value, annotations));
+            // Reset validation context
+            context.MemberName = null;
+            context.DisplayName = context.ObjectType.Name;
+
+            ctx.AddMessages(validatable.Validate(context), path);
         }
     }
 
-    [Impure]
-    private static object? MemberAttributes(NestedContext context, MemberAnnotations annotations)
+    private static void Member(MemberAnnotations member, Nested nested, ValidateContext ctx, ValidationContext context)
     {
-        if (!context.TryMember(annotations, out var value)) { return null; }
+        object? value;
 
-        foreach (var attribute in annotations.Attributes)
+        try { value = member.GetValue(nested.Instance); }
+        catch
+        {
+            ctx.AddMessage(ValidationMessage.Error($"The value is inaccessible.", member.Name), nested.Path);
+            return;
+        }
+
+        context.MemberName = member.Name;
+        context.DisplayName = member.Display?.GetName() ?? member.Name;
+
+        foreach (var attribute in member.Attributes)
         {
             // Stop on first required failure and do not validate further.
-            if (context.AddMessage(attribute.GetValidationMessage(value, context)) && attribute is RequiredAttribute)
+            if (ctx.AddMessage(attribute.GetValidationMessage(value, context), nested.Path) && attribute is RequiredAttribute)
             {
-                return null;
+                return;
             }
         }
-        return value;
+
+        if (value is { } && TypeAnnotations.Get(value.GetType()) is { CheckRecursive: true } typed)
+        {
+            var child = new Nested(value, typed, nested.Path.Child(member.Name));
+            Model(child, ctx);
+        }
     }
 }

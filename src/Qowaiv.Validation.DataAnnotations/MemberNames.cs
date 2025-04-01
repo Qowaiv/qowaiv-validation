@@ -6,7 +6,7 @@ internal readonly struct MemberNames : IReadOnlyCollection<string>
 {
     public MemberNames(string memberName)
     {
-        Path = MemberPath.Root.Nested(memberName);
+        Path = MemberPath.Root.Child(memberName);
         Members = new(0);
     }
 
