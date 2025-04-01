@@ -9,7 +9,7 @@ internal sealed class ValidateContext(IServiceProvider? serviceProvider, IDictio
     public readonly List<IValidationMessage> Messages = [];
 
     /// <summary>Keeps track of objects that already have been validated.</summary>
-    public readonly HashSet<object> Done = [];
+    public readonly HashSet<object> Done = new(ReferenceComparer.Instance);
 
     /// <summary>The service provider for the <see cref="ValidationContext"/>.</summary>
     private readonly IServiceProvider ServiceProvider = serviceProvider ?? EmptyProvider.Instance;

@@ -18,12 +18,17 @@ internal static class Validate
 
         if (annotations.CheckEnumerable && instance is IEnumerable enumerable)
         {
+            var enumTyped = TypeAnnotations.Get(enumerable.GetType().GetEnumerableType()!);
+
+            // We have to reset it if the type is not sealed.
+            if (enumTyped?.CheckInheritance is true) enumTyped = null;
+
             var index = -1;
 
             foreach (var item in enumerable)
             {
                 index++;
-                if (item is null || TypeAnnotations.Get(item.GetType().GetEnumerableType()!) is not { } typed) continue;
+                if (item is null || (enumTyped ?? TypeAnnotations.Get(item.GetType())) is not { } typed) continue;
 
                 var child = new Nested(item, typed, path.Child(index));
                 Model(child, ctx);

@@ -55,16 +55,23 @@ internal sealed class AnnotationStore
 
         var checks = AnnotationCheck.New(type) | (members.Any() ? AnnotationChecks.Members : default);
 
-        if (checks != AnnotationChecks.None)
+        // for sealed types we have to check if the enumerable types are annotatable.
+        if (!checks.HasFlag(AnnotationChecks.Enumerable)
+            && type.GetEnumerableType() is { } enumType
+            && Get(enumType, visited) is { })
         {
-            var annotations = new TypeAnnotations(checks, members);
-            Annotations[type] = annotations;
-            return annotations;
+            checks |= AnnotationChecks.Enumerable;
         }
-        else
+
+        var annotations = (members.Length, checks) switch
         {
-            return null;
-        }
+            (0, AnnotationChecks.None) => null,
+            (0, AnnotationChecks.Enumerable) => TypeAnnotations.SealedCollection,
+            _ => new TypeAnnotations(checks, members),
+        };
+
+        Annotations[type] = annotations;
+        return annotations;
     }
 
     [Pure]
@@ -100,9 +107,8 @@ internal sealed class AnnotationStore
         attributes.Sort(Sorter);
 
         var typeAnnotations = Get(info.MemberType, visited)?.Checks ?? default;
-        typeAnnotations |= attributes is { Count: > 0 } ? AnnotationChecks.Attributes : default;
 
-        return typeAnnotations != AnnotationChecks.None
+        return typeAnnotations != AnnotationChecks.None || attributes is { Count: > 0 }
             ? new(typeAnnotations, info.Name, display, attributes.ToArray(), info.GetValue)
             : null;
     }

@@ -3,6 +3,12 @@ namespace Qowaiv.Validation.DataAnnotations;
 [DebuggerDisplay("Checks = {Checks}, Members = {Members.Length}")]
 internal sealed class TypeAnnotations(AnnotationChecks checks, MemberAnnotations[] members) : Annotations(checks)
 {
+    /// <summary>A sealed enumerable type, which lacks members and does not implement <see cref="IValidatableObject"/>.</summary>
+    /// <remarks>
+    /// Typically used for <see cref="Array"/>.
+    /// </remarks>
+    public static readonly TypeAnnotations SealedCollection = new(AnnotationChecks.Enumerable, []);
+
     public readonly MemberAnnotations[] Members = members;
 
     /// <summary>Gets the <see cref="TypeAnnotations"/> of the <see cref="Type"/>.</summary>
