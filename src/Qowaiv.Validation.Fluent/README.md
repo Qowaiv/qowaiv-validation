@@ -1,6 +1,9 @@
 # Qowaiv exensions on [*Fluent Validation](https://fluentvalidation.net/)
+Qowaiv provides a set of extensions on top of the FluentValidation library. It
+allows to use FluentValidation in combination with Qowaiv's `Result<T>`.
 
 ## Validators
+There is a set of (generic purpose) validators to validate properties of a model.
 
 ### Required
 The `RequiredValidation` validates that a required property has a set value. If

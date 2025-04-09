@@ -13,8 +13,7 @@ public class ModelValidator<TModel> : AbstractValidator<TModel>, Abstractions.IV
     [Pure]
     Result<TModel> Abstractions.IValidator<TModel>.Validate(TModel model)
     {
-        var context = new FluentValidation.ValidationContext<TModel>(model);
-        var result = Validate(context);
+        var result = Validate(new ValidationContext<TModel>(model));
         return Result.For(model, ValidationMessage.For(result.Errors));
     }
 }
