@@ -24,7 +24,7 @@ public class ValidationMessage : ValidationFailure, IValidationMessage
     /// </summary>
     [Pure]
     public static IEnumerable<ValidationMessage> For(IEnumerable<ValidationFailure> messages)
-        => Guard.NotNull(messages).Select(message => For(message));
+        => Guard.NotNull(messages).Select(For);
 
     /// <summary>Gets a <see cref="ValidationMessage"/> based on a <see cref="ValidationFailure"/>.</summary>
     [Pure]
