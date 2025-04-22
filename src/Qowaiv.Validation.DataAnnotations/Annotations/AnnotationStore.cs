@@ -7,12 +7,12 @@ namespace Qowaiv.Validation.DataAnnotations;
 internal sealed class AnnotationStore
 {
     private static readonly AttributeSorter Sorter = new();
-    private readonly ConcurrentDictionary<Type, MemberAnnotations[]?> Annotations;
+    private readonly ConcurrentDictionary<Type, TypeAnnotations?> Annotations;
 
     /// <summary>Initializes a new instance of the <see cref="AnnotationStore"/> class.</summary>
     public AnnotationStore()
     {
-        Annotations = new ConcurrentDictionary<Type, MemberAnnotations[]?>(
+        Annotations = new ConcurrentDictionary<Type, TypeAnnotations?>(
         [
             None<object>(),
             None<string>(),
@@ -31,7 +31,7 @@ internal sealed class AnnotationStore
     }
 
     [Pure]
-    public MemberAnnotations[]? Get(Type type, HashSet<Type> visited) => Trim(type) switch
+    public TypeAnnotations? Get(Type type, HashSet<Type> visited) => type switch
     {
         var t when LackAnnotations(t) => null,
         var t when Annotations.TryGetValue(t, out var annotations) => annotations,
@@ -40,8 +40,10 @@ internal sealed class AnnotationStore
     };
 
     [Pure]
-    private MemberAnnotations[]? Annotate(Type type, HashSet<Type> visited)
+    private TypeAnnotations? Annotate(Type type, HashSet<Type> visited)
     {
+        if (type.GetCustomAttribute<SkipValidationAttribute>() is { }) return null;
+
         MemberAnnotations[] members =
         [
             .. type
@@ -51,15 +53,25 @@ internal sealed class AnnotationStore
                 .OfType<MemberAnnotations>()
         ];
 
-        if (members.Length > 0 || type.ImplementsIValidatableObject())
+        var checks = AnnotationCheck.New(type) | (members.Any() ? AnnotationChecks.Members : default);
+
+        // for sealed types we have to check if the enumerable types are annotatable.
+        if (!checks.HasFlag(AnnotationChecks.Enumerable)
+            && type.GetEnumerableType() is { } enumType
+            && Get(enumType, visited) is { })
         {
-            Annotations[type] = members;
-            return members;
+            checks |= AnnotationChecks.Enumerable;
         }
-        else
+
+        var annotations = (members.Length, checks) switch
         {
-            return null;
-        }
+            (0, AnnotationChecks.None) => null,
+            (0, AnnotationChecks.Enumerable) => TypeAnnotations.SealedCollection,
+            _ => new TypeAnnotations(checks, members),
+        };
+
+        Annotations[type] = annotations;
+        return annotations;
     }
 
     [Pure]
@@ -94,28 +106,19 @@ internal sealed class AnnotationStore
         }
         attributes.Sort(Sorter);
 
-        var typeAnnotations = Get(info.MemberType, visited);
-        var isSealed = Trim(info.MemberType).IsSealed;
+        var typeAnnotations = Get(info.MemberType, visited)?.Checks ?? default;
 
-        return !isSealed || typeAnnotations is { } || attributes is { Count: > 0 }
-            ? new(info.Name, display, attributes.ToArray(), info.GetValue)
+        return typeAnnotations != AnnotationChecks.None || attributes is { Count: > 0 }
+            ? new(typeAnnotations, info.Name, display, attributes.ToArray(), info.GetValue)
             : null;
     }
-
-    [Pure]
-    private static Type Trim(Type type) => type switch
-    {
-        _ when Nullable.GetUnderlyingType(type) is { } underlying => Trim(underlying),
-        _ when type.GetEnumerableType() is { } enumerable => Trim(enumerable),
-        _ => type,
-    };
 
     [Pure]
     private static bool LackAnnotations(Type type)
         => type.IsPrimitive
         || type.IsEnum
         || type.IsPointer
-        || type.GetCustomAttribute<SkipValidationAttribute>() is { };
+        || (Nullable.GetUnderlyingType(type) is { } nulable && LackAnnotations(nulable));
 
     [Pure]
     private static bool Include(Member member)
@@ -123,10 +126,10 @@ internal sealed class AnnotationStore
         && member.IsNotIndexed;
 
     [Pure]
-    private static KeyValuePair<Type, MemberAnnotations[]?> None<T>() => new(typeof(T), null);
+    private static KeyValuePair<Type, TypeAnnotations?> None<T>() => new(typeof(T), null);
 
     [Pure]
-    private static KeyValuePair<Type, MemberAnnotations[]?> None(Type tp) => new(tp, null);
+    private static KeyValuePair<Type, TypeAnnotations?> None(Type tp) => new(tp, null);
 
     private sealed class AttributeSorter : IComparer<ValidationAttribute>
     {

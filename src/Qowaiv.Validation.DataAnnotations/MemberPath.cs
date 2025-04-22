@@ -25,11 +25,8 @@ internal readonly struct MemberPath
     /// <param name="name">
     /// The name to add to the path.
     /// </param>
-    /// <param name="index">
-    /// The index of the collection, -1 if no collection is involved.
-    /// </param>
     [Pure]
-    public MemberPath Nested(string name, int index = -1)
+    public MemberPath Child(string name)
     {
         Builder.Length = Length;
 
@@ -39,11 +36,18 @@ internal readonly struct MemberPath
         }
 
         Builder.Append(name);
-        if (index >= 0)
-        {
-            Builder.Append('[').Append(index).Append(']');
-            return new(Builder, Builder.Length);
-        }
+        return new(Builder, Builder.Length);
+    }
+
+    /// <summary>Creates a nested path.</summary>
+    /// <param name="index">
+    /// The index of item in the collection.
+    /// </param>
+    [Pure]
+    public MemberPath Child(int index)
+    {
+        Builder.Length = Length;
+        Builder.Append('[').Append(index).Append(']');
         return new(Builder, Builder.Length);
     }
 
