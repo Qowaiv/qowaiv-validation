@@ -29,12 +29,8 @@ v4.0.0
 - Introduction of [SkipValidation] to explictly skip validation of types and properties.
 - Reduce size of AnnotatedModel and AnnotatedModelStore.
 - Update to Qowaiv v7.2.3.
-- Drop of [AllowedValues] in favor of [Allowed<TValue>]. (BREAKING)
-- Drop of [DefinedEnumValues] in favor of [DefinedOnly<TEnum>]. (BREAKING)
-- Drop of [ForbiddenValues] in favor of [Forbidden<TValue>]. (BREAKING)
-- Drop of [NestedModel]. (BREAKING)
-- Drop of [SetOfValues] in favor of [SetOf<TValue>]. (BREAKING)
 - Drop support on ValidationAttributes defined on types. (BREAKING)
+- Update to Qowaiv v7.2.1. #88
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
