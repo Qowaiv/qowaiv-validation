@@ -19,6 +19,17 @@ public class Is_valid_for
         public void based_on_other_than_string()
             => new ForbiddenAttribute<Amount>(12.00, 17.23).IsValid(64.28.Amount()).Should().BeTrue();
     }
+
+    public class Non_generic
+    {
+        [Test]
+        public void Null()
+            => new ForbiddenValuesAttribute("DE", "FR", "GB").IsValid(null).Should().BeTrue();
+
+        [Test]
+        public void value_not_in_allowed_values()
+            => new ForbiddenValuesAttribute("DE", "FR", "GB").IsValid(Country.TR).Should().BeTrue();
+    }
 }
 
 public class Is_not_valid_for
@@ -28,6 +39,13 @@ public class Is_not_valid_for
         [Test]
         public void value_in_allowed_values()
        => new ForbiddenAttribute<Country>("DE", "FR", "GB").IsValid(Country.GB).Should().BeFalse();
+    }
+
+    public class Non_generic
+    {
+        [Test]
+        public void value_in_allowed_values()
+       => new ForbiddenValuesAttribute("DE", "FR", "GB").IsValid(Country.GB).Should().BeFalse();
     }
 }
 
