@@ -4,6 +4,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Validates if the decorated enum has a value that is a defined.</summary>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+[Validates(typeof(Enum))]
 public class DefinedEnumValuesOnlyAttribute()
     : ValidationAttribute(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError)
 {

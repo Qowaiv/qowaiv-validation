@@ -2,7 +2,8 @@ namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Specifies that all values are distinct.</summary>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
-public sealed class DistinctValuesAttribute(Type? comparer) 
+[Validates(typeof(object))]
+public sealed class DistinctValuesAttribute(Type? comparer)
     : ValidationAttribute(() => QowaivValidationMessages.DistinctValuesAttribute_ValidationError)
 {
     /// <summary>Initializes a new instance of the <see cref="DistinctValuesAttribute"/> class.</summary>
