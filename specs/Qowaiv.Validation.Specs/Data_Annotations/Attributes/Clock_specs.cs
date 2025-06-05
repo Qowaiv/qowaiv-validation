@@ -1,4 +1,4 @@
-using FluentAssertions.Extensions;
+using AwesomeAssertions.Extensions;
 using Qowaiv.Validation.DataAnnotations;
 
 namespace Data_annotations.Attributes.Clock_specs;
