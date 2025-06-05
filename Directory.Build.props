@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <IsPublishable>false</IsPublishable>
     <NuGetAudit>true</NuGetAudit>
+    <NuGetAuditMode>all</NuGetAuditMode>
     <OutputType>library</OutputType>
     <DefineConstants>CONTRACTS_FULL</DefineConstants>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
