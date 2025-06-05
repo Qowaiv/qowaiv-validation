@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/package.props" />
 
@@ -8,6 +8,12 @@
     <Version>3.0.0</Version>
     <PackageId>Qowaiv.Validation.DataAnnotations</PackageId>
     <ToBeReleased>
+      <![CDATA[
+v4.0.1
+- ?
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
       <![CDATA[
 v4.0.0
 - Validate public fields.
@@ -22,19 +28,11 @@ v4.0.0
 - Introduction of the [Validates(type)] attribute to decorate [Validation] attributes.
 - Qowaiv.Validation.DataAnnotations.ValidationMessage.None returns null. (BREAKING)
 - Refactor annotations resolving.
-- Marked AnnotatedModel as obsolete.
-- Marked AnnotatedProperty as obsolete.
-- Marked AnnotatedValidator as obsolete.
-- Support requiredness via the required modifier.
-- Introduction of [SkipValidation] to explictly skip validation of types and properties.
-- Reduce size of AnnotatedModel and AnnotatedModelStore.
-- Update to Qowaiv v7.2.3.
+- Dropped AnnotatedModel. (BREAKING)
+- Dropped AnnotatedProperty. (BREAKING)
+- Dropped AnnotatedValidator. (BREAKING)
 - Drop support on ValidationAttributes defined on types. (BREAKING)
-- Update to Qowaiv v7.2.1. #88
-]]>
-    </ToBeReleased>
-    <PackageReleaseNotes>
-      <![CDATA[
+- Update to Qowaiv v7.4.3.
 v3.0.0
 - Introduction of AllowedAttribute<T> as alternative to AllowedValuesAttribute.
 - Introduction of DefinedOnlyAttribute<T> as alternative to DefinedEnumValuesOnlyAttribute.
