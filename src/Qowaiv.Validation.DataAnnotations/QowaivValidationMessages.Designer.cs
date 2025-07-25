@@ -124,11 +124,20 @@ namespace Qowaiv.Validation.DataAnnotations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value of the {0} field should be in the past,.
+        ///   Looks up a localized string similar to The value of the {0} field should be in the past..
         /// </summary>
         internal static string InPast {
             get {
                 return ResourceManager.GetString("InPast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The field {0} must be between {1} and {2}..
+        /// </summary>
+        internal static string InRange {
+            get {
+                return ResourceManager.GetString("InRange", resourceCulture);
             }
         }
         
