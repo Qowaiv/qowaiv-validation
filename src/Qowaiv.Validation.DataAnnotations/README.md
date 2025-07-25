@@ -119,7 +119,7 @@ public class Model
 }
 ```
 
-# In future
+### In future
 The `[InFuture]` attributes requires the `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value to be in the future. The current time is resolved
 using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
@@ -132,7 +132,7 @@ public class Model
 }
 ```
 
-# In past
+### In past
 The `[InPast]` attributes requires the `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value to be in the past. The current time is resolved
 using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
@@ -144,6 +144,11 @@ public class Model
     public DateOnly DateOfBirth { get; init; }
 }
 ```
+
+### In range
+The `[InRange<TValue>]` attribute the allowed values to the specified range.
+This attribute is simliar to Microsoft's `[Range]`(https://learn.microsoft.com/dotnet/api/system.componentmodel.dataannotations.rangeattribute).
+
 
 ### Items validation
 The `[Items<TValidator>]` attribute to define a validation attribute to apply

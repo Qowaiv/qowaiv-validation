@@ -33,6 +33,9 @@
   <data name="InPast">
     <value>The value of the {0} field should be in the past.</value>
   </data>
+  <data name="InRange">
+    <value>The field {0} must be between {1} and {2}.</value>
+  </data>
   <data name="IsFiniteAttribute_ValidationError">
     <value>The value of the {0} field is not a finite number.</value>
   </data>

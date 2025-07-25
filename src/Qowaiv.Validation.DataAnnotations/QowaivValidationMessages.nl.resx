@@ -30,6 +30,9 @@
   <data name="InPast">
     <value>De waarde van het {0} veld moet in het verleden liggen.</value>
   </data>
+  <data name="InRange">
+    <value>De waarde van het {0} veld moet een waarde hebben tussen {1} en {2}.</value>
+  </data>
   <data name="IsFiniteAttribute_ValidationError">
     <value>De waarde van het {0} veld is geen eindig getal.</value>
   </data>
