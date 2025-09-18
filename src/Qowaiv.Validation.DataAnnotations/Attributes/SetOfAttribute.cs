@@ -1,3 +1,5 @@
+using System.Net.Http;
+
 namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Base <see cref="ValidationAttribute"/> for allowing or forbidding a set of values.</summary>
@@ -42,12 +44,7 @@ public abstract class SetOfAttribute<TValue> : ValidationAttribute
     private HashSet<TValue> Init()
     {
         var all = new HashSet<TValue>();
-
-        var converter = TypeConverter is not null
-            ? Guard.IsInstanceOf<TypeConverter>(Activator.CreateInstance(TypeConverter))
-            : null;
-
-        converter ??= TypeDescriptor.GetConverter(typeof(TValue));
+        var converter = Converter();
 
         foreach (var value in Raw)
         {
@@ -62,4 +59,16 @@ public abstract class SetOfAttribute<TValue> : ValidationAttribute
         }
         return all;
     }
+
+    /// <summary>Resolves the Type converter to use.</summary>
+    /// <remarks>
+    /// Because .NET does provide a built-in converter for <see cref="HttpMethod"/>, we do.
+    /// </remarks>
+    [Pure]
+    private TypeConverter Converter() => TypeConverter switch
+    {
+        not null => Guard.IsInstanceOf<TypeConverter>(Activator.CreateInstance(TypeConverter)),
+        _ when typeof(TValue) == typeof(HttpMethod) => new Conversion.Web.HttpMethodTypeConverter(),
+        _ => TypeDescriptor.GetConverter(typeof(TValue)),
+    };
 }

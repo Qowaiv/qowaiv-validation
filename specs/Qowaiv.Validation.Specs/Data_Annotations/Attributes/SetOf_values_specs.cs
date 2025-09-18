@@ -2,7 +2,7 @@ using Qowaiv.Financial;
 using Qowaiv.TestTools.Globalization;
 using Qowaiv.Validation.DataAnnotations;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
+using System.Net.Http;
 
 namespace Data_Annotations.Attributes.SetOf_values_specs;
 
@@ -22,6 +22,11 @@ public class Supports
                 .Should().BeEquivalentTo([42.12.Amount(), 17.30.Amount()]);
         }
     }
+
+    [Test]
+    public void HttpMethod_as_TValue()
+        => new AllowedAttribute<HttpMethod>("GET", "POST").Values
+        .Should().BeEquivalentTo([HttpMethod.Get, HttpMethod.Post]);
 
     [Test]
     public void custom_type_converter()
