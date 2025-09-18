@@ -13,29 +13,7 @@ public abstract class SetOfAttribute<TValue> : ValidationAttribute
     /// Representations of the values.
     /// </param>
     protected SetOfAttribute(params object[] values)
-        : base(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError)
-    {
-        var all = new HashSet<TValue>();
-
-        var converter = TypeConverter is not null
-            ? Guard.IsInstanceOf<TypeConverter>(Activator.CreateInstance(TypeConverter))
-            : null;
-
-        converter ??= TypeDescriptor.GetConverter(typeof(TValue));
-
-        foreach (var value in values)
-        {
-            if (value is TValue typed)
-            {
-                all.Add(typed);
-            }
-            else if (converter.ConvertFrom(value) is TValue converted)
-            {
-                all.Add(converted);
-            }
-        }
-        Values = all;
-    }
+        : base(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError) => Raw = values;
 
     /// <summary>Specify a custom type converter to convert the values to convert.</summary>
     public Type? TypeConverter { get; init; }
@@ -46,11 +24,42 @@ public abstract class SetOfAttribute<TValue> : ValidationAttribute
     protected abstract bool OnEqual { get; }
 
     /// <summary>Gets the values.</summary>
-    public IReadOnlyCollection<TValue> Values { get; }
+    public IReadOnlyCollection<TValue> Values => Set;
 
     /// <summary>Returns true if the value is allowed.</summary>
     [Pure]
     public sealed override bool IsValid(object? value)
         => value is null
-        || OnEqual == Values.Contains((TValue)value);
+        || OnEqual == Set.Contains((TValue)value);
+
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private HashSet<TValue> Set => field ??= Init();
+
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private readonly object[] Raw;
+
+    [Pure]
+    private HashSet<TValue> Init()
+    {
+        var all = new HashSet<TValue>();
+
+        var converter = TypeConverter is not null
+            ? Guard.IsInstanceOf<TypeConverter>(Activator.CreateInstance(TypeConverter))
+            : null;
+
+        converter ??= TypeDescriptor.GetConverter(typeof(TValue));
+
+        foreach (var value in Raw)
+        {
+            if (value is TValue typed)
+            {
+                all.Add(typed);
+            }
+            else if (converter.ConvertFrom(value) is TValue converted)
+            {
+                all.Add(converted);
+            }
+        }
+        return all;
+    }
 }
