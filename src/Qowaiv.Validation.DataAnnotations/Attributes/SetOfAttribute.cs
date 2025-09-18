@@ -62,7 +62,7 @@ public abstract class SetOfAttribute<TValue> : ValidationAttribute
 
     /// <summary>Resolves the Type converter to use.</summary>
     /// <remarks>
-    /// Because .NET does provide a built-in converter for <see cref="HttpMethod"/>, we do.
+    /// Because .NET doesn't provide a built-in converter for <see cref="HttpMethod"/>, we do.
     /// </remarks>
     [Pure]
     private TypeConverter Converter() => TypeConverter switch
