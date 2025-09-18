@@ -17,7 +17,11 @@ public abstract class SetOfAttribute<TValue> : ValidationAttribute
     {
         var all = new HashSet<TValue>();
 
-        TypeConverter converter = TypeDescriptor.GetConverter(typeof(TValue));
+        var converter = TypeConverter is not null
+            ? Guard.IsInstanceOf<TypeConverter>(Activator.CreateInstance(TypeConverter))
+            : null;
+
+        converter ??= TypeDescriptor.GetConverter(typeof(TValue));
 
         foreach (var value in values)
         {
@@ -32,6 +36,9 @@ public abstract class SetOfAttribute<TValue> : ValidationAttribute
         }
         Values = all;
     }
+
+    /// <summary>Specify a custom type converter to convert the values to convert.</summary>
+    public Type? TypeConverter { get; init; }
 
     /// <summary>The result to return when the value of <see cref="IsValid(object)" />
     /// equals one of the values of the <see cref="SetOfAttribute{TValue}" />.
