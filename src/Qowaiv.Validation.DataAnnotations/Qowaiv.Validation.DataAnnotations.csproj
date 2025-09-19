@@ -4,17 +4,56 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net8.0;net9.0</TargetFrameworks>
-    <PackageValidationBaselineVersion>4.0.0</PackageValidationBaselineVersion>
-    <Version>4.0.1</Version>
     <PackageId>Qowaiv.Validation.DataAnnotations</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Qowaiv" />
+    <PackageReference Include="System.ComponentModel.Annotations" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <PackageReference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="QowaivValidationMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>QowaivValidationMessages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="QowaivValidationMessages.nl.resx" />
+    <EmbeddedResource Update="QowaivValidationMessages.resx">
+      <LastGenOutput>QowaivValidationMessages.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <PackageValidationBaselineVersion>4.0.0</PackageValidationBaselineVersion>
+    <Version>4.0.2</Version>
     <ToBeReleased>
       <![CDATA[
-v4.0.2
+v4.*
 - ?
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[
+v4.0.2
+- Support custom TypeConverters for [Allowed<T>] and [Forbidden<T>].
+- Support System.Net.Http.HttpMethod without custom TypeConverter for [Allowed<T>] and [Forbidden<T>].
 v4.0.1
 - Introduction of [InRange<TValue>] valiation attribute.
 v4.0.0
@@ -85,39 +124,6 @@ v0.0.4
 ]]>
     </PackageReleaseNotes>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Qowaiv" />
-    <PackageReference Include="System.ComponentModel.Annotations" />
-  </ItemGroup>
-  
-  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
-    <PackageReference Include="Microsoft.CSharp" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="../Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="QowaivValidationMessages.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>QowaivValidationMessages.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="QowaivValidationMessages.nl.resx" />
-    <EmbeddedResource Update="QowaivValidationMessages.resx">
-      <LastGenOutput>QowaivValidationMessages.Designer.cs</LastGenOutput>
-      <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
 
 </Project>
  

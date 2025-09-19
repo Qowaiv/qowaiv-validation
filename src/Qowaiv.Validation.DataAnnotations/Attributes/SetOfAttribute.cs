@@ -1,3 +1,5 @@
+using System.Net.Http;
+
 namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Base <see cref="ValidationAttribute"/> for allowing or forbidding a set of values.</summary>
@@ -13,13 +15,38 @@ public abstract class SetOfAttribute<TValue> : ValidationAttribute
     /// Representations of the values.
     /// </param>
     protected SetOfAttribute(params object[] values)
-        : base(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError)
+        : base(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError) => Raw = values;
+
+    /// <summary>Specify a custom type converter to convert the values to convert.</summary>
+    public Type? TypeConverter { get; init; }
+
+    /// <summary>The result to return when the value of <see cref="IsValid(object)" />
+    /// equals one of the values of the <see cref="SetOfAttribute{TValue}" />.
+    /// </summary>
+    protected abstract bool OnEqual { get; }
+
+    /// <summary>Gets the values.</summary>
+    public IReadOnlyCollection<TValue> Values => Set;
+
+    /// <summary>Returns true if the value is allowed.</summary>
+    [Pure]
+    public sealed override bool IsValid(object? value)
+        => value is null
+        || OnEqual == Set.Contains((TValue)value);
+
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private HashSet<TValue> Set => field ??= Init();
+
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private readonly object[] Raw;
+
+    [Pure]
+    private HashSet<TValue> Init()
     {
         var all = new HashSet<TValue>();
+        var converter = Converter();
 
-        TypeConverter converter = TypeDescriptor.GetConverter(typeof(TValue));
-
-        foreach (var value in values)
+        foreach (var value in Raw)
         {
             if (value is TValue typed)
             {
@@ -30,20 +57,18 @@ public abstract class SetOfAttribute<TValue> : ValidationAttribute
                 all.Add(converted);
             }
         }
-        Values = all;
+        return all;
     }
 
-    /// <summary>The result to return when the value of <see cref="IsValid(object)" />
-    /// equals one of the values of the <see cref="SetOfAttribute{TValue}" />.
-    /// </summary>
-    protected abstract bool OnEqual { get; }
-
-    /// <summary>Gets the values.</summary>
-    public IReadOnlyCollection<TValue> Values { get; }
-
-    /// <summary>Returns true if the value is allowed.</summary>
+    /// <summary>Resolves the Type converter to use.</summary>
+    /// <remarks>
+    /// Because .NET doesn't provide a built-in converter for <see cref="HttpMethod"/>, we do.
+    /// </remarks>
     [Pure]
-    public sealed override bool IsValid(object? value)
-        => value is null
-        || OnEqual == Values.Contains((TValue)value);
+    private TypeConverter Converter() => TypeConverter switch
+    {
+        not null => Guard.IsInstanceOf<TypeConverter>(Activator.CreateInstance(TypeConverter)),
+        _ when typeof(TValue) == typeof(HttpMethod) => new Conversion.Web.HttpMethodTypeConverter(),
+        _ => TypeDescriptor.GetConverter(typeof(TValue)),
+    };
 }
