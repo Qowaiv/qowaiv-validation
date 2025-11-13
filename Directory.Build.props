@@ -28,15 +28,8 @@
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)/build/Qowaiv.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
-  <ItemGroup Label="Code generation">
-    <PackageReference Include="PolySharp" PrivateAssets="all" />
-    <PackageReference Include="Qowaiv.Diagnostics.Contracts" PrivateAssets="all" />
-  </ItemGroup>
-
   <ItemGroup Label="Analyzers">
     <PackageReference Include="AsyncFixer" PrivateAssets="all" />
-    <PackageReference Include="DotNetProjectFile.Analyzers" PrivateAssets="all" ExcludeAssets="compile" />
-    <PackageReference Include="SonarAnalyzer.CSharp" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>

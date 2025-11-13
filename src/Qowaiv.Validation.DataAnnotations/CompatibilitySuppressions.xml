@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- https://learn.microsoft.com/dotnet/fundamentals/package-validation/diagnostic-ids -->
-<Suppressions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<Suppressions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Validation.DataAnnotations.Attributes.InRangeAttribute`1</Target>
@@ -35,6 +35,48 @@
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Validation.DataAnnotations.SetOfAttribute`1.get_TypeConverter</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Validation.DataAnnotations.SetOfAttribute`1.set_TypeConverter(System.Type)</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Validation.DataAnnotations.SetOfAttribute`1.get_TypeConverter</Target>
+    <Left>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Left>
+    <Right>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Validation.DataAnnotations.SetOfAttribute`1.set_TypeConverter(System.Type)</Target>
+    <Left>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Left>
+    <Right>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Validation.DataAnnotations.SetOfAttribute`1.get_TypeConverter</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Validation.DataAnnotations.SetOfAttribute`1.set_TypeConverter(System.Type)</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
     <DiagnosticId>CP0003</DiagnosticId>
     <Target>Qowaiv.Validation.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
     <Left>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Left>
@@ -51,6 +93,27 @@
   <Suppression>
     <DiagnosticId>CP0003</DiagnosticId>
     <Target>Qowaiv.Validation.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>M:Qowaiv.Validation.DataAnnotations.SetOfAttribute`1.get_Values:[T:System.Runtime.CompilerServices.CompilerGeneratedAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>M:Qowaiv.Validation.DataAnnotations.SetOfAttribute`1.get_Values:[T:System.Runtime.CompilerServices.CompilerGeneratedAttribute]</Target>
+    <Left>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Left>
+    <Right>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>M:Qowaiv.Validation.DataAnnotations.SetOfAttribute`1.get_Values:[T:System.Runtime.CompilerServices.CompilerGeneratedAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -129,7 +192,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Validation.DataAnnotations.AnnotatedModelValidator`1.#ctor(System.IServiceProvider,System.Collections.Generic.IDictionary{System.Object,System.Object}):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Validation.DataAnnotations.AnnotatedModelValidator`1.#ctor(System.IServiceProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
     <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
   </Suppression>
@@ -141,7 +204,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Validation.DataAnnotations.AnnotatedModelValidator`1.#ctor(System.IServiceProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Validation.DataAnnotations.AnnotatedModelValidator`1.#ctor(System.IServiceProvider,System.Collections.Generic.IDictionary{System.Object,System.Object}):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
     <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
   </Suppression>
@@ -249,13 +312,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Validation.DataAnnotations.ItemsAttribute`1.IsValid(System.Object,System.ComponentModel.DataAnnotations.ValidationContext):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Validation.DataAnnotations.ItemsAttribute`1.IsValid(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)$1:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
     <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Validation.DataAnnotations.ItemsAttribute`1.IsValid(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)$1:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Target>M:Qowaiv.Validation.DataAnnotations.ItemsAttribute`1.IsValid(System.Object,System.ComponentModel.DataAnnotations.ValidationContext):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
     <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
   </Suppression>
@@ -321,7 +384,19 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Validation.DataAnnotations.SetOfAttribute`1.get_TypeConverter:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Validation.DataAnnotations.SetOfAttribute`1.IsValid(System.Object):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Validation.DataAnnotations.SetOfAttribute`1.set_TypeConverter(System.Type):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
     <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
   </Suppression>
@@ -435,7 +510,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:System.ComponentModel.DataAnnotations.QowaivValidationAttributeExtensions.GetValidationMessage(System.ComponentModel.DataAnnotations.ValidationAttribute,System.Object,System.ComponentModel.DataAnnotations.ValidationContext)-&gt;Qowaiv.Validation.DataAnnotations.ValidationMessage?:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Target>M:System.ComponentModel.DataAnnotations.QowaivValidationAttributeExtensions.GetValidationMessage(System.ComponentModel.DataAnnotations.ValidationAttribute,System.Object,System.ComponentModel.DataAnnotations.ValidationContext)$1:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
     <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
   </Suppression>
@@ -447,13 +522,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:System.ComponentModel.DataAnnotations.QowaivValidationAttributeExtensions.GetValidationMessage(System.ComponentModel.DataAnnotations.ValidationAttribute,System.Object,System.ComponentModel.DataAnnotations.ValidationContext)$1:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
-    <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:System.ComponentModel.DataAnnotations.ValidationContextExtensions.GetSevice``1(System.ComponentModel.DataAnnotations.ValidationContext):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:System.ComponentModel.DataAnnotations.QowaivValidationAttributeExtensions.GetValidationMessage(System.ComponentModel.DataAnnotations.ValidationAttribute,System.Object,System.ComponentModel.DataAnnotations.ValidationContext)-&gt;Qowaiv.Validation.DataAnnotations.ValidationMessage?:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
     <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
   </Suppression>
@@ -465,7 +534,19 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:System.ComponentModel.DataAnnotations.ValidationContextExtensions.GetSevice``1(System.ComponentModel.DataAnnotations.ValidationContext):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
     <Target>P:Qowaiv.Validation.DataAnnotations.AnnotatedModelValidator`1.Items:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>P:Qowaiv.Validation.DataAnnotations.SetOfAttribute`1.TypeConverter:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
     <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
   </Suppression>
@@ -663,18 +744,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>T:Qowaiv.Validation.DataAnnotations.Size:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
-    <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0016</DiagnosticId>
-    <Target>T:Qowaiv.Validation.DataAnnotations.Size:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
-    <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0016</DiagnosticId>
     <Target>T:Qowaiv.Validation.DataAnnotations.Size.AtLeastAttribute:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
     <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
@@ -688,6 +757,18 @@
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>T:Qowaiv.Validation.DataAnnotations.Size.InRangeAttribute:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>T:Qowaiv.Validation.DataAnnotations.Size:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>T:Qowaiv.Validation.DataAnnotations.Size:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.DataAnnotations.dll</Left>
     <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
   </Suppression>
