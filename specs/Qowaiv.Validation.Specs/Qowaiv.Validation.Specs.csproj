@@ -3,7 +3,7 @@
   <Import Project="../../props/specs.props" />
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <IsTestProject>true</IsTestProject>
     <RootNamespace>Specs</RootNamespace>
     <NoWarn>CA1824;CA1861</NoWarn>
