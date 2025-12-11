@@ -42,7 +42,7 @@
 
   <PropertyGroup>
     <PackageValidationBaselineVersion>4.0.0</PackageValidationBaselineVersion>
-    <Version>4.0.2</Version>
+    <Version>4.0.3</Version>
     <ToBeReleased>
       <![CDATA[
 v4.*
@@ -51,6 +51,8 @@ v4.*
     </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[
+v4.0.3
+- Type conversions done by DataAnotations are culture independent. (BUG)
 v4.0.2
 - Support custom TypeConverters for [Allowed<T>] and [Forbidden<T>].
 - Support System.Net.Http.HttpMethod without custom TypeConverter for [Allowed<T>] and [Forbidden<T>].

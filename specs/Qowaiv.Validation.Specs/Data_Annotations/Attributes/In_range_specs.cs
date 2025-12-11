@@ -1,6 +1,8 @@
 using Qowaiv.Financial;
+using Qowaiv.TestTools.Globalization;
 using Qowaiv.Validation.DataAnnotations;
 using Qowaiv.Validation.DataAnnotations.Attributes;
+using System.Runtime.CompilerServices;
 
 namespace Data_Annotations.Attributes.In_range_specs;
 
@@ -27,6 +29,17 @@ public class Is_invalid_for
     [Test]
     public void value_of_different_type()
        => new InRangeAttribute<int>(12, 42).IsValid(20.0).Should().BeFalse();
+}
+
+public class Is_culture_independent
+{
+    [Test]
+    public void relies_on_invariant_culture()
+    {
+        using var _ = TestCultures.nl_BE.Scoped();
+        var attr  = new InRangeAttribute<decimal>("-3.141", "3.141");
+        attr.Maximum.Should().Be(3.141m);
+    }
 }
 
 public class With_message
