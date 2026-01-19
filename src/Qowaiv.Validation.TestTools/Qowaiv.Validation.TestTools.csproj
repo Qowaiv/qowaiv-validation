@@ -4,7 +4,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
-    <PackageValidationBaselineVersion>1.0.0</PackageValidationBaselineVersion>
+    <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
     <Version>3.0.0</Version>
     <PackageId>Qowaiv.Validation.TestTools</PackageId>
     <PackageReleaseNotes>
