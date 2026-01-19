@@ -1,0 +1,93 @@
+{
+  "version": 2,
+  "dependencies": {
+    "net10.0": {
+      "AsyncFixer": {
+        "type": "Direct",
+        "requested": "[2.1.0, )",
+        "resolved": "2.1.0",
+        "contentHash": "OOHNlH7GF39qk0Pv4cIQWA99hUh3nujDgGE2nADPpw88lD7s2qwlxEhuJIBfstC8ng3B1yY6SQy2JW/tddlMAQ=="
+      },
+      "DotNetProjectFile.Analyzers": {
+        "type": "Direct",
+        "requested": "[1.8.2, )",
+        "resolved": "1.8.2",
+        "contentHash": "qpiZM1TBr1UfOkFr+n7ZvV8URWLz4NqtJ55/Z71DXUZ/FCtjXPb7HKd2mCbTLvI3zo4bmWz/LbdEnSe7MMrasg=="
+      },
+      "PolySharp": {
+        "type": "Direct",
+        "requested": "[1.15.0, )",
+        "resolved": "1.15.0",
+        "contentHash": "FbU0El+EEjdpuIX4iDbeS7ki1uzpJPx8vbqOzEtqnl1GZeAGJfq+jCbxeJL2y0EPnUNk8dRnnqR2xnYXg9Tf+g=="
+      },
+      "Qowaiv.Diagnostics.Contracts": {
+        "type": "Direct",
+        "requested": "[2.0.6, )",
+        "resolved": "2.0.6",
+        "contentHash": "baPTMJTai/ePdLJhdUEZ4uwtLIavyEBWEOBYazoPtl3bySy+jNa29YbCEpzIp5zaAUwpsXVCzBdR+95eh7Os6A=="
+      },
+      "SonarAnalyzer.CSharp": {
+        "type": "Direct",
+        "requested": "[10.18.0.131500, )",
+        "resolved": "10.18.0.131500",
+        "contentHash": "Rbad71/k5e8MfG81i03Yh2YQQgovIdmyhWcLRevrcW4h9i1DUB3kKX9O1QiOGXcULLjkTdRAXdR8A8XtinL3Pg=="
+      },
+      "qowaiv.validation.abstractions": {
+        "type": "Project"
+      },
+      "qowaiv.validation.dataannotations": {
+        "type": "Project",
+        "dependencies": {
+          "Qowaiv": "[7.4.7, )",
+          "Qowaiv.Validation.Abstractions": "[1.0.0, )",
+          "System.ComponentModel.Annotations": "[5.0.0, )"
+        }
+      },
+      "qowaiv.validation.fluent": {
+        "type": "Project",
+        "dependencies": {
+          "FluentValidation": "[12.1.1, )",
+          "Qowaiv": "[7.4.7, )",
+          "Qowaiv.Validation.Abstractions": "[1.0.0, )"
+        }
+      },
+      "qowaiv.validation.guarding": {
+        "type": "Project",
+        "dependencies": {
+          "Qowaiv.Validation.Abstractions": "[1.0.0, )",
+          "Qowaiv.Validation.Messages": "[1.0.0, )"
+        }
+      },
+      "qowaiv.validation.messages": {
+        "type": "Project",
+        "dependencies": {
+          "Qowaiv.Validation.Abstractions": "[1.0.0, )"
+        }
+      },
+      "qowaiv.validation.xml": {
+        "type": "Project",
+        "dependencies": {
+          "Qowaiv.Validation.Abstractions": "[1.0.0, )"
+        }
+      },
+      "FluentValidation": {
+        "type": "CentralTransitive",
+        "requested": "[12.1.1, )",
+        "resolved": "12.1.1",
+        "contentHash": "EPpkIe1yh1a0OXyC100oOA8WMbZvqUu5plwhvYcb7oSELfyUZzfxV48BLhvs3kKo4NwG7MGLNgy1RJiYtT8Dpw=="
+      },
+      "Qowaiv": {
+        "type": "CentralTransitive",
+        "requested": "[7.4.7, )",
+        "resolved": "7.4.7",
+        "contentHash": "6dutg6KBxAWv55gNTM8Z+sadVlCg1tNPy/J5tgSXeWF66ZvCbhabcZqNw8likc+2T9es32sIMyfmU7uUXCvItA=="
+      },
+      "System.ComponentModel.Annotations": {
+        "type": "CentralTransitive",
+        "requested": "[5.0.0, )",
+        "resolved": "5.0.0",
+        "contentHash": "dMkqfy2el8A8/I76n2Hi1oBFEbG1SfxD2l5nhwXV3XjlnOmwxJlQbYpJH4W51odnU9sARCSAgv7S3CyAFMkpYg=="
+      }
+    }
+  }
+}
