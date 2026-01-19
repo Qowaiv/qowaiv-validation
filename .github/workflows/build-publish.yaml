@@ -38,12 +38,7 @@ jobs:
       - name: DotNet Pack
         if: startsWith(github.ref, 'refs/tags/')
         run: |
-          arrTag=(${GITHUB_REF//\// })
-          VERSION="${arrTag[2]}"
-          echo Version: $VERSION
-          VERSION="${VERSION//v}"
-          echo Clean Version: $VERSION
-          dotnet pack qowaiv-validation.slnx -v normal --no-build --no-restore -p:Version=$VERSION -c Release --output packages
+          dotnet pack qowaiv-validation.slnx -v normal --no-build --no-restore -c Release --output packages
    
       - name: Upload Artifact
         if: startsWith(github.ref, 'refs/tags/')
