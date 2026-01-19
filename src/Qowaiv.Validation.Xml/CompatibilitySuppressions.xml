@@ -14,6 +14,27 @@
     <Right>lib/net8.0/Qowaiv.Validation.Xml.dll</Right>
   </Suppression>
   <Suppression>
+    <DiagnosticId>CP0003</DiagnosticId>
+    <Target>Qowaiv.Validation.Xml, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Xml.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.Xml.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0003</DiagnosticId>
+    <Target>Qowaiv.Validation.Xml, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Left>lib/net9.0/Qowaiv.Validation.Xml.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.Xml.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0003</DiagnosticId>
+    <Target>Qowaiv.Validation.Xml, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.Xml.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Xml.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
     <Target>M:Qowaiv.Validation.Xml.XmlValidationHandler.get_Messages:[T:System.Runtime.CompilerServices.CompilerGeneratedAttribute]</Target>
     <Left>lib/net8.0/Qowaiv.Validation.Xml.dll</Left>
@@ -24,7 +45,7 @@
     <DiagnosticId>CP0014</DiagnosticId>
     <Target>M:Qowaiv.Validation.Xml.XmlValidationHandler.get_Messages:[T:System.Runtime.CompilerServices.CompilerGeneratedAttribute]</Target>
     <Left>lib/net9.0/Qowaiv.Validation.Xml.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.Xml.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.Xml.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>

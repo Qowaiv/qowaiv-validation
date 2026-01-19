@@ -19,7 +19,7 @@ v3.0.
 - `Before`, `After`, `NotBefore`, and `NotAfter` available for `IComparable`.
 - Update to Qowaiv v7.4.7.
 - Add .NET 10.0 target.
-- Drop .NET standard 5.0, NET6.0, NET7.0 NET 9.0 targets. (BREAKING)
+- Drop .NET standard, .NET 7.0, and .NET 9.0 targets. (BREAKING)
 - Update to FluentValidation 12.1.0. (BREAKING)
 v2.0.0
 - Add .NET 9.0 target.

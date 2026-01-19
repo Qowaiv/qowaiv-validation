@@ -5,14 +5,18 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net8.0;net10.0</TargetFrameworks>
     <PackageValidationBaselineVersion>1.0.0</PackageValidationBaselineVersion>
-    <Version>1.0.0</Version>
+    <Version>2.0.0</Version>
     <PackageId>Qowaiv.Validation.Abstractions</PackageId>
     <PackageReleaseNotes>
       <![CDATA[
-v1.0.0
+v2.0.0
 - Add Result.ThrowIfInvalid().
-- Add .NET 9.0 target.
 - Add .NET 10.0 target.
+- Drop .NET9.0 targets. (BREAKING)
+- Drop public Diagnostics.Contracts. (BREAKING)
+- Drop binary serialization on exceptions. (BREAKING)
+v1.0.0
+- Add .NET 9.0 target.
 - Drop .NET 5.0, NET6.0, NET7.0 targets. (BREAKING)
 - Drop public Diagnostics.Contracts. (BREAKING)
 - Drop binary serialization on exceptions. (BREAKING)
