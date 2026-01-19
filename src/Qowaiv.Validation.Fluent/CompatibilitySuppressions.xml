@@ -33,28 +33,42 @@
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:FluentValidation.AfterValidation</Target>
     <Left>lib/net9.0/Qowaiv.Validation.Fluent.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.Fluent.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.Fluent.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:FluentValidation.BeforeValidation</Target>
     <Left>lib/net9.0/Qowaiv.Validation.Fluent.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.Fluent.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.Fluent.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:FluentValidation.NotAfterValidation</Target>
     <Left>lib/net9.0/Qowaiv.Validation.Fluent.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.Fluent.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.Fluent.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:FluentValidation.NotBeforeValidation</Target>
     <Left>lib/net9.0/Qowaiv.Validation.Fluent.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.Fluent.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.Fluent.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0003</DiagnosticId>
+    <Target>Qowaiv.Validation.Fluent, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Fluent.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.Fluent.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0003</DiagnosticId>
+    <Target>Qowaiv.Validation.Fluent, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Left>lib/net9.0/Qowaiv.Validation.Fluent.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.Fluent.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>

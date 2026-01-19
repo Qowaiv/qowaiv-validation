@@ -138,133 +138,133 @@
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:FluentAssertions.Qowaiv.Validation.ResultAssertions</Target>
     <Left>lib/net9.0/Qowaiv.Validation.TestTools.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.TestTools.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:FluentAssertions.Qowaiv.Validation.ResultAssertions`1</Target>
     <Left>lib/net9.0/Qowaiv.Validation.TestTools.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.TestTools.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:FluentAssertions.Qowaiv.Validation.ResultAssertionsBase`1</Target>
     <Left>lib/net9.0/Qowaiv.Validation.TestTools.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.TestTools.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:FluentAssertions.Qowaiv.Validation.ResultInvalidnessAssertions</Target>
     <Left>lib/net9.0/Qowaiv.Validation.TestTools.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.TestTools.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:FluentAssertions.Qowaiv.Validation.ResultValidnessAssertions</Target>
     <Left>lib/net9.0/Qowaiv.Validation.TestTools.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.TestTools.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:FluentAssertions.Qowaiv.Validation.ResultValidnessAssertions`1</Target>
     <Left>lib/net9.0/Qowaiv.Validation.TestTools.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.TestTools.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:FluentAssertions.Qowaiv.Validation.ResultValidnessAssertionsBase`1</Target>
     <Left>lib/net9.0/Qowaiv.Validation.TestTools.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.TestTools.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:FluentAssertions.Qowaiv.Validation.ResultValidnessMessageAssertions`1</Target>
     <Left>lib/net9.0/Qowaiv.Validation.TestTools.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.TestTools.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:FluentAssertions.QowaivFluentAssertions</Target>
     <Left>lib/net9.0/Qowaiv.Validation.TestTools.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.TestTools.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Validation.TestTools.AssertionFailed</Target>
     <Left>lib/net9.0/Qowaiv.Validation.TestTools.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.TestTools.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Validation.TestTools.QowaivFluentAssertions</Target>
     <Left>lib/net9.0/Qowaiv.Validation.TestTools.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.TestTools.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Validation.TestTools.ResultAssertions</Target>
     <Left>lib/net9.0/Qowaiv.Validation.TestTools.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.TestTools.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Validation.TestTools.ResultAssertions`1</Target>
     <Left>lib/net9.0/Qowaiv.Validation.TestTools.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.TestTools.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Validation.TestTools.ResultAssertionsBase`1</Target>
     <Left>lib/net9.0/Qowaiv.Validation.TestTools.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.TestTools.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Validation.TestTools.ResultInvalidnessAssertions</Target>
     <Left>lib/net9.0/Qowaiv.Validation.TestTools.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.TestTools.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Validation.TestTools.ResultValidnessAssertions</Target>
     <Left>lib/net9.0/Qowaiv.Validation.TestTools.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.TestTools.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Validation.TestTools.ResultValidnessAssertions`1</Target>
     <Left>lib/net9.0/Qowaiv.Validation.TestTools.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.TestTools.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Validation.TestTools.ResultValidnessAssertionsBase`1</Target>
     <Left>lib/net9.0/Qowaiv.Validation.TestTools.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.TestTools.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Validation.TestTools.ResultValidnessMessageAssertions`1</Target>
     <Left>lib/net9.0/Qowaiv.Validation.TestTools.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.TestTools.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
@@ -278,7 +278,7 @@
     <DiagnosticId>CP0003</DiagnosticId>
     <Target>Qowaiv.Validation.TestTools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
     <Left>lib/net9.0/Qowaiv.Validation.TestTools.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.TestTools.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
