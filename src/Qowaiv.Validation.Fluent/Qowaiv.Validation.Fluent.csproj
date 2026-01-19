@@ -3,16 +3,17 @@
   <Import Project="../../props/package.props" />
   
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
     <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
     <Version>2.0.0</Version>
     <PackageId>Qowaiv.Validation.Fluent</PackageId>
     <ToBeReleased>
       <![CDATA[
-v2.0.1
-- `Before`, `After`, `NotBefore`, and `NotAfter` available for `IComparable`. #90
-- Update to Qowaiv v7.2.3.
-- Update to FluentValidation 11.11.0. #88
+v3.0.
+- `Before`, `After`, `NotBefore`, and `NotAfter` available for `IComparable`.
+- Update to Qowaiv v7.4.5.
+- Update to FluentValidation 12.1.0. (BREAKING)
+- Drop .NET standard suppport. (BREAKING)
     ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
