@@ -153,9 +153,17 @@ public class ThrowIfInvalid
         => 17.Invoking(v => Result.For(v)).Should().NotThrow();
 
     [Test]
-    public void InvalidModelException_when_invalid()
+    public void InvalidModelException_when_invalid_model()
     {
         var result = Result.WithMessages<int>(ValidationMessage.Error("Oops"));
+        result.Invoking(_ => result.ThrowIfInvalid())
+            .Should().Throw<InvalidModelException>();
+    }
+
+    [Test]
+    public void InvalidModelException_when_invalid_result()
+    {
+        var result = Result.WithMessages(ValidationMessage.Error("Oops"));
         result.Invoking(_ => result.ThrowIfInvalid())
             .Should().Throw<InvalidModelException>();
     }

@@ -24,6 +24,9 @@
   <data name="InvalidModelException" xml:space="preserve">
     <value>The {0} model can not be operated on as it is invalid.</value>
   </data>
+  <data name="InvalidOperationException" xml:space="preserve">
+    <value>The result of the operation is invalid.</value>
+  </data>
   <data name="NoValue" xml:space="preserve">
     <value>The value of the Result&lt;T&gt; can not be null.</value>
   </data>

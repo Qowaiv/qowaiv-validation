@@ -33,14 +33,10 @@ public sealed class Result<TModel> : Result
     [Pure]
     public static implicit operator Result<TModel>(TModel model) => For(model);
 
-    /// <summary>Throws an <see cref="InvalidModelException"/> if the result is not valid.</summary>
-    public void ThrowIfInvalid()
-    {
-        if (!IsValid)
-        {
-            throw InvalidModelException.For<TModel>(Errors);
-        }
-    }
+    /// <inheritdoc />
+    [Pure]
+    protected internal override InvalidModelException InvalidOperation()
+        => InvalidModelException.For<TModel>(Errors);
 
     /// <summary>Casts the result of <typeparamref name="TModel"/> to a result of <typeparamref name="TOut"/>.</summary>
     /// <typeparam name="TOut">

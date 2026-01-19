@@ -95,7 +95,18 @@ namespace Qowaiv.Validation.Abstractions {
                 return ResourceManager.GetString("InvalidModelException", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///  The result of the operation is invalid.
+        /// </summary>
+        internal static string InvalidOperationException
+        {
+            get
+            {
+                return ResourceManager.GetString("InvalidOperationException", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to The value of the Result&lt;T&gt; can not be null..
         /// </summary>

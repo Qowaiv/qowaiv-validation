@@ -10,6 +10,7 @@
     <PackageReleaseNotes>
       <![CDATA[
 v1.0.0
+- Add Result.ThrowIfInvalid().
 - Add .NET 9.0 target.
 - Drop .NET 5.0, NET6.0, NET7.0 targets. (BREAKING)
 - Drop public Diagnostics.Contracts. (BREAKING)
