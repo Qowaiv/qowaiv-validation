@@ -11,6 +11,7 @@
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <CheckEolTargetFramework>true</CheckEolTargetFramework>
     <SuppressTfmSupportBuildWarnings>false</SuppressTfmSupportBuildWarnings>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
 
   <PropertyGroup Label="Package info">
@@ -32,4 +33,12 @@
     <PackageReference Include="AsyncFixer" PrivateAssets="all" />
   </ItemGroup>
 
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <RestoreLockedMode>true</RestoreLockedMode>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="*.csproj" Visible="false" />
+  </ItemGroup>
 </Project>
