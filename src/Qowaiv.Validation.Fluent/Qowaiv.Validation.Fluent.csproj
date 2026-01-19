@@ -13,7 +13,7 @@ v3.0.
 - `Before`, `After`, `NotBefore`, and `NotAfter` available for `IComparable`.
 - Update to Qowaiv v7.4.5.
 - Update to FluentValidation 12.1.0. (BREAKING)
-- Drop .NET standard suppport. (BREAKING
+- Drop .NET standard suppport. (BREAKING)
     ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
