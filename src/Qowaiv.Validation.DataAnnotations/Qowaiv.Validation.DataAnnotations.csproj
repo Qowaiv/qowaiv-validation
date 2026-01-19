@@ -3,7 +3,7 @@
   <Import Project="../../props/package.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net8.0;net9.0;net10.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net8.0;net10.0</TargetFrameworks>
     <PackageId>Qowaiv.Validation.DataAnnotations</PackageId>
   </PropertyGroup>
 
@@ -42,15 +42,18 @@
 
   <PropertyGroup>
     <PackageValidationBaselineVersion>4.0.0</PackageValidationBaselineVersion>
-    <Version>4.0.3</Version>
+    <Version>5.0.0</Version>
     <ToBeReleased>
       <![CDATA[
-v4.*
+v5.*
 - ?
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[
+v5.0.0
+- Add .NET 10.0 target.
+- Drop .NET 5.0, NET6.0, NET7.0 targets. (BREAKING)
 v4.0.3
 - Type conversions done by DataAnotations are culture independent. (BUG)
 v4.0.2

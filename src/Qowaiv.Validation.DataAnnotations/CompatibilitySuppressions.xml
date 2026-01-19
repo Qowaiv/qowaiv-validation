@@ -12,7 +12,7 @@
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Validation.DataAnnotations.Attributes.InRangeAttribute`1</Target>
     <Left>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
@@ -52,14 +52,14 @@
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Validation.DataAnnotations.SetOfAttribute`1.get_TypeConverter</Target>
     <Left>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Validation.DataAnnotations.SetOfAttribute`1.set_TypeConverter(System.Type)</Target>
     <Left>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
@@ -87,7 +87,7 @@
     <DiagnosticId>CP0003</DiagnosticId>
     <Target>Qowaiv.Validation.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
     <Left>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
@@ -108,7 +108,28 @@
     <DiagnosticId>CP0014</DiagnosticId>
     <Target>M:Qowaiv.Validation.DataAnnotations.SetOfAttribute`1.get_Values:[T:System.Runtime.CompilerServices.CompilerGeneratedAttribute]</Target>
     <Left>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>M:Qowaiv.Validation.DataAnnotations.ValidationMessage.Error(System.String,System.Collections.Generic.IEnumerable{System.String}):[T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute]</Target>
+    <Left>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>M:Qowaiv.Validation.DataAnnotations.ValidationMessage.Info(System.String,System.Collections.Generic.IEnumerable{System.String}):[T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute]</Target>
+    <Left>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>M:Qowaiv.Validation.DataAnnotations.ValidationMessage.Warn(System.String,System.Collections.Generic.IEnumerable{System.String}):[T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute]</Target>
+    <Left>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
@@ -146,19 +167,19 @@
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Validation.DataAnnotations.ValidationMessage.Error(System.String,System.Collections.Generic.IEnumerable{System.String}):[T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute]</Target>
     <Left>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+    <Right>lib/net10.0/Qowaiv.Validation.DataAnnotations.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Validation.DataAnnotations.ValidationMessage.Info(System.String,System.Collections.Generic.IEnumerable{System.String}):[T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute]</Target>
     <Left>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+    <Right>lib/net10.0/Qowaiv.Validation.DataAnnotations.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Validation.DataAnnotations.ValidationMessage.Warn(System.String,System.Collections.Generic.IEnumerable{System.String}):[T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute]</Target>
     <Left>lib/net8.0/Qowaiv.Validation.DataAnnotations.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.DataAnnotations.dll</Right>
+    <Right>lib/net10.0/Qowaiv.Validation.DataAnnotations.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>

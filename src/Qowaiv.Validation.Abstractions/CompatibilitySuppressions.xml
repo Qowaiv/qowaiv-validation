@@ -31,14 +31,14 @@
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.InvalidModelException.For(System.Collections.Generic.IEnumerable{Qowaiv.Validation.Abstractions.IValidationMessage})</Target>
     <Left>lib/net9.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.Abstractions.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Result.ThrowIfInvalid</Target>
     <Left>lib/net9.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net9.0/Qowaiv.Validation.Abstractions.dll</Right>
+    <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
