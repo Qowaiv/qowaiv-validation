@@ -12,8 +12,8 @@ public sealed class InRangeAttribute<TValue> : ValidationAttribute where TValue 
     {
         var converter = TypeDescriptor.GetConverter(typeof(TValue));
 
-        Minimum = minimum is TValue min ? min : (TValue)converter.ConvertFrom(minimum)!;
-        Maximum = maximum is TValue max ? max : (TValue)converter.ConvertFrom(maximum)!;
+        Minimum = minimum is TValue min ? min : converter.ConvertFromCultureInvariant<TValue>(minimum);
+        Maximum = maximum is TValue max ? max : converter.ConvertFromCultureInvariant<TValue>(maximum);
     }
 
     /// <summary>Gets the minimum value for the range.</summary>

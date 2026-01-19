@@ -52,7 +52,7 @@ public abstract class SetOfAttribute<TValue> : ValidationAttribute
             {
                 all.Add(typed);
             }
-            else if (converter.ConvertFrom(value) is TValue converted)
+            else if (converter.ConvertFromCultureInvariant<TValue>(value) is TValue converted)
             {
                 all.Add(converted);
             }
