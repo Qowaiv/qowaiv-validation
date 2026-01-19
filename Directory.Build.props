@@ -1,7 +1,7 @@
 <Project>
 
   <PropertyGroup>
-    <LangVersion>preview</LangVersion>
+    <LangVersion>14</LangVersion>
     <Nullable>enable</Nullable>
     <IsPublishable>false</IsPublishable>
     <NuGetAudit>true</NuGetAudit>
