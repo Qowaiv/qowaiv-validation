@@ -19,6 +19,20 @@ public class Result
     [Pure]
     public bool IsValid => !Errors.Any();
 
+    /// <summary>Throws an <see cref="InvalidModelException"/> if the result is not valid.</summary>
+    public void ThrowIfInvalid()
+    {
+        if (!IsValid)
+        {
+            throw InvalidOperation();
+        }
+    }
+
+    /// <summary>Generated an <see cref="InvalidModelException" /> based on the errors.</summary>
+    [Pure]
+    protected internal virtual InvalidModelException InvalidOperation()
+        => InvalidModelException.For(Errors);
+
     /// <summary>Gets all messages with <see cref="ValidationSeverity.Error"/>.</summary>
     [Pure]
     public IEnumerable<IValidationMessage> Errors => Messages.GetErrors();

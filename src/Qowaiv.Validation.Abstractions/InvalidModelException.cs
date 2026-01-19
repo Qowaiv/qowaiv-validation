@@ -41,6 +41,24 @@ public class InvalidModelException : InvalidOperationException
         return new InvalidModelException(sb.ToString(), null, messages);
     }
 
+    /// <summary>Creates an <see cref="InvalidModelException"/> for the model.</summary>
+    [Pure]
+    public static InvalidModelException For(IEnumerable<IValidationMessage> messages)
+    {
+        var sb = new StringBuilder().Append(QowaivValidationMessages.InvalidOperationException);
+        var filtered = Filter(messages);
+
+        if (filtered.Any())
+        {
+            sb.Remove(sb.Length - 1, 1).AppendLine(":");
+            foreach (var message in filtered)
+            {
+                Append(sb, message);
+            }
+        }
+        return new InvalidModelException(sb.ToString(), null, messages);
+    }
+
     [Pure]
     private static IEnumerable<IValidationMessage> Filter(IEnumerable<IValidationMessage> messages)
         => (messages ?? [])
