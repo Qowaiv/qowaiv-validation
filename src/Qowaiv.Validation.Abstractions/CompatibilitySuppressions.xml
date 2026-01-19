@@ -56,6 +56,27 @@
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
+    <DiagnosticId>CP0003</DiagnosticId>
+    <Target>Qowaiv.Validation.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0003</DiagnosticId>
+    <Target>Qowaiv.Validation.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Left>lib/net9.0/Qowaiv.Validation.Abstractions.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0003</DiagnosticId>
+    <Target>Qowaiv.Validation.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
     <DiagnosticId>CP0008</DiagnosticId>
     <Target>T:Qowaiv.Validation.Abstractions.ValidationSeverity</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
