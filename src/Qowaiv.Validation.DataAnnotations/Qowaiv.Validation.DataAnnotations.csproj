@@ -33,7 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="QowaivValidationMessages.nl.resx" />
     <EmbeddedResource Update="QowaivValidationMessages.resx">
       <LastGenOutput>QowaivValidationMessages.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>

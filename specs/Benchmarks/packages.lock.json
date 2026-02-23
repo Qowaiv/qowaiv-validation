@@ -28,9 +28,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.8.2, )",
-        "resolved": "1.8.2",
-        "contentHash": "qpiZM1TBr1UfOkFr+n7ZvV8URWLz4NqtJ55/Z71DXUZ/FCtjXPb7HKd2mCbTLvI3zo4bmWz/LbdEnSe7MMrasg=="
+        "requested": "[1.9.0, )",
+        "resolved": "1.9.0",
+        "contentHash": "DdQiI4C+Z26EUPxIG9BYoBNDTUDiuX23F+LeC6HOsgaUApQsQr/xKtx7PSRCBpc4GT1wNiTNPYE7WOxbGnvUdw=="
       },
       "Microsoft.CodeAnalysis.Analyzers": {
         "type": "Direct",
@@ -58,9 +58,9 @@
       },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",
-        "requested": "[10.18.0.131500, )",
-        "resolved": "10.18.0.131500",
-        "contentHash": "Rbad71/k5e8MfG81i03Yh2YQQgovIdmyhWcLRevrcW4h9i1DUB3kKX9O1QiOGXcULLjkTdRAXdR8A8XtinL3Pg=="
+        "requested": "[10.19.0.132793, )",
+        "resolved": "10.19.0.132793",
+        "contentHash": "vDQSFE+KU5pXfVNzz4R4CA0ZGuLO35Sn+a7z2nyV9EM/nHsvl+WFGZ61Uk9eTdbhta1YXzqCMXB2B+6dn6ykVA=="
       },
       "BenchmarkDotNet.Annotations": {
         "type": "Transitive",
@@ -131,8 +131,8 @@
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions": {
         "type": "Transitive",
-        "resolved": "10.0.2",
-        "contentHash": "zOIurr59+kUf9vNcsUkCvKWZv+fPosUZXURZesYkJCvl0EzTc9F7maAO4Cd2WEV7ZJJ0AZrFQvuH6Npph9wdBw=="
+        "resolved": "10.0.3",
+        "contentHash": "bwGMrRcAMWx2s/RDgja97p27rxSz2pEQW0+rX5cWAUWVETVJ/eyxGfjAl8vuG5a+lckWmPIE+vcuaZNVB5YDdw=="
       },
       "Microsoft.Extensions.Logging": {
         "type": "Transitive",
@@ -202,7 +202,7 @@
         "type": "Project",
         "dependencies": {
           "Qowaiv": "[7.4.7, )",
-          "Qowaiv.Validation.Abstractions": "[1.0.0, )",
+          "Qowaiv.Validation.Abstractions": "[2.0.0, )",
           "System.ComponentModel.Annotations": "[5.0.0, )"
         }
       },
@@ -211,36 +211,36 @@
         "dependencies": {
           "FluentValidation": "[12.1.1, )",
           "Qowaiv": "[7.4.7, )",
-          "Qowaiv.Validation.Abstractions": "[1.0.0, )"
+          "Qowaiv.Validation.Abstractions": "[2.0.0, )"
         }
       },
       "qowaiv.validation.guarding": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[1.0.0, )",
-          "Qowaiv.Validation.Messages": "[1.0.0, )"
+          "Qowaiv.Validation.Abstractions": "[2.0.0, )",
+          "Qowaiv.Validation.Messages": "[2.0.0, )"
         }
       },
       "qowaiv.validation.messages": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[1.0.0, )"
+          "Qowaiv.Validation.Abstractions": "[2.0.0, )"
         }
       },
       "qowaiv.validation.testdata": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.DataAnnotations": "[4.0.3, )",
-          "Qowaiv.Validation.Fluent": "[2.0.0, )",
-          "Qowaiv.Validation.Guarding": "[1.0.0, )",
-          "Qowaiv.Validation.Messages": "[1.0.0, )",
-          "Qowaiv.Validation.Xml": "[1.0.0, )"
+          "Qowaiv.Validation.DataAnnotations": "[5.0.0, )",
+          "Qowaiv.Validation.Fluent": "[3.0.0, )",
+          "Qowaiv.Validation.Guarding": "[2.0.0, )",
+          "Qowaiv.Validation.Messages": "[2.0.0, )",
+          "Qowaiv.Validation.Xml": "[2.0.0, )"
         }
       },
       "qowaiv.validation.xml": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[1.0.0, )"
+          "Qowaiv.Validation.Abstractions": "[2.0.0, )"
         }
       },
       "FluentValidation": {
@@ -251,11 +251,11 @@
       },
       "Microsoft.Extensions.DependencyInjection": {
         "type": "CentralTransitive",
-        "requested": "[10.0.2, )",
-        "resolved": "10.0.2",
-        "contentHash": "J/Zmp6fY93JbaiZ11ckWvcyxMPjD6XVwIHQXBjryTBgn7O6O20HYg9uVLFcZlNfgH78MnreE/7EH+hjfzn7VyA==",
+        "requested": "[10.0.3, )",
+        "resolved": "10.0.3",
+        "contentHash": "2DLOmC0EkB2smVK8lPP1PIKEgL1arE3CMp9XSIQB/Y7ev5nnnyuM/PizKJ6QfLD08QCYoopSC9SFdbYglDomYg==",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.2"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.3"
         }
       },
       "Qowaiv": {

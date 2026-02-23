@@ -10,15 +10,15 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.8.2, )",
-        "resolved": "1.8.2",
-        "contentHash": "qpiZM1TBr1UfOkFr+n7ZvV8URWLz4NqtJ55/Z71DXUZ/FCtjXPb7HKd2mCbTLvI3zo4bmWz/LbdEnSe7MMrasg=="
+        "requested": "[1.9.0, )",
+        "resolved": "1.9.0",
+        "contentHash": "DdQiI4C+Z26EUPxIG9BYoBNDTUDiuX23F+LeC6HOsgaUApQsQr/xKtx7PSRCBpc4GT1wNiTNPYE7WOxbGnvUdw=="
       },
       "DotNetProjectFile.Analyzers.Sdk": {
         "type": "Direct",
-        "requested": "[1.8.2, )",
-        "resolved": "1.8.2",
-        "contentHash": "qY1CIPwIQCu6DfSxOH5tGY0Is9pNxoE0wDYIChNjUUGv8rAGmGJCW2zVY08T+4CuA5A5EUuExXgp6/TcZHh3gA=="
+        "requested": "[1.9.0, )",
+        "resolved": "1.9.0",
+        "contentHash": "sjjL6win17EbwpoY1WOMSfRHUeOwH2W30cklj/HX3kp+gjv/mOwYbkX+IPk+3d5qB+5UYSfp5708Koh7JAB/4g=="
       },
       "PolySharp": {
         "type": "Direct",
@@ -34,9 +34,9 @@
       },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",
-        "requested": "[10.18.0.131500, )",
-        "resolved": "10.18.0.131500",
-        "contentHash": "Rbad71/k5e8MfG81i03Yh2YQQgovIdmyhWcLRevrcW4h9i1DUB3kKX9O1QiOGXcULLjkTdRAXdR8A8XtinL3Pg=="
+        "requested": "[10.19.0.132793, )",
+        "resolved": "10.19.0.132793",
+        "contentHash": "vDQSFE+KU5pXfVNzz4R4CA0ZGuLO35Sn+a7z2nyV9EM/nHsvl+WFGZ61Uk9eTdbhta1YXzqCMXB2B+6dn6ykVA=="
       }
     }
   }
