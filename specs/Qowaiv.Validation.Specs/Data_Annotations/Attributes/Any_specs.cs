@@ -1,4 +1,5 @@
 using Qowaiv.Validation.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Data_annotations.Attributes.Any_specs;
 
@@ -35,5 +36,17 @@ public class With_message
     {
         [Any]
         public IEnumerable<string> Values { get; set; } = [];
+    }
+
+    [Test]
+    public void supports_custom_error_message()
+    {
+        var attr = new AnyAttribute
+        {
+            ErrorMessage = "Custom error message"
+        };
+
+        attr.GetValidationMessage(Array.Empty<int>(), new(new object()))!
+            .Message.Should().Be("Custom error message");
     }
 }

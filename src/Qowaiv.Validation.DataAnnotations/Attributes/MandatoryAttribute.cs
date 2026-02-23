@@ -51,7 +51,7 @@ public sealed class MandatoryAttribute : RequiredAttribute
     public override bool IsValid(object? value) => IsValid(value, null);
 
     [Pure]
-    private bool IsValid(object? value, Type? memberType)
+    private bool IsValid(object? value, Type? memberType) => this.Validates(() =>
     {
         if (value is { })
         {
@@ -68,5 +68,5 @@ public sealed class MandatoryAttribute : RequiredAttribute
             }
         }
         return base.IsValid(value);
-    }
+    });
 }
