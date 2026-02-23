@@ -72,6 +72,18 @@ public class With_message
         .Should().BeInvalid()
         .WithMessage(ValidationMessage.Error("The IBAN field is required.", "Iban"));
 
+    [Test]
+    public void supports_custom_error_message()
+    {
+        var attr = new MandatoryAttribute
+        {
+            ErrorMessage = "Custom error message" 
+        };
+
+        attr.GetValidationMessage(Guid.Empty, new(new object()))!
+            .Message.Should().Be("Custom error message");
+    }
+
     internal class Model
     {
         [Mandatory]

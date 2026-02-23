@@ -4,15 +4,8 @@ namespace Qowaiv.Validation.DataAnnotations;
 [AttributeUsage(AttributeTarget.Member, AllowMultiple = false)]
 [Validates(typeof(float))]
 [Validates(typeof(double))]
-public sealed class IsFiniteAttribute : ValidationAttribute
+public sealed class IsFiniteAttribute() : ValidationAttribute(() => QowaivValidationMessages.IsFiniteAttribute_ValidationError)
 {
-    /// <summary>Initializes a new instance of the <see cref="IsFiniteAttribute"/> class.</summary>
-    public IsFiniteAttribute()
-    {
-        ErrorMessageResourceType = typeof(QowaivValidationMessages);
-        ErrorMessageResourceName = nameof(QowaivValidationMessages.IsFiniteAttribute_ValidationError);
-    }
-
     /// <inheritdoc />
     [Pure]
     public override bool IsValid(object? value) => value switch
