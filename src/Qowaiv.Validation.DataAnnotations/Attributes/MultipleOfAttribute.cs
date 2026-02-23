@@ -18,12 +18,8 @@ public sealed class MultipleOfAttribute : ValidationAttribute
         : this(AsDecimal(factor) ?? throw new ArgumentOutOfRangeException(nameof(factor), "Can not be represented by a decimal.")) { }
 
     /// <summary>Initializes a new instance of the <see cref="MultipleOfAttribute"/> class.</summary>
-    private MultipleOfAttribute(decimal factor)
-    {
-        Factor = factor;
-        ErrorMessageResourceType = typeof(QowaivValidationMessages);
-        ErrorMessageResourceName = nameof(QowaivValidationMessages.MultipleOfAttribute_ValidationError);
-    }
+    private MultipleOfAttribute(decimal factor) : base(() => QowaivValidationMessages.MultipleOfAttribute_ValidationError)
+        => Factor = factor;
 
     /// <summary>The factor of which the value has to be a multiple of.</summary>
     public decimal Factor { get; }
