@@ -10,9 +10,9 @@
       },
       "AwesomeAssertions": {
         "type": "Direct",
-        "requested": "[9.3.0, )",
-        "resolved": "9.3.0",
-        "contentHash": "8lGLYap2ec2gNLgjf2xKZaKLpQ7j36oJvrYzBVVpNAumqnxRdevqqhEF66qxE92f8y2+zsbQ061DeHG61ZhzaQ=="
+        "requested": "[9.4.0, )",
+        "resolved": "9.4.0",
+        "contentHash": "dJxkWiQ8D+xT6Gr2sSL83+Mar+Vpy2JTcUPxFcckpPJ8VYBfSgnk+zqpS6t7kcGnjz8NLyF14qfuoL4bKzzoew=="
       },
       "AwesomeAssertions.Analyzers": {
         "type": "Direct",
@@ -22,15 +22,15 @@
       },
       "coverlet.collector": {
         "type": "Direct",
-        "requested": "[6.0.4, )",
-        "resolved": "6.0.4",
-        "contentHash": "lkhqpF8Pu2Y7IiN7OntbsTtdbpR1syMsm2F3IgX6ootA4ffRqWL5jF7XipHuZQTdVuWG/gVAAcf8mjk8Tz0xPg=="
+        "requested": "[8.0.0, )",
+        "resolved": "8.0.0",
+        "contentHash": "EMkj/2F6n6IVPrvGYkqzGJs6phuGGkq6N+E7KW9rNyzNxXbwQ1KfMqWyXNf9nCNEQOA6IjFwmOLvkriwKE7Orw=="
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.8.2, )",
-        "resolved": "1.8.2",
-        "contentHash": "qpiZM1TBr1UfOkFr+n7ZvV8URWLz4NqtJ55/Z71DXUZ/FCtjXPb7HKd2mCbTLvI3zo4bmWz/LbdEnSe7MMrasg=="
+        "requested": "[1.9.0, )",
+        "resolved": "1.9.0",
+        "contentHash": "DdQiI4C+Z26EUPxIG9BYoBNDTUDiuX23F+LeC6HOsgaUApQsQr/xKtx7PSRCBpc4GT1wNiTNPYE7WOxbGnvUdw=="
       },
       "FluentValidation": {
         "type": "Direct",
@@ -40,11 +40,11 @@
       },
       "Microsoft.Extensions.DependencyInjection": {
         "type": "Direct",
-        "requested": "[10.0.2, )",
-        "resolved": "10.0.2",
-        "contentHash": "J/Zmp6fY93JbaiZ11ckWvcyxMPjD6XVwIHQXBjryTBgn7O6O20HYg9uVLFcZlNfgH78MnreE/7EH+hjfzn7VyA==",
+        "requested": "[10.0.3, )",
+        "resolved": "10.0.3",
+        "contentHash": "2DLOmC0EkB2smVK8lPP1PIKEgL1arE3CMp9XSIQB/Y7ev5nnnyuM/PizKJ6QfLD08QCYoopSC9SFdbYglDomYg==",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.2"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.3"
         }
       },
       "Microsoft.NET.Test.Sdk": {
@@ -65,9 +65,9 @@
       },
       "NUnit": {
         "type": "Direct",
-        "requested": "[4.4.0, )",
-        "resolved": "4.4.0",
-        "contentHash": "7IWJcT9xWNhG9dEGdgAWdH6maCE0eVbeVnizvXACKbAyxbjoJ9+WaEb8qsCTJi3hsb18AJBtoqvWa3G7YYUQfw=="
+        "requested": "[4.5.0, )",
+        "resolved": "4.5.0",
+        "contentHash": "3AXYqXoll1CnWA+fNqMQemJO5qofh2r75bdrPyJqjCRCcZpwuCAgUnHxG1wKEbrGjtobrWWbwVrDhYcXcxRkjw=="
       },
       "NUnit.Analyzers": {
         "type": "Direct",
@@ -114,15 +114,15 @@
       },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",
-        "requested": "[10.18.0.131500, )",
-        "resolved": "10.18.0.131500",
-        "contentHash": "Rbad71/k5e8MfG81i03Yh2YQQgovIdmyhWcLRevrcW4h9i1DUB3kKX9O1QiOGXcULLjkTdRAXdR8A8XtinL3Pg=="
+        "requested": "[10.19.0.132793, )",
+        "resolved": "10.19.0.132793",
+        "contentHash": "vDQSFE+KU5pXfVNzz4R4CA0ZGuLO35Sn+a7z2nyV9EM/nHsvl+WFGZ61Uk9eTdbhta1YXzqCMXB2B+6dn6ykVA=="
       },
       "System.Memory.Data": {
         "type": "Direct",
-        "requested": "[10.0.2, )",
-        "resolved": "10.0.2",
-        "contentHash": "kNHLx0b1SgebHd+YLzjDNgrWcdaEufrAqR9jW9dzziil2Ez2Hx+1X+ya0ATWX8U2Rd6dLP/6neODTsUbCKPb4A=="
+        "requested": "[10.0.3, )",
+        "resolved": "10.0.3",
+        "contentHash": "MaGhRfGunmrj/nHjtsi9XkhlYJ/ERGWrbA+BiSKNtGnAjc9XlG5EhAvak6VRcX5LYzPF6pBO8nJ613dTgzabig=="
       },
       "Microsoft.ApplicationInsights": {
         "type": "Transitive",
@@ -136,8 +136,8 @@
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions": {
         "type": "Transitive",
-        "resolved": "10.0.2",
-        "contentHash": "zOIurr59+kUf9vNcsUkCvKWZv+fPosUZXURZesYkJCvl0EzTc9F7maAO4Cd2WEV7ZJJ0AZrFQvuH6Npph9wdBw=="
+        "resolved": "10.0.3",
+        "contentHash": "bwGMrRcAMWx2s/RDgja97p27rxSz2pEQW0+rX5cWAUWVETVJ/eyxGfjAl8vuG5a+lckWmPIE+vcuaZNVB5YDdw=="
       },
       "Microsoft.Testing.Extensions.Telemetry": {
         "type": "Transitive",
@@ -212,7 +212,7 @@
         "type": "Project",
         "dependencies": {
           "Qowaiv": "[7.4.7, )",
-          "Qowaiv.Validation.Abstractions": "[1.0.0, )",
+          "Qowaiv.Validation.Abstractions": "[2.0.0, )",
           "System.ComponentModel.Annotations": "[5.0.0, )"
         }
       },
@@ -221,44 +221,44 @@
         "dependencies": {
           "FluentValidation": "[12.1.1, )",
           "Qowaiv": "[7.4.7, )",
-          "Qowaiv.Validation.Abstractions": "[1.0.0, )"
+          "Qowaiv.Validation.Abstractions": "[2.0.0, )"
         }
       },
       "qowaiv.validation.guarding": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[1.0.0, )",
-          "Qowaiv.Validation.Messages": "[1.0.0, )"
+          "Qowaiv.Validation.Abstractions": "[2.0.0, )",
+          "Qowaiv.Validation.Messages": "[2.0.0, )"
         }
       },
       "qowaiv.validation.messages": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[1.0.0, )"
+          "Qowaiv.Validation.Abstractions": "[2.0.0, )"
         }
       },
       "qowaiv.validation.testdata": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.DataAnnotations": "[4.0.3, )",
-          "Qowaiv.Validation.Fluent": "[2.0.0, )",
-          "Qowaiv.Validation.Guarding": "[1.0.0, )",
-          "Qowaiv.Validation.Messages": "[1.0.0, )",
-          "Qowaiv.Validation.Xml": "[1.0.0, )"
+          "Qowaiv.Validation.DataAnnotations": "[5.0.0, )",
+          "Qowaiv.Validation.Fluent": "[3.0.0, )",
+          "Qowaiv.Validation.Guarding": "[2.0.0, )",
+          "Qowaiv.Validation.Messages": "[2.0.0, )",
+          "Qowaiv.Validation.Xml": "[2.0.0, )"
         }
       },
       "qowaiv.validation.testtools": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[1.0.0, )",
-          "Qowaiv.Validation.DataAnnotations": "[4.0.3, )",
-          "Qowaiv.Validation.Fluent": "[2.0.0, )"
+          "Qowaiv.Validation.Abstractions": "[2.0.0, )",
+          "Qowaiv.Validation.DataAnnotations": "[5.0.0, )",
+          "Qowaiv.Validation.Fluent": "[3.0.0, )"
         }
       },
       "qowaiv.validation.xml": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[1.0.0, )"
+          "Qowaiv.Validation.Abstractions": "[2.0.0, )"
         }
       },
       "System.ComponentModel.Annotations": {
