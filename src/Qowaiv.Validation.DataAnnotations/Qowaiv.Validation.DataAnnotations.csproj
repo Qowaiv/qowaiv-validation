@@ -51,7 +51,7 @@ v5.*
     <PackageReleaseNotes>
       <![CDATA[
 v5.0.1
-- All validation attributes support both ErrorMessage as ErrorMessageResourceName and ErrorMessageResourceType. (BUG)
+- Validation attributes support both ErrorMessage as ErrorMessageResourceName and ErrorMessageResourceType. (BUG)
 v5.0.0
 - Add .NET 10.0 target.
 - Drop .NET 5.0, NET6.0, NET7.0 targets. (BREAKING)
