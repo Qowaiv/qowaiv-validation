@@ -53,7 +53,7 @@ internal sealed class AnnotationStore
                 .OfType<MemberAnnotations>()
         ];
 
-        var checks = AnnotationCheck.New(type) | (members.Any() ? AnnotationChecks.Members : default);
+        var checks = AnnotationCheck.New(type) | (members is { Length: 0 } ? default : AnnotationChecks.Members);
 
         // for sealed types we have to check if the enumerable types are annotatable.
         if (!checks.HasFlag(AnnotationChecks.Enumerable)
