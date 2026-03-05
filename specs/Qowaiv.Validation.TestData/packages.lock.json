@@ -28,9 +28,9 @@
       },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",
-        "requested": "[10.19.0.132793, )",
-        "resolved": "10.19.0.132793",
-        "contentHash": "vDQSFE+KU5pXfVNzz4R4CA0ZGuLO35Sn+a7z2nyV9EM/nHsvl+WFGZ61Uk9eTdbhta1YXzqCMXB2B+6dn6ykVA=="
+        "requested": "[10.20.0.135146, )",
+        "resolved": "10.20.0.135146",
+        "contentHash": "Dx+sh/lhhJrG4Sr5W+bCDr/JKhY1Op6UaIoG5UrDVIyryC7rZtqO4Q4adzvm3IqAhFGHY7oYuaSjtR46hIv8qQ=="
       },
       "qowaiv.validation.abstractions": {
         "type": "Project"
@@ -38,7 +38,7 @@
       "qowaiv.validation.dataannotations": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[7.4.7, )",
+          "Qowaiv": "[7.5.0, )",
           "Qowaiv.Validation.Abstractions": "[2.0.0, )",
           "System.ComponentModel.Annotations": "[5.0.0, )"
         }
@@ -47,7 +47,7 @@
         "type": "Project",
         "dependencies": {
           "FluentValidation": "[12.1.1, )",
-          "Qowaiv": "[7.4.7, )",
+          "Qowaiv": "[7.5.0, )",
           "Qowaiv.Validation.Abstractions": "[2.0.0, )"
         }
       },
@@ -78,9 +78,9 @@
       },
       "Qowaiv": {
         "type": "CentralTransitive",
-        "requested": "[7.4.7, )",
-        "resolved": "7.4.7",
-        "contentHash": "6dutg6KBxAWv55gNTM8Z+sadVlCg1tNPy/J5tgSXeWF66ZvCbhabcZqNw8likc+2T9es32sIMyfmU7uUXCvItA=="
+        "requested": "[7.5.0, )",
+        "resolved": "7.5.0",
+        "contentHash": "nCEKQ/s6u1y2wZPMBI96H6IxLJ1WLC6azYA87xsqSFtNmeoY4kCVj+o3WSQq09PNy5mjf0/Zj7VbIWU71xS0Fg=="
       },
       "System.ComponentModel.Annotations": {
         "type": "CentralTransitive",

@@ -2,7 +2,6 @@ using Qowaiv.Financial;
 using Qowaiv.TestTools.Globalization;
 using Qowaiv.Validation.DataAnnotations;
 using Qowaiv.Validation.DataAnnotations.Attributes;
-using System.Runtime.CompilerServices;
 
 namespace Data_Annotations.Attributes.In_range_specs;
 

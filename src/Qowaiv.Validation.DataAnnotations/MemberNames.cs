@@ -7,7 +7,7 @@ internal readonly struct MemberNames : IReadOnlyCollection<string>
     public MemberNames(string memberName)
     {
         Path = MemberPath.Root.Child(memberName);
-        Members = new(0);
+        Members = [];
     }
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]

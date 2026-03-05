@@ -53,7 +53,7 @@ internal sealed class AnnotationStore
                 .OfType<MemberAnnotations>()
         ];
 
-        var checks = AnnotationCheck.New(type) | (members.Any() ? AnnotationChecks.Members : default);
+        var checks = AnnotationCheck.New(type) | (members is { Length: 0 } ? default : AnnotationChecks.Members);
 
         // for sealed types we have to check if the enumerable types are annotatable.
         if (!checks.HasFlag(AnnotationChecks.Enumerable)
@@ -115,10 +115,14 @@ internal sealed class AnnotationStore
 
     [Pure]
     private static bool LackAnnotations(Type type)
+        => IsSimple(type)
+        || (Nullable.GetUnderlyingType(type) is { } nulable && LackAnnotations(nulable));
+
+    [Pure]
+    private static bool IsSimple(Type type)
         => type.IsPrimitive
         || type.IsEnum
-        || type.IsPointer
-        || (Nullable.GetUnderlyingType(type) is { } nulable && LackAnnotations(nulable));
+        || type.IsPointer;
 
     [Pure]
     private static bool Include(Member member)

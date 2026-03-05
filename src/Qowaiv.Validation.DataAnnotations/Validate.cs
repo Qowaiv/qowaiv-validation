@@ -59,18 +59,18 @@ internal static class Validate
         context.MemberName = member.Name;
         context.DisplayName = member.Display?.GetName() ?? member.Name;
 
-        foreach (var attribute in member.Attributes)
+        // Stop on first required failure and do not validate further.
+        if (member.Attributes.Any(FailedRequired))
         {
-            // Stop on first required failure and do not validate further.
-            if (ctx.AddMessage(attribute.GetValidationMessage(value, context), nested.Path) && attribute is RequiredAttribute)
-            {
-                return;
-            }
+            return;
         }
 
         if (value is { } && TypeAnnotations.Get(value.GetType()) is { CheckRecursive: true } typed)
         {
             Model(new Nested(value, typed, nested.Path.Child(member.Name)), ctx);
         }
+
+        bool FailedRequired(ValidationAttribute attr)
+            => ctx.AddMessage(attr.GetValidationMessage(value, context), nested.Path) && attr is RequiredAttribute;
     }
 }

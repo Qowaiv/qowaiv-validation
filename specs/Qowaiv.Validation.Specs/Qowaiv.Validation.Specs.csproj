@@ -6,7 +6,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <IsTestProject>true</IsTestProject>
     <RootNamespace>Specs</RootNamespace>
-    <NoWarn>CA1824;CA1861</NoWarn>
+    <NoWarn>CA1824;CA1861;CS8002</NoWarn>
   </PropertyGroup>
 
   <ItemGroup Label="XML files as embedded">
