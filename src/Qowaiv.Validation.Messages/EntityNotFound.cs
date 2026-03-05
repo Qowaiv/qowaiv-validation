@@ -23,4 +23,9 @@ public class EntityNotFound : InvalidOperationException, IValidationMessage
     [Pure]
     public static EntityNotFound ForId(object id)
         => new(string.Format(ValidationMessages.EntityNotFound_ForId, id));
+
+    /// <summary>Creates an <see cref="EntityNotFound"/> for specific ID.</summary>
+    [Pure]
+    public static EntityNotFound ForId<TEntity>(object id)
+        => new(string.Format(ValidationMessages.EntityNotFound_ForTypeAndId, typeof(TEntity), id));
 }
