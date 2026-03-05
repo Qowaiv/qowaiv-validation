@@ -76,6 +76,8 @@ internal static class Model
 
             [Allowed<int>(42)]
             private int Private;
+
+            internal int Access() => Private;
         }
 
         public sealed class RequiredOnValueType

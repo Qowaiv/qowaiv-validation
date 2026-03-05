@@ -8,6 +8,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 /// </typeparam>
 [Mutable]
 public class AnnotatedModelValidator<TModel> : IValidator<TModel>
+    where TModel : notnull
 {
     /// <summary>Initializes a new instance of the <see cref="AnnotatedModelValidator{TModel}"/> class.</summary>
     public AnnotatedModelValidator() : this(null, null) { }
