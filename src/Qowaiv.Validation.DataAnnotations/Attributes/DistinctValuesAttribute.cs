@@ -45,11 +45,9 @@ public sealed class DistinctValuesAttribute(Type? comparer)
     }
 
     /// <summary>As there is no none generic hash set.</summary>
-    private sealed class WrappedComparer : IEqualityComparer<object>
+    private sealed class WrappedComparer(IEqualityComparer comparer) : IEqualityComparer<object>
     {
-        private readonly IEqualityComparer _comparer;
-
-        public WrappedComparer(IEqualityComparer comparer) => _comparer = comparer;
+        private readonly IEqualityComparer _comparer = comparer;
 
         [Pure]
         public new bool Equals(object? x, object? y) => _comparer.Equals(x, y);
