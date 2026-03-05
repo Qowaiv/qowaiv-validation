@@ -34,7 +34,7 @@
       },
       "Microsoft.CodeAnalysis.Analyzers": {
         "type": "Direct",
-        "requested": "[4.1.14, )",
+        "requested": "[4.14.0, )",
         "resolved": "4.14.0",
         "contentHash": "fCj+MzjJxN/4iYAz7JPLONGKeTomaZNzx4UgGA0AerTrx4Ou6Rw2J5YF4V51vWW+aSQSCv1nnAkCZUw5Z9+3zw=="
       },
@@ -218,7 +218,7 @@
         "type": "Project",
         "dependencies": {
           "Qowaiv.Validation.Abstractions": "[2.0.0, )",
-          "Qowaiv.Validation.Messages": "[2.0.0, )"
+          "Qowaiv.Validation.Messages": "[2.1.0, )"
         }
       },
       "qowaiv.validation.messages": {
@@ -230,10 +230,10 @@
       "qowaiv.validation.testdata": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.DataAnnotations": "[5.0.0, )",
+          "Qowaiv.Validation.DataAnnotations": "[5.0.1, )",
           "Qowaiv.Validation.Fluent": "[3.0.0, )",
           "Qowaiv.Validation.Guarding": "[2.0.0, )",
-          "Qowaiv.Validation.Messages": "[2.0.0, )",
+          "Qowaiv.Validation.Messages": "[2.1.0, )",
           "Qowaiv.Validation.Xml": "[2.0.0, )"
         }
       },
