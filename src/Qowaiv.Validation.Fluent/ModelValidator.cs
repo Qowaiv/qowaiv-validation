@@ -5,6 +5,7 @@ namespace Qowaiv.Validation.Fluent;
 /// The model to validate for.
 /// </typeparam>
 public class ModelValidator<TModel> : AbstractValidator<TModel>, Abstractions.IValidator<TModel>
+    where TModel : notnull
 {
     /// <summary>Initializes a new instance of the <see cref="ModelValidator{TModel}"/> class.</summary>
     protected ModelValidator() { }
