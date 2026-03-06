@@ -75,9 +75,9 @@ internal static class Model
             public static string NonInstance = string.Empty;
 
             [Allowed<int>(42)]
+#pragma warning disable CS0169 // Needed for testing
             private int Private;
-
-            internal int Access() => Private;
+#pragma warning restore CS0169
         }
 
         public sealed class RequiredOnValueType

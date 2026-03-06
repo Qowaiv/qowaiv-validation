@@ -9,13 +9,13 @@
     <PackageId>Qowaiv.Validation.Fluent</PackageId>
     <ToBeReleased>
       <![CDATA[
-v3.*
--?
-    ]]>
+v3.1.0
+- Add notnull constraint to Result.For<T>().
+]]>
     </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[
-v3.0.
+v3.0.0
 - `Before`, `After`, `NotBefore`, and `NotAfter` available for `IComparable`.
 - Update to Qowaiv v7.4.7.
 - Add .NET 10.0 target.

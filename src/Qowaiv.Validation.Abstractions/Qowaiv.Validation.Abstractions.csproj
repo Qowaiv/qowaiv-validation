@@ -7,21 +7,25 @@
     <PackageValidationBaselineVersion>1.0.0</PackageValidationBaselineVersion>
     <Version>2.0.0</Version>
     <PackageId>Qowaiv.Validation.Abstractions</PackageId>
+    <ToBeReleased>
+      <![CDATA[
+      v2.1.0
+- Add notnull constraint to Result.For<T>().
+]]>
+    </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[
 v2.0.0
 - Add Result.ThrowIfInvalid().
 - Add .NET 10.0 target.
 - Drop .NET9.0 targets. (BREAKING)
-- Drop public Diagnostics.Contracts. (BREAKING)
-- Drop binary serialization on exceptions. (BREAKING)
 v1.0.0
 - Add .NET 9.0 target.
 - Drop .NET 5.0, NET6.0, NET7.0 targets. (BREAKING)
 - Drop public Diagnostics.Contracts. (BREAKING)
 - Drop binary serialization on exceptions. (BREAKING)
 v0.3.0
-- Add Result&lt;T&gt;.Cast&lt;TOut&gt;(). #61
+- Add Result<T>.Cast<TOut>(). #61
 - Support .NET 7.0. #62
 v0.2.1
 - Nullable anotations. #48
@@ -40,7 +44,7 @@ v0.1.0
 - Improvements on InvalidModelException. #31
 v0.0.5
 - Act() methods on context. #29
-- AsTask() method for Result&lt;T&gt;. #28
+- AsTask() method for Result<T>. #28
 v0.0.4
 - Act() methods have pipe notation alternatives.
 ]]>
