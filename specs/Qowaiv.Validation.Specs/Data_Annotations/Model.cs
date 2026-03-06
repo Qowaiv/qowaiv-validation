@@ -77,7 +77,7 @@ internal static class Model
             [Allowed<int>(42)]
             private int Private;
 
-            internal int Access() => Private;
+            override public string ToString() => $"Answer: {Answer}, NonInstance: {NonInstance}, Private: {Private}";
         }
 
         public sealed class RequiredOnValueType
