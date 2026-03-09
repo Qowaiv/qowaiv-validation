@@ -61,11 +61,13 @@ public class Result
     /// <summary>Creates a <see cref="Result{T}"/> for the value.</summary>
     [Pure]
     public static Result<T> For<T>(T value, IEnumerable<IValidationMessage> messages)
+        where T : notnull
         => new Result<T>(value, FixedMessages.New(messages)).NotNull();
 
     /// <summary>Creates a <see cref="Result{T}"/> for the value.</summary>
     [Pure]
     public static Result<T> For<T>(T value, params IValidationMessage[] messages)
+        where T : notnull
         => new Result<T>(value, FixedMessages.New(messages)).NotNull();
 
     /// <summary>Creates a result with messages.</summary>

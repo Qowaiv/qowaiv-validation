@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- https://learn.microsoft.com/dotnet/fundamentals/package-validation/diagnostic-ids -->
 <Suppressions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Suppression>
@@ -67,6 +67,34 @@
   <Suppression>
     <DiagnosticId>CP0003</DiagnosticId>
     <Target>Qowaiv.Validation.Fluent, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Left>lib/net9.0/Qowaiv.Validation.Fluent.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.Fluent.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Fluent.ModelValidator`1&lt;0&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Fluent.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.Fluent.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Fluent.ModelValidator`1&lt;0&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/net9.0/Qowaiv.Validation.Fluent.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.Fluent.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0021</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Fluent.ModelValidator`1``0:notnull</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Fluent.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Validation.Fluent.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0021</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Fluent.ModelValidator`1``0:notnull</Target>
     <Left>lib/net9.0/Qowaiv.Validation.Fluent.dll</Left>
     <Right>lib/net8.0/Qowaiv.Validation.Fluent.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>

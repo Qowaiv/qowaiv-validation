@@ -1,3 +1,5 @@
+using System.Reflection;
+
 namespace Qowaiv.Validation.Abstractions;
 
 /// <summary>Represents a result of a validation, executed command, etcetera.</summary>
@@ -31,7 +33,7 @@ public sealed class Result<TModel> : Result
 
     /// <summary>Implicitly casts a model to the <see cref="Result"/>.</summary>
     [Pure]
-    public static implicit operator Result<TModel>(TModel model) => For(model);
+    public static implicit operator Result<TModel>(TModel model) => NotNull(model, FixedMessages.Empty);
 
     /// <inheritdoc />
     [Pure]
@@ -99,7 +101,7 @@ public sealed class Result<TModel> : Result
         if (IsValid)
         {
             var outcome = action(Value);
-            return For(Value, ((FixedMessages)Messages).AddRange(outcome.Messages));
+            return NotNull(Value, ((FixedMessages)Messages).AddRange(outcome.Messages));
         }
         else return WithMessages<TModel>(Messages);
     }
@@ -201,7 +203,7 @@ public sealed class Result<TModel> : Result
         if (IsValid)
         {
             var outcome = await action(Value).ConfigureAwait(continueOnCapturedContext);
-            return For(Value, ((FixedMessages)Messages).AddRange(outcome.Messages));
+            return NotNull(Value, ((FixedMessages)Messages).AddRange(outcome.Messages));
         }
         else return WithMessages<TModel>(Messages);
     }
@@ -294,4 +296,8 @@ public sealed class Result<TModel> : Result
     [Pure]
     internal Result<TModel> NotNull()
        => IsValid && Value is null ? throw NoValue.For<TModel>() : this;
+
+    [Pure]
+    private static Result<TModel> NotNull(TModel? value, FixedMessages messages)
+        => new Result<TModel>(value, messages).NotNull();
 }
