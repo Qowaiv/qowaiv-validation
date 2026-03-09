@@ -75,7 +75,12 @@ public class EntityNotFound
 
     [Test]
     public void Contains_Type_and_Id_in_message_when_specified()
-        => NS.EntityNotFound.ForId<EntityNotFound>(17).Message.Should().Be("Entity Validation_messages.Common_messages_specs.EntityNotFound with ID 17 could not be found.");
+        => NS.EntityNotFound.ForId<ExampleEntity>(17).Message.Should().Be("Entity Validation_messages.Common_messages_specs.ExampleEntity with ID 17 could not be found.");
+}
+
+public sealed record ExampleEntity
+{
+    public required string Id { get; init; }
 }
 
 public class ServiceUnavailable
