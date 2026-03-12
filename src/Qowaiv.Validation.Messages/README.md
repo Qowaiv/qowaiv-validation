@@ -8,7 +8,7 @@ A specific type of `System.Security.SecurityException`.
 ## Concurrency Issue
 To communicate a version mismatch:
 ``` csharp
-var message = ConcurrencyIssue.VersionMismatch(expectedVersion: 42, acutalVersion: 43);
+var message = ConcurrencyIssue.VersionMismatch(expectedVersion: 42, actualVersion: 43);
 ```
 
 To communicate a mid-air collision:
