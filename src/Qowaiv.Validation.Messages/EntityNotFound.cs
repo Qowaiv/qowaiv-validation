@@ -50,6 +50,6 @@ public class EntityNotFound : InvalidOperationException, IValidationMessage
             .GetMethods(BindingFlags.Static | BindingFlags.Public)
             .FirstOrDefault(m => m.Name == "ToCSharpString" && m.GetParameters().Length == 2) is { } m
                 ? t => m.Invoke(null, [t, true])?.ToString() ?? string.Empty
-                : t => t.FullName ?? string.Empty;
+                : t => t.FullName ?? t.Name;
     }
 }
