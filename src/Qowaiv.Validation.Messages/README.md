@@ -1,1 +1,36 @@
-# Qowaiv Validation
+# Qowaiv Validation Messages
+This package contains `Qowaiv.Validation.Abstractions.IValidationMessage`'s
+that are also exceptions.
+
+## Access Denied
+A specific type of `System.SEcurity.SecurityException`.
+
+## Concurrency Issue
+To communicate a version mismatch:
+``` csharp
+var message = ConcurrencyIssue.VersionMismatch(expectedVersion: 42, acutalVersion: 43);
+```
+
+To communicate a mid-air collision:
+``` csharp
+var message = ConcurrencyIssue.MidAirCollision();
+```
+
+## Entity Not Found
+To communicate an entity was not found:
+
+``` csharp
+var message = EntityNotFound.ForId(Uuid.Parse("Zj5sozHNSIapCiGm7YqJbQ"));
+```
+
+or:
+
+``` csharp
+var message = EntityNotFound.For<SomeEntity>(id: 42);
+```
+## Service Unavailable
+To commuicate which (depending) service was unavailable:
+
+``` csharp
+var message = ServiceUnavailable.WithName("Some service");
+```

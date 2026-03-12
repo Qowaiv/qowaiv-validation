@@ -71,16 +71,18 @@ public class EntityNotFound
 
     [Test]
     public void Contains_Id_in_message_when_specified()
-        => NS.EntityNotFound.ForId(17).Message.Should().Be("Entity with ID 17 could not be found.");
+        => NS.EntityNotFound.ForId(17).Message
+            .Should().Be("Entity with ID 17 could not be found.");
 
     [Test]
     public void Contains_Type_and_Id_in_message_when_specified()
-        => NS.EntityNotFound.ForId<ExampleEntity>(17).Message.Should().Be("Entity Validation_messages.Common_messages_specs.ExampleEntity with ID 17 could not be found.");
+        => NS.EntityNotFound.For<ExampleEntity<Uuid>>(17).Message
+            .Should().Be("Entity Validation_messages.Common_messages_specs.ExampleEntity<Qowaiv.Uuid> with ID 17 could not be found.");
 }
 
-public sealed record ExampleEntity
+public sealed record ExampleEntity<T> where T : struct
 {
-    public required string Id { get; init; }
+    public required T Id { get; init; }
 }
 
 public class ServiceUnavailable
