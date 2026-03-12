@@ -3,7 +3,7 @@ This package contains `Qowaiv.Validation.Abstractions.IValidationMessage` implem
 that are also exceptions.
 
 ## Access Denied
-A specific type of `System.SEcurity.SecurityException`.
+A specific type of `System.Security.SecurityException`.
 
 ## Concurrency Issue
 To communicate a version mismatch:
