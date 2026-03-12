@@ -22,7 +22,7 @@ public class EntityNotFound : InvalidOperationException, IValidationMessage
     public string? PropertyName => null;
 
     /// <summary>The Type of the entity.</summary>
-    public Type? EntityType { get; set; }
+    public Type? EntityType { get; init; }
 
     /// <summary>Creates an <see cref="EntityNotFound"/> for specific ID.</summary>
     [Pure]
