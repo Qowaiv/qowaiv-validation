@@ -1,5 +1,5 @@
 # Qowaiv Validation Messages
-This package contains `Qowaiv.Validation.Abstractions.IValidationMessage`'s
+This package contains `Qowaiv.Validation.Abstractions.IValidationMessage` implementations
 that are also exceptions.
 
 ## Access Denied
@@ -29,7 +29,7 @@ or:
 var message = EntityNotFound.For<SomeEntity>(id: 42);
 ```
 ## Service Unavailable
-To commuicate which (depending) service was unavailable:
+To communicate which (dependent) service was unavailable:
 
 ``` csharp
 var message = ServiceUnavailable.WithName("Some service");
