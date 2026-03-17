@@ -24,6 +24,9 @@
   <data name="EntityNotFound_ForId" xml:space="preserve">
     <value>Entity with ID {0} could not be found.</value>
   </data>
+  <data name="EntityNotFound_ForTypeAndId" xml:space="preserve">
+    <value>Entity {0} with ID {1} could not be found.</value>
+  </data>
   <data name="MidAirCollision" xml:space="preserve">
     <value>A mid-air collision was detected.</value>
   </data>
