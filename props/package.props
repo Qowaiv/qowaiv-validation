@@ -49,7 +49,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Additional files">
-    <AdditionalFiles Include="../../props/package.props" Link="Properties/package.props" />
+    <AdditionalFiles Include="../../props/package.props" />
   </ItemGroup>
 
 </Project>

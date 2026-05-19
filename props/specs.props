@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
+    <IsTestCode>true</IsTestCode>
   </PropertyGroup>
 
   <ItemGroup Label="Additional files">
-    <AdditionalFiles Include="../../props/specs.props" Link="Properties/specs.props" />
+    <AdditionalFiles Include="../../props/specs.props" />
   </ItemGroup>
 
 </Project>
