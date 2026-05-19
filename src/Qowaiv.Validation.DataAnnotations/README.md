@@ -231,6 +231,17 @@ public class Model
 }
 ```
 
+### Not unknown
+The `[NotUnknown]` attribute indicates that the field does not allow the unknown value.
+
+``` C#
+public class Model
+{
+    [NotUnknown]
+    public EmailAddress Address { get; init; }
+}
+```
+
 ### Optional 
 The `[Optional]` attribute indicates explicitly that a field is optional.
 
