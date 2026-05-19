@@ -71,7 +71,10 @@ public sealed class BenchmarkModel : IValidatableObject
         [Mandatory]
         public EmailAddress Email { get; init; } = EmailAddress.Parse("info@qowaiv.org");
 
+#pragma warning disable QW0101 // Required attribute cannot invalidate value types
+        // This is part of the test
         [Required]
+#pragma warning restore QW0101 // Required attribute cannot invalidate value types
         public bool UseLessAnntation { get; init; }
 
         public int JustIgnore1 { get; init; }
