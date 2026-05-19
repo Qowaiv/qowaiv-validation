@@ -60,6 +60,9 @@
   <data name="NotInPast">
     <value>The value of the {0} field should not be in the past.</value>
   </data>
+  <data name="NotUnknown">
+    <value>The field {0} must not be unknown.</value>
+  </data>
   <data name="Size_AtLeast_ValidationError">
     <value>The size of the {0} field should be at least {1: F}.</value>
   </data>
