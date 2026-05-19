@@ -9,12 +9,14 @@
     <PackageId>Qowaiv.Validation.Abstractions</PackageId>
     <ToBeReleased>
       <![CDATA[
-      v2.1.0
-- Add notnull constraint to Result.For<T>().
+v2.*
+- ?
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[
+v2.1.0
+- Add notnull constraint to Result.For<T>().
 v2.0.0
 - Add Result.ThrowIfInvalid().
 - Add .NET 10.0 target.
