@@ -44,8 +44,8 @@
     <Version>5.0.1</Version>
     <ToBeReleased>
       <![CDATA[
-v5.*
-- ?
+v5.1.0
+- Add [NotUnknown] to indicate that the unknown value is not allowed.
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

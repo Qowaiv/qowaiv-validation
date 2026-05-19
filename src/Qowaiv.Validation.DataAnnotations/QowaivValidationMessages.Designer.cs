@@ -19,7 +19,7 @@ namespace Qowaiv.Validation.DataAnnotations {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class QowaivValidationMessages {
@@ -210,6 +210,15 @@ namespace Qowaiv.Validation.DataAnnotations {
         internal static string NotInPast {
             get {
                 return ResourceManager.GetString("NotInPast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The field  {0} must not be unknown..
+        /// </summary>
+        internal static string NotUnknown {
+            get {
+                return ResourceManager.GetString("NotUnknown", resourceCulture);
             }
         }
         

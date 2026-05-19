@@ -57,6 +57,9 @@
   <data name="NotInPast">
     <value>De waarde van veld {0} mag niet in het verleden liggen.</value>
   </data>
+  <data name="NotUnknown">
+    <value>Het veld {0} mag niet onbekend zijn.</value>
+  </data>
   <data name="Size_AtLeast_ValidationError">
     <value>De grootte van het veld {0} moet minstens {1: F} zijn.</value>
   </data>
