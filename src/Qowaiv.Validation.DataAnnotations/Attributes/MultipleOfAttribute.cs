@@ -66,23 +66,22 @@ public sealed class MultipleOfAttribute : ValidationAttribute
 
     [Pure]
     private static bool IsValid(TypeCode type)
-        => type >= TypeCode.SByte
-        && type <= TypeCode.UInt64;
+        => type is >= TypeCode.SByte and <= TypeCode.UInt64;
 
     [Pure]
     private static decimal? AsDecimal(float value)
-        => value >= Decimal_MinValue
-        && value <= Decimal_MaxValue
+        => value is >= Decimal_MinValue_as_f and <= Decimal_MaxValue_as_f
             ? (decimal)value
             : null;
 
     [Pure]
     private static decimal? AsDecimal(double value)
-        => value >= Decimal_MinValue
-        && value <= Decimal_MaxValue
+        => value is >= Decimal_MinValue_as_d and <= Decimal_MaxValue_as_d
             ? (decimal)value
             : null;
 
-    private const double Decimal_MinValue = (double)decimal.MinValue;
-    private const double Decimal_MaxValue = (double)decimal.MaxValue;
+    private const double Decimal_MinValue_as_d = (double)decimal.MinValue;
+    private const double Decimal_MaxValue_as_d = (double)decimal.MaxValue;
+    private const float Decimal_MinValue_as_f = (float)decimal.MinValue;
+    private const float Decimal_MaxValue_as_f = (float)decimal.MaxValue;
 }

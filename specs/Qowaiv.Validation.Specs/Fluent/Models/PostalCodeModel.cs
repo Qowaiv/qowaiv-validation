@@ -10,8 +10,5 @@ public class PostalCodeModel
 
 public class PostalCodeModelValidator : AbstractValidator<PostalCodeModel>
 {
-    public PostalCodeModelValidator()
-    {
-        RuleFor(m => m.PostalCode).ValidFor(m => m.Country);
-    }
+    public PostalCodeModelValidator() => RuleFor(m => m.PostalCode).ValidFor(m => m.Country);
 }

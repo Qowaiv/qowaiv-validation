@@ -27,22 +27,19 @@ public sealed class DistinctValuesAttribute(Type? comparer)
 
     /// <summary>Creates the Comparer to do the distinct with.</summary>
     [Pure]
-    private static IEqualityComparer<object> CreateComparer(Type? comparer)
+    private static IEqualityComparer<object> CreateComparer(Type? comparer) => comparer switch
     {
-        if (comparer is null)
-        {
-            return EqualityComparer<object>.Default;
-        }
-        else if (typeof(IEqualityComparer<object>).IsAssignableFrom(comparer))
-        {
-            return (IEqualityComparer<object>)Activator.CreateInstance(comparer)!;
-        }
-        else if (typeof(IEqualityComparer).IsAssignableFrom(comparer))
-        {
-            return new WrappedComparer((IEqualityComparer)Activator.CreateInstance(comparer)!);
-        }
-        else throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivValidationMessages.ArgumentException_TypeIsNotEqualityComparer, comparer), nameof(comparer));
-    }
+        null
+            => EqualityComparer<object>.Default,
+
+        _ when typeof(IEqualityComparer<object>).IsAssignableFrom(comparer)
+            => (IEqualityComparer<object>)Activator.CreateInstance(comparer)!,
+
+        _ when typeof(IEqualityComparer).IsAssignableFrom(comparer)
+            => new WrappedComparer((IEqualityComparer)Activator.CreateInstance(comparer)!),
+
+        _ => throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, QowaivValidationMessages.ArgumentException_TypeIsNotEqualityComparer, comparer), nameof(comparer)),
+    };
 
     /// <summary>As there is no none generic hash set.</summary>
     private sealed class WrappedComparer(IEqualityComparer comparer) : IEqualityComparer<object>

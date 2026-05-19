@@ -134,7 +134,7 @@ public class Not_valid_for
     public void not_supported_types(object model)
         => new MultipleOfAttribute(10).IsValid(model).Should().BeFalse();
 
-    static IEnumerable<object?> NotSupportedTypes()
+    private static IEnumerable<object?> NotSupportedTypes()
     {
         yield return true;
         yield return "Hello, World!";

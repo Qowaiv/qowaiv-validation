@@ -180,9 +180,8 @@ internal class TestModel(int actions = 0)
     public int Actions { get; private set; } = actions;
 
     public Result<TestModel> NonfailingFunction()
-    {
-        return new TestModel(Actions + 1);
-    }
+        => new TestModel(Actions + 1);
+
     public Result<TestModel> FailingFunction()
     {
         Actions = -Actions;

@@ -10,25 +10,22 @@ internal sealed class AnnotationStore
     private readonly ConcurrentDictionary<Type, TypeAnnotations?> Annotations;
 
     /// <summary>Initializes a new instance of the <see cref="AnnotationStore"/> class.</summary>
-    public AnnotationStore()
-    {
-        Annotations = new ConcurrentDictionary<Type, TypeAnnotations?>(
-        [
-            None<object>(),
-            None<string>(),
-            None<decimal>(),
-            None<Guid>(),
+    public AnnotationStore() => Annotations = new ConcurrentDictionary<Type, TypeAnnotations?>(
+    [
+        None<object>(),
+        None<string>(),
+        None<decimal>(),
+        None<Guid>(),
 #if NET6_0_OR_GREATER
-            None<DateOnly>(),
-            None<TimeOnly>(),
+        None<DateOnly>(),
+        None<TimeOnly>(),
 #endif
-            None<DateTime>(),
-            None<DateTimeOffset>(),
-            None<Version>(),
+        None<DateTime>(),
+        None<DateTimeOffset>(),
+        None<Version>(),
 
-            .. typeof(Date).Assembly.GetExportedTypes().Where(tp => tp.IsValueType).Select(None)
-        ]);
-    }
+        .. typeof(Date).Assembly.GetExportedTypes().Where(tp => tp.IsValueType).Select(None)
+    ]);
 
     [Pure]
     public TypeAnnotations? Get(Type type, HashSet<Type> visited) => type switch
