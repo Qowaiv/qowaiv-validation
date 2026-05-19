@@ -23,7 +23,7 @@
     <PackageVersion Include="Qowaiv.TestTools" Version="8.0.0" />
     <PackageVersion Include="StyleCop.Analyzers.Unstable" Version="1.2.0.556" />
     <PackageVersion Include="System.ComponentModel.Annotations" Version="5.0.0" />
-    <PackageVersion Include="System.Memory.Data" Version="10.083" />
+    <PackageVersion Include="System.Memory.Data" Version="10.0.8" />
   </ItemGroup>
   <ItemGroup>
     <GlobalPackageReference Include="DotNetProjectFile.Analyzers" Version="1.14.0" />
