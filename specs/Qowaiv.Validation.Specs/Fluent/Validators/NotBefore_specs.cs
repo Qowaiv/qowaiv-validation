@@ -17,7 +17,7 @@ public class Is_valid
         .ValidateWith(validator)
         .Should().BeValid();
 
-    static readonly IEnumerable<ModelValidator<Model>> Validators = [new FixedValidator(), new ExpressionValidator(), new ExpressionNullableValidator()];
+    private static readonly IEnumerable<ModelValidator<Model>> Validators = [new FixedValidator(), new ExpressionValidator(), new ExpressionNullableValidator()];
 }
 
 public class Is_not_valid

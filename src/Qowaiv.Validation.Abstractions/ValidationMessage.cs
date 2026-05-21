@@ -73,11 +73,9 @@ public sealed class ValidationMessage : IValidationMessage, IEquatable<Validatio
     /// <inheritdoc />
     [Pure]
     public override int GetHashCode()
-    {
-        return Severity.GetHashCode()
-            ^ (PropertyName ?? string.Empty).GetHashCode()
-            ^ (Message ?? string.Empty).GetHashCode();
-    }
+        => Severity.GetHashCode()
+        ^ (PropertyName ?? string.Empty).GetHashCode()
+        ^ (Message ?? string.Empty).GetHashCode();
 
     /// <summary>Creates a None message.</summary>
     [Pure]
@@ -97,14 +95,11 @@ public sealed class ValidationMessage : IValidationMessage, IEquatable<Validatio
 
     /// <summary>Creates a validation message.</summary>
     [Pure]
-    public static IValidationMessage For(ValidationSeverity severity, string message, string? propertyName = null)
+    public static IValidationMessage For(ValidationSeverity severity, string message, string? propertyName = null) => severity switch
     {
-        return severity switch
-        {
-            ValidationSeverity.None => None,
-            ValidationSeverity.Info => Info(message, propertyName),
-            ValidationSeverity.Warning => Warn(message, propertyName),
-            _ => Error(message, propertyName),
-        };
-    }
+        ValidationSeverity.None => None,
+        ValidationSeverity.Info => Info(message, propertyName),
+        ValidationSeverity.Warning => Warn(message, propertyName),
+        _ => Error(message, propertyName),
+    };
 }

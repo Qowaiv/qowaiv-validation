@@ -17,10 +17,7 @@ public static class Data_Annotations
         internal readonly IDictionary<string, string[]> Empty = new Dictionary<string, string[]>();
 
         [IterationSetup]
-        public void Setup()
-        {
-            Model  = BenchmarkModel.New(Count);
-        }
+        public void Setup() => Model = BenchmarkModel.New(Count);
 
         [Params(10, 100, 1000, 10_000)]
         public int Count { get; set; }

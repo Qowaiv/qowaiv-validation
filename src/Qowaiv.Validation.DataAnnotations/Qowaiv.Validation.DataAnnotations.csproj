@@ -40,16 +40,19 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <PackageValidationBaselineVersion>4.0.0</PackageValidationBaselineVersion>
-    <Version>5.0.1</Version>
+    <PackageValidationBaselineVersion>5.0.0</PackageValidationBaselineVersion>
+    <Version>6.0.0</Version>
     <ToBeReleased>
       <![CDATA[
-v5.1.0
-- Add [NotUnknown] to indicate that the unknown value is not allowed.
+v6.*
+- ?
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[
+v6.0.0
+- Add [NotUnknown] to indicate that the unknown value is not allowed.
+- Update to Qowaiv v8.0.0. (BREAKING)
 v5.0.1
 - Validation attributes support both ErrorMessage as ErrorMessageResourceName and ErrorMessageResourceType. (BUG)
 v5.0.0

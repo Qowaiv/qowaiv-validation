@@ -6,21 +6,17 @@ public class Skips
 {
     [Test]
     public void Decorated_property()
-    {
-        new DeocratedProperty { Property = null! }
+        => new DeocratedProperty { Property = null! }
         .ValidateAnnotations()
         .Should().BeValid()
         .WithoutMessages();
-    }
 
     [Test]
     public void Decorated_type()
-    {
-        new DecoratedType { Property = null! }
+        => new DecoratedType { Property = null! }
         .ValidateAnnotations()
         .Should().BeValid()
         .WithoutMessages();
-    }
 }
 
 file class DeocratedProperty

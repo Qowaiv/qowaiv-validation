@@ -12,9 +12,5 @@
     <AdditionalFiles Include="build/**" />
     <AdditionalFiles Include="props/**" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="DotNetProjectFile.Analyzers.Sdk" PrivateAssets="all" />
-  </ItemGroup>
 
 </Project>

@@ -9,6 +9,7 @@
     <OutputType>library</OutputType>
     <DefineConstants>CONTRACTS_FULL</DefineConstants>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <CheckEolTargetFramework>true</CheckEolTargetFramework>
     <SuppressTfmSupportBuildWarnings>false</SuppressTfmSupportBuildWarnings>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
@@ -38,7 +39,4 @@
     <RestoreLockedMode>true</RestoreLockedMode>
   </PropertyGroup>
 
-  <ItemGroup>
-    <AdditionalFiles Include="*.csproj" Visible="false" />
-  </ItemGroup>
 </Project>

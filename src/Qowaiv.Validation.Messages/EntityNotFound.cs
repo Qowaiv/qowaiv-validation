@@ -43,13 +43,10 @@ public class EntityNotFound : InvalidOperationException, IValidationMessage
         };
 
     /// <summary>Tries to resolves Qowaiv's Type.ToCSharpString(bool) and falls back to <see cref="Type.FullName"/>.</summary>
-    private static Func<Type, string> TypeName
-    {
-        get => field ??= Type
-            .GetType("System.QowaivTypeExtensions, Qowaiv")?
-            .GetMethods(BindingFlags.Static | BindingFlags.Public)
-            .FirstOrDefault(m => m.Name == "ToCSharpString" && m.GetParameters().Length == 2) is { } m
-                ? t => m.Invoke(null, [t, true])?.ToString() ?? string.Empty
-                : t => t.FullName ?? t.Name;
-    }
+    private static Func<Type, string> TypeName => field ??= Type
+        .GetType("System.QowaivTypeExtensions, Qowaiv")?
+        .GetMethods(BindingFlags.Static | BindingFlags.Public)
+        .FirstOrDefault(m => m.Name == "ToCSharpString" && m.GetParameters().Length == 2) is { } m
+            ? t => m.Invoke(null, [t, true])?.ToString() ?? string.Empty
+            : t => t.FullName ?? t.Name;
 }

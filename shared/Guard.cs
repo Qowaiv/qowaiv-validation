@@ -4,7 +4,6 @@
 //    See: https://github.com/Corniel/Grenadiers/blob/master/LICENSE.md
 // </copyright>
 //-----------------------------------------------------------------------
-#nullable enable
 
 using System.IO;
 

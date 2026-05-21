@@ -16,9 +16,7 @@ public class BeValid
 
     [Test]
     public void passes_for_OK_result()
-    {
-        Result.OK.Should().BeValid("something went wrong");
-    }
+        => Result.OK.Should().BeValid("something went wrong");
 }
 
 public class BeInvalid
@@ -53,9 +51,7 @@ public class WithoutMessage
 
     [Test]
     public void passes_for_no_messages()
-    {
-        Result.OK.Should().BeValid().WithoutMessages();
-    }
+        => Result.OK.Should().BeValid().WithoutMessages();
 }
 
 public class WithMessage
@@ -94,9 +90,8 @@ Extra messages:
 
     [Test]
     public void passes_for_same_message()
-    {
-        Result.WithMessages(ValidationMessage.Warn("Almost broken")).Should().BeValid().WithMessage(ValidationMessage.Warn("Almost broken"));
-    }
+        => Result.WithMessages(ValidationMessage.Warn("Almost broken"))
+        .Should().BeValid().WithMessage(ValidationMessage.Warn("Almost broken"));
 }
 
 public class WithMessages
@@ -126,17 +121,14 @@ public class WithMessages
 
     [Test]
     public void passes_for_same_messages()
-    {
-        Result.WithMessages(
+        => Result.WithMessages(
             ValidationMessage.Warn("Almost broken"),
             ValidationMessage.Info("Just that you know.", "Data"),
             ValidationMessage.Error("Broken"))
-
         .Should().BeInvalid().WithMessages(
             ValidationMessage.Error("Broken"),
             ValidationMessage.Warn("Almost broken"),
             ValidationMessage.Info("Just that you know.", "Data"));
-    }
 }
 
 public class Value
