@@ -35,7 +35,24 @@ public class CustomValidator : AbstractValidator<Model>
 }
 ```
 
-### (Not) before and (not) after
+### (Not) positive/negative
+The `NumberValidation` validates that numbers are greater/small then, or equal
+to zero.
+
+``` C#
+public class CustomValidator : AbstractValidator<Model>
+{
+    public CustomValidator()
+    {
+        RuleFor(m => m.Number).IsPositive();
+        RuleFor(m => m.Number).IsNegative();
+        RuleFor(m => m.Number).IsNotPositive();
+        RuleFor(m => m.Number).IsNotNegative();
+    }
+}
+```
+
+### (Not) before and (not) (after)
 To have messages that use the phrasing `'{PropertyName}' should be after {Value}`
 instead of `'{PropertyName}' should be greater than {Value}` makes sense for a
 big range of property types, including date (time) related values.
@@ -88,8 +105,7 @@ public class CustomValidator : AbstractValidator<Model>
 ```
 
 ### Finite floating points
-The `FloatingPointValidation` validates that `double` and `float` values
-are finite numbers.
+The `NumberValidation` validates that numbers are finite.
 
 ``` C#
 public class CustomValidator : AbstractValidator<Model>
