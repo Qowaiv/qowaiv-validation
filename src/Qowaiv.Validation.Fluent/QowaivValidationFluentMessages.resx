@@ -24,6 +24,18 @@
   <data name="IsFinite" xml:space="preserve">
     <value>'{PropertyName}' must be a finite number.</value>
   </data>
+  <data name="IsNegative" xml:space="preserve">
+    <value>'{PropertyName}' must be negative.</value>
+  </data>
+  <data name="IsNotNegative" xml:space="preserve">
+    <value>'{PropertyName}' must not be negative.</value>
+  </data>
+  <data name="IsNotPositive" xml:space="preserve">
+    <value>'{PropertyName}' must not be positive.</value>
+  </data>
+  <data name="IsPositive" xml:space="preserve">
+    <value>'{PropertyName}' must be positive.</value>
+  </data>
   <data name="NoIPBasedEmailAddress" xml:space="preserve">
     <value>'{PropertyName}' has an IP address based domain.</value>
   </data>

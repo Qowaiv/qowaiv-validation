@@ -4,17 +4,22 @@
   
   <PropertyGroup>
     <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
-    <PackageValidationBaselineVersion>3.0.0</PackageValidationBaselineVersion>
-    <Version>4.0.0</Version>
+    <PackageValidationBaselineVersion>4.0.0</PackageValidationBaselineVersion>
+    <Version>4.1.0</Version>
     <PackageId>Qowaiv.Validation.Fluent</PackageId>
     <ToBeReleased>
       <![CDATA[
-v3.*
+v5.0.0
+- Drop FloatingPointValidation (covered by NumberValidation). (BREAKING)
+- Changed namespace from FluentValidation to Qowaiv.Validation.Fluent. (BREAKING)
+v4.*
 - ?
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[
+v4.1.0
+- Added `IsFinite`, `IsPostive`, `IsNegative`, `IsNotPostive` and `IsNotNegative` for `INumber`.
 v4.0.0
 - Update to Qowaiv v8.0.0. (BREAKING)
 v3.0.0
@@ -28,7 +33,7 @@ v2.0.0
 - Drop .NET 6.0 target. (BREAKING)
 v1.0.0
 - Drop support .NET 5.0 and .NET 7.0. (BREAKING)
-- Update to Qowaiv v8.0.0.
+- Update to Qowaiv v6.0.0.
 - Update to FluentValidation v11.9.2. (BREAKING)
 - ullable anotations. #48
 - `InPast`, `NotInPast`, `InFuture`, and `NotInFuture` is now `Clock.UtcNow()`.
@@ -39,7 +44,7 @@ v0.3.0
 - Support .NET 7.0. #62
 v0.2.1
 - Nullable anotations. #48
-- , `InPast`, `NotInPast`, `InFuture`, and `NotInFuture` available for `DateOnly`. #49
+- `InPast`, `NotInPast`, `InFuture`, and `NotInFuture` available for `DateOnly`. #49
 v0.2.0
 - Updated Qowaiv dependency.
 v0.1.1
