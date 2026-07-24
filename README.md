@@ -14,12 +14,12 @@
 |![v](https://img.shields.io/nuget/v/Qowaiv.Validation.TestTools?color=118)      |![v](https://img.shields.io/nuget/dt/Qowaiv.Validation.TestTools)      |[Qowaiv.Validation.TestTools](https://www.nuget.org/packages/Qowaiv.Validation.TestTools/)            |
 
 # Qowaiv Validation
-There are multiple ways to support validation within .NET. Most notable are
+There are multiple ways to support validation within .NET. Most notably are
 * [System.ComponentModel](https://www.nuget.org/packages/System.ComponentModel)
 * [FluentValidation.NET](https://fluentvalidation.net)
 
 Qowaiv.Validation aims to provide extensions on top of those that work well when
-using [Qowaiv SVO's](https://github.com/Qowaiv/Qowaiv), and prevent vendor lock-in.
+using [Qowaiv SVOs](https://github.com/Qowaiv/Qowaiv), and prevent vendor lock-in.
 
 
 ## Qowaiv Validation Abstractions
@@ -87,6 +87,22 @@ Result<DataType> resultWithMessages = Result.For(value, messages);
 Task<Result<DataType>> asyncResult = Result.For(value).AsTask();
 ```
 
+#### Throw if invalid
+When you want to fail fast and throw on invalid results, use `ThrowIfInvalid()`:
+
+``` C#
+Result<DataType> result = Validate(model);
+result.ThrowIfInvalid(); // throws InvalidModelException if invalid
+```
+
+#### Validator.Empty
+To create a validator that always returns a valid result, use `Validator.Empty<TModel>()`:
+
+``` C#
+IValidator<MyModel> validator = Validator.Empty<MyModel>();
+Result<MyModel> result = validator.Validate(model); // always valid
+```
+
 #### Composed Actions
 A Composed Action can be created by *method chaining* of multiple smaller
 actions/functions. Subsequent actions are executed while the `Result<TModel>`
@@ -109,11 +125,11 @@ Result<DataType> result = GetModel()
 This is short for:
 ``` C#
 Result<DataType> result = GetModel()
-if (result.Isvalid)
+if (result.IsValid)
 {
     result = result.Value.Action1();
 }
-if (result.Isvalid)
+if (result.IsValid)
 {
     result = result.Value.Action2();
 }
@@ -130,6 +146,23 @@ Or, with a (shared) immutable context:
 Result<Context> context = NewContext()
     .Act(c => Service.GetValue(), (c, value) => /* return Context */ c.Update(value))
     .Act(c => Service.GetOther(), (c, other) => /* return Context */ c.Update(other));
+```
+
+#### Async Composed Actions
+Async versions (`ActAsync`) are available for all `Act` overloads, allowing
+chaining of async operations:
+
+``` C#
+Result<DataType> result = await GetModelAsync()
+    .ActAsync(m => FetchDetailsAsync(m))
+    .ActAsync(m => SaveAsync(m));
+```
+
+The pipe operator also supports async results:
+``` C#
+Result<DataType> result = await GetModelAsync()
+    | (m => FetchDetailsAsync(m))
+    | (m => SaveAsync(m));
 ```
 
 #### Casting
@@ -158,7 +191,29 @@ namespace Qowaiv.Validation.Abstractions
 
 There are implementations available in `Qowaiv.Validation.Abstraction`,
 `Qowaiv.Validation.Fluent` and `Qowaiv.Validation.DataAnnotation`. You can pick
-your implementation of choice based on your scenario. 
+your implementation of choice based on your scenario.
+
+#### ValidationMessage
+`Qowaiv.Validation.Abstractions.ValidationMessage` is a concrete, sealed
+implementation of `IValidationMessage` with factory methods:
+
+``` C#
+IValidationMessage msg = ValidationMessage.Error("Name is required", "Name");
+IValidationMessage warn = ValidationMessage.Warn("Deprecated field", "Field");
+IValidationMessage info = ValidationMessage.Info("Value was auto-corrected");
+```
+
+#### ValidationSeverity
+The severity levels for validation messages:
+
+``` C#
+public enum ValidationSeverity
+{
+    Info = 0,
+    Warning = 1,
+    Error = 2,
+}
+```
 
 #### AccessDenied
 `Qowaiv.Validation.Messages` contains a specific implementation of `IValidationMessage`
@@ -167,7 +222,7 @@ communicate a `403 - Forbidden` response.
 
 #### ConcurrencyIssue
 `Qowaiv.Validation.Messages` contains a specific implementation of `IValidationMessage`
-for communicating that a concurrency issue. A use case for this can be to
+for communicating a concurrency issue. A use case for this can be to
 communicate a `409 - Conflict` response.
 
 #### EntityNotFound
@@ -180,16 +235,16 @@ communicate a `404 - Not Found` response.
 for communicating that a service was unavailable. A use case for this can be to
 communicate a `503 - Service Unavailable` response.
 
-## Qowaiv exensions on [*Fluent Validation](https://fluentvalidation.net/)
+## Qowaiv extensions on [*Fluent Validation](https://fluentvalidation.net/)
 Provides a Fluent Validation based implementation of the `Qowaiv.Validation.Abstractions.IValidator`
 and custom validation extensions [(..)](src/Qowaiv.Validation.Fluent/README.md).
 
 ## Qowaiv DataAnnotations based validation
-Provides an data annotations based implementation of the `Qowaiv.Validation.Abstractions.IValidator`
+Provides a data annotations based implementation of the `Qowaiv.Validation.Abstractions.IValidator`
 and data annotation attributes [(..)](src/Qowaiv.Validation.DataAnnotations/README.md).
 
 ## XML validation
-Validating XML documents via XSD schema's is a common scenario. To benefit from
+Validating XML documents via XSD schemas is a common scenario. To benefit from
 `Result<T>` the following scenario is supported:
 
 ``` C#
@@ -229,5 +284,5 @@ extended by writing custom extension methods on `Must<TSubject>` based on
 what guarding your (domain) logic requires.
 
 ## Test Tools
-Qowaiv.Valdation comes with a separate [Test Tools package](https://www.nuget.org/packages/Qowaiv.TestTools).
+Qowaiv.Validation comes with a separate [Test Tools package](https://www.nuget.org/packages/Qowaiv.TestTools).
 Details about that package can be found [here](src/Qowaiv.Validation.TestTools/README.md).
