@@ -14,64 +14,22 @@
     <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
   </Suppression>
   <Suppression>
-    <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:Qowaiv.Validation.Abstractions.InvalidModelException.For(System.Collections.Generic.IEnumerable{Qowaiv.Validation.Abstractions.IValidationMessage})</Target>
-    <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:Qowaiv.Validation.Abstractions.Result.ThrowIfInvalid</Target>
-    <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:Qowaiv.Validation.Abstractions.InvalidModelException.For(System.Collections.Generic.IEnumerable{Qowaiv.Validation.Abstractions.IValidationMessage})</Target>
-    <Left>lib/net9.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:Qowaiv.Validation.Abstractions.Result.ThrowIfInvalid</Target>
-    <Left>lib/net9.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:Qowaiv.Validation.Abstractions.InvalidModelException.For(System.Collections.Generic.IEnumerable{Qowaiv.Validation.Abstractions.IValidationMessage})</Target>
-    <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:Qowaiv.Validation.Abstractions.Result.ThrowIfInvalid</Target>
-    <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
+    <DiagnosticId>CP0003</DiagnosticId>
+    <Target>Qowaiv.Validation.Abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0003</DiagnosticId>
-    <Target>Qowaiv.Validation.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Target>Qowaiv.Validation.Abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
     <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0003</DiagnosticId>
-    <Target>Qowaiv.Validation.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
-    <Left>lib/net9.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0003</DiagnosticId>
-    <Target>Qowaiv.Validation.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Target>Qowaiv.Validation.Abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -85,57 +43,71 @@
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Result.For``1(``0,Qowaiv.Validation.Abstractions.IValidationMessage[])&lt;0&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
-    <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
+    <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Result.For``1(``0,System.Collections.Generic.IEnumerable{Qowaiv.Validation.Abstractions.IValidationMessage})&lt;0&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
-    <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
+    <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Validator.Empty``1:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
-    <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
+    <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Validator.Empty``1&lt;0&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
-    <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
+    <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Result.For``1(``0,Qowaiv.Validation.Abstractions.IValidationMessage[])&lt;0&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
-    <Left>lib/net9.0/Qowaiv.Validation.Abstractions.dll</Left>
+    <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Result.For``1(``0,System.Collections.Generic.IEnumerable{Qowaiv.Validation.Abstractions.IValidationMessage})&lt;0&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
-    <Left>lib/net9.0/Qowaiv.Validation.Abstractions.dll</Left>
+    <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Validator.Empty``1:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
-    <Left>lib/net9.0/Qowaiv.Validation.Abstractions.dll</Left>
+    <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Validator.Empty``1&lt;0&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
-    <Left>lib/net9.0/Qowaiv.Validation.Abstractions.dll</Left>
+    <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Abstractions.Validator:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Abstractions.Validator:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
@@ -149,20 +121,6 @@
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>T:Qowaiv.Validation.Abstractions.Validator:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0016</DiagnosticId>
-    <Target>T:Qowaiv.Validation.Abstractions.Validator:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
-    <Left>lib/net9.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0016</DiagnosticId>
-    <Target>T:Qowaiv.Validation.Abstractions.Validator:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
-    <Left>lib/net9.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
@@ -565,42 +523,42 @@
   <Suppression>
     <DiagnosticId>CP0021</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Result.For``1(``0,Qowaiv.Validation.Abstractions.IValidationMessage[])``0:notnull</Target>
-    <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
+    <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0021</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Result.For``1(``0,System.Collections.Generic.IEnumerable{Qowaiv.Validation.Abstractions.IValidationMessage})``0:notnull</Target>
-    <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
+    <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0021</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Validator.Empty``1``0:notnull</Target>
-    <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
+    <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0021</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Result.For``1(``0,Qowaiv.Validation.Abstractions.IValidationMessage[])``0:notnull</Target>
-    <Left>lib/net9.0/Qowaiv.Validation.Abstractions.dll</Left>
+    <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0021</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Result.For``1(``0,System.Collections.Generic.IEnumerable{Qowaiv.Validation.Abstractions.IValidationMessage})``0:notnull</Target>
-    <Left>lib/net9.0/Qowaiv.Validation.Abstractions.dll</Left>
+    <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0021</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Validator.Empty``1``0:notnull</Target>
-    <Left>lib/net9.0/Qowaiv.Validation.Abstractions.dll</Left>
+    <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>

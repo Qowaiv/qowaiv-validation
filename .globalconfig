@@ -22,8 +22,6 @@ dotnet_diagnostic.CA2254.severity   = warning    # Template should be a static e
 dotnet_diagnostic.CS8763.severity   = warning    # A method marked [DoesNotReturn] should not return.
 dotnet_diagnostic.CS8770.severity   = warning    # Method lacks [DoesNotReturn] annotation to match implemented or overridden member.
 
-dotnet_diagnostic.FAA0004.severity  = error      # Replace NUnit assertion with Fluent Assertions equivalent
-
 dotnet_diagnostic.IDE0130.severity  = none       # Namespace does not match file structure [Justification: We do not care.]
 dotnet_diagnostic.IDE1006.severity  = none       # Naming Styles [Justification: Naming styles should be guarded by other rules.]
 
@@ -101,11 +99,9 @@ dotnet_diagnostic.IDE0350.severity  = warning    # Use implicitly typed lambda
 dotnet_diagnostic.IDE0360.severity  = warning    # Simplify property accessor
 dotnet_diagnostic.IDE1005.severity  = warning    # Use conditional delegate call
 
-dotnet_diagnostic.NUnit1001.severity = none       # The individual arguments provided by a TestCaseAttribute must match the type of the corresponding parameter of the method
-dotnet_diagnostic.NUnit2005.severity = suggestion # Consider using Assert.That(actual, Is.EqualTo(expected)) instead of Assert.AreEqual(expected, actual)
-dotnet_diagnostic.NUnit2021.severity = warning    # Incompatible types for EqualTo constraint
-dotnet_diagnostic.NUnit2005.severity = error      # Consider using Assert.That instead of AreEqual
-dotnet_diagnostic.NUnit2033.severity = error      # Consider using Assert.That instead of NotZero
+dotnet_diagnostic.NUnit1001.severity = none      # The individual arguments provided by a TestCaseAttribute must match the type of the corresponding parameter of the method
+dotnet_diagnostic.NUnit2005.severity = none      # Consider using Assert.That(actual, Is.EqualTo(expected)) instead of Assert.AreEqual(expected, actual)
+dotnet_diagnostic.NUnit2021.severity = warning   # Incompatible types for EqualTo constraint
 
 dotnet_diagnostic.Proj0006.severity = none       # Add Additional files
 dotnet_diagnostic.Proj0240.severity = none       # Enable package validation [Justification: Disallows extended contracts for newer .NET versions]

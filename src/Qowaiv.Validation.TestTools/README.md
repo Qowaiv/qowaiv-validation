@@ -12,30 +12,30 @@ Result.For(17).Should().BeValid()
 ```
 Where the chain after `.Value` exposes the value.
 
-Other options for `.IsValid()` are:
+Other options for `.BeValid()` are:
 
 ``` C#
-Result.For(17).Shoud().BeValid()
+Result.For(17).Should().BeValid()
     .WithMessage(ValidationMessage.Warn("Are you sure?"))
     .Value.Should().Be(17);
-````
+```
 and
 
 ``` C#
 Result.For(17).Should().BeValid()
     .WithMessages(/* ... */)
     .Value.Should().Be(17);
-````
+```
 
-Obviously, you can also check for invalidness:
+Obviously, you can also check for invalidity:
 
 ``` C#
 Result.For(17).Should().BeInvalid(); 
 ```
 
 In that case you do not have the option of `.WithoutMessages()`, obviously,
-as `Result` is defined to be invalid bases on containing at least one error
-message. Furthermore, it does not exposes the `.Value` as that is not
+as `Result` is defined to be invalid based on containing at least one error
+message. Furthermore, it does not expose the `.Value` as that is not
 accessible for an invalid result.
 
 All (except for the `.Value`) is also applicable for the non-generic `Result`.
