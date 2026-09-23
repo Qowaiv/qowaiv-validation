@@ -1,5 +1,5 @@
 # Qowaiv DataAnnotations based validation
-Provides an data annotations based implementation of the `Qowaiv.Validation.Abstractions.IValidator`
+Provides a data annotations based implementation of the `Qowaiv.Validation.Abstractions.IValidator`
 and data annotation attributes.
 
 ## Annotated model validator
@@ -146,8 +146,8 @@ public class Model
 ```
 
 ### In range
-The `[InRange<TValue>]` attribute the allowed values to the specified range.
-This attribute is simliar to Microsoft's `[Range]`(https://learn.microsoft.com/dotnet/api/system.componentmodel.dataannotations.rangeattribute).
+The `[InRange<TValue>]` attribute limits the allowed values to the specified range.
+This attribute is similar to Microsoft's [`Range`](https://learn.microsoft.com/dotnet/api/system.componentmodel.dataannotations.rangeattribute).
 
 
 ### Items validation
@@ -170,7 +170,7 @@ those values are set to the `TValidator` allowing full control of the error mess
 
 ### Is finite
 The `[IsFinite]` attribute validates that the floating point value of the field
-represents a finite (e.a. not NaN, or infinity).
+represents a finite (i.e. not NaN, or infinity).
 
 ``` C#
 public class Model
@@ -205,28 +205,28 @@ public class Model
 }
 ```
 
-# Not in future
-The `[NotInFuture]` attributes requires the `DateTime`, `DateTimeOffset`, `Date`,
+### Not in future
+The `[NotInFuture]` attribute requires the `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value not to be in the future. The current time is resolved
 using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
 
 ``` C#
 public class Model
 {
-    [InFuture]
+    [NotInFuture]
     public DateTime CreationTime { get; init; }
 }
 ```
 
-# Not in past
-The `[NotInPast]` attributes requires the `DateTime`, `DateTimeOffset`, `Date`,
+### Not in past
+The `[NotInPast]` attribute requires the `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value not to be in the past. The current time is resolved
 using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
 
 ``` C#
 public class Model
 {
-    [InPast]
+    [NotInPast]
     public DateOnly Start { get; init; }
 }
 ```
@@ -265,7 +265,59 @@ public class Model
 }
 ```
 
+### Collection size
+The `[Collection.AtLeast]`, `[Collection.AtMost]`, and `[Collection.InRange]`
+attributes validate the number of items in a collection.
+
+``` C#
+public class Model
+{
+    [Collection.AtLeast(1)]
+    public List<string> Items { get; init; } = [];
+
+    [Collection.AtMost(10)]
+    public List<int> Numbers { get; init; } = [];
+
+    [Collection.InRange(1, 5)]
+    public string[] Tags { get; init; } = [];
+}
+```
+
+### Length (string/array)
+The `[Length.AtLeast]`, `[Length.AtMost]`, and `[Length.InRange]` attributes
+validate the length of strings or arrays.
+
+``` C#
+public class Model
+{
+    [Length.AtLeast(1)]
+    public string Name { get; init; }
+
+    [Length.AtMost(255)]
+    public string Description { get; init; }
+
+    [Length.InRange(2, 10)]
+    public string Code { get; init; }
+}
+```
+
+### Size (streams and binary data)
+The `[Size.AtLeast]`, `[Size.AtMost]`, and `[Size.InRange]` attributes
+validate the size of streams and binary data collections. They support
+`Stream`, `ICollection<byte>`, `IReadOnlyCollection<byte>`, and `BinaryData`.
+
+``` C#
+public class Model
+{
+    [Size.AtMost(1024 * 1024)] // max 1 MB
+    public Stream Upload { get; init; }
+
+    [Size.InRange(16, 64)]
+    public BinaryData Data { get; init; }
+}
+```
+
 ### Validates attribute
 The `[Validates]` attribute is designed to help the [QW0102](https://github.com/Qowaiv/qowaiv-analyzers/blob/main/rules/QW0102.md)
-to report on misusage of the attribute. By decorating an `[Validation]` attribute
+to report on misusage of the attribute. By decorating a `[Validation]` attribute
 the analyzer knows on which member types the attribute can be set.

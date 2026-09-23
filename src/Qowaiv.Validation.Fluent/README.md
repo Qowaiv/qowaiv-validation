@@ -1,6 +1,27 @@
-# Qowaiv exensions on [*Fluent Validation](https://fluentvalidation.net/)
+# Qowaiv extensions on [*Fluent Validation*](https://fluentvalidation.net/)
 Qowaiv provides a set of extensions on top of the FluentValidation library. It
-allows to use FluentValidation in combination with Qowaiv's `Result<T>`.
+allows using FluentValidation in combination with Qowaiv's `Result<T>`.
+
+## ModelValidator base class
+The `ModelValidator<TModel>` is a base class that bridges a FluentValidation
+`AbstractValidator<TModel>` to the `Qowaiv.Validation.Abstractions.IValidator<TModel>`
+interface. Extend it to create validators that return `Result<TModel>`:
+
+``` C#
+public class CustomerValidator : ModelValidator<Customer>
+{
+    public CustomerValidator()
+    {
+        RuleFor(c => c.Name).Required();
+        RuleFor(c => c.Email).NotEmptyOrUnknown();
+        RuleFor(c => c.Age).IsPositive();
+    }
+}
+
+// Usage:
+var validator = new CustomerValidator();
+Result<Customer> result = validator.Validate(customer);
+```
 
 ## Validators
 There is a set of (generic purpose) validators to validate properties of a model.
@@ -36,7 +57,7 @@ public class CustomValidator : AbstractValidator<Model>
 ```
 
 ### (Not) positive/negative
-The `NumberValidation` validates that numbers are greater/small then, or equal
+The `NumberValidation` validates that numbers are greater/smaller than, or equal
 to zero.
 
 ``` C#
@@ -85,7 +106,7 @@ public class CustomValidator : AbstractValidator<Model>
         RuleFor(m => m.Date1).InFuture();
         RuleFor(m => m.Date2).InPast();
         RuleFor(m => m.Date3).NotInFuture();
-        RuleFor(m => m.Date4).NotInPast(() => CustomeDateProvider());
+        RuleFor(m => m.Date4).NotInPast(() => CustomDateProvider());
     }
 }
 ```
