@@ -95,7 +95,6 @@ public class Is_not_valid_for
             .IsValid(Banners.UnionJack | Banners.StarsAndStripes).Should().BeFalse();
     }
 
-    [Obsolete("Will be dropped with next major release.")]
     public class Non_generic
     {
         [Test]
