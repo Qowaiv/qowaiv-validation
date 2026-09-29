@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/package.props" />
-  
+
   <PropertyGroup>
     <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
     <PackageValidationBaselineVersion>4.0.0</PackageValidationBaselineVersion>
@@ -87,18 +87,11 @@ v0.0.1
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="QowaivValidationFluentMessages.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>QowaivValidationFluentMessages.resx</DependentUpon>
-    </Compile>
+    <Compile Update="QowaivValidationFluentMessages.Designer.cs" DependentUpon="QowaivValidationFluentMessages.resx" AutoGen="True" DesignTime="True" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="QowaivValidationFluentMessages.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>QowaivValidationFluentMessages.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Update="QowaivValidationFluentMessages.resx" LastGenOutput="QowaivValidationFluentMessages.Designer.cs" Generator="ResXFileCodeGenerator" />
   </ItemGroup>
 
 </Project>

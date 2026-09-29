@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  
+
   <Import Project="../../props/package.props" />
 
   <PropertyGroup>
@@ -45,18 +45,11 @@ v0.0.1
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="ValidationMessages.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ValidationMessages.resx</DependentUpon>
-    </Compile>
+    <Compile Update="ValidationMessages.Designer.cs" DependentUpon="ValidationMessages.resx" AutoGen="True" DesignTime="True" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="ValidationMessages.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ValidationMessages.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Update="ValidationMessages.resx" LastGenOutput="ValidationMessages.Designer.cs" Generator="ResXFileCodeGenerator" />
   </ItemGroup>
 
 </Project>
