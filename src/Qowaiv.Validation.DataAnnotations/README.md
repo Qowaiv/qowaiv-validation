@@ -205,6 +205,66 @@ public class Model
 }
 ```
 
+### Negative
+The `[Negative]` attribute validates that the numeric value of a field is negative
+(less than zero).
+
+``` C#
+public class Model
+{
+    [Negative]
+    public int Temperature { get; init; }
+
+    [Negative]
+   public Amount Balance { get; init; }
+}
+```
+
+### Not negative
+The `[NotNegative]` attribute validates that the numeric value of a field is not negative
+(greater than or equal to zero).
+
+``` C#
+public class Model
+{
+    [NotNegative]
+    public int Count { get; init; }
+
+    [NotNegative]
+    public Amount Value { get; init; }
+}
+```
+
+### Not positive
+The `[NotPositive]` attribute validates that the numeric value of a field is not positive
+(less than or equal to zero).
+
+``` C#
+public class Model
+{
+    [NotPositive]
+    public int Adjustment { get; init; }
+
+    [NotPositive]
+    public Amount Discount { get; init; }
+}
+```
+
+### Positive
+The `[Positive]` attribute validates that the numeric value of a field is positive
+(greater than zero).
+
+``` C#
+public class Model
+{
+    [Positive]
+    public int Quantity { get; init; }
+
+    [Positive]
+    public Amount Discount { get; init; }
+}
+```
+
 ### Not in future
 The `[NotInFuture]` attribute requires the `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value not to be in the future. The current time is resolved
