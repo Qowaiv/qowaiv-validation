@@ -25,18 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="QowaivValidationMessages.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>QowaivValidationMessages.resx</DependentUpon>
-    </Compile>
+    <Compile Update="QowaivValidationMessages.Designer.cs" DesignTime="true" AutoGen="true" DependentUpon="QowaivValidationMessages.resx" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="QowaivValidationMessages.resx">
-      <LastGenOutput>QowaivValidationMessages.Designer.cs</LastGenOutput>
-      <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
+    <EmbeddedResource Update="QowaivValidationMessages.resx" LastGenOutput="QowaivValidationMessages.Designer.cs" Generator="ResXFileCodeGenerator" />
   </ItemGroup>
 
   <PropertyGroup>
@@ -45,7 +38,10 @@
     <ToBeReleased>
       <![CDATA[
 v6.*
-- ?
+- Introduction of [Negative] valiation attribute.
+- Introduction of [Positive] valiation attribute.
+- Introduction of [NotPositive] valiation attribute.
+- Introduction of [NotNegative] valiation attribute.
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
