@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="QowaivValidationMessages.Designer.cs" DesignTime="true" AutoGen="true" DependentUpon="QowaivValidationMessages.resx" />
+    <Compile Update="QowaivValidationMessages.Designer.cs" DependentUpon="QowaivValidationMessages.resx" AutoGen="True" DesignTime="True" />
   </ItemGroup>
 
   <ItemGroup>

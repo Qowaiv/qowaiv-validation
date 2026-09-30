@@ -49,18 +49,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="TestMessages.Designer.cs">
-      <DependentUpon>TestMessages.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
+    <Compile Update="TestMessages.Designer.cs" DependentUpon="TestMessages.resx" DesignTime="True" AutoGen="True" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="TestMessages.resx">
-      <LastGenOutput>TestMessages.Designer.cs</LastGenOutput>
-      <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
+    <EmbeddedResource Update="TestMessages.resx" LastGenOutput="TestMessages.Designer.cs" Generator="ResXFileCodeGenerator" />
   </ItemGroup>
 
 </Project>
