@@ -38,7 +38,10 @@
     <ToBeReleased>
       <![CDATA[
 v6.*
-- ?
+- Introduction of [Negative] validation attribute.
+- Introduction of [Positive] validation attribute.
+- Introduction of [NotPositive] validation attribute.
+- Introduction of [NotNegative] validation attribute.
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
@@ -57,15 +60,15 @@ v4.0.2
 - Support custom TypeConverters for [Allowed<T>] and [Forbidden<T>].
 - Support System.Net.Http.HttpMethod without custom TypeConverter for [Allowed<T>] and [Forbidden<T>].
 v4.0.1
-- Introduction of [InRange<TValue>] valiation attribute.
+- Introduction of [InRange<TValue>] validation attribute.
 v4.0.0
 - Validate public fields.
 - Support primitives of the same type on [ValueOf<TValue>] attributes.
 - Support requiredness via the required modifier.
-- Introduction of [InPast] valiation attribute.
-- Introduction of [InFuture] valiation attribute.
-- Introduction of [NotInPast] valiation attribute.
-- Introduction of [NotInFuture] valiation attribute.
+- Introduction of [InPast] validation attribute.
+- Introduction of [InFuture] validation attribute.
+- Introduction of [NotInPast] validation attribute.
+- Introduction of [NotInFuture] validation attribute.
 - Introduction of [Items<TValidator>] to define a validator on the items of a collection.
 - Introduction of [SkipValidation] to explictly skip validation of types and properties.
 - Introduction of the [Validates(type)] attribute to decorate [Validation] attributes.
@@ -128,4 +131,3 @@ v0.0.4
   </PropertyGroup>
 
 </Project>
- 
