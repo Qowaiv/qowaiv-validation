@@ -1,4 +1,5 @@
 using Qowaiv.Financial;
+using Qowaiv.IO;
 using Qowaiv.Mathematics;
 
 namespace Qowaiv.Validation.DataAnnotations;
@@ -16,9 +17,11 @@ namespace Qowaiv.Validation.DataAnnotations;
 [Validates(typeof(Int128))]
 #endif
 [Validates(typeof(Amount))]
+[Validates(typeof(Fraction))]
 [Validates(typeof(Money))]
 [Validates(typeof(Percentage))]
-[Validates(typeof(Fraction))]
+[Validates(typeof(StreamSize))]
+[CLSCompliant(false)]
 public sealed class NegativeAttribute() : SignAttribute(() => QowaivValidationMessages.NegativeAttribute_ValidationError)
 {
     /// <inheritdoc />

@@ -1,4 +1,5 @@
 using Qowaiv.Financial;
+using Qowaiv.IO;
 using Qowaiv.Mathematics;
 
 namespace Qowaiv.Validation.DataAnnotations;
@@ -24,9 +25,10 @@ public abstract class SignAttribute(Func<string> errorMessageAccessor) : Validat
         Int128 v /*.....*/ => Is(Int128.Sign(v)),
 #endif
         Amount v /*.....*/ => Is(v.Sign()),
+        Fraction v /*...*/ => Is(v.Sign()),
         Money v /*......*/ => Is(v.Sign()),
         Percentage v /*.*/ => Is(v.Sign()),
-        Fraction v /*...*/ => Is(v.Sign()),
+        StreamSize v /*.*/ => Is(v.Sign()),
         _ => throw UnsupportedType.ForAttribute<SignAttribute>(value.GetType()),
     };
 
