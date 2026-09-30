@@ -41,7 +41,7 @@ v6.*
 - Introduction of [Negative] validation attribute.
 - Introduction of [Positive] valiation attribute.
 - Introduction of [NotPositive] validation attribute.
-- Introduction of [NotNegative] valiation attribute.
+- Introduction of [NotNegative] validation attribute.
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
