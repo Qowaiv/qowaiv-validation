@@ -39,7 +39,7 @@
       <![CDATA[
 v6.*
 - Introduction of [Negative] validation attribute.
-- Introduction of [Positive] valiation attribute.
+- Introduction of [Positive] validation attribute.
 - Introduction of [NotPositive] validation attribute.
 - Introduction of [NotNegative] validation attribute.
 ]]>
