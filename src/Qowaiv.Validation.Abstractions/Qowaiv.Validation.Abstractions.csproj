@@ -58,18 +58,11 @@ v0.0.4
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="QowaivValidationMessages.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>QowaivValidationMessages.resx</DependentUpon>
-    </Compile>
+    <Compile Update="QowaivValidationMessages.Designer.cs" DependentUpon="QowaivValidationMessages.resx" AutoGen="True" DesignTime="True" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="QowaivValidationMessages.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>QowaivValidationMessages.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Update="QowaivValidationMessages.resx" LastGenOutput="QowaivValidationMessages.Designer.cs" Generator="ResXFileCodeGenerator" />
   </ItemGroup>
 
 </Project>

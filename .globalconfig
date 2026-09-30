@@ -1,8 +1,8 @@
 root = true
+is_global = true
 
 dotnet_diagnostic.CA1012.severity   = none       # Abstract types should not have public constructors [Justification: Similar to S3442.]
 dotnet_diagnostic.CA1050.severity   = none       # Declare types in namespaces [Justification: Similar to S3903.]
-dotnet_diagnostic.CA1845.severity   = none       # Use span-based 'string.Concat'
 dotnet_diagnostic.CA1846.severity   = none       # Prefer 'AsSpan' over 'Substring'
 dotnet_diagnostic.CA2231.severity   = none       # Overload operator equals on overriding value type Equals
 
@@ -28,7 +28,7 @@ dotnet_diagnostic.IDE1006.severity  = none       # Naming Styles [Justification:
 dotnet_diagnostic.IDE0005.severity  = suggestion # Using directive is unnecessary
 dotnet_diagnostic.IDE0032.severity  = suggestion # Use auto-implemented property
 dotnet_diagnostic.IDE0290.severity  = suggestion # Use primary constructor
-dotnet_diagnostic.IDE0370.severity  = sillent    # Remove unnecessary suppression
+dotnet_diagnostic.IDE0370.severity  = suggestion # Remove unnecessary suppression
 
 dotnet_diagnostic.IDE0001.severity  = warning    # Simplify name
 dotnet_diagnostic.IDE0002.severity  = warning    # Simplify member access
@@ -49,7 +49,6 @@ dotnet_diagnostic.IDE0029.severity  = warning    # Null check can be simplified 
 dotnet_diagnostic.IDE0030.severity  = warning    # Null check can be simplified (nullable ternary conditional check)
 dotnet_diagnostic.IDE0033.severity  = warning    # Use explicitly provided tuple name
 dotnet_diagnostic.IDE0034.severity  = warning    # Simplify 'default' expression
-dotnet_diagnostic.IDE0035.severity  = warning    # Remove unreachable code
 dotnet_diagnostic.IDE0038.severity  = warning    # Use pattern matching to avoid 'is' check followed by a cast
 dotnet_diagnostic.IDE0040.severity  = warning    # Add accessibility modifiers
 dotnet_diagnostic.IDE0041.severity  = warning    # Use 'is null' check
@@ -160,7 +159,6 @@ dotnet_diagnostic.S101.severity     = none       # Types should be named in Pasc
 dotnet_diagnostic.S1694.severity    = none       # An abstract class should have both abstract and concrete methods
 dotnet_diagnostic.S2178.severity    = none       # Short-circuit logic should be used in boolean contexts - '&' is used instead of && to accommodate expressions with nullable booleans too.
 dotnet_diagnostic.S3376.severity    = none       # EventArgs, and Exception type names should end with the type being extended
-dotnet_diagnostic.S3376.severity    = none       # Attribute, EventArgs, and Exception type names should end with the type being extended
 dotnet_diagnostic.S3925.severity    = none       # "ISerializable" should be implemented correctly
 dotnet_diagnostic.S4055.severity    = none       # Literals should not be passed as localized parameters
 dotnet_diagnostic.S4136.severity    = none       # Method overloads should be grouped together
@@ -176,7 +174,6 @@ dotnet_diagnostic.S1067.severity    = warning    # Expressions should not be too
 dotnet_diagnostic.S1144.severity    = warning    # Unused private types or members should be removed
 dotnet_diagnostic.S1172.severity    = warning    # Unused method parameters should be removed
 dotnet_diagnostic.S1185.severity    = warning    # Overriding members should do more than simply call the same member in the base class
-dotnet_diagnostic.S1227.severity    = warning    # break statements should not be used except for switch cases
 dotnet_diagnostic.S1479.severity    = warning    # Consider reworking this 'switch' to reduce the number of 'case's to at most 30
 dotnet_diagnostic.S1541.severity    = warning    # Methods and properties should not be too complex
 dotnet_diagnostic.S1858.severity    = warning    # "ToString()" calls should not be redundant
@@ -190,8 +187,9 @@ dotnet_diagnostic.S3218.severity    = warning    # Inner class members should no
 dotnet_diagnostic.S3254.severity    = warning    # Rename this enumeration to match naming convention
 dotnet_diagnostic.S3257.severity    = warning    # Default parameter values should not be passed as arguments
 dotnet_diagnostic.S3776.severity    = warning    # Cognitive Complexity of methods should not be too high
-dotnet_diagnostic.S3900.severity    = warning    # Arguments of public methods should be validated against null
 
 dotnet_diagnostic.S6354.severity    = warning    # Use a testable (date) time provider instead
 
 dotnet_diagnostic.SYSLIB1044.severity = none     # The regex generator couldn't generate a complete source implementation for the specified regular expression due to an internal limitation
+
+dotnet_diagnostic.VSSpell001.severity = silent # Correct spelling
