@@ -38,7 +38,7 @@
     <ToBeReleased>
       <![CDATA[
 v6.*
-- Introduction of [Negative] valiation attribute.
+- Introduction of [Negative] validation attribute.
 - Introduction of [Positive] valiation attribute.
 - Introduction of [NotPositive] valiation attribute.
 - Introduction of [NotNegative] valiation attribute.
