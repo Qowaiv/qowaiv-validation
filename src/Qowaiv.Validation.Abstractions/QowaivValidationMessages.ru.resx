@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AllowedValuesAttribute_ValidationError" xml:space="preserve">
+    <value>Значение поля {0} не допускается.</value>
+  </data>
+  <data name="ArgumentException_TypeIsNotEqualityComparer" xml:space="preserve">
+    <value>Тип {0} не реализует IEqualityComparer или IEqualityComarer&lt;object&gt;.</value>
+  </data>
+  <data name="DistinctValuesAttribute_ValidationError" xml:space="preserve">
+    <value>Все значения поля {0} должны быть различными.</value>
+  </data>
+  <data name="InvalidModelException" xml:space="preserve">
+    <value>Модель {0} не может быть обработана, так как она недействительна.</value>
+  </data>
+  <data name="InvalidOperationException" xml:space="preserve">
+    <value>Результат операции является недействительным.</value>
+  </data>
+  <data name="NoValue" xml:space="preserve">
+    <value>Значение Result&lt;T&gt; не может быть нулевым.</value>
+  </data>
+  <data name="NoValue_ForT" xml:space="preserve">
+    <value>Значение Result&lt;{0}&gt; не может быть нулевым.</value>
+  </data>
+  <data name="PostalCodeValidator_ErrorMessage" xml:space="preserve">
+    <value>Почтовый индекс {0} недействителен для {1}.</value>
+  </data>
+  <data name="ValidationRule_ResourcePropertyNotStringType" xml:space="preserve">
+    <value>Свойство '{1}' типа ресурса '{0}' не является строковым типом.</value>
+  </data>
+  <data name="ValidationRule_ResourceTypeDoesNotHaveProperty" xml:space="preserve">
+    <value>Тип ресурса '{0}' не имеет доступного статического свойства '{1}'.</value>
+  </data>
+</root>
