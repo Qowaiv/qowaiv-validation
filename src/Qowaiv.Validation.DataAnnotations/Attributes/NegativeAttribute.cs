@@ -13,14 +13,17 @@ namespace Qowaiv.Validation.DataAnnotations;
 [Validates(typeof(float))]
 [Validates(typeof(double))]
 [Validates(typeof(decimal))]
+[Validates(typeof(TimeSpan))]
 #if NET8_0_OR_GREATER
 [Validates(typeof(Int128))]
 #endif
 [Validates(typeof(Amount))]
 [Validates(typeof(Fraction))]
 [Validates(typeof(Money))]
+[Validates(typeof(MonthSpan))]
 [Validates(typeof(Percentage))]
 [Validates(typeof(StreamSize))]
+[Validates(typeof(YearSpan))]
 [CLSCompliant(false)]
 public sealed class NegativeAttribute() : SignAttribute(() => QowaivValidationMessages.NegativeAttribute_ValidationError)
 {

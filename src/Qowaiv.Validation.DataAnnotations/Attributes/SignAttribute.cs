@@ -21,14 +21,17 @@ public abstract class SignAttribute(Func<string> errorMessageAccessor) : Validat
         float v /*......*/ => Is(Math.Sign(v)),
         double v /*.....*/ => Is(Math.Sign(v)),
         decimal v /*....*/ => Is(Math.Sign(v)),
+        TimeSpan v /*...*/ => Is(Math.Sign(v.Ticks)),
 #if NET8_0_OR_GREATER
         Int128 v /*.....*/ => Is(Int128.Sign(v)),
 #endif
         Amount v /*.....*/ => Is(v.Sign()),
         Fraction v /*...*/ => Is(v.Sign()),
         Money v /*......*/ => Is(v.Sign()),
+        MonthSpan v /*..*/ => Is(v.Sign()),
         Percentage v /*.*/ => Is(v.Sign()),
         StreamSize v /*.*/ => Is(v.Sign()),
+        YearSpan v /*...*/ => Is(v.Sign()),
         _ => throw UnsupportedType.ForAttribute<SignAttribute>(value.GetType()),
     };
 
