@@ -39,7 +39,7 @@ public class ConcurrencyIssue
 
     [Test]
     public void Has_descriptive_default_message()
-        => new NS.ConcurrencyIssue().Message.Should().Be("A concurrency issues occurred.");
+        => new NS.ConcurrencyIssue().Message.Should().Be("A concurrency issue occurred.");
 
     [Test]
     public void Has_MidAirCollision_message()
