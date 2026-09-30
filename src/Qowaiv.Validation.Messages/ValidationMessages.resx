@@ -16,7 +16,7 @@
     <value>Access denied.</value>
   </data>
   <data name="ConcurrencyIssue" xml:space="preserve">
-    <value>A concurrency issues occurred.</value>
+    <value>A concurrency issue occurred.</value>
   </data>
   <data name="EntityNotFound" xml:space="preserve">
     <value>Entity could not be found.</value>
