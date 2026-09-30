@@ -13,30 +13,30 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AccessDenied" xml:space="preserve">
-    <value>Access denied.</value>
+    <value>Toegang geweigerd.</value>
   </data>
   <data name="ConcurrencyIssue" xml:space="preserve">
-    <value>A concurrency issue occurred.</value>
+    <value>Er is een parallelliteitsprobleem opgetreden.</value>
   </data>
   <data name="EntityNotFound" xml:space="preserve">
-    <value>Entity could not be found.</value>
+    <value>Entiteit kon niet worden gevonden.</value>
   </data>
   <data name="EntityNotFound_ForId" xml:space="preserve">
-    <value>Entity with ID {0} could not be found.</value>
+    <value>Entiteit met ID {0} kon niet worden gevonden.</value>
   </data>
   <data name="EntityNotFound_ForTypeAndId" xml:space="preserve">
-    <value>Entity {0} with ID {1} could not be found.</value>
+    <value>Entiteit {0} met ID {1} kon niet worden gevonden.</value>
   </data>
   <data name="MidAirCollision" xml:space="preserve">
-    <value>A mid-air collision was detected.</value>
+    <value>Een botsing in de lucht werd gedetecteerd.</value>
   </data>
   <data name="ServiceUnavailable" xml:space="preserve">
-    <value>The requested service is unavailable.</value>
+    <value>De aangevraagde service is niet beschikbaar.</value>
   </data>
   <data name="ServiceUnavailable_WithName" xml:space="preserve">
-    <value>The service '{0}' is unavailable.</value>
+    <value>De service '{0}' is niet beschikbaar.</value>
   </data>
   <data name="VersionMismatch" xml:space="preserve">
-    <value>Expected version {0}, but got version {1}.</value>
+    <value>Versie {0} werd verwacht, maar versie {1} werd ontvangen.</value>
   </data>
 </root>

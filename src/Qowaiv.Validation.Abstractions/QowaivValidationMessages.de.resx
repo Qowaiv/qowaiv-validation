@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AllowedValuesAttribute_ValidationError" xml:space="preserve">
+    <value>Der Wert des Feldes {0} ist nicht zulässig.</value>
+  </data>
+  <data name="ArgumentException_TypeIsNotEqualityComparer" xml:space="preserve">
+    <value>Der Typ {0} implementiert nicht IEqualityComparer oder IEqualityComarer&lt;object&gt;.</value>
+  </data>
+  <data name="DistinctValuesAttribute_ValidationError" xml:space="preserve">
+    <value>Alle Werte des Feldes {0} sollten unterschiedlich sein.</value>
+  </data>
+  <data name="InvalidModelException" xml:space="preserve">
+    <value>Das Modell {0} kann nicht verarbeitet werden, da es ungültig ist.</value>
+  </data>
+  <data name="InvalidOperationException" xml:space="preserve">
+    <value>Das Ergebnis der Operation ist ungültig.</value>
+  </data>
+  <data name="NoValue" xml:space="preserve">
+    <value>Der Wert von Result&lt;T&gt; kann nicht null sein.</value>
+  </data>
+  <data name="NoValue_ForT" xml:space="preserve">
+    <value>Der Wert von Result&lt;{0}&gt; kann nicht null sein.</value>
+  </data>
+  <data name="PostalCodeValidator_ErrorMessage" xml:space="preserve">
+    <value>Die Postleitzahl {0} ist für {1} nicht gültig.</value>
+  </data>
+  <data name="ValidationRule_ResourcePropertyNotStringType" xml:space="preserve">
+    <value>Die Eigenschaft '{1}' des Ressourcentyps '{0}' ist nicht vom Typ Zeichenfolge.</value>
+  </data>
+  <data name="ValidationRule_ResourceTypeDoesNotHaveProperty" xml:space="preserve">
+    <value>Der Ressourcentyp '{0}' hat keine zugängliche statische Eigenschaft namens '{1}'.</value>
+  </data>
+</root>

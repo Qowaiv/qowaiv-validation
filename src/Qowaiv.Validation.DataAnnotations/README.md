@@ -41,7 +41,7 @@ public class Model
     public required string? Optional { get; init; }
 
     [Required(AllowEmptyStrings = true)]
-    public required string AllowStringEmpty {get; init; }
+    public required string AllowStringEmpty { get; init; }
 }
 ```
 
@@ -107,7 +107,7 @@ public class Model
 
 ### Defined enum values only
 The `[DefinedOnly<TEnum>]` attribute limits the allowed values to defined
-enums only. By default it supports all possible combinations of defined enums 
+enums only. By default it supports all possible combinations of defined enums
 when dealing with flags, but that can be restricted by setting 
 `OnlyAllowDefinedFlagsCombinations` to true.
 
@@ -120,7 +120,7 @@ public class Model
 ```
 
 ### In future
-The `[InFuture]` attributes requires the `DateTime`, `DateTimeOffset`, `Date`,
+The `[InFuture]` attribute requires the `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value to be in the future. The current time is resolved
 using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
 
@@ -133,7 +133,7 @@ public class Model
 ```
 
 ### In past
-The `[InPast]` attributes requires the `DateTime`, `DateTimeOffset`, `Date`,
+The `[InPast]` attribute requires the `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value to be in the past. The current time is resolved
 using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
 
@@ -216,7 +216,7 @@ public class Model
     public int Temperature { get; init; }
 
     [Negative]
-   public Amount Balance { get; init; }
+    public Amount Balance { get; init; }
 }
 ```
 
@@ -302,7 +302,7 @@ public class Model
 }
 ```
 
-### Optional 
+### Optional
 The `[Optional]` attribute indicates explicitly that a field is optional.
 
 ``` C#

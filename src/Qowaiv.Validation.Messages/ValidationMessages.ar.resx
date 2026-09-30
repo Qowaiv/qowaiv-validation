@@ -13,30 +13,30 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AccessDenied" xml:space="preserve">
-    <value>Access denied.</value>
+    <value>تم رفض الوصول.</value>
   </data>
   <data name="ConcurrencyIssue" xml:space="preserve">
-    <value>A concurrency issue occurred.</value>
+    <value>حدثت مشكلة تزامن.</value>
   </data>
   <data name="EntityNotFound" xml:space="preserve">
-    <value>Entity could not be found.</value>
+    <value>لم يتم العثور على الكيان.</value>
   </data>
   <data name="EntityNotFound_ForId" xml:space="preserve">
-    <value>Entity with ID {0} could not be found.</value>
+    <value>لم يتم العثور على الكيان برقم المعرّف {0}.</value>
   </data>
   <data name="EntityNotFound_ForTypeAndId" xml:space="preserve">
-    <value>Entity {0} with ID {1} could not be found.</value>
+    <value>لم يتم العثور على الكيان {0} برقم المعرّف {1}.</value>
   </data>
   <data name="MidAirCollision" xml:space="preserve">
-    <value>A mid-air collision was detected.</value>
+    <value>تم كشف تصادم في الهواء.</value>
   </data>
   <data name="ServiceUnavailable" xml:space="preserve">
-    <value>The requested service is unavailable.</value>
+    <value>الخدمة المطلوبة غير متاحة.</value>
   </data>
   <data name="ServiceUnavailable_WithName" xml:space="preserve">
-    <value>The service '{0}' is unavailable.</value>
+    <value>الخدمة '{0}' غير متاحة.</value>
   </data>
   <data name="VersionMismatch" xml:space="preserve">
-    <value>Expected version {0}, but got version {1}.</value>
+    <value>توقع الإصدار {0}، لكن حصل على الإصدار {1}.</value>
   </data>
 </root>

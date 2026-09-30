@@ -13,30 +13,30 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AccessDenied" xml:space="preserve">
-    <value>Access denied.</value>
+    <value>訪問被拒絕。</value>
   </data>
   <data name="ConcurrencyIssue" xml:space="preserve">
-    <value>A concurrency issue occurred.</value>
+    <value>發生了並發問題。</value>
   </data>
   <data name="EntityNotFound" xml:space="preserve">
-    <value>Entity could not be found.</value>
+    <value>找不到實體。</value>
   </data>
   <data name="EntityNotFound_ForId" xml:space="preserve">
-    <value>Entity with ID {0} could not be found.</value>
+    <value>找不到 ID 為 {0} 的實體。</value>
   </data>
   <data name="EntityNotFound_ForTypeAndId" xml:space="preserve">
-    <value>Entity {0} with ID {1} could not be found.</value>
+    <value>找不到 ID 為 {1} 的實體 {0}。</value>
   </data>
   <data name="MidAirCollision" xml:space="preserve">
-    <value>A mid-air collision was detected.</value>
+    <value>檢測到空中碰撞。</value>
   </data>
   <data name="ServiceUnavailable" xml:space="preserve">
-    <value>The requested service is unavailable.</value>
+    <value>請求的服務不可用。</value>
   </data>
   <data name="ServiceUnavailable_WithName" xml:space="preserve">
-    <value>The service '{0}' is unavailable.</value>
+    <value>服務 '{0}' 不可用。</value>
   </data>
   <data name="VersionMismatch" xml:space="preserve">
-    <value>Expected version {0}, but got version {1}.</value>
+    <value>預期版本 {0}，但獲得版本 {1}。</value>
   </data>
 </root>

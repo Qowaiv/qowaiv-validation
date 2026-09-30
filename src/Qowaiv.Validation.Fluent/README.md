@@ -73,7 +73,7 @@ public class CustomValidator : AbstractValidator<Model>
 }
 ```
 
-### (Not) before and (not) (after)
+### (Not) before and (not) after
 To have messages that use the phrasing `'{PropertyName}' should be after {Value}`
 instead of `'{PropertyName}' should be greater than {Value}` makes sense for a
 big range of property types, including date (time) related values.
