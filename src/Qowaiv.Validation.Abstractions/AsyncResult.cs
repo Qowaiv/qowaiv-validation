@@ -1,11 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace Qowaiv.Validation.Abstractions;
 
+/// <summary>
+/// Represents an asynchronous operation that produces a <see cref="Result{TModel}"/> at some time in the future.
+/// </summary>
+/// <typeparam name="TModel">
+/// The model of the result.
+/// </typeparam>
 public readonly partial struct AsyncResult<TModel>
 {
+    [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
     private readonly Task<Result<TModel>> Promise;
 
     internal AsyncResult(Task<Result<TModel>> promise) => this.Promise = Guard.NotNull(promise);

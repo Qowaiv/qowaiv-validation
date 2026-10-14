@@ -58,7 +58,7 @@ public sealed class Result<TModel> : Result
 
     /// <summary>Gets the <see cref="Result{TModel}"/> as a <see cref="Task{TResult}"/>.</summary>
     [Pure]
-    public Task<Result<TModel>> AsTask() => Task.FromResult(this);
+    public AsyncResult<TModel> AsTask() => new(Task.FromResult(this));
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
     /// <param name="action">
@@ -232,16 +232,12 @@ public sealed class Result<TModel> : Result
     public AsyncResult<TModel> ActAsync<TOut>(
         Func<TModel, AsyncResult<TOut>> action,
         Action<TModel, TOut> update)
-
-    {
-        _ = Guard.NotNull(update);
-
-        return ActAsync(action, (model, result) =>
+        => ActAsync(action, (model, result) =>
         {
-            if (model is { }) update(model, result);
-            return new AsyncResult<TOut>(Result.For<TOut>(result).AsTask());
+            Guard.NotNull(update);
+            if (model is { }) { update.Invoke(model, result); }
+            return model;
         });
-    }
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
     /// <param name="action">

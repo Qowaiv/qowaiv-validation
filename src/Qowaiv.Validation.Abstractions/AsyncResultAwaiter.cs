@@ -1,7 +1,9 @@
 namespace Qowaiv.Validation.Abstractions;
 
+/// <summary>Provides an awaiter for awaiting a <see cref="AsyncResult{TResult}"/>.</summary>
 public readonly struct AsyncResultAwaiter<TModel> : ICriticalNotifyCompletion
 {
+    [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
     private readonly TaskAwaiter<Result<TModel>> Awaiter;
 
     internal AsyncResultAwaiter(Task<Result<TModel>> promise)
@@ -12,9 +14,7 @@ public readonly struct AsyncResultAwaiter<TModel> : ICriticalNotifyCompletion
 
     /// <inheritdoc cref="TaskAwaiter{TResult}.GetResult" />
     [Pure]
-#if !NETSTANDARD2_0
     [StackTraceHidden]
-#endif
     public Result<TModel> GetResult() => Awaiter.GetResult();
 
     /// <inheritdoc />
