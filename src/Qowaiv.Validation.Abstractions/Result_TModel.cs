@@ -165,19 +165,24 @@ public sealed class Result<TModel> : Result
     /// A result with the merged messages.
     /// </returns>
     [Impure]
-    public async Task<Result<TOut>> ActAsync<TOut>(
-        Func<TModel, Task<Result<TOut>>> action,
+    public AsyncResult<TOut> ActAsync<TOut>(
+        Func<TModel, AsyncResult<TOut>> action,
         bool continueOnCapturedContext = false)
     {
         _ = Guard.NotNull(action);
 
-        if (IsValid)
+        async Task<Result<TOut>> Execute()
         {
-            var outcome = await action(Value).ConfigureAwait(continueOnCapturedContext);
-            var value = outcome.IsValid ? outcome.Value : default;
-            return new(value, ((FixedMessages)Messages).AddRange(outcome.Messages));
+            if (IsValid)
+            {
+                var outcome = await action(Value);
+                var value = outcome.IsValid ? outcome.Value : default;
+                return new(value, ((FixedMessages)Messages).AddRange(outcome.Messages));
+            }
+            else return WithMessages<TOut>(Messages);
         }
-        else return WithMessages<TOut>(Messages);
+
+        return new(Execute());
     }
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
@@ -192,18 +197,22 @@ public sealed class Result<TModel> : Result
     /// A result with the merged messages.
     /// </returns>
     [Impure]
-    public async Task<Result<TModel>> ActAsync(
+    public AsyncResult<TModel> ActAsync(
         Func<TModel, Task<Result>> action,
         bool continueOnCapturedContext = false)
     {
         _ = Guard.NotNull(action);
 
-        if (IsValid)
+        async Task<Result<TModel>> Execute()
         {
-            var outcome = await action(Value).ConfigureAwait(continueOnCapturedContext);
-            return NotNull(Value, ((FixedMessages)Messages).AddRange(outcome.Messages));
+            if (IsValid)
+            {
+                var outcome = await action(Value).ConfigureAwait(continueOnCapturedContext);
+                return NotNull(Value, ((FixedMessages)Messages).AddRange(outcome.Messages));
+            }
+            else return WithMessages<TModel>(Messages);
         }
-        else return WithMessages<TModel>(Messages);
+        return new(Execute());
     }
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
@@ -220,15 +229,19 @@ public sealed class Result<TModel> : Result
     /// The updated model with the merged messages.
     /// </returns>
     [Impure]
-    public Task<Result<TModel>> ActAsync<TOut>(
-        Func<TModel, Task<Result<TOut>>> action,
+    public AsyncResult<TModel> ActAsync<TOut>(
+        Func<TModel, AsyncResult<TOut>> action,
         Action<TModel, TOut> update)
-        => ActAsync(action, (model, result) =>
+
+    {
+        _ = Guard.NotNull(update);
+
+        return ActAsync(action, (model, result) =>
         {
-            Guard.NotNull(update);
-            if (model is { }) { update.Invoke(model, result); }
-            return model;
+            if (model is { }) update(model, result);
+            return new AsyncResult<TOut>(Result.For<TOut>(result).AsTask());
         });
+    }
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
     /// <param name="action">
@@ -248,17 +261,21 @@ public sealed class Result<TModel> : Result
     /// The updated model with the merged messages.
     /// </returns>
     [Impure]
-    public async Task<Result<TModel>> ActAsync<TOut>(
-        Func<TModel, Task<Result<TOut>>> action,
+    public AsyncResult<TModel> ActAsync<TOut>(
+        Func<TModel, AsyncResult<TOut>> action,
         Func<TModel, TOut, TModel> update,
         bool continueOnCapturedContext = false)
     {
         Guard.NotNull(update);
 
-        var resolved = await ActAsync(action).ConfigureAwait(continueOnCapturedContext);
-        return resolved.IsValid
-            ? new(update(_value!, resolved.Value), (FixedMessages)resolved.Messages)
-            : new(_value, (FixedMessages)resolved.Messages);
+        async Task<Result<TModel>> Execute()
+        {
+            var resolved = await ActAsync(action, continueOnCapturedContext);
+            return resolved.IsValid
+                ? new(update(_value!, resolved.Value), (FixedMessages)resolved.Messages)
+                : new(_value, (FixedMessages)resolved.Messages);
+        }
+        return new(Execute());
     }
 
     /// <summary>Explicitly casts the <see cref="Result"/> to the type of the related model.</summary>
