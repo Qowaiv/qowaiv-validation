@@ -166,6 +166,14 @@ public class Pipe_Symbol
     }
 
     [Test]
+    public async Task Is_equal_to_ActAsync_on_function()
+    {
+        Result<TestModel> result = new TestModel();
+        var promise = await (result | (m => m.NonfailingFunctionAsync()));
+        promise.Should().BeValid().Value.Actions.Should().Be(1);
+    }
+
+    [Test]
     public void Is_equal_to_Act_on_action()
     {
         Result<TestModel> result = new TestModel();

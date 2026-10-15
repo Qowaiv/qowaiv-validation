@@ -58,7 +58,12 @@ public sealed class Result<TModel> : Result
 
     /// <summary>Gets the <see cref="Result{TModel}"/> as a <see cref="Task{TResult}"/>.</summary>
     [Pure]
-    public AsyncResult<TModel> AsTask() => new(Task.FromResult(this));
+    [Obsolete("Use Async() instead.")]
+    public AsyncResult<TModel> AsTask() => Async();
+
+    /// <summary>Gets the <see cref="Result{TModel}"/> as a <see cref="Task{TResult}"/>.</summary>
+    [Pure]
+    public AsyncResult<TModel> Async() => new(Task.FromResult(this));
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
     /// <param name="action">
@@ -289,6 +294,19 @@ public sealed class Result<TModel> : Result
     /// </returns>
     public static Result<TModel> operator |(Result<TModel> result, Func<TModel, Result<TModel>> action)
         => Guard.NotNull(result).Act(action);
+
+    /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+    /// <param name="result">
+    /// The result to act on.
+    /// </param>
+    /// <param name="action">
+    /// The action to invoke.
+    /// </param>
+    /// <returns>
+    /// A result with the merged messages.
+    /// </returns>
+    public static AsyncResult<TModel> operator |(Result<TModel> result, Func<TModel, AsyncResult<TModel>> action)
+        => Guard.NotNull(result).ActAsync(action);
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
     /// <param name="result">
