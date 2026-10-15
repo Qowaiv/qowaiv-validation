@@ -13,6 +13,7 @@ v11.*
 - Add .NET 11.0 target.
 - Drop .NET 8.0 targets (BREAKING)
 - AsyncResult<TModel>. (BREAKING)
+- Rely on built-in collection merging isntead of home-brew classes.
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
