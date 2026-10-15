@@ -57,7 +57,7 @@ public class ValidModel
 
 public class AsyncValidModel
 {
-    private static AsyncResult<TestModel> ModelAsync() => Result.For(new TestModel()).Async();
+    private static AsyncResult<TestModel> ModelAsync() => Result.For(new TestModel()).AsTask();
 
     [Test]
     public async Task ActAsync_on_sync_nonfailing_function_is_executed_and_result_stays_valid()
@@ -127,7 +127,7 @@ public class InvalidModel
 
 public class AsyncInvalidModel
 {
-    private static AsyncResult<TestModel> ModelAsync() => Result.WithMessages<TestModel>(ValidationMessage.Error("FailingModelAsync")).Async();
+    private static AsyncResult<TestModel> ModelAsync() => Result.WithMessages<TestModel>(ValidationMessage.Error("FailingModelAsync")).AsTask();
 
     [Test]
     public async Task ActAsync_with_sync_function_is_never_triggered()
@@ -197,12 +197,12 @@ internal class TestModel(int actions = 0)
     }
 
     public AsyncResult<TestModel> NonfailingFunctionAsync()
-        => Result.For(new TestModel(Actions + 1)).Async();
+        => Result.For(new TestModel(Actions + 1)).AsTask();
 
     public AsyncResult<TestModel> FailingFunctionAsync()
     {
         Actions = -Actions;
-        return Result.WithMessages<TestModel>(ValidationMessage.Error(nameof(FailingFunctionAsync))).Async();
+        return Result.WithMessages<TestModel>(ValidationMessage.Error(nameof(FailingFunctionAsync))).AsTask();
     }
 
     public Result NonfailingAction()
