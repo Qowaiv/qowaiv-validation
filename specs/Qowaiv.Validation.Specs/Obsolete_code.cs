@@ -10,10 +10,6 @@ public class Will_be_dropped
         .BeValid()
         .WithMessages()
         .Value.Should().Be(42);
-
-    [Test]
-    public void double_Percent_humanizer()
-        => 12.00.Percent().Should().NotBe(0.Percent());
 }
 
 [Obsolete("Will become private when the next major version is released.")]
