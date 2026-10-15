@@ -142,8 +142,12 @@ public class Casting
 public class Result_Of_TModel
 {
     [Test]
-    public void As_Task_with_AsTask()
-        => Result.For(17).AsTask().Should().BeOfType<Task<Result<int>>>();
+    public void As_Task_with_Async_on_Result()
+        => Result.For(17).Async().Should().BeOfType<AsyncResult<int>>();
+
+    [Test]
+    public void As_Task_with_Async_factory()
+        => Result.Async(17).Should().BeOfType<AsyncResult<int>>();
 }
 
 public class ThrowIfInvalid
