@@ -328,5 +328,5 @@ public sealed class Result<TModel> : Result
 
     [Pure]
     private static Result<TModel> NotNull(TModel? value, IValidationMessages messages)
-        => new Result<TModel>(value, ValidationMessages.New(messages)).NotNull();
+        => new Result<TModel>(value, messages).NotNull();
 }
