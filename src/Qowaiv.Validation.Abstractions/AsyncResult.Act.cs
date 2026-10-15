@@ -1,12 +1,8 @@
 namespace Qowaiv.Validation.Abstractions;
 
-/// <summary>Extensions on asynchronous <see cref="Result{TModel}"/>.</summary>
-public static class ResultActExtensions
+public readonly partial struct AsyncResult<TModel>
 {
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
-    /// <param name="promise">
-    /// The promise of the result.
-    /// </param>
     /// <param name="action">
     /// The action to invoke.
     /// </param>
@@ -14,9 +10,6 @@ public static class ResultActExtensions
     /// true to attempt to marshal the continuation back to the original context captured;
     /// otherwise, false. See <see cref="Task.ConfigureAwait(bool)"/>.
     /// </param>
-    /// <typeparam name="TModel">
-    /// The type of input result.
-    /// </typeparam>
     /// <typeparam name="TOut">
     /// The type of the new result value.
     /// </typeparam>
@@ -24,25 +17,22 @@ public static class ResultActExtensions
     /// A result with the merged messages.
     /// </returns>
     [Impure]
-    public static async Task<Result<TOut>> ActAsync<TModel, TOut>(
-        this Task<Result<TModel>> promise,
+    public AsyncResult<TOut> ActAsync<TOut>(
         Func<TModel, Result<TOut>> action,
         bool continueOnCapturedContext = false)
     {
-        _ = Guard.NotNull(promise);
         Guard.NotNull(action);
+        var promise = Promise;
 
-        var result = await promise.ConfigureAwait(continueOnCapturedContext);
+        async Task<Result<TOut>> Execute()
+            => await promise.ConfigureAwait(continueOnCapturedContext) is { } result
+            ? result.Act(action)
+            : Result.WithMessages<TOut>();
 
-        return result is null
-            ? Result.WithMessages<TOut>()
-            : result.Act(action);
+        return new(Execute());
     }
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
-    /// <param name="promise">
-    /// The promise of the result.
-    /// </param>
     /// <param name="action">
     /// The action to invoke.
     /// </param>
@@ -50,9 +40,6 @@ public static class ResultActExtensions
     /// true to attempt to marshal the continuation back to the original context captured;
     /// otherwise, false. See <see cref="Task.ConfigureAwait(bool)"/>.
     /// </param>
-    /// <typeparam name="TModel">
-    /// The type of input result.
-    /// </typeparam>
     /// <typeparam name="TOut">
     /// The type of the new result value.
     /// </typeparam>
@@ -60,24 +47,22 @@ public static class ResultActExtensions
     /// A result with the merged messages.
     /// </returns>
     [Impure]
-    public static async Task<Result<TOut>> ActAsync<TModel, TOut>(
-        this Task<Result<TModel>> promise,
-        Func<TModel, Task<Result<TOut>>> action,
+    public AsyncResult<TOut> ActAsync<TOut>(
+        Func<TModel, AsyncResult<TOut>> action,
         bool continueOnCapturedContext = false)
     {
-        _ = Guard.NotNull(promise);
         Guard.NotNull(action);
+        var promise = Promise;
 
-        var result = await promise.ConfigureAwait(continueOnCapturedContext);
-        return result is null
-            ? Result.Null<TOut>()
-            : await result.ActAsync(action).ConfigureAwait(continueOnCapturedContext);
+        async Task<Result<TOut>> Execute()
+            => await promise.ConfigureAwait(continueOnCapturedContext) is { } result
+            ? await result.ActAsync(action, continueOnCapturedContext)
+            : Result.Null<TOut>();
+
+        return new(Execute());
     }
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
-    /// <param name="promise">
-    /// The promise of the result.
-    /// </param>
     /// <param name="action">
     /// The action to invoke.
     /// </param>
@@ -85,31 +70,26 @@ public static class ResultActExtensions
     /// true to attempt to marshal the continuation back to the original context captured;
     /// otherwise, false. See <see cref="Task.ConfigureAwait(bool)"/>.
     /// </param>
-    /// <typeparam name="TModel">
-    /// The type of input result.
-    /// </typeparam>
     /// <returns>
     /// A result with the merged messages.
     /// </returns>
     [Impure]
-    public static async Task<Result<TModel>> ActAsync<TModel>(
-        this Task<Result<TModel>> promise,
+    public AsyncResult<TModel> ActAsync(
         Func<TModel, Result> action,
         bool continueOnCapturedContext = false)
     {
-        _ = Guard.NotNull(promise);
         Guard.NotNull(action);
+        var promise = Promise;
 
-        var result = await promise.ConfigureAwait(continueOnCapturedContext);
-        return result is null
-            ? Result.Null<TModel>()
-            : result.Act(action);
+        async Task<Result<TModel>> Execute()
+            => await promise.ConfigureAwait(continueOnCapturedContext) is { } result
+            ? result.Act(action)
+            : Result.Null<TModel>();
+
+        return new(Execute());
     }
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
-    /// <param name="promise">
-    /// The promise of the result.
-    /// </param>
     /// <param name="action">
     /// The action to invoke.
     /// </param>
@@ -117,31 +97,26 @@ public static class ResultActExtensions
     /// true to attempt to marshal the continuation back to the original context captured;
     /// otherwise, false. See <see cref="Task.ConfigureAwait(bool)"/>.
     /// </param>
-    /// <typeparam name="TModel">
-    /// The type of input result.
-    /// </typeparam>
     /// <returns>
     /// A result with the merged messages.
     /// </returns>
     [Impure]
-    public static async Task<Result<TModel>> ActAsync<TModel>(
-        this Task<Result<TModel>> promise,
+    public AsyncResult<TModel> ActAsync(
         Func<TModel, Task<Result>> action,
         bool continueOnCapturedContext = false)
     {
-        _ = Guard.NotNull(promise);
         Guard.NotNull(action);
+        var promise = Promise;
 
-        var result = await promise.ConfigureAwait(continueOnCapturedContext);
-        return result is null
-            ? Result.Null<TModel>()
-            : await result.ActAsync(action).ConfigureAwait(continueOnCapturedContext);
+        async Task<Result<TModel>> Execute()
+            => await promise.ConfigureAwait(continueOnCapturedContext) is { } result
+            ? await result.ActAsync(action, continueOnCapturedContext)
+            : Result.Null<TModel>();
+
+        return new(Execute());
     }
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
-    /// <param name="promise">
-    /// The promise of the result.
-    /// </param>
     /// <param name="action">
     /// The action to invoke.
     /// </param>
@@ -152,9 +127,6 @@ public static class ResultActExtensions
     /// true to attempt to marshal the continuation back to the original context captured;
     /// otherwise, false. See <see cref="Task.ConfigureAwait(bool)"/>.
     /// </param>
-    /// <typeparam name="TModel">
-    /// The type of input result.
-    /// </typeparam>
     /// <typeparam name="TOut">
     /// The type of the new result value.
     /// </typeparam>
@@ -162,25 +134,23 @@ public static class ResultActExtensions
     /// The updated model with the merged messages.
     /// </returns>
     [Impure]
-    public static async Task<Result<TModel>> ActAsync<TModel, TOut>(
-        this Task<Result<TModel>> promise,
+    public AsyncResult<TModel> ActAsync<TOut>(
         Func<TModel, Result<TOut>> action,
         Action<TModel, TOut> update,
         bool continueOnCapturedContext = false)
     {
-        _ = Guard.NotNull(promise);
         Guard.NotNull(action);
+        var promise = Promise;
 
-        var result = await promise.ConfigureAwait(continueOnCapturedContext);
-        return result is null
-            ? Result.WithMessages<TModel>()
-            : result.Act(action, update);
+        async Task<Result<TModel>> Execute()
+            => await promise.ConfigureAwait(continueOnCapturedContext) is { } result
+             ? result.Act(action, update)
+             : Result.WithMessages<TModel>();
+
+        return new(Execute());
     }
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
-    /// <param name="promise">
-    /// The promise of the result.
-    /// </param>
     /// <param name="action">
     /// The action to invoke.
     /// </param>
@@ -191,9 +161,6 @@ public static class ResultActExtensions
     /// true to attempt to marshal the continuation back to the original context captured;
     /// otherwise, false. See <see cref="Task.ConfigureAwait(bool)"/>.
     /// </param>
-    /// <typeparam name="TModel">
-    /// The type of input result.
-    /// </typeparam>
     /// <typeparam name="TOut">
     /// The type of the new result value.
     /// </typeparam>
@@ -201,25 +168,23 @@ public static class ResultActExtensions
     /// The updated model with the merged messages.
     /// </returns>
     [Impure]
-    public static async Task<Result<TModel>> ActAsync<TModel, TOut>(
-        this Task<Result<TModel>> promise,
-        Func<TModel, Task<Result<TOut>>> action,
+    public AsyncResult<TModel> ActAsync<TOut>(
+        Func<TModel, AsyncResult<TOut>> action,
         Action<TModel, TOut> update,
         bool continueOnCapturedContext = false)
     {
-        _ = Guard.NotNull(promise);
         Guard.NotNull(action);
+        var promise = Promise;
 
-        var result = await promise.ConfigureAwait(continueOnCapturedContext);
-        return result is null
-            ? Result.WithMessages<TModel>()
-            : await result.ActAsync(action, update).ConfigureAwait(continueOnCapturedContext);
+        async Task<Result<TModel>> Execute()
+            => await promise.ConfigureAwait(continueOnCapturedContext) is { } result
+            ? await result.ActAsync(action, update)
+            : Result.WithMessages<TModel>();
+
+        return new(Execute());
     }
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
-    /// <param name="promise">
-    /// The promise of the result.
-    /// </param>
     /// <param name="action">
     /// The action to invoke.
     /// </param>
@@ -230,9 +195,6 @@ public static class ResultActExtensions
     /// true to attempt to marshal the continuation back to the original context captured;
     /// otherwise, false. See <see cref="Task.ConfigureAwait(bool)"/>.
     /// </param>
-    /// <typeparam name="TModel">
-    /// The type of input result.
-    /// </typeparam>
     /// <typeparam name="TOut">
     /// The type of the new result value.
     /// </typeparam>
@@ -240,25 +202,23 @@ public static class ResultActExtensions
     /// The updated model with the merged messages.
     /// </returns>
     [Impure]
-    public static async Task<Result<TModel>> ActAsync<TModel, TOut>(
-        this Task<Result<TModel>> promise,
+    public AsyncResult<TModel> ActAsync<TOut>(
         Func<TModel, Result<TOut>> action,
         Func<TModel, TOut, TModel> update,
         bool continueOnCapturedContext = false)
     {
-        _ = Guard.NotNull(promise);
         Guard.NotNull(action);
+        var promise = Promise;
 
-        var result = await promise.ConfigureAwait(continueOnCapturedContext);
-        return result is null
-            ? Result.WithMessages<TModel>()
-            : result.Act(action, update);
+        async Task<Result<TModel>> Execute()
+            => await promise.ConfigureAwait(continueOnCapturedContext) is { } result
+            ? result.Act(action, update)
+            : Result.WithMessages<TModel>();
+
+        return new(Execute());
     }
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
-    /// <param name="promise">
-    /// The promise of the result.
-    /// </param>
     /// <param name="action">
     /// The action to invoke.
     /// </param>
@@ -269,9 +229,6 @@ public static class ResultActExtensions
     /// true to attempt to marshal the continuation back to the original context captured;
     /// otherwise, false. See <see cref="Task.ConfigureAwait(bool)"/>.
     /// </param>
-    /// <typeparam name="TModel">
-    /// The type of input result.
-    /// </typeparam>
     /// <typeparam name="TOut">
     /// The type of the new result value.
     /// </typeparam>
@@ -279,18 +236,19 @@ public static class ResultActExtensions
     /// The updated model with the merged messages.
     /// </returns>
     [Impure]
-    public static async Task<Result<TModel>> ActAsync<TModel, TOut>(
-        this Task<Result<TModel>> promise,
-        Func<TModel, Task<Result<TOut>>> action,
+    public AsyncResult<TModel> ActAsync<TOut>(
+        Func<TModel, AsyncResult<TOut>> action,
         Func<TModel, TOut, TModel> update,
         bool continueOnCapturedContext = false)
     {
-        _ = Guard.NotNull(promise);
         Guard.NotNull(action);
+        var promise = Promise;
 
-        var result = await promise.ConfigureAwait(continueOnCapturedContext);
-        return result is null
-            ? Result.WithMessages<TModel>()
-            : await result.ActAsync(action, update).ConfigureAwait(continueOnCapturedContext);
+        async Task<Result<TModel>> Execute()
+            => await promise.ConfigureAwait(continueOnCapturedContext) is { } result
+             ? await result.ActAsync(action, update, continueOnCapturedContext)
+            : Result.WithMessages<TModel>();
+
+        return new(Execute());
     }
 }

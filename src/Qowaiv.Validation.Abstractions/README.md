@@ -34,7 +34,12 @@ Result<DataType> withValue = Result.For(value);
 Result<DataType> withErrors = Result.For(value, ValidationMessage.Error("Bad"));
 Result<DataType> nullResult = Result.Null<DataType>();
 Result<DataType> withMessages = Result.WithMessages<DataType>(ValidationMessage.Warn("Check"));
+AsyncResult<DataType> asyncValue = Result.Async(value);
 ```
+
+The `Async<T>()` factory creates an [`AsyncResult<T>`](#asyncresulttmodel).
+An existing `Result<TModel>` can be turned into an `AsyncResult<TModel>` with
+`Async()` (the older `AsTask()` is obsolete).
 
 ### Properties
 
@@ -91,13 +96,19 @@ Result<DataType> result = GetModel()
 
 ### ActAsync
 
-Async versions for all `Act` overloads:
+Async versions for all `Act` overloads. They return an `AsyncResult<TModel>`,
+which can be awaited to obtain the resulting `Result<TModel>`:
 
 ``` C#
-Result<DataType> result = await GetModelAsync()
+AsyncResult<DataType> async = Result.For(model)
     .ActAsync(m => FetchDetailsAsync(m))
     .ActAsync(m => SaveAsync(m));
+
+Result<DataType> result = await async;
 ```
+
+The invoked actions may return `Result<TOut>`, `AsyncResult<TOut>`, or
+`Task<Result>` (see [`AsyncResult<TModel>`](#asyncresulttmodel)).
 
 ### Pipe operator
 
@@ -121,6 +132,54 @@ Result<Context> ctx = NewContext()
 // Immutable update
 Result<Context> ctx = NewContext()
     .Act(c => Service.GetValue(), (c, value) => c.Update(value));
+```
+
+## AsyncResult&lt;TModel&gt;
+
+`AsyncResult<TModel>` represents an operation that produces a `Result<TModel>`
+at some time in the future. It is a lightweight readonly struct that wraps a
+`Task<Result<TModel>>`, is awaitable, and exposes the same composition
+(`ActAsync` and `|`) as `Result<TModel>`.
+
+### Creating
+
+An `AsyncResult<TModel>` is created from a `Result<TModel>` via `Async()`, via
+the `Result.Async<T>()` factory, or implicitly from a `Task<Result<TModel>>`:
+
+``` C#
+AsyncResult<MyModel> fromResult = Result.For(model).Async();
+AsyncResult<MyModel> fromFactory = Result.Async(model);
+AsyncResult<MyModel> fromFactoryWithMessages = Result.Async(model, new[] { ValidationMessage.Warn("Check") });
+AsyncResult<MyModel> fromTask = Task.FromResult(Result.For(model));
+```
+
+### Awaiting
+
+Because `AsyncResult<TModel>` is awaitable, awaiting it yields the underlying
+`Result<TModel>`. It also mirrors the underlying task via `IsCompleted` and
+`IsCanceled`:
+
+``` C#
+Result<MyModel> result = await Result.Async(model);
+```
+
+### Composition
+
+`ActAsync` runs the next step only while the result is valid and merges the
+messages, exactly like `Act` on `Result<TModel>`:
+
+``` C#
+Result<DataType> result = await Result.Async(model)
+    .ActAsync(m => FetchDetailsAsync(m))
+    .ActAsync(m => SaveAsync(m));
+```
+
+The `|` operator works on `AsyncResult<TModel>` as well:
+
+``` C#
+Result<DataType> result = await (Result.Async(model)
+    | ValidateName
+    | SaveAsync);
 ```
 
 ## IValidationMessage

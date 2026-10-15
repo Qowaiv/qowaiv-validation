@@ -57,7 +57,7 @@ public class ValidModel
 
 public class AsyncValidModel
 {
-    private static Task<Result<TestModel>> ModelAsync() => Result.For(new TestModel()).AsTask();
+    private static AsyncResult<TestModel> ModelAsync() => Result.For(new TestModel()).AsTask();
 
     [Test]
     public async Task ActAsync_on_sync_nonfailing_function_is_executed_and_result_stays_valid()
@@ -127,7 +127,7 @@ public class InvalidModel
 
 public class AsyncInvalidModel
 {
-    private static Task<Result<TestModel>> ModelAsync() => Result.WithMessages<TestModel>(ValidationMessage.Error("FailingModelAsync")).AsTask();
+    private static AsyncResult<TestModel> ModelAsync() => Result.WithMessages<TestModel>(ValidationMessage.Error("FailingModelAsync")).AsTask();
 
     [Test]
     public async Task ActAsync_with_sync_function_is_never_triggered()
@@ -166,6 +166,14 @@ public class Pipe_Symbol
     }
 
     [Test]
+    public async Task Is_equal_to_ActAsync_on_function()
+    {
+        Result<TestModel> result = new TestModel();
+        var promise = await (result | (m => m.NonfailingFunctionAsync()));
+        promise.Should().BeValid().Value.Actions.Should().Be(1);
+    }
+
+    [Test]
     public void Is_equal_to_Act_on_action()
     {
         Result<TestModel> result = new TestModel();
@@ -188,10 +196,10 @@ internal class TestModel(int actions = 0)
         return Result.WithMessages<TestModel>(ValidationMessage.Error(nameof(FailingFunction)));
     }
 
-    public Task<Result<TestModel>> NonfailingFunctionAsync()
+    public AsyncResult<TestModel> NonfailingFunctionAsync()
         => Result.For(new TestModel(Actions + 1)).AsTask();
 
-    public Task<Result<TestModel>> FailingFunctionAsync()
+    public AsyncResult<TestModel> FailingFunctionAsync()
     {
         Actions = -Actions;
         return Result.WithMessages<TestModel>(ValidationMessage.Error(nameof(FailingFunctionAsync))).AsTask();
