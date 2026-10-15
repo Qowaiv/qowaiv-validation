@@ -56,12 +56,12 @@ public sealed class Result<TModel> : Result
             : throw new InvalidCastException($"Unable to cast object of type 'Result<{typeof(TModel)}>' to type 'Result<{typeof(TOut)}>'.");
     }
 
-    /// <summary>Gets the <see cref="Result{TModel}"/> as a <see cref="Task{TResult}"/>.</summary>
+    /// <summary>Wraps the <see cref="Result{TModel}"/> in an <see cref="AsyncResult{TModel}"/>.</summary>
     [Pure]
     [Obsolete("Use Async() instead.")]
     public AsyncResult<TModel> AsTask() => Async();
 
-    /// <summary>Gets the <see cref="Result{TModel}"/> as a <see cref="Task{TResult}"/>.</summary>
+    /// <summary>Wraps the <see cref="Result{TModel}"/> in an <see cref="AsyncResult{TModel}"/>.</summary>
     [Pure]
     public AsyncResult<TModel> Async() => new(Task.FromResult(this));
 

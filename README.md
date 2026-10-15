@@ -59,9 +59,10 @@ Result<DataType> result = GetModel()
     | (m => m.Action2());
 ```
 
-Async versions (`ActAsync`) are available for all overloads. Full documentation
-on `ThrowIfInvalid()`, `Validator.Empty<T>()`, casting, and context-update
-patterns is available in the [Abstractions README](src/Qowaiv.Validation.Abstractions/README.md).
+Async versions (`ActAsync`) are available for all overloads and return an
+awaitable `AsyncResult<TModel>`. Full documentation on `AsyncResult<TModel>`,
+`ThrowIfInvalid()`, `Validator.Empty<T>()`, casting, and context-update patterns
+is available in the [Abstractions README](src/Qowaiv.Validation.Abstractions/README.md).
 
 ### IValidationMessage
 The common interface for validation messages, with `Severity`, `PropertyName`,
