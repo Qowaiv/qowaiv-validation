@@ -143,7 +143,7 @@ public class Result_Of_TModel
 {
     [Test]
     public void As_Task_with_AsTask()
-        => Result.For(17).AsTask().Should().BeOfType<AsyncResult<int>>();
+        => Result.For(17).Async().Should().BeOfType<AsyncResult<int>>();
 }
 
 public class ThrowIfInvalid
