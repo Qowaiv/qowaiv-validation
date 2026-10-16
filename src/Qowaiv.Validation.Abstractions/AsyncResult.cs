@@ -27,7 +27,7 @@ public readonly struct AsyncResult
 
     /// <summary>Gets the awaiter.</summary>
     [Pure]
-    public AsyncResultAwaiter GetAwaiter() => new(Promise);
+    public TaskAwaiter<Result> GetAwaiter() => Promise.GetAwaiter();
 
     /// <summary>Implictly casts from Task to an AsyncResult.</summary>
     public static implicit operator AsyncResult(Task<Result> promise) => new(promise);

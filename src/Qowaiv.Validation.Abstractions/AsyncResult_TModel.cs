@@ -30,7 +30,7 @@ public readonly partial struct AsyncResult<TModel>
 
     /// <summary>Gets the awaiter.</summary>
     [Pure]
-    public AsyncResultAwaiter<TModel> GetAwaiter() => new(Promise);
+    public TaskAwaiter<Result<TModel>> GetAwaiter() => Promise.GetAwaiter();
 
     /// <summary>Implictly casts from Task to an AsyncResult.</summary>
     public static implicit operator AsyncResult<TModel>(Task<Result<TModel>> promise) => new(promise);
