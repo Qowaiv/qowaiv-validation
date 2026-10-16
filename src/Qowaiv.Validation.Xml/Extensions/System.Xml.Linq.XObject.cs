@@ -1,30 +1,34 @@
 using System.IO;
+using System.Text;
 
 namespace System.Xml.Linq;
 
 /// <summary>Extensions on <see cref="XObject"/>.</summary>
 public static class QowaivXObjectExtensions
 {
-    /// <summary>Validates the document using a <see cref="Stream"/> representing an <see cref="XmlSchema"/>.</summary>
-    [Pure]
-    public static Result<XDocument> Validate(this XDocument document, Stream stream)
-        => document.Validate(stream.AsXmlSchema());
-
-    /// <summary>Validates the document using a <see cref="Stream"/> representing an <see cref="XmlSchema"/>.</summary>
-    [Pure]
-    public static Result<XDocument> Validate(this XDocument document, XmlSchema schema)
-        => document.Validate(new XmlSchemaSet().Append(schema));
-
-    /// <summary>Validates the document using an <see cref="XmlSchemaSet"/>.</summary>
-    [Pure]
-    public static Result<XDocument> Validate(this XDocument document, XmlSchemaSet schemas)
+    extension(XDocument document)
     {
-        Guard.NotNull(document);
-        Guard.NotNull(schemas);
+        /// <summary>Validates the document using a <see cref="Stream"/> representing an <see cref="XmlSchema"/>.</summary>
+        [Pure]
+        public Result<XDocument> Validate(Stream stream)
+            => document.Validate(stream.AsXmlSchema());
 
-        var handler = new XmlValidationHandler();
-        document.Validate(schemas, handler.Validate);
-        return Result.For(document, handler.Messages);
+        /// <summary>Validates the document using an <see cref="XmlSchema"/>.</summary>
+        [Pure]
+        public Result<XDocument> Validate(XmlSchema schema)
+            => document.Validate(new XmlSchemaSet().Append(schema));
+
+        /// <summary>Validates the document using an <see cref="XmlSchemaSet"/>.</summary>
+        [Pure]
+        public Result<XDocument> Validate(XmlSchemaSet schemas)
+        {
+            Guard.NotNull(document);
+            Guard.NotNull(schemas);
+
+            var handler = new XmlValidationHandler();
+            document.Validate(schemas, handler.Validate);
+            return Result.For(document, handler.Messages);
+        }
     }
 
     /// <summary>Get the absolute XPath of the attribute.</summary>
@@ -46,23 +50,41 @@ public static class QowaivXObjectExtensions
     internal static string AbsoluteXPath(this XElement element)
     {
         Guard.NotNull(element);
-        return string.Concat(element
-            .AncestorsAndSelf().Select(RelativePath).Reverse());
+
+        var aliases = new Dictionary<string, string>(StringComparer.Ordinal);
+        var path = new StringBuilder();
+
+        foreach (var ancestor in element.AncestorsAndSelf().Reverse())
+        {
+            HashSet<string>? declared = null;
+
+            foreach (var declaration in ancestor.Attributes())
+            {
+                if (!declaration.IsNamespaceDeclaration || string.IsNullOrEmpty(declaration.Name.NamespaceName))
+                {
+                    continue;
+                }
+                declared ??= new HashSet<string>(StringComparer.Ordinal);
+                if (declared.Add(declaration.Value))
+                {
+                    aliases[declaration.Value] = declaration.Name.LocalName;
+                }
+            }
+            path.Append(RelativePath(ancestor, aliases));
+        }
+        return path.ToString();
     }
 
     [Pure]
-    private static string RelativePath(this XElement element)
+    private static string RelativePath(XElement element, Dictionary<string, string> aliases)
     {
-        int index = element.IndexPosition();
-        string name = element.Name.LocalName;
+        var index = element.IndexPosition();
+        var name = element.Name.LocalName;
 
-        if (element.AncestorsAndSelf()
-            .SelectMany(x => x.Attributes())
-            .FirstOrDefault(x => x.IsNamespaceDeclaration && x.Value == element.Name.NamespaceName) is { } alias
-            && !string.IsNullOrEmpty(alias.Name.NamespaceName)
-            && !string.IsNullOrEmpty(alias.Name.LocalName))
+        if (aliases.TryGetValue(element.Name.NamespaceName, out var alias)
+            && !string.IsNullOrEmpty(alias))
         {
-            name = $"{alias.Name.LocalName}:{name}";
+            name = $"{alias}:{name}";
         }
         return index == -1
             ? $"/{name}"
