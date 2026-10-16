@@ -122,7 +122,7 @@ public class Supports
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            var service = validationContext.GetSevice<AnswerService>();
+            var service = validationContext.GetService<AnswerService>();
             if (Answer != service?.Answer) yield return ValidationMessage.Error("Wrong answer!", nameof(Answer));
         }
     }

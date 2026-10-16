@@ -5,8 +5,14 @@ public static class ValidationContextExtensions
 {
     /// <summary>Returns the service that provides custom validation.</summary>
     [Pure]
-    public static T? GetSevice<T>(this ValidationContext validationContext)
+    public static T? GetService<T>(this ValidationContext validationContext)
         => (T?)Guard.NotNull(validationContext).GetService(typeof(T));
+
+    /// <summary>Returns the service that provides custom validation.</summary>
+    [Pure]
+    [Obsolete("Use GetService<T>() instead.")]
+    public static T? GetSevice<T>(this ValidationContext validationContext)
+        => GetService<T>(validationContext);
 
     /// <summary>Gets the <see cref="ValidationContext.MemberName"/> as an array.</summary>
     [Pure]

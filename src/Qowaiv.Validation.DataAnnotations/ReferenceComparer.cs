@@ -2,7 +2,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Compares objects just by reference.</summary>
 /// <remarks>
-/// We don't want to be cut of in the nested validation due to
+/// We don't want to be cut off in the nested validation due to
 /// <see cref="object.GetHashCode()"/> and <see cref="object.Equals(object)"/>
 /// overrides.
 /// </remarks>

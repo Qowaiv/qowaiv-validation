@@ -32,7 +32,7 @@ public readonly partial struct AsyncResult<TModel>
     [Pure]
     public TaskAwaiter<Result<TModel>> GetAwaiter() => Promise.GetAwaiter();
 
-    /// <summary>Implictly casts from Task to an AsyncResult.</summary>
+    /// <summary>Implicitly casts from Task to an AsyncResult.</summary>
     public static implicit operator AsyncResult<TModel>(Task<Result<TModel>> promise) => new(promise);
 
     /// <summary>Invokes the action when <see cref="AsyncResult{TModel}"/> is valid.</summary>

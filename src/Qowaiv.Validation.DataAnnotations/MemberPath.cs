@@ -4,7 +4,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Deals with constructing nested member paths.</summary>
 /// <remarks>
-/// This struct reuses the <see cref="StringBuilder"/> and is not threat-safe.
+/// This struct reuses the <see cref="StringBuilder"/> and is not thread-safe.
 /// Given its usage this should not be a problem.
 /// </remarks>
 internal readonly struct MemberPath
