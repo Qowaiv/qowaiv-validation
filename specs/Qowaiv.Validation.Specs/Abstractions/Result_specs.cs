@@ -35,7 +35,7 @@ public class Invalid_result
     {
         var result = Result.For(new object(), ValidationMessage.Error("Not OK"));
         result.Invoking(r => r.Value)
-            .Should().Throw<InvalidModelException>();
+            .Should().Throw<InvalidModel>();
     }
 }
 
@@ -161,7 +161,7 @@ public class ThrowIfInvalid
     {
         var result = Result.WithMessages<int>(ValidationMessage.Error("Oops"));
         result.Invoking(_ => result.ThrowIfInvalid())
-            .Should().Throw<InvalidModelException>();
+            .Should().Throw<InvalidModel>();
     }
 
     [Test]
@@ -169,6 +169,6 @@ public class ThrowIfInvalid
     {
         var result = Result.WithMessages(ValidationMessage.Error("Oops"));
         result.Invoking(_ => result.ThrowIfInvalid())
-            .Should().Throw<InvalidModelException>();
+            .Should().Throw<InvalidModel>();
     }
 }
