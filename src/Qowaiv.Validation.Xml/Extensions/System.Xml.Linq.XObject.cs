@@ -31,61 +31,83 @@ public static class QowaivXObjectExtensions
         }
     }
 
-    /// <summary>Get the absolute XPath of the attribute.</summary>
-    /// <remarks>
-    /// e.g.: /people/person[6]/name[1]/last[1]/@prefix.
-    /// </remarks>
-    [Pure]
-    internal static string AbsoluteXPath(this XAttribute attribute)
+    extension(XAttribute attribute)
     {
-        Guard.NotNull(attribute);
-        return $"{attribute.Parent?.AbsoluteXPath()}/@{attribute.Name.LocalName}";
+        /// <summary>Get the absolute XPath of the attribute.</summary>
+        /// <remarks>
+        /// e.g.: /people/person[6]/name[1]/last[1]/@prefix.
+        /// </remarks>
+        [Pure]
+        internal string AbsoluteXPath()
+            => $"{attribute.Parent?.AbsoluteXPath()}/@{attribute.Name.LocalName}";
     }
 
-    /// <summary>Get the absolute XPath of the element.</summary>
-    /// <remarks>
-    /// e.g.: /people/person[6]/name[1]/last[1].
-    /// </remarks>
-    [Pure]
-    internal static string AbsoluteXPath(this XElement element)
+    extension(XElement element)
     {
-        Guard.NotNull(element);
-
-        var path = new StringBuilder();
-
-        // A namespace is resolved by its nearest declaration at or above the
-        // element, so the path is built from the root down while keeping the
-        // in-scope prefix per namespace URI up to date.
-        var prefixes = new Dictionary<string, string>(StringComparer.Ordinal);
-
-        // If one element binds multiple prefixes to the same URI, only
-        // the first binding is used.
-        var declaredOnAncestor = new HashSet<string>(StringComparer.Ordinal);
-
-        foreach (var ancestor in element.AncestorsAndSelf().Reverse())
+        /// <summary>Get the absolute XPath of the element.</summary>
+        /// <remarks>
+        /// e.g.: /people/person[6]/name[1]/last[1].
+        /// </remarks>
+        [Pure]
+        internal string AbsoluteXPath()
         {
-            declaredOnAncestor.Clear();
+            var path = new StringBuilder();
 
-            foreach (var attr in ancestor.Attributes().Where(DeclaresPrefix).Where(a => declaredOnAncestor.Add(a.Value)))
+            // A namespace is resolved by its nearest declaration at or above the
+            // element, so the path is built from the root down while keeping the
+            // in-scope prefix per namespace URI up to date.
+            var prefixes = new Dictionary<string, string>(StringComparer.Ordinal);
+
+            // If one element binds multiple prefixes to the same URI, only
+            // the first binding is used.
+            var declaredOnAncestor = new HashSet<string>(StringComparer.Ordinal);
+
+            foreach (var ancestor in element.AncestorsAndSelf().Reverse())
             {
-                prefixes[attr.Value] = attr.Name.LocalName;
-            }
-            path.AppendRelativePath(ancestor, prefixes);
-        }
-        return path.ToString();
+                declaredOnAncestor.Clear();
 
-        static bool DeclaresPrefix(XAttribute attr) => attr is
+                foreach (var attr in ancestor.Attributes().Where(DeclaresPrefix).Where(a => declaredOnAncestor.Add(a.Value)))
+                {
+                    prefixes[attr.Value] = attr.Name.LocalName;
+                }
+                path.AppendRelativePath(ancestor, prefixes);
+            }
+            return path.ToString();
+
+            static bool DeclaresPrefix(XAttribute attr) => attr is
+            {
+                IsNamespaceDeclaration: true,
+                Name.Namespace.NamespaceName.Length: > 0,
+            };
+        }
+
+        /// <summary>
+        /// Get the index of the given XElement relative to its
+        /// siblings with identical names. If the given element is
+        /// the root, -1 is returned.
+        /// </summary>
+        [Pure]
+        private int? Index()
         {
-            IsNamespaceDeclaration: true,
-            Name.Namespace.NamespaceName.Length: > 0,
-        };
+            if (element.Parent is { })
+            {
+                var index = 0;
+
+                foreach (var sibling in element.Parent.Elements(element.Name))
+                {
+                    index++;
+                    if (sibling == element) return index;
+                }
+                throw new InvalidOperationException("Element has been removed from its parent.");
+            }
+            else return null;
+        }
     }
 
     extension(StringBuilder sb)
     {
         private void AppendRelativePath(XElement element, Dictionary<string, string> prefixes)
         {
-            var index = element.IndexPosition();
             var name = element.Name.LocalName;
 
             if (prefixes.TryGetValue(element.Name.NamespaceName, out var prefix)
@@ -93,34 +115,9 @@ public static class QowaivXObjectExtensions
             {
                 name = $"{prefix}:{name}";
             }
-            sb.Append(index == -1
-                ? $"/{name}"
-                : $"/{name}[{index}]");
+            sb.Append(element.Index() is { } index
+                ? $"/{name}[{index}]"
+                : $"/{name}");
         }
-    }
-
-    /// <summary>
-    /// Get the index of the given XElement relative to its
-    /// siblings with identical names. If the given element is
-    /// the root, -1 is returned.
-    /// </summary>
-    /// <param name="element">
-    /// The element to get the index of.
-    /// </param>
-    [Pure]
-    private static int IndexPosition(this XElement element)
-    {
-        if (element.Parent is { })
-        {
-            var index = 0;
-
-            foreach (var sibling in element.Parent.Elements(element.Name))
-            {
-                index++;
-                if (sibling == element) return index;
-            }
-            throw new InvalidOperationException("Element has been removed from its parent.");
-        }
-        else return -1;
     }
 }

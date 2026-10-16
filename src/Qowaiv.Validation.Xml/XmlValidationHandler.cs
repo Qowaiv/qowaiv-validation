@@ -13,7 +13,7 @@ public class XmlValidationHandler
     public ValidationEventHandler Validate => OnIssue;
 
     private void OnIssue(object? sender, ValidationEventArgs e)
-        => messages.Add(ValidationMessage.For(e.Severity.ToValidationSeverity(), e.Message, PropertyName(sender)));
+        => messages.Add(ValidationMessage.For(e.Severity.ValidationSeverity, e.Message, PropertyName(sender)));
 
     [Pure]
     private static string? PropertyName(object? sender) => sender switch
