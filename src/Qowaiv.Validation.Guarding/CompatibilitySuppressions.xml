@@ -4,14 +4,28 @@
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:System.Runtime.CompilerServices.IsExternalInit</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Guarding.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:System.Runtime.CompilerServices.RequiresLocationAttribute</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Guarding.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:System.Runtime.CompilerServices.IsExternalInit</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Guarding.dll</Right>
+    <Right>lib/net10.0/Qowaiv.Validation.Guarding.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:System.Runtime.CompilerServices.RequiresLocationAttribute</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Guarding.dll</Right>
+    <Right>lib/net10.0/Qowaiv.Validation.Guarding.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0003</DiagnosticId>
@@ -24,7 +38,7 @@
     <DiagnosticId>CP0003</DiagnosticId>
     <Target>Qowaiv.Validation.Guarding, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
     <Left>lib/net8.0/Qowaiv.Validation.Guarding.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Guarding.dll</Right>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
@@ -35,57 +49,120 @@
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Guarding.Guarding.Must``1(``0):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Guarding.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Guarding.Must`1.Exist``2(``0,System.Func{`0,``0,``1},Qowaiv.Validation.Abstractions.IValidationMessage)-&gt;Qowaiv.Validation.Abstractions.Result&lt;TSubject&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Guarding.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Guarding.Must`1.Exist``2(``0,System.Func{`0,``0,``1},Qowaiv.Validation.Abstractions.IValidationMessage):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Guarding.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Guarding.Must`1.Exist``2(``0,System.Func{`0,``0,``1},Qowaiv.Validation.Abstractions.IValidationMessage)$0:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Guarding.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Guarding.Must`1.Exist``2(``0,System.Func{`0,``0,``1},Qowaiv.Validation.Abstractions.IValidationMessage)$1:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Guarding.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Guarding.Must`1.Exist``2(``0,System.Func{`0,``0,``1})&lt;0&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Guarding.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Guarding.Must`1.Exist``2(``0,System.Func{`0,``0,``1})$1:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Guarding.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Guarding.Must`1:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Guarding.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Guarding.Must`1:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Guarding.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Validation.Guarding.Guarding.Must``1(``0):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Guarding.dll</Right>
+    <Right>lib/net10.0/Qowaiv.Validation.Guarding.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Validation.Guarding.Must`1.Exist``2(``0,System.Func{`0,``0,``1},Qowaiv.Validation.Abstractions.IValidationMessage)-&gt;Qowaiv.Validation.Abstractions.Result&lt;TSubject&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Guarding.dll</Right>
+    <Right>lib/net10.0/Qowaiv.Validation.Guarding.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Validation.Guarding.Must`1.Exist``2(``0,System.Func{`0,``0,``1},Qowaiv.Validation.Abstractions.IValidationMessage):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Guarding.dll</Right>
+    <Right>lib/net10.0/Qowaiv.Validation.Guarding.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Validation.Guarding.Must`1.Exist``2(``0,System.Func{`0,``0,``1},Qowaiv.Validation.Abstractions.IValidationMessage)$0:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Guarding.dll</Right>
+    <Right>lib/net10.0/Qowaiv.Validation.Guarding.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Validation.Guarding.Must`1.Exist``2(``0,System.Func{`0,``0,``1},Qowaiv.Validation.Abstractions.IValidationMessage)$1:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Guarding.dll</Right>
+    <Right>lib/net10.0/Qowaiv.Validation.Guarding.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Validation.Guarding.Must`1.Exist``2(``0,System.Func{`0,``0,``1})&lt;0&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Guarding.dll</Right>
+    <Right>lib/net10.0/Qowaiv.Validation.Guarding.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Validation.Guarding.Must`1.Exist``2(``0,System.Func{`0,``0,``1})$1:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Guarding.dll</Right>
+    <Right>lib/net10.0/Qowaiv.Validation.Guarding.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>T:Qowaiv.Validation.Guarding.Must`1:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Guarding.dll</Right>
+    <Right>lib/net10.0/Qowaiv.Validation.Guarding.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>T:Qowaiv.Validation.Guarding.Must`1:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.Guarding.dll</Right>
+    <Right>lib/net10.0/Qowaiv.Validation.Guarding.dll</Right>
   </Suppression>
 </Suppressions>

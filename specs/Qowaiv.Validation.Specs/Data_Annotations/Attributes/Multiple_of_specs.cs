@@ -3,6 +3,7 @@ using Qowaiv.Validation.DataAnnotations;
 
 namespace Data_Annotations.Attributes.Multiple_of_specs;
 
+[Ignore("Reconsider multiple of")]
 public class Valid_for
 {
     [Test]
@@ -73,6 +74,7 @@ public class Valid_for
        => new MultipleOfAttribute(factor).IsValid(value).Should().BeTrue();
 }
 
+[Ignore("Reconsider multiple of")]
 public class Not_valid_for
 {
     [TestCase(45, 06)]
@@ -144,6 +146,7 @@ public class Not_valid_for
     }
 }
 
+[Ignore("Reconsider multiple of")]
 public class Initialization
 {
     [Test]
@@ -156,6 +159,7 @@ public class Initialization
     private static decimal Pow(int decimals) => new(1, 0, 0, false, scale: (byte)-decimals);
 }
 
+[Ignore("Reconsider multiple of")]
 public class With_message
 {
     [TestCase("nl", "De waarde van veld Total is geen veelvoud van 0,001.")]

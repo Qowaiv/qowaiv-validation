@@ -9,10 +9,7 @@
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
-    <DiagnosticId>CP0003</DiagnosticId>
-    <Target>Qowaiv.Validation.TestTools, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
-    <Left>lib/net8.0/Qowaiv.Validation.TestTools.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Validation.TestTools.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
+    <DiagnosticId>PKV006</DiagnosticId>
+    <Target>net8.0</Target>
   </Suppression>
 </Suppressions>

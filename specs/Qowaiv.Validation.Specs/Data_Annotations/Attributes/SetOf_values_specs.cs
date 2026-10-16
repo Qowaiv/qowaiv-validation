@@ -19,7 +19,7 @@ public class Supports
         using (TestCultures.en_US.Scoped())
         {
             new AllowedAttribute<Amount>(42.12, "17.30").Values
-                .Should().BeEquivalentTo([42.12.Amount(), 17.30.Amount()]);
+                .Should().BeEquivalentTo([Amount.Create(42.12), 17.30m.Amount()]);
         }
     }
 

@@ -1,4 +1,7 @@
 using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Columns;
+using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Jobs;
 using Qowaiv.Validation.Abstractions;
 using Qowaiv.Validation.DataAnnotations;
 using Qowaiv.Validation.TestData;
@@ -8,7 +11,11 @@ namespace Benchmarks;
 
 public static class Data_Annotations
 {
+    [SimpleJob(RuntimeMoniker.Net10_0)]
+    [SimpleJob(RuntimeMoniker.Net11_0)]
     [MemoryDiagnoser]
+    [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByParams)]
+    [HideColumns(Column.StdDev, Column.Error, Column.Median, Column.RatioSD)]
     public class Validate
     {
         internal readonly BenchmarkModelValidator FluentValidator = new();
