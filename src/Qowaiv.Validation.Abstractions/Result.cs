@@ -9,7 +9,7 @@ public partial class Result
     /// The messages related to the result.
     /// </param>
     internal Result(IValidationMessages messages)
-        => Messages = Guard.NotNull(messages);
+        => Messages = messages;
 
     /// <summary>Gets the messages related to the result.</summary>
     [Pure]
