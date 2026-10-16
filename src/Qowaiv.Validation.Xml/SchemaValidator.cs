@@ -18,7 +18,7 @@ public class SchemaValidator<TModel> : IValidator<TModel>
 
     /// <summary>Initializes a new instance of the <see cref="SchemaValidator{TModel}"/> class.</summary>
     /// <param name="schema">
-    /// The main of <see cref="XmlSchema"/>'.
+    /// The <see cref="XmlSchema"/> to validate against.
     /// </param>
     public SchemaValidator(XmlSchema schema) : this(new XmlSchemaSet().Append(schema)) { }
 
