@@ -1,6 +1,6 @@
 namespace Qowaiv.Validation.Abstractions;
 
-/// <summary>Represents a validation messsage.</summary>
+/// <summary>Represents a validation message.</summary>
 public interface IValidationMessage
 {
     /// <summary>Gets the severity of the message (None, Info, Warning, Error).</summary>
