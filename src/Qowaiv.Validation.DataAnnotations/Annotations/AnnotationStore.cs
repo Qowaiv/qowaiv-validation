@@ -12,7 +12,6 @@ internal sealed class AnnotationStore
     /// <summary>Initializes a new instance of the <see cref="AnnotationStore"/> class.</summary>
     public AnnotationStore() => Annotations = new ConcurrentDictionary<Type, TypeAnnotations?>(
     [
-        None<object>(),
         None<string>(),
         None<decimal>(),
         None<Guid>(),
