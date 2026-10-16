@@ -58,37 +58,38 @@ public static class QowaivXObjectExtensions
         {
             HashSet<string>? declared = null;
 
-            foreach (var declaration in ancestor.Attributes())
+            foreach (var declaration in ancestor.Attributes().Where(IsDeclaration))
             {
-                if (!declaration.IsNamespaceDeclaration || string.IsNullOrEmpty(declaration.Name.NamespaceName))
-                {
-                    continue;
-                }
                 declared ??= new HashSet<string>(StringComparer.Ordinal);
                 if (declared.Add(declaration.Value))
                 {
                     aliases[declaration.Value] = declaration.Name.LocalName;
                 }
             }
-            path.Append(RelativePath(ancestor, aliases));
+            path.AppendRelativePath(ancestor, aliases);
         }
         return path.ToString();
+
+        static bool IsDeclaration(XAttribute attr)
+            => attr is { IsNamespaceDeclaration: false, Name.Namespace.NamespaceName.Length: > 0 };
     }
 
-    [Pure]
-    private static string RelativePath(XElement element, Dictionary<string, string> aliases)
+    extension(StringBuilder sb)
     {
-        var index = element.IndexPosition();
-        var name = element.Name.LocalName;
-
-        if (aliases.TryGetValue(element.Name.NamespaceName, out var alias)
-            && !string.IsNullOrEmpty(alias))
+        private void AppendRelativePath(XElement element, Dictionary<string, string> aliases)
         {
-            name = $"{alias}:{name}";
+            var index = element.IndexPosition();
+            var name = element.Name.LocalName;
+
+            if (aliases.TryGetValue(element.Name.NamespaceName, out var alias)
+                && !string.IsNullOrEmpty(alias))
+            {
+                name = $"{alias}:{name}";
+            }
+            sb.Append(index == -1
+                ? $"/{name}"
+                : $"/{name}[{index}]");
         }
-        return index == -1
-            ? $"/{name}"
-            : $"/{name}[{index}]";
     }
 
     /// <summary>
