@@ -10,15 +10,15 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.19.0, )",
-        "resolved": "1.19.0",
-        "contentHash": "kQLuDrC/iRNvAH3+YSfmgGYodAz9itKM1zrzvfR1ug4zbn5lTEcyHWT+JdFMna73J/EbgwY73Hx8LjxQ655Pyw=="
+        "requested": "[1.19.1, )",
+        "resolved": "1.19.1",
+        "contentHash": "AurPfke1r9v1HJGNE+Yi3ywuLFmOCCaGnnbRUQLPHJSeFtRjKxoQFR2qdpAr400XPQ/VazIuOTNSSXlD8jKayw=="
       },
       "FluentValidation": {
         "type": "Direct",
-        "requested": "[12.1.1, )",
-        "resolved": "12.1.1",
-        "contentHash": "EPpkIe1yh1a0OXyC100oOA8WMbZvqUu5plwhvYcb7oSELfyUZzfxV48BLhvs3kKo4NwG7MGLNgy1RJiYtT8Dpw=="
+        "requested": "[12.2.0, )",
+        "resolved": "12.2.0",
+        "contentHash": "DR3lFbdnKucaaj1/8zMNOACMz/64igzox1yVZSFVsLxYB5mxAB+wFP1WZ8fjwrZnbU1KA1DoMzHKYKxUfuZ4wQ=="
       },
       "Microsoft.CodeAnalysis.Analyzers": {
         "type": "Direct",
@@ -46,9 +46,9 @@
       },
       "Qowaiv.Analyzers.CSharp": {
         "type": "Direct",
-        "requested": "[2.6.1, )",
-        "resolved": "2.6.1",
-        "contentHash": "0ljmGKayDaVKQVRMvxqWYqN1XcWcHrDxpocLrjYCaAABW9t3aWFuJRA3KGUVi01uTlnJ40FN1RxKBBSzdyq7fQ=="
+        "requested": "[2.7.2, )",
+        "resolved": "2.7.2",
+        "contentHash": "MKqmAZj+gKvbLk1pqjdDaDQ3QnnuyjBKQoIT+ysqXi43GqhWmkvW1QqpBmx5QMUeLfb0ViQDGWz/s9E5d1Ih/Q=="
       },
       "Qowaiv.Diagnostics.Contracts": {
         "type": "Direct",
@@ -72,7 +72,7 @@
         "type": "Project"
       }
     },
-    "net8.0": {
+    "net11.0": {
       "AsyncFixer": {
         "type": "Direct",
         "requested": "[2.1.0, )",
@@ -81,15 +81,15 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.19.0, )",
-        "resolved": "1.19.0",
-        "contentHash": "kQLuDrC/iRNvAH3+YSfmgGYodAz9itKM1zrzvfR1ug4zbn5lTEcyHWT+JdFMna73J/EbgwY73Hx8LjxQ655Pyw=="
+        "requested": "[1.19.1, )",
+        "resolved": "1.19.1",
+        "contentHash": "AurPfke1r9v1HJGNE+Yi3ywuLFmOCCaGnnbRUQLPHJSeFtRjKxoQFR2qdpAr400XPQ/VazIuOTNSSXlD8jKayw=="
       },
       "FluentValidation": {
         "type": "Direct",
-        "requested": "[12.1.1, )",
-        "resolved": "12.1.1",
-        "contentHash": "EPpkIe1yh1a0OXyC100oOA8WMbZvqUu5plwhvYcb7oSELfyUZzfxV48BLhvs3kKo4NwG7MGLNgy1RJiYtT8Dpw=="
+        "requested": "[12.2.0, )",
+        "resolved": "12.2.0",
+        "contentHash": "DR3lFbdnKucaaj1/8zMNOACMz/64igzox1yVZSFVsLxYB5mxAB+wFP1WZ8fjwrZnbU1KA1DoMzHKYKxUfuZ4wQ=="
       },
       "Microsoft.CodeAnalysis.Analyzers": {
         "type": "Direct",
@@ -117,9 +117,9 @@
       },
       "Qowaiv.Analyzers.CSharp": {
         "type": "Direct",
-        "requested": "[2.6.1, )",
-        "resolved": "2.6.1",
-        "contentHash": "0ljmGKayDaVKQVRMvxqWYqN1XcWcHrDxpocLrjYCaAABW9t3aWFuJRA3KGUVi01uTlnJ40FN1RxKBBSzdyq7fQ=="
+        "requested": "[2.7.2, )",
+        "resolved": "2.7.2",
+        "contentHash": "MKqmAZj+gKvbLk1pqjdDaDQ3QnnuyjBKQoIT+ysqXi43GqhWmkvW1QqpBmx5QMUeLfb0ViQDGWz/s9E5d1Ih/Q=="
       },
       "Qowaiv.Diagnostics.Contracts": {
         "type": "Direct",
