@@ -1,6 +1,5 @@
 global using Qowaiv.Diagnostics.Contracts;
 global using Qowaiv.Validation.Abstractions.Diagnostics;
-global using Qowaiv.Validation.Abstractions.Internals;
 global using System;
 global using System.Collections;
 global using System.Collections.Generic;
@@ -13,3 +12,4 @@ global using System.Linq;
 global using System.Runtime.CompilerServices;
 global using System.Text;
 global using System.Threading.Tasks;
+global using IValidationMessages = System.Collections.Generic.IReadOnlyList<Qowaiv.Validation.Abstractions.IValidationMessage>;

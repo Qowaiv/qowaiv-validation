@@ -8,12 +8,12 @@ public partial class Result
     /// <param name="messages">
     /// The messages related to the result.
     /// </param>
-    internal Result(FixedMessages messages)
+    internal Result(IValidationMessages messages)
         => Messages = Guard.NotNull(messages);
 
     /// <summary>Gets the messages related to the result.</summary>
     [Pure]
-    public IReadOnlyList<IValidationMessage> Messages { get; }
+    public IValidationMessages Messages { get; }
 
     /// <summary>Return true if there are no error messages, otherwise false.</summary>
     [Pure]
