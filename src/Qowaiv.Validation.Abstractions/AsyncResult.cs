@@ -16,6 +16,15 @@ public readonly struct AsyncResult
     /// <inheritdoc cref="Task.IsCompleted" />
     public bool IsCompleted => Promise.IsCompleted;
 
+    /// <summary>Configures an awaiter used to await this <see cref="AsyncResult" />.</summary>
+    /// <param name="continueOnCapturedContext">
+    /// true to attempt to marshal the continuation back to the original context captured;
+    /// otherwise, false.
+    /// </param>
+    [Pure]
+    public ConfiguredTaskAwaitable<Result> ConfigureAwait(bool continueOnCapturedContext)
+        => Promise.ConfigureAwait(continueOnCapturedContext);
+
     /// <summary>Gets the awaiter.</summary>
     [Pure]
     public AsyncResultAwaiter GetAwaiter() => new(Promise);

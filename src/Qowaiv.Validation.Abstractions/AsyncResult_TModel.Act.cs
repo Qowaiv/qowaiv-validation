@@ -102,7 +102,7 @@ public readonly partial struct AsyncResult<TModel>
     /// </returns>
     [Impure]
     public AsyncResult<TModel> ActAsync(
-        Func<TModel, Task<Result>> action,
+        Func<TModel, AsyncResult> action,
         bool continueOnCapturedContext = false)
     {
         Guard.NotNull(action);
