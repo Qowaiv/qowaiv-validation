@@ -216,12 +216,12 @@ internal class TestModel(int actions = 0)
         return Result.WithMessages<TestModel>(ValidationMessage.Error(nameof(FailingAction)));
     }
 
-    public Task<Result> NonfailingActionAsync()
+    public AsyncResult NonfailingActionAsync()
     {
         Actions++;
-        return Task.FromResult(Result.OK);
+        return Result.OK.Async();
     }
-    public Task<Result> FailingActionAsync()
+    public AsyncResult FailingActionAsync()
     {
         Actions = -Actions;
         return Task.FromResult(Result.WithMessages(ValidationMessage.Error(nameof(FailingActionAsync))));

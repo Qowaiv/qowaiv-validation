@@ -63,7 +63,7 @@ public sealed class Result<TModel> : Result
 
     /// <summary>Wraps the <see cref="Result{TModel}"/> in an <see cref="AsyncResult{TModel}"/>.</summary>
     [Pure]
-    public AsyncResult<TModel> Async() => new(Task.FromResult(this));
+    public new AsyncResult<TModel> Async() => new(Task.FromResult(this));
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
     /// <param name="action">
@@ -180,7 +180,7 @@ public sealed class Result<TModel> : Result
         {
             if (IsValid)
             {
-                var outcome = await action(Value);
+                var outcome = await action(Value).ConfigureAwait(continueOnCapturedContext);
                 var value = outcome.IsValid ? outcome.Value : default;
                 return new(value, Messages.Append(outcome.Messages));
             }
@@ -203,7 +203,7 @@ public sealed class Result<TModel> : Result
     /// </returns>
     [Impure]
     public AsyncResult<TModel> ActAsync(
-        Func<TModel, Task<Result>> action,
+        Func<TModel, AsyncResult> action,
         bool continueOnCapturedContext = false)
     {
         _ = Guard.NotNull(action);
@@ -227,6 +227,10 @@ public sealed class Result<TModel> : Result
     /// <param name="update">
     /// The update to apply on a successfully invoked action.
     /// </param>
+    /// <param name="continueOnCapturedContext">
+    /// true to attempt to marshal the continuation back to the original context captured;
+    /// otherwise, false. See <see cref="Task.ConfigureAwait(bool)"/>.
+    /// </param>
     /// <typeparam name="TOut">
     /// The type of the new result value.
     /// </typeparam>
@@ -236,13 +240,17 @@ public sealed class Result<TModel> : Result
     [Impure]
     public AsyncResult<TModel> ActAsync<TOut>(
         Func<TModel, AsyncResult<TOut>> action,
-        Action<TModel, TOut> update)
-        => ActAsync(action, (model, result) =>
-        {
-            Guard.NotNull(update);
-            if (model is { }) { update.Invoke(model, result); }
-            return model;
-        });
+        Action<TModel, TOut> update,
+        bool continueOnCapturedContext = false)
+        => ActAsync(
+            action,
+            (model, result) =>
+            {
+                Guard.NotNull(update);
+                if (model is { }) { update.Invoke(model, result); }
+                return model;
+            },
+            continueOnCapturedContext);
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
     /// <param name="action">
