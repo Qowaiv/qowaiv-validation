@@ -13,7 +13,7 @@ public abstract class SetOfValuesAttribute(params string[] values) : ValidationA
     /// <summary>Gets the values.</summary>
     public string[] Values { get; } = Guard.NotNull(values);
 
-    /// <summary>Returns true if the value occurs to be forbidden, otherwise false.</summary>
+    /// <summary>Returns true if the value is forbidden, otherwise false.</summary>
     [Pure]
     public sealed override bool IsValid(object? value)
     {

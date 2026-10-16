@@ -109,7 +109,7 @@ public class ItemsAttribute<TValidator> : ValidationAttribute
         }
         catch (Exception x)
         {
-            throw new ArgumentException("The args could not be used ", nameof(args), x);
+            throw new ArgumentException("The provided args could not be used to create the validator.", nameof(args), x);
         }
     }
 }

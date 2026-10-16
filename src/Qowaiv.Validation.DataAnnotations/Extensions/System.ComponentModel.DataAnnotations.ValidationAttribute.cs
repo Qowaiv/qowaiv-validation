@@ -7,7 +7,7 @@ public static class QowaivValidationAttributeExtensions
 {
     /// <summary>Replacement of <see cref="ValidationAttribute.GetValidationResult(object, ValidationContext)"/>.</summary>
     /// <remarks>
-    /// The original function messes up with <see cref="ValidationMessage.None"/>, as it has no error message.
+    /// The original function does not handle <see cref="ValidationMessage.None"/> correctly, as it has no error message.
     /// </remarks>
     [Pure]
     public static ValidationMessage? GetValidationMessage(this ValidationAttribute attribute, object? value, ValidationContext validationContext)
