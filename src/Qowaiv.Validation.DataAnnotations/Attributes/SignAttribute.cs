@@ -18,8 +18,8 @@ public abstract class SignAttribute(Func<string> errorMessageAccessor) : Validat
         short v /*......*/ => Is(Math.Sign(v)),
         int v /*........*/ => Is(Math.Sign(v)),
         long v /*.......*/ => Is(Math.Sign(v)),
-        float v /*......*/ => Is(Math.Sign(v)),
-        double v /*.....*/ => Is(Math.Sign(v)),
+        float v /*......*/ => !float.IsNaN(v) && Is(Math.Sign(v)),
+        double v /*.....*/ => !double.IsNaN(v) && Is(Math.Sign(v)),
         decimal v /*....*/ => Is(Math.Sign(v)),
         TimeSpan v /*...*/ => Is(Math.Sign(v.Ticks)),
 #if NET8_0_OR_GREATER

@@ -37,8 +37,8 @@
     <Version>6.2.0</Version>
     <ToBeReleased>
       <![CDATA[
-v6.*
-- 
+v11.*
+- Sign based attributes don't crash on NaN. (BUG)
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
