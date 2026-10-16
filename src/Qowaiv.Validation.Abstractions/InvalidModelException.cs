@@ -21,7 +21,7 @@ public class InvalidModelException : InvalidOperationException
         => Errors = new ReadOnlyCollection<IValidationMessage>([.. Filter(messages)]);
 
     /// <summary>The related validation error(s).</summary>
-    public IReadOnlyList<IValidationMessage> Errors { get; } = [];
+    public IValidationMessages Errors { get; } = [];
 
     /// <summary>Creates an <see cref="InvalidModelException"/> for the model.</summary>
     [Pure]

@@ -4,7 +4,7 @@ namespace Qowaiv.Validation.Abstractions;
 public sealed class Result<TModel> : Result
 {
     /// <summary>Initializes a new instance of the <see cref="Result{T}"/> class.</summary>
-    internal Result(FixedMessages messages) : base(messages) { }
+    internal Result(IValidationMessages messages) : base(messages) { }
 
     /// <summary>Initializes a new instance of the <see cref="Result{T}"/> class.</summary>
     /// <param name="value">
@@ -13,7 +13,7 @@ public sealed class Result<TModel> : Result
     /// <param name="messages">
     /// The messages related to the result.
     /// </param>
-    internal Result(TModel? value, FixedMessages messages) : base(messages)
+    internal Result(TModel? value, IValidationMessages messages) : base(messages)
         => _value = IsValid ? value : default;
 
     /// <summary>Gets the value related to result.</summary>
@@ -31,7 +31,7 @@ public sealed class Result<TModel> : Result
 
     /// <summary>Implicitly casts a model to the <see cref="Result"/>.</summary>
     [Pure]
-    public static implicit operator Result<TModel>(TModel model) => NotNull(model, FixedMessages.Empty);
+    public static implicit operator Result<TModel>(TModel model) => NotNull(model, []);
 
     /// <inheritdoc />
     [Pure]
@@ -48,7 +48,7 @@ public sealed class Result<TModel> : Result
     [Pure]
     public Result<TOut> Cast<TOut>()
     {
-        return new(_value is null ? default : Cast(), (FixedMessages)Messages);
+        return new(_value is null ? default : Cast(), Messages);
 
         TOut Cast()
             => _value is TOut cast
@@ -84,7 +84,7 @@ public sealed class Result<TModel> : Result
         {
             var outcome = action(Value);
             var value = outcome.IsValid ? outcome.Value : default;
-            return new(value, ((FixedMessages)Messages).AddRange(outcome.Messages));
+            return new(value, Messages.Append(outcome.Messages));
         }
         else return WithMessages<TOut>(Messages);
     }
@@ -104,7 +104,7 @@ public sealed class Result<TModel> : Result
         if (IsValid)
         {
             var outcome = action(Value);
-            return NotNull(Value, ((FixedMessages)Messages).AddRange(outcome.Messages));
+            return NotNull(Value, Messages.Append(outcome.Messages));
         }
         else return WithMessages<TModel>(Messages);
     }
@@ -151,8 +151,8 @@ public sealed class Result<TModel> : Result
 
         var resolved = Act(action);
         return resolved.IsValid
-            ? new(update(_value!, resolved.Value), (FixedMessages)resolved.Messages)
-            : new(_value, (FixedMessages)resolved.Messages);
+            ? new(update(_value!, resolved.Value), resolved.Messages)
+            : new(_value, resolved.Messages);
     }
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
@@ -182,7 +182,7 @@ public sealed class Result<TModel> : Result
             {
                 var outcome = await action(Value);
                 var value = outcome.IsValid ? outcome.Value : default;
-                return new(value, ((FixedMessages)Messages).AddRange(outcome.Messages));
+                return new(value, Messages.Append(outcome.Messages));
             }
             else return WithMessages<TOut>(Messages);
         }
@@ -213,7 +213,7 @@ public sealed class Result<TModel> : Result
             if (IsValid)
             {
                 var outcome = await action(Value).ConfigureAwait(continueOnCapturedContext);
-                return NotNull(Value, ((FixedMessages)Messages).AddRange(outcome.Messages));
+                return NotNull(Value, Messages.Append(outcome.Messages));
             }
             else return WithMessages<TModel>(Messages);
         }
@@ -273,8 +273,8 @@ public sealed class Result<TModel> : Result
         {
             var resolved = await ActAsync(action, continueOnCapturedContext);
             return resolved.IsValid
-                ? new(update(_value!, resolved.Value), (FixedMessages)resolved.Messages)
-                : new(_value, (FixedMessages)resolved.Messages);
+                ? new(update(_value!, resolved.Value), resolved.Messages)
+                : new(_value, resolved.Messages);
         }
         return new(Execute());
     }
@@ -327,6 +327,6 @@ public sealed class Result<TModel> : Result
        => IsValid && Value is null ? throw NoValue.For<TModel>() : this;
 
     [Pure]
-    private static Result<TModel> NotNull(TModel? value, FixedMessages messages)
+    private static Result<TModel> NotNull(TModel? value, IValidationMessages messages)
         => new Result<TModel>(value, messages).NotNull();
 }
