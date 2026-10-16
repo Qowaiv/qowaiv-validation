@@ -1,45 +1,25 @@
-namespace Qowaiv.Validation.DataAnnotations.Reflection;
-
-using System.Linq.Expressions;
 using System.Reflection;
-using Contract = System.Func<
-    System.ComponentModel.DataAnnotations.ValidationAttribute,
-    object?,
-    System.ComponentModel.DataAnnotations.ValidationContext,
-    System.ComponentModel.DataAnnotations.ValidationResult?>;
+using static System.Linq.Expressions.Expression;
+
+namespace Qowaiv.Validation.DataAnnotations.Reflection;
 
 internal static class ValidationAttributes
 {
-    /// <summary>Checks if the value is valid according to he specific attribute.</summary>
-    [Pure]
-    public static ValidationResult? IsValid(
-        ValidationAttribute attr,
-        object? value,
-        ValidationContext context)
-    {
-        var type = attr.GetType();
-        if (!Cache.TryGetValue(type, out var expression))
-        {
-            expression = Compile(type);
-            Cache[type] = expression;
-        }
-        return expression(attr, value, context);
-    }
+    public delegate ValidationResult? Contract(ValidationAttribute attr, object? value, ValidationContext context);
+
+    public static readonly Contract IsValid = Compile();
 
     [Pure]
-    private static Contract Compile(Type type)
+    private static Contract Compile()
     {
-        var att = Expression.Parameter(typeof(ValidationAttribute), "attr");
-        var mth = type.GetMethod(nameof(IsValid), Instance, null, [typeof(object), typeof(ValidationContext)], null)!;
-        var val = Expression.Parameter(typeof(object), "value");
-        var ctx = Expression.Parameter(typeof(ValidationContext), "context");
-        var cast = Expression.Convert(att, type);
-        var body = Expression.Call(cast, mth, val, ctx);
-        var expr = Expression.Lambda<Contract>(body, att, val, ctx);
+        var att = Parameter(typeof(ValidationAttribute), "attr");
+        var mth = typeof(ValidationAttribute).GetMethod(nameof(IsValid), Instance)!;
+        var val = Parameter(typeof(object), "value");
+        var ctx = Parameter(typeof(ValidationContext), "context");
+        var body = Call(att, mth, val, ctx);
+        var expr = Lambda<Contract>(body, att, val, ctx);
         return expr.Compile();
     }
-
-    private static readonly ConcurrentDictionary<Type, Contract> Cache = [];
 
 #pragma warning disable S3011 // Reflection should not be used to increase accessibility.
     public const BindingFlags Instance = BindingFlags.Instance | BindingFlags.NonPublic;
