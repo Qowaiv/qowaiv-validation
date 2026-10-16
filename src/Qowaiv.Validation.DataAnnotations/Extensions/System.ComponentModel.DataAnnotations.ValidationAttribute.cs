@@ -16,8 +16,8 @@ public static class QowaivValidationAttributeExtensions
         {
             Guard.NotNull(attribute);
 
-            var result = NonPublic.ValidationAttribute.IsValid.Invoke(attribute, [value, validationContext]);
-            return ValidationMessage.For(result as ValidationResult);
+            var result = ValidationAttributes.IsValid(attribute, value, validationContext);
+            return ValidationMessage.For(result);
         }
 
         /// <summary>Validates the attribute.</summary>
@@ -33,13 +33,14 @@ public static class QowaivValidationAttributeExtensions
         [Pure]
         internal bool Validates(Func<bool> isValid)
         {
-            if (!isValid() && attribute.ErrorMessage is { Length: > 0 })
+            var result = isValid();
+
+            if (!result && attribute.ErrorMessage is { Length: > 0 })
             {
                 attribute.ErrorMessageResourceName = null;
                 attribute.ErrorMessageResourceType = null;
-                return false;
             }
-            return true;
+            return result;
         }
     }
 }
