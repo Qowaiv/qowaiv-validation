@@ -6,8 +6,11 @@ namespace Qowaiv.Validation.Xml;
 /// <typeparam name="TModel">
 /// The type of the model to validate.
 /// </typeparam>
-[WillBeSealed]
-public class SchemaValidator<TModel> : IValidator<TModel>
+/// <remarks>Initializes a new instance of the <see cref="SchemaValidator{TModel}"/> class.</remarks>
+/// <param name="schemas">
+/// A set of <see cref="XmlSchema"/>'s.
+/// </param>
+public sealed class SchemaValidator<TModel>(XmlSchemaSet schemas) : IValidator<TModel>
     where TModel : class
 {
     /// <summary>Initializes a new instance of the <see cref="SchemaValidator{TModel}"/> class.</summary>
@@ -18,18 +21,12 @@ public class SchemaValidator<TModel> : IValidator<TModel>
 
     /// <summary>Initializes a new instance of the <see cref="SchemaValidator{TModel}"/> class.</summary>
     /// <param name="schema">
-    /// The main of <see cref="XmlSchema"/>'.
+    /// The <see cref="XmlSchema"/> to validate against.
     /// </param>
     public SchemaValidator(XmlSchema schema) : this(new XmlSchemaSet().Append(schema)) { }
 
-    /// <summary>Initializes a new instance of the <see cref="SchemaValidator{TModel}"/> class.</summary>
-    /// <param name="schemas">
-    /// A set of <see cref="XmlSchema"/>'s.
-    /// </param>
-    public SchemaValidator(XmlSchemaSet schemas) => Schemas = Guard.NotNull(schemas);
-
     /// <summary>The XML Schema('s) used to validate the model.</summary>
-    public XmlSchemaSet Schemas { get; }
+    public XmlSchemaSet Schemas { get; } = Guard.NotNull(schemas);
 
     /// <summary>Validates the model using the <see cref="XmlSchemaSet"/>.</summary>
     [Pure]

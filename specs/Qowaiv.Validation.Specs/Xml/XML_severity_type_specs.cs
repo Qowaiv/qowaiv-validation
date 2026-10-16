@@ -7,10 +7,10 @@ public class Maps
 {
     [Test]
     public void warning_as_warning()
-        => XmlSeverityType.Warning.ToValidationSeverity().Should().Be(ValidationSeverity.Warning);
+        => XmlSeverityType.Warning.ValidationSeverity.Should().Be(ValidationSeverity.Warning);
 
     [TestCase(XmlSeverityType.Error)]
     [TestCase(666)]
     public void others_as_error(XmlSeverityType severityType)
-      => severityType.ToValidationSeverity().Should().Be(ValidationSeverity.Error);
+      => severityType.ValidationSeverity.Should().Be(ValidationSeverity.Error);
 }
