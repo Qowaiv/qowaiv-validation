@@ -24,7 +24,7 @@ public sealed class Result<TModel> : Result
     [Pure]
     public TModel Value => IsValid
         ? _value!
-        : throw InvalidModelException.For<TModel>(Errors);
+        : throw InvalidModel.For<TModel>(Errors);
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly TModel? _value;
@@ -35,8 +35,8 @@ public sealed class Result<TModel> : Result
 
     /// <inheritdoc />
     [Pure]
-    protected internal override InvalidModelException InvalidOperation()
-        => InvalidModelException.For<TModel>(Errors);
+    protected internal override InvalidModel InvalidOperation()
+        => InvalidModel.For<TModel>(Errors);
 
     /// <summary>Casts the result of <typeparamref name="TModel"/> to a result of <typeparamref name="TOut"/>.</summary>
     /// <typeparam name="TOut">

@@ -1,7 +1,6 @@
 namespace Qowaiv.Validation.Abstractions;
 
 /// <summary>Exception to communicate that <see cref="Result{TModel}.Value"/> has no value (unintentionally).</summary>
-[Serializable]
 public class NoValue : ArgumentNullException
 {
     /// <summary>Initializes a new instance of the <see cref="NoValue"/> class.</summary>
@@ -21,5 +20,6 @@ public class NoValue : ArgumentNullException
     /// The type of the result.
     /// </typeparam>
     [Pure]
-    public static NoValue For<T>() => new(nameof(Result<>.Value), string.Format(QowaivValidationMessages.NoValue_ForT, typeof(T).Name));
+    public static NoValue For<T>()
+        => new(nameof(Result<>.Value), string.Format(QowaivValidationMessages.NoValue_ForT, typeof(T).Name));
 }
