@@ -51,43 +51,47 @@ public static class QowaivXObjectExtensions
     {
         Guard.NotNull(element);
 
-        var aliases = new Dictionary<string, string>(StringComparer.Ordinal);
         var path = new StringBuilder();
+
+        // A namespace is resolved by its nearest declaration at or above the
+        // element, so the path is built from the root down while keeping the
+        // in-scope prefix per namespace URI up to date.
+        var prefixes = new Dictionary<string, string>(StringComparer.Ordinal);
+
+        // If one element binds multiple prefixes to the same URI, only
+        // the first binding is used.
+        var declaredOnAncestor = new HashSet<string>(StringComparer.Ordinal);
 
         foreach (var ancestor in element.AncestorsAndSelf().Reverse())
         {
-            HashSet<string>? declared = null;
+            declaredOnAncestor.Clear();
 
-            foreach (var attr in ancestor.Attributes().Where(DeclaresPrefix))
+            foreach (var attr in ancestor.Attributes().Where(DeclaresPrefix).Where(a => declaredOnAncestor.Add(a.Value)))
             {
-                declared ??= new HashSet<string>(StringComparer.Ordinal);
-                if (declared.Add(attr.Value))
-                {
-                    aliases[attr.Value] = attr.Name.LocalName;
-                }
+                prefixes[attr.Value] = attr.Name.LocalName;
             }
-            path.AppendRelativePath(ancestor, aliases);
+            path.AppendRelativePath(ancestor, prefixes);
         }
         return path.ToString();
 
         static bool DeclaresPrefix(XAttribute attr) => attr is
         {
-            IsNamespaceDeclaration: false,
+            IsNamespaceDeclaration: true,
             Name.Namespace.NamespaceName.Length: > 0,
         };
     }
 
     extension(StringBuilder sb)
     {
-        private void AppendRelativePath(XElement element, Dictionary<string, string> aliases)
+        private void AppendRelativePath(XElement element, Dictionary<string, string> prefixes)
         {
             var index = element.IndexPosition();
             var name = element.Name.LocalName;
 
-            if (aliases.TryGetValue(element.Name.NamespaceName, out var alias)
-                && alias is { Length: > 0 })
+            if (prefixes.TryGetValue(element.Name.NamespaceName, out var prefix)
+                && prefix is { Length: > 0 })
             {
-                name = $"{alias}:{name}";
+                name = $"{prefix}:{name}";
             }
             sb.Append(index == -1
                 ? $"/{name}"
