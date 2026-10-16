@@ -20,6 +20,8 @@ public class Positive
         [TestCase((short)1)]
         [TestCase((short)32767)]
         [TestCase((long)1)]
+        [TestCase(float.PositiveInfinity)]
+        [TestCase(double.PositiveInfinity)]
         public void positive_numbers(object value)
             => new PositiveAttribute().IsValid(value).Should().BeTrue();
     }
@@ -36,6 +38,10 @@ public class Positive
         [TestCase((sbyte)-1)]
         [TestCase((short)-1)]
         [TestCase((long)-1)]
+        [TestCase(float.NaN)]
+        [TestCase(double.NaN)]
+        [TestCase(float.NegativeInfinity)]
+        [TestCase(double.NegativeInfinity)]
         public void zero_or_negative_numbers(object value)
             => new PositiveAttribute().IsValid(value).Should().BeFalse();
 
@@ -86,6 +92,8 @@ public class NotPositive
         [TestCase((short)0)]
         [TestCase((long)-1)]
         [TestCase((long)0)]
+        [TestCase(float.NegativeInfinity)]
+        [TestCase(double.NegativeInfinity)]
         public void zero_or_negative_numbers(object value)
             => new NotPositiveAttribute().IsValid(value).Should().BeTrue();
     }
@@ -103,6 +111,10 @@ public class NotPositive
         [TestCase((short)1)]
         [TestCase((short)32767)]
         [TestCase((long)1)]
+        [TestCase(float.NaN)]
+        [TestCase(double.NaN)]
+        [TestCase(float.PositiveInfinity)]
+        [TestCase(double.PositiveInfinity)]
         public void positive_numbers(object value)
             => new NotPositiveAttribute().IsValid(value).Should().BeFalse();
 
@@ -152,6 +164,8 @@ public class Negative
         [TestCase((short)-1)]
         [TestCase((short)-32768)]
         [TestCase((long)-1)]
+        [TestCase(float.NegativeInfinity)]
+        [TestCase(double.NegativeInfinity)]
         public void negative_numbers(object value)
             => new NegativeAttribute().IsValid(value).Should().BeTrue();
     }
@@ -173,6 +187,10 @@ public class Negative
         [TestCase((short)1)]
         [TestCase((long)0)]
         [TestCase((long)1)]
+        [TestCase(float.NaN)]
+        [TestCase(double.NaN)]
+        [TestCase(float.PositiveInfinity)]
+        [TestCase(double.PositiveInfinity)]
         public void zero_or_positive_numbers(object value)
             => new NegativeAttribute().IsValid(value).Should().BeFalse();
 
@@ -226,6 +244,9 @@ public class NotNegative
         [TestCase((short)32767)]
         [TestCase((long)0)]
         [TestCase((long)1)]
+        [TestCase(float.PositiveInfinity)]
+        [TestCase(double.PositiveInfinity)]
+
         public void zero_or_positive_numbers(object value)
             => new NotNegativeAttribute().IsValid(value).Should().BeTrue();
     }
@@ -244,6 +265,10 @@ public class NotNegative
         [TestCase((short)-1)]
         [TestCase((short)-32768)]
         [TestCase((long)-1)]
+        [TestCase(float.NaN)]
+        [TestCase(double.NaN)]
+        [TestCase(float.NegativeInfinity)]
+        [TestCase(double.NegativeInfinity)]
         public void negative_numbers(object value)
             => new NotNegativeAttribute().IsValid(value).Should().BeFalse();
 
