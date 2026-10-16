@@ -58,20 +58,23 @@ public static class QowaivXObjectExtensions
         {
             HashSet<string>? declared = null;
 
-            foreach (var declaration in ancestor.Attributes().Where(IsDeclaration))
+            foreach (var attr in ancestor.Attributes().Where(DeclaresPrefix))
             {
                 declared ??= new HashSet<string>(StringComparer.Ordinal);
-                if (declared.Add(declaration.Value))
+                if (declared.Add(attr.Value))
                 {
-                    aliases[declaration.Value] = declaration.Name.LocalName;
+                    aliases[attr.Value] = attr.Name.LocalName;
                 }
             }
             path.AppendRelativePath(ancestor, aliases);
         }
         return path.ToString();
 
-        static bool IsDeclaration(XAttribute attr)
-            => attr is { IsNamespaceDeclaration: false, Name.Namespace.NamespaceName.Length: > 0 };
+        static bool DeclaresPrefix(XAttribute attr) => attr is
+        {
+            IsNamespaceDeclaration: false,
+            Name.Namespace.NamespaceName.Length: > 0,
+        };
     }
 
     extension(StringBuilder sb)
@@ -82,7 +85,7 @@ public static class QowaivXObjectExtensions
             var name = element.Name.LocalName;
 
             if (aliases.TryGetValue(element.Name.NamespaceName, out var alias)
-                && !string.IsNullOrEmpty(alias))
+                && alias is { Length: > 0 })
             {
                 name = $"{alias}:{name}";
             }
