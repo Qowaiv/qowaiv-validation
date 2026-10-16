@@ -19,7 +19,7 @@ public partial class Result
     [Pure]
     public bool IsValid => !Errors.Any();
 
-    /// <summary>Throws an <see cref="InvalidModelException"/> if the result is not valid.</summary>
+    /// <summary>Throws an <see cref="InvalidModel"/> if the result is not valid.</summary>
     public void ThrowIfInvalid()
     {
         if (!IsValid)
@@ -32,10 +32,10 @@ public partial class Result
     [Pure]
     public AsyncResult Async() => new(Task.FromResult(this));
 
-    /// <summary>Generated an <see cref="InvalidModelException" /> based on the errors.</summary>
+    /// <summary>Generated an <see cref="InvalidModel" /> based on the errors.</summary>
     [Pure]
-    protected internal virtual InvalidModelException InvalidOperation()
-        => InvalidModelException.For(Errors);
+    protected internal virtual InvalidModel InvalidOperation()
+        => InvalidModel.For(Errors);
 
     /// <summary>Gets all messages with <see cref="ValidationSeverity.Error"/>.</summary>
     [Pure]

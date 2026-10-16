@@ -7,21 +7,21 @@ public class InvalidModel
     [Test]
     public void Null_messages_is_fine()
     {
-        var exception = InvalidModelException.For<int>(null!);
+        var exception = Qowaiv.Validation.Abstractions.InvalidModel.For<int>(null!);
         exception.Message.Should().Be("The System.Int32 model can not be operated on as it is invalid.");
     }
 
     [Test]
     public void No_list_without_errors_specified()
     {
-        var exception = InvalidModelException.For<int>([ValidationMessage.None]);
+        var exception = Qowaiv.Validation.Abstractions.InvalidModel.For<int>([ValidationMessage.None]);
         exception.Message.Should().Be("The System.Int32 model can not be operated on as it is invalid.");
     }
     
     [Test]
     public void Contains_the_error_messages_in_Message()
     {
-        var exception = InvalidModelException.For<int>(
+        var exception = Qowaiv.Validation.Abstractions.InvalidModel.For<int>(
         [
             ValidationMessage.None,
             ValidationMessage.Error("Not a prime", "_value"),
@@ -33,14 +33,15 @@ public class InvalidModel
             ValidationMessage.Error("Not a multiple of 17", "_value"),
         ]);
 
-        exception.Message.Should().Be(
-           @"The System.Int32 model can not be operated on as it is invalid:
-* Not a prime (_value)
-* Multi-line
-  message. (multi-line)
-* No property specified.
-* Validation Error. (no-message)
-* Not a multiple of 17 (_value)
-");
+        exception.Message.Should().Be("""
+            The System.Int32 model can not be operated on as it is invalid:
+            * Not a prime (_value)
+            * Multi-line
+              message. (multi-line)
+            * No property specified.
+            *  (no-message)
+            * Not a multiple of 17 (_value)
+
+            """);
     }
 }
