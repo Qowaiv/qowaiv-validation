@@ -3,11 +3,13 @@ on:
   push:
     branches:
       - main
+      - v11
     tags:
       - 'v*'
   pull_request:
     branches:
       - main
+      - v11
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   NUGET_FEED: https://api.nuget.org/v3/index.json

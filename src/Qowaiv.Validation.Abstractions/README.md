@@ -108,7 +108,7 @@ Result<DataType> result = await async;
 ```
 
 The invoked actions may return `Result<TOut>`, `AsyncResult<TOut>`, or
-`Task<Result>` (see [`AsyncResult<TModel>`](#asyncresulttmodel)).
+`AsyncResult` (see [`AsyncResult<TModel>`](#asyncresulttmodel)).
 
 ### Pipe operator
 
@@ -149,7 +149,7 @@ the `Result.Async<T>()` factory, or implicitly from a `Task<Result<TModel>>`:
 ``` C#
 AsyncResult<MyModel> fromResult = Result.For(model).Async();
 AsyncResult<MyModel> fromFactory = Result.Async(model);
-AsyncResult<MyModel> fromFactoryWithMessages = Result.Async(model, new[] { ValidationMessage.Warn("Check") });
+AsyncResult<MyModel> fromFactoryWithMessages = Result.Async(model, ValidationMessage.Warn("Check"));
 AsyncResult<MyModel> fromTask = Task.FromResult(Result.For(model));
 ```
 
