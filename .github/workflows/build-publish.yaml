@@ -31,6 +31,11 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
+      - name: Setup .NET 11.0
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '11.0.x'
+
       - name: Build
         run: dotnet build qowaiv-validation.slnx -c Release
 

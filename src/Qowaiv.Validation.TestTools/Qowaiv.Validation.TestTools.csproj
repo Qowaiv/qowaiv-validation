@@ -3,14 +3,16 @@
   <Import Project="../../props/package.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <TargetFrameworks>net10.0;net11.0</TargetFrameworks>
     <PackageValidationBaselineVersion>3.0.0</PackageValidationBaselineVersion>
     <Version>4.1.0</Version>
     <PackageId>Qowaiv.Validation.TestTools</PackageId>
     <ToBeReleased>
       <![CDATA[
-v4.*
-- ?
+v11.0.0
+- Add .NET 11.0 target.
+- Drop .NET 8.0 targets (BREAKING)
+- AsyncResult<TModel>. (BREAKING)
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

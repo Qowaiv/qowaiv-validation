@@ -192,7 +192,7 @@
         "type": "Project"
       }
     },
-    "net8.0": {
+    "net11.0": {
       "AsyncFixer": {
         "type": "Direct",
         "requested": "[2.1.0, )",

@@ -3,10 +3,18 @@
   <Import Project="../../props/package.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net8.0;net10.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
     <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
     <Version>2.2.0</Version>
     <PackageId>Qowaiv.Validation.Guarding</PackageId>
+    <ToBeReleased>
+      <![CDATA[
+v11.0.0
+- Add .NET 11.0 target.
+- Drop .NET 8.0 targets (BREAKING)
+- AsyncResult<TModel>. (BREAKING)
+]]>
+    </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[
 v2.2.0
