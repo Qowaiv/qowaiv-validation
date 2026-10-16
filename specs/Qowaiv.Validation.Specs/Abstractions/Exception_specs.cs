@@ -2,26 +2,26 @@ using Qowaiv.Validation.Abstractions;
 
 namespace Abstractions.Exception_specs;
 
-public class InvalidModel
+public class InvalidModels
 {
     [Test]
     public void Null_messages_is_fine()
     {
-        var exception = Qowaiv.Validation.Abstractions.InvalidModel.For<int>(null!);
+        var exception = InvalidModel.For<int>(null!);
         exception.Message.Should().Be("The System.Int32 model can not be operated on as it is invalid.");
     }
 
     [Test]
     public void No_list_without_errors_specified()
     {
-        var exception = Qowaiv.Validation.Abstractions.InvalidModel.For<int>([ValidationMessage.None]);
+        var exception = InvalidModel.For<int>([ValidationMessage.None]);
         exception.Message.Should().Be("The System.Int32 model can not be operated on as it is invalid.");
     }
     
     [Test]
     public void Contains_the_error_messages_in_Message()
     {
-        var exception = Qowaiv.Validation.Abstractions.InvalidModel.For<int>(
+        var exception = InvalidModel.For<int>(
         [
             ValidationMessage.None,
             ValidationMessage.Error("Not a prime", "_value"),
