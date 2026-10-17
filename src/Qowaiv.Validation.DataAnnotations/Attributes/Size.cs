@@ -14,7 +14,7 @@ public static partial class Size
         Stream stream => stream.GetStreamSize(),
         ICollection<byte> collection => collection.Count,
         IReadOnlyCollection<byte> collection => collection.Count,
-        _ when value.GetType().FullName == "System.BinaryData" => value.TryLength()!.Value,
+        _ when value.GetType().FullName == "System.BinaryData" && value.TryLength() is { } length => length,
         _ => throw UnsupportedType.ForAttribute<TAttribute>(value.GetType()),
     };
 }
