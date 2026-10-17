@@ -16,6 +16,7 @@ internal sealed class MemberAnnotations : Annotations
         Display = display;
         Attributes = attributes;
         Accessor = getValue;
+        RequiresContext = attributes.Any(a => a.RequiresValidationContext);
     }
 
     /// <summary>Gets the name of the member.</summary>
@@ -26,6 +27,9 @@ internal sealed class MemberAnnotations : Annotations
 
     /// <summary>Gets the <see cref="ValidationAttribute"/>s defined on the member.</summary>
     public IReadOnlyCollection<ValidationAttribute> Attributes { get; }
+
+    /// <summary>Gets a value indicating whether any attribute needs a <see cref="ValidationContext"/>.</summary>
+    public bool RequiresContext { get; }
 
     /// <summary>Gets the value of the member.</summary>
     [Pure]

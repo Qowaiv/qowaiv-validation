@@ -26,6 +26,15 @@ internal sealed class AnnotationStore
         .. typeof(Date).Assembly.GetExportedTypes().Where(tp => tp.IsValueType).Select(None)
     ]);
 
+    /// <summary>Gets the annotations for the type, allocating the visited set only on a cache miss.</summary>
+    [Pure]
+    public TypeAnnotations? Get(Type type) => type switch
+    {
+        var t when LackAnnotations(t) => null,
+        var t when Annotations.TryGetValue(t, out var annotations) => annotations,
+        _ => Annotate(type, [type]),
+    };
+
     [Pure]
     public TypeAnnotations? Get(Type type, HashSet<Type> visited) => type switch
     {
