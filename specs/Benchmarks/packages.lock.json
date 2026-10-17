@@ -121,6 +121,11 @@
         "resolved": "1.21.0",
         "contentHash": "dv5+81Q1TBQvVMSOOOmRcjJmvWcX3BZPZsIq31+RLc5cNft0IHAyNlkdb7ZarOWG913PyBoFDsDXoCIlKmLclg=="
       },
+      "MathNet.Numerics": {
+        "type": "Transitive",
+        "resolved": "5.0.0",
+        "contentHash": "pg1W2VwaEQMAiTpGK840hZgzavnqjlCMTVSbtVCXVyT+7AX4mc1o89SPv4TBlAjhgCOo9c1Y+jZ5m3ti2YgGgA=="
+      },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Transitive",
         "resolved": "10.0.11",
@@ -288,6 +293,35 @@
         "type": "Transitive",
         "resolved": "4.5.0",
         "contentHash": "wLBKzFnDCxP12VL9ANydSYhk59fC4cvOr9ypYQLPnAj48NQIhqnjdD2yhP8yEKyBJEjERWS9DisKL7rX5eU25Q=="
+      },
+      "hdn.abnamro.v26_0_2_1": {
+        "type": "Project",
+        "dependencies": {
+          "Hdn.DomainModel": "[8.4.2, )"
+        }
+      },
+      "hdn.domainmodel": {
+        "type": "Project",
+        "dependencies": {
+          "Qowaiv": "[8.2.0, )",
+          "Qowaiv.Validation.DataAnnotations": "[6.2.0, )",
+          "System.Memory.Data": "[10.0.13, )"
+        }
+      },
+      "hdn.testdata": {
+        "type": "Project",
+        "dependencies": {
+          "Hdn.AbnAmro.v26_0_2_1": "[1.0.0, )",
+          "Hdn.DomainModel": "[8.4.2, )",
+          "Hdn.v26_0_0_1": "[3.0.0, )",
+          "MathNet.Numerics": "[5.0.0, )"
+        }
+      },
+      "hdn.v26_0_0_1": {
+        "type": "Project",
+        "dependencies": {
+          "Hdn.DomainModel": "[8.4.2, )"
+        }
       },
       "qowaiv.validation.abstractions": {
         "type": "Project"
@@ -480,6 +514,11 @@
         "resolved": "1.21.0",
         "contentHash": "dv5+81Q1TBQvVMSOOOmRcjJmvWcX3BZPZsIq31+RLc5cNft0IHAyNlkdb7ZarOWG913PyBoFDsDXoCIlKmLclg=="
       },
+      "MathNet.Numerics": {
+        "type": "Transitive",
+        "resolved": "5.0.0",
+        "contentHash": "pg1W2VwaEQMAiTpGK840hZgzavnqjlCMTVSbtVCXVyT+7AX4mc1o89SPv4TBlAjhgCOo9c1Y+jZ5m3ti2YgGgA=="
+      },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Transitive",
         "resolved": "10.0.11",
@@ -571,6 +610,35 @@
         "type": "Transitive",
         "resolved": "4.5.0",
         "contentHash": "wLBKzFnDCxP12VL9ANydSYhk59fC4cvOr9ypYQLPnAj48NQIhqnjdD2yhP8yEKyBJEjERWS9DisKL7rX5eU25Q=="
+      },
+      "hdn.abnamro.v26_0_2_1": {
+        "type": "Project",
+        "dependencies": {
+          "Hdn.DomainModel": "[8.4.2, )"
+        }
+      },
+      "hdn.domainmodel": {
+        "type": "Project",
+        "dependencies": {
+          "Qowaiv": "[8.2.0, )",
+          "Qowaiv.Validation.DataAnnotations": "[6.2.0, )",
+          "System.Memory.Data": "[10.0.13, )"
+        }
+      },
+      "hdn.testdata": {
+        "type": "Project",
+        "dependencies": {
+          "Hdn.AbnAmro.v26_0_2_1": "[1.0.0, )",
+          "Hdn.DomainModel": "[8.4.2, )",
+          "Hdn.v26_0_0_1": "[3.0.0, )",
+          "MathNet.Numerics": "[5.0.0, )"
+        }
+      },
+      "hdn.v26_0_0_1": {
+        "type": "Project",
+        "dependencies": {
+          "Hdn.DomainModel": "[8.4.2, )"
+        }
       },
       "qowaiv.validation.abstractions": {
         "type": "Project"

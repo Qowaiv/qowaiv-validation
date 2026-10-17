@@ -2,19 +2,13 @@ namespace Qowaiv.Validation.DataAnnotations;
 
 [DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView<string>))]
 [DebuggerDisplay("Count = {Count}")]
-internal readonly struct MemberNames : IReadOnlyCollection<string>
+internal readonly struct MemberNames(string memberName) : IReadOnlyCollection<string>
 {
-    public MemberNames(string memberName)
-    {
-        Path = MemberPath.Root.Child(memberName);
-        Members = [];
-    }
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private readonly MemberPath Path = MemberPath.Root.Child(memberName);
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly MemberPath Path;
-
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly List<string> Members;
+    private readonly List<string> Members = [];
 
     /// <inheritdoc />
     public int Count => Members.Count;

@@ -32,12 +32,32 @@ public sealed class MandatoryAttribute : RequiredAttribute
     /// Because the values of the member are boxed, this is (unfortunately)
     /// the only way to determine if the provided value is a nullable type,
     /// or not.
+    /// The resolved type is cached, as a single attribute instance is bound
+    /// to a single member.
     /// </remarks>
     [Pure]
-    private static Type? GetMemberType(ValidationContext context)
-        => context.MemberName is { Length: > 0 } member
-        ? context.ObjectType.GetProperty(member)?.PropertyType ?? context.ObjectType.GetField(member)?.FieldType
-        : null;
+    private Type? GetMemberType(ValidationContext context)
+    {
+        var member = context.MemberName;
+        if (member == CachedMember && ReferenceEquals(context.ObjectType, CachedObjectType)) return CachedMemberType;
+
+        CachedMember = member;
+        CachedObjectType = context.ObjectType;
+        CachedMemberType = member is { Length: > 0 }
+            ? context.ObjectType.GetProperty(member)?.PropertyType ?? context.ObjectType.GetField(member)?.FieldType
+            : null;
+
+        return CachedMemberType;
+    }
+
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private string? CachedMember;
+
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private Type? CachedObjectType;
+
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private Type? CachedMemberType;
 
     /// <summary>Returns true if the value is not null and value types are
     /// not equal to their default value, otherwise false.
@@ -49,22 +69,28 @@ public sealed class MandatoryAttribute : RequiredAttribute
     public override bool IsValid(object? value) => IsValid(value, null);
 
     [Pure]
-    private bool IsValid(object? value, Type? memberType) => this.Validates(() =>
+    private bool IsValid(object? value, Type? memberType)
     {
-        if (value is { })
-        {
-            var type = memberType ?? value.GetType();
-            var underlyingType = QowaivType.GetNotNullableType(type);
+        if (value is null) return this.PostValidate(base.IsValid(value));
 
-            if (!AllowUnknownValue && value.Equals(Unknown.Value(underlyingType)))
-            {
-                return false;
-            }
-            else if (type.IsValueType)
-            {
-                return !value.Equals(Activator.CreateInstance(type));
-            }
-        }
-        return base.IsValid(value);
-    });
+        var type = memberType ?? value.GetType();
+
+        var result = !AllowUnknownValue && value.Equals(UnknownValue(QowaivType.GetNotNullableType(type)))
+            ? false
+            : type.IsValueType
+            ? !value.Equals(Default(type))
+            : base.IsValid(value);
+
+        return this.PostValidate(result);
+    }
+
+    [Pure]
+    private static object? Default(Type type) => Defaults.GetOrAdd(type, static t => Activator.CreateInstance(t));
+
+    [Pure]
+    private static object? UnknownValue(Type type) => Unknowns.GetOrAdd(type, static t => Unknown.Value(t));
+
+    private static readonly ConcurrentDictionary<Type, object?> Defaults = new();
+
+    private static readonly ConcurrentDictionary<Type, object?> Unknowns = new();
 }

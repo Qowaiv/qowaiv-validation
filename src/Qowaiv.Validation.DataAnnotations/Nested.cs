@@ -1,7 +1,7 @@
 namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Represents a wrapper for a (sealed) <see cref="ValidationContext"/>.</summary>
-internal readonly struct Nested(object instance, TypeAnnotations annotations, MemberPath path)
+internal readonly ref struct Nested(object instance, TypeAnnotations annotations, MemberPath path)
 {
     public readonly object Instance = instance;
     public readonly TypeAnnotations Annotations = annotations;

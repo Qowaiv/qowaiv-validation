@@ -12,7 +12,7 @@ internal sealed class ValidateContext(IServiceProvider? serviceProvider, IDictio
     public readonly HashSet<object> Done = new(ReferenceComparer.Instance);
 
     /// <summary>The service provider for the <see cref="ValidationContext"/>.</summary>
-    private readonly IServiceProvider ServiceProvider = serviceProvider ?? EmptyProvider.Instance;
+    private readonly IServiceProvider? ServiceProvider = serviceProvider;
 
     /// <summary>The service items for the <see cref="ValidationContext"/>.</summary>
     private readonly IDictionary<object, object?> Items = items ?? new Dictionary<object, object?>(capacity: 0);
@@ -61,11 +61,19 @@ internal sealed class ValidateContext(IServiceProvider? serviceProvider, IDictio
         return true;
     }
 
-    [Pure]
+    /// <summary>Gets a <see cref="ValidationContext"/> to validate the nested instance with.</summary>
+    /// <remarks>
+    /// A context is only created when <see cref="TypeAnnotations.NeedsContext"/> is true.
+    /// Otherwise a single shared (per validation) context is returned, as the
+    /// <see cref="ValidationContext.MemberName"/> and <see cref="ValidationContext.DisplayName"/>
+    /// are the only mutable members used by attributes that do not require the context.
+    /// </remarks>
+    [Impure]
     public ValidationContext Validation(Nested nested)
-        => nested.Annotations.CheckWithContext
+        => nested.Annotations.NeedsContext
         ? new(nested.Instance, ServiceProvider, Items)
-        : None;
+        : None ??= new(nested.Instance, ServiceProvider, Items);
 
-    private static readonly ValidationContext None = new(new object(), EmptyProvider.Instance, new Dictionary<object, object?>(0));
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private ValidationContext? None;
 }

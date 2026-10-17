@@ -36,12 +36,12 @@ public class AnnotatedModelValidator<TModel> : IValidator<TModel>
     /// </param>
     public AnnotatedModelValidator(IServiceProvider? serviceProvider, IDictionary<object, object?>? items)
     {
-        ServiceProvider = serviceProvider ?? EmptyProvider.Instance;
+        ServiceProvider = serviceProvider;
         Items = items ?? new Dictionary<object, object?>(0);
     }
 
     /// <summary>Gets the <see cref="IServiceProvider"/>.</summary>
-    protected IServiceProvider ServiceProvider { get; }
+    protected IServiceProvider? ServiceProvider { get; }
 
     /// <summary>Gets the <see cref="IServiceProvider"/>.</summary>
     protected IDictionary<object, object?> Items { get; }

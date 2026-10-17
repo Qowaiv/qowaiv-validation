@@ -9,19 +9,19 @@ using System.Collections.Generic;
 
 namespace Benchmarks;
 
-public static class Data_Annotations
+[MemoryDiagnoser]
+[GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByParams)]
+[HideColumns(Column.StdDev, Column.Error, Column.Median, Column.RatioSD)]
+public class Data_Annotations
 {
+    internal static readonly IDictionary<string, string[]> Empty = new Dictionary<string, string[]>();
+
     [SimpleJob(RuntimeMoniker.Net10_0)]
     [SimpleJob(RuntimeMoniker.Net11_0)]
-    [MemoryDiagnoser]
-    [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByParams)]
-    [HideColumns(Column.StdDev, Column.Error, Column.Median, Column.RatioSD)]
-    public class Validate
+    public class Validate_small
     {
         internal readonly BenchmarkModelValidator FluentValidator = new();
         internal BenchmarkModel Model = new(); 
-
-        internal readonly IDictionary<string, string[]> Empty = new Dictionary<string, string[]>();
 
         [IterationSetup]
         public void Setup() => Model = BenchmarkModel.New(Count);

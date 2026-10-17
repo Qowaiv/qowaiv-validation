@@ -1,4 +1,6 @@
+using System.Linq.Expressions;
 using System.Reflection;
+using static System.Linq.Expressions.Expression;
 
 namespace Qowaiv.Validation.DataAnnotations.Reflection;
 
@@ -17,9 +19,9 @@ internal abstract class Member
     [Pure]
     public abstract object[] GetCustomAttributes();
 
-    /// <summary>Gets the value of the member.</summary>
+    /// <summary>Gets the compiled accessor of the member.</summary>
     [Pure]
-    public abstract object? GetValue(object obj);
+    public abstract Func<object, object?> Get { get; }
 
     /// <summary>Indicates that the members is indexed.</summary>
     [Pure]
@@ -66,10 +68,18 @@ internal abstract class Member
         public override object[] GetCustomAttributes() => Info.GetCustomAttributes(inherit: true);
 
         [Pure]
-        public override object? GetValue(object obj) => Info.GetValue(obj);
+        public override Func<object, object?> Get => field ??= Compile();
 
         [Pure]
         public override bool IsNotIndexed => true;
+
+        [Pure]
+        private Func<object, object?> Compile()
+        {
+            var obj = Parameter(typeof(object), "obj");
+            var body = Convert(Expression.Field(Convert(obj, Info.DeclaringType!), Info), typeof(object));
+            return Lambda<Func<object, object?>>(body, obj).Compile();
+        }
     }
 
     private sealed class Property(PropertyInfo prop) : Member
@@ -86,9 +96,22 @@ internal abstract class Member
         public override object[] GetCustomAttributes() => Info.GetCustomAttributes(inherit: true);
 
         [Pure]
-        public override object? GetValue(object obj) => Info.GetValue(obj);
+        public override Func<object, object?> Get => Accessor ??= Compile();
 
         [Pure]
         public override bool IsNotIndexed => Info.GetIndexParameters() is not { Length: > 0 };
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private Func<object, object?>? Accessor;
+
+        [Pure]
+        private Func<object, object?> Compile()
+        {
+            var obj = Parameter(typeof(object), "obj");
+            var body = Convert(
+                Expression.Property(Convert(obj, Info.DeclaringType!), Info),
+                typeof(object));
+            return Lambda<Func<object, object?>>(body, obj).Compile();
+        }
     }
 }

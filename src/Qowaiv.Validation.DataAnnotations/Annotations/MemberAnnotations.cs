@@ -7,16 +7,39 @@ internal sealed class MemberAnnotations : Annotations
     /// <summary>Initializes a new instance of the <see cref="MemberAnnotations"/> class.</summary>
     internal MemberAnnotations(
         AnnotationChecks checks,
+        TypeAnnotations? type,
+        bool exactRuntimeType,
         string name,
         DisplayAttribute? display,
-        IReadOnlyCollection<ValidationAttribute> attributes,
+        ValidationAttribute[] attributes,
         Func<object, object?> getValue) : base(checks)
     {
+        Type = type;
+        ExactRuntimeType = exactRuntimeType;
         Name = name;
         Display = display;
         Attributes = attributes;
-        Accessor = getValue;
+        GetValue = getValue;
+
+        foreach (var attr in attributes)
+        {
+            if (attr.RequiresValidationContext)
+            {
+                RequiresContext = true;
+                break;
+            }
+        }
     }
+
+    /// <summary>Gets the annotations of the declared member type (if any).</summary>
+    public readonly TypeAnnotations? Type;
+
+    /// <summary>
+    /// Gets a value indicating whether the runtime type of the member value
+    /// is guaranteed to be equal to the declared member type. This is the case
+    /// for non-nullable value types and sealed (non-array) reference types.
+    /// </summary>
+    public readonly bool ExactRuntimeType;
 
     /// <summary>Gets the name of the member.</summary>
     public readonly string Name;
@@ -25,14 +48,13 @@ internal sealed class MemberAnnotations : Annotations
     public readonly DisplayAttribute? Display;
 
     /// <summary>Gets the <see cref="ValidationAttribute"/>s defined on the member.</summary>
-    public IReadOnlyCollection<ValidationAttribute> Attributes { get; }
+    public ValidationAttribute[] Attributes { get; }
 
-    /// <summary>Gets the value of the member.</summary>
-    [Pure]
-    public object? GetValue(object model) => Accessor(model);
+    /// <summary>Gets a value indicating whether any attribute needs a <see cref="ValidationContext"/>.</summary>
+    public bool RequiresContext { get; }
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly Func<object, object?> Accessor;
+    public readonly Func<object, object?> GetValue;
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => $"{Name}, Checks = {Checks}, Attributes = {string.Join(", ", Attributes.Select(Shorten))}";
