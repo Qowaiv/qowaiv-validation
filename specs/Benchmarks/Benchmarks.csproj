@@ -17,7 +17,6 @@
     <ProjectReference Include="../../src/Qowaiv.Validation.DataAnnotations/Qowaiv.Validation.DataAnnotations.csproj" />
     <ProjectReference Include="../../src/Qowaiv.Validation.Fluent/Qowaiv.Validation.Fluent.csproj" />
     <ProjectReference Include="../Qowaiv.Validation.TestData/Qowaiv.Validation.TestData.csproj" />
-    <ProjectReference Include="..\..\..\..\_TJIP\hdn-domain-model\specs\Hdn.TestData\Hdn.TestData.csproj" />
   </ItemGroup>
 
 </Project>
