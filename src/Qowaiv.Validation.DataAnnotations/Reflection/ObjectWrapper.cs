@@ -5,36 +5,39 @@ namespace Qowaiv.Validation.DataAnnotations.Reflection;
 
 internal static class ObjectWrapper
 {
-    /// <summary>Tries to resolve the value of the length property.</summary>
-    [Pure]
-    public static long? TryLength(this object obj) => obj switch
+    extension(object obj)
     {
-        string str => str.Length,
-        Array array => array.Length,
-        _ => Try("Length", obj),
-    };
+        /// <summary>Tries to resolve the value of the length property.</summary>
+        [Pure]
+        public long? TryLength() => obj.Try("Length");
 
-    /// <summary>Tries to resolve the value of the count property.</summary>
-    [Pure]
-    public static long? TryCount(this object obj) => obj switch
-    {
-        ICollection collection => collection.Count,
-        _ when Try("Count", obj) is { } count => count,
-        IEnumerable collection => collection.Count(),
-        _ => null,
-    };
+        /// <summary>Tries to resolve the value of the count property.</summary>
+        [Pure]
+        public long? TryCount() => obj.Try("Count");
 
-    [Pure]
-    private static long? Try(string name, object value)
-        => value.GetType().GetRuntimeProperty(name) is { CanRead: true } prop
-            ? GetValue(value, prop)
-            : null;
+        [Pure]
+        private long? Try(string name) => obj switch
+        {
+            string str => str.Length,
+            Array array => array.Length,
+            ICollection collection => collection.Count,
+            _ when obj.GetValue(name) is { } value => value,
+            _ => null,
+        };
 
-    [Pure]
-    private static long? GetValue(object value, PropertyInfo property) => property.PropertyType switch
-    {
-        var type when type == typeof(int) => (int?)property.GetValue(value),
-        var type when type == typeof(long) => (long?)property.GetValue(value),
-        _ => null,
-    };
+        [Pure]
+        private long? GetValue(string name)
+        {
+            if (obj.GetType().GetRuntimeProperty(name) is { CanRead: true } prop)
+            {
+                return prop.PropertyType switch
+                {
+                    var type when type == typeof(int) => (int?)prop.GetValue(obj),
+                    var type when type == typeof(long) => (long?)prop.GetValue(obj),
+                    _ => null,
+                };
+            }
+            else return null;
+        }
+    }
 }
