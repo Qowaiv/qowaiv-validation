@@ -31,10 +31,8 @@ public static class QowaivValidationAttributeExtensions
         /// behavior.
         /// </remarks>
         [Pure]
-        internal bool Validates(Func<bool> isValid)
+        internal bool PostValidate(bool result)
         {
-            var result = isValid();
-
             if (!result && attribute.ErrorMessage is { Length: > 0 })
             {
                 attribute.ErrorMessageResourceName = null;
