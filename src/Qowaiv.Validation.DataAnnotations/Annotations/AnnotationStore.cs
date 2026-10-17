@@ -111,12 +111,18 @@ internal sealed class AnnotationStore
         }
         attributes.Sort(Sorter);
 
-        var typeAnnotations = Get(info.MemberType, visited)?.Checks ?? default;
+        var typeAnnotations = Get(info.MemberType, visited);
+        var checks = typeAnnotations?.Checks ?? default;
 
-        return typeAnnotations != AnnotationChecks.None || attributes is { Count: > 0 }
-            ? new(typeAnnotations, info.Name, display, attributes.ToArray(), info.GetValue)
+        return checks != AnnotationChecks.None || attributes is { Count: > 0 }
+            ? new(checks, typeAnnotations, ExactRuntimeType(info.MemberType), info.Name, display, attributes.ToArray(), info.Getter)
             : null;
     }
+
+    [Pure]
+    private static bool ExactRuntimeType(Type type)
+        => !type.IsGenericParameter
+        && (type.IsNonNullableValueType() || (!type.IsArray && type.IsSealed));
 
     [Pure]
     private static bool LackAnnotations(Type type)

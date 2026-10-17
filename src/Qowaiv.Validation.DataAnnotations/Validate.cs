@@ -18,20 +18,7 @@ internal static class Validate
 
         if (annotations.CheckEnumerable && instance is IEnumerable enumerable)
         {
-            var enumTyped = TypeAnnotations.Get(enumerable.GetType().GetEnumerableType()!);
-
-            // We have to reset it if the type is not sealed.
-            if (enumTyped?.CheckInheritance is true) enumTyped = null;
-
-            var index = -1;
-
-            foreach (var item in enumerable)
-            {
-                index++;
-                if (item is null || (enumTyped ?? TypeAnnotations.Get(item.GetType())) is not { } typed) continue;
-
-                Model(new Nested(item, typed, path.Child(index)), ctx);
-            }
+            Enumerable(enumerable, path, ctx);
         }
 
         if (annotations.CheckValidatable && instance is IValidatableObject validatable)
@@ -41,6 +28,50 @@ internal static class Validate
             context.DisplayName = context.ObjectType.Name;
 
             ctx.AddMessages(validatable.Validate(context), path);
+        }
+    }
+
+    /// <summary>Validates the items of the enumerable.</summary>
+    private static void Enumerable(IEnumerable enumerable, MemberPath path, ValidateContext ctx)
+    {
+        var enumTyped = TypeAnnotations.Get(enumerable.GetType().GetEnumerableType()!);
+
+        // We have to reset it if the type is not sealed.
+        if (enumTyped?.CheckInheritance is true) enumTyped = null;
+
+        var index = -1;
+
+        // As enumerable types are often homogeneous, the annotations of the
+        // previously validated item are cached to avoid a lookup per item.
+        Type? lastType = null;
+        TypeAnnotations? lastTyped = null;
+
+        foreach (var item in enumerable)
+        {
+            index++;
+            if (item is null) continue;
+
+            TypeAnnotations? typed = enumTyped;
+
+            if (typed is null)
+            {
+                var type = item.GetType();
+
+                if (type == lastType)
+                {
+                    typed = lastTyped;
+                }
+                else
+                {
+                    lastType = type;
+                    typed = lastTyped = TypeAnnotations.Get(type);
+                }
+            }
+
+            if (typed is not null)
+            {
+                Model(new Nested(item, typed, path.Child(index)), ctx);
+            }
         }
     }
 
@@ -70,9 +101,23 @@ internal static class Validate
         }
 #pragma warning restore S3267
 
-        if (value is { } && TypeAnnotations.Get(value.GetType()) is { CheckRecursive: true } typed)
+        if (value is { } && RecursionOf(member, value) is { } typed)
         {
             Model(new Nested(value, typed, nested.Path.Child(member.Name)), ctx);
         }
+    }
+
+    /// <summary>Gets the annotations to recurse into, or null if no recursion is applicable.</summary>
+    [Pure]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static TypeAnnotations? RecursionOf(MemberAnnotations member, object value)
+    {
+        // For a member whose runtime type is guaranteed to equal the declared
+        // type, the annotations are known upfront, avoiding a lookup.
+        var annotations = member.ExactRuntimeType
+            ? member.Type
+            : TypeAnnotations.Get(value.GetType());
+
+        return annotations is { CheckRecursive: true } type ? type : null;
     }
 }
