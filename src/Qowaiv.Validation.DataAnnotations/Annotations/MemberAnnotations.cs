@@ -19,7 +19,7 @@ internal sealed class MemberAnnotations : Annotations
         Name = name;
         Display = display;
         Attributes = attributes;
-        Accessor = getValue;
+        GetValue = getValue;
 
         foreach (var attr in attributes)
         {
@@ -53,12 +53,8 @@ internal sealed class MemberAnnotations : Annotations
     /// <summary>Gets a value indicating whether any attribute needs a <see cref="ValidationContext"/>.</summary>
     public bool RequiresContext { get; }
 
-    /// <summary>Gets the value of the member.</summary>
-    [Pure]
-    public object? GetValue(object model) => Accessor(model);
-
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly Func<object, object?> Accessor;
+    public readonly Func<object, object?> GetValue;
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => $"{Name}, Checks = {Checks}, Attributes = {string.Join(", ", Attributes.Select(Shorten))}";

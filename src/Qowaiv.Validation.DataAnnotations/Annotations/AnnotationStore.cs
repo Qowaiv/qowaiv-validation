@@ -115,7 +115,7 @@ internal sealed class AnnotationStore
         var checks = typeAnnotations?.Checks ?? default;
 
         return checks != AnnotationChecks.None || attributes is { Count: > 0 }
-            ? new(checks, typeAnnotations, ExactRuntimeType(info.MemberType), info.Name, display, attributes.ToArray(), info.Getter)
+            ? new(checks, typeAnnotations, ExactRuntimeType(info.MemberType), info.Name, display, attributes.ToArray(), info.Get)
             : null;
     }
 

@@ -21,7 +21,7 @@ internal abstract class Member
 
     /// <summary>Gets the compiled accessor of the member.</summary>
     [Pure]
-    public abstract Func<object, object?> Getter { get; }
+    public abstract Func<object, object?> Get { get; }
 
     /// <summary>Indicates that the members is indexed.</summary>
     [Pure]
@@ -68,7 +68,7 @@ internal abstract class Member
         public override object[] GetCustomAttributes() => Info.GetCustomAttributes(inherit: true);
 
         [Pure]
-        public override Func<object, object?> Getter => field ??= Compile();
+        public override Func<object, object?> Get => field ??= Compile();
 
         [Pure]
         public override bool IsNotIndexed => true;
@@ -96,7 +96,7 @@ internal abstract class Member
         public override object[] GetCustomAttributes() => Info.GetCustomAttributes(inherit: true);
 
         [Pure]
-        public override Func<object, object?> Getter => Accessor ??= Compile();
+        public override Func<object, object?> Get => Accessor ??= Compile();
 
         [Pure]
         public override bool IsNotIndexed => Info.GetIndexParameters() is not { Length: > 0 };
