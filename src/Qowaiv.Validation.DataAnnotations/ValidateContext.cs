@@ -12,7 +12,7 @@ internal sealed class ValidateContext(IServiceProvider? serviceProvider, IDictio
     public readonly HashSet<object> Done = new(ReferenceComparer.Instance);
 
     /// <summary>The service provider for the <see cref="ValidationContext"/>.</summary>
-    private readonly IServiceProvider ServiceProvider = serviceProvider ?? EmptyProvider.Instance;
+    private readonly IServiceProvider? ServiceProvider = serviceProvider;
 
     /// <summary>The service items for the <see cref="ValidationContext"/>.</summary>
     private readonly IDictionary<object, object?> Items = items ?? new Dictionary<object, object?>(capacity: 0);
