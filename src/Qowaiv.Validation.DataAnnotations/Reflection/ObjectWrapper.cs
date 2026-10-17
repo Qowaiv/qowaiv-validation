@@ -1,3 +1,4 @@
+using System.Collections.Enumerable;
 using System.Linq.Expressions;
 using System.Reflection;
 using static System.Linq.Expressions.Expression;
@@ -23,6 +24,7 @@ internal static class ObjectWrapper
             Array array => array.Length,
             ICollection collection => collection.Count,
             _ when Gets.GetOrAdd(new(obj.GetType(), name), Compile) is { } size => size(obj),
+            IEnumerable enumerable => enumerable.Count(),
             _ => null,
         };
     }

@@ -16,6 +16,9 @@ public class At_least
 
         [Test]
         public void type_with_length_property() => new Length.AtLeastAttribute(4).IsValid(EmailAddress.Parse("test@qowaiv.org")).Should().BeTrue();
+
+        [Test]
+        public void enumerable() => new Length.AtLeastAttribute(4).IsValid(Enumerable.Repeat(42, 4)).Should().BeTrue();
     }
 
     public class Does_not_support
@@ -64,6 +67,9 @@ public class At_most
 
         [Test]
         public void type_with_length_property() => new Length.AtMostAttribute(40).IsValid(EmailAddress.Parse("test@qowaiv.org")).Should().BeTrue();
+
+        [Test]
+        public void enumerable() => new Length.AtMostAttribute(4).IsValid(Enumerable.Repeat(42, 4)).Should().BeTrue();
     }
 
     public class Does_not_support
@@ -109,6 +115,9 @@ public class In_range
 
         [Test]
         public void type_with_length_property() => new Length.InRangeAttribute(3, 40).IsValid(EmailAddress.Parse("test@qowaiv.org")).Should().BeTrue();
+
+        [Test]
+        public void enumerable() => new Length.InRangeAttribute(3, 5).IsValid(Enumerable.Repeat(42, 4)).Should().BeTrue();
     }
 
     public class Does_not_support
