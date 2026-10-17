@@ -22,8 +22,8 @@ public class At_least
     {
         [Test]
         public void type_without_length_property()
-            => new Length.AtLeastAttribute(4).Invoking(a => a.IsValid(new List<int>()))
-            .Should().Throw<UnsupportedType>().WithMessage("Length.AtLeastAttribute does not support properties of the type List<int>.");
+            => new Length.AtLeastAttribute(4).Invoking(a => a.IsValid(new object()))
+            .Should().Throw<UnsupportedType>().WithMessage("Length.AtLeastAttribute does not support the type object.");
     }
 
     public class Ignores
@@ -70,8 +70,8 @@ public class At_most
     {
         [Test]
         public void type_without_length_property()
-            => new Length.AtMostAttribute(4).Invoking(a => a.IsValid(new List<int>()))
-            .Should().Throw<UnsupportedType>().WithMessage("Length.AtMostAttribute does not support properties of the type List<int>.");
+            => new Length.AtMostAttribute(4).Invoking(a => a.IsValid(new object()))
+            .Should().Throw<UnsupportedType>().WithMessage("Length.AtMostAttribute does not support the type object.");
     }
 
     public class Ignores
@@ -115,10 +115,9 @@ public class In_range
     {
         [Test]
         public void type_without_length_property()
-            => new Length.InRangeAttribute(1, 4).Invoking(a => a.IsValid(new List<int>()))
-            .Should().Throw<UnsupportedType>().WithMessage("Length.InRangeAttribute does not support properties of the type List<int>.");
+            => new Length.InRangeAttribute(1, 4).Invoking(a => a.IsValid(new object()))
+            .Should().Throw<UnsupportedType>().WithMessage("Length.InRangeAttribute does not support the type object.");
     }
-
 
     public class Ignores
     {
@@ -128,7 +127,6 @@ public class In_range
         [Test]
         public void length_zero() => new Length.InRangeAttribute(2, 4).IsValid(string.Empty).Should().BeTrue();
     }
-
 
     [Test]
     public void validates([Range(4, 10)] int value) => new Length.InRangeAttribute(4, 10).IsValid(new byte[value]).Should().BeTrue();

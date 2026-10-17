@@ -19,7 +19,7 @@ public class At_least
         [Test]
         public void type_without_count_property()
             => new Collection.AtLeastAttribute(4).Invoking(a => a.IsValid(new object()))
-            .Should().Throw<UnsupportedType>().WithMessage("Collection.AtLeastAttribute does not support properties of the type object.");
+            .Should().Throw<UnsupportedType>().WithMessage("Collection.AtLeastAttribute does not support the type object.");
     }
 
     public class Ignores
@@ -64,7 +64,7 @@ public class At_most
         [Test]
         public void type_without_count_property()
             => new Collection.AtMostAttribute(4).Invoking(a => a.IsValid(new object()))
-            .Should().Throw<UnsupportedType>().WithMessage("Collection.AtMostAttribute does not support properties of the type object.");
+            .Should().Throw<UnsupportedType>().WithMessage("Collection.AtMostAttribute does not support the type object.");
     }
 
     public class Ignores
@@ -106,7 +106,7 @@ public class In_range
         [Test]
         public void type_without_count_property()
             => new Collection.InRangeAttribute(1, 4).Invoking(a => a.IsValid(new object()))
-            .Should().Throw<UnsupportedType>().WithMessage("Collection.InRangeAttribute does not support properties of the type object.");
+            .Should().Throw<UnsupportedType>().WithMessage("Collection.InRangeAttribute does not support the type object.");
     }
 
 

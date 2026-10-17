@@ -295,7 +295,7 @@ namespace Qowaiv.Validation.DataAnnotations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} does not support properties of the type {1}..
+        ///   Looks up a localized string similar to {0} does not support the type {1}..
         /// </summary>
         internal static string UnsupportedType_ForAttribute {
             get {
