@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>Benchmarks.Data_Annotations.Validate_small</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.16.0-preview.2, Windows 11 (10.0.26200.9448/25H2/2025Update/HudsonValley2)
+12th Gen Intel Core i7-12700H 2.69GHz, 1 CPU, 20 logical and 14 physical cores
+Memory: 31,68 GB Total, 3,21 GB Available
+.NET SDK 11.0.100-rc.2.26504.105
+  [Host]     : .NET 10.0.13 (10.0.13, 10.0.1326.50504), X64 RyuJIT x86-64-v3
+  Job-CNUJVU : .NET 10.0.13 (10.0.13, 10.0.1326.50504), X64 RyuJIT x86-64-v3
+</code></pre>
+<pre><code>InvocationCount=1  UnrollFactor=1  
+</code></pre>
+
+<table>
+<thead><tr><th>Method </th><th>Count</th><th>Mean   </th><th>Error</th><th>StdDev</th><th>Median </th><th>Ratio</th><th>RatioSD</th>
+</tr>
+</thead><tbody><tr><td>Qowaiv</td><td>10</td><td>8.186 μs</td><td>0.6988 μs</td><td>1.948 μs</td><td>7.500 μs</td><td>0.35</td><td>0.11</td>
+</tr><tr><td>Fluent</td><td>10</td><td>155.099 μs</td><td>5.4096 μs</td><td>15.346 μs</td><td>150.900 μs</td><td>6.57</td><td>1.40</td>
+</tr><tr><td>MiniValidator</td><td>10</td><td>24.542 μs</td><td>1.7811 μs</td><td>5.167 μs</td><td>23.700 μs</td><td>1.00</td><td>0.00</td>
+</tr><tr><td>Qowaiv</td><td>100</td><td>19.598 μs</td><td>1.5119 μs</td><td>4.314 μs</td><td>17.850 μs</td><td>0.20</td><td>0.05</td>
+</tr><tr><td>Fluent</td><td>100</td><td>199.416 μs</td><td>4.1608 μs</td><td>11.667 μs</td><td>198.700 μs</td><td>2.03</td><td>0.20</td>
+</tr><tr><td>MiniValidator</td><td>100</td><td>98.850 μs</td><td>2.7723 μs</td><td>8.087 μs</td><td>96.950 μs</td><td>1.00</td><td>0.00</td>
+</tr><tr><td>Qowaiv</td><td>1000</td><td>99.700 μs</td><td>2.1252 μs</td><td>6.063 μs</td><td>99.100 μs</td><td>0.12</td><td>0.01</td>
+</tr><tr><td>Fluent</td><td>1000</td><td>791.280 μs</td><td>20.0887 μs</td><td>58.917 μs</td><td>778.000 μs</td><td>0.95</td><td>0.08</td>
+</tr><tr><td>MiniValidator</td><td>1000</td><td>834.242 μs</td><td>16.4108 μs</td><td>34.256 μs</td><td>831.500 μs</td><td>1.00</td><td>0.00</td>
+</tr><tr><td>Qowaiv</td><td>10000</td><td>1,028.756 μs</td><td>20.0524 μs</td><td>32.381 μs</td><td>1,028.050 μs</td><td>0.10</td><td>0.00</td>
+</tr><tr><td>Fluent</td><td>10000</td><td>6,979.083 μs</td><td>104.2301 μs</td><td>81.376 μs</td><td>6,992.100 μs</td><td>0.69</td><td>0.03</td>
+</tr><tr><td>MiniValidator</td><td>10000</td><td>10,146.789 μs</td><td>202.8874 μs</td><td>381.072 μs</td><td>10,200.000 μs</td><td>1.00</td><td>0.00</td>
+</tr></tbody></table>
+</body>
+</html>

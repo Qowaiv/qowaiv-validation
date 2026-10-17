@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "MiniValidation": {
+        "type": "Direct",
+        "requested": "[0.10.0, )",
+        "resolved": "0.10.0",
+        "contentHash": "ZNDIyFTLppmmUck8fUMxi0dJL94MKPM8QPc1V/cD3HG2ZLUV9/e7ldVlxM9H/y/3sxI7b2CZNxnW7OnhRMZPrQ=="
+      },
+      "FluentValidation": {
+        "type": "Transitive",
+        "resolved": "12.2.0",
+        "contentHash": "DR3lFbdnKucaaj1/8zMNOACMz/64igzox1yVZSFVsLxYB5mxAB+wFP1WZ8fjwrZnbU1KA1DoMzHKYKxUfuZ4wQ=="
+      },
+      "Qowaiv": {
+        "type": "Transitive",
+        "resolved": "8.2.0",
+        "contentHash": "AZCOoAEMpAHJWhDocBpKmRFkpRk5GB3c1WYntivF0JKNrewqyBKm85X7LickaeHNHi9QeBDOq012x1wa2psOhg=="
+      },
+      "System.ComponentModel.Annotations": {
+        "type": "Transitive",
+        "resolved": "5.0.0",
+        "contentHash": "dMkqfy2el8A8/I76n2Hi1oBFEbG1SfxD2l5nhwXV3XjlnOmwxJlQbYpJH4W51odnU9sARCSAgv7S3CyAFMkpYg=="
+      },
+      "qowaiv.validation.abstractions": {
+        "type": "Project"
+      },
+      "qowaiv.validation.dataannotations": {
+        "type": "Project",
+        "dependencies": {
+          "Qowaiv": "[8.2.0, )",
+          "Qowaiv.Validation.Abstractions": "[2.1.0, )",
+          "System.ComponentModel.Annotations": "[5.0.0, )"
+        }
+      },
+      "qowaiv.validation.fluent": {
+        "type": "Project",
+        "dependencies": {
+          "FluentValidation": "[12.2.0, )",
+          "Qowaiv": "[8.2.0, )",
+          "Qowaiv.Validation.Abstractions": "[2.1.0, )"
+        }
+      },
+      "qowaiv.validation.guarding": {
+        "type": "Project",
+        "dependencies": {
+          "Qowaiv.Validation.Abstractions": "[2.1.0, )",
+          "Qowaiv.Validation.Messages": "[2.2.0, )"
+        }
+      },
+      "qowaiv.validation.messages": {
+        "type": "Project",
+        "dependencies": {
+          "Qowaiv.Validation.Abstractions": "[2.1.0, )"
+        }
+      },
+      "qowaiv.validation.testdata": {
+        "type": "Project",
+        "dependencies": {
+          "Qowaiv.Validation.DataAnnotations": "[6.2.0, )",
+          "Qowaiv.Validation.Fluent": "[4.2.0, )",
+          "Qowaiv.Validation.Guarding": "[2.2.0, )",
+          "Qowaiv.Validation.Messages": "[2.2.0, )",
+          "Qowaiv.Validation.Xml": "[2.1.0, )"
+        }
+      },
+      "qowaiv.validation.xml": {
+        "type": "Project",
+        "dependencies": {
+          "Qowaiv.Validation.Abstractions": "[2.1.0, )"
+        }
+      }
+    }
+  }
+}
