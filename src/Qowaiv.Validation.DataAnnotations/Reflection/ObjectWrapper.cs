@@ -1,3 +1,4 @@
+using System.Collections.Enumerable;
 using System.Reflection;
 
 namespace Qowaiv.Validation.DataAnnotations.Reflection;
@@ -18,7 +19,9 @@ internal static class ObjectWrapper
     public static long? TryCount(this object obj) => obj switch
     {
         ICollection collection => collection.Count,
-        _ => Try("Count", obj) ?? (obj as IEnumerable)?.Cast<object>().Count(),
+        _ when Try("Count", obj) is { } count => count,
+        IEnumerable collection => collection.Count(),
+        _ => null,
     };
 
     [Pure]
