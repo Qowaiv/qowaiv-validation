@@ -16,10 +16,12 @@ public class AnyAttribute : RequiredAttribute
     /// has any item, otherwise false.
     /// </summary>
     [Pure]
-    public override bool IsValid(object? value) => value switch
+    public override bool IsValid(object? value) => this.PostValidate(value switch
     {
-        ICollection collection => this.PostValidate(collection.Count > 0),
-        IEnumerable enumerable => this.PostValidate(enumerable.GetEnumerator().MoveNext()),
-        _ => this.PostValidate(base.IsValid(value)),
-    };
+        null => false,
+        ICollection collection => collection.Count > 0,
+        string str => str.Length > 0,
+        IEnumerable enumerable => enumerable.GetEnumerator().MoveNext(),
+        _ => true,
+    });
 }
