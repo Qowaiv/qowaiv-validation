@@ -8,6 +8,14 @@ public class Is_valid_for
     [Test]
     public void Not_empty_collection()
        => new AnyAttribute().IsValid(new[] { 42 }).Should().BeTrue();
+
+    [Test]
+    public void Not_empty_enumeration()
+        => new AnyAttribute().IsValid(Enumerable.Repeat(0, 2)).Should().BeTrue();
+
+    [Test]
+    public void Not_empty_string()
+        => new AnyAttribute().IsValid(" ").Should().BeTrue();
 }
 
 public class Is_not_valid_for
@@ -18,7 +26,15 @@ public class Is_not_valid_for
 
     [Test]
     public void Empty_collection()
-       => new AnyAttribute().IsValid(Array.Empty<int>()).Should().BeFalse();
+        => new AnyAttribute().IsValid(Array.Empty<int>()).Should().BeFalse();
+
+    [Test]
+    public void Empty_enumeration()
+        => new AnyAttribute().IsValid(Enumerable.Repeat(0, 0)).Should().BeFalse();
+
+    [Test]
+    public void Empty_string()
+        => new AnyAttribute().IsValid(string.Empty).Should().BeFalse();
 }
 
 public class With_message

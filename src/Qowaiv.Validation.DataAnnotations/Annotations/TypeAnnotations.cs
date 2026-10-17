@@ -11,6 +11,16 @@ internal sealed class TypeAnnotations(AnnotationChecks checks, MemberAnnotations
 
     public readonly MemberAnnotations[] Members = members;
 
+    /// <summary>
+    /// Gets a value indicating whether a <see cref="ValidationContext"/> is needed
+    /// for this type: when it implements <see cref="IValidatableObject"/>, or when
+    /// any of its members has an attribute that requires the context.
+    /// </summary>
+    [Pure]
+    public bool NeedsContext { get; }
+        = (checks & AnnotationChecks.Validatable) != AnnotationChecks.None
+        || members.Any(m => m.RequiresContext);
+
     /// <summary>Gets the <see cref="TypeAnnotations"/> of the <see cref="Type"/>.</summary>
     /// <param name="type">
     /// The type to get the annotations from.
@@ -23,7 +33,7 @@ internal sealed class TypeAnnotations(AnnotationChecks checks, MemberAnnotations
     /// </returns>
     [Pure]
     internal static TypeAnnotations? Get(Type type)
-        => Store.Get(Guard.NotNull(type), []);
+        => Store.Get(Guard.NotNull(type));
 
     private static readonly AnnotationStore Store = new();
 }

@@ -12,7 +12,6 @@ internal sealed class AnnotationStore
     /// <summary>Initializes a new instance of the <see cref="AnnotationStore"/> class.</summary>
     public AnnotationStore() => Annotations = new ConcurrentDictionary<Type, TypeAnnotations?>(
     [
-        None<object>(),
         None<string>(),
         None<decimal>(),
         None<Guid>(),
@@ -26,6 +25,15 @@ internal sealed class AnnotationStore
 
         .. typeof(Date).Assembly.GetExportedTypes().Where(tp => tp.IsValueType).Select(None)
     ]);
+
+    /// <summary>Gets the annotations for the type, allocating the visited set only on a cache miss.</summary>
+    [Pure]
+    public TypeAnnotations? Get(Type type) => type switch
+    {
+        var t when LackAnnotations(t) => null,
+        var t when Annotations.TryGetValue(t, out var annotations) => annotations,
+        _ => Annotate(type, [type]),
+    };
 
     [Pure]
     public TypeAnnotations? Get(Type type, HashSet<Type> visited) => type switch
@@ -103,12 +111,18 @@ internal sealed class AnnotationStore
         }
         attributes.Sort(Sorter);
 
-        var typeAnnotations = Get(info.MemberType, visited)?.Checks ?? default;
+        var typeAnnotations = Get(info.MemberType, visited);
+        var checks = typeAnnotations?.Checks ?? default;
 
-        return typeAnnotations != AnnotationChecks.None || attributes is { Count: > 0 }
-            ? new(typeAnnotations, info.Name, display, attributes.ToArray(), info.GetValue)
+        return checks != AnnotationChecks.None || attributes is { Count: > 0 }
+            ? new(checks, typeAnnotations, ExactRuntimeType(info.MemberType), info.Name, display, attributes.ToArray(), info.Get)
             : null;
     }
+
+    [Pure]
+    private static bool ExactRuntimeType(Type type)
+        => !type.IsGenericParameter
+        && (type.IsNonNullableValueType() || (!type.IsArray && type.IsSealed));
 
     [Pure]
     private static bool LackAnnotations(Type type)
