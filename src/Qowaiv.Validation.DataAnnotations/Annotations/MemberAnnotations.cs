@@ -9,14 +9,22 @@ internal sealed class MemberAnnotations : Annotations
         AnnotationChecks checks,
         string name,
         DisplayAttribute? display,
-        IReadOnlyCollection<ValidationAttribute> attributes,
+        ValidationAttribute[] attributes,
         Func<object, object?> getValue) : base(checks)
     {
         Name = name;
         Display = display;
         Attributes = attributes;
         Accessor = getValue;
-        RequiresContext = attributes.Any(a => a.RequiresValidationContext);
+
+        foreach (var attr in attributes)
+        {
+            if (attr.RequiresValidationContext)
+            {
+                RequiresContext = true;
+                break;
+            }
+        }
     }
 
     /// <summary>Gets the name of the member.</summary>
@@ -26,7 +34,7 @@ internal sealed class MemberAnnotations : Annotations
     public readonly DisplayAttribute? Display;
 
     /// <summary>Gets the <see cref="ValidationAttribute"/>s defined on the member.</summary>
-    public IReadOnlyCollection<ValidationAttribute> Attributes { get; }
+    public ValidationAttribute[] Attributes { get; }
 
     /// <summary>Gets a value indicating whether any attribute needs a <see cref="ValidationContext"/>.</summary>
     public bool RequiresContext { get; }

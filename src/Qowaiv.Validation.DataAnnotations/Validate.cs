@@ -59,18 +59,20 @@ internal static class Validate
         context.MemberName = member.Name;
         context.DisplayName = member.Display?.GetName() ?? member.Name;
 
+#pragma warning disable S3267 // Do not use LINQ: it allocates on this hot path.
         // Stop on first required failure and do not validate further.
-        if (member.Attributes.Any(FailedRequired))
+        foreach (var attr in member.Attributes)
         {
-            return;
+            if (ctx.AddMessage(attr.GetValidationMessage(value, context), nested.Path) && attr is RequiredAttribute)
+            {
+                return;
+            }
         }
+#pragma warning restore S3267
 
         if (value is { } && TypeAnnotations.Get(value.GetType()) is { CheckRecursive: true } typed)
         {
             Model(new Nested(value, typed, nested.Path.Child(member.Name)), ctx);
         }
-
-        bool FailedRequired(ValidationAttribute attr)
-            => ctx.AddMessage(attr.GetValidationMessage(value, context), nested.Path) && attr is RequiredAttribute;
     }
 }
