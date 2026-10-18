@@ -31,22 +31,22 @@ public static class PostalCodeValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, PostalCode> ValidFor<TModel>(this IRuleBuilder<TModel, PostalCode> ruleBuilder, Func<TModel, Country> country)
         => Guard.NotNull(ruleBuilder)
-            .Must((model, postalCode, context) => IsValidFor(postalCode, country(model), context))
+            .Must((model, postalCode, context) => IsValidFor(postalCode, Guard.NotNull(country)(model), context))
             .WithMessage(_ => QowaivValidationFluentMessages.PostalCodeValidForCountry);
 
     [Impure]
     private static bool IsValidFor<TModel>(PostalCode postalCode, Country country, ValidationContext<TModel> context)
     {
-        if (country.IsEmptyOrUnknown()
-            || postalCode.IsEmptyOrUnknown()
-            || postalCode.IsValid(country))
+        if (country.IsKnown
+            && postalCode.IsKnown
+            && !postalCode.IsValid(country))
         {
-            return true;
-        }
-        context.MessageFormatter
-            .AppendArgument(nameof(Country), country.DisplayName)
-            .AppendArgument("ComparisonValue", postalCode);
+            context.MessageFormatter
+                .AppendArgument(nameof(Country), country.DisplayName)
+                .AppendArgument("ComparisonValue", postalCode);
 
-        return false;
+            return false;
+        }
+        else return true;
     }
 }
