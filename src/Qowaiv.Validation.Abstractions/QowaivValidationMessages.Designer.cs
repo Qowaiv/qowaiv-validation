@@ -61,33 +61,6 @@ namespace Qowaiv.Validation.Abstractions {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value of the {0} field is not allowed..
-        /// </summary>
-        internal static string AllowedValuesAttribute_ValidationError {
-            get {
-                return ResourceManager.GetString("AllowedValuesAttribute_ValidationError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The type {0} does not implement IEqualityComparer or IEqualityComarer&lt;object&gt;..
-        /// </summary>
-        internal static string ArgumentException_TypeIsNotEqualityComparer {
-            get {
-                return ResourceManager.GetString("ArgumentException_TypeIsNotEqualityComparer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to All values of the {0} field should be distinct..
-        /// </summary>
-        internal static string DistinctValuesAttribute_ValidationError {
-            get {
-                return ResourceManager.GetString("DistinctValuesAttribute_ValidationError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The {0} model can not be operated on as it is invalid..
         /// </summary>
         internal static string InvalidModel {
@@ -122,33 +95,6 @@ namespace Qowaiv.Validation.Abstractions {
         internal static string NoValue_ForT {
             get {
                 return ResourceManager.GetString("NoValue_ForT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The postal code {0} is not valid for {1}..
-        /// </summary>
-        internal static string PostalCodeValidator_ErrorMessage {
-            get {
-                return ResourceManager.GetString("PostalCodeValidator_ErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The property &apos;{1}&apos; on resource type &apos;{0}&apos; is not a string type..
-        /// </summary>
-        internal static string ValidationRule_ResourcePropertyNotStringType {
-            get {
-                return ResourceManager.GetString("ValidationRule_ResourcePropertyNotStringType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The resource type &apos;{0}&apos; does not have an accessible static property named &apos;{1}&apos;..
-        /// </summary>
-        internal static string ValidationRule_ResourceTypeDoesNotHaveProperty {
-            get {
-                return ResourceManager.GetString("ValidationRule_ResourceTypeDoesNotHaveProperty", resourceCulture);
             }
         }
     }
