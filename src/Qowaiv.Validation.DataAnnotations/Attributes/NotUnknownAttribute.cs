@@ -9,5 +9,5 @@ public sealed class NotUnknownAttribute() : ValidationAttribute(() => QowaivVali
     [Pure]
     public override bool IsValid(object? value)
         => value is null
-        || !Equals(Unknown.Value(value.GetType()), value);
+        || !Equals(SvoValues.Unknown(value.GetType()), value);
 }
