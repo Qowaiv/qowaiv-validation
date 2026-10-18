@@ -258,6 +258,7 @@
       "qowaiv.validation.testdata": {
         "type": "Project",
         "dependencies": {
+          "MathNet.Numerics": "[5.0.0, )",
           "Qowaiv.Validation.DataAnnotations": "[6.2.0, )",
           "Qowaiv.Validation.Fluent": "[4.2.0, )",
           "Qowaiv.Validation.Guarding": "[2.2.0, )",
@@ -278,6 +279,12 @@
         "dependencies": {
           "Qowaiv.Validation.Abstractions": "[2.1.0, )"
         }
+      },
+      "MathNet.Numerics": {
+        "type": "CentralTransitive",
+        "requested": "[5.0.0, )",
+        "resolved": "5.0.0",
+        "contentHash": "pg1W2VwaEQMAiTpGK840hZgzavnqjlCMTVSbtVCXVyT+7AX4mc1o89SPv4TBlAjhgCOo9c1Y+jZ5m3ti2YgGgA=="
       },
       "System.ComponentModel.Annotations": {
         "type": "CentralTransitive",
@@ -534,6 +541,7 @@
       "qowaiv.validation.testdata": {
         "type": "Project",
         "dependencies": {
+          "MathNet.Numerics": "[5.0.0, )",
           "Qowaiv.Validation.DataAnnotations": "[6.2.0, )",
           "Qowaiv.Validation.Fluent": "[4.2.0, )",
           "Qowaiv.Validation.Guarding": "[2.2.0, )",
@@ -554,6 +562,12 @@
         "dependencies": {
           "Qowaiv.Validation.Abstractions": "[2.1.0, )"
         }
+      },
+      "MathNet.Numerics": {
+        "type": "CentralTransitive",
+        "requested": "[5.0.0, )",
+        "resolved": "5.0.0",
+        "contentHash": "pg1W2VwaEQMAiTpGK840hZgzavnqjlCMTVSbtVCXVyT+7AX4mc1o89SPv4TBlAjhgCOo9c1Y+jZ5m3ti2YgGgA=="
       }
     }
   }

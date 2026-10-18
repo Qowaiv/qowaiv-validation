@@ -33,25 +33,25 @@ public class Task_Valid_Model
 {
     [Test]
     public async Task ActAsync_on_sync_success_is_executed_and_result_stays_valid()
-        => (await Context.Valid.AsTask().ActAsync(Actions.Success, Context.Update))
+        => (await Context.Valid.Async().ActAsync(Actions.Success, Context.Update))
         .Should().BeValid()
         .Value.Updated.Should().BeTrue();
 
     [Test]
     public async Task ActAsync_on_async_success_is_executed_and_result_stays_valid()
-        => (await Context.Valid.AsTask().ActAsync(Actions.SuccessAsync, Context.Update))
+        => (await Context.Valid.Async().ActAsync(Actions.SuccessAsync, Context.Update))
         .Should().BeValid()
         .Value.Updated.Should().BeTrue();
 
     [Test]
     public async Task ActAsync_on_sync_failing_makes_result_invalid()
-        => (await Context.Valid.AsTask().ActAsync(Actions.Failure, Context.Update))
+        => (await Context.Valid.Async().ActAsync(Actions.Failure, Context.Update))
         .Should().BeInvalid()
         .WithMessage(ValidationMessage.Error("Failure"));
 
     [Test]
     public async Task ActAsync_on_async_failing_makes_result_invalid()
-        => (await Context.Valid.AsTask().ActAsync(Actions.FailureAsync, Context.Update))
+        => (await Context.Valid.Async().ActAsync(Actions.FailureAsync, Context.Update))
         .Should().BeInvalid()
         .WithMessage(ValidationMessage.Error("FailureAsync"));
 }
@@ -75,13 +75,13 @@ public class Task_Invalid_Model
 {
     [Test]
     public async Task ActAsync_with_sync_is_never_triggered()
-        => (await Context.Invalid.AsTask().ActAsync(Actions.Failure, Context.Update))
+        => (await Context.Invalid.Async().ActAsync(Actions.Failure, Context.Update))
         .Should().BeInvalid()
         .WithMessage(ValidationMessage.Error("InvalidContext"));
 
     [Test]
     public async Task ActAsync_with_async_is_never_triggered()
-        => (await Context.Invalid.AsTask().ActAsync(Actions.FailureAsync, Context.Update))
+        => (await Context.Invalid.Async().ActAsync(Actions.FailureAsync, Context.Update))
         .Should().BeInvalid()
         .WithMessage(ValidationMessage.Error("InvalidContext"));
 }
@@ -104,11 +104,11 @@ internal static class Actions
         => Result.For(nameof(Success));
 
     public static AsyncResult<string> SuccessAsync(Context _)
-        => Result.For(nameof(SuccessAsync)).AsTask();
+        => Result.For(nameof(SuccessAsync)).Async();
     
     public static Result<string> Failure(Context _) 
         => Result.WithMessages<string>(ValidationMessage.Error(nameof(Failure)));
 
     public static AsyncResult<string> FailureAsync(Context _)
-        => Result.WithMessages<string>(ValidationMessage.Error(nameof(FailureAsync))).AsTask();
+        => Result.WithMessages<string>(ValidationMessage.Error(nameof(FailureAsync))).Async();
 }

@@ -27,9 +27,8 @@ public class InvalidModel : InvalidOperationException
     public static InvalidModel For<T>(IEnumerable<IValidationMessage> messages)
     {
         var sb = new StringBuilder().AppendFormat(QowaivValidationMessages.InvalidModel, typeof(T));
-        var filtered = Filter(messages);
 
-        if (filtered.Any())
+        if (Filter(messages) is { Count: > 0 } filtered)
         {
             sb.Remove(sb.Length - 1, 1).AppendLine(":");
             foreach (var message in filtered)

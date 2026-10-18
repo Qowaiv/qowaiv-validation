@@ -6,8 +6,14 @@ namespace Qowaiv.Validation.DataAnnotations;
 /// <typeparam name="TModel">
 /// The type of the annotated model to validate.
 /// </typeparam>
+/// <param name="serviceProvider">
+/// The object that implements the System.IServiceProvider interface. This parameter is optional.
+/// </param>
+/// <param name="items">
+/// A dictionary of key/value pairs to make available to the service consumers. This parameter is optional.
+/// </param>
 [Mutable]
-public class AnnotatedModelValidator<TModel> : IValidator<TModel>
+public class AnnotatedModelValidator<TModel>(IServiceProvider? serviceProvider, IDictionary<object, object?>? items) : IValidator<TModel>
     where TModel : notnull
 {
     /// <summary>Initializes a new instance of the <see cref="AnnotatedModelValidator{TModel}"/> class.</summary>
@@ -27,24 +33,11 @@ public class AnnotatedModelValidator<TModel> : IValidator<TModel>
     public AnnotatedModelValidator(IDictionary<object, object?>? items)
         : this(null, items) { }
 
-    /// <summary>Initializes a new instance of the <see cref="AnnotatedModelValidator{TModel}"/> class.</summary>
-    /// <param name="serviceProvider">
-    /// The object that implements the System.IServiceProvider interface. This parameter is optional.
-    /// </param>
-    /// <param name="items">
-    /// A dictionary of key/value pairs to make available to the service consumers. This parameter is optional.
-    /// </param>
-    public AnnotatedModelValidator(IServiceProvider? serviceProvider, IDictionary<object, object?>? items)
-    {
-        ServiceProvider = serviceProvider;
-        Items = items ?? new Dictionary<object, object?>(0);
-    }
+    /// <summary>Gets the <see cref="IServiceProvider"/>.</summary>
+    protected IServiceProvider? ServiceProvider { get; } = serviceProvider;
 
     /// <summary>Gets the <see cref="IServiceProvider"/>.</summary>
-    protected IServiceProvider? ServiceProvider { get; }
-
-    /// <summary>Gets the <see cref="IServiceProvider"/>.</summary>
-    protected IDictionary<object, object?> Items { get; }
+    protected IDictionary<object, object?> Items { get; } = items ?? new Dictionary<object, object?>(0);
 
     /// <summary>Validates the model.</summary>
     /// <param name="model">
