@@ -24,6 +24,16 @@ public class Is_valid_for
     [Test]
     public void EmailAddress_Unknown_when_unknown_values_are_allowed()
         => new MandatoryAttribute { AllowUnknownValue = true }.IsValid(EmailAddress.Unknown).Should().BeTrue();
+
+    [Test]
+    public void ReferenceType_without_parameterless_ctor()
+        => new MandatoryAttribute().IsValid(new Uri("https://qowaiv.org"))
+        .Should().BeTrue();
+
+    [Test]
+    public void ReferenceType_without_Unknown_value()
+        => new MandatoryAttribute{ AllowUnknownValue = false }.IsValid(new object())
+        .Should().BeTrue();
 }
 public class Is_not_valid_for
 {
@@ -91,6 +101,9 @@ public class With_message
 
         [Required]
         public string? ReferenceField { get; set; }
+
+        [Mandatory] // Is valid as it is a nullable.
+        public decimal? Nullable { get; init; } = 0;
     }
 
     public class WithCustomErrorMessageType
