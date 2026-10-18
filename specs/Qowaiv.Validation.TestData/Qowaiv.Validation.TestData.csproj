@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MathNet.Numerics" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="../../src/Qowaiv.Validation.DataAnnotations/Qowaiv.Validation.DataAnnotations.csproj" />
     <ProjectReference Include="../../src/Qowaiv.Validation.Fluent/Qowaiv.Validation.Fluent.csproj" />
     <ProjectReference Include="../../src/Qowaiv.Validation.Guarding/Qowaiv.Validation.Guarding.csproj" />
