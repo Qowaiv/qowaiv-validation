@@ -13,7 +13,7 @@ v11.0.0
 - Add .NET 11.0 target.
 - Drop .NET 8.0 targets (BREAKING)
 - AsyncResult<TModel>. (BREAKING)
-- InvalidModel renamed to InvalidModel. (BREAKING)
+- InvalidModelException renamed to InvalidModel. (BREAKING)
 - Rely on built-in collection merging isntead of home-brew collection.
 - Prevent creation of a valid Result<T> without setting T when struct. (BUG)
 ]]>
