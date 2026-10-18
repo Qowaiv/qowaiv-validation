@@ -29,8 +29,8 @@ public abstract class ResultAssertionsBase<TSubject>(TSubject? subject, string? 
 
     internal void ExecuteBeValid(string because, object[] becauseArgs)
     {
-        var error = Subject.Messages.Any()
-            ? Text("Actual {context} is not valid{reason}:").AppendMessages(Subject.Messages).ToString()
+        var error = Subject is { Messages: { Count: > 0 } messages }
+            ? Text("Actual {context} is not valid{reason}:").AppendMessages(messages).ToString()
             : "Actual {context} is not invalid{reason}.";
 
         Assertion

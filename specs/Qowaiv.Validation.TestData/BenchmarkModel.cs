@@ -1,6 +1,6 @@
 using FluentValidation;
+using MathNet.Numerics.Random;
 using Qowaiv.Validation.DataAnnotations;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,7 +11,7 @@ public sealed class BenchmarkModel : IValidatableObject
 {
     public static BenchmarkModel New(int count)
     {
-        var rnd = new Random(count);
+        var rnd = new MersenneTwister(count);
 
         var list = new List<Child>();
 
