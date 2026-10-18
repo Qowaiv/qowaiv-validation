@@ -21,7 +21,7 @@
   <data name="DistinctValuesAttribute_ValidationError" xml:space="preserve">
     <value>欄位 {0} 的所有值應該是不同的。</value>
   </data>
-  <data name="InvalidModelException" xml:space="preserve">
+  <data name="InvalidModel" xml:space="preserve">
     <value>模型 {0} 因為無效而無法操作。</value>
   </data>
   <data name="InvalidOperationException" xml:space="preserve">

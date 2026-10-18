@@ -26,7 +26,7 @@ public class InvalidModel : InvalidOperationException
     [Pure]
     public static InvalidModel For<T>(IEnumerable<IValidationMessage> messages)
     {
-        var sb = new StringBuilder().AppendFormat(QowaivValidationMessages.InvalidModelException, typeof(T));
+        var sb = new StringBuilder().AppendFormat(QowaivValidationMessages.InvalidModel, typeof(T));
         var filtered = Filter(messages);
 
         if (filtered.Any())

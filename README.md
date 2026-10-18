@@ -38,7 +38,7 @@ public interface IValidator<TModel>
 ### Result and Result&lt;TModel&gt;
 A (validation) result, containing validation messages. Creation is only via
 factory methods. The generic result wraps a `Value` that is only accessible
-when valid — accessing it on an invalid result throws `InvalidModelException`.
+when valid — accessing it on an invalid result throws `InvalidModel`.
 
 ``` C#
 Result<DataType> result = Result.For(value);

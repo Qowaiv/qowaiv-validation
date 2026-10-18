@@ -15,6 +15,7 @@ v11.0.0
 - AsyncResult<TModel>. (BREAKING)
 - InvalidModelException renamed to InvalidModel. (BREAKING)
 - Rely on built-in collection merging isntead of home-brew collection.
+- Prevent creation of a valid Result<T> without setting T when struct. (BUG)
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

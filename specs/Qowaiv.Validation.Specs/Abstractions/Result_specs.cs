@@ -9,7 +9,7 @@ public class Valid_result
     [Test]
     public void Contains_no_ErrorMessages()
     {
-        var result = Result.WithMessages<int>(Warning1, Info1, Info2);
+        var result = Result.WithMessages(Warning1, Info1, Info2);
         result.IsValid.Should().BeTrue();
     }
 
@@ -157,7 +157,7 @@ public class ThrowIfInvalid
         => 17.Invoking(v => Result.For(v)).Should().NotThrow();
 
     [Test]
-    public void InvalidModelException_when_invalid_model()
+    public void InvalidModel_when_invalid_model()
     {
         var result = Result.WithMessages<int>(ValidationMessage.Error("Oops"));
         result.Invoking(_ => result.ThrowIfInvalid())
@@ -165,10 +165,15 @@ public class ThrowIfInvalid
     }
 
     [Test]
-    public void InvalidModelException_when_invalid_result()
+    public void InvalidModel_when_invalid_result()
     {
         var result = Result.WithMessages(ValidationMessage.Error("Oops"));
         result.Invoking(_ => result.ThrowIfInvalid())
             .Should().Throw<InvalidModel>();
     }
+
+    [Test]
+    public void NoModel_when_not_provided() 
+        => Warning1.Invoking(m => Result.WithMessages<int>(m))
+        .Should().Throw<NoValue>();
 }
