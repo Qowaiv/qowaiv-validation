@@ -48,8 +48,7 @@ public sealed class MandatoryAttribute : RequiredAttribute
         }
 
         bool IsDefault(Type type)
-            => type.IsValueType
-            && !IsNullable(type, ctx)
+            => !IsNullable(type, ctx)
             && value.Equals(SvoValues.Default(type));
 
         bool IsUknown(Type type)
@@ -60,14 +59,14 @@ public sealed class MandatoryAttribute : RequiredAttribute
     [Pure]
     private static bool IsNullable(Type type, ValidationContext? ctx)
     {
-        if (Member.New(ctx) is { } member)
+        if (type.IsValueType && Member.New(ctx) is { } member)
         {
-            if (!Members.TryGetValue(member, out var memberType))
+            if (!Members.TryGetValue(member, out var nullable))
             {
-                memberType = member.Resolve();
-                Members[member] = memberType;
+                nullable = member.Resolve() != type;
+                Members[member] = nullable;
             }
-            return memberType != type;
+            return nullable;
         }
         else return false;
     }
@@ -88,5 +87,5 @@ public sealed class MandatoryAttribute : RequiredAttribute
             : null;
     }
 
-    private static readonly ConcurrentDictionary<Member, Type?> Members = [];
+    private static readonly ConcurrentDictionary<Member, bool> Members = [];
 }
