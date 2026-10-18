@@ -48,7 +48,7 @@ v0.1.0
 - Disallow Result<T>.For(null). #34
 - Act() and ActAsync() are also executed for null values. #34
 - Result.OK is static readonly field (was static property). #32
-- Improvements on InvalidModel. #31
+- Improvements on InvalidModelException. #31
 v0.0.5
 - Act() methods on context. #29
 - AsTask() method for Result<T>. #28
