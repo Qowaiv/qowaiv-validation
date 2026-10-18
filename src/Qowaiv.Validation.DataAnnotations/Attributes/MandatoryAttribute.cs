@@ -1,5 +1,3 @@
-using Qowaiv.Reflection;
-
 namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Specifies that a field is mandatory (for value types the default value is not allowed).</summary>
@@ -23,41 +21,9 @@ public sealed class MandatoryAttribute : RequiredAttribute
     /// <inheritdoc />
     [Pure]
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
-        => IsValid(value, GetMemberType(Guard.NotNull(validationContext)))
+        => this.PostValidate(Check(value, null))
         ? null
         : ValidationMessage.Error(FormatErrorMessage(validationContext.DisplayName), validationContext.MemberNames());
-
-    /// <summary>Gets the type of the field/property.</summary>
-    /// <remarks>
-    /// Because the values of the member are boxed, this is (unfortunately)
-    /// the only way to determine if the provided value is a nullable type,
-    /// or not.
-    /// The resolved type is cached, as a single attribute instance is bound
-    /// to a single member.
-    /// </remarks>
-    [Pure]
-    private Type? GetMemberType(ValidationContext context)
-    {
-        var member = context.MemberName;
-        if (member == CachedMember && ReferenceEquals(context.ObjectType, CachedObjectType)) return CachedMemberType;
-
-        CachedMember = member;
-        CachedObjectType = context.ObjectType;
-        CachedMemberType = member is { Length: > 0 }
-            ? context.ObjectType.GetProperty(member)?.PropertyType ?? context.ObjectType.GetField(member)?.FieldType
-            : null;
-
-        return CachedMemberType;
-    }
-
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private string? CachedMember;
-
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private Type? CachedObjectType;
-
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private Type? CachedMemberType;
 
     /// <summary>Returns true if the value is not null and value types are
     /// not equal to their default value, otherwise false.
@@ -66,22 +32,61 @@ public sealed class MandatoryAttribute : RequiredAttribute
     /// The unknown value is expected to be static field or property of the type with the name "Unknown".
     /// </remarks>
     [Pure]
-    public override bool IsValid(object? value) => IsValid(value, null);
+    public override bool IsValid(object? value)
+        => this.PostValidate(Check(value, null));
 
     [Pure]
-    private bool IsValid(object? value, Type? memberType)
+    private bool Check(object? value, ValidationContext? ctx)
     {
-        if (value is null) return this.PostValidate(base.IsValid(value));
+        // Null and string are handled the same as by RequiredAttribute.
+        if (value is null) return false;
+        else if (value is string s) return s.Length > 0 || AllowUnknownValue;
+        else
+        {
+            var type = value.GetType();
+            return !IsDefault(type) && !IsUknown(type);
+        }
 
-        var type = memberType ?? value.GetType();
+        bool IsDefault(Type type)
+            => type.IsValueType
+            && !IsNullable(type, ctx)
+            && value.Equals(SvoValues.Default(type));
 
-        var result = !AllowUnknownValue && value.Equals(SvoValues.Unknown(QowaivType.GetNotNullableType(type)))
-            ? false
-            : type.IsValueType
-            ? !value.Equals(SvoValues.Default(type))
-            : base.IsValid(value);
-
-        return this.PostValidate(result);
+        bool IsUknown(Type type)
+            => !AllowUnknownValue
+            && value.Equals(SvoValues.Unknown(type));
     }
 
+    [Pure]
+    private static bool IsNullable(Type type, ValidationContext? ctx)
+    {
+        if (Member.New(ctx) is { } member)
+        {
+            if (!Members.TryGetValue(member, out var memberType))
+            {
+                memberType = member.Resolve();
+                Members[member] = memberType;
+            }
+            return memberType != type;
+        }
+        else return false;
+    }
+
+    private readonly record struct Member(Type Declaring, string Name)
+    {
+        [Pure]
+        public Type? Resolve()
+            => Name is { Length: > 0 }
+            && (Declaring.GetProperty(Name)?.PropertyType ?? Declaring.GetField(Name)?.FieldType) is { IsValueType: true } type
+            ? type
+            : null;
+
+        [Pure]
+        public static Member? New(ValidationContext? ctx)
+            => ctx is { ObjectType: { } declaring, MemberName: { Length: > 0 } name }
+            ? new(declaring, name)
+            : null;
+    }
+
+    private static readonly ConcurrentDictionary<Member, Type?> Members = [];
 }
