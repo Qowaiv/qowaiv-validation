@@ -18,7 +18,7 @@ public static class UnknownValidation
     [FluentSyntax]
     public static IRuleBuilderOptions<TModel, TProperty> NotUnknown<TModel, TProperty>(this IRuleBuilder<TModel, TProperty> ruleBuilder)
         => Guard.NotNull(ruleBuilder)
-        .Must(prop => prop is null || !Equals(Unknown.Value(typeof(TProperty)), prop))
+        .Must(prop => prop is null || !Equals(SvoValues.Unknown(typeof(TProperty)), prop))
         .WithMessage(_ => QowaivValidationFluentMessages.NotUnknown);
 
     /// <summary>Defines a 'not empty' and a 'not unkmown' validator on the current rule builder.</summary>

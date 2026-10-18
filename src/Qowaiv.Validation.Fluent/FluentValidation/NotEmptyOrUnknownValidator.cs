@@ -13,5 +13,5 @@ internal sealed class NotEmptyOrUnknownValidator<TModel, TProperty> : NotEmptyVa
     [Pure]
     public override bool IsValid(ValidationContext<TModel> context, TProperty value)
         => base.IsValid(context, value)
-        && !Equals(Unknown.Value(typeof(TProperty)), value);
+        && !Equals(SvoValues.Unknown(typeof(TProperty)), value);
 }
