@@ -30,5 +30,7 @@ public partial class Result
     /// <summary>Creates a result with messages.</summary>
     [Pure]
     public static Result<TModel> WithMessages<TModel>(params IEnumerable<IValidationMessage> messages)
-         => new Result<TModel>(ValidationMessages.New(messages)).NotNull();
+        => new Result<TModel>(ValidationMessages.New(messages)) is { IsValid: false } model
+        ? model
+        : throw NoValue.For<TModel>();
 }
