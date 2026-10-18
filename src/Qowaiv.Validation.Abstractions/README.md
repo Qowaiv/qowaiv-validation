@@ -50,7 +50,7 @@ An existing `Result<TModel>` can be turned into an `AsyncResult<TModel>` with
 ### Value access
 
 The generic `Result<TModel>` wraps a `Value` that is only accessible when
-valid. Accessing `Value` on an invalid result throws `InvalidModelException`.
+valid. Accessing `Value` on an invalid result throws `InvalidModel`.
 
 ``` C#
 Result<MyModel> result = Validate(model);
@@ -65,7 +65,7 @@ if (result.IsValid)
 When you want to fail fast:
 
 ``` C#
-result.ThrowIfInvalid(); // throws InvalidModelException if invalid
+result.ThrowIfInvalid(); // throws InvalidModel if invalid
 ```
 
 ### Implicit and explicit casts
@@ -217,7 +217,7 @@ public enum ValidationSeverity
 }
 ```
 
-## InvalidModelException
+## InvalidModel
 
 Thrown when accessing `Value` on an invalid result. Contains the `Errors`
 collection:
@@ -227,7 +227,7 @@ try
 {
     var value = invalidResult.Value;
 }
-catch (InvalidModelException ex)
+catch (InvalidModel ex)
 {
     IEnumerable<IValidationMessage> errors = ex.Errors;
 }

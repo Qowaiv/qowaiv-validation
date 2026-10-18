@@ -21,7 +21,7 @@
   <data name="DistinctValuesAttribute_ValidationError" xml:space="preserve">
     <value>جميع قيم الحقل {0} يجب أن تكون مختلفة.</value>
   </data>
-  <data name="InvalidModelException" xml:space="preserve">
+  <data name="InvalidModel" xml:space="preserve">
     <value>نموذج {0} لا يمكن تشغيله لأنه غير صحيح.</value>
   </data>
   <data name="InvalidOperationException" xml:space="preserve">

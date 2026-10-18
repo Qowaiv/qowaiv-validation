@@ -21,7 +21,7 @@
   <data name="DistinctValuesAttribute_ValidationError" xml:space="preserve">
     <value>フィールド {0} のすべての値は個別である必要があります。</value>
   </data>
-  <data name="InvalidModelException" xml:space="preserve">
+  <data name="InvalidModel" xml:space="preserve">
     <value>モデル {0} は無効なため操作できません。</value>
   </data>
   <data name="InvalidOperationException" xml:space="preserve">

@@ -90,9 +90,9 @@ namespace Qowaiv.Validation.Abstractions {
         /// <summary>
         ///   Looks up a localized string similar to The {0} model can not be operated on as it is invalid..
         /// </summary>
-        internal static string InvalidModelException {
+        internal static string InvalidModel {
             get {
-                return ResourceManager.GetString("InvalidModelException", resourceCulture);
+                return ResourceManager.GetString("InvalidModel", resourceCulture);
             }
         }
 
