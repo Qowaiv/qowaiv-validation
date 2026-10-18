@@ -75,22 +75,13 @@ public sealed class MandatoryAttribute : RequiredAttribute
 
         var type = memberType ?? value.GetType();
 
-        var result = !AllowUnknownValue && value.Equals(UnknownValue(QowaivType.GetNotNullableType(type)))
+        var result = !AllowUnknownValue && value.Equals(SvoValues.Unknown(QowaivType.GetNotNullableType(type)))
             ? false
             : type.IsValueType
-            ? !value.Equals(Default(type))
+            ? !value.Equals(SvoValues.Default(type))
             : base.IsValid(value);
 
         return this.PostValidate(result);
     }
 
-    [Pure]
-    private static object? Default(Type type) => Defaults.GetOrAdd(type, static t => Activator.CreateInstance(t));
-
-    [Pure]
-    private static object? UnknownValue(Type type) => Unknowns.GetOrAdd(type, static t => Unknown.Value(t));
-
-    private static readonly ConcurrentDictionary<Type, object?> Defaults = new();
-
-    private static readonly ConcurrentDictionary<Type, object?> Unknowns = new();
 }
