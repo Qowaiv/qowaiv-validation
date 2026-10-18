@@ -43,6 +43,7 @@ v11.0.0
 - Add .NET 11.0 target.
 - Drop .NET 8.0 targets (BREAKING)
 - AnnotatedModelValidator speed improvements.
+- Length.* and Count.* speed improvements.
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
