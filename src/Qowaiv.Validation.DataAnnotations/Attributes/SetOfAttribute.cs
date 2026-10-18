@@ -8,15 +8,9 @@ namespace Qowaiv.Validation.DataAnnotations;
 /// </typeparam>
 [AttributeUsage(AttributeTarget.Member, AllowMultiple = false)]
 [CLSCompliant(false)]
-public abstract class SetOfAttribute<TValue> : ValidationAttribute
+public abstract class SetOfAttribute<TValue>(params object[] values)
+    : ValidationAttribute(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError)
 {
-    /// <summary>Initializes a new instance of the <see cref="SetOfAttribute{TValue}"/> class.</summary>
-    /// <param name="values">
-    /// Representations of the values.
-    /// </param>
-    protected SetOfAttribute(params object[] values)
-        : base(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError) => Raw = values;
-
     /// <summary>Specify a custom type converter to convert the values to convert.</summary>
     public Type? TypeConverter { get; init; }
 
@@ -38,7 +32,7 @@ public abstract class SetOfAttribute<TValue> : ValidationAttribute
     private HashSet<TValue> Set => field ??= Init();
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly object[] Raw;
+    private readonly object[] Raw = values;
 
     [Pure]
     private HashSet<TValue> Init()
