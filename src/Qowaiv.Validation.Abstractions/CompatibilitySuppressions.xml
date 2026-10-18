@@ -24,7 +24,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Validation.Abstractions.InvalidModelException</Target>
+    <Target>T:Qowaiv.Validation.Abstractions.InvalidModel</Target>
     <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -59,7 +59,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Validation.Abstractions.InvalidModelException</Target>
+    <Target>T:Qowaiv.Validation.Abstractions.InvalidModel</Target>
     <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -120,7 +120,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Validation.Abstractions.InvalidModelException</Target>
+    <Target>T:Qowaiv.Validation.Abstractions.InvalidModel</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>

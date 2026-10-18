@@ -21,7 +21,7 @@
   <data name="DistinctValuesAttribute_ValidationError" xml:space="preserve">
     <value>Все значения поля {0} должны быть различными.</value>
   </data>
-  <data name="InvalidModelException" xml:space="preserve">
+  <data name="InvalidModel" xml:space="preserve">
     <value>Модель {0} не может быть обработана, так как она недействительна.</value>
   </data>
   <data name="InvalidOperationException" xml:space="preserve">

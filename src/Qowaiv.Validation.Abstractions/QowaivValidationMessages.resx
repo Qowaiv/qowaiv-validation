@@ -21,7 +21,7 @@
   <data name="DistinctValuesAttribute_ValidationError" xml:space="preserve">
     <value>All values of the {0} field should be distinct.</value>
   </data>
-  <data name="InvalidModelException" xml:space="preserve">
+  <data name="InvalidModel" xml:space="preserve">
     <value>The {0} model can not be operated on as it is invalid.</value>
   </data>
   <data name="InvalidOperationException" xml:space="preserve">
