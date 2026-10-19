@@ -20,7 +20,7 @@ public class Does_not_allow
         public void validation_on_non_enum_values()
         {
             Func<bool> validate = () => new DefinedEnumValuesOnlyAttribute().IsValid(1);
-            validate.Should().Throw<ArgumentException>();
+            validate.Should().Throw<UnsupportedType>();
         }
     }
 }

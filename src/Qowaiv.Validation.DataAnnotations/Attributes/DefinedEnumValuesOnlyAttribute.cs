@@ -24,25 +24,39 @@ public class DefinedEnumValuesOnlyAttribute()
     {
         // Might be a nullable enum, we just don't know.
         if (value is null) return true;
-        else
+        else if (value.GetType() is { IsEnum: true } enumType)
         {
-            var enumType = value.GetType();
-
-            if (!OnlyAllowDefinedFlagsCombinations && enumType.IsEnum && enumType.GetCustomAttributes<FlagsAttribute>().Any())
+            if (OnlyAllowDefinedFlagsCombinations || !enumType.GetCustomAttributes<FlagsAttribute>().Any())
             {
-                var defined = Enum.GetValues(enumType);
-                if (defined.Length == 0) return false;
-
-                dynamic max = defined.GetValue(0)!;
-                for (var i = 1; i < defined.Length; i++)
-                {
-                    max |= (dynamic)defined.GetValue(i)!;
-                }
-
-                dynamic dyn = value;
-                return (max & dyn) == dyn;
+                return Enum.IsDefined(enumType, value);
             }
-            return Enum.IsDefined(enumType, value);
+            else
+            {
+                dynamic dyn = value;
+                return (Mask(enumType) & dyn) == dyn;
+            }
         }
+        else throw UnsupportedType.ForAttribute<DefinedEnumValuesOnlyAttribute>(value.GetType());
     }
+
+    [Pure]
+    private static dynamic Mask(Type enumType)
+    {
+        if (!Flags.TryGetValue(enumType, out var mask))
+        {
+            var defined = Enum.GetValues(enumType);
+            mask = defined.GetValue(0)!;
+
+            for (var i = 1; i < defined.Length; i++)
+            {
+                mask |= (dynamic)defined.GetValue(i)!;
+            }
+
+            Flags[enumType] = mask;
+        }
+
+        return mask;
+    }
+
+    private static readonly ConcurrentDictionary<Type, dynamic> Flags = [];
 }
