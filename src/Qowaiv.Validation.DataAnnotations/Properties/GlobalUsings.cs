@@ -13,3 +13,8 @@ global using System.Diagnostics.Contracts;
 global using System.Globalization;
 global using System.Linq;
 global using System.Runtime.CompilerServices;
+#if NETSTANDARD2_0
+global using Lock = System.Object;
+#else
+global using Lock = System.Threading.Lock;
+#endif
