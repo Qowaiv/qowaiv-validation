@@ -19,7 +19,9 @@ public sealed class MultipleOfAttribute : ValidationAttribute
 
     /// <summary>Initializes a new instance of the <see cref="MultipleOfAttribute"/> class.</summary>
     private MultipleOfAttribute(decimal factor) : base(() => QowaivValidationMessages.MultipleOfAttribute_ValidationError)
-        => Factor = factor;
+        => Factor = factor == 0
+            ? throw new ArgumentOutOfRangeException(nameof(factor), "The factor can not be zero.")
+            : factor;
 
     /// <summary>The factor of which the value has to be a multiple of.</summary>
     public decimal Factor { get; }

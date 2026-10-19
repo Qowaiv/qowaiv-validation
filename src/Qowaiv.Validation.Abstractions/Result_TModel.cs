@@ -104,7 +104,7 @@ public sealed class Result<TModel> : Result
         if (IsValid)
         {
             var outcome = action(Value);
-            return NotNull(Value, Messages.Append(outcome.Messages));
+            return new(_value, Messages.Append(outcome.Messages));
         }
         else return WithMessages<TModel>(Messages);
     }
@@ -216,7 +216,7 @@ public sealed class Result<TModel> : Result
             if (IsValid)
             {
                 var outcome = await action(Value).ConfigureAwait(continueOnCapturedContext);
-                return NotNull(Value, Messages.Append(outcome.Messages));
+                return new(_value, Messages.Append(outcome.Messages));
             }
             else return WithMessages<TModel>(Messages);
         }
