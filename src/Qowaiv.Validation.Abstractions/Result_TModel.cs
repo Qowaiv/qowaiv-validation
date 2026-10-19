@@ -48,7 +48,7 @@ public sealed class Result<TModel> : Result
     [Pure]
     public Result<TOut> Cast<TOut>()
     {
-        return new(_value is null ? default : Cast(), Messages);
+        return new(_value is not null && IsValid ? Cast() : default, Messages);
 
         TOut Cast()
             => _value is TOut cast
