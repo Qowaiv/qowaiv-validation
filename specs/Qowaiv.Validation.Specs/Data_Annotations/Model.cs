@@ -1,5 +1,6 @@
 #pragma warning disable
 
+using NUnit.Framework.Constraints;
 using Qowaiv.Validation.DataAnnotations;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
@@ -131,6 +132,12 @@ internal static class Model
 
             [Allowed<int>("42")]
             public int Value { get; init; }
+        }
+    
+        public class NonGenericEnumerable
+        {
+            [Any]
+            public ArrayList Items { get; init; } = new();
         }
     }
 

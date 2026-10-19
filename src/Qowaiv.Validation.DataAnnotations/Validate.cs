@@ -34,7 +34,9 @@ internal static class Validate
     /// <summary>Validates the items of the enumerable.</summary>
     private static void Enumerable(IEnumerable enumerable, MemberPath path, ValidateContext ctx)
     {
-        var enumTyped = TypeAnnotations.Get(enumerable.GetType().GetEnumerableType()!);
+        var enumTyped = enumerable.GetType().GetEnumerableType() is { } enumerated
+            ? TypeAnnotations.Get(enumerated)
+            : null;
 
         // We have to reset it if the type is not sealed.
         if (enumTyped?.CheckInheritance is true) enumTyped = null;

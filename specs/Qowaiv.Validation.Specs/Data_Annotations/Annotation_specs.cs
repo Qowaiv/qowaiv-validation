@@ -22,6 +22,12 @@ public class Does_not_crash_on
         => new AnnotatedModelValidator<Model.With.SetOnlyProperty>()
         .Validate(new())
         .Should().BeValid();
+
+    [Test]
+    public void non_generic_enumerables()
+     => new AnnotatedModelValidator<Model.With.NonGenericEnumerable>()
+        .Validate(new() { Items = new() { "one" } })
+        .Should().BeValid();
 }
 
 public class Resolves_property
