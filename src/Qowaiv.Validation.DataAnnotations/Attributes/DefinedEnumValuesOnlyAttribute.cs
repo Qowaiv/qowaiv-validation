@@ -8,7 +8,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 public class DefinedEnumValuesOnlyAttribute()
     : ValidationAttribute(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError)
 {
-    /// <summary>If true, for flag enums, also combinations of defined single values are allowed, that are not defined themselves explicitly.</summary>
+    /// <summary>If true, only explicitly defined values of flag enums are allowed; combinations of defined values that are not defined themselves are rejected.</summary>
     /// <remarks>
     /// When enabled, the logic falls back on <see cref="Enum.IsDefined(Type, object)"/>, as
     /// that is stricter than, our implementation.
@@ -30,11 +30,16 @@ public class DefinedEnumValuesOnlyAttribute()
 
             if (!OnlyAllowDefinedFlagsCombinations && enumType.IsEnum && enumType.GetCustomAttributes<FlagsAttribute>().Any())
             {
-                dynamic dyn = value;
-                var max = Enum.GetValues(enumType)
-                    .Cast<dynamic>()
-                    .Aggregate((e1, e2) => e1 | e2);
+                var defined = Enum.GetValues(enumType);
+                if (defined.Length == 0) return false;
 
+                dynamic max = defined.GetValue(0)!;
+                for (var i = 1; i < defined.Length; i++)
+                {
+                    max |= (dynamic)defined.GetValue(i)!;
+                }
+
+                dynamic dyn = value;
                 return (max & dyn) == dyn;
             }
             return Enum.IsDefined(enumType, value);
