@@ -56,7 +56,7 @@ public readonly partial struct AsyncResult<TModel>
 
         async Task<Result<TOut>> Execute()
             => await promise.ConfigureAwait(continueOnCapturedContext) is { } result
-            ? await result.ActAsync(action, continueOnCapturedContext)
+            ? await result.ActAsync(action, continueOnCapturedContext).ConfigureAwait(continueOnCapturedContext)
             : Result.Null<TOut>();
 
         return new(Execute());
@@ -110,7 +110,7 @@ public readonly partial struct AsyncResult<TModel>
 
         async Task<Result<TModel>> Execute()
             => await promise.ConfigureAwait(continueOnCapturedContext) is { } result
-            ? await result.ActAsync(action, continueOnCapturedContext)
+            ? await result.ActAsync(action, continueOnCapturedContext).ConfigureAwait(continueOnCapturedContext)
             : Result.Null<TModel>();
 
         return new(Execute());
@@ -178,7 +178,7 @@ public readonly partial struct AsyncResult<TModel>
 
         async Task<Result<TModel>> Execute()
             => await promise.ConfigureAwait(continueOnCapturedContext) is { } result
-            ? await result.ActAsync(action, update, continueOnCapturedContext)
+             ? await result.ActAsync(action, update, continueOnCapturedContext).ConfigureAwait(continueOnCapturedContext)
             : Result.WithMessages<TModel>();
 
         return new(Execute());
@@ -246,7 +246,7 @@ public readonly partial struct AsyncResult<TModel>
 
         async Task<Result<TModel>> Execute()
             => await promise.ConfigureAwait(continueOnCapturedContext) is { } result
-             ? await result.ActAsync(action, update, continueOnCapturedContext)
+            ? await result.ActAsync(action, update, continueOnCapturedContext).ConfigureAwait(continueOnCapturedContext)
             : Result.WithMessages<TModel>();
 
         return new(Execute());

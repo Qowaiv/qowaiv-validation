@@ -279,7 +279,7 @@ public sealed class Result<TModel> : Result
 
         async Task<Result<TModel>> Execute()
         {
-            var resolved = await ActAsync(action, continueOnCapturedContext);
+            var resolved = await ActAsync(action, continueOnCapturedContext).ConfigureAwait(continueOnCapturedContext);
             return resolved.IsValid
                 ? new(update(_value!, resolved.Value), resolved.Messages)
                 : new(_value, resolved.Messages);
