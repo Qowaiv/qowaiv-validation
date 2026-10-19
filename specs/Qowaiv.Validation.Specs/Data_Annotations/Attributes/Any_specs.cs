@@ -37,6 +37,47 @@ public class Is_not_valid_for
         => new AnyAttribute().IsValid(string.Empty).Should().BeFalse();
 }
 
+public class Disposes
+{
+    [Test]
+    public void its_enumerator_after_short_circuiting_on_the_first_item()
+    {
+        var values = new TrackingEnumerable(42, 43);
+
+        new AnyAttribute().IsValid(values).Should().BeTrue();
+
+        values.Fetched.Should().Be(1);
+        values.Disposed.Should().BeTrue();
+    }
+
+    [Test]
+    public void its_enumerator_when_empty()
+    {
+        var values = new TrackingEnumerable();
+
+        new AnyAttribute().IsValid(values).Should().BeFalse();
+
+        values.Disposed.Should().BeTrue();
+    }
+
+    [Test]
+    public void its_enumerator_when_validating_a_model_member()
+    {
+        var values = new TrackingEnumerable(42);
+
+        new Model { Values = values }.ValidateWith(new AnnotatedModelValidator<Model>())
+            .Should().BeValid();
+
+        values.Disposed.Should().BeTrue();
+    }
+}
+
+file sealed class Model
+{
+    [Any]
+    public IEnumerable<int> Values { get; init; } = [];
+}
+
 public class With_message
 {
     [TestCase("nl", "Het veld Values is verplicht.")]

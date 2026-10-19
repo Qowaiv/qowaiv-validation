@@ -141,6 +141,20 @@ public class In_range
     }
 }
 
+public class Disposes
+{
+    [Test]
+    public void its_enumerator_when_counting_a_non_ICollection()
+    {
+        var values = new TrackingEnumerable(1, 2, 3);
+
+        new Collection.AtLeastAttribute(2).IsValid(values).Should().BeTrue();
+
+        values.Fetched.Should().Be(3);
+        values.Disposed.Should().BeTrue();
+    }
+}
+
 file sealed class Model
 {
     [Collection.InRange(3, 4)]

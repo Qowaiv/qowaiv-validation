@@ -1,3 +1,5 @@
+using System.Collections.Enumerable;
+
 namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Specifies that a field should at least have one item in its collection.</summary>
@@ -21,7 +23,7 @@ public class AnyAttribute : RequiredAttribute
         null => false,
         ICollection collection => collection.Count > 0,
         string str => str.Length > 0,
-        IEnumerable enumerable => enumerable.GetEnumerator().MoveNext(),
+        IEnumerable enumerable => enumerable.Any(),
         _ => true,
     });
 }

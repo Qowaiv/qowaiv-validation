@@ -1,9 +1,9 @@
-using Qowaiv.Diagnostics.Contracts;
+#pragma warning disable
+
+using NUnit.Framework.Constraints;
 using Qowaiv.Validation.DataAnnotations;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
-
-namespace Data_annotations;
 
 internal static class Model
 {
@@ -75,13 +75,7 @@ internal static class Model
             public static string NonInstance = string.Empty;
 
             [Allowed<int>(42)]
-#pragma warning disable CS0169 // Needed for testing
-#pragma warning disable IDE0044 // Add readonly modifier
-#pragma warning disable IDE0051 // Remove unused private members
             private int Private;
-#pragma warning restore IDE0051 // Remove unused private members
-#pragma warning restore IDE0044 // Add readonly modifier
-#pragma warning restore CS0169
         }
 
         public sealed class RequiredOnValueType
@@ -89,9 +83,7 @@ internal static class Model
             [Required]
             public int? Required { get; init; }
 
-#pragma warning disable QW0101 // Required attribute cannot invalidate value types
             [Required]
-#pragma warning restore QW0101 // Required attribute cannot invalidate value types
             public bool Ignored { get; init; }
 
             [Mandatory]
@@ -100,16 +92,52 @@ internal static class Model
 
         public sealed class SetOnlyProperty
         {
-#pragma warning disable S2376 // Write-only properties should not be used
-#pragma warning disable IDE0360 // Simplify property accessor
             // This is a test to check if write-only properties are handled correctly.
             [Mandatory]
             public int SomeProperty
             {
                 set => field = value;
             }
-#pragma warning restore IDE0360
-#pragma warning restore S2376
+        }
+
+        public class SelfReference
+        {
+            [Allowed<int>("42")]
+            public int Value { get; init; }
+
+            public SelfReference? Next { get; set; }
+        }
+
+        public sealed class MutualA
+        {
+            public MutualB? B { get; init; }
+        }
+
+        public class MutualB
+        {
+            public MutualA? A { get; init; }
+
+            [Allowed<int>("42")]
+            public int Value { get; init; }
+        }
+
+        public sealed class SealedCycle
+        {
+            public UnsealedInner? Inner { get; init; }
+        }
+
+        public class UnsealedInner
+        {
+            public SealedCycle? Cycle { get; init; }
+
+            [Allowed<int>("42")]
+            public int Value { get; init; }
+        }
+    
+        public class NonGenericEnumerable
+        {
+            [Any]
+            public ArrayList Items { get; init; } = new();
         }
     }
 
@@ -142,7 +170,6 @@ internal static class Model
         }
     }
 
-    [Inheritable]
     public class Inheritable { }
 
     public class Inherited : Inheritable

@@ -1,3 +1,5 @@
+using Qowaiv.Reflection;
+
 namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Specifies that a field is mandatory (for value types the default value is not allowed).</summary>
@@ -21,7 +23,7 @@ public sealed class MandatoryAttribute : RequiredAttribute
     /// <inheritdoc />
     [Pure]
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
-        => this.PostValidate(Check(value, null))
+        => this.PostValidate(Check(value, validationContext))
         ? null
         : ValidationMessage.Error(FormatErrorMessage(validationContext.DisplayName), validationContext.MemberNames());
 
@@ -59,14 +61,18 @@ public sealed class MandatoryAttribute : RequiredAttribute
     [Pure]
     private static bool IsNullable(Type type, ValidationContext? ctx)
     {
-        if (type.IsValueType && Member.New(ctx) is { } member)
+        // Reference types are nullable by design.
+        if (!type.IsValueType) return true;
+
+        if (Member.New(ctx) is { } member)
         {
             if (!Members.TryGetValue(member, out var nullable))
             {
-                nullable = member.Resolve() != type;
+                nullable = member.IsNullable();
                 Members[member] = nullable;
+                return nullable;
             }
-            return nullable;
+            else return nullable;
         }
         else return false;
     }
@@ -74,11 +80,10 @@ public sealed class MandatoryAttribute : RequiredAttribute
     private readonly record struct Member(Type Declaring, string Name)
     {
         [Pure]
-        public Type? Resolve()
+        public bool IsNullable()
             => Name is { Length: > 0 }
             && (Declaring.GetProperty(Name)?.PropertyType ?? Declaring.GetField(Name)?.FieldType) is { IsValueType: true } type
-            ? type
-            : null;
+            && QowaivType.IsNullable(type);
 
         [Pure]
         public static Member? New(ValidationContext? ctx)
