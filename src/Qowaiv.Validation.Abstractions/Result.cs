@@ -17,7 +17,7 @@ public partial class Result
 
     /// <summary>Return true if there are no error messages, otherwise false.</summary>
     [Pure]
-    public bool IsValid => !Errors.Any();
+    public bool IsValid => Messages is { Count: 0 } || Messages[0].Severity is not ValidationSeverity.Error;
 
     /// <summary>Throws an <see cref="InvalidModel"/> if the result is not valid.</summary>
     public void ThrowIfInvalid()
