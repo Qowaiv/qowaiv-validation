@@ -139,6 +139,29 @@ internal static class Model
             [Any]
             public ArrayList Items { get; init; } = new();
         }
+
+        public class Enumerables
+        {
+            [Collection.AtLeast(4)]
+            public IEnumerable Items { get; init; } = new Childeren();
+
+            public class Child
+            {
+                [Mandatory]
+                public int Mandatory { get; init; } = 42;
+            }
+
+            public class Childeren : IEnumerable
+            {
+                public IEnumerator GetEnumerator()
+                {
+                    yield return new Child();
+                    yield return new Child();
+                    yield return new Child();
+                    yield return new Child();
+                }
+            }
+        }
     }
 
     public static class Without
