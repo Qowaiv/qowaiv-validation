@@ -4,8 +4,6 @@ namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Specifies that a field is a multiple of a factor.</summary>
 [AttributeUsage(AttributeTarget.Member, AllowMultiple = false)]
-[Validates(typeof(float))]
-[Validates(typeof(double))]
 [Validates(typeof(decimal))]
 [Validates(typeof(Amount))]
 [Validates(typeof(Money))]
@@ -19,8 +17,8 @@ public sealed class MultipleOfAttribute : ValidationAttribute
 
     /// <summary>Initializes a new instance of the <see cref="MultipleOfAttribute"/> class.</summary>
     private MultipleOfAttribute(decimal factor) : base(() => QowaivValidationMessages.MultipleOfAttribute_ValidationError)
-        => Factor = factor == 0
-            ? throw new ArgumentOutOfRangeException(nameof(factor), "The factor can not be zero.")
+        => Factor = factor <= 0
+            ? throw new ArgumentOutOfRangeException(nameof(factor), "The factor can not be zero or less.")
             : factor;
 
     /// <summary>The factor of which the value has to be a multiple of.</summary>
@@ -36,8 +34,8 @@ public sealed class MultipleOfAttribute : ValidationAttribute
     public override bool IsValid(object? value) => value switch
     {
         null => true,
-        float flt => IsValid(flt),
-        double dbl => IsValid(dbl),
+        float => throw UnsupportedType.ForAttribute<MultipleOfAttribute>(typeof(float)),
+        double => throw UnsupportedType.ForAttribute<MultipleOfAttribute>(typeof(double)),
         decimal dec => IsValid(dec),
         Amount amount => IsValid((decimal)amount),
         Money money => IsValid((decimal)money.Amount),
@@ -50,18 +48,6 @@ public sealed class MultipleOfAttribute : ValidationAttribute
     private bool IsValid(decimal value) => value % Factor == 0;
 
     [Pure]
-    private bool IsValid(float value)
-       => value.IsFinite()
-       && AsDecimal(value) is { } dec
-       && IsValid(dec);
-
-    [Pure]
-    private bool IsValid(double value)
-        => value.IsFinite()
-        && AsDecimal(value) is { } dec
-        && IsValid(dec);
-
-    [Pure]
     private bool IsValid(IConvertible value)
         => IsValid(value.GetTypeCode())
         && IsValid(Convert.ToDecimal(value));
@@ -71,19 +57,11 @@ public sealed class MultipleOfAttribute : ValidationAttribute
         => type is >= TypeCode.SByte and <= TypeCode.UInt64;
 
     [Pure]
-    private static decimal? AsDecimal(float value)
-        => value is >= Decimal_MinValue_as_f and <= Decimal_MaxValue_as_f
-            ? (decimal)value
-            : null;
-
-    [Pure]
     private static decimal? AsDecimal(double value)
         => value is >= Decimal_MinValue_as_d and <= Decimal_MaxValue_as_d
-            ? (decimal)value
+            ? ((decimal)value).Round(15)
             : null;
 
     private const double Decimal_MinValue_as_d = (double)decimal.MinValue;
     private const double Decimal_MaxValue_as_d = (double)decimal.MaxValue;
-    private const float Decimal_MinValue_as_f = (float)decimal.MinValue;
-    private const float Decimal_MaxValue_as_f = (float)decimal.MaxValue;
 }
