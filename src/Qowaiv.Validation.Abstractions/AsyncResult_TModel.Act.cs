@@ -178,7 +178,7 @@ public readonly partial struct AsyncResult<TModel>
 
         async Task<Result<TModel>> Execute()
             => await promise.ConfigureAwait(continueOnCapturedContext) is { } result
-            ? await result.ActAsync(action, update)
+            ? await result.ActAsync(action, update, continueOnCapturedContext)
             : Result.WithMessages<TModel>();
 
         return new(Execute());
