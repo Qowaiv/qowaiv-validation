@@ -140,6 +140,7 @@ public readonly partial struct AsyncResult<TModel>
         bool continueOnCapturedContext = false)
     {
         Guard.NotNull(action);
+        Guard.NotNull(update);
         var promise = Promise;
 
         async Task<Result<TModel>> Execute()
@@ -174,6 +175,7 @@ public readonly partial struct AsyncResult<TModel>
         bool continueOnCapturedContext = false)
     {
         Guard.NotNull(action);
+        Guard.NotNull(update);
         var promise = Promise;
 
         async Task<Result<TModel>> Execute()
@@ -208,6 +210,7 @@ public readonly partial struct AsyncResult<TModel>
         bool continueOnCapturedContext = false)
     {
         Guard.NotNull(action);
+        Guard.NotNull(update);
         var promise = Promise;
 
         async Task<Result<TModel>> Execute()
@@ -242,6 +245,7 @@ public readonly partial struct AsyncResult<TModel>
         bool continueOnCapturedContext = false)
     {
         Guard.NotNull(action);
+        Guard.NotNull(update);
         var promise = Promise;
 
         async Task<Result<TModel>> Execute()
