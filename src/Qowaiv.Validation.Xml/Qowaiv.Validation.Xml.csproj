@@ -14,6 +14,7 @@ v11.0.0
 - Drop .NET 8.0 targets (BREAKING)
 - AsyncResult<TModel>. (BREAKING)
 - SchemaValidator is sealed. (BREAKING)
+- Explicitly prohibited DTD.
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

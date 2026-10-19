@@ -7,7 +7,12 @@ internal static class QowaivValidationStreamExtensions
         [Pure]
         public XmlSchema AsXmlSchema()
         {
-            using var reader = new XmlTextReader(stream);
+            var settings = new XmlReaderSettings
+            {
+                DtdProcessing = DtdProcessing.Prohibit,
+                XmlResolver = null,
+            };
+            using var reader = XmlReader.Create(stream, settings);
             return XmlSchema.Read(reader, null)!;
         }
     }
