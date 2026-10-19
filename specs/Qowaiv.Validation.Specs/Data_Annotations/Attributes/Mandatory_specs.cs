@@ -24,6 +24,20 @@ public class Is_valid_for
     [Test]
     public void EmailAddress_Unknown_when_unknown_values_are_allowed()
         => new MandatoryAttribute { AllowUnknownValue = true }.IsValid(EmailAddress.Unknown).Should().BeTrue();
+
+    [Test]
+    public void ReferenceType_without_parameterless_ctor()
+        => new MandatoryAttribute().IsValid(new Uri("https://qowaiv.org"))
+        .Should().BeTrue();
+
+    [Test]
+    public void ReferenceType_without_Unknown_value()
+        => new MandatoryAttribute{ AllowUnknownValue = false }.IsValid(new object())
+        .Should().BeTrue();
+
+    [Test]
+    public void Record_in_default_state()
+        => new MandatoryAttribute().IsValid(new AllDefault()).Should().BeTrue();
 }
 public class Is_not_valid_for
 {
@@ -39,6 +53,27 @@ public class Is_not_valid_for
     public void EmailAddress_Unknown()
       => new MandatoryAttribute().IsValid(EmailAddress.Unknown).Should().BeFalse();
 }
+public class Nullable_value_types
+{
+    [Test]
+    [SetCulture("en-GB")]
+    public void that_is_null_is_not_valid()
+        => new Model().ValidateWith(new AnnotatedModelValidator<Model>())
+        .Should().BeInvalid()
+        .WithMessage(ValidationMessage.Error("The Value field is required.", "Value"));
+
+    [Test]
+    public void with_a_value_is_valid()
+        => new Model { Value = 0 }.ValidateWith(new AnnotatedModelValidator<Model>())
+        .Should().BeValid();
+}
+
+file sealed class Model
+{
+    [Mandatory]
+    public int? Value { get; init; }
+}
+
 public class With_message
 {
     [TestCase("nl-NL", "Het veld TestField is verplicht.")]
@@ -91,6 +126,9 @@ public class With_message
 
         [Required]
         public string? ReferenceField { get; set; }
+
+        [Mandatory] // Is valid as it is a nullable.
+        public decimal? Nullable { get; init; } = 0;
     }
 
     public class WithCustomErrorMessageType
@@ -106,3 +144,5 @@ public class With_message
         public InternationalBankAccountNumber Iban { get; set; }
     }
 }
+
+file sealed record AllDefault;

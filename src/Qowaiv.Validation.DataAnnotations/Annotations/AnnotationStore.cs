@@ -114,10 +114,21 @@ internal sealed class AnnotationStore
         var typeAnnotations = Get(info.MemberType, visited);
         var checks = typeAnnotations?.Checks ?? default;
 
-        return checks != AnnotationChecks.None || attributes is { Count: > 0 }
+        // A cyclic reference (the member type is being annotated higher up the call stack)
+        // has no annotations (yet), but the member should not be dropped: at runtime the
+        // annotations are resolved via the store, so its nested members are validated.
+        return checks != AnnotationChecks.None || attributes is { Count: > 0 } || IsInProgress(info.MemberType, visited)
             ? new(checks, typeAnnotations, ExactRuntimeType(info.MemberType), info.Name, display, attributes.ToArray(), info.Get)
             : null;
     }
+
+    /// <summary>Gets a value indicating whether the type is currently being annotated
+    /// higher up the call stack (a cyclic reference), and thus not cached (yet).</summary>
+    [Pure]
+    private bool IsInProgress(Type type, HashSet<Type> visited)
+        => !LackAnnotations(type)
+        && !Annotations.ContainsKey(type)
+        && visited.Contains(type);
 
     [Pure]
     private static bool ExactRuntimeType(Type type)

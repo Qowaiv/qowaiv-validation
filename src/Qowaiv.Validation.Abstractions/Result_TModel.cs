@@ -48,7 +48,7 @@ public sealed class Result<TModel> : Result
     [Pure]
     public Result<TOut> Cast<TOut>()
     {
-        return new(_value is null ? default : Cast(), Messages);
+        return new(_value is not null && IsValid ? Cast() : default, Messages);
 
         TOut Cast()
             => _value is TOut cast
@@ -124,12 +124,15 @@ public sealed class Result<TModel> : Result
     /// </returns>
     [Impure]
     public Result<TModel> Act<TOut>(Func<TModel, Result<TOut>> action, Action<TModel, TOut> update)
-        => Act(action, (model, result) =>
+    {
+        Guard.NotNull(update);
+
+        return Act(action, (model, result) =>
         {
-            Guard.NotNull(update);
             if (model is { }) { update.Invoke(model, result); }
             return model;
         });
+    }
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
     /// <param name="action">
@@ -242,15 +245,18 @@ public sealed class Result<TModel> : Result
         Func<TModel, AsyncResult<TOut>> action,
         Action<TModel, TOut> update,
         bool continueOnCapturedContext = false)
-        => ActAsync(
+    {
+        Guard.NotNull(update);
+
+        return ActAsync(
             action,
             (model, result) =>
             {
-                Guard.NotNull(update);
                 if (model is { }) { update.Invoke(model, result); }
                 return model;
             },
             continueOnCapturedContext);
+    }
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
     /// <param name="action">
@@ -279,7 +285,7 @@ public sealed class Result<TModel> : Result
 
         async Task<Result<TModel>> Execute()
         {
-            var resolved = await ActAsync(action, continueOnCapturedContext);
+            var resolved = await ActAsync(action, continueOnCapturedContext).ConfigureAwait(continueOnCapturedContext);
             return resolved.IsValid
                 ? new(update(_value!, resolved.Value), resolved.Messages)
                 : new(_value, resolved.Messages);
