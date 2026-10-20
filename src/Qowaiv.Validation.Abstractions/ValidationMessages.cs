@@ -1,12 +1,12 @@
 namespace Qowaiv.Validation.Abstractions;
 
 /// <summary>Represents a read-only collection of valiation messages.</summary>
-[DebuggerDisplay("{DebuggerDisplay(),nq}")]
+[DebuggerDisplay("{DebuggerDisplay),nq}")]
 [CollectionBuilder(typeof(ValidationMessages), nameof(New))]
 public readonly struct ValidationMessages : IReadOnlyCollection<IValidationMessage>, ICollection
 {
     /// <summary>An empty validation message collection.</summary>
-    public static readonly ValidationMessages Empty = new(0, 0, 0, []);
+    public static readonly ValidationMessages None = new(0, 0, 0, []);
 
     [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
     private readonly IValidationMessage[] Messages;
@@ -25,9 +25,6 @@ public readonly struct ValidationMessages : IReadOnlyCollection<IValidationMessa
         Inf = inf;
         Messages = messages;
     }
-
-    /// <summary>Indicates that validation messages have not been initialized.</summary>
-    public bool IsDefault => Messages is null;
 
     /// <summary>True if any of the messages is an error.</summary>
     public bool HasErrors => Err is not 0;
@@ -52,7 +49,6 @@ public readonly struct ValidationMessages : IReadOnlyCollection<IValidationMessa
     {
         get
         {
-            if (IsDefault) return "NotInitialized";
             var sb = new StringBuilder().Append($"Count = {Count}");
             if (Err is not 0) sb.Append($", Errors = {Err}");
             if (Wrn is not 0) sb.Append($", Warings = {Wrn}");
@@ -72,8 +68,8 @@ public readonly struct ValidationMessages : IReadOnlyCollection<IValidationMessa
     {
         var additions = New(messages);
 
-        if (additions.Count is 0) return this;
-        else if (Count is 0) return additions;
+        if (Count is 0) return additions;
+        else if (additions.Count is 0) return this;
         else
         {
             IValidationMessage[] combined = [.. Messages, .. additions.Messages];
@@ -103,16 +99,24 @@ public readonly struct ValidationMessages : IReadOnlyCollection<IValidationMessa
     private IValidationMessage[] messages(Range range)
 #if NETSTANDARD2_0
     {
-        throw new NotSupportedException();
+        // SubRange is not available for .NET standard 2.0 unfortunatly.
+        var count = Count;
+        var start = range.Start is { IsFromEnd: true } ? count - range.Start.Value : range.Start.Value;
+        var end = range.End is { IsFromEnd: true } ? count - range.End.Value : range.End.Value;
+        var length = end - start;
+
+        if (length == count) return messages();
+
+        var copy = new IValidationMessage[length];
+        Array.Copy(Messages, start, copy, 0, length);
+        return copy;
     }
-#else
+    #else
         => messages()[range];
-#endif
+    #endif
 
     [Pure]
-    private IValidationMessage[] messages()
-        => Messages
-        ?? throw new InvalidOperationException("ValidationMessages has not been initialized.");
+    private IValidationMessage[] messages() => Messages ?? [];
 
     /// <summary>Creates a new collection of <see cref="ValidationMessages" /></summary>
     /// <param name="messages">
@@ -125,7 +129,7 @@ public readonly struct ValidationMessages : IReadOnlyCollection<IValidationMessa
     [OverloadResolutionPriority(1)]
     public static ValidationMessages New(IEnumerable<IValidationMessage?> messages)
     {
-        if (messages is null) return Empty;
+        if (messages is null) return None;
 
         var index = -1;
         var list = new List<IValidationMessage>();
