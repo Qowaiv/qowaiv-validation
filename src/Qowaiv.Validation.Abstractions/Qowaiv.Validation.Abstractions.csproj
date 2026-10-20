@@ -1,12 +1,31 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/package.props" />
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
+    <PackageId>Qowaiv.Validation.Abstractions</PackageId>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="System.Memory" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="QowaivValidationMessages.Designer.cs" DependentUpon="QowaivValidationMessages.resx" AutoGen="True" DesignTime="True" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="QowaivValidationMessages.resx" LastGenOutput="QowaivValidationMessages.Designer.cs" Generator="ResXFileCodeGenerator" />
+  </ItemGroup>
+
+  <PropertyGroup>
     <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
     <Version>2.1.0</Version>
-    <PackageId>Qowaiv.Validation.Abstractions</PackageId>
     <ToBeReleased>
       <![CDATA[
 v11.0.0
@@ -58,17 +77,5 @@ v0.0.4
 ]]>
     </PackageReleaseNotes>
   </PropertyGroup>
- 
-  <ItemGroup>
-    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="QowaivValidationMessages.Designer.cs" DependentUpon="QowaivValidationMessages.resx" AutoGen="True" DesignTime="True" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="QowaivValidationMessages.resx" LastGenOutput="QowaivValidationMessages.Designer.cs" Generator="ResXFileCodeGenerator" />
-  </ItemGroup>
 
 </Project>

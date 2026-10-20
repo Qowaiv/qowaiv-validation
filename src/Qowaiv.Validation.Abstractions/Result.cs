@@ -8,16 +8,16 @@ public partial class Result
     /// <param name="messages">
     /// The messages related to the result.
     /// </param>
-    internal Result(IValidationMessages messages)
-        => Messages = Guard.NotNull(messages);
+    internal Result(ValidationMessages messages)
+        => Messages = messages;
 
     /// <summary>Gets the messages related to the result.</summary>
     [Pure]
-    public IValidationMessages Messages { get; }
+    public ValidationMessages Messages { get; }
 
     /// <summary>Return true if there are no error messages, otherwise false.</summary>
     [Pure]
-    public bool IsValid => Messages is { Count: 0 } || Messages[0].Severity is not ValidationSeverity.Error;
+    public bool IsValid => !Messages.HasErrors;
 
     /// <summary>Throws an <see cref="InvalidModel"/> if the result is not valid.</summary>
     public void ThrowIfInvalid()
@@ -39,13 +39,13 @@ public partial class Result
 
     /// <summary>Gets all messages with <see cref="ValidationSeverity.Error"/>.</summary>
     [Pure]
-    public IEnumerable<IValidationMessage> Errors => Messages.GetErrors();
+    public ValidationMessages Errors => Messages.Errors;
 
     /// <summary>Gets all messages with <see cref="ValidationSeverity.Warning"/>.</summary>
     [Pure]
-    public IEnumerable<IValidationMessage> Warnings => Messages.GetWarnings();
+    public ValidationMessages Warnings => Messages.Warnings;
 
     /// <summary>Gets all messages with <see cref="ValidationSeverity.Info"/>.</summary>
     [Pure]
-    public IEnumerable<IValidationMessage> Infos => Messages.GetInfos();
+    public ValidationMessages Infos => Messages.Infos;
 }
