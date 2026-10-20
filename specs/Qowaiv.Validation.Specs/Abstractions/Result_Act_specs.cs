@@ -13,6 +13,28 @@ public class ValidModel
         .Value.Actions.Should().Be(1);
 
     [Test]
+    public void Act_on_value_transforming_function_is_executed_and_result_stays_valid()
+        => Model().Act(m => m.ToModel())
+        .Should().BeValid()
+        .Value.Actions.Should().Be(1);
+
+    [Test]
+    public void Act_on_value_transforming_function_returning_null_throws()
+        => Model().Invoking(m => m.Act(_ => (TestModel?)null))
+        .Should().Throw<NoValue>();
+
+    [Test]
+    public void Act_on_value_transforming_function_of_valid_null_model_returning_null_throws()
+        => Result.Null<TestModel>().Invoking(m => m.Act(model => model))
+        .Should().Throw<NoValue>();
+
+    [Test]
+    public void Act_on_result_returning_function_with_Result_Null_is_valid_with_null_value()
+        => Model().Act(_ => Result.Null<TestModel>())
+        .Should().BeValid()
+        .Value.Should().BeNull();
+
+    [Test]
     public void Act_on_nonfailing_function_is_executed_and_result_stays_valid()
         => Model().Act(m => m.NonfailingFunction())
         .Should().BeValid()
@@ -35,6 +57,18 @@ public class ValidModel
         => (await Model().ActAsync(m => m.FailingFunctionAsync()))
         .Should().BeInvalid()
         .WithMessage(ValidationMessage.Error("FailingFunctionAsync"));
+
+    [Test]
+    public async Task ActAsync_on_async_result_returning_function_with_Result_Null_is_valid_with_null_value()
+        => (await Model().ActAsync(_ => Result.Null<TestModel>().Async()))
+        .Should().BeValid()
+        .Value.Should().BeNull();
+
+    [Test]
+    public void Act_on_result_returning_function_of_valid_null_model_stays_valid()
+        => Result.Null<TestModel>().Act(_ => Result.Null<TestModel>())
+        .Should().BeValid()
+        .Value.Should().BeNull();
 
     [Test]
     public void Act_on_nonfailing_action_is_executed_and_result_stays_valid()
@@ -70,6 +104,25 @@ public class AsyncValidModel
         => (await ModelAsync().ActAsync(m => m.TransformingFunction()))
         .Should().BeValid()
         .Value.Actions.Should().Be(1);
+
+    [Test]
+    public async Task ActAsync_on_sync_value_transforming_function_is_executed_and_result_stays_valid()
+        => (await ModelAsync().ActAsync(m => m.ToModel()))
+        .Should().BeValid()
+        .Value.Actions.Should().Be(1);
+
+    [Test]
+    public async Task ActAsync_on_sync_value_transforming_function_returning_null_throws()
+    {
+        var act = async () => await ModelAsync().ActAsync(_ => (TestModel?)null);
+        await act.Should().ThrowAsync<NoValue>();
+    }
+
+    [Test]
+    public async Task ActAsync_on_async_result_returning_function_with_Result_Null_is_valid_with_null_value()
+        => (await ModelAsync().ActAsync(_ => Result.Null<TestModel>().Async()))
+        .Should().BeValid()
+        .Value.Should().BeNull();
 
     [Test]
     public async Task ActAsync_on_sync_nonfailing_function_is_executed_and_result_stays_valid()
@@ -178,10 +231,19 @@ public class Pipe_Symbol
     }
 
     [Test]
-    public void Is_equal_to_Act_on_function()
+    public void Is_equal_to_Act_on_transforming_function_with_result()
     {
         Result<TestModel> result = new TestModel();
         result |= (m => m.TransformingFunction());
+
+        result.Should().BeValid().Value.Actions.Should().Be(1);
+    }
+
+    [Test]
+    public void Is_equal_to_Act_on_value_transforming_function()
+    {
+        Result<TestModel> result = new TestModel();
+        result |= (m => m.ToModel());
 
         result.Should().BeValid().Value.Actions.Should().Be(1);
     }
@@ -191,6 +253,14 @@ public class Pipe_Symbol
     {
         Result<TestModel> result = new TestModel();
         var promise = await (result | (m => m.NonfailingFunctionAsync()));
+        promise.Should().BeValid().Value.Actions.Should().Be(1);
+    }
+
+    [Test]
+    public async Task Is_equal_to_ActAsync_on_value_transforming_function()
+    {
+        AsyncResult<TestModel> result = Result.Async(new TestModel());
+        var promise = await (result | (m => m.ToModel()));
         promise.Should().BeValid().Value.Actions.Should().Be(1);
     }
 
@@ -210,6 +280,9 @@ internal class TestModel(int actions = 0)
 
     public Result<TestModel> TransformingFunction()
         => new TestModel(Actions + 1);
+
+    public TestModel ToModel()
+        => new(Actions + 1);
 
     public Result<TestModel> NonfailingFunction()
         => TransformingFunction();

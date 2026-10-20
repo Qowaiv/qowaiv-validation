@@ -10,15 +10,18 @@ public sealed partial class Result<TModel> : Result
     /// The type of the new result value.
     /// </typeparam>
     /// <returns>
-    /// A result with the merged messages.
+    /// A result with the transformed value.
     /// </returns>
+    /// <exception cref="NoValue">
+    /// When the action returns <see langword="null"/> for a valid result.
+    /// </exception>
     [Impure]
     public Result<TOut> Act<TOut>(Func<TModel, TOut> action)
     {
         Guard.NotNull(action);
 
         return IsValid
-            ? new(action(Value), Messages)
+            ? NotNull(action(Value), Messages)
             : WithMessages<TOut>(Messages);
     }
 
@@ -95,6 +98,9 @@ public sealed partial class Result<TModel> : Result
     /// <returns>
     /// The updated model with the merged messages.
     /// </returns>
+    /// <exception cref="NoValue">
+    /// When the update returns <see langword="null"/> for a valid result.
+    /// </exception>
     [Impure]
     public Result<TModel> Act<TOut>(Func<TModel, Result<TOut>> action, Func<TModel, TOut, TModel> update)
     {
@@ -102,7 +108,7 @@ public sealed partial class Result<TModel> : Result
 
         var resolved = Act(action);
         return resolved.IsValid
-            ? new(update(_value!, resolved.Value), resolved.Messages)
+            ? NotNull(update(_value!, resolved.Value), resolved.Messages)
             : new(_value, resolved.Messages);
     }
 
@@ -223,6 +229,9 @@ public sealed partial class Result<TModel> : Result
     /// <returns>
     /// The updated model with the merged messages.
     /// </returns>
+    /// <exception cref="NoValue">
+    /// When the update returns <see langword="null"/> for a valid result.
+    /// </exception>
     [Impure]
     public AsyncResult<TModel> ActAsync<TOut>(
         Func<TModel, AsyncResult<TOut>> action,
@@ -235,7 +244,7 @@ public sealed partial class Result<TModel> : Result
         {
             var resolved = await ActAsync(action, continueOnCapturedContext).ConfigureAwait(continueOnCapturedContext);
             return resolved.IsValid
-                ? new(update(_value!, resolved.Value), resolved.Messages)
+                ? NotNull(update(_value!, resolved.Value), resolved.Messages)
                 : new(_value, resolved.Messages);
         }
         return new(Execute());
@@ -247,6 +256,9 @@ public sealed partial class Result<TModel> : Result
        => IsValid && Value is null ? throw NoValue.For<TModel>() : this;
 
     [Pure]
-    private static Result<TModel> NotNull(TModel? value, IValidationMessages messages)
-        => new Result<TModel>(value, messages).NotNull();
+    private static Result<TOut> NotNull<TOut>(TOut? value, IValidationMessages messages)
+    {
+        var result = new Result<TOut>(value, messages);
+        return result.IsValid && value is null ? throw NoValue.For<TOut>() : result;
+    }
 }

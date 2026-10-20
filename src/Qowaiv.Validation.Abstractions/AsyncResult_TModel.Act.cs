@@ -6,12 +6,19 @@ public readonly partial struct AsyncResult<TModel>
     /// <param name="action">
     /// The action to invoke.
     /// </param>
+    /// <param name="continueOnCapturedContext">
+    /// true to attempt to marshal the continuation back to the original context captured;
+    /// otherwise, false. See <see cref="Task.ConfigureAwait(bool)"/>.
+    /// </param>
     /// <typeparam name="TOut">
     /// The type of the new result value.
     /// </typeparam>
     /// <returns>
-    /// A result with the merged messages.
+    /// A result with the transformed value.
     /// </returns>
+    /// <exception cref="NoValue">
+    /// When the action returns <see langword="null"/> for a valid result.
+    /// </exception>
     [Impure]
     public AsyncResult<TOut> ActAsync<TOut>(
         Func<TModel, TOut> action,
