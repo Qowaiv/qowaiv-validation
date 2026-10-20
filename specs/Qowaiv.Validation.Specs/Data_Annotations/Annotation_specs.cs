@@ -26,7 +26,13 @@ public class Does_not_crash_on
     [Test]
     public void non_generic_enumerables()
      => new AnnotatedModelValidator<Model.With.NonGenericEnumerable>()
-        .Validate(new() { Items = new() { "one" } })
+        .Validate(new() { Items = ["one"] })
+        .Should().BeValid();
+
+    [Test]
+    public void enumerables_without_count()
+     => new AnnotatedModelValidator<Model.With.Enumerables>()
+        .Validate(new())
         .Should().BeValid();
 }
 
