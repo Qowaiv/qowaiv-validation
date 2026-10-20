@@ -7,6 +7,12 @@ public class ValidModel
     private static Result<TestModel> Model() => Result.For(new TestModel());
 
     [Test]
+    public void Act_on_transforming_function_is_executed_and_result_stays_valid()
+        => Model().Act(m => m.TransformingFunction())
+        .Should().BeValid()
+        .Value.Actions.Should().Be(1);
+
+    [Test]
     public void Act_on_nonfailing_function_is_executed_and_result_stays_valid()
         => Model().Act(m => m.NonfailingFunction())
         .Should().BeValid()
@@ -58,6 +64,12 @@ public class ValidModel
 public class AsyncValidModel
 {
     private static AsyncResult<TestModel> ModelAsync() => Result.Async(new TestModel());
+
+    [Test]
+    public async Task ActAsync_on_sync_transforming_function_is_executed_and_result_stays_valid()
+        => (await ModelAsync().ActAsync(m => m.TransformingFunction()))
+        .Should().BeValid()
+        .Value.Actions.Should().Be(1);
 
     [Test]
     public async Task ActAsync_on_sync_nonfailing_function_is_executed_and_result_stays_valid()
@@ -157,10 +169,19 @@ public class AsyncInvalidModel
 public class Pipe_Symbol
 {
     [Test]
-    public void Is_equal_to_Act_on_function()
+    public void Is_equal_to_Act_on_function_with_result()
     {
         Result<TestModel> result = new TestModel();
         result |= (m => m.NonfailingFunction());
+
+        result.Should().BeValid().Value.Actions.Should().Be(1);
+    }
+
+    [Test]
+    public void Is_equal_to_Act_on_function()
+    {
+        Result<TestModel> result = new TestModel();
+        result |= (m => m.TransformingFunction());
 
         result.Should().BeValid().Value.Actions.Should().Be(1);
     }
@@ -187,8 +208,11 @@ internal class TestModel(int actions = 0)
 {
     public int Actions { get; private set; } = actions;
 
-    public Result<TestModel> NonfailingFunction()
+    public Result<TestModel> TransformingFunction()
         => new TestModel(Actions + 1);
+
+    public Result<TestModel> NonfailingFunction()
+        => TransformingFunction();
 
     public Result<TestModel> FailingFunction()
     {

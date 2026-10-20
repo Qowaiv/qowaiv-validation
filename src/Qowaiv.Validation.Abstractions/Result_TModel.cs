@@ -1,7 +1,10 @@
 namespace Qowaiv.Validation.Abstractions;
 
 /// <summary>Represents a result of a validation, executed command, etcetera.</summary>
-public sealed class Result<TModel> : Result
+/// <typeparam name="TModel">
+/// The type of <see cref="Value"/>.
+/// </typeparam>
+public sealed partial class Result<TModel> : Result
 {
     /// <summary>Initializes a new instance of the <see cref="Result{T}"/> class.</summary>
     internal Result(ValidationMessages messages) : base(messages) { }
@@ -65,236 +68,21 @@ public sealed class Result<TModel> : Result
     [Pure]
     public new AsyncResult<TModel> Async() => new(Task.FromResult(this));
 
-    /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
-    /// <param name="action">
-    /// The action to invoke.
-    /// </param>
-    /// <typeparam name="TOut">
-    /// The type of the new result value.
-    /// </typeparam>
-    /// <returns>
-    /// A result with the merged messages.
-    /// </returns>
-    [Impure]
-    public Result<TOut> Act<TOut>(Func<TModel, Result<TOut>> action)
-    {
-        Guard.NotNull(action);
-
-        if (IsValid)
-        {
-            var outcome = action(Value);
-            var value = outcome.IsValid ? outcome.Value : default;
-            return new(value, Messages.Append(outcome.Messages));
-        }
-        else return WithMessages<TOut>(Messages);
-    }
-
-    /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
-    /// <param name="action">
-    /// The action to invoke.
-    /// </param>
-    /// <returns>
-    /// A result with the merged messages.
-    /// </returns>
-    [Impure]
-    public Result<TModel> Act(Func<TModel, Result> action)
-    {
-        Guard.NotNull(action);
-
-        if (IsValid)
-        {
-            var outcome = action(Value);
-            return new(_value, Messages.Append(outcome.Messages));
-        }
-        else return WithMessages<TModel>(Messages);
-    }
-
-    /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
-    /// <param name="action">
-    /// The action to invoke.
-    /// </param>
-    /// <param name="update">
-    /// The update to apply on a successfully invoked action.
-    /// </param>
-    /// <typeparam name="TOut">
-    /// The type of the new result value.
-    /// </typeparam>
-    /// <returns>
-    /// The updated model with the merged messages.
-    /// </returns>
-    [Impure]
-    public Result<TModel> Act<TOut>(Func<TModel, Result<TOut>> action, Action<TModel, TOut> update)
-    {
-        Guard.NotNull(update);
-
-        return Act(action, (model, result) =>
-        {
-            if (model is { }) { update.Invoke(model, result); }
-            return model;
-        });
-    }
-
-    /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
-    /// <param name="action">
-    /// The action to invoke.
-    /// </param>
-    /// <param name="update">
-    /// The update to apply on a successfully invoked action.
-    /// </param>
-    /// <typeparam name="TOut">
-    /// The type of the new result value.
-    /// </typeparam>
-    /// <returns>
-    /// The updated model with the merged messages.
-    /// </returns>
-    [Impure]
-    public Result<TModel> Act<TOut>(Func<TModel, Result<TOut>> action, Func<TModel, TOut, TModel> update)
-    {
-        Guard.NotNull(update);
-
-        var resolved = Act(action);
-        return resolved.IsValid
-            ? new(update(_value!, resolved.Value), resolved.Messages)
-            : new(_value, resolved.Messages);
-    }
-
-    /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
-    /// <param name="action">
-    /// The action to invoke.
-    /// </param>
-    /// <param name="continueOnCapturedContext">
-    /// true to attempt to marshal the continuation back to the original context captured;
-    /// otherwise, false. See <see cref="Task.ConfigureAwait(bool)"/>.
-    /// </param>
-    /// <typeparam name="TOut">
-    /// The type of the new result value.
-    /// </typeparam>
-    /// <returns>
-    /// A result with the merged messages.
-    /// </returns>
-    [Impure]
-    public AsyncResult<TOut> ActAsync<TOut>(
-        Func<TModel, AsyncResult<TOut>> action,
-        bool continueOnCapturedContext = false)
-    {
-        _ = Guard.NotNull(action);
-
-        async Task<Result<TOut>> Execute()
-        {
-            if (IsValid)
-            {
-                var outcome = await action(Value).ConfigureAwait(continueOnCapturedContext);
-                var value = outcome.IsValid ? outcome.Value : default;
-                return new(value, Messages.Append(outcome.Messages));
-            }
-            else return WithMessages<TOut>(Messages);
-        }
-
-        return new(Execute());
-    }
-
-    /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
-    /// <param name="action">
-    /// The action to invoke.
-    /// </param>
-    /// <param name="continueOnCapturedContext">
-    /// true to attempt to marshal the continuation back to the original context captured;
-    /// otherwise, false. See <see cref="Task.ConfigureAwait(bool)"/>.
-    /// </param>
-    /// <returns>
-    /// A result with the merged messages.
-    /// </returns>
-    [Impure]
-    public AsyncResult<TModel> ActAsync(
-        Func<TModel, AsyncResult> action,
-        bool continueOnCapturedContext = false)
-    {
-        _ = Guard.NotNull(action);
-
-        async Task<Result<TModel>> Execute()
-        {
-            if (IsValid)
-            {
-                var outcome = await action(Value).ConfigureAwait(continueOnCapturedContext);
-                return new(_value, Messages.Append(outcome.Messages));
-            }
-            else return WithMessages<TModel>(Messages);
-        }
-        return new(Execute());
-    }
-
-    /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
-    /// <param name="action">
-    /// The action to invoke.
-    /// </param>
-    /// <param name="update">
-    /// The update to apply on a successfully invoked action.
-    /// </param>
-    /// <param name="continueOnCapturedContext">
-    /// true to attempt to marshal the continuation back to the original context captured;
-    /// otherwise, false. See <see cref="Task.ConfigureAwait(bool)"/>.
-    /// </param>
-    /// <typeparam name="TOut">
-    /// The type of the new result value.
-    /// </typeparam>
-    /// <returns>
-    /// The updated model with the merged messages.
-    /// </returns>
-    [Impure]
-    public AsyncResult<TModel> ActAsync<TOut>(
-        Func<TModel, AsyncResult<TOut>> action,
-        Action<TModel, TOut> update,
-        bool continueOnCapturedContext = false)
-    {
-        Guard.NotNull(update);
-
-        return ActAsync(
-            action,
-            (model, result) =>
-            {
-                if (model is { }) { update.Invoke(model, result); }
-                return model;
-            },
-            continueOnCapturedContext);
-    }
-
-    /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
-    /// <param name="action">
-    /// The action to invoke.
-    /// </param>
-    /// <param name="update">
-    /// The update to apply on a successfully invoked action.
-    /// </param>
-    /// <param name="continueOnCapturedContext">
-    /// true to attempt to marshal the continuation back to the original context captured;
-    /// otherwise, false. See <see cref="Task.ConfigureAwait(bool)"/>.
-    /// </param>
-    /// <typeparam name="TOut">
-    /// The type of the new result value.
-    /// </typeparam>
-    /// <returns>
-    /// The updated model with the merged messages.
-    /// </returns>
-    [Impure]
-    public AsyncResult<TModel> ActAsync<TOut>(
-        Func<TModel, AsyncResult<TOut>> action,
-        Func<TModel, TOut, TModel> update,
-        bool continueOnCapturedContext = false)
-    {
-        Guard.NotNull(update);
-
-        async Task<Result<TModel>> Execute()
-        {
-            var resolved = await ActAsync(action, continueOnCapturedContext).ConfigureAwait(continueOnCapturedContext);
-            return resolved.IsValid
-                ? new(update(_value!, resolved.Value), resolved.Messages)
-                : new(_value, resolved.Messages);
-        }
-        return new(Execute());
-    }
-
     /// <summary>Explicitly casts the <see cref="Result"/> to the type of the related model.</summary>
     public static explicit operator TModel?(Result<TModel>? result) => result == null ? default : result.Value;
+
+    /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
+    /// <param name="result">
+    /// The result to act on.
+    /// </param>
+    /// <param name="action">
+    /// The action to invoke.
+    /// </param>
+    /// <returns>
+    /// A result with the merged messages.
+    /// </returns>
+    public static Result<TModel> operator |(Result<TModel> result, Func<TModel, TModel> action)
+        => Guard.NotNull(result).Act(action);
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
     /// <param name="result">
@@ -334,13 +122,4 @@ public sealed class Result<TModel> : Result
     /// </returns>
     public static Result<TModel> operator |(Result<TModel> result, Func<TModel, Result> action)
         => Guard.NotNull(result).Act(action);
-
-    /// <summary>Throws <see cref="NoValue"/> exception when valid with null value.</summary>
-    [Pure]
-    internal Result<TModel> NotNull()
-       => IsValid && Value is null ? throw NoValue.For<TModel>() : this;
-
-    [Pure]
-    private static Result<TModel> NotNull(TModel? value, ValidationMessages messages)
-        => new Result<TModel>(value, messages).NotNull();
 }
