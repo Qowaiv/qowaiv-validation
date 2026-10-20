@@ -26,10 +26,9 @@ public class InvalidModel : InvalidOperationException
     [Pure]
     public static InvalidModel For<T>(IEnumerable<IValidationMessage> messages)
     {
-        var filtered = Filter(messages);
-        var sb = new StringBuilder().AppendFormat(QowaivValidationMessages.InvalidModel, typeof(T));
-
         var filtered = ValidationMessages.New(messages).Errors;
+
+        var sb = new StringBuilder().AppendFormat(QowaivValidationMessages.InvalidModel, typeof(T));
 
         if (filtered.HasAny)
         {
@@ -46,10 +45,9 @@ public class InvalidModel : InvalidOperationException
     [Pure]
     public static InvalidModel For(IEnumerable<IValidationMessage> messages)
     {
-        var filtered = Filter(messages);
-        var sb = new StringBuilder().Append(QowaivValidationMessages.InvalidOperationException);
-
         var filtered = ValidationMessages.New(messages).Errors;
+
+        var sb = new StringBuilder().Append(QowaivValidationMessages.InvalidOperationException);
 
         if (filtered.HasAny)
         {

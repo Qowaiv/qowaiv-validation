@@ -19,10 +19,23 @@ public class Messages
     public void Filters_Warnings()
         => ValidationMessages.New([Warning1, Info1, Error1, Error2, Warning2, Info2]).Warnings
         .Should().BeEquivalentTo([Warning1, Warning2]);
+    
     [Test]
     public void Filters_Infos()
         => ValidationMessages.New([Warning1, Info1, Error1, Error2, Warning2, Info2]).Infos
         .Should().BeEquivalentTo([Info1, Info2]);
+
+    [Test]
+    public void Ingores_null_args()
+        => ValidationMessages.New([Warning1, null, Error1])
+        .Should().BeEquivalentTo([Error1, Warning1]);
+
+    [TestCase((ValidationSeverity)(-2))]
+    [TestCase((ValidationSeverity)(+4))]
+    public void throws_on_invalid_severity(ValidationSeverity severity)
+        => severity.Invoking(s => ValidationMessages.New([Warning1, null, InvalidSeverity(s), Error1])).Should().Throw<ArgumentOutOfRangeException>()
+        .WithMessage("Severity * is not Error, Warning, Info, or None.*")
+        .And.ParamName.Should().Be("messages[2]");
 }
 
 public class Not_initalized_does_not_throw
