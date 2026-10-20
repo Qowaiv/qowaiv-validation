@@ -195,7 +195,12 @@ public class Model
 
 ### Multiple of
 The `[MultipleOf]` attribute validates that the value of a field is a multiple
-of the specified factor.
+of the specified factor. It supports types such as `decimal`, `Percentage`, and
+`Amount`, but not `double` or `float`, as their [decimal representation](https://0.30000000000000004.com)
+does not commonly fit with decimial based multples such as `0.1`, or `0.001`.
+Note that the specified factor in the attribute is a `double` but rounded to
+overcome those floating point issues.
+
 
 ``` C#
 public class Model

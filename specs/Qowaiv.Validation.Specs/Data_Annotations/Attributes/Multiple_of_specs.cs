@@ -3,7 +3,6 @@ using Qowaiv.Validation.DataAnnotations;
 
 namespace Data_Annotations.Attributes.Multiple_of_specs;
 
-[Ignore("Reconsider multiple of")]
 public class Valid_for
 {
     [Test]
@@ -31,14 +30,6 @@ public class Valid_for
     [TestCase(45, 0.010)]
     [TestCase(45, 0.001)]
     public void longs(long value, double factor)
-        => new MultipleOfAttribute(factor).IsValid(value).Should().BeTrue();
-
-    [TestCase("45.000", 5.000)]
-    [TestCase("45.000", 1.000)]
-    [TestCase("45.100", 0.100)]
-    [TestCase("45.170", 0.010)]
-    [TestCase("45.178", 0.001)]
-    public void doubles(double value, double factor)
         => new MultipleOfAttribute(factor).IsValid(value).Should().BeTrue();
 
     [TestCase("45.000", 5.000)]
@@ -74,34 +65,10 @@ public class Valid_for
        => new MultipleOfAttribute(factor).IsValid(value).Should().BeTrue();
 }
 
-[Ignore("Reconsider multiple of")]
-public class Not_valid_for
-{
+public class Not_valid_for{
     [TestCase(45, 06)]
     [TestCase(45, 10)]
     public void integers(long value, double factor)
-        => new MultipleOfAttribute(factor).IsValid(value).Should().BeFalse();
-
-    [TestCase(float.NaN, 1)]
-    [TestCase(float.NegativeInfinity, 1)]
-    [TestCase(float.PositiveInfinity, 1)]
-    [TestCase(float.MinValue, 1)]
-    [TestCase(float.MaxValue, 1)]
-    [TestCase("45.500", 1.00)]
-    [TestCase("45.120", 0.10)]
-    [TestCase("45.178", 0.01)]
-    public void floats(float value, double factor)
-        => new MultipleOfAttribute(factor).IsValid(value).Should().BeFalse();
-
-    [TestCase(double.NaN, 1)]
-    [TestCase(double.NegativeInfinity, 1)]
-    [TestCase(double.PositiveInfinity, 1)]
-    [TestCase(double.MinValue, 1)]
-    [TestCase(double.MaxValue, 1)]
-    [TestCase("45.500", 1.00)]
-    [TestCase("45.120", 0.10)]
-    [TestCase("45.178", 0.01)]
-    public void doubles(double value, double factor)
         => new MultipleOfAttribute(factor).IsValid(value).Should().BeFalse();
 
     [TestCase("45.000", 6.00)]
@@ -132,11 +99,40 @@ public class Not_valid_for
     public void percentages(Percentage value, double factor)
        => new MultipleOfAttribute(factor).IsValid(value).Should().BeFalse();
 
-    [TestCaseSource(nameof(NotSupportedTypes))]
-    public void not_supported_types(object model)
-        => new MultipleOfAttribute(10).IsValid(model).Should().BeFalse();
+    [TestCase(45.0f)]
+    [TestCase(float.NaN)]
+    [TestCase(float.PositiveInfinity)]
+    [TestCase(45.0)]
+    [TestCase(double.NaN)]
+    [TestCase(double.PositiveInfinity)]
+    public void floating_point_types(object value)
+        => value.Invoking(v => new MultipleOfAttribute(10).IsValid(v))
+        .Should().Throw<UnsupportedType>();
+}
 
-    private static IEnumerable<object?> NotSupportedTypes()
+public class Does_not_support
+{
+    [Test]
+    public void doubles()
+        => 12d.Invoking(v => new MultipleOfAttribute(0.1).IsValid(v))
+        .Should().Throw<UnsupportedType>();
+
+    [Test]
+    public void floats()
+        => 12f.Invoking(v => new MultipleOfAttribute(0.1).IsValid(v))
+        .Should().Throw<UnsupportedType>();
+
+    [Test]
+    public void non_numeric_types()
+        => (new object()).Invoking(v => new MultipleOfAttribute(0.1).IsValid(v))
+        .Should().Throw<UnsupportedType>();
+
+    [TestCaseSource(nameof(NotSupportedIConvertables))]
+    public void not_supported_IConvertables(object value)
+        => value.Invoking(v => new MultipleOfAttribute(10).IsValid(v))
+        .Should().Throw<UnsupportedType>();
+
+    private static IEnumerable<object?> NotSupportedIConvertables()
     {
         yield return true;
         yield return "Hello, World!";
@@ -146,20 +142,15 @@ public class Not_valid_for
     }
 }
 
-[Ignore("Reconsider multiple of")]
 public class Initialization
 {
     [Test]
-    public void has_sufficient_precision([Range(1, 23)] int decimals)
-    {
-        var factor = (decimal)Math.Pow(10, -decimals);
-        factor.Should().Be(Pow(-decimals));
-    }
+    public void has_sufficient_precision([Range(1, 15)] int decimals)
+        => new MultipleOfAttribute(Math.Pow(10, -decimals)).Factor.Should().Be(Pow(-decimals));
 
     private static decimal Pow(int decimals) => new(1, 0, 0, false, scale: (byte)-decimals);
 }
 
-[Ignore("Reconsider multiple of")]
 public class With_message
 {
     [TestCase("nl", "De waarde van veld Total is geen veelvoud van 0,001.")]
@@ -175,9 +166,9 @@ public class With_message
     internal class Model
     {
         [MultipleOf(0.001)]
-        public Amount Total { get; set; } = 0.12345.Amount();
+        public Amount Total { get; set; } = 0.12345m.Amount();
 
-        [MultipleOf(0.001)]
-        public Amount Sub { get; set; } = 0.123.Amount();
+        [MultipleOf("0.001")]
+        public Amount Sub { get; set; } = 0.123m.Amount();
     }
 }

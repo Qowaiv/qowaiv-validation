@@ -37,13 +37,13 @@
     <Version>6.2.0</Version>
     <ToBeReleased>
       <![CDATA[
-v11.*
-- Sign based attributes don't crash on NaN. (BUG)
 v11.0.0
 - Add .NET 11.0 target.
-- Drop .NET 8.0 targets (BREAKING)
+- Drop .NET 8.0 targets. (BREAKING)
+- [MultipleOf] not longers supports double or float. (BREAKING)
 - AnnotatedModelValidator speed improvements.
-- Length.* and Count.* speed improvements.
+- [Mandatory], [Length.*], [Count.*], [DefinedEnumValuesOnly] speed improvements.
+- Sign based attributes don't crash on NaN. (BUG)
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
