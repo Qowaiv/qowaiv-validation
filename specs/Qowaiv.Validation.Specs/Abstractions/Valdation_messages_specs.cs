@@ -30,6 +30,11 @@ public class Messages
         => ValidationMessages.New([Warning1, null, Error1])
         .Should().BeEquivalentTo([Error1, Warning1]);
 
+    [Test]
+    public void Ingores_None_args()
+        => ValidationMessages.New([Warning1, ValidationMessage.None, Error1])
+        .Should().BeEquivalentTo([Error1, Warning1]);
+
     [TestCase((ValidationSeverity)(-2))]
     [TestCase((ValidationSeverity)(+4))]
     public void throws_on_invalid_severity(ValidationSeverity severity)
