@@ -227,9 +227,9 @@ internal static partial class Guard
     /// </returns>
     [DebuggerStepThrough]
     public static double Positive(double parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
-        => parameter <= 0
-        ? throw new ArgumentOutOfRangeException(paramName, Messages.ArgumentOutOfRangeException_NotPositive)
-        : parameter;
+        => parameter > 0
+        ? parameter
+        : throw new ArgumentOutOfRangeException(paramName, Messages.ArgumentOutOfRangeException_NotPositive);
 
     /// <summary>Throws an ArgumentOutOfRangeException if the parameter is not positive, otherwise the parameter is passed.</summary>
     /// <param name="parameter">The parameter to guard.</param>
@@ -337,9 +337,9 @@ internal static partial class Guard
     /// </returns>
     [DebuggerStepThrough]
     public static double NotNegative(double parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
-        => parameter < 0
-        ? throw new ArgumentOutOfRangeException(paramName, Messages.ArgumentOutOfRangeException_Negative)
-        : parameter;
+        => parameter >= 0
+        ? parameter
+        : throw new ArgumentOutOfRangeException(paramName, Messages.ArgumentOutOfRangeException_Negative);
 
     /// <summary>Throws an ArgumentException if the parameter is negative, otherwise the parameter is passed.</summary>
     /// <param name="parameter">The parameter to guard.</param>
@@ -393,7 +393,7 @@ internal static partial class Guard
     /// </returns>
     [DebuggerStepThrough]
     public static FileInfo Exists([ValidatedNotNull] FileInfo? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
-        => NotNull(parameter).Exists
+        => NotNull(parameter, paramName).Exists
         ? parameter!
         : throw new ArgumentException(string.Format(Messages.ArgumentException_NotExists, parameter!.FullName), paramName);
 
