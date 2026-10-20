@@ -2,6 +2,7 @@ namespace Qowaiv.Validation.Abstractions;
 
 /// <summary>Represents a result of a validation, executed command, etcetera.</summary>
 [Inheritable]
+[DebuggerDisplay("IsValid = {IsValid}, Messages = {Messages.Count}")]
 public partial class Result
 {
     /// <summary>Initializes a new instance of the <see cref="Result"/> class.</summary>
@@ -13,6 +14,7 @@ public partial class Result
 
     /// <summary>Gets the messages related to the result.</summary>
     [Pure]
+    [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
     public ValidationMessages Messages { get; }
 
     /// <summary>Return true if there are no error messages, otherwise false.</summary>
@@ -39,13 +41,16 @@ public partial class Result
 
     /// <summary>Gets all messages with <see cref="ValidationSeverity.Error"/>.</summary>
     [Pure]
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public ValidationMessages Errors => Messages.Errors;
 
     /// <summary>Gets all messages with <see cref="ValidationSeverity.Warning"/>.</summary>
     [Pure]
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public ValidationMessages Warnings => Messages.Warnings;
 
     /// <summary>Gets all messages with <see cref="ValidationSeverity.Info"/>.</summary>
     [Pure]
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public ValidationMessages Infos => Messages.Infos;
 }
