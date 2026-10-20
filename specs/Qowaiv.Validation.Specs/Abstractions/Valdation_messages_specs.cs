@@ -11,6 +11,29 @@ public class Messages
         .Should().BeEquivalentTo([Error1, Warning1, Info1, Info2]);
 
     [Test]
+    public void with_Append_are_sorted_and_leaves_original_unchanged()
+    {
+        var messages = ValidationMessages.New([Warning1, Info1, Error1, Info2]);
+        var addition = messages.Append([Warning2, Error2]);
+
+        messages.AsObject().Should().BeEquivalentTo(new
+        {
+            Count = 4,
+            Errors = array(Error1),
+            Warnings = array(Warning1),
+            Infos = array(Info1, Info2),
+        });
+
+        addition.AsObject().Should().BeEquivalentTo(new
+        {
+            Count = 6,
+            Errors = array(Error1, Error2),
+            Warnings = array(Warning1, Warning2),
+            Infos = array(Info1, Info2),
+        });
+    }
+
+    [Test]
     public void Filters_Errors()
         => ValidationMessages.New([Warning1, Info1, Error1, Error2,Info2]).Errors
         .Should().BeEquivalentTo([Error1, Error2]);

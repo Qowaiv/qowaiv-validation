@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/package.props" />
 
@@ -35,7 +35,7 @@ v11.0.0
 - InvalidModelException renamed to InvalidModel. (BREAKING)
 - Rely on built-in collection merging isntead of home-brew collection.
 - Prevent creation of a valid Result<T> without setting T when struct. (BUG)
-- ValidationMessages in Result sorted by severity.
+- ValidationMessages is an immutable collection, and type of Messages in Result. (BREAKING)
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
