@@ -16,7 +16,7 @@ v11.0.0
 - InvalidModelException renamed to InvalidModel. (BREAKING)
 - Rely on built-in collection merging isntead of home-brew collection.
 - Prevent creation of a valid Result<T> without setting T when struct. (BUG)
-- Sorts ValidationMessages in Result async by severity (So errors frist).
+- Sorts ValidationMessages in Result async by severity (So errors first).
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
