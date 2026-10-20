@@ -21,7 +21,6 @@ internal static class ObjectWrapper
         private long? Try(string name) => obj switch
         {
             string str => str.Length,
-            Array array => array.Length,
             ICollection collection => collection.Count,
             _ when Gets.GetOrAdd(new(obj.GetType(), name), Compile) is { } size => size(obj),
             IEnumerable enumerable => enumerable.Count(),

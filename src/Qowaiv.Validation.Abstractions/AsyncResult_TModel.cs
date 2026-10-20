@@ -8,7 +8,6 @@ namespace Qowaiv.Validation.Abstractions;
 /// </typeparam>
 public readonly partial struct AsyncResult<TModel>
 {
-
     internal AsyncResult(Task<Result<TModel>> promise) => Promise = promise;
 
     /// <summary>Gets the underlying promise, guarding against the uninitialized (default) struct.</summary>
