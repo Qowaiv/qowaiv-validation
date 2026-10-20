@@ -3,8 +3,12 @@ using System.Diagnostics.Contracts;
 
 namespace Specs.TestTools;
 
-public static class AnnotationsValidations
+internal static class AnnotationsValidations
 {
+    /// <summary>Helps to test types that have custom should you want to skip.</summary>
+    [Pure]
+    public static object AsObject<T>(this T obj) where T:  notnull => obj;
+
     [Pure]
     public static Qowaiv.Validation.Abstractions.Result<TModel> ValidateAnnotations<TModel>(this TModel model)
         where TModel : class

@@ -4,7 +4,7 @@ namespace Qowaiv.Validation.Abstractions;
 public sealed class Result<TModel> : Result
 {
     /// <summary>Initializes a new instance of the <see cref="Result{T}"/> class.</summary>
-    internal Result(IValidationMessages messages) : base(messages) { }
+    internal Result(ValidationMessages messages) : base(messages) { }
 
     /// <summary>Initializes a new instance of the <see cref="Result{T}"/> class.</summary>
     /// <param name="value">
@@ -13,7 +13,7 @@ public sealed class Result<TModel> : Result
     /// <param name="messages">
     /// The messages related to the result.
     /// </param>
-    internal Result(TModel? value, IValidationMessages messages) : base(messages)
+    internal Result(TModel? value, ValidationMessages messages) : base(messages)
         => _value = IsValid ? value : default;
 
     /// <summary>Gets the value related to result.</summary>
@@ -341,6 +341,6 @@ public sealed class Result<TModel> : Result
        => IsValid && Value is null ? throw NoValue.For<TModel>() : this;
 
     [Pure]
-    private static Result<TModel> NotNull(TModel? value, IValidationMessages messages)
+    private static Result<TModel> NotNull(TModel? value, ValidationMessages messages)
         => new Result<TModel>(value, messages).NotNull();
 }
