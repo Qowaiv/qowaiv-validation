@@ -60,23 +60,30 @@ public class ItemsAttribute<TValidator> : ValidationAttribute
     {
         if (Init)
         {
-            if (ErrorMessageResourceName is { }) Validator.ErrorMessageResourceName = ErrorMessageResourceName;
-            if (ErrorMessageResourceType is { }) Validator.ErrorMessageResourceType = ErrorMessageResourceType;
-
-            // If the error message is updated, reset the resource based setting.
-            if (ErrorMessage is { })
+            lock (Locker)
             {
-                Validator.ErrorMessageResourceName = null;
-                Validator.ErrorMessageResourceType = null;
-                Validator.ErrorMessage = ErrorMessage;
-            }
+                if (Init)
+                {
+                    if (ErrorMessageResourceName is { }) Validator.ErrorMessageResourceName = ErrorMessageResourceName;
+                    if (ErrorMessageResourceType is { }) Validator.ErrorMessageResourceType = ErrorMessageResourceType;
 
-            Init = false;
+                    // If the error message is updated, reset the resource based setting.
+                    if (ErrorMessage is { })
+                    {
+                        Validator.ErrorMessageResourceName = null;
+                        Validator.ErrorMessageResourceType = null;
+                        Validator.ErrorMessage = ErrorMessage;
+                    }
+                    Init = false;
+                }
+            }
         }
         return Validator.FormatErrorMessage(name);
     }
 
-    private bool Init = true;
+    private readonly Lock Locker = new();
+
+    private volatile bool Init = true;
 
     [Pure]
     private static TValidator Create(object[] args)

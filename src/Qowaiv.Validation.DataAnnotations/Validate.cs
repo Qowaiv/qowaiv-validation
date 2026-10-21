@@ -34,7 +34,9 @@ internal static class Validate
     /// <summary>Validates the items of the enumerable.</summary>
     private static void Enumerable(IEnumerable enumerable, MemberPath path, ValidateContext ctx)
     {
-        var enumTyped = TypeAnnotations.Get(enumerable.GetType().GetEnumerableType()!);
+        var enumTyped = enumerable.GetType().GetEnumerableType() is { } enumerated
+            ? TypeAnnotations.Get(enumerated)
+            : null;
 
         // We have to reset it if the type is not sealed.
         if (enumTyped?.CheckInheritance is true) enumTyped = null;
@@ -113,9 +115,10 @@ internal static class Validate
     private static TypeAnnotations? RecursionOf(MemberAnnotations member, object value)
     {
         // For a member whose runtime type is guaranteed to equal the declared
-        // type, the annotations are known upfront, avoiding a lookup.
-        var annotations = member.ExactRuntimeType
-            ? member.Type
+        // type, the annotations are known upfront, avoiding a lookup. Cyclic
+        // references lack upfront annotations and are resolved via the store.
+        var annotations = member.ExactRuntimeType && member.Type is { } declared
+            ? declared
             : TypeAnnotations.Get(value.GetType());
 
         return annotations is { CheckRecursive: true } type ? type : null;

@@ -5,10 +5,12 @@ namespace Qowaiv.Validation.Abstractions;
 /// </summary>
 public readonly struct AsyncResult
 {
-    [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
-    private readonly Task<Result> Promise;
+    internal AsyncResult(Task<Result> promise) => Promise = promise;
 
-    internal AsyncResult(Task<Result> promise) => Promise = Guard.NotNull(promise);
+    /// <summary>Gets the underlying promise, guarding against the uninitialized (default) struct.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private Task<Result> Promise => field
+        ?? throw new InvalidOperationException($"The {nameof(AsyncResult)} is not initialized; use {nameof(Result)}.{nameof(Result.Async)}() or an implicit cast from {nameof(Task)} instead of default.");
 
     /// <inheritdoc cref="Task.IsCanceled" />
     public bool IsCanceled => Promise.IsCanceled;
@@ -34,5 +36,5 @@ public readonly struct AsyncResult
     public TaskAwaiter<Result> GetAwaiter() => Promise.GetAwaiter();
 
     /// <summary>Implicitly casts from Task to an AsyncResult.</summary>
-    public static implicit operator AsyncResult(Task<Result> promise) => new(promise);
+    public static implicit operator AsyncResult(Task<Result> promise) => new(Guard.NotNull(promise));
 }

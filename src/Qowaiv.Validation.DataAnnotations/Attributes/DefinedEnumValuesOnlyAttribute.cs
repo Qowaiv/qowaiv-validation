@@ -8,7 +8,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 public class DefinedEnumValuesOnlyAttribute()
     : ValidationAttribute(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError)
 {
-    /// <summary>If true, for flag enums, also combinations of defined single values are allowed, that are not defined themselves explicitly.</summary>
+    /// <summary>If true, only explicitly defined values of flag enums are allowed; combinations of defined values that are not defined themselves are rejected.</summary>
     /// <remarks>
     /// When enabled, the logic falls back on <see cref="Enum.IsDefined(Type, object)"/>, as
     /// that is stricter than, our implementation.
@@ -24,20 +24,39 @@ public class DefinedEnumValuesOnlyAttribute()
     {
         // Might be a nullable enum, we just don't know.
         if (value is null) return true;
-        else
+        else if (value.GetType() is { IsEnum: true } enumType)
         {
-            var enumType = value.GetType();
-
-            if (!OnlyAllowDefinedFlagsCombinations && enumType.IsEnum && enumType.GetCustomAttributes<FlagsAttribute>().Any())
+            if (OnlyAllowDefinedFlagsCombinations || !enumType.GetCustomAttributes<FlagsAttribute>().Any())
+            {
+                return Enum.IsDefined(enumType, value);
+            }
+            else
             {
                 dynamic dyn = value;
-                var max = Enum.GetValues(enumType)
-                    .Cast<dynamic>()
-                    .Aggregate((e1, e2) => e1 | e2);
-
-                return (max & dyn) == dyn;
+                return (Mask(enumType) & dyn) == dyn;
             }
-            return Enum.IsDefined(enumType, value);
         }
+        else throw UnsupportedType.ForAttribute<DefinedEnumValuesOnlyAttribute>(value.GetType());
     }
+
+    [Pure]
+    private static dynamic Mask(Type enumType)
+    {
+        if (!Flags.TryGetValue(enumType, out var mask))
+        {
+            var defined = Enum.GetValues(enumType);
+            mask = defined.GetValue(0)!;
+
+            for (var i = 1; i < defined.Length; i++)
+            {
+                mask |= (dynamic)defined.GetValue(i)!;
+            }
+
+            Flags[enumType] = mask;
+        }
+
+        return mask;
+    }
+
+    private static readonly ConcurrentDictionary<Type, dynamic> Flags = [];
 }

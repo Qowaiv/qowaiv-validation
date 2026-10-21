@@ -15,20 +15,22 @@ public class InvalidModel : InvalidOperationException
         : base(message, innerException) { }
 
     /// <summary>Initializes a new instance of the <see cref="InvalidModel"/> class.</summary>
-    public InvalidModel(string? message, Exception? innerException, IEnumerable<IValidationMessage> messages)
+    public InvalidModel(string? message, Exception? innerException, ValidationMessages messages)
         : this(message, innerException)
-        => Errors = Filter(messages);
+        => Errors = messages.Errors;
 
     /// <summary>The related validation error(s).</summary>
-    public IValidationMessages Errors { get; } = [];
+    public ValidationMessages Errors { get; } = [];
 
     /// <summary>Creates an <see cref="InvalidModel"/> for the model.</summary>
     [Pure]
     public static InvalidModel For<T>(IEnumerable<IValidationMessage> messages)
     {
+        var filtered = ValidationMessages.New(messages).Errors;
+
         var sb = new StringBuilder().AppendFormat(QowaivValidationMessages.InvalidModel, typeof(T));
 
-        if (Filter(messages) is { Count: > 0 } filtered)
+        if (filtered.HasAny)
         {
             sb.Remove(sb.Length - 1, 1).AppendLine(":");
             foreach (var message in filtered)
@@ -36,16 +38,18 @@ public class InvalidModel : InvalidOperationException
                 Append(sb, message);
             }
         }
-        return new InvalidModel(sb.ToString(), null, messages);
+        return new InvalidModel(sb.ToString(), null, filtered);
     }
 
     /// <summary>Creates an <see cref="InvalidModel"/> for the model.</summary>
     [Pure]
     public static InvalidModel For(IEnumerable<IValidationMessage> messages)
     {
+        var filtered = ValidationMessages.New(messages).Errors;
+
         var sb = new StringBuilder().Append(QowaivValidationMessages.InvalidOperationException);
 
-        if (Filter(messages) is { Count: > 0 } filtered)
+        if (filtered.HasAny)
         {
             sb.Remove(sb.Length - 1, 1).AppendLine(":");
             foreach (var message in filtered)
@@ -53,14 +57,8 @@ public class InvalidModel : InvalidOperationException
                 Append(sb, message);
             }
         }
-        return new InvalidModel(sb.ToString(), null, messages);
+        return new InvalidModel(sb.ToString(), null, filtered);
     }
-
-    [Pure]
-    private static IValidationMessages Filter(IEnumerable<IValidationMessage> messages) =>
-    [
-        .. messages?.Where(e => e.Severity >= ValidationSeverity.Error) ?? []
-    ];
 
     private static void Append(StringBuilder builder, IValidationMessage message)
     {
