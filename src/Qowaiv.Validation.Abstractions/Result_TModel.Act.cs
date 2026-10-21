@@ -256,7 +256,7 @@ public sealed partial class Result<TModel> : Result
        => IsValid && Value is null ? throw NoValue.For<TModel>() : this;
 
     [Pure]
-    private static Result<TOut> NotNull<TOut>(TOut? value, IValidationMessages messages)
+    private static Result<TOut> NotNull<TOut>(TOut? value, ValidationMessages messages)
     {
         var result = new Result<TOut>(value, messages);
         return result.IsValid && value is null ? throw NoValue.For<TOut>() : result;
