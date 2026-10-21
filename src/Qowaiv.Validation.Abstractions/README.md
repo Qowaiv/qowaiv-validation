@@ -110,6 +110,17 @@ Result<DataType> result = await async;
 The invoked actions may return `Result<TOut>`, `AsyncResult<TOut>`, or
 `AsyncResult` (see [`AsyncResult<TModel>`](#asyncresulttmodel)).
 
+### Act with a transform
+
+An action can also return a plain value, transforming the model (or a related
+value) without producing messages. A `null` transform result makes the result
+throw `NoValue`:
+
+``` C#
+Result<Name> name = GetPerson()
+    .Act(p => p.Name);         // TOut is Name
+```
+
 ### Pipe operator
 
 The `|` operator provides an alternative syntax for `Act`:
@@ -118,6 +129,13 @@ The `|` operator provides an alternative syntax for `Act`:
 Result<DataType> result = GetModel()
     | ValidateName
     | ValidateAge;
+```
+
+It also supports a pure `TModel`-to-`TModel` transform on both `Result<TModel>`
+and `AsyncResult<TModel>`:
+
+``` C#
+Result<DataType> result = GetModel() | Normalize;
 ```
 
 ### Act with context update

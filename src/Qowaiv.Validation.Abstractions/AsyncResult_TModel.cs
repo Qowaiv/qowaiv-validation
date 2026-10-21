@@ -47,6 +47,19 @@ public readonly partial struct AsyncResult<TModel>
     /// <returns>
     /// A result with the merged messages.
     /// </returns>
+    public static AsyncResult<TModel> operator |(AsyncResult<TModel> result, Func<TModel, TModel> action)
+        => result.ActAsync(action);
+
+    /// <summary>Invokes the action when <see cref="AsyncResult{TModel}"/> is valid.</summary>
+    /// <param name="result">
+    /// The result to act on.
+    /// </param>
+    /// <param name="action">
+    /// The action to invoke.
+    /// </param>
+    /// <returns>
+    /// A result with the merged messages.
+    /// </returns>
     public static AsyncResult<TModel> operator |(AsyncResult<TModel> result, Func<TModel, Result<TModel>> action)
         => result.ActAsync(action);
 

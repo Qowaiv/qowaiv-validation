@@ -22,6 +22,11 @@ public class Valid_Model
         .Should().BeInvalid().WithMessage(ValidationMessage.Error("Failure"));
 
     [Test]
+    public void Act_with_update_returning_null_throws()
+        => Context.Valid.Invoking(c => c.Act(Actions.Success, (_, _) => null!))
+        .Should().Throw<NoValue>();
+
+    [Test]
     public async Task ActAsync_on_success_is_executed_and_result_stays_valid()
         => (await Context.Valid.ActAsync(Actions.SuccessAsync, Context.Update))
         .Should().BeValid()
@@ -37,6 +42,13 @@ public class Valid_Model
     public async Task ActAsync_on_failing_makes_result_invalid()
         => (await Context.Valid.ActAsync(Actions.FailureAsync, Context.Update))
         .Should().BeInvalid().WithMessage(ValidationMessage.Error("FailureAsync"));
+
+    [Test]
+    public async Task ActAsync_with_update_returning_null_throws()
+    {
+        var act = async () => await Context.Valid.ActAsync(Actions.SuccessAsync, (_, _) => null!);
+        await act.Should().ThrowAsync<NoValue>();
+    }
 }
 
 public class Task_Valid_Model

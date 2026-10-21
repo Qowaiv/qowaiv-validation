@@ -36,6 +36,7 @@ v11.0.0
 - Rely on built-in collection merging isntead of home-brew collection.
 - Prevent creation of a valid Result<T> without setting T when struct. (BUG)
 - ValidationMessages is an immutable collection, and type of Messages in Result. (BREAKING)
+- Act(Async)(Func<TModel, TOut>) to simplify applying transforms.
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
