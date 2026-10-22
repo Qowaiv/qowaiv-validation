@@ -114,7 +114,7 @@ public readonly struct ValidationMessages : IReadOnlyCollection<IValidationMessa
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private IValidationMessage[] messages() => Messages ?? [];
 
-    /// <summary>Creates a new collection of <see cref="ValidationMessages" /></summary>
+    /// <summary>Creates a new collection of <see cref="ValidationMessages" />.</summary>
     /// <param name="messages">
     /// The messages.
     /// </param>
