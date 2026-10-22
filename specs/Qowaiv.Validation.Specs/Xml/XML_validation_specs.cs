@@ -19,7 +19,7 @@ public class Invalidates
     {
         var model = new Bookstore
         {
-            Books = [new Book { Genre = "fiction", Price = 11.99.Amount(), PublicationDate = "not-a-date" }]
+            Books = [new Book { Genre = "fiction", Price = 11.99m.Amount(), PublicationDate = "not-a-date" }]
         };
         var validator = new SchemaValidator<Bookstore>(Schema);
         validator.Validate(model)
@@ -83,7 +83,7 @@ public class Validates
                         FirstName = "Douglas",
                     },
                     Title = "The Hitchhiker's Guide to the Galaxy",
-                    Price = 11.99.Amount(), 
+                    Price = 11.99m.Amount(), 
                     ISBN = "0-330-25864-8",
                     PublicationDate = "1979-10-12" 
                 },
@@ -120,4 +120,3 @@ public class Invalid_XML
         deserialize.Should().Throw<System.Xml.XmlException>();
     }
 }
-
