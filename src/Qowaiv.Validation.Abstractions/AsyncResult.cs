@@ -18,6 +18,10 @@ public readonly struct AsyncResult
     /// <inheritdoc cref="Task.IsCompleted" />
     public bool IsCompleted => Promise.IsCompleted;
 
+    /// <<summary>Represents the async result as task.</summary>
+    [Pure]
+    public Task<Result> AsTask() => Promise;
+
     /// <summary>Configures an awaiter used to await this <see cref="AsyncResult" />.</summary>
     /// <param name="continueOnCapturedContext">
     /// true to attempt to marshal the continuation back to the original context captured;
