@@ -17,7 +17,7 @@ public class Is_valid_for
 
         [Test]
         public void based_on_other_than_string()
-            => new AllowedAttribute<Amount>(12.00, 17.23).IsValid(17.23.Amount()).Should().BeTrue();
+            => new AllowedAttribute<Amount>(12.00m, 17.23m).IsValid(17.23m.Amount()).Should().BeTrue();
     }
 
     public class Non_generic
