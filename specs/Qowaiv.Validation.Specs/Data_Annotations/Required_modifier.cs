@@ -5,14 +5,13 @@ namespace Specs.DataAnnotations;
 
 public class Required_modifier
 {
-    [TestCase(null)]
-    [TestCase("")]
-    public void makes_non_nullable_references_types_required(string? value)
+    [Test]
+    public void makes_non_nullable_references_types_required()
     {
         var model = new RequiredModel
         {
             Nullable = "Some text",
-            NotNullable = value!,
+            NotNullable = null!,
             Svo = EmailAddress.Parse("info@qowaiv.org"),
         };
 

@@ -45,7 +45,7 @@ internal abstract class Member
             : null;
     }
 
-    private static readonly RequiredAttribute RequiredMember = new();
+    private static readonly RequiredMemberAttribute RequiredMember = new();
 
     /// <summary>Gets a field member.</summary>
     [Pure]
@@ -118,5 +118,13 @@ internal abstract class Member
                 typeof(object));
             return Lambda<Func<object, object?>>(body, obj).Compile();
         }
+    }
+
+    [AttributeUsage(AttributeTargets.Property)]
+    [Validates(typeof(object))]
+    private sealed class RequiredMemberAttribute : RequiredAttribute
+    {
+        [Pure]
+        public override bool IsValid(object? value) => value is not null;
     }
 }
