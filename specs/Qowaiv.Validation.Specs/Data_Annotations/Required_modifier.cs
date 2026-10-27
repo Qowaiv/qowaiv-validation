@@ -23,6 +23,23 @@ public class Required_modifier
     }
 
     [Test]
+    public void allows_string_empty()
+    {
+        var model = new RequiredModel
+        {
+            Nullable = "Some text",
+            NotNullable = "",
+            Svo = EmailAddress.Parse("info@qowaiv.org"),
+        };
+
+        var validator = new AnnotatedModelValidator<RequiredModel>();
+
+        validator.Validate(model)
+            .Should().BeValid()
+            .WithoutMessages();
+    }
+
+    [Test]
     public void has_lower_priority_than_attributes()
     {
         var model = new DecoratedModel { NotNullable = string.Empty };
