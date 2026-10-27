@@ -20,12 +20,13 @@ internal abstract class Member
     public abstract object[] GetCustomAttributes();
 
     /// <summary>Gets the compiled accessor of the member.</summary>
-    [Pure]
     public abstract Func<object, object?> Get { get; }
 
     /// <summary>Indicates that the members is indexed.</summary>
-    [Pure]
     public abstract bool IsNotIndexed { get; }
+
+    /// <summary>Members that can safely be accessed to not need a try catch.</summary>
+    public abstract bool IsSafe { get; }
 
     /// <summary>
     /// Get the <see cref="RequiredMemberAttribute"/> attribute instance for reference types
@@ -64,6 +65,8 @@ internal abstract class Member
 
         public override bool CanRead => true;
 
+        public override bool IsSafe => true;
+
         [Pure]
         public override object[] GetCustomAttributes() => Info.GetCustomAttributes(inherit: true);
 
@@ -91,6 +94,8 @@ internal abstract class Member
         public override Type MemberType => Info.PropertyType;
 
         public override bool CanRead => Info.CanRead;
+
+        public override bool IsSafe { get; } = prop.IsSimpleFieldAccessor;
 
         [Pure]
         public override object[] GetCustomAttributes() => Info.GetCustomAttributes(inherit: true);

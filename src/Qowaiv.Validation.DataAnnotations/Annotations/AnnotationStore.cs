@@ -118,8 +118,17 @@ internal sealed class AnnotationStore
         // has no annotations (yet), but the member should not be dropped: at runtime the
         // annotations are resolved via the store, so its nested members are validated.
         return checks != AnnotationChecks.None || attributes is { Count: > 0 } || IsInProgress(info.MemberType, visited)
-            ? new(checks, typeAnnotations, ExactRuntimeType(info.MemberType), info.Name, display, attributes.ToArray(), info.Get)
+            ? new(Extend(checks), typeAnnotations, info.Name, display, attributes.ToArray(), info.Get)
             : null;
+
+        AnnotationChecks Extend(AnnotationChecks checks)
+        {
+            if (info.IsSafe)
+                checks |= AnnotationChecks.IsSafe;
+            if (IsFixedType(info.MemberType))
+                checks |= AnnotationChecks.FixedType;
+            return checks;
+        }
     }
 
     /// <summary>Gets a value indicating whether the type is currently being annotated
@@ -131,7 +140,7 @@ internal sealed class AnnotationStore
         && visited.Contains(type);
 
     [Pure]
-    private static bool ExactRuntimeType(Type type)
+    private static bool IsFixedType(Type type)
         => !type.IsGenericParameter
         && (type.IsNonNullableValueType() || (!type.IsArray && type.IsSealed));
 
