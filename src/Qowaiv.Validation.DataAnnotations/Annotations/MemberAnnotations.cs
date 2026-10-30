@@ -8,14 +8,12 @@ internal sealed class MemberAnnotations : Annotations
     internal MemberAnnotations(
         AnnotationChecks checks,
         TypeAnnotations? type,
-        bool exactRuntimeType,
         string name,
         DisplayAttribute? display,
         ValidationAttribute[] attributes,
         Func<object, object?> getValue) : base(checks)
     {
         Type = type;
-        ExactRuntimeType = exactRuntimeType;
         Name = name;
         Display = display;
         Attributes = attributes;
@@ -34,12 +32,11 @@ internal sealed class MemberAnnotations : Annotations
     /// <summary>Gets the annotations of the declared member type (if any).</summary>
     public readonly TypeAnnotations? Type;
 
-    /// <summary>
-    /// Gets a value indicating whether the runtime type of the member value
-    /// is guaranteed to be equal to the declared member type. This is the case
-    /// for non-nullable value types and sealed (non-array) reference types.
-    /// </summary>
-    public readonly bool ExactRuntimeType;
+    /// <inheritdoc cref="AnnotationChecks.IsSafe" />
+    public bool IsSafe => Checks.HasFlag(AnnotationChecks.IsSafe);
+
+    /// <inheritdoc cref="AnnotationChecks.FixedType" />
+    public bool FixedType => Checks.HasFlag(AnnotationChecks.FixedType);
 
     /// <summary>Gets the name of the member.</summary>
     public readonly string Name;

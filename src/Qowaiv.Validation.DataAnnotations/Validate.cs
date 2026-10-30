@@ -82,11 +82,18 @@ internal static class Validate
     {
         object? value;
 
-        try { value = member.GetValue(nested.Instance); }
-        catch
+        if (member.IsSafe)
         {
-            ctx.AddMessage(ValidationMessage.Error($"The value is inaccessible.", member.Name), nested.Path);
-            return;
+            value = member.GetValue(nested.Instance);
+        }
+        else
+        {
+            try { value = member.GetValue(nested.Instance); }
+            catch
+            {
+                ctx.AddMessage(ValidationMessage.Error($"The value is inaccessible.", member.Name), nested.Path);
+                return;
+            }
         }
 
         context.MemberName = member.Name;
@@ -117,7 +124,7 @@ internal static class Validate
         // For a member whose runtime type is guaranteed to equal the declared
         // type, the annotations are known upfront, avoiding a lookup. Cyclic
         // references lack upfront annotations and are resolved via the store.
-        var annotations = member.ExactRuntimeType && member.Type is { } declared
+        var annotations = member is { FixedType: true, Type: { } declared }
             ? declared
             : TypeAnnotations.Get(value.GetType());
 

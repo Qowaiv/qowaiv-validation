@@ -5,14 +5,13 @@ namespace Specs.DataAnnotations;
 
 public class Required_modifier
 {
-    [TestCase(null)]
-    [TestCase("")]
-    public void makes_non_nullable_references_types_required(string? value)
+    [Test]
+    public void makes_non_nullable_references_types_required()
     {
         var model = new RequiredModel
         {
             Nullable = "Some text",
-            NotNullable = value!,
+            NotNullable = null!,
             Svo = EmailAddress.Parse("info@qowaiv.org"),
         };
 
@@ -21,6 +20,23 @@ public class Required_modifier
         validator.Validate(model)
             .Should().BeInvalid()
             .WithMessage(ValidationMessage.Error("The NotNullable field is required.", "NotNullable"));
+    }
+
+    [Test]
+    public void allows_string_empty()
+    {
+        var model = new RequiredModel
+        {
+            Nullable = "Some text",
+            NotNullable = "",
+            Svo = EmailAddress.Parse("info@qowaiv.org"),
+        };
+
+        var validator = new AnnotatedModelValidator<RequiredModel>();
+
+        validator.Validate(model)
+            .Should().BeValid()
+            .WithoutMessages();
     }
 
     [Test]

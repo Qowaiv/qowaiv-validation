@@ -31,9 +31,30 @@ public sealed class MultipleOfAttribute : ValidationAttribute
 
     /// <summary>Initializes a new instance of the <see cref="MultipleOfAttribute"/> class.</summary>
     private MultipleOfAttribute(decimal factor) : base(() => QowaivValidationMessages.MultipleOfAttribute_ValidationError)
-        => Factor = factor <= 0
+    {
+        Factor = factor <= 0
             ? throw new ArgumentOutOfRangeException(nameof(factor), "The factor can not be zero or less.")
             : factor;
+#if !NETSTANDARD2_0
+        scale = factor switch
+        {
+            1 => 0,
+            0.1m => 1,
+            0.01m => 2,
+            0.001m => 3,
+            0.0001m => 4,
+            0.00001m => 5,
+            0.000001m => 6,
+            0.0000001m => 7,
+            0.00000001m => 8,
+            _ => null,
+        };
+    }
+
+    private readonly int? scale;
+#else
+    }
+#endif
 
     /// <summary>The factor of which the value has to be a multiple of.</summary>
     public decimal Factor { get; }
@@ -51,13 +72,30 @@ public sealed class MultipleOfAttribute : ValidationAttribute
         decimal v /*......*/ => IsValid(v),
         Amount v /*.......*/ => IsValid((decimal)v),
         Money v /*........*/ => IsValid((decimal)v.Amount),
-        Percentage v /*...*/ => IsValid(100 * (decimal)v),
+        Percentage v /*...*/ => IsValid(v),
         IConvertible v when Supported(v.GetTypeCode()) => IsValid(Convert.ToDecimal(v)),
         _ /*..............*/ => throw UnsupportedType.ForAttribute<MultipleOfAttribute>(value.GetType()),
     };
 
     [Pure]
-    private bool IsValid(decimal value) => value % Factor == 0;
+    private bool IsValid(decimal value)
+    {
+#if !NETSTANDARD2_0
+        if (scale is { } s && value.Scale <= s) return true;
+#endif
+        return value % Factor is 0;
+    }
+
+    [Pure]
+    private bool IsValid(Percentage value)
+    {
+        var v = (decimal)value;
+#if !NETSTANDARD2_0
+        if (scale is { } s && v.Scale <= s + 2) return true;
+#endif
+        v *= 100;
+        return v % Factor is 0;
+    }
 
     [Pure]
     private static bool Supported(TypeCode type)
