@@ -44,6 +44,7 @@ v11.0.0
 - AnnotatedModelValidator speed improvements.
 - [Mandatory], [Length.*], [Count.*], [DefinedEnumValuesOnly] speed improvements.
 - Sign based attributes don't crash on NaN. (BUG)
+- Required keyword on string requires it to be set, but string empty is allowed. (BUG)
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
