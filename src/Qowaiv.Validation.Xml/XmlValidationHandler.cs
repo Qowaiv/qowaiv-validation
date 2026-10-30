@@ -1,12 +1,12 @@
 namespace Qowaiv.Validation.Xml;
 
 /// <summary>A <see cref="ValidationEventHandler"/> that collects all issues as <see cref="IValidationMessage"/>'s.</summary>
-[WillBeSealed]
-public class XmlValidationHandler
+public sealed class XmlValidationHandler
 {
     /// <summary>The collection of validation messages.</summary>
     public IReadOnlyCollection<IValidationMessage> Messages => messages;
 
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly List<IValidationMessage> messages = [];
 
     /// <summary>The <see cref="ValidationEventHandler"/> delegate.</summary>
