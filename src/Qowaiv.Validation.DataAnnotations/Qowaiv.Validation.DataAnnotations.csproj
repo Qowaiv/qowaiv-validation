@@ -9,11 +9,11 @@
 
   <ItemGroup>
     <PackageReference Include="Qowaiv" />
-    <PackageReference Include="System.ComponentModel.Annotations" />
   </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
     <PackageReference Include="Microsoft.CSharp" />
+    <PackageReference Include="System.ComponentModel.Annotations" />
   </ItemGroup>
 
   <ItemGroup>

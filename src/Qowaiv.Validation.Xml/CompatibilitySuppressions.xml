@@ -225,6 +225,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0009</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Xml.XmlValidationHandler</Target>
+    <Left>lib/net10.0/Qowaiv.Validation.Xml.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Xml.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0009</DiagnosticId>
     <Target>T:Qowaiv.Validation.Xml.SchemaValidator`1</Target>
     <Left>lib/net8.0/Qowaiv.Validation.Xml.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Xml.dll</Right>
@@ -232,7 +239,21 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0009</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Xml.XmlValidationHandler</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Xml.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Xml.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0009</DiagnosticId>
     <Target>T:Qowaiv.Validation.Xml.SchemaValidator`1</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.Xml.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Xml.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0009</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Xml.XmlValidationHandler</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Xml.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Xml.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
