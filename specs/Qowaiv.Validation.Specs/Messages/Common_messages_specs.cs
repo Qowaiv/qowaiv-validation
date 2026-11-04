@@ -1,4 +1,5 @@
 using Qowaiv.Validation.Abstractions;
+using System.Net;
 using System.Security;
 using NS = Qowaiv.Validation.Messages;
 
@@ -13,6 +14,14 @@ public class AccessDenied
     [Test]
     public void Derives_from_SecurityException()
         => typeof(NS.AccessDenied).Should().BeDerivedFrom<SecurityException>();
+
+    [Test]
+    public void Implements_IHttpStatusMessage()
+        => typeof(NS.AccessDenied).Should().Implement<IHttpStatusMessage>();
+
+    [Test]
+    public void Has_HTTP_status_Forbidden()
+        => new NS.AccessDenied().StatusCode.Should().Be(HttpStatusCode.Forbidden);
 
     [Test]
     public void Has_error_validation_severity()
@@ -32,6 +41,14 @@ public class ConcurrencyIssue
     [Test]
     public void Derives_from_InvalidOperationException()
         => typeof(NS.ConcurrencyIssue).Should().BeDerivedFrom<InvalidOperationException>();
+
+    [Test]
+    public void Implements_IHttpStatusMessage()
+        => typeof(NS.ConcurrencyIssue).Should().Implement<IHttpStatusMessage>();
+
+    [Test]
+    public void Has_HTTP_status_Conflict()
+        => new NS.ConcurrencyIssue().StatusCode.Should().Be(HttpStatusCode.Conflict);
 
     [Test]
     public void Has_error_validation_severity()
@@ -60,6 +77,14 @@ public class EntityNotFound
     [Test]
     public void Derives_from_InvalidOperationException()
         => typeof(NS.EntityNotFound).Should().BeDerivedFrom<InvalidOperationException>();
+
+    [Test]
+    public void Implements_IHttpStatusMessage()
+        => typeof(NS.EntityNotFound).Should().Implement<IHttpStatusMessage>();
+
+    [Test]
+    public void Has_HTTP_status_NotFound()
+        => new NS.EntityNotFound().StatusCode.Should().Be(HttpStatusCode.NotFound);
 
     [Test]
     public void Has_error_validation_severity()
@@ -94,6 +119,14 @@ public class ServiceUnavailable
     [Test]
     public void Derives_from_Exception()
         => typeof(NS.ServiceUnavailable).Should().BeDerivedFrom<Exception>();
+
+    [Test]
+    public void Implements_IHttpStatusMessage()
+        => typeof(NS.ServiceUnavailable).Should().Implement<IHttpStatusMessage>();
+
+    [Test]
+    public void Has_HTTP_status_ServiceUnavailable()
+        => new NS.ServiceUnavailable().StatusCode.Should().Be(HttpStatusCode.ServiceUnavailable);
 
     [Test]
     public void Has_error_validation_severity()
