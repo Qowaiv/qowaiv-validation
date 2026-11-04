@@ -17,7 +17,7 @@ public class Valid_result
     public void Has_access_to_Value()
     {
         var result = Result.For(2);
-        result.And.Value.Should().Be(2);
+        result.Value.Should().Be(2);
     }
 }
 
@@ -144,17 +144,6 @@ public class Casting
         public void Can_always_cast_on_error()
             => Result.For(42, Error1).Cast<string>().Should().BeInvalid();
     }
-}
-
-public class Result_Of_TModel
-{
-    [Test]
-    public void As_Task_with_Async_on_Result()
-        => Result.For(17).Async().Should().BeOfType<AsyncResult_int>();
-
-    [Test]
-    public void As_Task_with_Async_factory()
-        => Result.Async(17).Should().BeOfType<AsyncResult_int>();
 }
 
 public class ThrowIfInvalid

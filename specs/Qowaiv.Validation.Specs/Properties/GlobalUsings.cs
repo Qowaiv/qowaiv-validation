@@ -13,3 +13,4 @@ global using System.Threading.Tasks;
 global using AsyncResult = System.Threading.Tasks.Task<Qowaiv.Validation.Abstractions.Result>;
 global using AsyncResult_string = System.Threading.Tasks.Task<Qowaiv.Validation.Abstractions.Result<string>>;
 global using AsyncResult_int = System.Threading.Tasks.Task<Qowaiv.Validation.Abstractions.Result<int>>;
+global using AsyncResult_TestModel = System.Threading.Tasks.Task<Qowaiv.Validation.Abstractions.Result<Abstractions.Result_Act_specs.TestModel>>;
