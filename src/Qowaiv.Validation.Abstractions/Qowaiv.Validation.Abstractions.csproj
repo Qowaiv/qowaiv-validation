@@ -37,6 +37,7 @@ v11.0.0
 - Prevent creation of a valid Result<T> without setting T when struct. (BUG)
 - ValidationMessages is an immutable collection, and type of Messages in Result. (BREAKING)
 - Act(Async)(Func<TModel, TOut>) to simplify applying transforms.
+- Validator.Composite<TModel>() creates a composite Ivalidator<<TModel>.
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
