@@ -1,5 +1,6 @@
 namespace Qowaiv.Validation.Abstractions;
 
+/// <summary>Manimpulation of collections of <see cref="Result"/>s.</summary>
 public static class Results
 {
     extension(IEnumerable<Result> results)
