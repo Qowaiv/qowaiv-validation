@@ -17,7 +17,7 @@ public class Valid_result
     public void Has_access_to_Value()
     {
         var result = Result.For(2);
-        result.Value.Should().Be(2);
+        result.And.Value.Should().Be(2);
     }
 }
 
@@ -105,14 +105,14 @@ public class Casting
     public void Implicit_from_T_to_Result_of_T_is_supported()
     {
         Result<int> result = 17;
-        result.Should().BeValid().Value.Should().Be(17);
+        result.Should().BeValid().And.Value.Should().Be(17);
     }
 
     [Test]
     public void Explicit_from_Result_of_T_to_T_is_supported()
     {
         var result = Result.For(666);
-        result.Should().BeValid().Value.Should().Be(666);
+        result.Should().BeValid().And.Value.Should().Be(666);
     }
 
     public class With_method
@@ -122,13 +122,13 @@ public class Casting
         {
             var value = XDocument.Parse("<root />");
             Result.For(value).Cast<XNode>().Should().BeValid()
-                .Value.Should().BeSameAs(value);
+                .And.Value.Should().BeSameAs(value);
         }
 
         [Test]
         public void Null_value_with_subtype_of_T_is_supported()
             => Result.Null<XDocument>().Cast<XNode>().Should().BeValid()
-            .Value.Should().BeNull();
+            .And.Value.Should().BeNull();
 
         [Test]
         public void To_Result_of_invalid_with_subtype_of_T_is_supported()
