@@ -4,9 +4,29 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
-    <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
-    <Version>2.2.0</Version>
     <PackageId>Qowaiv.Validation.Messages</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ValidationMessages.Designer.cs" DependentUpon="ValidationMessages.resx" AutoGen="True" DesignTime="True" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="ValidationMessages.resx" LastGenOutput="ValidationMessages.Designer.cs" Generator="ResXFileCodeGenerator" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
+    <Version>11.0.0-rc.1</Version>
+    <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
 v11.0.0
@@ -14,6 +34,8 @@ v11.0.0
 - Drop .NET 8.0 targets (BREAKING)
 - AsyncResult<TModel>. (BREAKING)
 - AccessDenied, ConcurrencyIssue, EntityNotFound, and ServiceUnavailable implement IHttpStatusMessage.
+- Drop [Serializable] attributes. (BREAKING)
+- Add PaymentRequired message.
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
@@ -46,21 +68,5 @@ v0.0.1
 ]]>
     </PackageReleaseNotes>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="../Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="ValidationMessages.Designer.cs" DependentUpon="ValidationMessages.resx" AutoGen="True" DesignTime="True" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="ValidationMessages.resx" LastGenOutput="ValidationMessages.Designer.cs" Generator="ResXFileCodeGenerator" />
-  </ItemGroup>
 
 </Project>
