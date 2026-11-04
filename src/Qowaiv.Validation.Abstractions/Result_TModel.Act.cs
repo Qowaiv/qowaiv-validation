@@ -127,8 +127,8 @@ public sealed partial class Result<TModel> : Result
     /// A result with the merged messages.
     /// </returns>
     [Impure]
-    public AsyncResult<TOut> ActAsync<TOut>(
-        Func<TModel, AsyncResult<TOut>> action,
+    public Task<Result<TOut>> ActAsync<TOut>(
+        Func<TModel, Task<Result<TOut>>> action,
         bool continueOnCapturedContext = false)
     {
         _ = Guard.NotNull(action);
@@ -143,8 +143,7 @@ public sealed partial class Result<TModel> : Result
             }
             else return WithMessages<TOut>(Messages);
         }
-
-        return new(Execute());
+        return Execute();
     }
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
@@ -159,7 +158,7 @@ public sealed partial class Result<TModel> : Result
     /// A result with the merged messages.
     /// </returns>
     [Impure]
-    public AsyncResult<TModel> ActAsync(
+    public Task<Result<TModel>> ActAsync(
         Func<TModel, AsyncResult> action,
         bool continueOnCapturedContext = false)
     {
@@ -174,7 +173,7 @@ public sealed partial class Result<TModel> : Result
             }
             else return WithMessages<TModel>(Messages);
         }
-        return new(Execute());
+        return Execute();
     }
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>
@@ -195,8 +194,8 @@ public sealed partial class Result<TModel> : Result
     /// The updated model with the merged messages.
     /// </returns>
     [Impure]
-    public AsyncResult<TModel> ActAsync<TOut>(
-        Func<TModel, AsyncResult<TOut>> action,
+    public Task<Result<TModel>> ActAsync<TOut>(
+        Func<TModel, Task<Result<TOut>>> action,
         Action<TModel, TOut> update,
         bool continueOnCapturedContext = false)
     {
@@ -233,8 +232,8 @@ public sealed partial class Result<TModel> : Result
     /// When the update returns <see langword="null"/> for a valid result.
     /// </exception>
     [Impure]
-    public AsyncResult<TModel> ActAsync<TOut>(
-        Func<TModel, AsyncResult<TOut>> action,
+    public Task<Result<TModel>> ActAsync<TOut>(
+        Func<TModel, Task<Result<TOut>>> action,
         Func<TModel, TOut, TModel> update,
         bool continueOnCapturedContext = false)
     {
@@ -247,7 +246,7 @@ public sealed partial class Result<TModel> : Result
                 ? NotNull(update(_value!, resolved.Value), resolved.Messages)
                 : new(_value, resolved.Messages);
         }
-        return new(Execute());
+        return Execute();
     }
 
     /// <summary>Throws <see cref="NoValue"/> exception when valid with null value.</summary>

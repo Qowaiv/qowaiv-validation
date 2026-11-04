@@ -129,18 +129,18 @@ internal static class Actions
     public static Result<string> Success(Context _)
         => Result.For(nameof(Success));
 
-    public static AsyncResult<string> SuccessAsync(Context _)
+    public static AsyncResult_string SuccessAsync(Context _)
         => Result.For(nameof(SuccessAsync)).Async();
 
     public static Result<string> SuccessNullValue(Context _)
         => Result.Null<string>();
 
-    public static AsyncResult<string> SuccessNullValueAsync(Context _)
+    public static AsyncResult_string SuccessNullValueAsync(Context _)
         => Result.Null<string>().Async();
 
     public static Result<string> Failure(Context _)
         => Result.WithMessages<string>(ValidationMessage.Error(nameof(Failure)));
 
-    public static AsyncResult<string> FailureAsync(Context _)
+    public static AsyncResult_string FailureAsync(Context _)
         => Result.WithMessages<string>(ValidationMessage.Error(nameof(FailureAsync))).Async();
 }

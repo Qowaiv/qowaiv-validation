@@ -1,4 +1,5 @@
 using Qowaiv.Validation.Abstractions;
+using AsyncResult_TestModel = System.Threading.Tasks.Task<Qowaiv.Validation.Abstractions.Result<Abstractions.Result_Act_specs.TestModel>>;
 
 namespace Abstractions.Result_Act_specs;
 
@@ -97,7 +98,7 @@ public class ValidModel
 
 public class AsyncValidModel
 {
-    private static AsyncResult<TestModel> ModelAsync() => Result.Async(new TestModel());
+    private static AsyncResult_TestModel ModelAsync() => Result.Async(new TestModel());
 
     [Test]
     public async Task ActAsync_on_sync_transforming_function_is_executed_and_result_stays_valid()
@@ -192,7 +193,7 @@ public class InvalidModel
 
 public class AsyncInvalidModel
 {
-    private static AsyncResult<TestModel> ModelAsync() => Result.WithMessages<TestModel>(ValidationMessage.Error("FailingModelAsync")).Async();
+    private static AsyncResult_TestModel ModelAsync() => Result.WithMessages<TestModel>(ValidationMessage.Error("FailingModelAsync")).Async();
 
     [Test]
     public async Task ActAsync_with_sync_function_is_never_triggered()
@@ -257,14 +258,6 @@ public class Pipe_Symbol
     }
 
     [Test]
-    public async Task Is_equal_to_ActAsync_on_value_transforming_function()
-    {
-        AsyncResult<TestModel> result = Result.Async(new TestModel());
-        var promise = await (result | (m => m.ToModel()));
-        promise.Should().BeValid().Value.Actions.Should().Be(1);
-    }
-
-    [Test]
     public void Is_equal_to_Act_on_action()
     {
         Result<TestModel> result = new TestModel();
@@ -293,10 +286,10 @@ internal class TestModel(int actions = 0)
         return Result.WithMessages<TestModel>(ValidationMessage.Error(nameof(FailingFunction)));
     }
 
-    public AsyncResult<TestModel> NonfailingFunctionAsync()
+    public AsyncResult_TestModel NonfailingFunctionAsync()
         => Result.Async(new TestModel(Actions + 1));
 
-    public AsyncResult<TestModel> FailingFunctionAsync()
+    public AsyncResult_TestModel FailingFunctionAsync()
     {
         Actions = -Actions;
         return Result.WithMessages<TestModel>(ValidationMessage.Error(nameof(FailingFunctionAsync))).Async();
