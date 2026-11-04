@@ -8,13 +8,13 @@ public class Valid_Model
     public void Act_on_success_is_executed_and_result_stays_valid()
         => Context.Valid.Act(Actions.Success, Context.Update)
         .Should().BeValid()
-        .Value.Updated.Should().BeTrue();
+        .And.Value.Updated.Should().BeTrue();
 
     [Test]
     public void Act_on_success_null_value_is_executed_and_result_stays_valid()
         => Context.Valid.Act(Actions.SuccessNullValue, Context.Update)
         .Should().BeValid()
-        .Value.Updated.Should().BeTrue();
+        .And.Value.Updated.Should().BeTrue();
 
     [Test]
     public void Act_on_failing_makes_result_invalid()
@@ -30,13 +30,13 @@ public class Valid_Model
     public async Task ActAsync_on_success_is_executed_and_result_stays_valid()
         => (await Context.Valid.ActAsync(Actions.SuccessAsync, Context.Update))
         .Should().BeValid()
-        .Value.Updated.Should().BeTrue();
+        .And.Value.Updated.Should().BeTrue();
 
     [Test]
     public async Task ActAsync_on_success_null_value_is_executed_and_result_stays_valid()
         => (await Context.Valid.ActAsync(Actions.SuccessNullValueAsync, Context.Update))
         .Should().BeValid()
-        .Value.Updated.Should().BeTrue();
+        .And.Value.Updated.Should().BeTrue();
 
     [Test]
     public async Task ActAsync_on_failing_makes_result_invalid()
@@ -57,25 +57,25 @@ public class Task_Valid_Model
     public async Task ActAsync_on_sync_success_is_executed_and_result_stays_valid()
         => (await Context.Valid.Async().ActAsync(Actions.Success, Context.Update))
         .Should().BeValid()
-        .Value.Updated.Should().BeTrue();
+        .And.Value.Updated.Should().BeTrue();
 
     [Test]
     public async Task ActAsync_on_sync_success_null_value_is_executed_and_result_stays_valid()
         => (await Context.Valid.Async().ActAsync(Actions.SuccessNullValue, Context.Update))
         .Should().BeValid()
-        .Value.Updated.Should().BeTrue();
+        .And.Value.Updated.Should().BeTrue();
 
     [Test]
     public async Task ActAsync_on_async_success_is_executed_and_result_stays_valid()
         => (await Context.Valid.Async().ActAsync(Actions.SuccessAsync, Context.Update))
         .Should().BeValid()
-        .Value.Updated.Should().BeTrue();
+        .And.Value.Updated.Should().BeTrue();
 
     [Test]
     public async Task ActAsync_on_async_success_null_value_is_executed_and_result_stays_valid()
         => (await Context.Valid.Async().ActAsync(Actions.SuccessNullValueAsync, Context.Update))
         .Should().BeValid()
-        .Value.Updated.Should().BeTrue();
+        .And.Value.Updated.Should().BeTrue();
 
     [Test]
     public async Task ActAsync_on_sync_failing_makes_result_invalid()
@@ -129,18 +129,18 @@ internal static class Actions
     public static Result<string> Success(Context _)
         => Result.For(nameof(Success));
 
-    public static AsyncResult<string> SuccessAsync(Context _)
+    public static AsyncResult_string SuccessAsync(Context _)
         => Result.For(nameof(SuccessAsync)).Async();
 
     public static Result<string> SuccessNullValue(Context _)
         => Result.Null<string>();
 
-    public static AsyncResult<string> SuccessNullValueAsync(Context _)
+    public static AsyncResult_string SuccessNullValueAsync(Context _)
         => Result.Null<string>().Async();
 
     public static Result<string> Failure(Context _)
         => Result.WithMessages<string>(ValidationMessage.Error(nameof(Failure)));
 
-    public static AsyncResult<string> FailureAsync(Context _)
+    public static AsyncResult_string FailureAsync(Context _)
         => Result.WithMessages<string>(ValidationMessage.Error(nameof(FailureAsync))).Async();
 }

@@ -30,9 +30,9 @@ public partial class Result
         }
     }
 
-    /// <summary>Wraps the <see cref="Result{TModel}"/> in an <see cref="AsyncResult"/>.</summary>
+    /// <summary>Wraps the <see cref="Result{TModel}"/> in a <see cref="Task"/>.</summary>
     [Pure]
-    public AsyncResult Async() => new(Task.FromResult(this));
+    public AsyncResult Async() => Task.FromResult(this);
 
     /// <summary>Generated an <see cref="InvalidModel" /> based on the errors.</summary>
     [Pure]

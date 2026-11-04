@@ -10,3 +10,4 @@ global using System.Linq;
 global using System.Runtime.CompilerServices;
 global using System.Text;
 global using System.Threading.Tasks;
+global using AsyncResult = System.Threading.Tasks.Task<Qowaiv.Validation.Abstractions.Result>;

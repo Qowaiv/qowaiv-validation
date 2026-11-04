@@ -59,14 +59,14 @@ public sealed partial class Result<TModel> : Result
             : throw new InvalidCastException($"Unable to cast object of type 'Result<{typeof(TModel)}>' to type 'Result<{typeof(TOut)}>'.");
     }
 
-    /// <summary>Wraps the <see cref="Result{TModel}"/> in an <see cref="AsyncResult{TModel}"/>.</summary>
+    /// <summary>Wraps the <see cref="Result{TModel}"/> in an <see cref="Task"/>.</summary>
     [Pure]
     [Obsolete("Use Async() instead.")]
-    public AsyncResult<TModel> AsTask() => Async();
+    public Task<Result<TModel>> AsTask() => Async();
 
-    /// <summary>Wraps the <see cref="Result{TModel}"/> in an <see cref="AsyncResult{TModel}"/>.</summary>
+    /// <summary>Wraps the <see cref="Result{TModel}"/> in an <see cref="Task"/>.</summary>
     [Pure]
-    public new AsyncResult<TModel> Async() => new(Task.FromResult(this));
+    public new Task<Result<TModel>> Async() => Task.FromResult(this);
 
     /// <summary>Explicitly casts the <see cref="Result"/> to the type of the related model.</summary>
     public static explicit operator TModel?(Result<TModel>? result) => result == null ? default : result.Value;
@@ -107,7 +107,7 @@ public sealed partial class Result<TModel> : Result
     /// <returns>
     /// A result with the merged messages.
     /// </returns>
-    public static AsyncResult<TModel> operator |(Result<TModel> result, Func<TModel, AsyncResult<TModel>> action)
+    public static Task<Result<TModel>> operator |(Result<TModel> result, Func<TModel, Task<Result<TModel>>> action)
         => Guard.NotNull(result).ActAsync(action);
 
     /// <summary>Invokes the action when <see cref="Result{TModel}"/> is valid.</summary>

@@ -22,7 +22,7 @@ public class Continues_when
         var result = model.Must().Be(condition: true, ValidationMessage.Error("This is wrong"));
 
         result.Should().BeValid().WithoutMessages()
-            .Value.Should().BeSameAs(model);
+            .And.Value.Should().BeSameAs(model);
     }
 
     [Test]
@@ -32,7 +32,7 @@ public class Continues_when
         var result = model.Must().NotBe(condition: false, "This is wrong");
 
         result.Should().BeValid().WithoutMessages()
-            .Value.Should().BeSameAs(model);
+            .And.Value.Should().BeSameAs(model);
     }
 
     [Test]
@@ -42,7 +42,7 @@ public class Continues_when
         var result = model.Must().Exist(8, (_, _) => new object());
 
         result.Should().BeValid().WithoutMessages()
-            .Value.Should().BeSameAs(model);
+            .And.Value.Should().BeSameAs(model);
     }
 }
 
