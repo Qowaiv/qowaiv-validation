@@ -15,6 +15,14 @@ public interface IValidator<TModel>
 }
 ```
 
+### Validator.Composite
+
+To combine validators you can create a composite validator:
+
+``` C#
+var composite = Validator.Composite(new SpecialValidator(), new CustomValidator());
+```
+
 ### Validator.Empty
 
 To create a validator that always returns a valid result:
