@@ -35,6 +35,7 @@ v11.0.0
 - AccessDenied, ConcurrencyIssue, EntityNotFound, and ServiceUnavailable implement IHttpStatusMessage.
 - Drop [Serializable] attributes. (BREAKING)
 - Add PaymentRequired message.
+- Fix ConcurrencyIssue translations.
 - Fix MidAirCollision translations.
 ]]>
     </ToBeReleased>

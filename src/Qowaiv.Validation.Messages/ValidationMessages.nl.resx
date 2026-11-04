@@ -16,7 +16,7 @@
     <value>Toegang geweigerd.</value>
   </data>
   <data name="ConcurrencyIssue" xml:space="preserve">
-    <value>Er is een parallelliteitsprobleem opgetreden.</value>
+    <value>Er is een concurrency issue opgetreden.</value>
   </data>
   <data name="EntityNotFound" xml:space="preserve">
     <value>Entiteit kon niet worden gevonden.</value>
