@@ -28,7 +28,7 @@
     <value>L'entità {0} con ID {1} non è stata trovata.</value>
   </data>
   <data name="MidAirCollision" xml:space="preserve">
-    <value>È stata rilevata una collisione in volo.</value>
+    <value>È stata rilevata una mid-air collision.</value>
   </data>
   <data name="PaymentRequired" xml:space="preserve">
     <value>Pagamento richiesto.</value>

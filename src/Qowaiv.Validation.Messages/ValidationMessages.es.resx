@@ -28,7 +28,7 @@
     <value>No se pudo encontrar la entidad {0} con ID {1}.</value>
   </data>
   <data name="MidAirCollision" xml:space="preserve">
-    <value>Se detectó una colisión en el aire.</value>
+    <value>Se detectó una mid-air collision.</value>
   </data>
   <data name="PaymentRequired" xml:space="preserve">
     <value>Pago requerido.</value>

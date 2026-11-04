@@ -28,7 +28,7 @@
     <value>Entiteit {0} met ID {1} kon niet worden gevonden.</value>
   </data>
   <data name="MidAirCollision" xml:space="preserve">
-    <value>Een botsing in de lucht werd gedetecteerd.</value>
+    <value>Een mid-air collision werd gedetecteerd.</value>
   </data>
   <data name="PaymentRequired" xml:space="preserve">
     <value>Betaling vereist.</value>

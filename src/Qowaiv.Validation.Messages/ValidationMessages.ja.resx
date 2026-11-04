@@ -28,7 +28,7 @@
     <value>エンティティ {0} (ID {1}) が見つかりませんでした。</value>
   </data>
   <data name="MidAirCollision" xml:space="preserve">
-    <value>空中衝突が検出されました。</value>
+    <value>mid-air collision が検出されました。</value>
   </data>
   <data name="PaymentRequired" xml:space="preserve">
     <value>お支払いが必要です。</value>
