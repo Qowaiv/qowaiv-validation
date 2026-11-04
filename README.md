@@ -71,7 +71,7 @@ and `Message` properties. Implementations are available in each package.
 ## Messages
 `Qowaiv.Validation.Messages` provides `IValidationMessage` implementations that
 are also exceptions: `AccessDenied` (403), `ConcurrencyIssue` (409),
-`EntityNotFound` (404), and `ServiceUnavailable` (503). See the
+`EntityNotFound` (404), `PaymentRequired` (402), and `ServiceUnavailable` (503). See the
 [Messages README](src/Qowaiv.Validation.Messages/README.md) for details.
 
 ## Qowaiv extensions on [*Fluent Validation](https://fluentvalidation.net/)

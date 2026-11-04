@@ -30,6 +30,9 @@
   <data name="MidAirCollision" xml:space="preserve">
     <value>空中衝突が検出されました。</value>
   </data>
+  <data name="PaymentRequired" xml:space="preserve">
+    <value>お支払いが必要です。</value>
+  </data>
   <data name="ServiceUnavailable" xml:space="preserve">
     <value>要求されたサービスは利用できません。</value>
   </data>

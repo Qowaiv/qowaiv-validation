@@ -110,6 +110,24 @@ public sealed record ExampleEntity<T> where T : struct
     public required T Id { get; init; }
 }
 
+public class PaymentRequired
+{
+    [Test]
+    public void Implements_IValidationMessage()
+        => typeof(NS.PaymentRequired).Should().Implement<IValidationMessage>();
+
+    [Test]
+    public void Derives_from_InvalidOperationException()
+        => typeof(NS.PaymentRequired).Should().BeDerivedFrom<InvalidOperationException>();
+
+    [Test]
+    public void Has_error_validation_severity()
+        => new NS.PaymentRequired().Severity.Should().Be(ValidationSeverity.Error);
+
+    [Test]
+    public void Has_descriptive_default_message()
+        => new NS.PaymentRequired().Message.Should().Be("Payment required.");
+}
 public class ServiceUnavailable
 {
     [Test]

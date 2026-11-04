@@ -30,6 +30,9 @@
   <data name="MidAirCollision" xml:space="preserve">
     <value>Une collision en vol a été détectée.</value>
   </data>
+  <data name="PaymentRequired" xml:space="preserve">
+    <value>Paiement requis.</value>
+  </data>
   <data name="ServiceUnavailable" xml:space="preserve">
     <value>Le service demandé n'est pas disponible.</value>
   </data>

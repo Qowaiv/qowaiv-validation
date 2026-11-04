@@ -31,8 +31,6 @@ namespace Qowaiv.Validation.Messages {
         internal ValidationMessages() {
         }
 
-        public static string PaymentRequired { get; internal set; }
-
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -112,6 +110,15 @@ namespace Qowaiv.Validation.Messages {
         internal static string MidAirCollision {
             get {
                 return ResourceManager.GetString("MidAirCollision", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment required..
+        /// </summary>
+        internal static string PaymentRequired {
+            get {
+                return ResourceManager.GetString("PaymentRequired", resourceCulture);
             }
         }
         

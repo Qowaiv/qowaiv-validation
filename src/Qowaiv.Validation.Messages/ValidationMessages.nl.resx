@@ -30,6 +30,9 @@
   <data name="MidAirCollision" xml:space="preserve">
     <value>Een botsing in de lucht werd gedetecteerd.</value>
   </data>
+  <data name="PaymentRequired" xml:space="preserve">
+    <value>Betaling vereist.</value>
+  </data>
   <data name="ServiceUnavailable" xml:space="preserve">
     <value>De aangevraagde service is niet beschikbaar.</value>
   </data>

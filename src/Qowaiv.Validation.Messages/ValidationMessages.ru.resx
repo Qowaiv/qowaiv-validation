@@ -30,6 +30,9 @@
   <data name="MidAirCollision" xml:space="preserve">
     <value>Обнаружено столкновение в воздухе.</value>
   </data>
+  <data name="PaymentRequired" xml:space="preserve">
+    <value>Требуется оплата.</value>
+  </data>
   <data name="ServiceUnavailable" xml:space="preserve">
     <value>Запрошенная служба недоступна.</value>
   </data>
