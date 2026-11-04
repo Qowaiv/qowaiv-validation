@@ -13,22 +13,12 @@ public static class Results
 
     extension(IEnumerable<AsyncResult> results)
     {
-        /// <summary>Represents the async results as tasks.</summary>
-        [Pure]
-        public IEnumerable<Task<Result>> AsTasks()
-            => results.Select(r => r.AsTask());
-
         /// <summary>Combines the results.</summary>
         [Pure]
-        public AsyncResult Combine()
+        public async AsyncResult Combine()
         {
-            async Task<Result> Excecute()
-            {
-                var promises = await Task.WhenAll(results.AsTasks());
-                return new([.. promises.SelectMany(r => r.Messages)]);
-            }
-
-            return new(Excecute());
+            var promises = await Task.WhenAll(results);
+            return promises.Combine();
         }
     }
 }
