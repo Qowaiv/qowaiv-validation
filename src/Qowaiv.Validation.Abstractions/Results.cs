@@ -17,7 +17,7 @@ public static class Results
         [Pure]
         public async AsyncResult Combine()
         {
-            var promises = await Task.WhenAll(results);
+            var promises = await Task.WhenAll(Guard.NotNull(results));
             return promises.Combine();
         }
     }

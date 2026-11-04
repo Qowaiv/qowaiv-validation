@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Qowaiv.Validation.TestTools;
 
@@ -25,7 +24,7 @@ public static class Shoulds
 
     /// <summary>
     /// Returns an <see cref="ResultAssertions"/> object that can be used to assert the
-    /// current <task of a <see cref="Result"/>.
+    /// current task of a <see cref="Result"/>.
     /// </summary>
     [Pure]
     public static ResultAssertions Should(this Task<Result> promise, [CallerArgumentExpression(nameof(promise))] string? expression = null)

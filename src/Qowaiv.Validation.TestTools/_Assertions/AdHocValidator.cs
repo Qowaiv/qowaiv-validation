@@ -6,7 +6,7 @@ public static class AdHocValidator
 {
     extension<TModel>(TModel model) where TModel : class
     {
-        /// <summary>Asserts thats object is valid for the specified validator.</summary>
+        /// <summary>Validates the model is valid for the specified validator.</summary>
         [Pure]
         public Result<TModel> ValidateWith(IValidator<TModel> validator)
         {
