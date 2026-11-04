@@ -30,6 +30,11 @@ public enum ValidationSeverity
 }
 ```
 
+The values are ordered by impact: a higher value is worse. Only severities that
+are hardly used, so `None`, are negative. This also keeps `Info`, the least
+severe severity that is actually reported, at `0`, which makes
+`ValidationMessages` sorting by severity (descending) straightforward.
+
 `None` is basically no issue: it represents a successful message (so no
 severity). Messages with this severity are never part of a `ValidationMessages`
 collection.
