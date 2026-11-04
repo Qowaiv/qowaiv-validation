@@ -4,8 +4,7 @@ using System.Reflection;
 namespace Qowaiv.Validation.Messages;
 
 /// <summary>Message to communicate if a entity could not be found.</summary>
-[Serializable]
-public class EntityNotFound : InvalidOperationException, IHttpStatusMessage
+public class EntityNotFound : InvalidOperationException, IValidationMessage
 {
     /// <summary>Initializes a new instance of the <see cref="EntityNotFound"/> class.</summary>
     public EntityNotFound() : this(ValidationMessages.EntityNotFound) { }

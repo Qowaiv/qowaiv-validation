@@ -3,8 +3,7 @@ using System.Net;
 namespace Qowaiv.Validation.Messages;
 
 /// <summary>Message to communicate that access has been denied.</summary>
-[Serializable]
-public class AccessDenied : SecurityException, IHttpStatusMessage
+public class AccessDenied : SecurityException, IValidationMessage
 {
     /// <summary>Initializes a new instance of the <see cref="AccessDenied"/> class.</summary>
     public AccessDenied() : this(ValidationMessages.AccessDenied) { }

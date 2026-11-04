@@ -30,7 +30,9 @@ namespace Qowaiv.Validation.Messages {
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal ValidationMessages() {
         }
-        
+
+        public static string PaymentRequired { get; internal set; }
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
