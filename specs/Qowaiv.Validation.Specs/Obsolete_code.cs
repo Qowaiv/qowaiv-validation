@@ -9,7 +9,11 @@ public class Will_be_dropped
         .Should()
         .BeValid()
         .WithMessages()
-        .Value.Should().Be(42);
+        .And.Value.Should().Be(42);
+
+    [Test]
+    public void Value_on_Should_be_valid()
+        => Qowaiv.Validation.Abstractions.Result.For(42).Should().BeValid().Value.Should().Be(42);
 }
 
 [Obsolete("Will become private when the next major version is released.")]

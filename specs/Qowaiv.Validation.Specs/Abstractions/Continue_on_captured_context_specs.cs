@@ -1,6 +1,7 @@
 using System.Threading;
 using Qowaiv.Validation.Abstractions;
 
+
 namespace Abstractions.Continue_on_captured_context_specs;
 
 public class Continue_on_captured_context_false
@@ -41,7 +42,7 @@ public class Continue_on_captured_context_true
 
 internal static class Delayed
 {
-    public static AsyncResult<string> Action(int _)
+    public static AsyncResult_string Action(int _)
         => ActionAsync();
 
     public static AsyncResult ActionResult(int _)
@@ -53,7 +54,7 @@ internal static class Delayed
         return Result.For(nameof(ActionAsync));
     }
 
-    private static async Task<Result> ActionResultAsync()
+    private static async AsyncResult ActionResultAsync()
     {
         await Task.Delay(10).ConfigureAwait(false);
         return Result.OK;

@@ -136,21 +136,21 @@ public class Value
     [Test]
     public void is_evaluated_for_a_valid_chain()
     {
-        Action assert = () => Result.For(3).Should().BeValid().Value.Should().Be(13);
+        Action assert = () => Result.For(3).Should().BeValid().And.Value.Should().Be(13);
         assert.Should().Throw<Exception>().WithMessage("Expected * to be 13, but found 3 (difference of -10).");
     }
 
     [Test]
     public void is_evaluated_for_a_valid_chain_with_message_assert()
     {
-        Action assert = () => Result.For(3).Should().BeValid().WithoutMessages().Value.Should().Be(13);
+        Action assert = () => Result.For(3).Should().BeValid().WithoutMessages().And.Value.Should().Be(13);
         assert.Should().Throw<Exception>().WithMessage("Expected * to be 13, but found 3 (difference of -10).");
     }
 
     [Test]
     public void is_not_evaluated_for_a_invalid_chain()
     {
-        Action assert = () => Result.For(3).Should().BeValid().WithMessage(ValidationMessage.Info("Any")).Value.Should().Be(13);
+        Action assert = () => Result.For(3).Should().BeValid().WithMessage(ValidationMessage.Info("Any")).And.Value.Should().Be(13);
         assert.Should().Throw<Exception>().WithMessage("Expected a message, but found none.");
     }
 }
