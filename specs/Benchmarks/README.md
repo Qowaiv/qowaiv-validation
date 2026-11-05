@@ -17,11 +17,11 @@
 
 ## DefinedOnly & DefinedEnumOnly attribute
 
-| IsValid()                | Mean     | Ratio |
-|------------------------- |---------:|------:|
-| `[DefinedEnumOnly]`      | 16.23 ms |  1.00 |
-| `[DefinedOnly&lt;T&gt;]` | 11.76 ms |  0.73 |
-| `[NotChached]`           | 45.36 ms |  2.80 |
+| IsValid()           | Mean     | Ratio |
+|---------------------|---------:|------:|
+| `[DefinedEnumOnly]` | 16.23 ms |  1.00 |
+| `[DefinedOnly<T>]`  | 11.76 ms |  0.73 |
+| `[NotChached]`      | 45.36 ms |  2.80 |
 
 ## Data Annotations Validation
 | Method        | Runtime   | Count | Mean         | Error      | StdDev     | Median       | Ratio | RatioSD |
