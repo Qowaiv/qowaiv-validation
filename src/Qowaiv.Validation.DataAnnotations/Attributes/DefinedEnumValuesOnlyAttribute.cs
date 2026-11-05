@@ -28,18 +28,12 @@ public sealed class DefinedEnumValuesOnlyAttribute()
     [Pure]
     private bool Contains(object value, Type enumType)
     {
-        var lookup = OnlyAllowDefinedFlagsCombinations ? Strict : Loose;
-
-        if (!lookup.TryGetValue(enumType, out var defined))
-        {
-            defined = DefinedEnums.New(enumType, OnlyAllowDefinedFlagsCombinations);
-            lookup[enumType] = defined;
-        }
-
-        return defined.Contains(value);
+        var strict = OnlyAllowDefinedFlagsCombinations;
+        var lookup = strict ? Strict : Loose;
+        return lookup.GetOrAdd(enumType, static (type, flag) => DefinedEnums.New(type, flag), strict).Contains(value);
     }
 
-    /// <summary>Contains enums with flags whre only defined flags are allowed.</summary>
+    /// <summary>Contains enums with flags where only defined flags are allowed.</summary>
     private static readonly ConcurrentDictionary<Type, DefinedEnums> Strict = [];
 
     /// <summary>Contains all other enums.</summary>

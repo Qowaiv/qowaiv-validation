@@ -42,6 +42,7 @@ v11.0.0
 - Drop .NET 8.0 targets. (BREAKING)
 - [MultipleOf] not longers supports double or float. (BREAKING)
 - [DefinedEnumValuesOnly] has been sealed. (BREAKING)
+- [DefinedOnly<TEnum>] has been sealed. (BREAKING)
 - AnnotatedModelValidator speed improvements.
 - [Mandatory], [Length.*], [Count.*], [DefinedEnumValuesOnly] speed improvements.
 - Sign based attributes don't crash on NaN. (BUG)

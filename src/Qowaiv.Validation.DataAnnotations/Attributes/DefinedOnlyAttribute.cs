@@ -6,7 +6,7 @@ namespace Qowaiv.Validation.DataAnnotations;
 /// </typeparam>
 [AttributeUsage(AttributeTarget.Member, AllowMultiple = false)]
 [Validates(GenericArgument = true)]
-public class DefinedOnlyAttribute<TEnum>()
+public sealed class DefinedOnlyAttribute<TEnum>()
     : ValidationAttribute(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError)
     where TEnum : struct, Enum
 {
@@ -25,9 +25,11 @@ public class DefinedOnlyAttribute<TEnum>()
     public override bool IsValid(object? value) => value switch
     {
         null => true,
-        TEnum val => Values.Contains(val),
+        TEnum val => (OnlyAllowDefinedFlagsCombinations ? Strict : Loose).Value.Contains(val),
         _ => throw UnsupportedType.ForAttribute<DefinedOnlyAttribute<TEnum>>(value.GetType()),
     };
 
-    private DefinedEnums Values => field ??= DefinedEnums.New(typeof(TEnum), OnlyAllowDefinedFlagsCombinations);
+    private static readonly Lazy<DefinedEnums<TEnum>> Strict = new(() => DefinedEnums<TEnum>.New(onlyAllowDefinedFlags: true));
+
+    private static readonly Lazy<DefinedEnums<TEnum>> Loose = new(() => DefinedEnums<TEnum>.New(onlyAllowDefinedFlags: false));
 }

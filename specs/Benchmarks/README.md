@@ -16,12 +16,19 @@
 | InRange&lt;Amount&gt; |   2.678 us |  0.07 |
 
 ## DefinedOnly & DefinedEnumOnly attribute
+Based on a set of 1 milion (HTTP Status code) enum values.
+| IsValid()           | Mean      | Ratio |
+|---------------------|----------:|------:|
+| `[DefinedEnumOnly]` | 10.232 ms |  1.00 |
+| `[DefinedOnly<T>]`  |  4.842 ms |  0.47 |
+| `[NotCached]`       | 45.069 ms |  4.41 |
 
-| IsValid()           | Mean     | Ratio |
-|---------------------|---------:|------:|
-| `[DefinedEnumOnly]` | 16.23 ms |  1.00 |
-| `[DefinedOnly<T>]`  | 11.76 ms |  0.73 |
-| `[NotChached]`      | 45.36 ms |  2.80 |
+Based on a set of 1 milion flag enum values.
+
+| IsValid()           | Mean      | Ratio |
+|---------------------|----------:|------:|
+| `[DefinedEnumOnly]` |  7.382 ms |  1.00 |
+| `[DefinedOnly<T>]`  |  2.940 ms |  0.40 |
 
 ## Data Annotations Validation
 | Method        | Runtime   | Count | Mean         | Error      | StdDev     | Median       | Ratio | RatioSD |
