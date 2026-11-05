@@ -30,7 +30,7 @@ namespace Qowaiv.Validation.Messages {
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal ValidationMessages() {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -110,6 +110,15 @@ namespace Qowaiv.Validation.Messages {
         internal static string MidAirCollision {
             get {
                 return ResourceManager.GetString("MidAirCollision", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment required..
+        /// </summary>
+        internal static string PaymentRequired {
+            get {
+                return ResourceManager.GetString("PaymentRequired", resourceCulture);
             }
         }
         

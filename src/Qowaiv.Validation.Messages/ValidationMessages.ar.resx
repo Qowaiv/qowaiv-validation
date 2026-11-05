@@ -28,7 +28,10 @@
     <value>لم يتم العثور على الكيان {0} برقم المعرّف {1}.</value>
   </data>
   <data name="MidAirCollision" xml:space="preserve">
-    <value>تم كشف تصادم في الهواء.</value>
+    <value>تم اكتشاف mid-air collision.</value>
+  </data>
+  <data name="PaymentRequired" xml:space="preserve">
+    <value>الدفع مطلوب.</value>
   </data>
   <data name="ServiceUnavailable" xml:space="preserve">
     <value>الخدمة المطلوبة غير متاحة.</value>
