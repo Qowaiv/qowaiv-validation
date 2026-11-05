@@ -28,6 +28,14 @@ or:
 ``` csharp
 var message = EntityNotFound.For<SomeEntity>(id: 42);
 ```
+## Payment Required
+To communicate that a payment is required to proceed (HTTP 402).
+A specific type of `System.InvalidOperationException`:
+
+``` csharp
+var message = new PaymentRequired();
+```
+
 ## Service Unavailable
 To communicate which (dependent) service was unavailable:
 

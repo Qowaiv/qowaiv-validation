@@ -3,7 +3,6 @@ using System.Net;
 namespace Qowaiv.Validation.Messages;
 
 /// <summary>Message to communicate concurrency control failed.</summary>
-[Serializable]
 public class ConcurrencyIssue : InvalidOperationException, IHttpStatusMessage
 {
     /// <summary>Initializes a new instance of the <see cref="ConcurrencyIssue"/> class.</summary>

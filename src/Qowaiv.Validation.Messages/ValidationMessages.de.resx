@@ -16,7 +16,7 @@
     <value>Zugriff verweigert.</value>
   </data>
   <data name="ConcurrencyIssue" xml:space="preserve">
-    <value>Ein Parallelitätsproblem ist aufgetreten.</value>
+    <value>Ein Concurrency-Problem ist aufgetreten.</value>
   </data>
   <data name="EntityNotFound" xml:space="preserve">
     <value>Entität konnte nicht gefunden werden.</value>
@@ -28,7 +28,10 @@
     <value>Entität {0} mit ID {1} konnte nicht gefunden werden.</value>
   </data>
   <data name="MidAirCollision" xml:space="preserve">
-    <value>Eine Luftkollision wurde erkannt.</value>
+    <value>Eine Mid-Air Collision wurde erkannt.</value>
+  </data>
+  <data name="PaymentRequired" xml:space="preserve">
+    <value>Zahlung erforderlich.</value>
   </data>
   <data name="ServiceUnavailable" xml:space="preserve">
     <value>Der angeforderte Service ist nicht verfügbar.</value>

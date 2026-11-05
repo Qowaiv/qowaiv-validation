@@ -28,7 +28,10 @@
     <value>找不到 ID 为 {1} 的实体 {0}。</value>
   </data>
   <data name="MidAirCollision" xml:space="preserve">
-    <value>检测到空中碰撞。</value>
+    <value>检测到 mid-air collision。</value>
+  </data>
+  <data name="PaymentRequired" xml:space="preserve">
+    <value>需要付款。</value>
   </data>
   <data name="ServiceUnavailable" xml:space="preserve">
     <value>请求的服务不可用。</value>

@@ -3,7 +3,6 @@ using System.Net;
 namespace Qowaiv.Validation.Messages;
 
 /// <summary>Message to communicate that a (external) service/system/process is unavailable.</summary>
-[Serializable]
 public class ServiceUnavailable : Exception, IHttpStatusMessage
 {
     /// <summary>Initializes a new instance of the <see cref="ServiceUnavailable"/> class.</summary>

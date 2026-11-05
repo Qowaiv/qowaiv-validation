@@ -28,7 +28,10 @@
     <value>Сущность {0} с ID {1} не найдена.</value>
   </data>
   <data name="MidAirCollision" xml:space="preserve">
-    <value>Обнаружено столкновение в воздухе.</value>
+    <value>Обнаружено событие mid-air collision.</value>
+  </data>
+  <data name="PaymentRequired" xml:space="preserve">
+    <value>Требуется оплата.</value>
   </data>
   <data name="ServiceUnavailable" xml:space="preserve">
     <value>Запрошенная служба недоступна.</value>
