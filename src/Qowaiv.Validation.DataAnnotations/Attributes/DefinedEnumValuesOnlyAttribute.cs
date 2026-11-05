@@ -1,11 +1,9 @@
-using System.Reflection;
-
 namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Validates if the decorated enum has a value that is a defined.</summary>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
 [Validates(typeof(Enum))]
-public class DefinedEnumValuesOnlyAttribute()
+public sealed class DefinedEnumValuesOnlyAttribute()
     : ValidationAttribute(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError)
 {
     /// <summary>If true, only explicitly defined values of flag enums are allowed; combinations of defined values that are not defined themselves are rejected.</summary>
@@ -20,43 +18,30 @@ public class DefinedEnumValuesOnlyAttribute()
     /// If the type of the value is not an enum.
     /// </exception>
     [Pure]
-    public override bool IsValid(object? value)
+    public override bool IsValid(object? value) => value switch
     {
-        // Might be a nullable enum, we just don't know.
-        if (value is null) return true;
-        else if (value.GetType() is { IsEnum: true } enumType)
-        {
-            if (OnlyAllowDefinedFlagsCombinations || !enumType.GetCustomAttributes<FlagsAttribute>().Any())
-            {
-                return Enum.IsDefined(enumType, value);
-            }
-            else
-            {
-                dynamic dyn = value;
-                return (Mask(enumType) & dyn) == dyn;
-            }
-        }
-        else throw UnsupportedType.ForAttribute<DefinedEnumValuesOnlyAttribute>(value.GetType());
-    }
+        null => true,
+        _ when value.GetType() is { IsEnum: true } enumType => Contains(value, enumType),
+        _ => throw UnsupportedType.ForAttribute<DefinedEnumValuesOnlyAttribute>(value.GetType()),
+    };
 
     [Pure]
-    private static dynamic Mask(Type enumType)
+    private bool Contains(object value, Type enumType)
     {
-        if (!Flags.TryGetValue(enumType, out var mask))
+        var lookup = OnlyAllowDefinedFlagsCombinations ? Strict : Loose;
+
+        if (!lookup.TryGetValue(enumType, out var defined))
         {
-            var defined = Enum.GetValues(enumType);
-            mask = defined.GetValue(0)!;
-
-            for (var i = 1; i < defined.Length; i++)
-            {
-                mask |= (dynamic)defined.GetValue(i)!;
-            }
-
-            Flags[enumType] = mask;
+            defined = DefinedEnums.New(enumType, OnlyAllowDefinedFlagsCombinations);
+            lookup[enumType] = defined;
         }
 
-        return mask;
+        return defined.Contains(value);
     }
 
-    private static readonly ConcurrentDictionary<Type, dynamic> Flags = [];
+    /// <summary>Contains enums with flags whre only defined flags are allowed.</summary>
+    private static readonly ConcurrentDictionary<Type, DefinedEnums> Strict = [];
+
+    /// <summary>Contains all other enums.</summary>
+    private static readonly ConcurrentDictionary<Type, DefinedEnums> Loose = [];
 }

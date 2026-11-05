@@ -1,8 +1,6 @@
-using BenchmarkDotNet.Attributes;
 using Qowaiv.Diagnostics.Contracts;
 using Qowaiv.Financial;
 using Qowaiv.Validation.DataAnnotations.Attributes;
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
@@ -11,7 +9,7 @@ namespace Benchmarks;
 public partial class Attributes
 {
     [Inheritable]
-    public class Range
+    public class Attributes_Range
     {
         private readonly RangeAttribute NonGeneric = new(typeof(Amount), "14", "42");
         private readonly InRangeAttribute<Amount> WithGenerics = new(14.0, 42.0);

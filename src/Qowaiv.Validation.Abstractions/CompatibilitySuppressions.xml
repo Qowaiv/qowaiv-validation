@@ -38,7 +38,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
-<<<<<<< HEAD
     <Target>T:Qowaiv.Validation.Abstractions.Results</Target>
     <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
@@ -46,8 +45,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
-=======
->>>>>>> 35ca204 (wip)
     <Target>T:Qowaiv.Validation.Abstractions.ValidationMessageExtensions</Target>
     <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
@@ -62,11 +59,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
-<<<<<<< HEAD
     <Target>T:Qowaiv.Validation.Abstractions.AsynchronousTask</Target>
-=======
-    <Target>T:Qowaiv.Validation.Abstractions.AsyncResult</Target>
->>>>>>> 35ca204 (wip)
     <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -101,7 +94,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
-<<<<<<< HEAD
     <Target>T:Qowaiv.Validation.Abstractions.Results</Target>
     <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
@@ -109,8 +101,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
-=======
->>>>>>> 35ca204 (wip)
     <Target>T:Qowaiv.Validation.Abstractions.ValidationMessageExtensions</Target>
     <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
@@ -186,7 +176,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
-<<<<<<< HEAD
     <Target>T:Qowaiv.Validation.Abstractions.Results</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
@@ -194,8 +183,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
-=======
->>>>>>> 35ca204 (wip)
     <Target>T:Qowaiv.Validation.Abstractions.ValidationMessageExtensions</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
@@ -231,7 +218,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-<<<<<<< HEAD
     <Target>M:Qowaiv.Validation.Abstractions.Result.For``1(``0,System.Collections.Generic.IEnumerable{Qowaiv.Validation.Abstractions.IValidationMessage})</Target>
     <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
@@ -239,8 +225,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-=======
->>>>>>> 35ca204 (wip)
     <Target>M:Qowaiv.Validation.Abstractions.Result.get_Errors</Target>
     <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
@@ -305,16 +289,6 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Result`1.Act``1(System.Func{`0,``0})</Target>
-<<<<<<< HEAD
-=======
-    <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:Qowaiv.Validation.Abstractions.Result`1.ActAsync(System.Func{`0,Qowaiv.Validation.Abstractions.AsyncResult},System.Boolean)</Target>
->>>>>>> 35ca204 (wip)
     <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -349,7 +323,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-<<<<<<< HEAD
     <Target>M:Qowaiv.Validation.Abstractions.Result`1.op_BitwiseOr(Qowaiv.Validation.Abstractions.Result{`0},System.Func{`0,System.Threading.Tasks.Task{Qowaiv.Validation.Abstractions.Result{`0}}})</Target>
     <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
@@ -358,9 +331,6 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Validator.Composite``1(System.Collections.Generic.IEnumerable{Qowaiv.Validation.Abstractions.IValidator{``0}})</Target>
-=======
-    <Target>M:Qowaiv.Validation.Abstractions.Result`1.op_BitwiseOr(Qowaiv.Validation.Abstractions.Result{`0},System.Func{`0,Qowaiv.Validation.Abstractions.AsyncResult{`0}})</Target>
->>>>>>> 35ca204 (wip)
     <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -388,7 +358,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-<<<<<<< HEAD
     <Target>M:Qowaiv.Validation.Abstractions.Result.For``1(``0,System.Collections.Generic.IEnumerable{Qowaiv.Validation.Abstractions.IValidationMessage})</Target>
     <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
@@ -396,8 +365,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-=======
->>>>>>> 35ca204 (wip)
     <Target>M:Qowaiv.Validation.Abstractions.Result.get_Errors</Target>
     <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
@@ -462,16 +429,6 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Result`1.Act``1(System.Func{`0,``0})</Target>
-<<<<<<< HEAD
-=======
-    <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:Qowaiv.Validation.Abstractions.Result`1.ActAsync(System.Func{`0,Qowaiv.Validation.Abstractions.AsyncResult},System.Boolean)</Target>
->>>>>>> 35ca204 (wip)
     <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -506,7 +463,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-<<<<<<< HEAD
     <Target>M:Qowaiv.Validation.Abstractions.Result`1.op_BitwiseOr(Qowaiv.Validation.Abstractions.Result{`0},System.Func{`0,System.Threading.Tasks.Task{Qowaiv.Validation.Abstractions.Result{`0}}})</Target>
     <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
@@ -515,9 +471,6 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Validator.Composite``1(System.Collections.Generic.IEnumerable{Qowaiv.Validation.Abstractions.IValidator{``0}})</Target>
-=======
-    <Target>M:Qowaiv.Validation.Abstractions.Result`1.op_BitwiseOr(Qowaiv.Validation.Abstractions.Result{`0},System.Func{`0,Qowaiv.Validation.Abstractions.AsyncResult{`0}})</Target>
->>>>>>> 35ca204 (wip)
     <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -545,7 +498,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-<<<<<<< HEAD
     <Target>M:Qowaiv.Validation.Abstractions.Result.For``1(``0,System.Collections.Generic.IEnumerable{Qowaiv.Validation.Abstractions.IValidationMessage})</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
@@ -553,8 +505,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-=======
->>>>>>> 35ca204 (wip)
     <Target>M:Qowaiv.Validation.Abstractions.Result.get_Errors</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
@@ -619,16 +569,6 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Result`1.Act``1(System.Func{`0,``0})</Target>
-<<<<<<< HEAD
-=======
-    <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:Qowaiv.Validation.Abstractions.Result`1.ActAsync(System.Func{`0,Qowaiv.Validation.Abstractions.AsyncResult},System.Boolean)</Target>
->>>>>>> 35ca204 (wip)
     <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -663,7 +603,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
-<<<<<<< HEAD
     <Target>M:Qowaiv.Validation.Abstractions.Result`1.op_BitwiseOr(Qowaiv.Validation.Abstractions.Result{`0},System.Func{`0,System.Threading.Tasks.Task{Qowaiv.Validation.Abstractions.Result{`0}}})</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
@@ -672,9 +611,6 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Validator.Composite``1(System.Collections.Generic.IEnumerable{Qowaiv.Validation.Abstractions.IValidator{``0}})</Target>
-=======
-    <Target>M:Qowaiv.Validation.Abstractions.Result`1.op_BitwiseOr(Qowaiv.Validation.Abstractions.Result{`0},System.Func{`0,Qowaiv.Validation.Abstractions.AsyncResult{`0}})</Target>
->>>>>>> 35ca204 (wip)
     <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -1022,7 +958,6 @@
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
-<<<<<<< HEAD
     <DiagnosticId>CP0014</DiagnosticId>
     <Target>M:Qowaiv.Validation.Abstractions.Result`1.ActAsync(System.Func{`0,System.Threading.Tasks.Task{Qowaiv.Validation.Abstractions.Result}},System.Boolean):[T:System.Runtime.CompilerServices.AsyncStateMachineAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
@@ -1034,12 +969,6 @@
     <Target>M:Qowaiv.Validation.Abstractions.Result`1.ActAsync``1(System.Func{`0,System.Threading.Tasks.Task{Qowaiv.Validation.Abstractions.Result{``0}}},System.Boolean):[T:System.Runtime.CompilerServices.AsyncStateMachineAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
-=======
-    <DiagnosticId>CP0016</DiagnosticId>
-    <Target>T:Qowaiv.Validation.Abstractions.Result:[T:System.Diagnostics.DebuggerDisplayAttribute]</Target>
-    <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
->>>>>>> 35ca204 (wip)
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
@@ -1079,7 +1008,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-<<<<<<< HEAD
     <Target>M:Qowaiv.Validation.Abstractions.Result`1.AsTask:[T:System.ObsoleteAttribute]</Target>
     <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
@@ -1087,8 +1015,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-=======
->>>>>>> 35ca204 (wip)
     <Target>T:Qowaiv.Validation.Abstractions.Result:[T:System.Diagnostics.DebuggerDisplayAttribute]</Target>
     <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
@@ -1096,11 +1022,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-<<<<<<< HEAD
     <Target>M:Qowaiv.Validation.Abstractions.AsynchronousTask.&lt;G&gt;$2A2B2E0CEAE296674C1BA359438B9A6A`1.ActAsync(System.Func{`0,Qowaiv.Validation.Abstractions.Result},System.Boolean):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
-=======
-    <Target>M:Qowaiv.Validation.Abstractions.AsyncResult.ConfigureAwait(System.Boolean)-&gt;System.Runtime.CompilerServices.ConfiguredTaskAwaitable&lt;Qowaiv.Validation.Abstractions.Result&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
->>>>>>> 35ca204 (wip)
     <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
   </Suppression>
@@ -1124,23 +1046,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-<<<<<<< HEAD
     <Target>M:Qowaiv.Validation.Abstractions.AsynchronousTask.&lt;G&gt;$2A2B2E0CEAE296674C1BA359438B9A6A`1.ActAsync``1(System.Func{`0,Qowaiv.Validation.Abstractions.Result{``0}},System.Action{`0,``0},System.Boolean):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
-=======
-    <Target>M:Qowaiv.Validation.Abstractions.AsyncResult`1.ActAsync``1(System.Func{`0,``0},System.Boolean)-&gt;Qowaiv.Validation.Abstractions.AsyncResult&lt;TOut&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
-    <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Validation.Abstractions.AsyncResult`1.ActAsync``1(System.Func{`0,``0},System.Boolean)&lt;0&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
-    <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Validation.Abstractions.AsyncResult`1.ActAsync``1(System.Func{`0,Qowaiv.Validation.Abstractions.AsyncResult{``0}},System.Action{`0,``0},System.Boolean)-&gt;Qowaiv.Validation.Abstractions.AsyncResult&lt;TModel&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
->>>>>>> 35ca204 (wip)
     <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
   </Suppression>
@@ -1242,23 +1148,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-<<<<<<< HEAD
     <Target>M:Qowaiv.Validation.Abstractions.AsynchronousTask.ActAsync``1(System.Threading.Tasks.Task{Qowaiv.Validation.Abstractions.Result{``0}},System.Func{``0,System.Threading.Tasks.Task{Qowaiv.Validation.Abstractions.Result}},System.Boolean)$1:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
-=======
-    <Target>M:Qowaiv.Validation.Abstractions.AsyncResult`1.op_BitwiseOr(Qowaiv.Validation.Abstractions.AsyncResult{`0},System.Func{`0,`0})-&gt;Qowaiv.Validation.Abstractions.AsyncResult&lt;TModel&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
-    <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Validation.Abstractions.AsyncResult`1.op_BitwiseOr(Qowaiv.Validation.Abstractions.AsyncResult{`0},System.Func{`0,`0})$0:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
-    <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Validation.Abstractions.AsyncResult`1.op_BitwiseOr(Qowaiv.Validation.Abstractions.AsyncResult{`0},System.Func{`0,Qowaiv.Validation.Abstractions.AsyncResult{`0}})-&gt;Qowaiv.Validation.Abstractions.AsyncResult&lt;TModel&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
->>>>>>> 35ca204 (wip)
     <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
   </Suppression>
@@ -1306,7 +1196,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-<<<<<<< HEAD
     <Target>M:Qowaiv.Validation.Abstractions.AsynchronousTask.ActAsync``2(System.Threading.Tasks.Task{Qowaiv.Validation.Abstractions.Result{``0}},System.Func{``0,Qowaiv.Validation.Abstractions.Result{``1}},System.Boolean)-&gt;System.Threading.Tasks.Task&lt;Qowaiv.Validation.Abstractions.Result&lt;TOut&gt;&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
@@ -1415,8 +1304,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-=======
->>>>>>> 35ca204 (wip)
     <Target>M:Qowaiv.Validation.Abstractions.InvalidModel.#ctor(System.String,System.Exception,Qowaiv.Validation.Abstractions.ValidationMessages):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
@@ -1753,46 +1640,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-<<<<<<< HEAD
     <Target>M:Qowaiv.Validation.Abstractions.Result`1.AsTask:[T:System.ObsoleteAttribute]</Target>
-=======
-    <Target>T:Qowaiv.Validation.Abstractions.Result:[T:System.Diagnostics.DebuggerDisplayAttribute]</Target>
-    <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0021</DiagnosticId>
-    <Target>M:Qowaiv.Validation.Abstractions.Result.For``1(``0,System.Collections.Generic.IEnumerable{Qowaiv.Validation.Abstractions.IValidationMessage})``0:notnull</Target>
-    <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0021</DiagnosticId>
-    <Target>M:Qowaiv.Validation.Abstractions.Validator.Empty``1``0:notnull</Target>
-    <Left>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/net10.0/Qowaiv.Validation.Abstractions.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0021</DiagnosticId>
-    <Target>M:Qowaiv.Validation.Abstractions.Result.For``1(``0,System.Collections.Generic.IEnumerable{Qowaiv.Validation.Abstractions.IValidationMessage})``0:notnull</Target>
-    <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0021</DiagnosticId>
-    <Target>M:Qowaiv.Validation.Abstractions.Validator.Empty``1``0:notnull</Target>
-    <Left>lib/net8.0/Qowaiv.Validation.Abstractions.dll</Left>
-    <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0021</DiagnosticId>
-    <Target>M:Qowaiv.Validation.Abstractions.Result.For``1(``0,System.Collections.Generic.IEnumerable{Qowaiv.Validation.Abstractions.IValidationMessage})``0:notnull</Target>
->>>>>>> 35ca204 (wip)
     <Left>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Abstractions.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>

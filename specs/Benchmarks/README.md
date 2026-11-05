@@ -10,10 +10,18 @@
 
 ## In Range attribute
 
-| Method                | Mean       | Ratio |
+| IsValid()             | Mean       | Ratio |
 |-----------------------|-----------:|------:|
 | ComponentModel Range  |  40.587 us |  1.00 |
 | InRange&lt;Amount&gt; |   2.678 us |  0.07 |
+
+## DefinedOnly & DefinedEnumOnly attribute
+
+| IsValid()                | Mean     | Ratio |
+|------------------------- |---------:|------:|
+| `[DefinedEnumOnly]`      | 16.23 ms |  1.00 |
+| `[DefinedOnly&lt;T&gt;]` | 11.76 ms |  0.73 |
+| `[NotChached]`           | 45.36 ms |  2.80 |
 
 ## Data Annotations Validation
 | Method        | Runtime   | Count | Mean         | Error      | StdDev     | Median       | Ratio | RatioSD |
