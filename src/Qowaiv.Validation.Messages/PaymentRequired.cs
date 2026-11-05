@@ -22,5 +22,4 @@ public class PaymentRequired : InvalidOperationException, IHttpStatusMessage
 
     /// <inheritdoc />
     public string? PropertyName { get; set; }
-
 }

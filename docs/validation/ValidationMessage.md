@@ -87,14 +87,15 @@ implementations that are also exceptions. See the
 
 | Message              | Derives from                      | HTTP status                |
 |----------------------|-----------------------------------|----------------------------|
+| `PaymentRequired`    | `InvalidOperationException`       | 402 (`PaymentRequired`)    |
 | `AccessDenied`       | `SecurityException`               | 403 (`Forbidden`)          |
 | `ConcurrencyIssue`   | `InvalidOperationException`       | 409 (`Conflict`)           |
 | `EntityNotFound`     | `InvalidOperationException`       | 404 (`NotFound`)           |
 | `ServiceUnavailable` | `Exception`                       | 503 (`ServiceUnavailable`) |
 
 ## HTTP status
-A validation message that can be bound to an HTTP status implements
-`IHttpStatusMessage`, an `IValidationMessage` that also has a
+A validation message that can be bound to an [HTTP status](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
+implements `IHttpStatusMessage`, an `IValidationMessage` that also has a
 `System.Net.HttpStatusCode`. This is a separate interface because most messages
 (DataAnnotations, FluentValidation, XML) have no HTTP meaning.
 
