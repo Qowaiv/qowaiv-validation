@@ -32,9 +32,11 @@ public partial class Attributes
         private readonly DefinedEnumValuesOnlyAttribute nonGeneric = new();
         private readonly NotCachedAttribute notCached = new();
 
+        private readonly NotCachedAttribute<HttpStatusCode> notCachedGen = new();
+
 
         [Benchmark(Baseline = true)]
-        public void NonGeneric()
+        public void Non_generic()
         {
             foreach (var value in Data.Enums.Values) _ = nonGeneric.IsValid(value);
         }
@@ -50,6 +52,12 @@ public partial class Attributes
         {
             foreach (var value in Data.Enums.Values) _ = notCached.IsValid(value);
         }
+
+        [Benchmark]
+        public void Not_cached_generic()
+        {
+            foreach (var value in Data.Enums.Values) _ = notCachedGen.IsValid(value);
+        }
     }
 
     [AttributeUsage(AttributeTargets.All)]
@@ -59,6 +67,17 @@ public partial class Attributes
         {
             null => true,
             _ when value.GetType() is { IsEnum: true } enumType => Enum.IsDefined(enumType, value),
+            _ => throw UnsupportedType.ForAttribute<NotCachedAttribute>(value.GetType()),
+        };
+    }
+
+    [AttributeUsage(AttributeTargets.All)]
+    public sealed class NotCachedAttribute<T> : ValidationAttribute where T: struct, Enum
+    {
+        public override bool IsValid(object? value) => value switch
+        {
+            null => true,
+            T val => Enum.IsDefined(val),
             _ => throw UnsupportedType.ForAttribute<NotCachedAttribute>(value.GetType()),
         };
     }

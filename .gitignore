@@ -1,7 +1,7 @@
-# custom additions
-packages/
 .nuget/
 .temp/
+.bdn/
+packages/
 
 #################
 ## Visual Studio

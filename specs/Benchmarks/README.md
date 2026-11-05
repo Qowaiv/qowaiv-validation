@@ -10,18 +10,20 @@
 
 ## In Range attribute
 
-| IsValid()             | Mean       | Ratio |
-|-----------------------|-----------:|------:|
-| ComponentModel Range  |  40.587 us |  1.00 |
-| InRange&lt;Amount&gt; |   2.678 us |  0.07 |
+| IsValid()                | Mean       | Ratio |
+|------------------------- |-----------:|------:|
+| `[ComponentModel.Range]` |  40.587 us |  1.00 |
+| `[InRange<Amount>]`      |   2.678 us |  0.07 |
 
 ## DefinedOnly & DefinedEnumOnly attribute
+
 Based on a set of 1 milion (HTTP Status code) enum values.
 | IsValid()           | Mean      | Ratio |
 |---------------------|----------:|------:|
-| `[DefinedEnumOnly]` | 10.232 ms |  1.00 |
-| `[DefinedOnly<T>]`  |  4.842 ms |  0.47 |
-| `[NotCached]`       | 45.069 ms |  4.41 |
+| `[DefinedEnumOnly]` | 10.666 ms |  1.00 |
+| `[DefinedOnly<T>]`  |  5.061 ms |  0.47 |
+| `[NotCached]`       | 47.058 ms |  4.42 |
+| `[NotCached<T>]`    | 32.838 ms |  3.08 |
 
 Based on a set of 1 milion flag enum values.
 
