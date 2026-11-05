@@ -62,6 +62,10 @@ Full severity map: `.globalconfig` (201 lines of diagnostic overrides).
 
 * **Do not modify `.net.csproj`:** This file is exclusively for running Roslyn Analyzers. Agents must completely ignore and skip this file during development.
 
+* **Always skip `CompatibilitySuppressions.xml` files:** Do not modify them, and ignore them when reviewing changes. They are generated and maintained by the maintainers.
+
+* **Temporary files:** If you need a temp location, use the `.temp` directory in the repository root.
+
 ### Important notes on `[Validates]` attributes
 
 - The `[Validates]` attribute helps the `QW0102` analyzer catch attribute misuse

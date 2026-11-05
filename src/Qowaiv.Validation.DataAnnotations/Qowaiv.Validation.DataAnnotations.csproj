@@ -33,14 +33,16 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <PackageValidationBaselineVersion>5.0.0</PackageValidationBaselineVersion>
-    <Version>6.2.0</Version>
+    <Version>11.0.0-rc.1</Version>
+    <PackageValidationBaselineVersion>6.2.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
 v11.0.0
 - Add .NET 11.0 target.
 - Drop .NET 8.0 targets. (BREAKING)
 - [MultipleOf] not longers supports double or float. (BREAKING)
+- [DefinedEnumValuesOnly] has been sealed. (BREAKING)
+- [DefinedOnly<TEnum>] has been sealed. (BREAKING)
 - AnnotatedModelValidator speed improvements.
 - [Mandatory], [Length.*], [Count.*], [DefinedEnumValuesOnly] speed improvements.
 - Sign based attributes don't crash on NaN. (BUG)

@@ -1,4 +1,3 @@
-using BenchmarkDotNet.Attributes;
 using Qowaiv.Diagnostics.Contracts;
 using Qowaiv.Globalization;
 using Qowaiv.Validation.DataAnnotations;
@@ -8,7 +7,7 @@ namespace Benchmarks;
 public partial class Attributes
 {
     [Inheritable]
-    public class AllowedValues
+    public class Attributes_AllowedValues
     {
         private readonly AllowedValuesAttribute NonGeneric = new("NL", "BE", "LU", "DE", "FR");
         private readonly AllowedAttribute<Country> WithGenerics = new("NL", "BE", "LU", "DE", "FR");

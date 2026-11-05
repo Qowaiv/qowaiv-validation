@@ -1,5 +1,3 @@
-using System.Reflection;
-
 namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Validates if the decorated enum has a value that is defined.</summary>
@@ -8,13 +6,10 @@ namespace Qowaiv.Validation.DataAnnotations;
 /// </typeparam>
 [AttributeUsage(AttributeTarget.Member, AllowMultiple = false)]
 [Validates(GenericArgument = true)]
-public class DefinedOnlyAttribute<TEnum> : ValidationAttribute
+public sealed class DefinedOnlyAttribute<TEnum>()
+    : ValidationAttribute(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError)
     where TEnum : struct, Enum
 {
-    /// <summary>Initializes a new instance of the <see cref="DefinedOnlyAttribute{TEnum}"/> class.</summary>
-    public DefinedOnlyAttribute()
-        : base(() => QowaivValidationMessages.AllowedValuesAttribute_ValidationError) { }
-
     /// <summary>If false, combinations of defined single values, that are not defined explicitly themselves, are allowed for flag enums.</summary>
     /// <remarks>
     /// When enabled, the logic falls back on <see cref="Enum.IsDefined(Type, object)"/>,
@@ -30,36 +25,11 @@ public class DefinedOnlyAttribute<TEnum> : ValidationAttribute
     public override bool IsValid(object? value) => value switch
     {
         null => true,
-        TEnum val => !OnlyAllowDefinedFlagsCombinations && AllFlags is { } all
-            ? all.HasFlag(val)
-            : EnumIsDefined(val),
+        TEnum val => (OnlyAllowDefinedFlagsCombinations ? Strict : Loose).Value.Contains(val),
         _ => throw UnsupportedType.ForAttribute<DefinedOnlyAttribute<TEnum>>(value.GetType()),
     };
 
-    private static readonly TEnum? AllFlags = GetAllFlags();
+    private static readonly Lazy<DefinedEnums<TEnum>> Strict = new(() => DefinedEnums<TEnum>.New(onlyAllowDefinedFlags: true));
 
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static TEnum? GetAllFlags()
-        => typeof(TEnum).GetCustomAttributes<FlagsAttribute>().Any()
-        ? GetEnumValues().Cast<dynamic>().Aggregate((e1, e2) => e1 | e2)
-        : null;
-
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool EnumIsDefined(TEnum val)
-#if NETSTANDARD2_0
-        => Enum.IsDefined(typeof(TEnum), val);
-#else
-        => Enum.IsDefined(val);
-#endif
-
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static TEnum[] GetEnumValues()
-#if NETSTANDARD2_0
-        => [.. Enum.GetValues(typeof(TEnum)).Cast<TEnum>()];
-#else
-        => Enum.GetValues<TEnum>();
-#endif
+    private static readonly Lazy<DefinedEnums<TEnum>> Loose = new(() => DefinedEnums<TEnum>.New(onlyAllowDefinedFlags: false));
 }
