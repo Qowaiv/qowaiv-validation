@@ -10,10 +10,27 @@
 
 ## In Range attribute
 
-| Method                | Mean       | Ratio |
-|-----------------------|-----------:|------:|
-| ComponentModel Range  |  40.587 us |  1.00 |
-| InRange&lt;Amount&gt; |   2.678 us |  0.07 |
+| IsValid()                | Mean       | Ratio |
+|------------------------- |-----------:|------:|
+| `[ComponentModel.Range]` |  40.587 us |  1.00 |
+| `[InRange<Amount>]`      |   2.678 us |  0.07 |
+
+## DefinedOnly & DefinedEnumOnly attribute
+
+Based on a set of 1 milion (HTTP Status code) enum values.
+| IsValid()           | Mean      | Ratio |
+|---------------------|----------:|------:|
+| `[DefinedEnumOnly]` | 10.666 ms |  1.00 |
+| `[DefinedOnly<T>]`  |  5.061 ms |  0.47 |
+| `[NotCached]`       | 47.058 ms |  4.42 |
+| `[NotCached<T>]`    | 32.838 ms |  3.08 |
+
+Based on a set of 1 milion flag enum values.
+
+| IsValid()           | Mean      | Ratio |
+|---------------------|----------:|------:|
+| `[DefinedEnumOnly]` |  7.382 ms |  1.00 |
+| `[DefinedOnly<T>]`  |  2.940 ms |  0.40 |
 
 ## Data Annotations Validation
 | Method        | Runtime   | Count | Mean         | Error      | StdDev     | Median       | Ratio | RatioSD |

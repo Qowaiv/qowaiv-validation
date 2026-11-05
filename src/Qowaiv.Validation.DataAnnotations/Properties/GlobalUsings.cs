@@ -18,3 +18,4 @@ global using Lock = System.Object;
 #else
 global using Lock = System.Threading.Lock;
 #endif
+global using static Qowaiv.Validation.DataAnnotations.Statics;

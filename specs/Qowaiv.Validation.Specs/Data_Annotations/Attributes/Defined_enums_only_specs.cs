@@ -120,8 +120,113 @@ public class OnlyAllowDefinedFlagsCombinations
     [Test]
     public void is_disabled_by_default()
         => new DefinedOnlyAttribute<Banners>().OnlyAllowDefinedFlagsCombinations.Should().BeFalse();
+
+    [Test]
+    public void generic_is_applied_per_instance()
+    {
+        var combined = Banners.UnionJack | Banners.StarsAndStripes;
+        var strict = new DefinedOnlyAttribute<Banners> { OnlyAllowDefinedFlagsCombinations = true };
+        var loose = new DefinedOnlyAttribute<Banners>();
+
+        strict.IsValid(combined).Should().BeFalse();
+        loose.IsValid(combined).Should().BeTrue();
+        strict.IsValid(combined).Should().BeFalse();
+    }
+
+    [Test]
+    public void non_generic_is_applied_per_instance()
+    {
+        var combined = Banners.UnionJack | Banners.StarsAndStripes;
+        var strict = new DefinedEnumValuesOnlyAttribute { OnlyAllowDefinedFlagsCombinations = true };
+        var loose = new DefinedEnumValuesOnlyAttribute();
+
+        loose.IsValid(combined).Should().BeTrue();
+        strict.IsValid(combined).Should().BeFalse();
+        loose.IsValid(combined).Should().BeTrue();
+    }
+}
+public class Edge_cases
+{
+    [Test]
+    public void generic_flags_enum_without_values_only_allows_default()
+    {
+        var attribute = new DefinedOnlyAttribute<NoFlags>();
+
+        attribute.IsValid(default(NoFlags)).Should().BeTrue();
+        attribute.IsValid((NoFlags)1).Should().BeFalse();
+    }
+
+    [Test]
+    public void non_generic_flags_enum_without_values_only_allows_default()
+    {
+        var attribute = new DefinedEnumValuesOnlyAttribute();
+
+        attribute.IsValid(default(NoFlags)).Should().BeTrue();
+        attribute.IsValid((NoFlags)1).Should().BeFalse();
+    }
+
+    [Test]
+    public void flags_enum_with_defined_zero_is_valid_for_both_modes_and_attributes()
+    {
+        foreach (var strict in new[] { false, true })
+        {
+            new DefinedOnlyAttribute<WithNone> { OnlyAllowDefinedFlagsCombinations = strict }
+                .IsValid(WithNone.None).Should().BeTrue();
+            new DefinedEnumValuesOnlyAttribute { OnlyAllowDefinedFlagsCombinations = strict }
+                .IsValid(WithNone.None).Should().BeTrue();
+        }
+    }
+
+    [Test]
+    public void flags_enum_with_undefined_zero_is_only_valid_when_combinations_are_allowed()
+    {
+        new DefinedOnlyAttribute<Banners>().IsValid((Banners)0).Should().BeTrue();
+        new DefinedEnumValuesOnlyAttribute().IsValid((Banners)0).Should().BeTrue();
+
+        new DefinedOnlyAttribute<Banners> { OnlyAllowDefinedFlagsCombinations = true }
+            .IsValid((Banners)0).Should().BeFalse();
+        new DefinedEnumValuesOnlyAttribute { OnlyAllowDefinedFlagsCombinations = true }
+            .IsValid((Banners)0).Should().BeFalse();
+    }
+
+    [Test]
+    public void concurrent_first_use_is_consistent()
+    {
+        var results = new System.Collections.Concurrent.ConcurrentBag<bool>();
+
+        Parallel.For(0, 256, i =>
+        {
+            var strict = i % 2 == 0;
+            var generic = new DefinedOnlyAttribute<Concurrent> { OnlyAllowDefinedFlagsCombinations = strict };
+            var nonGeneric = new DefinedEnumValuesOnlyAttribute { OnlyAllowDefinedFlagsCombinations = strict };
+            var combined = Concurrent.A | Concurrent.B;
+
+            results.Add(generic.IsValid(combined) == !strict);
+            results.Add(nonGeneric.IsValid(combined) == !strict);
+        });
+
+        results.Should().OnlyContain(r => r);
+    }
 }
 
+[Flags]
+public enum NoFlags { }
+
+[Flags]
+public enum WithNone
+{
+    None = 0,
+    One = 1,
+    Two = 2,
+}
+
+[Flags]
+public enum Concurrent
+{
+    A = 1,
+    B = 2,
+    C = 4,
+}
 public class With_message
 {
     [TestCase("nl", "De waarde van het veld Banners is niet toegestaan.")]
