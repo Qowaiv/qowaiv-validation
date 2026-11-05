@@ -6,6 +6,7 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <None Include="docs/**" />
     <None Include="shared/**" />
   </ItemGroup>
 

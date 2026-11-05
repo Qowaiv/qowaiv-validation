@@ -1,8 +1,10 @@
+using System.Net;
+
 namespace Qowaiv.Validation.Messages;
 
 /// <summary>Message to communicate that a (external) service/system/process is unavailable.</summary>
 [Serializable]
-public class ServiceUnavailable : Exception, IValidationMessage
+public class ServiceUnavailable : Exception, IHttpStatusMessage
 {
     /// <summary>Initializes a new instance of the <see cref="ServiceUnavailable"/> class.</summary>
     public ServiceUnavailable() : this(ValidationMessages.ServiceUnavailable) { }
@@ -12,6 +14,9 @@ public class ServiceUnavailable : Exception, IValidationMessage
 
     /// <summary>Initializes a new instance of the <see cref="ServiceUnavailable"/> class.</summary>
     public ServiceUnavailable(string message, Exception innerException) : base(message, innerException) { }
+
+    /// <inheritdoc />
+    public HttpStatusCode StatusCode => HttpStatusCode.ServiceUnavailable;
 
     /// <inheritdoc />
     public ValidationSeverity Severity => ValidationSeverity.Error;

@@ -1,8 +1,10 @@
+using System.Net;
+
 namespace Qowaiv.Validation.Messages;
 
 /// <summary>Message to communicate that access has been denied.</summary>
 [Serializable]
-public class AccessDenied : SecurityException, IValidationMessage
+public class AccessDenied : SecurityException, IHttpStatusMessage
 {
     /// <summary>Initializes a new instance of the <see cref="AccessDenied"/> class.</summary>
     public AccessDenied() : this(ValidationMessages.AccessDenied) { }
@@ -33,6 +35,9 @@ public class AccessDenied : SecurityException, IValidationMessage
     /// The state of the permission that caused the exception to be thrown.
     /// </param>
     public AccessDenied(string message, Type type, string state) : base(message, type, state) { }
+
+    /// <inheritdoc />
+    public HttpStatusCode StatusCode => HttpStatusCode.Forbidden;
 
     /// <inheritdoc />
     public ValidationSeverity Severity => ValidationSeverity.Error;

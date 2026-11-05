@@ -24,8 +24,8 @@
   </ItemGroup>
 
   <PropertyGroup>
+    <Version>11.0.0-rc.1</Version>
     <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
-    <Version>2.1.0</Version>
     <ToBeReleased>
       <![CDATA[
 v11.0.0
@@ -37,6 +37,7 @@ v11.0.0
 - ValidationMessages is an immutable collection, and type of Messages in Result. (BREAKING)
 - Act(Async)(Func<TModel, TOut>) to simplify applying transforms.
 - Validator.Composite<TModel>() creates a composite Ivalidator<<TModel>.
+- IHttpStatusMessage to bind an IValidationMessage to an HTTP status.
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
