@@ -1,8 +1,10 @@
+using System.Net;
+
 namespace Qowaiv.Validation.Messages;
 
 /// <summary>Message to communicate concurrency control failed.</summary>
 [Serializable]
-public class ConcurrencyIssue : InvalidOperationException, IValidationMessage
+public class ConcurrencyIssue : InvalidOperationException, IHttpStatusMessage
 {
     /// <summary>Initializes a new instance of the <see cref="ConcurrencyIssue"/> class.</summary>
     public ConcurrencyIssue() : base(ValidationMessages.ConcurrencyIssue) { }
@@ -12,6 +14,9 @@ public class ConcurrencyIssue : InvalidOperationException, IValidationMessage
 
     /// <summary>Initializes a new instance of the <see cref="ConcurrencyIssue"/> class.</summary>
     public ConcurrencyIssue(string message, Exception innerException) : base(message, innerException) { }
+
+    /// <inheritdoc />
+    public HttpStatusCode StatusCode => HttpStatusCode.Conflict;
 
     /// <inheritdoc />
     public ValidationSeverity Severity => ValidationSeverity.Error;

@@ -29,6 +29,20 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Messages.AccessDenied.get_StatusCode</Target>
+    <Left>lib/net10.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Messages.ConcurrencyIssue.get_StatusCode</Target>
+    <Left>lib/net10.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Validation.Messages.EntityNotFound.For(System.Object,System.Type)</Target>
     <Left>lib/net10.0/Qowaiv.Validation.Messages.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Messages.dll</Right>
@@ -50,9 +64,37 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Messages.EntityNotFound.get_StatusCode</Target>
+    <Left>lib/net10.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Validation.Messages.EntityNotFound.set_EntityType(System.Type)</Target>
     <Left>lib/net10.0/Qowaiv.Validation.Messages.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Messages.ServiceUnavailable.get_StatusCode</Target>
+    <Left>lib/net10.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Messages.AccessDenied.get_StatusCode</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Messages.ConcurrencyIssue.get_StatusCode</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
@@ -78,8 +120,36 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Messages.EntityNotFound.get_StatusCode</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Validation.Messages.EntityNotFound.set_EntityType(System.Type)</Target>
     <Left>lib/net8.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Messages.ServiceUnavailable.get_StatusCode</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Messages.AccessDenied.get_StatusCode</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Messages.ConcurrencyIssue.get_StatusCode</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
@@ -106,7 +176,21 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Messages.EntityNotFound.get_StatusCode</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Validation.Messages.EntityNotFound.set_EntityType(System.Type)</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Messages.ServiceUnavailable.get_StatusCode</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -128,6 +212,90 @@
   <Suppression>
     <DiagnosticId>CP0003</DiagnosticId>
     <Target>Qowaiv.Validation.Messages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Messages.AccessDenied</Target>
+    <Left>lib/net10.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Messages.ConcurrencyIssue</Target>
+    <Left>lib/net10.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Messages.EntityNotFound</Target>
+    <Left>lib/net10.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Messages.ServiceUnavailable</Target>
+    <Left>lib/net10.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Messages.AccessDenied</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Messages.ConcurrencyIssue</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Messages.EntityNotFound</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Messages.ServiceUnavailable</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Messages.AccessDenied</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Messages.ConcurrencyIssue</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Messages.EntityNotFound</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Messages.ServiceUnavailable</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Messages.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
