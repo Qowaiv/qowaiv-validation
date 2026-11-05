@@ -55,18 +55,68 @@ public class Model
 ```
 
 ## Defined enum values only
-The `[DefinedOnly<TEnum>]` attribute limits the allowed values to defined
-enums only. By default it supports all possible combinations of defined enums
-when dealing with flags, but that can be restricted by setting 
-`OnlyAllowDefinedFlagsCombinations` to true.
+The `[DefinedOnly<TEnum>]` attribute limits the allowed values of an enum to
+the ones that are defined.
+
+``` C#
+public enum Status { Active = 1, Inactive = 2 }
+
+public class Model
+{
+    [DefinedOnly<Status>]
+    public Status Status { get; init; } // (Status)42 is not valid.
+}
+```
+
+### Flag enums
+By default, any combination of the defined values of a `[Flags]` enum is
+valid, but values with bits that are not defined are not. That can be
+restricted by setting `OnlyAllowDefinedFlagsCombinations` to `true`, in which
+case only values that are explicitly defined are valid.
+
+``` C#
+[Flags]
+public enum Permissions
+{
+    Read = 1,
+    Write = 2,
+    Delete = 4,
+    ReadWrite = Read | Write,
+}
+
+public class Model
+{
+    // Read | Delete is valid; (Permissions)8 is not.
+    [DefinedOnly<Permissions>]
+    public Permissions Any { get; init; }
+
+    // Read and ReadWrite are valid; Read | Delete is not.
+    [DefinedOnly<Permissions>(OnlyAllowDefinedFlagsCombinations = true)]
+    public Permissions Defined { get; init; }
+}
+```
+
+The default value `0` is valid for flag enums by default, even if no member
+with that value is defined. With `OnlyAllowDefinedFlagsCombinations = true` it
+is only valid if it is defined (for example `None = 0`).
+`OnlyAllowDefinedFlagsCombinations` has no effect on enums that are not
+decorated with `[Flags]`.
+
+### Non-generic
+If attributes with generics are not supported ([pre-.NET 7.0/C#11](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-7)),
+the non-generic `[DefinedEnumValuesOnly]` attribute can be used. It behaves the
+same, also supporting `OnlyAllowDefinedFlagsCombinations`.
 
 ``` C#
 public class Model
 {
-    [DefinedOnly<SomeEnum>(OnlyAllowDefinedFlagsCombinations = false)]
-    public SomeEnum CountryOfBirth { get; init; }
+    [DefinedEnumValuesOnly(OnlyAllowDefinedFlagsCombinations = true)]
+    public Permissions Permissions { get; init; }
 }
 ```
+
+Both attributes throw an `UnsupportedType` exception when applied to a value
+that is not an enum, instead of reporting a validation error.
 
 ## In future
 The `[InFuture]` attribute requires the `DateTime`, `DateTimeOffset`, `Date`,
@@ -98,6 +148,13 @@ public class Model
 The `[InRange<TValue>]` attribute limits the allowed values to the specified range.
 This attribute is similar to Microsoft's [`Range`](https://learn.microsoft.com/dotnet/api/system.componentmodel.dataannotations.rangeattribute).
 
+``` C#
+public class Model
+{
+    [InRange<int>(1, 10)]
+    public int Rating { get; init; }
+}
+```
 
 ## Items validation
 The `[Items<TValidator>]` attribute to define a validation attribute to apply
@@ -109,7 +166,7 @@ public class Model
     [Items<Mandatory>] // ensures none of the items is null or empty
     public string[] Names { get; init; } = [];
 
-    [Items<Allowed<int>(42, 2017)] // ensures that all items have either the value 42 or 2017.
+    [Items<Allowed<int>>(42, 2017)] // ensures that all items have either the value 42 or 2017.
     public int[] Numbers { get; init; } = [];
 }
 ```
@@ -146,10 +203,9 @@ public class Model
 The `[MultipleOf]` attribute validates that the value of a field is a multiple
 of the specified factor. It supports types such as `decimal`, `Percentage`, and
 `Amount`, but not `double` or `float`, as their [decimal representation](https://0.30000000000000004.com)
-does not commonly fit with decimial based multples such as `0.1`, or `0.001`.
+does not commonly fit with decimal based multiples such as `0.1`, or `0.001`.
 Note that the specified factor in the attribute is a `double` but rounded to
 overcome those floating point issues.
-
 
 ``` C#
 public class Model
@@ -268,7 +324,7 @@ public class Model
 ```
 
 ## Unique values
-The `[Unique<Value>]` attribute validates that all items of the collection are
+The `[Unique<TValue>]` attribute validates that all items of the collection are
 distinct. If needed, a custom `IEqualityComparer<Value>` comparer can be defined.
 
 ``` C#
@@ -333,5 +389,23 @@ public class Model
 
 ## Validates attribute
 The `[Validates]` attribute is designed to help the [QW0102](https://github.com/Qowaiv/qowaiv-analyzers/blob/main/rules/QW0102.md)
-to report on misusage of the attribute. By decorating a `[Validation]` attribute
-the analyzer knows on which member types the attribute can be set.
+to report on misusage of the attribute. By decorating a `ValidationAttribute`
+the analyzer knows on which member types the attribute can be set, and report
+an issue when used on a field of an not supported type.
+
+``` C#
+[Validates(typeof(string))]
+public sealed ContainsTextAttribute(string text) : ValdationAttribute 
+{
+    // ...
+}
+```
+
+``` C#
+[AttributeUsage(AttributeTarget.Member, AllowMultiple = false)]
+[Validates(GenericArgument = true)]
+public sealed class DefinedOnlyAttribute<TEnum> : ValidationAttribute where TEnum : struct, Enum
+{
+    // ..
+}
+```
