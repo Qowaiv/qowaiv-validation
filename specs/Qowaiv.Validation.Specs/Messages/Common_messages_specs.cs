@@ -121,6 +121,14 @@ public class PaymentRequired
         => typeof(NS.PaymentRequired).Should().BeDerivedFrom<InvalidOperationException>();
 
     [Test]
+    public void Implements_IHttpStatusMessage()
+       => typeof(NS.PaymentRequired).Should().Implement<IHttpStatusMessage>();
+
+    [Test]
+    public void Has_HTTP_status_ServiceUnavailable()
+        => new NS.PaymentRequired().StatusCode.Should().Be(HttpStatusCode.PaymentRequired);
+
+    [Test]
     public void Has_error_validation_severity()
         => new NS.PaymentRequired().Severity.Should().Be(ValidationSeverity.Error);
 
