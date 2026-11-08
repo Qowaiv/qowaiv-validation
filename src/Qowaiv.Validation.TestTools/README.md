@@ -38,10 +38,10 @@ as `Result` is defined to be invalid based on containing at least one error
 message. Furthermore, it does not expose the `.Value` as that is not
 accessible for an invalid result.
 
-All (except for the `.Value`) is also applicable for the non-generic `Result`.
+Everything except `.Value` also applies to the non-generic `Result`.
 
 ## Validate with
-There is also some syntactic sugar for testing validators on a model of choice:
+There is also some syntactic sugar for validating a model of choice:
 
 ``` C#
 var model = new MyModel();

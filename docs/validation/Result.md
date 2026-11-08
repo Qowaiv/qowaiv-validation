@@ -11,13 +11,13 @@ Result<DataType> nullResult = Result.Null<DataType>();
 Result<DataType> withMessages = Result.WithMessages<DataType>(ValidationMessage.Error("Check"));
 Task<Result<DataType>> asyncValue = Result.Async(value);
 ```
-A `Result<TModel>` can be turned into an `Task<Result<TModel>>` with `Async()`.
+A `Result<TModel>` can be turned into a `Task<Result<TModel>>` with `Async()`.
 
 ## Properties
 
 * `Messages` — all [validation messages](ValidationMessage).
-* `IsValid` — `true` when there are no error-severity messages
-* `Errors` / `Warnings` / `Infos` — filtered views by severity
+* `IsValid` — `true` when there are no error-severity messages.
+* `Errors` / `Warnings` / `Infos` — filtered views by severity.
 
 ## Value access
 
@@ -54,7 +54,7 @@ Result<DerivedModel> casted = result.Cast<DerivedModel>();
 ```
 
 ## Combining Results
-Both collections of `Result`, and `Task<Result>` can be combined:
+Both collections of `Result` and collections of `Task<Result>` can be combined:
 
 ``` C#
 Result[] f = [..];

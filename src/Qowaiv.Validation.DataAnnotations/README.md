@@ -17,9 +17,9 @@ Result<SomeModel> result = validator.Validate(model);
 This allows the creation of messages with different severities:
 
 ``` C#
-var none = ValidationMessage.None; // returns null, but for telling the story ValidationMessage.None is preferred.
+var none = ValidationMessage.None; // returns null; use ValidationMessage.None to express the intent.
 var info = ValidationMessage.Info(message, args);
-var warn = ValidationMessage.Warning(message, args);
+var warn = ValidationMessage.Warn(message, args);
 var error = ValidationMessage.Error(message, args);
 ```
 
@@ -50,8 +50,7 @@ the second one is considered optional. The third one is also considered required
 but via the attribute it was decorated with, not because of the `required` modifier.
 
 ## Validation attributes
-Multiple `[System.ComponentModel.DataAnnotations.Validation]` attributes can be
-used to decorate models.
+Multiple validation attributes can be used to decorate models.
 
 ### Mandatory
 The `[Required]` attribute does not work for value types. The `[Mandatory]`
@@ -120,7 +119,7 @@ public class Model
 ```
 
 ### In future
-The `[InFuture]` attribute requires the `DateTime`, `DateTimeOffset`, `Date`,
+The `[InFuture]` attribute requires a `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value to be in the future. The current time is resolved
 using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
 
@@ -133,7 +132,7 @@ public class Model
 ```
 
 ### In past
-The `[InPast]` attribute requires the `DateTime`, `DateTimeOffset`, `Date`,
+The `[InPast]` attribute requires a `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value to be in the past. The current time is resolved
 using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
 
@@ -151,7 +150,7 @@ This attribute is similar to Microsoft's [`Range`](https://learn.microsoft.com/d
 
 
 ### Items validation
-The `[Items<TValidator>]` attribute to define a validation attribute to apply
+The `[Items<TValidator>]` attribute defines a validation attribute to apply
 on all items of a collection. This is useful in multiple cases:
 
 ``` C#
@@ -181,8 +180,8 @@ public class Model
 ```
 
 ### Skip validation
-The `[SkipValidation]` attribute allows to skip the validation of property or
-type.
+The `[SkipValidation]` attribute allows to skip the validation of a property
+or type.
 
 ``` C#
 [SkipValidation]
@@ -197,7 +196,7 @@ public class Model
 The `[MultipleOf]` attribute validates that the value of a field is a multiple
 of the specified factor. It supports types such as `decimal`, `Percentage`, and
 `Amount`, but not `double` or `float`, as their [decimal representation](https://0.30000000000000004.com)
-does not commonly fit with decimial based multples such as `0.1`, or `0.001`.
+does not commonly fit with decimal-based multiples such as `0.1`, or `0.001`.
 Note that the specified factor in the attribute is a `double` but rounded to
 overcome those floating point issues.
 
@@ -271,7 +270,7 @@ public class Model
 ```
 
 ### Not in future
-The `[NotInFuture]` attribute requires the `DateTime`, `DateTimeOffset`, `Date`,
+The `[NotInFuture]` attribute requires a `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value not to be in the future. The current time is resolved
 using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
 
@@ -284,7 +283,7 @@ public class Model
 ```
 
 ### Not in past
-The `[NotInPast]` attribute requires the `DateTime`, `DateTimeOffset`, `Date`,
+The `[NotInPast]` attribute requires a `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value not to be in the past. The current time is resolved
 using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
 
@@ -320,7 +319,7 @@ public class Model
 
 ### Unique values
 The `[Unique<Value>]` attribute validates that all items of the collection are
-distinct. If needed, a custom `IEqualityComparer<Value>` comparer can be defined.
+distinct. If needed, a custom `IEqualityComparer<TValue>` can be defined.
 
 ``` C#
 public class Model

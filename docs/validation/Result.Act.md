@@ -1,6 +1,6 @@
 # Result.Act
-Using [`Result<T>`](Result.md) alows to apply _[Monadic](https://en.wikipedia.org/wiki/Monad_(functional_programming))
-Composition/Railway Oriented Programming_.  A chain actions is ecuted while
+Using [`Result<T>`](Result.md) allows to apply _[Monadic](https://en.wikipedia.org/wiki/Monad_(functional_programming))
+Composition/Railway Oriented Programming_.  A chain of actions is executed while
 the result is valid, and messages accumulate:
 
 ``` C#
@@ -11,7 +11,7 @@ Result<DataType> result = GetModel()
 
 ## Asynchronous
 
-Async versions for all `Act` overloads. They return an `Task<Result<TModel>>`,
+Async versions for all `Act` overloads. They return a `Task<Result<TModel>>`,
 which can be awaited to obtain the resulting `Result<TModel>`:
 
 ``` C#
@@ -24,7 +24,7 @@ Task<Result<DataType>> promise = Result.For(model)
 
 An action can also return a plain value, transforming the model (or a related
 value) without producing messages. A `null` transform result makes the result
-throw `NoValue`:
+throw a `NoValue` exception:
 
 ``` C#
 Result<Name> name = GetPerson()
@@ -41,11 +41,11 @@ Result<DataType> result = GetModel()
     | ValidateAge;
 
 // where
-Result<DataType> ValdiateName(DataType data) => ...
+Result<DataType> ValidateName(DataType data) => ...
 Result<DataType> ValidateAge(DataType data) => ...
 ```
 
-The limitation is that `TIn` and `TOut` must be teh same type.
+The limitation is that `TIn` and `TOut` must be the same type.
 
 ## Act with context update
 

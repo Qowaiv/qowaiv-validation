@@ -1,8 +1,8 @@
 # Qowaiv Validation Guarding
 
 Fluent pre-condition guards for domain logic. Uses the `.Must()` extension
-method to create guard expressions that return `Result<T>` to communicate
-the outcome.
+method to create guard expressions that return `Result<TSubject>` to
+communicate the outcome.
 
 ## Must
 
