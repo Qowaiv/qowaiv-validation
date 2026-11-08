@@ -5,7 +5,10 @@ internal sealed class FrozenSet<T>(IEnumerable<T> collection) : HashSet<T>(colle
 
 internal static class QowaivFrozenExtensions
 {
-    [Pure]
-    public static FrozenSet<T> ToFrozenSet<T>(this IEnumerable<T> set) where T : notnull => new(set);
+    extension<T>(IEnumerable<T> set) where T : notnull
+    {
+        [Pure]
+        public FrozenSet<T> ToFrozenSet() => new(set);
+    }
 }
 #endif
