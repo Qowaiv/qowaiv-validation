@@ -19,7 +19,7 @@ public class CustomerValidator : ModelValidator<Customer>
 }
 
 // Usage:
-var validator = new CustomerValidator();
+IValidator<Customer> validator = new CustomerValidator();
 Result<Customer> result = validator.Validate(customer);
 ```
 
@@ -95,7 +95,7 @@ public class CustomValidator : AbstractValidator<Model>
 
 The `ClockValidation` validates if a date (time) is in the past, or future.
 It supports `Date`, `DateTime`, `Date?`, and `DateTime?`, and the provision
-of custom date (time) provider. By Default, `Clock.Now()` and `Clock.Today()`
+of custom date (time) provider. By Default, `Clock.UtcNow()` and `Clock.Today()`
 are used.
 
 ``` C#
@@ -126,7 +126,7 @@ public class CustomValidator : AbstractValidator<Model>
 ```
 
 ### Finite floating points
-The `NumberValidation` validates that numbers are finite.
+The `FloatingPointValidation` validates that numbers are finite.
 
 ``` C#
 public class CustomValidator : AbstractValidator<Model>

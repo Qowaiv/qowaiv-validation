@@ -72,4 +72,4 @@ var schemas = new XmlSchemaSet()
 
 XML validation errors are collected as `IValidationMessage` instances with
 XPath-based property names for precise error location (e.g.
-`/root/element[0]/child`).
+`/root/element[0]/child[3]`).

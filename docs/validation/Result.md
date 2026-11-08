@@ -3,11 +3,12 @@
 A validation result containing messages. Created only via factory methods.
 
 ``` C#
-Result<DataType> ok = Result.OK;
+Result ok = Result.OK;
+Result ok_ = Result.WithMessages(ValidationMessage.Warn("Check"));
 Result<DataType> withValue = Result.For(value);
 Result<DataType> withErrors = Result.For(value, ValidationMessage.Error("Bad"));
 Result<DataType> nullResult = Result.Null<DataType>();
-Result<DataType> withMessages = Result.WithMessages<DataType>(ValidationMessage.Warn("Check"));
+Result<DataType> withMessages = Result.WithMessages<DataType>(ValidationMessage.Error("Check"));
 Task<Result<DataType>> asyncValue = Result.Async(value);
 ```
 A `Result<TModel>` can be turned into an `Task<Result<TModel>>` with `Async()`.

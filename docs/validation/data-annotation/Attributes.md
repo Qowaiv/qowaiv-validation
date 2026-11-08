@@ -391,18 +391,19 @@ public class Model
 The `[Validates]` attribute is designed to help the [QW0102](https://github.com/Qowaiv/qowaiv-analyzers/blob/main/rules/QW0102.md)
 to report on misusage of the attribute. By decorating a `ValidationAttribute`
 the analyzer knows on which member types the attribute can be set, and report
-an issue when used on a field of an not supported type.
+an issue when used on a field of an not supported type. Note that the attribute
+is decorated with `[Conditional("CONTRACTS_FULL")]` so unless `CONTRACTS_FULL`
+is set during the build, that argument only acts as contract annotation.
 
 ``` C#
 [Validates(typeof(string))]
-public sealed ContainsTextAttribute(string text) : ValdationAttribute 
+public sealed class ContainsTextAttribute(string text) : ValidationAttribute 
 {
     // ...
 }
 ```
 
 ``` C#
-[AttributeUsage(AttributeTarget.Member, AllowMultiple = false)]
 [Validates(GenericArgument = true)]
 public sealed class DefinedOnlyAttribute<TEnum> : ValidationAttribute where TEnum : struct, Enum
 {

@@ -6,7 +6,8 @@ the outcome.
 
 ## Must
 
-The `.Must()` extension creates a `Must<TSubject>` guard builder on any object.
+The `.Must()` extension creates a `Must<TSubject>` guard builder on any
+(not-null) reference type.
 
 ### Be / NotBe
 

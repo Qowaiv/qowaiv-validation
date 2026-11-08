@@ -35,10 +35,10 @@ Result.For(17).Should().BeInvalid();
 
 In that case you do not have the option of `.WithoutMessages()`, obviously,
 as `Result` is defined to be invalid based on containing at least one error
-message. Furthermore, it does not expose the `.Value` as that is not
+message. Furthermore, it does not expose the `.And.Value` as that is not
 accessible for an invalid result.
 
-All (except for the `.Value`) is also applicable for the non-generic `Result`.
+All (except for the `.And.Value`) is also applicable for the non-generic `Result`.
 
 ## Validate with
 There is also some syntactic sugar for testing validators on a model of choice:
