@@ -242,19 +242,3 @@ public enum ValidationSeverity
     Error = 2,
 }
 ```
-
-## InvalidModel
-
-Thrown when accessing `Value` on an invalid result. Contains the `Errors`
-collection:
-
-``` C#
-try
-{
-    var value = invalidResult.Value;
-}
-catch (InvalidModel ex)
-{
-    IEnumerable<IValidationMessage> errors = ex.Errors;
-}
-```
