@@ -3,6 +3,20 @@
 <Suppressions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Guarding.Guarding.&lt;G&gt;$66F77D1E46F965A5B22D4932892FA78B`1.&lt;M&gt;$7C133912BDC61135B3A56EB247D25D42</Target>
+    <Left>lib/net10.0/Qowaiv.Validation.Guarding.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Guarding.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Guarding.Guarding.&lt;G&gt;$66F77D1E46F965A5B22D4932892FA78B`1.&lt;M&gt;$7C133912BDC61135B3A56EB247D25D42</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Guarding.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:System.Runtime.CompilerServices.IsExternalInit</Target>
     <Left>lib/net8.0/Qowaiv.Validation.Guarding.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Right>
@@ -26,6 +40,13 @@
     <Target>T:System.Runtime.CompilerServices.RequiresLocationAttribute</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Guarding.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Guarding.Guarding.&lt;G&gt;$66F77D1E46F965A5B22D4932892FA78B`1.&lt;M&gt;$7C133912BDC61135B3A56EB247D25D42</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0003</DiagnosticId>
@@ -113,6 +134,12 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Guarding.Guarding.&lt;G&gt;$66F77D1E46F965A5B22D4932892FA78B`1.Must:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Guarding.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Validation.Guarding.Guarding.Must``1(``0):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Guarding.dll</Right>
@@ -155,6 +182,12 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
+    <Target>T:Qowaiv.Validation.Guarding.Guarding.&lt;G&gt;$66F77D1E46F965A5B22D4932892FA78B`1.&lt;M&gt;$7C133912BDC61135B3A56EB247D25D42&lt;0&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Guarding.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
     <Target>T:Qowaiv.Validation.Guarding.Must`1:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Guarding.dll</Right>
@@ -164,5 +197,26 @@
     <Target>T:Qowaiv.Validation.Guarding.Must`1:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Guarding.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0017</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Guarding.Guarding.Must``1(``0)$0</Target>
+    <Left>lib/net10.0/Qowaiv.Validation.Guarding.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Guarding.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0017</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Guarding.Guarding.Must``1(``0)$0</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Guarding.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0017</DiagnosticId>
+    <Target>M:Qowaiv.Validation.Guarding.Guarding.Must``1(``0)$0</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Guarding.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
 </Suppressions>
