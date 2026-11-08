@@ -4,9 +4,34 @@
 
   <PropertyGroup>
     <TargetFrameworks>net10.0;net11.0</TargetFrameworks>
-    <PackageValidationBaselineVersion>4.0.0</PackageValidationBaselineVersion>
-    <Version>4.2.0</Version>
     <PackageId>Qowaiv.Validation.Fluent</PackageId>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" />
+    <PackageReference Include="Qowaiv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="QowaivValidationFluentMessages.Designer.cs" DependentUpon="QowaivValidationFluentMessages.resx" AutoGen="True" DesignTime="True" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="QowaivValidationFluentMessages.resx" LastGenOutput="QowaivValidationFluentMessages.Designer.cs" Generator="ResXFileCodeGenerator" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Version>4.2.0</Version>
+    <PackageValidationBaselineVersion>4.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
 v5.0.0
@@ -73,28 +98,6 @@ v0.0.1
 - Initial version
 ]]>
     </PackageReleaseNotes>
-    <UserSecretsId>dd510743-1ccb-4f89-800a-f658d42b4bf6</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="FluentValidation" />
-    <PackageReference Include="Qowaiv" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="../Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="QowaivValidationFluentMessages.Designer.cs" DependentUpon="QowaivValidationFluentMessages.resx" AutoGen="True" DesignTime="True" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="QowaivValidationFluentMessages.resx" LastGenOutput="QowaivValidationFluentMessages.Designer.cs" Generator="ResXFileCodeGenerator" />
-  </ItemGroup>
 
 </Project>

@@ -1,5 +1,3 @@
-#if NET6_0_OR_GREATER
-
 namespace FluentValidation;
 
 /// <summary>Fluent validation for <see cref="Clock"/>.</summary>
@@ -184,5 +182,3 @@ public static partial class ClockValidation
     [Pure]
     private static DateOnly DateOnlyToday() => Clock.Today();
 }
-
-#endif

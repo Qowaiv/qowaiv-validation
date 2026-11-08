@@ -1,6 +1,5 @@
 # Validation attributes
-Multiple `[System.ComponentModel.DataAnnotations.Validation]` attributes can be
-used to decorate models.
+Multiple validation attributes can be used to decorate models.
 
 ## Mandatory
 The `[Required]` attribute does not work for value types. The `[Mandatory]`
@@ -103,7 +102,7 @@ is only valid if it is defined (for example `None = 0`).
 decorated with `[Flags]`.
 
 ### Non-generic
-If attributes with generics are not supported ([pre-.NET 7.0/C#11](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-7)),
+If generic attributes are not supported ([pre-.NET 7.0/C#11](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-7)),
 the non-generic `[DefinedEnumValuesOnly]` attribute can be used. It behaves the
 same, also supporting `OnlyAllowDefinedFlagsCombinations`.
 
@@ -115,11 +114,11 @@ public class Model
 }
 ```
 
-Both attributes throw an `UnsupportedType` exception when applied to a value
-that is not an enum, instead of reporting a validation error.
+Both attributes throw an `UnsupportedType` exception when applied to a member
+whose type is not an enum, instead of reporting a validation error.
 
 ## In future
-The `[InFuture]` attribute requires the `DateTime`, `DateTimeOffset`, `Date`,
+The `[InFuture]` attribute requires a `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value to be in the future. The current time is resolved
 using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
 
@@ -132,7 +131,7 @@ public class Model
 ```
 
 ## In past
-The `[InPast]` attribute requires the `DateTime`, `DateTimeOffset`, `Date`,
+The `[InPast]` attribute requires a `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value to be in the past. The current time is resolved
 using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
 
@@ -157,7 +156,7 @@ public class Model
 ```
 
 ## Items validation
-The `[Items<TValidator>]` attribute to define a validation attribute to apply
+The `[Items<TValidator>]` attribute defines a validation attribute to apply
 on all items of a collection. This is useful in multiple cases:
 
 ``` C#
@@ -187,8 +186,8 @@ public class Model
 ```
 
 ## Skip validation
-The `[SkipValidation]` attribute allows to skip the validation of property or
-type.
+The `[SkipValidation]` attribute allows to skip the validation of a property
+or type.
 
 ``` C#
 [SkipValidation]
@@ -276,7 +275,7 @@ public class Model
 ```
 
 ## Not in future
-The `[NotInFuture]` attribute requires the `DateTime`, `DateTimeOffset`, `Date`,
+The `[NotInFuture]` attribute requires a `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value not to be in the future. The current time is resolved
 using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
 
@@ -289,7 +288,7 @@ public class Model
 ```
 
 ## Not in past
-The `[NotInPast]` attribute requires the `DateTime`, `DateTimeOffset`, `Date`,
+The `[NotInPast]` attribute requires a `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value not to be in the past. The current time is resolved
 using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
 
@@ -325,7 +324,7 @@ public class Model
 
 ## Unique values
 The `[Unique<TValue>]` attribute validates that all items of the collection are
-distinct. If needed, a custom `IEqualityComparer<Value>` comparer can be defined.
+distinct. If needed, a custom `IEqualityComparer<TValue>` can be defined.
 
 ``` C#
 public class Model
@@ -391,18 +390,19 @@ public class Model
 The `[Validates]` attribute is designed to help the [QW0102](https://github.com/Qowaiv/qowaiv-analyzers/blob/main/rules/QW0102.md)
 to report on misusage of the attribute. By decorating a `ValidationAttribute`
 the analyzer knows on which member types the attribute can be set, and report
-an issue when used on a field of an not supported type.
+an issue when used on a field of an not supported type. Note that the attribute
+is decorated with `[Conditional("CONTRACTS_FULL")]` so unless `CONTRACTS_FULL`
+is set during the build, that argument only acts as contract annotation.
 
 ``` C#
 [Validates(typeof(string))]
-public sealed ContainsTextAttribute(string text) : ValdationAttribute 
+public sealed class ContainsTextAttribute(string text) : ValidationAttribute 
 {
     // ...
 }
 ```
 
 ``` C#
-[AttributeUsage(AttributeTarget.Member, AllowMultiple = false)]
 [Validates(GenericArgument = true)]
 public sealed class DefinedOnlyAttribute<TEnum> : ValidationAttribute where TEnum : struct, Enum
 {

@@ -12,7 +12,7 @@ public interface IValidationMessage
 }
 ```
 
-It maps on:
+It maps to:
 * [`FluentValidation.Results.ValidationFailure`](https://docs.fluentvalidation.net)
 * [`System.ComponentModel.DataAnnotations.ValidationResult`](https://learn.microsoft.com/dotnet/api/system.componentmodel.dataannotations.validationresult)
 * [`System.Xml.Schema.ValidationEventArgs`](https://learn.microsoft.com/dotnet/api/system.xml.schema.validationeventargs)
@@ -30,8 +30,8 @@ public enum ValidationSeverity
 }
 ```
 
-The values are ordered by impact: a higher value is worse. Only severities that
-are hardly used, so `None`, are negative. This also keeps `Info`, the least
+The values are ordered by impact: a higher value is worse. Only rarely used
+severities, such as `None`, are negative. This also keeps `Info`, the least
 severe severity that is actually reported, at `0`, which makes
 `ValidationMessages` sorting by severity (descending) straightforward.
 

@@ -4,9 +4,21 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
+    <PackageId>Qowaiv.Validation.Guarding</PackageId>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
+    <ProjectReference Include="../Qowaiv.Validation.Messages/Qowaiv.Validation.Messages.csproj" />
+  </ItemGroup>
+  
+  <PropertyGroup>
     <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
     <Version>2.2.0</Version>
-    <PackageId>Qowaiv.Validation.Guarding</PackageId>
     <ToBeReleased>
       <![CDATA[
 v11.0.0
@@ -39,14 +51,5 @@ v0.1.2
 ]]>
     </PackageReleaseNotes>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="../Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
-    <ProjectReference Include="../Qowaiv.Validation.Messages/Qowaiv.Validation.Messages.csproj" />
-  </ItemGroup>
   
 </Project>

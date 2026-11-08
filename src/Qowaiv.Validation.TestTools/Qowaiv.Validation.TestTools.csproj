@@ -2,11 +2,24 @@
 
   <Import Project="../../props/package.props" />
 
+  <ItemGroup>
+    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFrameworks>net10.0;net11.0</TargetFrameworks>
-    <PackageValidationBaselineVersion>3.0.0</PackageValidationBaselineVersion>
-    <Version>4.1.0</Version>
     <PackageId>Qowaiv.Validation.TestTools</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Validation.DataAnnotations/Qowaiv.Validation.DataAnnotations.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Validation.Fluent/Qowaiv.Validation.Fluent.csproj" />
+  </ItemGroup>
+  
+  <PropertyGroup>
+    <Version>4.1.0</Version>
+    <PackageValidationBaselineVersion>4.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
 v11.0.0
@@ -50,15 +63,5 @@ v0.0.2
 ]]>
     </PackageReleaseNotes>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="../../src/Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
-    <ProjectReference Include="../../src/Qowaiv.Validation.DataAnnotations/Qowaiv.Validation.DataAnnotations.csproj" />
-    <ProjectReference Include="../../src/Qowaiv.Validation.Fluent/Qowaiv.Validation.Fluent.csproj" />
-  </ItemGroup>
 
 </Project>

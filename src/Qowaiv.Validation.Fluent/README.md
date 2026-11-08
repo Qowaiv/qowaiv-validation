@@ -24,11 +24,11 @@ Result<Customer> result = validator.Validate(customer);
 ```
 
 ## Validators
-There is a set of (generic purpose) validators to validate properties of a model.
+There is a set of general-purpose validators to validate properties of a model.
 
 ### Required
 The `RequiredValidation` validates that a required property has a set value. If
-specified, an unknown value can be seen as a set value, by default it is not.
+specified, an unknown value is considered set; by default it is not.
 
 ``` C#
 public class CustomValidator : AbstractValidator<Model>
@@ -43,7 +43,7 @@ public class CustomValidator : AbstractValidator<Model>
 
 ### Not unknown
 The `UnknownValidation` validates that a value does not equal the Unknown
-value (if existing of course). Accessible via the fluent syntax.
+value (if one exists). Accessible via the fluent syntax.
 
 ``` C#
 public class CustomValidator : AbstractValidator<Model>
@@ -74,9 +74,9 @@ public class CustomValidator : AbstractValidator<Model>
 ```
 
 ### (Not) before and (not) after
-To have messages that use the phrasing `'{PropertyName}' should be after {Value}`
-instead of `'{PropertyName}' should be greater than {Value}` makes sense for a
-big range of property types, including date (time) related values.
+Using the phrasing `'{PropertyName}' should be after {Value}` instead of
+`'{PropertyName}' should be greater than {Value}` makes sense for a wide range
+of property types, including date (time) related values.
 
 ``` C#
 public class CustomValidator : AbstractValidator<Model>
@@ -111,7 +111,7 @@ public class CustomValidator : AbstractValidator<Model>
 }
 ```
 
-### Postal code valid for specific country
+### Postal code valid for a specific country
 The `PostalCodeValidation` validates that a `PostalCode` value is valid for
 a specific `Country`, both static and via another property.
 
