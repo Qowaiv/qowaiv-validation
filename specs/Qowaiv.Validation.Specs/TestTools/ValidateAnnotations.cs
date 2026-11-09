@@ -5,12 +5,17 @@ namespace Specs.TestTools;
 
 internal static class AnnotationsValidations
 {
-    /// <summary>Helps to test types that have custom should you want to skip.</summary>
-    [Pure]
-    public static object AsObject<T>(this T obj) where T:  notnull => obj;
+    extension<T>(T obj) where T : notnull
+    {
+        /// <summary>Helps to test types that have custom should you want to skip.</summary>
+        [Pure]
+        public object AsObject() => obj;
+    }
 
-    [Pure]
-    public static Qowaiv.Validation.Abstractions.Result<TModel> ValidateAnnotations<TModel>(this TModel model)
-        where TModel : class
-        => AnnotatedModelValidator.Validate(model);
+    extension<TModel>(TModel model) where TModel : class
+    {
+        [Pure]
+        public Qowaiv.Validation.Abstractions.Result<TModel> ValidateAnnotations()
+            => AnnotatedModelValidator.Validate(model);
+    }
 }

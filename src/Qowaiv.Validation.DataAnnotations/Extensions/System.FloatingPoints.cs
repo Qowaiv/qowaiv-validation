@@ -2,19 +2,25 @@ namespace System;
 
 internal static class FloatingPointExtensions
 {
-    [Pure]
-    public static bool IsFinite(this double d)
+    extension(double d)
+    {
+        [Pure]
+        public bool IsFinite()
 #if NETSTANDARD
-        => !double.IsNaN(d) && !double.IsInfinity(d);
+            => !double.IsNaN(d) && !double.IsInfinity(d);
 #else
-        => double.IsFinite(d);
+            => double.IsFinite(d);
 #endif
+    }
 
-    [Pure]
-    public static bool IsFinite(this float f)
+    extension(float f)
+    {
+        [Pure]
+        public bool IsFinite()
 #if NETSTANDARD
-        => !float.IsNaN(f) && !float.IsInfinity(f);
+            => !float.IsNaN(f) && !float.IsInfinity(f);
 #else
-        => float.IsFinite(f);
+            => float.IsFinite(f);
 #endif
+    }
 }

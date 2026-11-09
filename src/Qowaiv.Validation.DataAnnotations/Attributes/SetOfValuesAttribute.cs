@@ -21,7 +21,7 @@ public abstract class SetOfValuesAttribute(params string[] values) : ValidationA
         else
         {
             var converter = TypeDescriptor.GetConverter(value.GetType());
-            return OnEqual == Values.Exists(val => value.Equals(converter.ConvertFromInvariantString(val)));
+            return OnEqual == Values.Any(val => value.Equals(converter.ConvertFromInvariantString(val)));
         }
     }
 }

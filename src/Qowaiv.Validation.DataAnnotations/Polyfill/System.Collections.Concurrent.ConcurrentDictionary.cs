@@ -3,13 +3,15 @@ namespace System.Collections.Concurrent;
 
 internal static class QowaivConcurrentDictionaryExtensions
 {
-    [Impure]
-    public static TValue GetOrAdd<TKey, TValue, TArg>(
-        this ConcurrentDictionary<TKey, TValue> dictionary,
-        TKey key,
-        Func<TKey, TArg, TValue> valueFactory,
-        TArg factoryArgument)
+    extension<TKey, TValue, TArg>(ConcurrentDictionary<TKey, TValue> dictionary)
         where TKey : notnull
-        => dictionary.GetOrAdd(key, k => valueFactory(k, factoryArgument));
+    {
+        [Impure]
+        public TValue GetOrAdd(
+            TKey key,
+            Func<TKey, TArg, TValue> valueFactory,
+            TArg factoryArgument)
+            => dictionary.GetOrAdd(key, k => valueFactory(k, factoryArgument));
+    }
 }
 #endif

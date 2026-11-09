@@ -5,33 +5,36 @@ namespace System;
 
 internal static class TypeExtensions
 {
-    [Pure]
-    public static IEnumerable<Member> GetPublicInstanceMembers(this Type type) =>
-    [
-        .. type.GetProperties(BindingFlags.Instance | BindingFlags.Public).Select(Member.New),
-        .. type.GetFields(BindingFlags.Instance | BindingFlags.Public).Select(Member.New),
-    ];
+    extension(Type type)
+    {
+        [Pure]
+        public IEnumerable<Member> GetPublicInstanceMembers() =>
+        [
+            .. type.GetProperties(BindingFlags.Instance | BindingFlags.Public).Select(Member.New),
+            .. type.GetFields(BindingFlags.Instance | BindingFlags.Public).Select(Member.New),
+        ];
 
-    [Pure]
-    public static Type? GetEnumerableType(this Type type) => type
-        .GetInterfaces()
-        .Find(iface =>
-            iface.IsGenericType &&
-            iface.GetGenericTypeDefinition() == typeof(IEnumerable<>))?
-        .GetGenericArguments()[0];
+        [Pure]
+        public Type? GetEnumerableType() => type
+            .GetInterfaces()
+            .FirstOrDefault(iface =>
+                iface.IsGenericType &&
+                iface.GetGenericTypeDefinition() == typeof(IEnumerable<>))?
+            .GetGenericArguments()[0];
 
-    /// <summary>True if the type implements <see cref="IValidatableObject"/>.</summary>
-    [Pure]
-    public static bool ImplementsIValidatableObject(this Type type) => typeof(IValidatableObject).IsAssignableFrom(type);
+        /// <summary>True if the type implements <see cref="IValidatableObject"/>.</summary>
+        [Pure]
+        public bool ImplementsIValidatableObject() => typeof(IValidatableObject).IsAssignableFrom(type);
 
-    /// <summary>Returns true for all value types except <see cref="Nullable{T}" />.</summary>
-    [Pure]
-    public static bool IsNonNullableValueType(this Type type)
-        => type.IsValueType
-        && (!type.IsGenericType || type.GetGenericTypeDefinition() != typeof(Nullable<>));
+        /// <summary>Returns true for all value types except <see cref="Nullable{T}" />.</summary>
+        [Pure]
+        public bool IsNonNullableValueType()
+            => type.IsValueType
+            && (!type.IsGenericType || type.GetGenericTypeDefinition() != typeof(Nullable<>));
 
-    /// <summary>Gets the decorated <see cref="ValidationAttribute"/>'s for the property.</summary>
-    [Pure]
-    public static IEnumerable<ValidationAttribute> ValidationAttributes(this Type type)
-        => type.GetCustomAttributes<ValidationAttribute>(inherit: true);
+        /// <summary>Gets the decorated <see cref="ValidationAttribute"/>'s for the property.</summary>
+        [Pure]
+        public IEnumerable<ValidationAttribute> ValidationAttributes()
+            => type.GetCustomAttributes<ValidationAttribute>(inherit: true);
+    }
 }
