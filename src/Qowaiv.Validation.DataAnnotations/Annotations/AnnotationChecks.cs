@@ -43,9 +43,12 @@ internal static class AnnotationCheck
         _ => AnnotationChecks.None,
     };
 
-    [Pure]
-    private static AnnotationChecks And(this AnnotationChecks checks, AnnotationChecks and)
-        => checks is AnnotationChecks.None
-        ? checks
-        : checks | and;
+    extension(AnnotationChecks checks)
+    {
+        [Pure]
+        private AnnotationChecks And(AnnotationChecks and)
+            => checks is AnnotationChecks.None
+            ? checks
+            : checks | and;
+    }
 }
