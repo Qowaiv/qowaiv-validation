@@ -1,3 +1,18 @@
+# ⚠️ REPOSITORY MOVED & ARCHIVED
+
+This repository is **archived and read-only**. Development has moved to our monorepo:
+
+👉 **[New Location:`github.com/Qowaiv/Qowaiv`](https://github.com/Qowaiv/Qowaiv/)**
+
+---
+
+### What does this mean?
+* **Issues & PRs:** Please submit all new issues, feature requests, and pull requests in the [monorepo issue tracker](https://github.com/Qowaiv/Qowaiv/issues).
+* **Releases:** Future releases and package updates will be published from the monorepo.
+* **Legacy Code:** This repository remains available as a read-only archive for historical reference.
+
+---
+
 ![Qowaiv](https://github.com/Qowaiv/Qowaiv/blob/master/design/qowaiv-logo_linkedin_100x060.jpg)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
